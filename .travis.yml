@@ -1,0 +1,19 @@
+notifications:
+  email: false
+language: node_js
+node_js:
+- '5'
+- node
+sudo: false
+before_deploy: npm run build
+after_success: npm run coveralls
+deploy:
+  provider: npm
+  skip_cleanup: true
+  email: admin@inspirehep.net
+  api_key:
+    secure: ZO0gp0WoyzYY6/UBbwJVIH8Dt0Vay2Dvc/Lb1XmcfwbVMNk5VIDUvo4EUSXR0DBTh+h6A3in8oLmIKBcir2nSnUT6+ATzkT5K5dyZKloZ47uYDsgsFnnLbyqn7iDjljl0/NSBFwXoNr6IiLHEWU/9Qv1Qyim1bQDoL5xK7d2u4jDxXk932fSAySn2foq6235WH8UK2ACekzffCoHmfmjRpYrs/OIGLAvuMKt31gW9/bzu61oLaI8bHuoxAQjc7CN57qlUh7Ffmr6tABcVwuFMm5EVaEosZsdJAR6guVrcAch1rE6gHCqZLGUrrPdOh9925xbtN3VeLWXrB9Z3FdubicARf1Q+A62+9XGDzIKSwTLpG9nyIfeFj1QEljNmIpXHp+wmMDEaZjM6bSf72B/kXhhb5G6bLc0XOt1yqXhM8ytnYUQGBlTDqKz1SnNL7bSEE20AncAueVFarJ7mB34BXQ6qAhZXGmfAVkWClr4RyMtVzSy0rhRBynVF3+vM3owpxD/cDffQQ3M7ehszzRXsnIsAZAoErvciQEv4DH/J+AWXy7s3JuxYflvjj2hPLlMvVqM9XFn9Y/SZiBtNIqKfIM17srU+vBSPclxEarWodj4n5WPmMGT09GFNxsbbHL51rv27Hf6U37BQviMYDqmWexoJ56+ohnSyZ+t28IRol0=
+  on:
+    tags: true
+    repo: inspirehep/ng2-json-editor
+    all_branches: true

@@ -1,6 +1,6 @@
 {
   "name": "ng2-json-editor",
-  "version": "0.0.1-0",
+  "version": "0.0.0",
   "description": "Angular2 component for editing large json documents",
   "keywords": [
     "angular2",
@@ -18,7 +18,6 @@
     "tslint": "tslint",
     "typedoc": "typedoc",
     "lint": "npm run tslint \"src/**/*.ts\"",
-    "pretest": "npm run lint",
     "test": "gulp test",
     "build": "gulp build",
     "docs": "npm run typedoc -- --options typedoc.json --exclude '**/*.spec.ts' ./src/",
@@ -30,7 +29,11 @@
     "e2e": "npm run protractor",
     "e2e:live": "npm run e2e -- --elementExplorer",
     "start": "npm run build && webpack-dev-server --config config/webpack.dev.js --inline --progress --profile --colors --watch --display-error-details --display-cached --content-base example/",
-    "coveralls": "cat coverage/**/lcov.info | coveralls"
+    "coveralls": "cat coverage/**/lcov.info | coveralls",
+    "preversion": "npm test",
+    "version": "npm run build",
+    "postversion": "git push upstream && git push upstream --tags",
+    "postinstall": "typings -- install"
   },
   "dependencies": {
     "@angular/common": "2.0.0-rc.4",
