@@ -42,7 +42,6 @@ export class AppComponent {
   schema: Object = {};
 
   constructor(private http: Http) {
-    // let record;
     Observable.zip(
       this.http.get('./mock-data/record.json'),
       this.http.get('./mock-data/schema.json'),
