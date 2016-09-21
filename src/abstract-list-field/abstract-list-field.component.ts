@@ -42,13 +42,13 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
    * Called when a property of any element of the values is changed
    * Used if values is a object array.
    * 
-   * @param {any} event - new value
+   * @param {any} value - new value
    * @param {number} index - index of changed element in array
    * @param {key} key - name of the changed property of the element in given index
    * 
    */
-  onValueChange(event: any, index: number, key: string) {
-    this.values[index][key] = event;
+  onValueChange(value: any, index: number, key: string) {
+    this.values[index][key] = value;
   }
 
   /**
