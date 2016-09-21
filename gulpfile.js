@@ -53,13 +53,17 @@ var tsSourceFiles = './src/**/*.ts';
 var typingFiles = 'typings/**/*.d.ts';
 
 // run tslint
-gulp.task('tslint', () =>
+gulp.task('tslint', (done) =>
   gulp.src(tsSourceFiles)
-    .pipe(tsLint({ configuration: 'tslint.json' }))
+    .pipe(tsLint({
+      configuration: 'tslint.json',
+      formatter: 'prose'
+    }))
+    .pipe(tsLint.report())
 );
 
 // generate .d.ts, .js, js.map from .ts files in src then copy them into dist
-gulp.task('build.ts.src', ['tslint'], () => {
+gulp.task('build.ts.src', () => {
   var tsResult = gulp.src([tsSourceFiles, typingFiles])
     .pipe(inlineNg2Template({ base: '/src', useRelativePaths: true, styleProcessor: compileSass }))
     .pipe(sourcemaps.init())
@@ -89,9 +93,10 @@ gulp.task('build.ts.npm-export', () => {
 // build all typscript files
 gulp.task('build.ts', (done) => {
   runSequence(
+    'tslint',
     'build.ts.src',
     'build.ts.npm-export',
-  done);
+    done);
 });
 
 // remove dist folder
