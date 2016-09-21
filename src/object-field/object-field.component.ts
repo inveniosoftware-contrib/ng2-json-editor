@@ -49,8 +49,8 @@ export class ObjectFieldComponent extends AbstractFieldComponent {
     super();
   }
 
-  onValueChange(event: any, key: string) {
-    this.value[key] = event;
+  onValueChange(value: any, key: string) {
+    this.value[key] = value;
   }
 
   deleteField(name: string) {

@@ -68,18 +68,18 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent {
     this.valueType = this.componentTypeService.getComponentType(this.schema);
   }
 
-  onModelChange(event: any) {
+  onModelChange(value: any) {
     // Validation
     if (this.schema['type'] === 'string' && this.schema['enum'] === undefined) {
       try {
-        this.schemaValidationService.validateStringValue(event.toString(), this.schema);
+        this.schemaValidationService.validateStringValue(value.toString(), this.schema);
       } catch (error) {
         console.error(error);
       }
     }
     // TODO: should we make the change even if it is not validated
-    this.value = event;
-    this.onValueChange.emit(event);
+    this.value = value;
+    this.onValueChange.emit(value);
   }
 
 }
