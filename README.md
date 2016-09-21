@@ -104,7 +104,7 @@ string
 ```
 
 Note that:
-  it should return errors in the same format as [remote-validation-response.json](./src/assets/mock-data/remote-validation-response.json) 
+  it should return errors in the same format as [remote-validation-response.json](./example/mock-data/remote-validation-response.json) 
 
 #### x_editor_previews
 
@@ -126,6 +126,8 @@ Configuration for previews to be displayed in previewer (on the right side, belo
 
 **Make sure you have Node version >= 4.0 and NPM >= 3**
 
+### Setup
+
 ```bash
 # clone our repo or alternatively your fork
 git clone https://github.com/inspirehep/ng2-json-editor.git
@@ -135,7 +137,11 @@ cd ng2-json-editor
 
 # install the repo with npm
 npm install
+```
 
+### Useful commands
+
+```bash
 # typings install
 typings install
 
