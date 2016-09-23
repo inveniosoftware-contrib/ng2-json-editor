@@ -1,1 +1,1 @@
-export { EditorComponent } from './editor.component';
+export { JsonEditorModule } from './json-editor.module';

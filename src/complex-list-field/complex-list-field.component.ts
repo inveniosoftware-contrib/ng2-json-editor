@@ -23,27 +23,15 @@
 import { Component, Input } from '@angular/core';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
-import { AddFieldToObjectDropdownComponent } from '../add-field-dropdown';
-import { ObjectFieldComponent } from '../object-field';
-import { TableListFieldComponent } from '../table-list-field';
-import { PrimitiveListFieldComponent } from '../primitive-list-field';
-import { PrimitiveFieldComponent } from '../primitive-field';
 
-import { MapToSortedIterablePipe, UnderscoreToSpacePipe } from '../shared/pipes';
-
-import { AppGlobalsService, ComponentTypeService, EmptyValueService } from '../shared/services';
+import {
+  AppGlobalsService,
+  ComponentTypeService,
+  EmptyValueService
+} from '../shared/services';
 
 @Component({
   selector: 'complex-list-field',
-  directives: [
-    AddFieldToObjectDropdownComponent,
-    ObjectFieldComponent,
-    TableListFieldComponent,
-    PrimitiveFieldComponent,
-    PrimitiveListFieldComponent
-  ],
-  pipes: [MapToSortedIterablePipe, UnderscoreToSpacePipe],
-  providers: [ComponentTypeService, EmptyValueService],
   styleUrls: [
     './complex-list-field.component.scss'
   ],

@@ -23,9 +23,9 @@
 // modules
 var gulp = require('gulp');
 var sass = require('node-sass');
-var ts = require('gulp-typescript');
-var tscOptions = require('./tsconfig.json');
-var sourcemaps = require('gulp-sourcemaps')
+var tsc = require('gulp-typescript');
+var typescript = require('typescript'); // don't use global typescript!
+var sourcemaps = require('gulp-sourcemaps');
 var merge = require('merge2');
 var del = require('del');
 var tsLint = require('gulp-tslint');
@@ -50,20 +50,23 @@ function compileSass(path, ext, file, cb) {
 
 // file regexps
 var tsSourceFiles = './src/**/*.ts';
-var typingFiles = 'typings/**/*.d.ts';
 
 // run tslint
 gulp.task('tslint', () =>
   gulp.src(tsSourceFiles)
-    .pipe(tsLint({ configuration: 'tslint.json' }))
+    .pipe(tsLint({
+      configuration: 'tslint.json',
+      formatter: 'prose'
+    }))
+    .pipe(tsLint.report())
 );
 
 // generate .d.ts, .js, js.map from .ts files in src then copy them into dist
-gulp.task('build.ts.src', ['tslint'], () => {
-  var tsResult = gulp.src([tsSourceFiles, typingFiles])
+gulp.task('build.ts.src', () => {
+  var tsResult = gulp.src(tsSourceFiles)
     .pipe(inlineNg2Template({ base: '/src', useRelativePaths: true, styleProcessor: compileSass }))
     .pipe(sourcemaps.init())
-    .pipe(ts(ts.createProject('tsconfig.json')))
+    .pipe(tsc(tsc.createProject('./src/tsconfig.json', { typescript })))
 
   return merge([
     tsResult.dts
@@ -76,22 +79,23 @@ gulp.task('build.ts.src', ['tslint'], () => {
 
 // generate .d.ts and js for npm export file
 gulp.task('build.ts.npm-export', () => {
-  var npmFile = gulp.src(['ng2-json-editor.ts', typingFiles])
-    .pipe(ts(ts.createProject('tsconfig.json')));
+  var npmFile = gulp.src('ng2-json-editor.ts')
+    .pipe(tsc(tsc.createProject('./src/tsconfig.json', { typescript })));
 
   return merge([npmFile.dts
     .pipe(gulp.dest('.')),
-    npmFile.js
-      .pipe(gulp.dest('.'))
+  npmFile.js
+    .pipe(gulp.dest('.'))
   ]);
 });
 
 // build all typscript files
 gulp.task('build.ts', (done) => {
   runSequence(
+    'tslint',
     'build.ts.src',
     'build.ts.npm-export',
-  done);
+    done);
 });
 
 // remove dist folder

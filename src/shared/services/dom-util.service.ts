@@ -39,7 +39,7 @@ export class DomUtilService {
   flashElementById(id: string) {
     let el = document.getElementById(id);
     if (el) {
-      // .flash is defined editor.component.scss, {border: 2px solid yellow;}
+      // .flash is defined json-editor.component.scss, {border: 2px solid yellow;}
       el.classList.add('flash');
       setTimeout(() => {
         el.classList.remove('flash');

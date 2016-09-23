@@ -21,7 +21,7 @@
 */
 
 import { Injectable } from '@angular/core';
-import { ReplaySubject, Observable } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 
 @Injectable()
 export class AppGlobalsService {

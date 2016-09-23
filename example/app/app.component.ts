@@ -23,18 +23,18 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/zip';
 
-import { EditorComponent } from '../../ng2-json-editor';
 
 @Component({
   selector: 'app',
-  directives: [EditorComponent],
   encapsulation: ViewEncapsulation.None, //  Apply style (bootstrap.scss) globally
-  styles: [
-    require('./app.component.scss')
+  styleUrls: [
+    'app.component.scss'
   ],
   template: `
-    <editor [(record)]="record" [schema]="schema"></editor>
+    <json-editor [(record)]="record" [schema]="schema">
+    </json-editor>
   `
 })
 export class AppComponent {
@@ -43,8 +43,8 @@ export class AppComponent {
 
   constructor(private http: Http) {
     Observable.zip(
-      this.http.get('./mock-data/record.json'),
-      this.http.get('./mock-data/schema.json'),
+      this.http.get('./assets/mock-data/record.json'),
+      this.http.get('./assets/mock-data/schema.json'),
       (recordRes, schemaRes) => {
         return {
           record: recordRes.json(),
@@ -52,8 +52,8 @@ export class AppComponent {
         };
       }
     ).subscribe((data) => {
-      this.record = data.record; // set ./mock-data/record.json
-      this.schema = data.schema; // set ./mock-data/schema.json
+      this.record = data.record; // set ./assets/mock-data/record.json
+      this.schema = data.schema; // set ./assets/mock-data/schema.json
     });
   }
 }

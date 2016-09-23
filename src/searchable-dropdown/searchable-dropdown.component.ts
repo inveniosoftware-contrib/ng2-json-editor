@@ -22,14 +22,8 @@
 
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { DROPDOWN_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
-
-import { FilterByPrefixPipe } from '../shared/pipes';
-
 @Component({
   selector: 'searchable-dropdown',
-  directives: [DROPDOWN_DIRECTIVES],
-  pipes: [FilterByPrefixPipe],
   styleUrls: [
     './searchable-dropdown.component.scss'
   ],

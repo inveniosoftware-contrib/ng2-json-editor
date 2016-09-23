@@ -23,17 +23,11 @@
 import { Component, Input } from '@angular/core';
 
 import { AbstractFieldComponent } from '../abstract-field';
-import { AddFieldToObjectDropdownComponent } from '../add-field-dropdown';
-import { PrimitiveFieldComponent } from '../primitive-field';
-
-import { MapToSortedIterablePipe } from '../shared/pipes';
 
 import { AppGlobalsService } from '../shared/services';
 
 @Component({
   selector: 'object-field',
-  directives: [AddFieldToObjectDropdownComponent, PrimitiveFieldComponent],
-  pipes: [MapToSortedIterablePipe],
   styleUrls: [
     './object-field.component.scss'
   ],

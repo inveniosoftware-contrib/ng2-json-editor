@@ -22,19 +22,12 @@
 
 import { Component, Input } from '@angular/core';
 
-import { DROPDOWN_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
-
 import { AbstractAddFieldDropdownComponent } from './abstract-add-field-dropdown.component';
-
-import { DifferentKeysPipe } from '../shared/pipes';
 
 import { EmptyValueService } from '../shared/services';
 
 @Component({
   selector: 'add-field-to-list-dropdown',
-  directives: [DROPDOWN_DIRECTIVES],
-  pipes: [DifferentKeysPipe],
-  providers: [EmptyValueService],
   styleUrls: [
     './add-field-dropdown.component.scss'
   ],

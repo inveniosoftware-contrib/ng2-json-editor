@@ -37,13 +37,10 @@ export class ErrorsToMessagesHtmlPipe implements PipeTransform {
    * @return {Array<Pair<any>>} - sorted array of key-value pairs of given map's properties.
    */
   transform(errors: Array<Object>): string {
-    if (!errors || errors.length === 0) return undefined;
+    if (!errors || errors.length === 0) { return undefined; }
 
     return errors
       .map(error => error['message'])
       .reduce((pre, cur) => `<li>${pre}</li><li>${cur}</li>`);
   }
 }
-
-
-

@@ -20,16 +20,10 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
-
-import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
+import { Component, Input, Output, OnInit, EventEmitter, ViewEncapsulation } from '@angular/core';
 
 import { AbstractFieldComponent } from '../abstract-field';
-import { AutocompleteInputComponent } from '../autocomplete-input';
-import { SearchableDropdownComponent } from '../searchable-dropdown';
 
-import { ErrorsToMessagesHtmlPipe } from '../shared/pipes';
 import {
   AppGlobalsService,
   ComponentTypeService,
@@ -39,15 +33,12 @@ import {
 @Component({
   selector: 'primitive-field',
   encapsulation: ViewEncapsulation.None,
-  directives: [TOOLTIP_DIRECTIVES, AutocompleteInputComponent, SearchableDropdownComponent],
-  pipes: [ErrorsToMessagesHtmlPipe],
-  providers: [ComponentTypeService, SchemaValidationService],
   styleUrls: [
     './primitive-field.component.scss'
   ],
   templateUrl: './primitive-field.component.html'
 })
-export class PrimitiveFieldComponent extends AbstractFieldComponent {
+export class PrimitiveFieldComponent extends AbstractFieldComponent implements OnInit {
 
   @Input() value: string | number | boolean;
   @Input() schema: Object;

@@ -38,20 +38,19 @@ export class MapToSortedIterablePipe implements PipeTransform {
    * @return {Array<Pair<any>>} - sorted array of key-value pairs of given map's properties.
    */
   transform(map: Object, schema: Object): Array<Pair> {
-    if (!map)
-      return undefined;
+    if (!map) { return undefined; }
     return Object.keys(map)
       .sort((a, b) => {
         // Sort by x_editor_priority, larger is the first.
         let pa = schema[a]['x_editor_priority'] || 0;
         let pb = schema[b]['x_editor_priority'] || 0;
 
-        if (pa > pb) return -1;
-        if (pa < pb) return 1;
+        if (pa > pb) { return -1; }
+        if (pa < pb) { return 1; }
 
         // Sort alphabetically.
-        if (a < b) return -1;
-        if (a > b) return 1;
+        if (a < b) { return -1; }
+        if (a > b) { return 1; }
         return 0;
       })
       .map(key => new Pair(key, map[key]));
@@ -60,5 +59,5 @@ export class MapToSortedIterablePipe implements PipeTransform {
 
 // TODO: discuss if we should remove Pair and return only keys instead,
 export class Pair {
-  constructor(public key: string, public value: any) {}
+  constructor(public key: string, public value: any) { }
 }

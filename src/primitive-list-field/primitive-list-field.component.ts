@@ -22,19 +22,11 @@ import { Component, Input } from '@angular/core';
 */
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
-import { PrimitiveFieldComponent } from '../primitive-field';
-
-import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
-
-import { ErrorsToMessagesHtmlPipe } from '../shared/pipes';
 
 import { AppGlobalsService, EmptyValueService } from '../shared/services';
 
-
 @Component({
   selector: 'primitive-list-field',
-  directives: [TOOLTIP_DIRECTIVES, PrimitiveFieldComponent],
-  pipes: [ErrorsToMessagesHtmlPipe],
   providers: [EmptyValueService],
   styleUrls: [
     './primitive-list-field.component.scss'
