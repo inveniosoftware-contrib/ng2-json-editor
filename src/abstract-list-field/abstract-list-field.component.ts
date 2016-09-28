@@ -20,6 +20,8 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
+import { EventEmitter } from '@angular/core';
+
 import { AbstractFieldComponent } from '../abstract-field';
 
 import { EmptyValueService } from '../shared/services';
@@ -34,6 +36,7 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
 
   values: Array<any>;
   schema: Object;
+  onValuesChange: EventEmitter<Array<any>>;
   path: string;
   emptyValueService: EmptyValueService;
   protected _emptyValue: any;
@@ -49,6 +52,7 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
    */
   onValueChange(value: any, index: number, key: string) {
     this.values[index][key] = value;
+    this.onValuesChange.emit(this.values);
   }
 
   /**
@@ -60,10 +64,12 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
     let temp = this.values[index];
     this.values[index] = this.values[newIndex];
     this.values[newIndex] = temp;
+    this.onValuesChange.emit(this.values);
   }
 
   addNewElement() {
     this.values.push(this.emptyValue);
+    this.onValuesChange.emit(this.values);
   }
 
   /**
@@ -85,6 +91,7 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
    */
   deleteElement(index: number) {
     this.values.splice(index, 1);
+    this.onValuesChange.emit(this.values);
   }
 
   /**

@@ -1,4 +1,3 @@
-import { Component, Input } from '@angular/core';
 /*
  * This file is part of ng2-json-editor.
  * Copyright (C) 2016 CERN.
@@ -21,6 +20,8 @@ import { Component, Input } from '@angular/core';
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+
 import { AbstractListFieldComponent } from '../abstract-list-field';
 
 import { AppGlobalsService, EmptyValueService } from '../shared/services';
@@ -40,6 +41,8 @@ export class PrimitiveListFieldComponent extends AbstractListFieldComponent {
   @Input() schema: Object;
   @Input() path: string;
 
+  @Output() onValuesChange: EventEmitter<Array<any>> = new EventEmitter<Array<any>>();
+
   constructor(public emptyValueService: EmptyValueService,
     public appGlobalsService: AppGlobalsService) {
     super();
@@ -57,6 +60,7 @@ export class PrimitiveListFieldComponent extends AbstractListFieldComponent {
    */
   onValueChange(event: any, index: number) {
     this.values[index] = event;
+    this.onValuesChange.emit(this.values);
   }
 
   /**

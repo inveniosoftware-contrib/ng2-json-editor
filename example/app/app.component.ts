@@ -33,7 +33,7 @@ import 'rxjs/add/observable/zip';
     'app.component.scss'
   ],
   template: `
-    <json-editor [(record)]="record" [schema]="schema">
+    <json-editor [record]="record" (onRecordChange)="onRecordChange($event)" [schema]="schema">
     </json-editor>
   `
 })
@@ -55,5 +55,9 @@ export class AppComponent {
       this.record = data.record; // set ./assets/mock-data/record.json
       this.schema = data.schema; // set ./assets/mock-data/schema.json
     });
+  }
+
+  onRecordChange(record: Object) {
+    this.record = record;
   }
 }

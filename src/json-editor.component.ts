@@ -22,7 +22,9 @@
 
 import {
   Component,
+  EventEmitter,
   Input,
+  Output,
   OnChanges,
   ViewEncapsulation
 } from '@angular/core';
@@ -50,8 +52,9 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
   @Input() record: Object;
   @Input() schema: Object;
 
-  previews: Array<any> = [];
+  @Output() onRecordChange: EventEmitter<Object> = new EventEmitter<Object>();
 
+  previews: Array<any> = [];
 
   constructor(private http: Http,
     private appGlobalsService: AppGlobalsService,
@@ -63,6 +66,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
 
   onValueChange(event: any, key: string) {
     this.record[key] = event;
+    this.onRecordChange.emit(this.record);
   }
 
   getFieldType(field: string): string {

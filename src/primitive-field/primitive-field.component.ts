@@ -20,7 +20,14 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input, Output, OnInit, EventEmitter, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  OnInit,
+  EventEmitter,
+  ViewEncapsulation
+} from '@angular/core';
 
 import { AbstractFieldComponent } from '../abstract-field';
 

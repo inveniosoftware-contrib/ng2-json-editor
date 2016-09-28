@@ -20,7 +20,7 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { AbstractFieldComponent } from '../abstract-field';
 
@@ -39,16 +39,20 @@ export class ObjectFieldComponent extends AbstractFieldComponent {
   @Input() schema: Object;
   @Input() path: string;
 
+  @Output() onValueChange: EventEmitter<Object> = new EventEmitter<Object>();
+
   constructor(public appGlobalsService: AppGlobalsService) {
     super();
   }
 
-  onValueChange(value: any, key: string) {
-    this.value[key] = value;
+  onPropertyChange(propertyValue: any, key: string) {
+    this.value[key] = propertyValue;
+    this.onValueChange.emit(this.value);
   }
 
   deleteField(name: string) {
     delete this.value[name];
+    this.onValueChange.emit(this.value);
   }
 
   getFieldPath(name: string): string {

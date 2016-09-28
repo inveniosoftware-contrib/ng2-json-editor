@@ -20,7 +20,7 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
 
@@ -42,6 +42,8 @@ export class TableListFieldComponent extends AbstractListFieldComponent {
   @Input() values: Array<Object>;
   @Input() schema: Object;
   @Input() path: string;
+
+  @Output() onValuesChange: EventEmitter<Array<Object>> = new EventEmitter<Array<Object>>();
 
   constructor(private componentTypeService: ComponentTypeService,
     public emptyValueService: EmptyValueService,

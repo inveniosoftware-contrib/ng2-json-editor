@@ -23,7 +23,7 @@ Then add it to your module's `imports`.
 ### Use
 
 ```html
-<json-editor [schema]="mySchema" [(record)]="myRecord"></json-editor>
+<json-editor [schema]="mySchema" [record]="myRecord" (onRecordChange)="doStuffWithNewRecord($event)"></json-editor>
 ```
 
 ## Example
