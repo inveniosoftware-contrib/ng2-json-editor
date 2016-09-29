@@ -28,8 +28,8 @@ import { ComponentTypeService } from './component-type.service';
 @Injectable()
 export class RecordFixerService {
 
-  private emptyValueService: EmptyValueService = new EmptyValueService();
-  private componentTypeService: ComponentTypeService = new ComponentTypeService();
+  constructor(private emptyValueService: EmptyValueService,
+    private componentTypeService: ComponentTypeService) { }
 
   // TODO: return fixed record!
   fixRecord(record: Object, schema: Object) {

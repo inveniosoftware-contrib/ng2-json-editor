@@ -20,18 +20,14 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { addProviders, inject } from '@angular/core/testing';
-
 import { EmptyValueService } from './empty-value.service';
 
 describe('EmptyValueService', () => {
   let service: EmptyValueService;
 
-  beforeEach(() => addProviders([EmptyValueService]));
-
-  beforeEach(inject([EmptyValueService], (emptyValueService) => {
-    service = emptyValueService;
-  }));
+  beforeEach(() => {
+    service = new EmptyValueService();
+  });
 
   it('should respect x_editor_always_show as an object property', () => {
     let schema = {

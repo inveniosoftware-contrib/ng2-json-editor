@@ -22,20 +22,12 @@
 
 import { Component, Input } from '@angular/core';
 
-
 import { AbstractTrackerComponent } from '../abstract-tracker';
-import { TreeMenuItemComponent } from './tree-menu-item.component';
 
-import { FilterByPrefixPipe, MapToSortedIterablePipe } from '../shared/pipes';
-
-import { DomUtilService } from '../shared/services';
-import { WindowHrefService } from './window-href.service';
+import { DomUtilService, WindowHrefService } from '../shared/services';
 
 @Component({
   selector: 'tree-menu',
-  directives: [TreeMenuItemComponent],
-  pipes: [MapToSortedIterablePipe],
-  providers: [DomUtilService, WindowHrefService],
   styleUrls: [
     './tree-menu.component.scss'
   ],

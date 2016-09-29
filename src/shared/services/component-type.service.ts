@@ -34,7 +34,7 @@ export class ComponentTypeService {
    *  - primitive-list, table-list, complex-list
    *  - disabled, autocomplete
    * 
-   * @param {Object} schema 
+   * @param {Object} schema
    * @return {string}
    */
   getComponentType(schema: Object): string {

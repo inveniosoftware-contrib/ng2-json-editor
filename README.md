@@ -15,18 +15,20 @@ npm install --save ng2-json-editor
 ### Import
 
 ```typescript
-import { EditorComponent } from 'ng2-json-editor/ng2-json-editor';
+import { JsonEditorModule } from 'ng2-json-editor/ng2-json-editor';
 ```
+
+Then add it to your module's `imports`.
 
 ### Use
 
 ```html
-<editor [schema]="mySchema" [(record)]="myRecord"></editor>
+<json-editor [schema]="mySchema" [record]="myRecord" (onRecordChange)="doStuffWithNewRecord($event)"></json-editor>
 ```
 
 ## Example
 
-Please have a look at [example app component](/example/app/app.component.ts)
+Please have a look at [example app](./example/app)
 
 ## Configuration
 
@@ -137,19 +139,28 @@ cd ng2-json-editor
 
 # install the repo with npm
 npm install
+
+# build for the first time and start example app to see changes
+npm start
+
+# in another terminal session
+# watch changes on src, so that all will be available on example app immediately
+gulp watch
 ```
 
 ### Useful commands
 
 ```bash
-# typings install
-typings install
-
-# start the server with example-app
+# build the editor and start the server with example app
 npm start
 
 # test
 gulp test
+# or
+ng test --watch=false
+
+# test and watch (for usually debugging tests)
+ng test
 
 # build
 gulp build 

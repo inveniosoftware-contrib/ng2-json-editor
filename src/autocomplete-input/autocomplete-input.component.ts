@@ -20,27 +20,20 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
-import { TYPEAHEAD_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
-
-import { AutocompletionService } from './autocompletion.service';
-
-import { AutocompletionOptions } from './autocompletion.model';
-
+import { AutocompletionService } from '../shared/services';
 
 @Component({
   selector: 'autocomplete-input',
-  directives: [TYPEAHEAD_DIRECTIVES],
-  providers: [AutocompletionService],
   styleUrls: [
     './autocomplete-input.component.scss'
   ],
   templateUrl: './autocomplete-input.component.html'
 })
-export class AutocompleteInputComponent {
+export class AutocompleteInputComponent implements OnInit {
 
   @Input() autocompletionOptions: AutocompletionOptions;
   @Input() value: string;

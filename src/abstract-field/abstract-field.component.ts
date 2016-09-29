@@ -19,6 +19,8 @@
  * waive the privileges and immunities granted to it by virtue of its status
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
+import { OnInit, OnDestroy } from '@angular/core';
+
 import { Subscription } from 'rxjs/Subscription';
 
 import { AbstractTrackerComponent } from '../abstract-tracker';
@@ -33,7 +35,9 @@ import { AppGlobalsService } from '../shared/services';
  * 
  * It provides trackByFunction from AbstractTrackerComponent, and handles errors for the component.
  */
-export abstract class AbstractFieldComponent extends AbstractTrackerComponent {
+export abstract class AbstractFieldComponent
+  extends AbstractTrackerComponent
+  implements OnInit, OnDestroy {
 
   path: string;
   errors: Array<Object> = [];

@@ -20,28 +20,18 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
-import { AddFieldToListDropdownComponent } from '../add-field-dropdown';
-import { ObjectFieldComponent } from '../object-field';
-import { PrimitiveFieldComponent } from '../primitive-field';
-import { PrimitiveListFieldComponent } from '../primitive-list-field';
 
-import { MapToSortedIterablePipe } from '../shared/pipes';
-
-import { AppGlobalsService, ComponentTypeService, EmptyValueService } from '../shared/services';
+import {
+  AppGlobalsService,
+  ComponentTypeService,
+  EmptyValueService
+} from '../shared/services';
 
 @Component({
   selector: 'table-list-field',
-  directives: [
-    AddFieldToListDropdownComponent,
-    ObjectFieldComponent,
-    PrimitiveFieldComponent,
-    PrimitiveListFieldComponent
-  ],
-  pipes: [MapToSortedIterablePipe],
-  providers: [ComponentTypeService, EmptyValueService],
   styleUrls: [
     './table-list-field.component.scss'
   ],
@@ -52,6 +42,8 @@ export class TableListFieldComponent extends AbstractListFieldComponent {
   @Input() values: Array<Object>;
   @Input() schema: Object;
   @Input() path: string;
+
+  @Output() onValuesChange: EventEmitter<Array<Object>> = new EventEmitter<Array<Object>>();
 
   constructor(private componentTypeService: ComponentTypeService,
     public emptyValueService: EmptyValueService,

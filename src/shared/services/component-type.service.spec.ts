@@ -20,7 +20,6 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { addProviders, inject } from '@angular/core/testing';
 
 import { ComponentTypeService } from './component-type.service';
 
@@ -28,11 +27,9 @@ describe('ComponentTypeService', () => {
 
   let service: ComponentTypeService;
 
-  beforeEach(() => addProviders([ComponentTypeService]));
-
-  beforeEach(inject([ComponentTypeService], (componentTypeService) => {
-    service = componentTypeService;
-  }));
+  beforeEach(() => {
+    service = new ComponentTypeService();
+  });
 
   it('should return primitive-list', () => {
     let schema = {

@@ -20,30 +20,38 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { provide } from '@angular/core';
-import { TestComponentBuilder } from '@angular/compiler/testing';
 import {
+  async,
   ComponentFixture,
-  inject
+  TestBed,
 } from '@angular/core/testing';
 
 import { SearchableDropdownComponent } from './searchable-dropdown.component';
 
-import { DROPDOWN_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
+import { Ng2BootstrapModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { FilterByPrefixPipe } from '../shared/pipes';
 
 describe('SearchableDropdownComponent', () => {
 
-  const providers = [...DROPDOWN_DIRECTIVES];
   let fixture: ComponentFixture<SearchableDropdownComponent>;
   let component: SearchableDropdownComponent;
   let nativeEl: HTMLElement;
   let inputEl: HTMLInputElement;
 
-  beforeEach(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-    fixture = tcb
-      .overrideProviders(SearchableDropdownComponent, providers)
-      .createSync(SearchableDropdownComponent);
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        FilterByPrefixPipe,
+        SearchableDropdownComponent,
+      ],
+      imports: [
+        Ng2BootstrapModule
+      ]
+    }).compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(SearchableDropdownComponent);
     component = fixture.componentInstance;
     component.value = 'default';
     component.items = [];
@@ -52,7 +60,7 @@ describe('SearchableDropdownComponent', () => {
     nativeEl = fixture.nativeElement;
     inputEl = nativeEl
       .querySelector('input') as HTMLInputElement;
-  }));
+  });
 
   it('should map shortcut to correct value when pressed enter', () => {
     component.shortcutMap = {

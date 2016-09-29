@@ -12,19 +12,18 @@ npm-debug.log
 example
 .github
 coverage
-typings
-config
 !dist
 gulpfile.js
 
 #################
 ## Test
 #################
-*.spec.js
-*.spec.ts
+**/*.spec.js
+**/*.spec.ts
 protractor.conf.js
 webpack.config.js
 karma.conf.js
+e2e
 
 #################
 ## IDE

@@ -19,16 +19,12 @@
  * waive the privileges and immunities granted to it by virtue of its status
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
-import { provide } from '@angular/core';
-import { TestComponentBuilder } from '@angular/compiler/testing';
-import {
-  ComponentFixture,
-  inject
-} from '@angular/core/testing';
+
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddFieldToObjectDropdownComponent } from './add-field-to-object-dropdown.component';
 
-import { DROPDOWN_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
+import { Ng2BootstrapModule } from 'ng2-bootstrap/ng2-bootstrap';
 
 import { DifferentKeysPipe } from '../shared/pipes';
 
@@ -55,19 +51,28 @@ class MockEmptyValueService extends EmptyValueService {
 
 describe('AddFieldToObjectDropdownComponent', () => {
 
-  const providers = [
-    ...DROPDOWN_DIRECTIVES,
-    provide(EmptyValueService, { useClass: MockEmptyValueService })
-  ];
   let fixture: ComponentFixture<AddFieldToObjectDropdownComponent>;
   let component: AddFieldToObjectDropdownComponent;
   let nativeEl: HTMLElement;
   let showDropdownButton: HTMLButtonElement;
 
-  beforeEach(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-    fixture = tcb
-      .overrideProviders(AddFieldToObjectDropdownComponent, providers)
-      .createSync(AddFieldToObjectDropdownComponent);
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        DifferentKeysPipe,
+        AddFieldToObjectDropdownComponent
+      ],
+      imports: [
+        Ng2BootstrapModule
+      ],
+      providers: [
+        { provide: EmptyValueService, useClass: MockEmptyValueService }
+      ]
+    }).compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AddFieldToObjectDropdownComponent);
     component = fixture.componentInstance;
     component.value = value;
     component.schema = schemaProperties;
@@ -75,7 +80,7 @@ describe('AddFieldToObjectDropdownComponent', () => {
 
     nativeEl = fixture.nativeElement;
     showDropdownButton = nativeEl.querySelector('button') as HTMLButtonElement;
-  }));
+  });
 
   it('should show different keys of schema', () => {
     showDropdownButton.dispatchEvent(new Event('click'));
