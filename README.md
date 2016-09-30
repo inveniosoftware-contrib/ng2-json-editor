@@ -26,6 +26,11 @@ Then add it to your module's `imports`.
 <json-editor [schema]="mySchema" [record]="myRecord" (onRecordChange)="doStuffWithNewRecord($event)"></json-editor>
 ```
 
+- `schema` : valid json-schema for the record.
+- `record` : valid json to be edited.
+- `onRecordChange` emitted when record change, `$event` is the edited record.
+- `errorMap (={})`: errors for individual parts of the record (format should be [errors-map.json](./example/assets/mock-data/error-map.json) 
+
 ## Example
 
 Please have a look at [example app](./example/app)
@@ -96,17 +101,6 @@ number
 ```
 default: 0
 ```
-
-#### x_editor_validation_url
-
-Url to be used for backend validation.
-
-```
-string
-```
-
-Note that:
-  it should return errors in the same format as [remote-validation-response.json](./example/mock-data/remote-validation-response.json) 
 
 #### x_editor_previews
 
