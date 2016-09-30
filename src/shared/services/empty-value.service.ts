@@ -27,9 +27,7 @@ export class EmptyValueService {
 
   private static defaultValueLookup = {
     'string': '',
-    'boolean': false,
-    'integer': 0,
-    'number': 0
+    'boolean': false
   };
 
   generateEmptyValue(schema: Object): any {
