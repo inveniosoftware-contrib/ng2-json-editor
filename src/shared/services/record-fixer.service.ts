@@ -31,17 +31,27 @@ export class RecordFixerService {
   constructor(private emptyValueService: EmptyValueService,
     private componentTypeService: ComponentTypeService) { }
 
-  // TODO: return fixed record!
-  fixRecord(record: Object, schema: Object) {
+  /**
+   * Fixes given record according to given schema, in other words
+   * changes it to match the format expected the by te json-editor
+   * 
+   * @param {Object} rawRecord - json record to be fixed
+   * @param {Object} schema - extended schema of rawRecord
+   * @return {Object} - fixed record
+   */
+  fixRecord(rawRecord: Object, schema: Object): Object {
+    let record = Object.assign({}, rawRecord);
     Object.keys(record).forEach(field => {
       if (!schema['properties'][field]) {
+        // Delete if field is not in schema!
         this.deleteField(record, field);
       } else {
+        // Fix the field and all children.
         this.fix(field, record, schema['properties'][field]);
       }
     });
-
     this.insertEmptyIntoAlwaysShowFields(record, schema);
+    return record;
   }
 
   private insertEmptyIntoAlwaysShowFields(record: Object, schema: Object) {
@@ -83,14 +93,26 @@ export class RecordFixerService {
   }
 
   /**
+   * Visits all parts of record recursivly, along with the subschema of the part
+   * and apply required fixes.
+   * 
    * NOTE: the reason that parent and key are passed instead of the direct value
    * is to be able do some operations that needs the parent such as `delete`.
+   * 
+   * TODO: add special case for arrays because fixes are the same for
+   * all elements.
+   * 
+   * @param key {string | number} - field name or element index
+   * @param parent {Object | Array<any>} - parent of the field/element
+   * @param schema - schema of visited field/element
    */
   private fix(key: string | number, parent: Object | Array<any>, schema: Object) {
     if (schema['x_editor_hidden']) {
       delete parent[key];
       return;
     }
+    
+    // Fixes for each type/condition, can be added below.
     let value = parent[key];
 
     if (this.componentTypeService.getComponentType(schema) === 'table-list') {
@@ -102,6 +124,7 @@ export class RecordFixerService {
       // Looping over record to filter out fields that are not in schema.
       Object.keys(value).forEach(prop => {
         if (!schema['properties'][prop]) {
+          // we don't like fields without schema!
           this.deleteField(value, prop);
         } else {
           this.fix(prop, value, schema['properties'][prop]);

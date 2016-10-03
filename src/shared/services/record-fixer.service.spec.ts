@@ -45,9 +45,9 @@ describe('RecordFixerService', () => {
 
       let record = {};
 
-      service.fixRecord(record, schema);
+      let fixedRecord = service.fixRecord(record, schema);
 
-      expect(record['prop']).toBeDefined();
+      expect(fixedRecord['prop']).toBeDefined();
     }
   );
 
@@ -71,9 +71,9 @@ describe('RecordFixerService', () => {
         level1: {}
       };
 
-      service.fixRecord(record, schema);
+      let fixedRecord = service.fixRecord(record, schema);
 
-      expect(record['level1']['prop']).toBeDefined();
+      expect(fixedRecord['level1']['prop']).toBeDefined();
     }
   );
 
@@ -96,9 +96,9 @@ describe('RecordFixerService', () => {
 
       let record = {};
 
-      service.fixRecord(record, schema);
+      let fixedRecord = service.fixRecord(record, schema);
 
-      expect(record['level1']['prop']).toBeDefined();
+      expect(fixedRecord['level1']['prop']).toBeDefined();
     }
   );
 
@@ -127,9 +127,9 @@ describe('RecordFixerService', () => {
         ]
       };
 
-      service.fixRecord(record, schema);
+      let fixedRecord = service.fixRecord(record, schema);
 
-      record['level1'].forEach(element => expect(element['prop']).toBeDefined());
+      fixedRecord['level1'].forEach(element => expect(element['prop']).toBeDefined());
     }
   );
 
@@ -160,8 +160,8 @@ describe('RecordFixerService', () => {
       };
 
       let originalValues = record['level1'];
-      service.fixRecord(record, schema);
-      let fixedValues = record['level1'];
+      let fixedRecord = service.fixRecord(record, schema);
+      let fixedValues = fixedRecord['level1'];
 
       fixedValues.forEach((fixedValue, index) => {
         expect(fixedValue['prop']).toEqual(originalValues[index]['prop']);
@@ -185,9 +185,9 @@ describe('RecordFixerService', () => {
         prop: 'value'
       };
 
-      service.fixRecord(record, schema);
+      let fixedRecord = service.fixRecord(record, schema);
 
-      expect(record['prop']).not.toBeDefined();
+      expect(fixedRecord['prop']).not.toBeDefined();
     }
   );
 
@@ -213,9 +213,9 @@ describe('RecordFixerService', () => {
         }
       };
 
-      service.fixRecord(record, schema);
+      let fixedRecord = service.fixRecord(record, schema);
 
-      expect(record['level1']['prop']).not.toBeDefined();
+      expect(fixedRecord['level1']['prop']).not.toBeDefined();
     }
   );
 
@@ -246,8 +246,8 @@ describe('RecordFixerService', () => {
         ]
       };
 
-      service.fixRecord(record, schema);
-      record['level1'].forEach((element => expect(element['prop']).not.toBeDefined()));
+      let fixedRecord = service.fixRecord(record, schema);
+      fixedRecord['level1'].forEach((element => expect(element['prop']).not.toBeDefined()));
 
     }
   );
@@ -288,9 +288,9 @@ describe('RecordFixerService', () => {
         ]
       };
 
-      service.fixRecord(record, schema);
+      let fixedRecord = service.fixRecord(record, schema);
 
-      record['object_array'].forEach(element => {
+      fixedRecord['object_array'].forEach(element => {
         expect(element['prop1']).toBeDefined();
         expect(element['prop2']).toBeDefined();
         expect(element['prop3']).toBeDefined();
