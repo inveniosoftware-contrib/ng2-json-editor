@@ -51,6 +51,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
 
   @Input() record: Object;
   @Input() schema: Object;
+  @Input() errorMap: Object = {};
 
   @Output() onRecordChange: EventEmitter<Object> = new EventEmitter<Object>();
 
@@ -83,20 +84,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
     this.record = this.jsonUtilService.flattenMARCJson(this.record, this.schema);
     this.schema = this.jsonUtilService.flattenMARCSchema(this.schema);
     this.previews = this.extractPreviews();
-  }
-
-  saveRecord() {
-    // Remote validation before save.
-    let validationUrl = this.schema['x_editor_validation_url'];
-    if (validationUrl) {
-      // TODO: change it post and include record and schema in request when it is not mock.
-      this.http.get(validationUrl).map(res => res.json())
-        .subscribe(validationErrors => {
-          this.appGlobalsService.globalErrors = validationErrors;
-        });
-    }
-
-    // TODO: implement saving and do it when only validationErrors is empty.
+    this.appGlobalsService.globalErrors = this.errorMap;
   }
 
   /**

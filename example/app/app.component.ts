@@ -25,7 +25,6 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/zip';
 
-
 @Component({
   selector: 'app',
   encapsulation: ViewEncapsulation.None, //  Apply style (bootstrap.scss) globally
@@ -33,7 +32,10 @@ import 'rxjs/add/observable/zip';
     'app.component.scss'
   ],
   template: `
-    <json-editor [record]="record" (onRecordChange)="onRecordChange($event)" [schema]="schema">
+    <json-editor 
+      [record]="record"
+      (onRecordChange)="onRecordChange($event)"
+      [schema]="schema">
     </json-editor>
   `
 })
