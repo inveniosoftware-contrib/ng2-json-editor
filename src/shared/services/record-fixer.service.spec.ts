@@ -78,7 +78,7 @@ describe('RecordFixerService', () => {
   );
 
   it('should add properties that are marked as x_editor_always_show to' +
-    'a record with depth 2 and without defined parent',
+    ' a record with depth 2 and without defined parent',
     () => {
       let schema = {
         properties: {
@@ -103,7 +103,7 @@ describe('RecordFixerService', () => {
   );
 
   it('should add properties that are marked as x_editor_always_show ' +
-    'to a record with depth 2 and with array parent',
+    ' to a record with depth 2 and with array parent',
     () => {
       let schema = {
         properties: {
@@ -133,8 +133,8 @@ describe('RecordFixerService', () => {
     }
   );
 
-  it('should not overwrite existing properties that are marked as x_editor_always_show ' +
-    'to a record with depth 2 and with array parent',
+  it('should not overwrite existing properties that are marked as x_editor_always_show' +
+    ' to a record with depth 2 and with array parent',
     () => {
       let schema = {
         properties: {
@@ -167,6 +167,46 @@ describe('RecordFixerService', () => {
         expect(fixedValue['prop']).toEqual(originalValues[index]['prop']);
       });
 
+    }
+  );
+
+  it('should add missing properties that are marked as x_editor_always_show' +
+    ' to a record with so deep schema',
+    () => {
+      let schema = {
+        type: 'object',
+        properties: {
+          prop0: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                prop1: {
+                  type: 'array',
+                  items: {
+                    type: 'object',
+                    properties: {
+                      prop2: {
+                        type: 'object',
+                        properties: {
+                          prop3: {
+                            type: 'string',
+                            x_editor_always_show: true
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      };
+
+      let everythingMissingRecord = {};
+      let fixedEverythingMissingRecord = service.fixRecord(everythingMissingRecord, schema);
+      expect(fixedEverythingMissingRecord['prop0'][0]['prop1'][0]['prop2']['prop3']).toBeDefined();
     }
   );
 
@@ -220,7 +260,7 @@ describe('RecordFixerService', () => {
   );
 
   it('should delete properties that are marked as x_editor_hidden' +
-    'in a record with depth 2 and array parent',
+    ' in a record with depth 2 and array parent',
     () => {
       let schema = {
         properties: {
@@ -253,7 +293,7 @@ describe('RecordFixerService', () => {
   );
 
   it('should fix elements of an array in a record, for all to have same properties' +
-    'for proper table-list UI look',
+    ' for proper table-list UI look',
     () => {
       let schema = {
         properties: {

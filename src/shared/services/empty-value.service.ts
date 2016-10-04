@@ -21,6 +21,7 @@
 */
 
 import { Injectable } from '@angular/core';
+import { AlwaysShowPathHelper } from './always-show-path.helper';
 
 @Injectable()
 export class EmptyValueService {
@@ -31,26 +32,59 @@ export class EmptyValueService {
   };
 
   generateEmptyValue(schema: Object): any {
+    let emptyValue = this.generateEmptyValueRecursively(schema);
+    new AlwaysShowPathHelper().getAlwaysShowFieldPaths(schema)
+      .forEach(path => {
+        this.insertEmptyIntoPath(path, emptyValue, schema);
+      });
+    return emptyValue;
+  }
+
+  private generateEmptyValueRecursively(schema: Object): any {
     if (schema['type'] === 'object') {
       let emptyObject = {};
       Object.keys(schema['properties'])
         .filter(prop => {
           let required: Array<string> = schema['required'] || [];
-          return (schema['properties'][prop]['x_editor_always_show']
-            || required.indexOf(prop) > -1);
+          return required.indexOf(prop) > -1;
         }).forEach(prop => {
           let propSchema = schema['properties'][prop];
-          emptyObject[prop] = this.generateEmptyValue(propSchema);
+          emptyObject[prop] = this.generateEmptyValueRecursively(propSchema);
         });
       return emptyObject;
     }
     if (schema['type'] === 'array') {
       let emptyArray = [];
       let arrayElementSchema = schema['items'];
-      emptyArray.push(this.generateEmptyValue(arrayElementSchema));
+      emptyArray.push(this.generateEmptyValueRecursively(arrayElementSchema));
       return emptyArray;
     }
     return EmptyValueService.defaultValueLookup[schema['type']];
+  }
+
+  /*
+   * Inserts empty value into a highest levelproperty going through the given path.
+   * 
+   * It goes into path step by step until empty values inserted through the all path.
+   * 
+   * @param {Array<string>} path - array of path elements
+   * @param {any} value - value which the property will be inserted
+   * @param {Object} schema - jsonschema of value
+   */
+  private insertEmptyIntoPath(path: Array<string>, value: any, schema: Object) {
+    let subSchema = schema;
+    for (let i = 0; i < path.length; i++) {
+      let parentSchema = subSchema;
+      subSchema = (subSchema['properties'] || subSchema['items']['properties'])[path[i]];
+
+      if (parentSchema['type'] === 'array') {
+        value[0][path[i]] = this.generateEmptyValueRecursively(subSchema);
+        value = value[0][path[i]];
+      } else {
+        value[path[i]] = this.generateEmptyValueRecursively(subSchema);
+        value = value[path[i]];
+      }
+    }
   }
 
 }

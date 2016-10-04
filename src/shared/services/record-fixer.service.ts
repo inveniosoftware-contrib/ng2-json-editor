@@ -25,6 +25,8 @@ import { Injectable } from '@angular/core';
 import { EmptyValueService } from './empty-value.service';
 import { ComponentTypeService } from './component-type.service';
 
+import { AlwaysShowPathHelper } from './always-show-path.helper';
+
 @Injectable()
 export class RecordFixerService {
 
@@ -55,14 +57,14 @@ export class RecordFixerService {
   }
 
   private insertEmptyIntoAlwaysShowFields(record: Object, schema: Object) {
-    let paths = new AlwaysShowPathFinder().getPaths(schema['properties']);
+    let paths = new AlwaysShowPathHelper().getAlwaysShowFieldPaths(schema);
     paths.forEach(path => {
-      this.insertEmptyIntoPath(path, record, schema);
+      this.insertEmptyIntoPathIfMissing(path, record, schema);
     });
   }
 
   /*
-   * Inserts empty value into a highest level missing property going through the given path.
+   * Inserts empty value into a highest level MISSING property going through the given path.
    * 
    * It goes into path step by step until it finds a property that isn't present
    * then inserts the empty record and stops.
@@ -71,7 +73,7 @@ export class RecordFixerService {
    * @param {any} value - value which the missing property will be inserted
    * @param {Object} schema - jsonschema of value
    */
-  private insertEmptyIntoPath(path: Array<string>, value: any, schema: Object) {
+  private insertEmptyIntoPathIfMissing(path: Array<string>, value: any, schema: Object) {
     let subSchema = schema;
     for (let i = 0; i < path.length; i++) {
       subSchema = (subSchema['properties'] || subSchema['items']['properties'])[path[i]];
@@ -83,7 +85,7 @@ export class RecordFixerService {
       if (subSchema['type'] === 'array') {
         for (let element of value[path[i]]) {
           if (path.length > 1) {
-            this.insertEmptyIntoPath(path.slice(i + 1), element, subSchema['items']);
+            this.insertEmptyIntoPathIfMissing(path.slice(i + 1), element, subSchema['items']);
           }
         }
       }
@@ -111,7 +113,7 @@ export class RecordFixerService {
       delete parent[key];
       return;
     }
-    
+
     // Fixes for each type/condition, can be added below.
     let value = parent[key];
 
@@ -180,36 +182,5 @@ export class RecordFixerService {
   private deleteField(object: Object, field: string) {
     delete object[field];
     console.log(`REMOVED: ${field} not in schema`);
-  }
-}
-
-class AlwaysShowPathFinder {
-
-  private paths: Array<Array<string>> = [];
-
-
-  getPaths(schema: Object): Array<Array<string>> {
-    // Loop because param is actually not schema but inside of `schema.properties` directly.
-    Object.keys(schema).forEach(prop => {
-      this.find([prop], schema[prop]);
-    });
-    return this.paths;
-  }
-
-  find(path: Array<string>, schema: Object) {
-    if (schema['x_editor_always_show']) {
-      this.paths.push(path);
-      return;
-    }
-
-    let innerSchema = schema['type'] === 'array' ?
-      schema['items']['properties'] : schema['properties'];
-
-    if (innerSchema) {
-      Object.keys(innerSchema).forEach(prop => {
-        let newPath = path.concat([prop]); // copy! TODO: is it necessary?
-        this.find(newPath, innerSchema[prop]);
-      });
-    }
   }
 }
