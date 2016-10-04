@@ -91,6 +91,8 @@ export class RecordFixerService {
       delete parent[key];
       return;
     }
+
+    // Fixes for each type/condition, can be added below.
     let value = parent[key];
 
     if (this.componentTypeService.getComponentType(schema) === 'table-list') {
