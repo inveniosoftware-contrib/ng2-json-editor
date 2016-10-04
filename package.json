@@ -19,7 +19,7 @@
     "build": "gulp build",
     "start": "npm run build && ng serve",
     "lint": "tslint \"src/**/*.ts\"",
-    "test": "ng test --watch=false",
+    "test": "npm run build && ng test --watch=false",
     "pree2e": "webdriver-manager update",
     "e2e": "protractor",
     "preversion": "npm test",
