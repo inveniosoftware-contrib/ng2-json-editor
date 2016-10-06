@@ -28,7 +28,6 @@ import { AppGlobalsService, EmptyValueService } from '../shared/services';
 
 @Component({
   selector: 'primitive-list-field',
-  providers: [EmptyValueService],
   styleUrls: [
     './primitive-list-field.component.scss'
   ],
