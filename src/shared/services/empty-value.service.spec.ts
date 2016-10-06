@@ -72,6 +72,47 @@ describe('EmptyValueService', () => {
     expect(empty['prop1']).toBeUndefined();
   });
 
+  it('should respect x_editor_always_show as property of an object which a property of another',
+    () => {
+      let schema = {
+        type: 'object',
+        properties: {
+          prop1: {
+            type: 'object',
+            properties: {
+              prop2: {
+                type: 'string',
+                x_editor_always_show: true
+              }
+            }
+          }
+        }
+      };
+      let empty = service.generateEmptyValue(schema);
+      expect(empty['prop1']['prop2']).toBeDefined();
+    }
+  );
+
+  it('should not genereate empty deeply if respect x_editor_always_show is not set deep',
+    () => {
+      let schema = {
+        type: 'object',
+        properties: {
+          prop1: {
+            type: 'object',
+            x_editor_always_show: true,
+            properties: {
+              prop2: {
+                type: 'string',
+              }
+            }
+          }
+        }
+      };
+      let empty = service.generateEmptyValue(schema);
+      expect(empty['prop1']['prop2']).toBeUndefined();
+    });
+
   it('should respect x_editor_always_show as a property of array element', () => {
     let schema = {
       type: 'array',
@@ -89,4 +130,58 @@ describe('EmptyValueService', () => {
     expect(empty[0]['prop1']).toBeDefined();
   });
 
+  it('should respect x_editor_always_show as a property of array element (deeper)', () => {
+    let schema = {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          prop1: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                prop2: {
+                  type: 'string',
+                  x_editor_always_show: true
+                }
+              }
+            }
+          }
+        }
+      }
+    };
+    let empty = service.generateEmptyValue(schema);
+    expect(empty[0]['prop1'][0]['prop2']).toBeDefined();
+  });
+
+  it('should respect x_editor_always_show as a property of array element (way deeper)', () => {
+    let schema = {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          prop1: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                prop2: {
+                  type: 'object',
+                  properties: {
+                    prop3: {
+                      type: 'string',
+                      x_editor_always_show: true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    };
+    let empty = service.generateEmptyValue(schema);
+    expect(empty[0]['prop1'][0]['prop2']['prop3']).toBeDefined();
+  });
 });

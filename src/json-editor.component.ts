@@ -80,7 +80,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
     // TODO: remove this when this is called only once.
     if (Object.keys(this.record).length === 0) { return; }
 
-    this.recordFixerService.fixRecord(this.record, this.schema);
+    this.record = this.recordFixerService.fixRecord(this.record, this.schema);
     this.record = this.jsonUtilService.flattenMARCJson(this.record, this.schema);
     this.schema = this.jsonUtilService.flattenMARCSchema(this.schema);
     this.previews = this.extractPreviews();

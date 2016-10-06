@@ -25,34 +25,46 @@ import { Injectable } from '@angular/core';
 import { EmptyValueService } from './empty-value.service';
 import { ComponentTypeService } from './component-type.service';
 
+import { AlwaysShowPathHelper } from './always-show-path.helper';
+
 @Injectable()
 export class RecordFixerService {
 
   constructor(private emptyValueService: EmptyValueService,
     private componentTypeService: ComponentTypeService) { }
 
-  // TODO: return fixed record!
-  fixRecord(record: Object, schema: Object) {
+  /**
+   * Fixes given record according to given schema, in other words
+   * changes it to match the format expected the by te json-editor
+   * 
+   * @param {Object} rawRecord - json record to be fixed
+   * @param {Object} schema - extended schema of rawRecord
+   * @return {Object} - fixed record
+   */
+  fixRecord(rawRecord: Object, schema: Object): Object {
+    let record = Object.assign({}, rawRecord);
     Object.keys(record).forEach(field => {
       if (!schema['properties'][field]) {
+        // Delete if field is not in schema!
         this.deleteField(record, field);
       } else {
+        // Fix the field and all children.
         this.fix(field, record, schema['properties'][field]);
       }
     });
-
     this.insertEmptyIntoAlwaysShowFields(record, schema);
+    return record;
   }
 
   private insertEmptyIntoAlwaysShowFields(record: Object, schema: Object) {
-    let paths = new AlwaysShowPathFinder().getPaths(schema['properties']);
+    let paths = new AlwaysShowPathHelper().getAlwaysShowFieldPaths(schema);
     paths.forEach(path => {
-      this.insertEmptyIntoPath(path, record, schema);
+      this.insertEmptyIntoPathIfMissing(path, record, schema);
     });
   }
 
   /*
-   * Inserts empty value into a highest level missing property going through the given path.
+   * Inserts empty value into a highest level MISSING property going through the given path.
    * 
    * It goes into path step by step until it finds a property that isn't present
    * then inserts the empty record and stops.
@@ -61,7 +73,7 @@ export class RecordFixerService {
    * @param {any} value - value which the missing property will be inserted
    * @param {Object} schema - jsonschema of value
    */
-  private insertEmptyIntoPath(path: Array<string>, value: any, schema: Object) {
+  private insertEmptyIntoPathIfMissing(path: Array<string>, value: any, schema: Object) {
     let subSchema = schema;
     for (let i = 0; i < path.length; i++) {
       subSchema = (subSchema['properties'] || subSchema['items']['properties'])[path[i]];
@@ -73,7 +85,7 @@ export class RecordFixerService {
       if (subSchema['type'] === 'array') {
         for (let element of value[path[i]]) {
           if (path.length > 1) {
-            this.insertEmptyIntoPath(path.slice(i + 1), element, subSchema['items']);
+            this.insertEmptyIntoPathIfMissing(path.slice(i + 1), element, subSchema['items']);
           }
         }
       }
@@ -83,14 +95,26 @@ export class RecordFixerService {
   }
 
   /**
+   * Visits all parts of record recursivly, along with the subschema of the part
+   * and apply required fixes.
+   * 
    * NOTE: the reason that parent and key are passed instead of the direct value
    * is to be able do some operations that needs the parent such as `delete`.
+   * 
+   * TODO: add special case for arrays because fixes are the same for
+   * all elements.
+   * 
+   * @param key {string | number} - field name or element index
+   * @param parent {Object | Array<any>} - parent of the field/element
+   * @param schema - schema of visited field/element
    */
   private fix(key: string | number, parent: Object | Array<any>, schema: Object) {
     if (schema['x_editor_hidden']) {
       delete parent[key];
       return;
     }
+
+    // Fixes for each type/condition, can be added below.
     let value = parent[key];
 
     if (this.componentTypeService.getComponentType(schema) === 'table-list') {
@@ -102,6 +126,7 @@ export class RecordFixerService {
       // Looping over record to filter out fields that are not in schema.
       Object.keys(value).forEach(prop => {
         if (!schema['properties'][prop]) {
+          // we don't like fields without schema!
           this.deleteField(value, prop);
         } else {
           this.fix(prop, value, schema['properties'][prop]);
@@ -157,36 +182,5 @@ export class RecordFixerService {
   private deleteField(object: Object, field: string) {
     delete object[field];
     console.log(`REMOVED: ${field} not in schema`);
-  }
-}
-
-class AlwaysShowPathFinder {
-
-  private paths: Array<Array<string>> = [];
-
-
-  getPaths(schema: Object): Array<Array<string>> {
-    // Loop because param is actually not schema but inside of `schema.properties` directly.
-    Object.keys(schema).forEach(prop => {
-      this.find([prop], schema[prop]);
-    });
-    return this.paths;
-  }
-
-  find(path: Array<string>, schema: Object) {
-    if (schema['x_editor_always_show']) {
-      this.paths.push(path);
-      return;
-    }
-
-    let innerSchema = schema['type'] === 'array' ?
-      schema['items']['properties'] : schema['properties'];
-
-    if (innerSchema) {
-      Object.keys(innerSchema).forEach(prop => {
-        let newPath = path.concat([prop]); // copy! TODO: is it necessary?
-        this.find(newPath, innerSchema[prop]);
-      });
-    }
   }
 }

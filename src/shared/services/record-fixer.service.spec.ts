@@ -45,9 +45,9 @@ describe('RecordFixerService', () => {
 
       let record = {};
 
-      service.fixRecord(record, schema);
+      let fixedRecord = service.fixRecord(record, schema);
 
-      expect(record['prop']).toBeDefined();
+      expect(fixedRecord['prop']).toBeDefined();
     }
   );
 
@@ -71,14 +71,14 @@ describe('RecordFixerService', () => {
         level1: {}
       };
 
-      service.fixRecord(record, schema);
+      let fixedRecord = service.fixRecord(record, schema);
 
-      expect(record['level1']['prop']).toBeDefined();
+      expect(fixedRecord['level1']['prop']).toBeDefined();
     }
   );
 
   it('should add properties that are marked as x_editor_always_show to' +
-    'a record with depth 2 and without defined parent',
+    ' a record with depth 2 and without defined parent',
     () => {
       let schema = {
         properties: {
@@ -96,14 +96,14 @@ describe('RecordFixerService', () => {
 
       let record = {};
 
-      service.fixRecord(record, schema);
+      let fixedRecord = service.fixRecord(record, schema);
 
-      expect(record['level1']['prop']).toBeDefined();
+      expect(fixedRecord['level1']['prop']).toBeDefined();
     }
   );
 
   it('should add properties that are marked as x_editor_always_show ' +
-    'to a record with depth 2 and with array parent',
+    ' to a record with depth 2 and with array parent',
     () => {
       let schema = {
         properties: {
@@ -127,14 +127,14 @@ describe('RecordFixerService', () => {
         ]
       };
 
-      service.fixRecord(record, schema);
+      let fixedRecord = service.fixRecord(record, schema);
 
-      record['level1'].forEach(element => expect(element['prop']).toBeDefined());
+      fixedRecord['level1'].forEach(element => expect(element['prop']).toBeDefined());
     }
   );
 
-  it('should not overwrite existing properties that are marked as x_editor_always_show ' +
-    'to a record with depth 2 and with array parent',
+  it('should not overwrite existing properties that are marked as x_editor_always_show' +
+    ' to a record with depth 2 and with array parent',
     () => {
       let schema = {
         properties: {
@@ -160,13 +160,53 @@ describe('RecordFixerService', () => {
       };
 
       let originalValues = record['level1'];
-      service.fixRecord(record, schema);
-      let fixedValues = record['level1'];
+      let fixedRecord = service.fixRecord(record, schema);
+      let fixedValues = fixedRecord['level1'];
 
       fixedValues.forEach((fixedValue, index) => {
         expect(fixedValue['prop']).toEqual(originalValues[index]['prop']);
       });
 
+    }
+  );
+
+  it('should add missing properties that are marked as x_editor_always_show' +
+    ' to a record with so deep schema',
+    () => {
+      let schema = {
+        type: 'object',
+        properties: {
+          prop0: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                prop1: {
+                  type: 'array',
+                  items: {
+                    type: 'object',
+                    properties: {
+                      prop2: {
+                        type: 'object',
+                        properties: {
+                          prop3: {
+                            type: 'string',
+                            x_editor_always_show: true
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      };
+
+      let everythingMissingRecord = {};
+      let fixedEverythingMissingRecord = service.fixRecord(everythingMissingRecord, schema);
+      expect(fixedEverythingMissingRecord['prop0'][0]['prop1'][0]['prop2']['prop3']).toBeDefined();
     }
   );
 
@@ -185,9 +225,9 @@ describe('RecordFixerService', () => {
         prop: 'value'
       };
 
-      service.fixRecord(record, schema);
+      let fixedRecord = service.fixRecord(record, schema);
 
-      expect(record['prop']).not.toBeDefined();
+      expect(fixedRecord['prop']).not.toBeDefined();
     }
   );
 
@@ -213,14 +253,14 @@ describe('RecordFixerService', () => {
         }
       };
 
-      service.fixRecord(record, schema);
+      let fixedRecord = service.fixRecord(record, schema);
 
-      expect(record['level1']['prop']).not.toBeDefined();
+      expect(fixedRecord['level1']['prop']).not.toBeDefined();
     }
   );
 
   it('should delete properties that are marked as x_editor_hidden' +
-    'in a record with depth 2 and array parent',
+    ' in a record with depth 2 and array parent',
     () => {
       let schema = {
         properties: {
@@ -246,14 +286,14 @@ describe('RecordFixerService', () => {
         ]
       };
 
-      service.fixRecord(record, schema);
-      record['level1'].forEach((element => expect(element['prop']).not.toBeDefined()));
+      let fixedRecord = service.fixRecord(record, schema);
+      fixedRecord['level1'].forEach((element => expect(element['prop']).not.toBeDefined()));
 
     }
   );
 
   it('should fix elements of an array in a record, for all to have same properties' +
-    'for proper table-list UI look',
+    ' for proper table-list UI look',
     () => {
       let schema = {
         properties: {
@@ -288,9 +328,9 @@ describe('RecordFixerService', () => {
         ]
       };
 
-      service.fixRecord(record, schema);
+      let fixedRecord = service.fixRecord(record, schema);
 
-      record['object_array'].forEach(element => {
+      fixedRecord['object_array'].forEach(element => {
         expect(element['prop1']).toBeDefined();
         expect(element['prop2']).toBeDefined();
         expect(element['prop3']).toBeDefined();
