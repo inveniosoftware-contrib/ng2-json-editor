@@ -1,38 +1,23 @@
 <div class="editor-container">
-    <div class="editor-table-container">
-        <table id="editor" class="table table-striped">
-            <tr *ngFor="let pair of record | mapToSortedIterable:schema.properties; trackBy:trackByFunction">
-                <td class="label-holder">
-                    <label>{{pair.key | underscoreToSpace}}</label>
-                </td>
-                <td>
-                    <div [ngSwitch]="getFieldType(pair.key)">
-                        <div *ngSwitchCase="'table-list'">
-                            <table-list-field [values]="pair.value" (onValuesChange)="onValueChange($event, pair.key)" [schema]="schema.properties[pair.key]" [path]="pair.key"></table-list-field>
-                        </div>
-                        <div *ngSwitchCase="'complex-list'">
-                            <complex-list-field [values]="pair.value" (onValuesChange)="onValueChange($event, pair.key)" [schema]="schema.properties[pair.key]" [path]="pair.key"></complex-list-field>
-                        </div>
-                        <div *ngSwitchCase="'primitive-list'">
-                            <primitive-list-field [values]="pair.value" (onValuesChange)="onValueChange($event, pair.key)" [schema]="schema.properties[pair.key]" [path]="pair.key"></primitive-list-field>
-                        </div>
-                        <div *ngSwitchCase="'object'">
-                            <object-field [value]="pair.value" (onValueChange)="onValueChange($event, pair.key)" [schema]="schema.properties[pair.key]" [path]="pair.key"></object-field>
-                        </div>
-                        <div *ngSwitchDefault>
-                            <primitive-field [value]="record[pair.key]" (onValueChange)="onValueChange($event, pair.key)" [schema]="schema.properties[pair.key]" [path]="pair.key"></primitive-field>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="right-side-container">
-        <div>
-            <tree-menu [record]="record" [schema]="schema"></tree-menu>
-        </div>
-        <div>
-            <editor-previewer [previews]="previews"> </editor-previewer>
-        </div>
-    </div>
+	<div class="editor-table-container">
+		<table id="editor" class="table table-striped">
+			<tr *ngFor="let pair of record | mapToSortedIterable:schema.properties; trackBy:trackByFunction">
+				<td class="label-holder">
+					<label>{{pair.key | underscoreToSpace}}</label>
+				</td>
+				<td>
+					<any-type-field [value]="record[pair.key]" (onValueChange)="onValueChange($event, pair.key)" [schema]="schema.properties[pair.key]"
+						[path]="pair.key"></any-type-field>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="right-side-container">
+		<div>
+			<tree-menu [record]="record" [schema]="schema"></tree-menu>
+		</div>
+		<div>
+			<editor-previewer [previews]="previews"> </editor-previewer>
+		</div>
+	</div>
 </div>

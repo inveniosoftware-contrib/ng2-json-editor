@@ -31,15 +31,17 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class MapToSortedIterablePipe implements PipeTransform {
 
   /**
-   * Transforms an object to sorted array of key-value pairs of its properties.
+   * Transforms an object to sorted (by `x_editor_priority`) array of key-value pairs of its properties.
+   * Also it filters out the fields for which `x_editor_hidden` is set.
    * 
    * @param {Object} map - the object to be transformed
-   * @param {Object} schema - the `schema.propeties` of the object to be used for sorting
+   * @param {Object} schema - the `schema.propeties` of the object, used for sorting and filtering
    * @return {Array<Pair<any>>} - sorted array of key-value pairs of given map's properties.
    */
   transform(map: Object, schema: Object): Array<Pair> {
     if (!map) { return undefined; }
     return Object.keys(map)
+      .filter(key => !schema[key]['x_editor_hidden'])
       .sort((a, b) => {
         // Sort by x_editor_priority, larger is the first.
         let pa = schema[a]['x_editor_priority'] || 0;
