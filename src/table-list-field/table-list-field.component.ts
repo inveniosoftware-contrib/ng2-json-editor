@@ -26,7 +26,6 @@ import { AbstractListFieldComponent } from '../abstract-list-field';
 
 import {
   AppGlobalsService,
-  ComponentTypeService,
   EmptyValueService
 } from '../shared/services';
 
@@ -45,8 +44,7 @@ export class TableListFieldComponent extends AbstractListFieldComponent {
 
   @Output() onValuesChange: EventEmitter<Array<Object>> = new EventEmitter<Array<Object>>();
 
-  constructor(private componentTypeService: ComponentTypeService,
-    public emptyValueService: EmptyValueService,
+  constructor(public emptyValueService: EmptyValueService,
     public appGlobalsService: AppGlobalsService) {
     super();
   }
@@ -69,12 +67,6 @@ export class TableListFieldComponent extends AbstractListFieldComponent {
         clone[prop] = this.emptyValueService.generateEmptyValue(propSchema);
       });
     return Object.assign({}, clone);
-  }
-
-  // TODO: cache the types for each field!
-  getFieldType(field: string): string {
-    let fieldSchema = this.schema['items']['properties'][field];
-    return this.componentTypeService.getComponentType(fieldSchema);
   }
 
 }

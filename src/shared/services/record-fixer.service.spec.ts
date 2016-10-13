@@ -110,6 +110,7 @@ describe('RecordFixerService', () => {
           level1: {
             type: 'array',
             items: {
+              type: 'object',
               properties: {
                 prop: {
                   type: 'string',
@@ -141,6 +142,7 @@ describe('RecordFixerService', () => {
           level1: {
             type: 'array',
             items: {
+              type: 'object',
               properties: {
                 prop: {
                   type: 'string',
@@ -207,88 +209,6 @@ describe('RecordFixerService', () => {
       let everythingMissingRecord = {};
       let fixedEverythingMissingRecord = service.fixRecord(everythingMissingRecord, schema);
       expect(fixedEverythingMissingRecord['prop0'][0]['prop1'][0]['prop2']['prop3']).toBeDefined();
-    }
-  );
-
-  it('should delete properties that are marked as x_editor_hidden in a record with depth 1',
-    () => {
-      let schema = {
-        properties: {
-          prop: {
-            type: 'string',
-            x_editor_hidden: true
-          }
-        }
-      };
-
-      let record = {
-        prop: 'value'
-      };
-
-      let fixedRecord = service.fixRecord(record, schema);
-
-      expect(fixedRecord['prop']).not.toBeDefined();
-    }
-  );
-
-  it('should delete properties that are marked as x_editor_hidden in a record with depth 2',
-    () => {
-      let schema = {
-        properties: {
-          level1: {
-            type: 'object',
-            properties: {
-              prop: {
-                type: 'string',
-                x_editor_hidden: true
-              }
-            }
-          }
-        }
-      };
-
-      let record = {
-        level1: {
-          prop: 'value'
-        }
-      };
-
-      let fixedRecord = service.fixRecord(record, schema);
-
-      expect(fixedRecord['level1']['prop']).not.toBeDefined();
-    }
-  );
-
-  it('should delete properties that are marked as x_editor_hidden' +
-    ' in a record with depth 2 and array parent',
-    () => {
-      let schema = {
-        properties: {
-          level1: {
-            type: 'array',
-            items: {
-              properties: {
-                prop: {
-                  type: 'string',
-                  x_editor_hidden: true
-                }
-              },
-              type: 'object'
-            }
-          }
-        }
-      };
-
-      let record = {
-        level1: [
-          { prop: 'value1' },
-          { prop: 'value2' }
-        ]
-      };
-
-      let fixedRecord = service.fixRecord(record, schema);
-      fixedRecord['level1'].forEach((element => expect(element['prop']).not.toBeDefined()));
-
     }
   );
 

@@ -140,4 +140,26 @@ describe('MapToSortedIterablePipe', () => {
       expect(pipe.transform(map, schema.properties)).toEqual(expected);
     });
 
+  it('should not return hidden keys', () => {
+    let schema = {
+      properties: {
+        key1: {
+          x_editor_hidden: true
+        },
+        key2: {
+        }
+      }
+    };
+    let map = {
+      key1: 'value1',
+      key2: 'value2'
+    };
+
+    let expected = [
+      new Pair('key2', 'value2'),
+    ];
+
+    expect(pipe.transform(map, schema.properties)).toEqual(expected);
+  });
+
 });

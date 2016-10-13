@@ -110,7 +110,6 @@ export class RecordFixerService {
    */
   private fix(key: string | number, parent: Object | Array<any>, schema: Object) {
     if (schema['x_editor_hidden']) {
-      delete parent[key];
       return;
     }
 
@@ -151,12 +150,17 @@ export class RecordFixerService {
    */
   private fixTableList(array: Array<Object>, schema: Object) {
     let presentKeys = {};
-
+    let itemSchema;
+    if (schema['items']['anyOf']) {
+      itemSchema = schema['items']['anyOf'][0];
+    } else {
+      itemSchema = schema['items'];
+    }
     // 1. Step
     array.forEach(element => {
       Object.keys(element)
         // Don't include  if not part of schema, will be deleted anyway.
-        .filter(key => schema['items']['properties'][key])
+        .filter(key => itemSchema['properties'][key])
         .forEach(key => {
           presentKeys[key] = true;
         });
@@ -165,7 +169,7 @@ export class RecordFixerService {
     // 2. Step
     Object.keys(presentKeys).forEach(key => {
       let emptyElement = this.emptyValueService
-        .generateEmptyValue(schema['items']['properties'][key]);
+        .generateEmptyValue(itemSchema['properties'][key]);
       array.filter(element => !element[key])
         .forEach(element => {
           element[key] = emptyElement;

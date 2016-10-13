@@ -1,0 +1,17 @@
+<div [ngSwitch]="componentType">
+	<div *ngSwitchCase="'table-list'">
+		<table-list-field [values]="value" (onValuesChange)="onValueChange.emit($event)" [schema]="schema" [path]="path"></table-list-field>
+	</div>
+	<div *ngSwitchCase="'complex-list'">
+		<complex-list-field [values]="value" (onValuesChange)="onValueChange.emit($event)" [schema]="schema" [path]="path"></complex-list-field>
+	</div>
+	<div *ngSwitchCase="'primitive-list'">
+		<primitive-list-field [values]="value" (onValuesChange)="onValueChange.emit($event)" [schema]="schema" [path]="path"></primitive-list-field>
+	</div>
+	<div *ngSwitchCase="'object'">
+		<object-field [value]="value" (onValueChange)="onValueChange.emit($event)" [schema]="schema" [path]="path"></object-field>
+	</div>
+	<div *ngSwitchDefault>
+		<primitive-field [value]="value" (onValueChange)="onValueChange.emit($event)" [schema]="schema" [path]="path"></primitive-field>
+	</div>
+</div>

@@ -20,32 +20,45 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-
-import { AbstractListFieldComponent } from '../abstract-list-field';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 
 import {
-  AppGlobalsService,
-  EmptyValueService
+  ComponentTypeService,
 } from '../shared/services';
 
+/**
+ * AnyFieldComponent
+ * 
+ * This is a dummy component that has no logic, just passes @Input to its child and
+ * propagates its child's output to its parent.
+ * 
+ * IMPORTANT: 
+ * On the other hand it has smart template which has logic to decide which type of 
+ * component to use according to schema.
+ */
 @Component({
-  selector: 'complex-list-field',
+  selector: 'any-type-field',
   styleUrls: [
-    './complex-list-field.component.scss'
+    './any-type-field.component.scss'
   ],
-  templateUrl: './complex-list-field.component.html'
+  templateUrl: './any-type-field.component.html'
 })
-export class ComplexListFieldComponent extends AbstractListFieldComponent {
+export class AnyTypeFieldComponent {
 
-  @Input() values: Array<Object>;
+  @Input() value: any;
   @Input() schema: Object;
   @Input() path: string;
 
-  @Output() onValuesChange: EventEmitter<Array<Object>> = new EventEmitter<Array<Object>>();
+  @Output() onValueChange: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(public emptyValueService: EmptyValueService,
-    public appGlobalsService: AppGlobalsService) {
-    super();
+  constructor(public componentTypeService: ComponentTypeService) { }
+
+  get componentType(): string {
+    return this.componentTypeService.getComponentType(this.schema);
   }
 }
