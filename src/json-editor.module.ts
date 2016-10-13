@@ -33,6 +33,7 @@ import {
   AddFieldToListDropdownComponent,
   AddFieldToObjectDropdownComponent
 } from './add-field-dropdown';
+import { AnyTypeFieldComponent } from './any-type-field';
 import { AutocompleteInputComponent } from './autocomplete-input';
 import { ComplexListFieldComponent } from './complex-list-field';
 import { EditorPreviewerComponent } from './editor-previewer';
@@ -41,7 +42,10 @@ import { ObjectFieldComponent } from './object-field';
 import { PrimitiveListFieldComponent } from './primitive-list-field';
 import { PrimitiveFieldComponent } from './primitive-field';
 import { TableListFieldComponent } from './table-list-field';
-import { TreeMenuComponent, TreeMenuItemComponent } from './tree-menu';
+import {
+  TreeMenuComponent,
+  TreeMenuItemComponent
+} from './tree-menu';
 import { SearchableDropdownComponent } from './searchable-dropdown';
 
 import { SHARED_PIPES, SHARED_SERVICES } from './shared';
@@ -52,6 +56,7 @@ import { SHARED_PIPES, SHARED_SERVICES } from './shared';
     ...SHARED_PIPES,
     AddFieldToListDropdownComponent,
     AddFieldToObjectDropdownComponent,
+    AnyTypeFieldComponent,
     AutocompleteInputComponent,
     ComplexListFieldComponent,
     ObjectFieldComponent,

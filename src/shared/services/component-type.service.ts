@@ -38,6 +38,10 @@ export class ComponentTypeService {
    * @return {string}
    */
   getComponentType(schema: Object): string {
+    if (!schema) {
+      throw new Error('schema is undefined');
+    }
+
     if (schema['x_editor_disabled']) {
       return 'disabled';
     } else if (schema['x_editor_autocomplete']) {
@@ -48,7 +52,13 @@ export class ComponentTypeService {
 
     let schemaType = schema['type'];
     if (!schemaType) {
-      return 'raw';
+      if (schema['anyOf']) {
+        return 'any-of';
+      } else if (Object.keys(schema).length === 0) { // if shema === {} (empty object)
+        return 'raw';
+      } else {
+        throw new Error(`Not supported schema: ${JSON.stringify(schema)}`);
+      }
     } else if (schemaType === 'array') {
       let itemSchema = schema['items'];
       if (itemSchema['type'] === 'object') {
@@ -66,6 +76,7 @@ export class ComponentTypeService {
           return 'table-list';
         }
       } else {
+        // if schema.items.type is not object!
         return 'primitive-list';
       }
     }
