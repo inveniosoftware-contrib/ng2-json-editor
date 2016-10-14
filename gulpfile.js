@@ -50,6 +50,7 @@ function compileSass(path, ext, file, cb) {
 
 // file regexps
 var tsSourceFiles = './src/**/*.ts';
+var allSourceFiles = './src/**/*';
 
 // run tslint
 gulp.task('tslint', () =>
@@ -111,7 +112,7 @@ gulp.task('build', (done) => {
 
 // watch changes for all files
 gulp.task('watch', () => {
-  gulp.watch(tsSourceFiles, ['build.ts']);
+  gulp.watch(allSourceFiles, ['build.ts']);
 });
 
 // builds then run tests with karma
