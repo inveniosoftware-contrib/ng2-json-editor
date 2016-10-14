@@ -58,6 +58,9 @@ export class AddFieldToListDropdownComponent extends AbstractAddFieldDropdownCom
         value[field] = emptyValue;
       }
     });
+    // HACK: needed for table-list, so that sampleValue will be updated
+    // for better table rendering
+    this.value[field] = '';
   }
 
 }

@@ -116,10 +116,6 @@ export class RecordFixerService {
     // Fixes for each type/condition, can be added below.
     let value = parent[key];
 
-    if (this.componentTypeService.getComponentType(schema) === 'table-list') {
-      this.fixTableList(value, schema);
-    }
-
     // Recursive calls
     if (schema['type'] === 'object') {
       // Looping over record to filter out fields that are not in schema.
@@ -136,45 +132,6 @@ export class RecordFixerService {
         this.fix(index, value, schema['items']);
       });
     }
-  }
-
-
-
-  /**
-   * Fixes the UI appearance of array fields that will be rendered as a table.
-   *  1. Find all subfields that are present in any item.
-   *  2. Insert empty values if an item doesn't have these subfields
-   * 
-   * Goal is to force all elements to have same subfields so that
-   * table looks ok.
-   */
-  private fixTableList(array: Array<Object>, schema: Object) {
-    let presentKeys = {};
-    let itemSchema;
-    if (schema['items']['anyOf']) {
-      itemSchema = schema['items']['anyOf'][0];
-    } else {
-      itemSchema = schema['items'];
-    }
-    // 1. Step
-    array.forEach(element => {
-      Object.keys(element)
-        // Don't include  if not part of schema, will be deleted anyway.
-        .filter(key => itemSchema['properties'][key])
-        .forEach(key => {
-          presentKeys[key] = true;
-        });
-    });
-
-    // 2. Step
-    Object.keys(presentKeys).forEach(key => {
-      let emptyElement = this.emptyValueService
-        .generateEmptyValue(itemSchema['properties'][key]);
-      array.filter(element => !element[key])
-        .forEach(element => {
-          element[key] = emptyElement;
-        });
-    });
   }
 
   /**

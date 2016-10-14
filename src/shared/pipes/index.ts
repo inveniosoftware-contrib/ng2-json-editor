@@ -2,6 +2,7 @@ import { DifferentKeysPipe } from './different-keys.pipe';
 import { ErrorsToMessagesHtmlPipe } from './errors-to-message.pipe';
 import { FilterByPrefixPipe } from './filter-by-prefix.pipe';
 import { MapToSortedIterablePipe } from './map-to-sorted-iterable.pipe';
+import { SelfOrEmptyPipe } from './self-or-empty.pipe';
 import { UnderscoreToSpacePipe } from './underscore-to-space.pipe';
 
 export {
@@ -9,6 +10,7 @@ export {
   ErrorsToMessagesHtmlPipe,
   FilterByPrefixPipe,
   MapToSortedIterablePipe,
+  SelfOrEmptyPipe,
   UnderscoreToSpacePipe
 };
 
@@ -17,5 +19,6 @@ export const SHARED_PIPES = [
   ErrorsToMessagesHtmlPipe,
   FilterByPrefixPipe,
   MapToSortedIterablePipe,
+  SelfOrEmptyPipe,
   UnderscoreToSpacePipe
 ];
