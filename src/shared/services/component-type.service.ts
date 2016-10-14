@@ -54,8 +54,6 @@ export class ComponentTypeService {
     if (!schemaType) {
       if (Object.keys(schema).length === 0) { // if shema === {} (empty object)
         return 'raw';
-      } else {
-        throw new Error(`Not supported schema: ${JSON.stringify(schema)}`);
       }
     } else if (schemaType === 'array') {
       let itemSchema = schema['items'];
