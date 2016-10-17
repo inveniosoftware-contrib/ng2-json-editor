@@ -22,7 +22,7 @@
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddFieldToObjectDropdownComponent } from './add-field-to-object-dropdown.component';
+import { AddFieldDropdownComponent } from './add-field-dropdown.component';
 
 import { Ng2BootstrapModule } from 'ng2-bootstrap/ng2-bootstrap';
 
@@ -51,8 +51,8 @@ class MockEmptyValueService extends EmptyValueService {
 
 describe('AddFieldToObjectDropdownComponent', () => {
 
-  let fixture: ComponentFixture<AddFieldToObjectDropdownComponent>;
-  let component: AddFieldToObjectDropdownComponent;
+  let fixture: ComponentFixture<AddFieldDropdownComponent>;
+  let component: AddFieldDropdownComponent;
   let nativeEl: HTMLElement;
   let showDropdownButton: HTMLButtonElement;
 
@@ -60,7 +60,7 @@ describe('AddFieldToObjectDropdownComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         DifferentKeysPipe,
-        AddFieldToObjectDropdownComponent
+        AddFieldDropdownComponent
       ],
       imports: [
         Ng2BootstrapModule
@@ -72,7 +72,7 @@ describe('AddFieldToObjectDropdownComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddFieldToObjectDropdownComponent);
+    fixture = TestBed.createComponent(AddFieldDropdownComponent);
     component = fixture.componentInstance;
     component.value = value;
     component.schema = schemaProperties;

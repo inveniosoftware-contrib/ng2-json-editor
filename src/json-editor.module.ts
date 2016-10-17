@@ -29,10 +29,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import {
-  AddFieldToListDropdownComponent,
-  AddFieldToObjectDropdownComponent
-} from './add-field-dropdown';
+import { AddFieldDropdownComponent } from './add-field-dropdown';
 import { AnyTypeFieldComponent } from './any-type-field';
 import { AutocompleteInputComponent } from './autocomplete-input';
 import { ComplexListFieldComponent } from './complex-list-field';
@@ -54,8 +51,7 @@ import { SHARED_PIPES, SHARED_SERVICES } from './shared';
   declarations: [
     PdfViewerComponent,
     ...SHARED_PIPES,
-    AddFieldToListDropdownComponent,
-    AddFieldToObjectDropdownComponent,
+    AddFieldDropdownComponent,
     AnyTypeFieldComponent,
     AutocompleteInputComponent,
     ComplexListFieldComponent,

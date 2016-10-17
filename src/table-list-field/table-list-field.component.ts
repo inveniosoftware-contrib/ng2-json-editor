@@ -55,6 +55,9 @@ export class TableListFieldComponent extends AbstractListFieldComponent implemen
     this.sampleValue = this.generateSampleValue(this.values);
   }
 
+  /**
+   * Generates sample value that has union of all keys of elements of objectArray
+   */
   private generateSampleValue(objectArray: Array<Object>): Object {
     let sampleValue = {};
     objectArray
