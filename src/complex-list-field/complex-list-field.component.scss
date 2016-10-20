@@ -1,5 +1,10 @@
-$array-even-color: #fff8f3;
+table {
+	background-color: #f9f9f9;
+	border: none;
+}
 
-tbody:nth-child(even) {
-  background-color: $array-even-color;
+tbody:not(:first-child):before {
+    content: '';
+    display: block;
+    height: 15px;
 }

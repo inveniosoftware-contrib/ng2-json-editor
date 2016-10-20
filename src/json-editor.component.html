@@ -1,6 +1,9 @@
-<div class="editor-container">
-	<div class="editor-table-container">
-		<table id="editor" class="table table-striped">
+<div class="row editor-container">
+	<div class="col-md-2 left">
+		<tree-menu [record]="record" [schema]="schema"></tree-menu>
+	</div>
+	<div class="col-md-6 middle">
+		<table id="editor" class="table">
 			<tr *ngFor="let pair of record | mapToSortedIterable:schema.properties; trackBy:trackByFunction">
 				<td class="label-holder">
 					<label>{{pair.key | underscoreToSpace}}</label>
@@ -12,12 +15,7 @@
 			</tr>
 		</table>
 	</div>
-	<div class="right-side-container">
-		<div>
-			<tree-menu [record]="record" [schema]="schema"></tree-menu>
-		</div>
-		<div>
-			<editor-previewer [previews]="previews"> </editor-previewer>
-		</div>
+	<div class="col-md-4 right">
+		<editor-previewer [previews]="previews"> </editor-previewer>
 	</div>
 </div>

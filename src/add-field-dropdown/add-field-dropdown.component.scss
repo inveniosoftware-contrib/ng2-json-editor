@@ -1,4 +1,5 @@
 .editor-btn-add-subfield {
+  padding: 0;
   font-size: 21px;
   opacity: 0.4;
   border: 0;
@@ -12,4 +13,9 @@
     color: blue;
     opacity: 0.6;
   }
+}
+
+.dropdown-menu {
+  left: inherit;
+  right: -45px;
 }

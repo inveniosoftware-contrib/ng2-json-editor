@@ -1,8 +1,48 @@
 $text-button-font-size: 13px;
 $button-font-size: 21px;
+$table-editable-rows-background: #edf6fd;
+
+body, html {
+  height:100%;
+}
+
+@media (min-width: 768px){
+  .left {
+    background-color: #1D2D3D;
+    height: 100%;
+    overflow: auto;
+  }
+
+  .middle {
+    height: 100%;
+    overflow: auto;
+    max-width: 900px;
+  }
+
+  .right {
+    height: 100%;
+    overflow: auto;
+  }
+}
+
+.editor-container {
+  height: 100%;
+}
+
+.editable-field-container {
+  background-color: $table-editable-rows-background;
+}
 
 #editor {
   font-size: 13px;
+
+  > tbody > tr {
+    border: 2px solid #a5adb5;
+  }
+
+  td {
+    background-color: #f9f9f9;
+  }
 
   td, th {
     padding: 3px;
