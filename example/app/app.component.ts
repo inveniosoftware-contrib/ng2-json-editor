@@ -20,10 +20,11 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/zip';
+import { APP_CONFIG } from './app.config';
 
 @Component({
   selector: 'app',
@@ -32,7 +33,8 @@ import 'rxjs/add/observable/zip';
     'app.component.scss'
   ],
   template: `
-    <json-editor *ngIf="record && schema"
+    <json-editor *ngIf="record && schema" 
+      [config]="config"
       [record]="record"
       (onRecordChange)="onRecordChange($event)"
       [schema]="schema">
@@ -42,8 +44,10 @@ import 'rxjs/add/observable/zip';
 export class AppComponent {
   record: Object;
   schema: Object;
+  config: Object;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, @Inject(APP_CONFIG) config: AppConfig) {
+    this.config = config;
     Observable.zip(
       this.http.get('./assets/mock-data/record.json'),
       this.http.get('./assets/mock-data/schema.json'),

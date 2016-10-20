@@ -23,9 +23,10 @@ Then add it to your module's `imports`.
 ### Use
 
 ```html
-<json-editor [schema]="mySchema" [record]="myRecord" (onRecordChange)="doStuffWithNewRecord($event)"></json-editor>
+<json-editor [config]="config" [schema]="mySchema" [record]="myRecord" (onRecordChange)="doStuffWithNewRecord($event)"></json-editor>
 ```
 
+- `config` : configuration object. See [configuration section](#configuration) for options.
 - `schema` : valid json-schema for the record.
 - `record` : valid json to be edited.
 - `onRecordChange` emitted when record change, `$event` is the edited record.
@@ -35,9 +36,29 @@ Then add it to your module's `imports`.
 
 Please have a look at [example app](./example/app)
 
-## Configuration
+## <a name="configuration"></a>Configuration
 
-### Extended Schema
+|               |             |             |
+| ------------- |-------------|-------------|
+| *schemaOptions*      | Object | Enriches JsonSchema with custom properties that `ng2-json-editor` understands. See [possible values](#schemaOptions).|
+| *previews*      | Array | Configures previews for the document. See [configuration syntax](#previews).|
+
+### <a name="schemaOptions"></a>Extended Schema (schemaOptions)
+
+The keys of this object correspond the path in the schema that wants to be configured (in dotted notation), for example:
+
+```
+{
+  'titles.items.properties.title': {
+    x_editor_hidden: true
+  },
+  'abstracts': {
+    x_editor_disabled: true
+  }
+}
+```
+
+Continue reading for available configuration available for fields.
 
 #### x_editor_autocompletion
 
@@ -102,9 +123,9 @@ number
 default: 0
 ```
 
-#### x_editor_previews
+### <a name="previews"></a>Previews
 
-Configuration for previews to be displayed in previewer (on the right side, below menu).
+Configuration for previews to be displayed in previewer (on the right side).
 
 ```
 [
