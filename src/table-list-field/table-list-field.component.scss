@@ -1,12 +1,10 @@
-$table-editable-rows-background: #edf6fd;
-
 table.editable-inner-table {
-  tbody {
-    background-color: $table-editable-rows-background;
-  }
+
+  border: none;
 
   thead > tr > th {
-    border-bottom: 0px;
+    vertical-align: middle;
+    border: none;
   }
 
   div.list-holder {
@@ -15,6 +13,6 @@ table.editable-inner-table {
 
   td {
     padding: 0 0 0 1px !important;
-    vertical-align: middle !important;
+    vertical-align: top !important;
   }
 }
