@@ -25,8 +25,6 @@ import { Injectable } from '@angular/core';
 import { EmptyValueService } from './empty-value.service';
 import { ComponentTypeService } from './component-type.service';
 
-import { AlwaysShowPathHelper } from './always-show-path.helper';
-
 @Injectable()
 export class RecordFixerService {
 
@@ -52,46 +50,7 @@ export class RecordFixerService {
         this.fix(field, record, schema['properties'][field]);
       }
     });
-    this.insertEmptyIntoAlwaysShowFields(record, schema);
     return record;
-  }
-
-  private insertEmptyIntoAlwaysShowFields(record: Object, schema: Object) {
-    let paths = new AlwaysShowPathHelper().getAlwaysShowFieldPaths(schema);
-    paths.forEach(path => {
-      this.insertEmptyIntoPathIfMissing(path, record, schema);
-    });
-  }
-
-  /*
-   * Inserts empty value into a highest level MISSING property going through the given path.
-   * 
-   * It goes into path step by step until it finds a property that isn't present
-   * then inserts the empty record and stops.
-   * 
-   * @param {Array<string>} path - array of path elements
-   * @param {any} value - value which the missing property will be inserted
-   * @param {Object} schema - jsonschema of value
-   */
-  private insertEmptyIntoPathIfMissing(path: Array<string>, value: any, schema: Object) {
-    let subSchema = schema;
-    for (let i = 0; i < path.length; i++) {
-      subSchema = (subSchema['properties'] || subSchema['items']['properties'])[path[i]];
-      if (!value[path[i]]) {
-        value[path[i]] = this.emptyValueService.generateEmptyValue(subSchema);
-        break;
-      }
-
-      if (subSchema['type'] === 'array') {
-        for (let element of value[path[i]]) {
-          if (path.length > 1) {
-            this.insertEmptyIntoPathIfMissing(path.slice(i + 1), element, subSchema['items']);
-          }
-        }
-      }
-
-      value = value[path[i]];
-    }
   }
 
   /**

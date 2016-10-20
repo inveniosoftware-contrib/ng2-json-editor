@@ -56,6 +56,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   @Output() onRecordChange: EventEmitter<Object> = new EventEmitter<Object>();
 
   previews: Array<any> = [];
+  keys: Array<string>;
 
   constructor(private http: Http,
     private appGlobalsService: AppGlobalsService,
@@ -79,6 +80,8 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     this.record = this.recordFixerService.fixRecord(this.record, this.schema);
     this.previews = this.extractPreviews();
     this.appGlobalsService.globalErrors = this.errorMap;
+
+    this.keys = Object.keys(this.record);
   }
 
   /**

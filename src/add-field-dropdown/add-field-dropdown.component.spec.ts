@@ -36,10 +36,7 @@ const schemaProperties = {
   propNotInValueA: {},
   propNotInValueB: {}
 };
-const value = {
-  propA: 'A',
-  propB: 'B'
-};
+const fields = ['propA', 'propB'];
 const mockDifferentKeys = ['propNotInValueA', 'propNotInValueB'];
 const emptyValue = 'empty-value';
 
@@ -74,7 +71,7 @@ describe('AddFieldToObjectDropdownComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AddFieldDropdownComponent);
     component = fixture.componentInstance;
-    component.value = value;
+    component.fields = fields;
     component.schema = schemaProperties;
     fixture.detectChanges();
 
@@ -93,8 +90,9 @@ describe('AddFieldToObjectDropdownComponent', () => {
   it('should add field with empty value when dropdown item clicked', () => {
     showDropdownButton.dispatchEvent(new Event('click'));
     let anchor = nativeEl.querySelector('li a') as HTMLAnchorElement;
-    expect(component.value[anchor.textContent]).toBeUndefined();
+    expect(component.fields.indexOf(anchor.textContent)).toEqual(-1);
+    spyOn(component.onFieldAdd, 'emit');
     anchor.dispatchEvent(new Event('click'));
-    expect(component.value[anchor.textContent]).toEqual(emptyValue);
+    expect(component.onFieldAdd.emit).toHaveBeenCalledWith(anchor.textContent);
   });
 });

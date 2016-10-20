@@ -20,7 +20,7 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 
 import { AbstractTrackerComponent } from '../abstract-tracker';
 
@@ -33,12 +33,16 @@ import { DomUtilService, WindowHrefService } from '../shared/services';
   ],
   templateUrl: './tree-menu-item.component.html'
 })
-export class TreeMenuItemComponent extends AbstractTrackerComponent implements OnInit {
+export class TreeMenuItemComponent extends AbstractTrackerComponent implements OnInit, OnChanges {
 
   @Input() label: string;
   @Input() value: any;
   @Input() schema: Object;
   @Input() path: string;
+
+  // defined only if schmea.type equals to 'object'
+  keys: Array<string>;
+
   private isCollapsed: boolean = true;
   private href: string;
 
@@ -49,6 +53,17 @@ export class TreeMenuItemComponent extends AbstractTrackerComponent implements O
 
   ngOnInit() {
     this.href = `${this.windowHrefService.getHrefWithoutHash()}#${this.path}`;
+
+    if (this.schema['type'] === 'object') {
+      this.keys = Object.keys(this.value);
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    let valueChange = changes['value'];
+    if (valueChange && this.schema['type'] === 'object') {
+      this.keys = Object.keys(valueChange.currentValue);
+    }
   }
 
   toggle(event: Event) {
@@ -68,4 +83,5 @@ export class TreeMenuItemComponent extends AbstractTrackerComponent implements O
     let schemaType = this.schema['type'];
     return (schemaType === 'object' || schemaType === 'array');
   }
+
 }

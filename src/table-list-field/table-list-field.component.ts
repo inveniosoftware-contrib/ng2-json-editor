@@ -44,7 +44,7 @@ export class TableListFieldComponent extends AbstractListFieldComponent implemen
 
   @Output() onValuesChange: EventEmitter<Array<Object>> = new EventEmitter<Array<Object>>();
 
-  private sampleValue: Object;
+  keys: Array<string>;
 
   constructor(public emptyValueService: EmptyValueService,
     public appGlobalsService: AppGlobalsService) {
@@ -52,21 +52,15 @@ export class TableListFieldComponent extends AbstractListFieldComponent implemen
   }
 
   ngOnInit() {
-    this.sampleValue = this.generateSampleValue(this.values);
-  }
+    super.ngOnInit();
 
-  /**
-   * Generates sample value that has union of all keys of elements of objectArray
-   */
-  private generateSampleValue(objectArray: Array<Object>): Object {
-    let sampleValue = {};
-    objectArray
-      .map(object => Object.keys(object))
-      .reduce((pre, cur) => pre.concat(cur), [])
-      .forEach(key => {
-        sampleValue[key] = '';
-      });
-    return sampleValue;
+    // all unique keys that are present in at least single element
+    this.keys = Array.from(
+      new Set(
+        this.values
+          .map(object => Object.keys(object))
+          .reduce((pre, cur) => pre.concat(cur), []))
+    );
   }
 
   /**
@@ -87,6 +81,10 @@ export class TableListFieldComponent extends AbstractListFieldComponent implemen
         clone[prop] = this.emptyValueService.generateEmptyValue(propSchema);
       });
     return Object.assign({}, clone);
+  }
+
+  onFieldAdd(field: string) {
+    this.keys.push(field);
   }
 
 }

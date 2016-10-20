@@ -20,7 +20,7 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { EmptyValueService } from '../shared/services';
 
@@ -35,17 +35,14 @@ export class AddFieldDropdownComponent {
 
   // 'propeties' of an object schema
   @Input() schema: Object;
-  @Input() value: Object;
+  @Input() fields: Array<string>;
+
+  @Output() onFieldAdd: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private emptyValueService: EmptyValueService) { }
 
-  addFieldFromSchema(fieldName: string) {
-    let subSchema = this.schema[fieldName];
-    this.value[fieldName] = this.emptyValueService.generateEmptyValue(subSchema);
-  }
-
   get disabled(): boolean {
-    return Object.keys(this.schema).length === Object.keys(this.value).length;
+    return Object.keys(this.schema).length === this.fields.length;
   }
 
 }

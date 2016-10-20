@@ -2,8 +2,8 @@
   <div class="tree-menu-container">
     <input class="wide" type="text" [(ngModel)]="prefixOrPath" (keypress)="onKeypress($event.key)" placeholder="Search or go">
     <ul class="menu-item-container">
-      <li *ngFor="let pair of record | mapToSortedIterable:schema.properties; trackBy:trackByFunction" [hidden]="!filter(pair.key)">
-        <tree-menu-item [label]="pair.key" [value]="pair.value" [schema]="schema.properties[pair.key]" [path]="pair.key"></tree-menu-item>
+      <li *ngFor="let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema; trackBy:trackByFunction" [hidden]="!filter(key)">
+        <tree-menu-item [label]="key" [value]="record[key]" [schema]="schema.properties[key]" [path]="key"></tree-menu-item>
       </li>
     </ul>
   </div>

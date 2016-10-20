@@ -21,7 +21,6 @@
 */
 
 import { Injectable } from '@angular/core';
-import { AlwaysShowPathHelper } from './always-show-path.helper';
 
 @Injectable()
 export class EmptyValueService {
@@ -33,10 +32,6 @@ export class EmptyValueService {
 
   generateEmptyValue(schema: Object): any {
     let emptyValue = this.generateEmptyValueRecursively(schema);
-    new AlwaysShowPathHelper().getAlwaysShowFieldPaths(schema)
-      .forEach(path => {
-        this.insertEmptyIntoPath(path, emptyValue, schema);
-      });
     return emptyValue;
   }
 
@@ -60,31 +55,6 @@ export class EmptyValueService {
       return emptyArray;
     }
     return EmptyValueService.defaultValueLookup[schema['type']];
-  }
-
-  /*
-   * Inserts empty value into a highest levelproperty going through the given path.
-   * 
-   * It goes into path step by step until empty values inserted through the all path.
-   * 
-   * @param {Array<string>} path - array of path elements
-   * @param {any} value - value which the property will be inserted
-   * @param {Object} schema - jsonschema of value
-   */
-  private insertEmptyIntoPath(path: Array<string>, value: any, schema: Object) {
-    let subSchema = schema;
-    for (let i = 0; i < path.length; i++) {
-      let parentSchema = subSchema;
-      subSchema = (subSchema['properties'] || subSchema['items']['properties'])[path[i]];
-
-      if (parentSchema['type'] === 'array') {
-        value[0][path[i]] = this.generateEmptyValueRecursively(subSchema);
-        value = value[0][path[i]];
-      } else {
-        value[path[i]] = this.generateEmptyValueRecursively(subSchema);
-        value = value[path[i]];
-      }
-    }
   }
 
 }

@@ -4,13 +4,12 @@
 	</div>
 	<div class="col-md-6 middle">
 		<table id="editor" class="table">
-			<tr *ngFor="let pair of record | mapToSortedIterable:schema.properties; trackBy:trackByFunction">
+			<tr *ngFor="let key of keys | addAlwaysShowFields:schema |filterAndSortBySchema:schema; trackBy:trackByFunction">
 				<td class="label-holder">
-					<label>{{pair.key | underscoreToSpace}}</label>
+					<label>{{key | underscoreToSpace}}</label>
 				</td>
 				<td>
-					<any-type-field [value]="record[pair.key]" (onValueChange)="onValueChange($event, pair.key)" [schema]="schema.properties[pair.key]"
-						[path]="pair.key"></any-type-field>
+					<any-type-field [value]="record[key]" (onValueChange)="onValueChange($event, key)" [schema]="schema.properties[key]" [path]="key"></any-type-field>
 				</td>
 			</tr>
 		</table>

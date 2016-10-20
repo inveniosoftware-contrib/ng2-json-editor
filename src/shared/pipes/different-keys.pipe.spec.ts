@@ -30,36 +30,30 @@ describe('DifferentKeysPipe', () => {
   });
 
   it('should return different keys', () => {
-    let obj1 = {
+    let obj = {
       propDiff1: 1,
       propA: 1,
       propB: 1,
       propDiff2: 1
     };
 
-    let obj2 = {
-      propA: 2,
-      propB: 2
-    };
+    let arr = ['propA', 'propB'];
 
     let differentKeys = ['propDiff1', 'propDiff2'];
 
-    let pipeResult = pipe.transform(obj1, obj2);
+    let pipeResult = pipe.transform(obj, arr);
     expect(pipeResult).toEqual(differentKeys);
   });
 
   it('should return empty if keys are same', () => {
-    let obj1 = {
+    let obj = {
       propA: 1,
       propB: 1
     };
 
-    let obj2 = {
-      propB: 2,
-      propA: 2
-    };
+    let arr = ['propA', 'propB'];
 
-    let pipeResult = pipe.transform(obj1, obj2);
+    let pipeResult = pipe.transform(obj, arr);
     expect(pipeResult).toEqual([]);
   });
 
