@@ -20,23 +20,23 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { Pipe, PipeTransform } from '@angular/core';
 
-import { JsonEditorModule } from '../../ng2-json-editor';
+import { EmptyValueService } from '../services';
 
-import { AppComponent } from './app.component';
-
-@NgModule({
-  declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    JsonEditorModule
-  ],
-  bootstrap: [AppComponent]
+@Pipe({
+  name: 'addAlwaysShowFields',
+  pure: false
 })
-export class AppModule { }
+export class AddAlwaysShowFieldsPipe implements PipeTransform {
+
+  constructor(public emptyValueService: EmptyValueService) { }
+
+  transform(fields: Array<string>, schema: Object): Object {
+    let fieldsSet = new Set(fields);
+    let schemaProps = schema['properties'];
+    let missingAlwayShowFields = Object.keys(schemaProps)
+      .filter(prop => schemaProps[prop]['x_editor_always_show'] && !fieldsSet.has(prop));
+    return fields.concat(missingAlwayShowFields);
+  }
+}

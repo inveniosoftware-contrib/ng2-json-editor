@@ -29,8 +29,10 @@ import { Pipe, PipeTransform } from '@angular/core';
   pure: false
 })
 export class DifferentKeysPipe implements PipeTransform {
-  transform(object: Object, other: Object): Array<string> {
-    return Object.keys(object)
-      .filter(prop => !other.hasOwnProperty(prop));
+  transform(object: Object, keys: Array<string>): Array<string> {
+    let objectKeys = Object.keys(object);
+    let keysSet = new Set(keys);
+    return objectKeys
+      .filter( objectKey => !keysSet.has(objectKey));
   }
 }

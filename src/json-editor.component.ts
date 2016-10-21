@@ -25,7 +25,7 @@ import {
   EventEmitter,
   Input,
   Output,
-  OnChanges,
+  OnInit,
   ViewEncapsulation
 } from '@angular/core';
 import { Http } from '@angular/http';
@@ -47,7 +47,7 @@ import {
   ],
   templateUrl: './json-editor.component.html'
 })
-export class JsonEditorComponent extends AbstractTrackerComponent implements OnChanges {
+export class JsonEditorComponent extends AbstractTrackerComponent implements OnInit {
 
   @Input() record: Object;
   @Input() schema: Object;
@@ -56,6 +56,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
   @Output() onRecordChange: EventEmitter<Object> = new EventEmitter<Object>();
 
   previews: Array<any> = [];
+  keys: Array<string>;
 
   constructor(private http: Http,
     private appGlobalsService: AppGlobalsService,
@@ -75,14 +76,12 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
     return this.componentTypeService.getComponentType(fieldScehma);
   }
 
-  // FIXME: called two times!
-  ngOnChanges() {
-    // TODO: remove this when this is called only once.
-    if (Object.keys(this.record).length === 0) { return; }
-
+  ngOnInit() {
     this.record = this.recordFixerService.fixRecord(this.record, this.schema);
     this.previews = this.extractPreviews();
     this.appGlobalsService.globalErrors = this.errorMap;
+
+    this.keys = Object.keys(this.record);
   }
 
   /**

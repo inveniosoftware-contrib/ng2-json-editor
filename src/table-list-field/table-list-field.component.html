@@ -3,21 +3,21 @@
 		<table class="table table-bordered editable-inner-table">
 			<thead class="thead-inverse">
 				<tr>
-					<th *ngFor="let column of values[0] | mapToSortedIterable:schema.items.properties; trackBy:trackByFunction">
-						{{column.key}}
+					<th *ngFor="let key of keys | addAlwaysShowFields:schema.items | filterAndSortBySchema:schema.items; trackBy:trackByFunction">
+						{{key}}
 					</th>
 
 					<th class="button-holder">
-						<add-field-to-list-dropdown *ngIf="values[0]" [(values)]="values" [value]="values[0]" [schema]="schema.items.properties"></add-field-to-list-dropdown>
+						<add-field-dropdown *ngIf="values.length > 0" [fields]="keys" (onFieldAdd)="onFieldAdd($event)" [schema]="schema.items.properties"></add-field-dropdown>
 					</th>
 
 				</tr>
 			</thead>
 			<tr *ngFor="let row of values; let i = index; trackBy:trackByFunction" [id]="path + '.' + i">
 				<!-- Element value -->
-				<td *ngFor="let column of row | mapToSortedIterable:schema.items.properties; trackBy:trackByFunction">
-						<any-type-field [value]="row[column.key]" (onValueChange)="onValueChange($event, i, column.key)" [schema]="schema.items.properties[column.key]"
-							[path]="getValuePath(i, column.key)"></any-type-field>
+				<td *ngFor="let key of keys | addAlwaysShowFields:schema.items | filterAndSortBySchema:schema.items; trackBy:trackByFunction">
+					<any-type-field [value]="row[key] | selfOrEmpty:schema.items.properties[key]" (onValueChange)="onValueChange($event, i, key)" [schema]="schema.items.properties[key]"
+						[path]="getValuePath(i, key)"></any-type-field>
 
 				</td>
 
@@ -31,9 +31,9 @@
 			<tr>
 			</tr>
 		</table>
-		</div>
-		<div class="add-new-field-container">
-			<!-- ADD button for table -->
-			<button tooltipHtml="<b>Add new {{path}}</b>" type="button" class="btn-new-field" (click)="addNewElement()">+</button>
-		</div>
 	</div>
+	<div class="add-new-field-container">
+		<!-- ADD button for table -->
+		<button tooltipHtml="<b>Add new {{path}}</b>" type="button" class="btn-new-field" (click)="addNewElement()">+</button>
+	</div>
+</div>

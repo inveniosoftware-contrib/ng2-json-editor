@@ -20,7 +20,7 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 
 import { AbstractFieldComponent } from '../abstract-field';
 
@@ -33,16 +33,24 @@ import { AppGlobalsService } from '../shared/services';
   ],
   templateUrl: './object-field.component.html'
 })
-export class ObjectFieldComponent extends AbstractFieldComponent {
+export class ObjectFieldComponent extends AbstractFieldComponent implements OnInit {
 
   @Input() value: Object;
   @Input() schema: Object;
   @Input() path: string;
 
+  keys: Array<string>;
+
   @Output() onValueChange: EventEmitter<Object> = new EventEmitter<Object>();
 
   constructor(public appGlobalsService: AppGlobalsService) {
     super();
+  }
+
+  ngOnInit() {
+    super.ngOnInit();
+
+    this.keys = Object.keys(this.value);
   }
 
   onPropertyChange(propertyValue: any, key: string) {
@@ -58,4 +66,9 @@ export class ObjectFieldComponent extends AbstractFieldComponent {
   getFieldPath(name: string): string {
     return `${this.path}.${name}`;
   }
+
+  onFieldAdd(field: string) {
+    this.keys.push(field);
+  }
+
 }

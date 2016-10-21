@@ -20,11 +20,28 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-export abstract class AbstractAddFieldDropdownComponent {
-  schema: Object;
-  value: Object;
+import { Pipe, PipeTransform } from '@angular/core';
 
-  get disabled(): boolean {
-    return Object.keys(this.schema).length === Object.keys(this.value).length;
+import { EmptyValueService } from '../services';
+
+@Pipe({
+  name: 'selfOrEmpty',
+  pure: false
+})
+
+export class SelfOrEmptyPipe implements PipeTransform {
+
+  constructor(public emptyValueService: EmptyValueService) {}
+
+  /**
+   * Transforms a value to empty value if it is undefined, 
+   * returns self if it is already defined
+   * 
+   * @param {any} value
+   * @param {Object} schema 
+   * @return {any} - empty value if given value is undefined or value itself.
+   */
+  transform(value: any, schema: Object): any {
+    return value ? value : this.emptyValueService.generateEmptyValue(schema);
   }
 }

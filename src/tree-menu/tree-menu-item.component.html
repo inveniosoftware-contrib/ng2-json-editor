@@ -4,8 +4,8 @@
   <div [ngSwitch]="schema.type" [hidden]="isCollapsed">
     <ul>
       <div *ngSwitchCase="'object'">
-        <li *ngFor="let pair of value | mapToSortedIterable:schema.properties; trackBy:trackByFunction">
-          <tree-menu-item [label]="pair.key" [value]="pair.value" [schema]="schema.properties[pair.key]" [path]="path + '.' + pair.key"></tree-menu-item>
+        <li *ngFor="let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema; trackBy:trackByFunction">
+          <tree-menu-item [label]="key" [value]="value[key]" [schema]="schema.properties[key]" [path]="path + '.' + key"></tree-menu-item>
         </li>
       </div>
       <div *ngSwitchCase="'array'">

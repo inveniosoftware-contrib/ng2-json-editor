@@ -20,13 +20,13 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { MapToSortedIterablePipe, Pair } from './map-to-sorted-iterable.pipe';
+import { FilterAndSortBySchemaPipe } from './filter-and-sort-by-schema.pipe';
 
-describe('MapToSortedIterablePipe', () => {
-  let pipe: MapToSortedIterablePipe;
+describe('FilterAndSortBySchemaPipe', () => {
+  let pipe: FilterAndSortBySchemaPipe;
 
   beforeEach(() => {
-    pipe = new MapToSortedIterablePipe();
+    pipe = new FilterAndSortBySchemaPipe();
   });
 
   it('should sort by x_editor_priority, larger first', () => {
@@ -40,17 +40,11 @@ describe('MapToSortedIterablePipe', () => {
         }
       }
     };
-    let map = {
-      key1: 'value1',
-      key2: 'value2'
-    };
+    let keys = ['key1', 'key2'];
 
-    let expected = [
-      new Pair('key2', 'value2'),
-      new Pair('key1', 'value1')
-    ];
+    let expected = ['key2', 'key1'];
 
-    expect(pipe.transform(map, schema.properties)).toEqual(expected);
+    expect(pipe.transform(keys, schema)).toEqual(expected);
   });
 
   it('should sort alphabetically if x_editor_priority not set', () => {
@@ -60,17 +54,11 @@ describe('MapToSortedIterablePipe', () => {
         key2: {}
       }
     };
-    let map = {
-      key2: 'value2',
-      key1: 'value1'
-    };
+    let keys = ['key2', 'key1'];
 
-    let expected = [
-      new Pair('key1', 'value1'),
-      new Pair('key2', 'value2')
-    ];
+    let expected = ['key1', 'key2'];
 
-    expect(pipe.transform(map, schema.properties)).toEqual(expected);
+    expect(pipe.transform(keys, schema)).toEqual(expected);
   });
 
   it('should sort by x_editor_priority, larger first then alphabetically if it is not set for some',
@@ -87,21 +75,11 @@ describe('MapToSortedIterablePipe', () => {
           key4: {}
         }
       };
-      let map = {
-        key1: 'value1',
-        key2: 'value2',
-        key4: 'value4',
-        key3: 'value3'
-      };
+      let keys = ['key1', 'key2', 'key3', 'key4'];
 
-      let expected = [
-        new Pair('key2', 'value2'),
-        new Pair('key1', 'value1'),
-        new Pair('key3', 'value3'),
-        new Pair('key4', 'value4')
-      ];
+      let expected = ['key2', 'key1', 'key3', 'key4'];
 
-      expect(pipe.transform(map, schema.properties)).toEqual(expected);
+      expect(pipe.transform(keys, schema)).toEqual(expected);
     });
 
   it('should sort by x_editor_priority, positive larger first, then alphabetically, then negative',
@@ -121,23 +99,11 @@ describe('MapToSortedIterablePipe', () => {
           key5: {}
         }
       };
-      let map = {
-        key5: 'value5',
-        key1: 'value1',
-        key2: 'value2',
-        key4: 'value4',
-        key3: 'value3'
-      };
+      let keys = ['key5', 'key1', 'key2', 'key4', 'key3'];
 
-      let expected = [
-        new Pair('key4', 'value4'),
-        new Pair('key3', 'value3'),
-        new Pair('key5', 'value5'),
-        new Pair('key2', 'value2'),
-        new Pair('key1', 'value1')
-      ];
+      let expected = ['key4', 'key3', 'key5', 'key2', 'key1'];
 
-      expect(pipe.transform(map, schema.properties)).toEqual(expected);
+      expect(pipe.transform(keys, schema)).toEqual(expected);
     });
 
   it('should not return hidden keys', () => {
@@ -150,16 +116,11 @@ describe('MapToSortedIterablePipe', () => {
         }
       }
     };
-    let map = {
-      key1: 'value1',
-      key2: 'value2'
-    };
+    let keys = ['key1', 'key2'];
 
-    let expected = [
-      new Pair('key2', 'value2'),
-    ];
+    let expected = ['key2'];
 
-    expect(pipe.transform(map, schema.properties)).toEqual(expected);
+    expect(pipe.transform(keys, schema)).toEqual(expected);
   });
 
 });

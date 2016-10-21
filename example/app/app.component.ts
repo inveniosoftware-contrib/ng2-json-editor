@@ -32,7 +32,7 @@ import 'rxjs/add/observable/zip';
     'app.component.scss'
   ],
   template: `
-    <json-editor 
+    <json-editor *ngIf="record && schema"
       [record]="record"
       (onRecordChange)="onRecordChange($event)"
       [schema]="schema">
@@ -40,8 +40,8 @@ import 'rxjs/add/observable/zip';
   `
 })
 export class AppComponent {
-  record: Object = {};
-  schema: Object = {};
+  record: Object;
+  schema: Object;
 
   constructor(private http: Http) {
     Observable.zip(

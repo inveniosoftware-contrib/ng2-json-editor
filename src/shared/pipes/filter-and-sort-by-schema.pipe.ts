@@ -23,29 +23,29 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'mapToSortedIterable',
+  name: 'filterAndSortBySchema',
   // http://stackoverflow.com/questions/34456430/ngfor-doesnt-update-data-with-pipe-in-angular2
   pure: false
 })
 
-export class MapToSortedIterablePipe implements PipeTransform {
+export class FilterAndSortBySchemaPipe implements PipeTransform {
 
   /**
-   * Transforms an object to sorted (by `x_editor_priority`) array of key-value pairs of its properties.
-   * Also it filters out the fields for which `x_editor_hidden` is set.
+   * It filters out `x_editor_hidden` fields and sorts keys by `x_editor_priority`
    * 
-   * @param {Object} map - the object to be transformed
-   * @param {Object} schema - the `schema.propeties` of the object, used for sorting and filtering
-   * @return {Array<Pair<any>>} - sorted array of key-value pairs of given map's properties.
+   * @param {Array<string>} keys
+   * @param {Object} schema - the `schema` that has object schema which contains each key in `keys`
+   * @return {Array<string>} - filtered and sortered keys
    */
-  transform(map: Object, schema: Object): Array<Pair> {
-    if (!map) { return undefined; }
-    return Object.keys(map)
-      .filter(key => !schema[key]['x_editor_hidden'])
+  transform(keys: Array<string>, schema: Object): Array<string> {
+    let schemaProps = schema['properties'];
+    if (!keys) { return undefined; }
+    return keys
+      .filter(key => !schemaProps[key]['x_editor_hidden'])
       .sort((a, b) => {
         // Sort by x_editor_priority, larger is the first.
-        let pa = schema[a]['x_editor_priority'] || 0;
-        let pb = schema[b]['x_editor_priority'] || 0;
+        let pa = schemaProps[a]['x_editor_priority'] || 0;
+        let pb = schemaProps[b]['x_editor_priority'] || 0;
 
         if (pa > pb) { return -1; }
         if (pa < pb) { return 1; }
@@ -54,12 +54,6 @@ export class MapToSortedIterablePipe implements PipeTransform {
         if (a < b) { return -1; }
         if (a > b) { return 1; }
         return 0;
-      })
-      .map(key => new Pair(key, map[key]));
+      });
   }
-}
-
-// TODO: discuss if we should remove Pair and return only keys instead,
-export class Pair {
-  constructor(public key: string, public value: any) { }
 }

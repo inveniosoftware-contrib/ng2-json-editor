@@ -20,7 +20,7 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
 
@@ -36,7 +36,7 @@ import {
   ],
   templateUrl: './table-list-field.component.html'
 })
-export class TableListFieldComponent extends AbstractListFieldComponent {
+export class TableListFieldComponent extends AbstractListFieldComponent implements OnInit {
 
   @Input() values: Array<Object>;
   @Input() schema: Object;
@@ -44,9 +44,23 @@ export class TableListFieldComponent extends AbstractListFieldComponent {
 
   @Output() onValuesChange: EventEmitter<Array<Object>> = new EventEmitter<Array<Object>>();
 
+  keys: Array<string>;
+
   constructor(public emptyValueService: EmptyValueService,
     public appGlobalsService: AppGlobalsService) {
     super();
+  }
+
+  ngOnInit() {
+    super.ngOnInit();
+
+    // all unique keys that are present in at least single element
+    this.keys = Array.from(
+      new Set(
+        this.values
+          .map(object => Object.keys(object))
+          .reduce((pre, cur) => pre.concat(cur), []))
+    );
   }
 
   /**
@@ -67,6 +81,10 @@ export class TableListFieldComponent extends AbstractListFieldComponent {
         clone[prop] = this.emptyValueService.generateEmptyValue(propSchema);
       });
     return Object.assign({}, clone);
+  }
+
+  onFieldAdd(field: string) {
+    this.keys.push(field);
   }
 
 }

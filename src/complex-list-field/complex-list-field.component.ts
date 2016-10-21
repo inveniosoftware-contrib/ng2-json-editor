@@ -20,7 +20,7 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
 
@@ -36,16 +36,66 @@ import {
   ],
   templateUrl: './complex-list-field.component.html'
 })
-export class ComplexListFieldComponent extends AbstractListFieldComponent {
+export class ComplexListFieldComponent extends AbstractListFieldComponent implements OnInit {
 
   @Input() values: Array<Object>;
   @Input() schema: Object;
   @Input() path: string;
+
+  keys: Array<Array<string>>;
 
   @Output() onValuesChange: EventEmitter<Array<Object>> = new EventEmitter<Array<Object>>();
 
   constructor(public emptyValueService: EmptyValueService,
     public appGlobalsService: AppGlobalsService) {
     super();
+  }
+
+  ngOnInit() {
+    super.ngOnInit();
+
+    this.keys = this.values
+      .map(value => Object.keys(value));
+  }
+
+  onFieldAdd(field: string, index: number) {
+    this.keys[index].push(field);
+  }
+
+  /**
+   * @override
+   * to update keys
+   */
+  moveElement(index: number, direction: number) {
+    super.moveElement(index, direction);
+
+    // update keys array when element moved
+    let newIndex = index + direction;
+    let temp = this.keys[index];
+    this.keys[index] = this.keys[newIndex];
+    this.keys[newIndex] = temp;
+  }
+
+
+  /**
+   * @override
+   * to update keys
+   */
+  addNewElement() {
+    super.addNewElement();
+
+    // update keys array when element moved
+    this.keys.push([]);
+  }
+
+  /**
+   * @override
+   * to update keys
+   */
+  deleteElement(index: number) {
+    super.deleteElement(index);
+
+    // update keys array when element moved
+    this.keys.splice(index, 1);
   }
 }

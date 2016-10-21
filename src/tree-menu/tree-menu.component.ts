@@ -20,7 +20,7 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 import { AbstractTrackerComponent } from '../abstract-tracker';
 
@@ -33,16 +33,25 @@ import { DomUtilService, WindowHrefService } from '../shared/services';
   ],
   templateUrl: './tree-menu.component.html'
 })
-export class TreeMenuComponent extends AbstractTrackerComponent {
+export class TreeMenuComponent extends AbstractTrackerComponent implements OnChanges {
 
   @Input() record: Object;
   @Input() schema: Object;
+
+  keys: Array<string>;
 
   private prefixOrPath: string = '';
 
   constructor(private windowHrefService: WindowHrefService,
     private domUtilService: DomUtilService) {
     super();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    let recordChange = changes['record'];
+    if (recordChange) {
+      this.keys = Object.keys(recordChange.currentValue);
+    }
   }
 
   filter(key: string): boolean {

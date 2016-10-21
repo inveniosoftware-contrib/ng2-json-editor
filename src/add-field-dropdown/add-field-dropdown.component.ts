@@ -20,32 +20,29 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input } from '@angular/core';
-
-import { AbstractAddFieldDropdownComponent } from './abstract-add-field-dropdown.component';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { EmptyValueService } from '../shared/services';
 
 @Component({
-  selector: 'add-field-to-object-dropdown',
+  selector: 'add-field-dropdown',
   styleUrls: [
     './add-field-dropdown.component.scss'
   ],
   templateUrl: './add-field-dropdown.component.html'
 })
-export class AddFieldToObjectDropdownComponent extends AbstractAddFieldDropdownComponent {
+export class AddFieldDropdownComponent {
 
   // 'propeties' of an object schema
   @Input() schema: Object;
-  @Input() value: Object;
+  @Input() fields: Array<string>;
 
-  constructor(private emptyValueService: EmptyValueService) {
-    super();
-  }
+  @Output() onFieldAdd: EventEmitter<string> = new EventEmitter<string>();
 
-  addFieldFromSchema(name: string) {
-    let subSchema = this.schema[name];
-    this.value[name] = this.emptyValueService.generateEmptyValue(subSchema);
+  constructor(private emptyValueService: EmptyValueService) { }
+
+  get disabled(): boolean {
+    return Object.keys(this.schema).length === this.fields.length;
   }
 
 }

@@ -2,21 +2,21 @@
 	<div>
 		<table class="table table-bordered">
 			<tbody *ngFor="let value of values; let i = index; trackBy:trackByFunction" [id]="path + '.' + i">
-				<tr *ngFor="let row of value | mapToSortedIterable:schema.items.properties; trackBy:trackByFunction">
+				<tr *ngFor="let key of keys[i] | addAlwaysShowFields:schema.items | filterAndSortBySchema:schema.items; trackBy:trackByFunction">
 					<td class="label-holder">
 						<div>
-							<strong>{{row.key | underscoreToSpace}}</strong>
+							<strong>{{key | underscoreToSpace}}</strong>
 						</div>
 					</td>
 					<td>
-						<any-type-field [value]="value[row.key]" (onValueChange)="onValueChange($event, i, row.key)" [schema]="schema.items.properties[row.key]"
-							[path]="getValuePath(i, row.key)"></any-type-field>
+						<any-type-field [value]="value[key] | selfOrEmpty:schema.items.properties[key]" (onValueChange)="onValueChange($event, i, key)" [schema]="schema.items.properties[key]"
+							[path]="getValuePath(i, key)"></any-type-field>
 					</td>
 				</tr>
 				<!-- ADD-FIELD-FROM-SCHEMA, UP/DOWN and DELETE buttons for each row group -->
 				<tr *ngIf="values.length > 0">
 					<td class="button-holder">
-						<add-field-to-object-dropdown [(value)]="values[i]" [schema]="schema.items.properties"></add-field-to-object-dropdown>
+						<add-field-dropdown [fields]="keys[i]" (onFieldAdd)="onFieldAdd($event, i)" [schema]="schema.items.properties"></add-field-dropdown>
 					</td>
 					<td class="button-holder">
 						<button type="button" class="editor-btn-delete" (click)="deleteElement(i)">&times;</button>
