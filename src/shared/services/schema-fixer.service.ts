@@ -20,21 +20,27 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-declare var System: any;
+import { Injectable } from '@angular/core';
 
-// removes the error when testing!
-interface AutocompletionResult {
-  text: string;
-  payload?: Object;
-}
+import { JsonUtilService } from './json-util.service';
 
-interface AutocompletionOptions {
-  url: string;
-  path: string;
-  size: number;
-}
+@Injectable()
+export class SchemaFixerService {
 
-interface AppConfig {
-  schemaOptions?: Object;
-  previews?: Array<Object>;
+  constructor(private jsonUtilService: JsonUtilService) { }
+
+  /**
+   * Enriches schema with options coming from configuration
+   * 
+   * @param {Object} schema - schema for the record
+   * @param {Object} config - schema specific options
+   * @return {Object} - fixed record
+   */
+  fixSchema(schema: Object, config: Object): Object {
+    Object.keys(config).forEach(field => {
+      let schemaField = this.jsonUtilService.getValueInPath(schema['properties'], field);
+      Object.assign(schemaField, config[field]);
+    });
+    return schema;
+  }
 }

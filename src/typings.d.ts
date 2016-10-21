@@ -31,3 +31,8 @@ interface AutocompletionOptions {
   path: string;
   size: number;
 }
+
+interface EditorConfig {
+  schemaOptions?: Object;
+  previews?: Array<Object>;
+}

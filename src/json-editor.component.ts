@@ -36,7 +36,8 @@ import {
   AppGlobalsService,
   ComponentTypeService,
   JsonUtilService,
-  RecordFixerService
+  RecordFixerService,
+  SchemaFixerService
 } from './shared/services';
 
 @Component({
@@ -47,8 +48,10 @@ import {
   ],
   templateUrl: './json-editor.component.html'
 })
+
 export class JsonEditorComponent extends AbstractTrackerComponent implements OnInit {
 
+  @Input() config: EditorConfig = {};
   @Input() record: Object;
   @Input() schema: Object;
   @Input() errorMap: Object = {};
@@ -62,7 +65,8 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     private appGlobalsService: AppGlobalsService,
     private componentTypeService: ComponentTypeService,
     private jsonUtilService: JsonUtilService,
-    private recordFixerService: RecordFixerService) {
+    private recordFixerService: RecordFixerService,
+    private schemaFixerService: SchemaFixerService) {
     super();
   }
 
@@ -77,6 +81,10 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   }
 
   ngOnInit() {
+    let schemaOptions = this.config.schemaOptions;
+    if (schemaOptions) {
+      this.schema = this.schemaFixerService.fixSchema(this.schema, this.config.schemaOptions);
+    }
     this.record = this.recordFixerService.fixRecord(this.record, this.schema);
     this.previews = this.extractPreviews();
     this.appGlobalsService.globalErrors = this.errorMap;
@@ -88,7 +96,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
    * Extracts previews from record using defined path in schema.
    */
   private extractPreviews(): Array<any> {
-    let previews = this.schema['x_editor_previews'];
+    let previews = this.config.previews;
     if (previews) {
       previews.forEach(preview => {
         preview['url'] = this.jsonUtilService.getValueInPath(this.record, preview['url_path']);
