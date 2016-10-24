@@ -37,6 +37,7 @@ import {
   ComponentTypeService,
   JsonUtilService,
   RecordFixerService,
+  RecordChangeNotifierService,
   SchemaFixerService
 } from './shared/services';
 
@@ -66,13 +67,16 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     private componentTypeService: ComponentTypeService,
     private jsonUtilService: JsonUtilService,
     private recordFixerService: RecordFixerService,
-    private schemaFixerService: SchemaFixerService) {
+    private schemaFixerService: SchemaFixerService,
+    private recordChangeNotifierService: RecordChangeNotifierService,
+    ) {
     super();
   }
 
   onValueChange(event: any, key: string) {
     this.record[key] = event;
     this.onRecordChange.emit(this.record);
+    this.recordChangeNotifierService.notifyChanges(this.record[key]);
   }
 
   getFieldType(field: string): string {

@@ -20,11 +20,11 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { AbstractTrackerComponent } from '../abstract-tracker';
 
-import { DomUtilService, WindowHrefService } from '../shared/services';
+import { DomUtilService, RecordChangeNotifierService, WindowHrefService } from '../shared/services';
 
 @Component({
   selector: 'tree-menu',
@@ -33,7 +33,7 @@ import { DomUtilService, WindowHrefService } from '../shared/services';
   ],
   templateUrl: './tree-menu.component.html'
 })
-export class TreeMenuComponent extends AbstractTrackerComponent implements OnChanges {
+export class TreeMenuComponent extends AbstractTrackerComponent implements OnInit {
 
   @Input() record: Object;
   @Input() schema: Object;
@@ -43,15 +43,16 @@ export class TreeMenuComponent extends AbstractTrackerComponent implements OnCha
   private prefixOrPath: string = '';
 
   constructor(private windowHrefService: WindowHrefService,
-    private domUtilService: DomUtilService) {
+    private domUtilService: DomUtilService,
+    private recordChangeNotifierService: RecordChangeNotifierService) {
     super();
+    this.recordChangeNotifierService.recordChanged.subscribe(record => {
+      this.keys = Object.keys(record);
+    });
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    let recordChange = changes['record'];
-    if (recordChange) {
-      this.keys = Object.keys(recordChange.currentValue);
-    }
+  ngOnInit() {
+    this.keys = Object.keys(this.record);
   }
 
   filter(key: string): boolean {
