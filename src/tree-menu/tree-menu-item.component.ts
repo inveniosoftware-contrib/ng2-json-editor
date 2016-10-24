@@ -24,7 +24,7 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/cor
 
 import { AbstractTrackerComponent } from '../abstract-tracker';
 
-import { DomUtilService, WindowHrefService } from '../shared/services';
+import { DomUtilService, RecordChangeNotifierService, WindowHrefService } from '../shared/services';
 
 @Component({
   selector: 'tree-menu-item',
@@ -47,8 +47,12 @@ export class TreeMenuItemComponent extends AbstractTrackerComponent implements O
   private href: string;
 
   constructor(private windowHrefService: WindowHrefService,
-    private domUtilService: DomUtilService) {
+    private domUtilService: DomUtilService,
+    private recordChangeNotifierService: RecordChangeNotifierService) {
     super();
+    this.recordChangeNotifierService.recordChanged.subscribe(record => {
+      this.keys = Object.keys(record);
+    });
   }
 
   ngOnInit() {
