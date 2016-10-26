@@ -24,8 +24,6 @@ import { EventEmitter } from '@angular/core';
 
 import { AbstractFieldComponent } from '../abstract-field';
 
-import { EmptyValueService } from '../shared/services';
-
 /**
  * Abstract component to share code of common operations of all array fields
  * 
@@ -38,8 +36,6 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
   schema: Object;
   onValuesChange: EventEmitter<Array<any>>;
   path: string;
-  emptyValueService: EmptyValueService;
-  protected _emptyValue: any;
 
   /**
    * Called when a property of any element of the values is changed
@@ -67,25 +63,6 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
     this.onValuesChange.emit(this.values);
   }
 
-  addNewElement() {
-    this.values.push(this.emptyValue);
-    this.onValuesChange.emit(this.values);
-  }
-
-  /**
-   * Returns copy of empty value generated via schema.
-   * At first caches the actual value for later use.
-   * After returns a copy of the cache.
-   */
-  get emptyValue(): any {
-    if (!this._emptyValue) {
-      this._emptyValue = this.emptyValueService.generateEmptyValue(this.schema['items']);
-    }
-    // Return a copy if it is an object because objects are passed by reference.
-    return (typeof this._emptyValue === 'object') ?
-      Object.assign({}, this._emptyValue) : this._emptyValue;
-  }
-
   /**
    * @param {number} index - Index of the element to be deleted
    */
@@ -100,4 +77,5 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
   getValuePath(index: number, property: string): string {
     return `${this.path}.${index}.${property}`;
   }
+
 }

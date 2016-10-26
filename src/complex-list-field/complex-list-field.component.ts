@@ -76,14 +76,8 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
     this.keys[newIndex] = temp;
   }
 
-
-  /**
-   * @override
-   * to update keys
-   */
-  addNewElement() {
-    super.addNewElement();
-
+  onNewElementAddToChildsProperty(value: Array<any>, index: number, key: string) {
+    super.onValueChange(value, index, key);
     // update keys array when element moved
     this.keys.push([]);
   }

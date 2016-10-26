@@ -6,6 +6,8 @@
 					<td class="label-holder">
 						<div>
 							<strong>{{key | underscoreToSpace}}</strong>
+							<add-new-element-button *ngIf="schema.items.properties[key].type === 'array'" [key]="key" [schema]="schema.items.properties[key]"
+								[values]="value[key] | selfOrEmpty:schema.items.properties[key]" (onNewElementAdd)="onNewElementAddToChildsProperty($event, i, key)"></add-new-element-button>
 						</div>
 					</td>
 					<td>
@@ -26,8 +28,5 @@
 				</tr>
 			</tbody>
 		</table>
-	</div>
-	<div class="add-new-field-container">
-		<button tooltipHtml="<b>Add new {{path}}</b>" type="button" class="btn-new-field" (click)="addNewElement()">+</button>
 	</div>
 </div>

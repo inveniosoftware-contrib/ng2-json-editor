@@ -63,26 +63,6 @@ export class TableListFieldComponent extends AbstractListFieldComponent implemen
     );
   }
 
-  /**
-   * @override
-   * Needs different logic! because new row supposed to
-   * have same properties as the existing ones.
-   * 
-   * TODO: cache the emptyValue into this._emptyValue so 
-   *  that this empty value will not be generated everytime
-   *  but only when a new column (field) is added.
-   */
-  get emptyValue(): Object {
-    let clone = Object.assign({}, this.values[0]);
-    Object.keys(clone)
-      .filter(prop => clone[prop] !== undefined)
-      .forEach(prop => {
-        let propSchema = this.schema['items']['properties'][prop];
-        clone[prop] = this.emptyValueService.generateEmptyValue(propSchema);
-      });
-    return Object.assign({}, clone);
-  }
-
   onFieldAdd(field: string) {
     this.keys.push(field);
   }

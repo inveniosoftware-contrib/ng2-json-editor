@@ -33,6 +33,10 @@ body, html {
   background-color: $table-editable-rows-background;
 }
 
+table {
+  margin-bottom: 0px !important;
+}
+
 #editor {
   font-size: 13px;
 
@@ -74,25 +78,6 @@ body, html {
   }
 }
 
-.btn-new-field {
-  font-size: $button-font-size;
-  font-weight: bold;
-  line-height: 1;
-  text-shadow: 0 1px 0 #fff;
-  opacity: 0.4;
-  cursor: pointer;
-  background: transparent;
-  border: 0;
-  position: absolute;
-  bottom: -5px;
-  left: -5px;
-
-  &:hover {
-    color: green;
-    opacity: 0.6;
-  }
-}
-
 .editor-btn-move-up, .editor-btn-move-down {
   border: 0;
   background: transparent;
@@ -110,10 +95,6 @@ td.button-holder, th.button-holder {
   button {
     padding: 2px;
   }
-}
-
-.add-new-field-container {
-  position: relative;
 }
 
 div.error {
