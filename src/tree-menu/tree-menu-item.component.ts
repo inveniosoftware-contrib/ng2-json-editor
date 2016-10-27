@@ -20,9 +20,11 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 
 import { AbstractTrackerComponent } from '../abstract-tracker';
+
+import { Map } from 'immutable';
 
 import { DomUtilService, WindowHrefService } from '../shared/services';
 
@@ -31,7 +33,8 @@ import { DomUtilService, WindowHrefService } from '../shared/services';
   styleUrls: [
     './tree-menu-item.component.scss'
   ],
-  templateUrl: './tree-menu-item.component.html'
+  templateUrl: './tree-menu-item.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreeMenuItemComponent extends AbstractTrackerComponent implements OnInit, OnChanges {
 
@@ -53,16 +56,13 @@ export class TreeMenuItemComponent extends AbstractTrackerComponent implements O
 
   ngOnInit() {
     this.href = `${this.windowHrefService.getHrefWithoutHash()}#${this.path}`;
-
-    if (this.schema['type'] === 'object') {
-      this.keys = Object.keys(this.value);
-    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
     let valueChange = changes['value'];
     if (valueChange && this.schema['type'] === 'object') {
-      this.keys = Object.keys(valueChange.currentValue);
+      let currentValue: Map<string, any> = valueChange.currentValue;
+      this.keys = currentValue.keySeq().toArray();
     }
   }
 

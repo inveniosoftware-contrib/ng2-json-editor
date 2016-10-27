@@ -20,7 +20,9 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnChanges, ChangeDetectionStrategy, SimpleChanges } from '@angular/core';
+
+import { List, Map } from 'immutable';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
 
@@ -34,62 +36,35 @@ import {
   styleUrls: [
     './complex-list-field.component.scss'
   ],
-  templateUrl: './complex-list-field.component.html'
+  templateUrl: './complex-list-field.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ComplexListFieldComponent extends AbstractListFieldComponent implements OnInit {
+export class ComplexListFieldComponent extends AbstractListFieldComponent implements OnChanges {
 
-  @Input() values: Array<Object>;
+  @Input() values: List<Map<string, any>>;
   @Input() schema: Object;
   @Input() path: string;
 
   keys: Array<Array<string>>;
 
-  @Output() onValuesChange: EventEmitter<Array<Object>> = new EventEmitter<Array<Object>>();
+  @Output() onValuesChange: EventEmitter<List<Map<string, any>>> = new EventEmitter<any>();
 
   constructor(public emptyValueService: EmptyValueService,
     public appGlobalsService: AppGlobalsService) {
     super();
   }
 
-  ngOnInit() {
-    super.ngOnInit();
-
-    this.keys = this.values
-      .map(value => Object.keys(value));
-  }
-
   onFieldAdd(field: string, index: number) {
     this.keys[index].push(field);
   }
 
-  /**
-   * @override
-   * to update keys
-   */
-  moveElement(index: number, direction: number) {
-    super.moveElement(index, direction);
-
-    // update keys array when element moved
-    let newIndex = index + direction;
-    let temp = this.keys[index];
-    this.keys[index] = this.keys[newIndex];
-    this.keys[newIndex] = temp;
+  ngOnChanges(changes: SimpleChanges) {
+    let valuesChanges = changes['values'];
+    if (valuesChanges) {
+      this.keys = valuesChanges.currentValue
+        .map(value => value.keySeq().toArray())
+        .toArray();
+    }
   }
 
-  onNewElementAddToChildsProperty(value: Array<any>, index: number, key: string) {
-    super.onValueChange(value, index, key);
-    // update keys array when element moved
-    this.keys.push([]);
-  }
-
-  /**
-   * @override
-   * to update keys
-   */
-  deleteElement(index: number) {
-    super.deleteElement(index);
-
-    // update keys array when element moved
-    this.keys.splice(index, 1);
-  }
 }

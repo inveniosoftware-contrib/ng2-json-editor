@@ -20,7 +20,9 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
+
+import { Map } from 'immutable';
 
 import { AbstractTrackerComponent } from '../abstract-tracker';
 
@@ -31,11 +33,12 @@ import { DomUtilService, WindowHrefService } from '../shared/services';
   styleUrls: [
     './tree-menu.component.scss'
   ],
-  templateUrl: './tree-menu.component.html'
+  templateUrl: './tree-menu.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreeMenuComponent extends AbstractTrackerComponent implements OnChanges {
 
-  @Input() record: Object;
+  @Input() record: Map<string, any>;
   @Input() schema: Object;
 
   keys: Array<string>;
@@ -50,7 +53,8 @@ export class TreeMenuComponent extends AbstractTrackerComponent implements OnCha
   ngOnChanges(changes: SimpleChanges) {
     let recordChange = changes['record'];
     if (recordChange) {
-      this.keys = Object.keys(recordChange.currentValue);
+      let currentRecord: Map<string, any> = recordChange.currentValue;
+      this.keys = currentRecord.keySeq().toArray();
     }
   }
 

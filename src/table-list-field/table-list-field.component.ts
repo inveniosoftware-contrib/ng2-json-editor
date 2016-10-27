@@ -20,7 +20,9 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, ChangeDetectionStrategy } from '@angular/core';
+
+import { List, Map } from 'immutable';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
 
@@ -34,15 +36,16 @@ import {
   styleUrls: [
     './table-list-field.component.scss'
   ],
-  templateUrl: './table-list-field.component.html'
+  templateUrl: './table-list-field.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableListFieldComponent extends AbstractListFieldComponent implements OnInit {
 
-  @Input() values: Array<Object>;
+  @Input() values: List<Map<string, any>>;
   @Input() schema: Object;
   @Input() path: string;
 
-  @Output() onValuesChange: EventEmitter<Array<Object>> = new EventEmitter<Array<Object>>();
+  @Output() onValuesChange: EventEmitter<List<Map<string, any>>> = new EventEmitter<any>();
 
   keys: Array<string>;
 
@@ -58,7 +61,7 @@ export class TableListFieldComponent extends AbstractListFieldComponent implemen
     this.keys = Array.from(
       new Set(
         this.values
-          .map(object => Object.keys(object))
+          .map(object => object.keySeq().toArray())
           .reduce((pre, cur) => pre.concat(cur), []))
     );
   }

@@ -26,7 +26,8 @@ import {
   Output,
   OnInit,
   EventEmitter,
-  ViewEncapsulation
+  ViewEncapsulation,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import { AbstractFieldComponent } from '../abstract-field';
@@ -43,7 +44,8 @@ import {
   styleUrls: [
     './primitive-field.component.scss'
   ],
-  templateUrl: './primitive-field.component.html'
+  templateUrl: './primitive-field.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PrimitiveFieldComponent extends AbstractFieldComponent implements OnInit {
 

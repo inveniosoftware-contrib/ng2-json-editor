@@ -22,6 +22,8 @@
 
 import { EmptyValueService } from './empty-value.service';
 
+import { Map } from 'immutable';
+
 describe('EmptyValueService', () => {
   let service: EmptyValueService;
 
@@ -41,8 +43,8 @@ describe('EmptyValueService', () => {
         'prop1'
       ]
     };
-    let empty = service.generateEmptyValue(schema);
-    expect(empty['prop1']).toBeDefined();
+    let empty: Map<string, any> = service.generateEmptyValue(schema);
+    expect(empty.get('prop1')).toBeDefined();
   });
 
 });

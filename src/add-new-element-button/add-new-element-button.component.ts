@@ -1,4 +1,6 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+
+import { List } from 'immutable';
 
 import { EmptyValueService } from '../shared/services';
 
@@ -7,12 +9,13 @@ import { EmptyValueService } from '../shared/services';
   styleUrls: [
     './add-new-element-button.component.scss'
   ],
-  templateUrl: './add-new-element-button.component.html'
+  templateUrl: './add-new-element-button.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddNewElementButtonComponent {
 
   @Input() key: string;
-  @Input() values: Array<any>;
+  @Input() values: List<any>;
   @Input() schema: Object;
 
   @Output() onNewElementAdd: EventEmitter<any> = new EventEmitter<any>();
@@ -22,7 +25,7 @@ export class AddNewElementButtonComponent {
   addNewElement() {
     let itemSchema = this.schema['items'];
     let emptyValue = this.emptyValueService.generateEmptyValue(itemSchema);
-    this.values.push(emptyValue);
+    this.values = this.values.push(emptyValue);
     this.onNewElementAdd.emit(this.values);
   }
 

@@ -20,7 +20,7 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
@@ -31,7 +31,8 @@ import { AutocompletionService } from '../shared/services';
   styleUrls: [
     './autocomplete-input.component.scss'
   ],
-  templateUrl: './autocomplete-input.component.html'
+  templateUrl: './autocomplete-input.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AutocompleteInputComponent implements OnInit {
 

@@ -26,9 +26,12 @@ import {
   Input,
   Output,
   OnInit,
-  ViewEncapsulation
+  ViewEncapsulation,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { Http } from '@angular/http';
+
+import { fromJS, Map } from 'immutable';
 
 import { AbstractTrackerComponent } from './abstract-tracker';
 
@@ -46,7 +49,8 @@ import {
   styleUrls: [
     './json-editor.component.scss'
   ],
-  templateUrl: './json-editor.component.html'
+  templateUrl: './json-editor.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class JsonEditorComponent extends AbstractTrackerComponent implements OnInit {
@@ -60,6 +64,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
 
   previews: Array<any> = [];
   keys: Array<string>;
+  private _record: Map<string, any>;
 
   constructor(private http: Http,
     private appGlobalsService: AppGlobalsService,
@@ -71,8 +76,8 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   }
 
   onValueChange(event: any, key: string) {
-    this.record[key] = event;
-    this.onRecordChange.emit(this.record);
+    this._record = this._record.set(key, event);
+    this.onRecordChange.emit(this._record.toJS());
   }
 
   getFieldType(field: string): string {
@@ -90,6 +95,8 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     this.appGlobalsService.globalErrors = this.errorMap;
 
     this.keys = Object.keys(this.record);
+    // convert input to immutable
+    this._record = fromJS(this.record);
   }
 
   /**

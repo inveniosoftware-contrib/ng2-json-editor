@@ -22,6 +22,8 @@
 
 import { Injectable } from '@angular/core';
 
+import { fromJS } from 'immutable';
+
 @Injectable()
 export class EmptyValueService {
 
@@ -32,7 +34,11 @@ export class EmptyValueService {
 
   generateEmptyValue(schema: Object): any {
     let emptyValue = this.generateEmptyValueRecursively(schema);
-    return emptyValue;
+    if (typeof emptyValue === 'object') {
+      return fromJS(emptyValue);
+    } else {
+      return emptyValue;
+    }
   }
 
   private generateEmptyValueRecursively(schema: Object): any {
