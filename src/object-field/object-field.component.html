@@ -1,9 +1,9 @@
 <div [id]="path">
-	<table class="table table-bordered">
+	<table class="table">
 		<tr *ngFor="let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema; trackBy:trackByFunction">
 			<td>
 				<div>
-					<strong>{{key | underscoreToSpace}}</strong>
+					<label>{{key | underscoreToSpace}}</label>
 					<add-new-element-button *ngIf="schema.properties[key].type === 'array'" [key]="key" [schema]="schema.properties[key]" [values]="value.get(key) | selfOrEmpty:schema.properties[key]"
 						(onNewElementAdd)="onPropertyChange($event, key)"></add-new-element-button>
 				</div>

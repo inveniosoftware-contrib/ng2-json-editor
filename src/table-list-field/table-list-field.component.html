@@ -1,6 +1,6 @@
 <div [id]="path">
 	<div>
-		<table class="table table-bordered editable-inner-table">
+		<table class="table editable-inner-table">
 			<thead class="thead-inverse">
 				<tr>
 					<th *ngFor="let key of keys | addAlwaysShowFields:schema.items | filterAndSortBySchema:schema.items; trackBy:trackByFunction">
