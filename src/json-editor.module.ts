@@ -30,6 +30,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AddFieldDropdownComponent } from './add-field-dropdown';
+import { AddNewElementButtonComponent } from './add-new-element-button';
 import { AnyTypeFieldComponent } from './any-type-field';
 import { AutocompleteInputComponent } from './autocomplete-input';
 import { ComplexListFieldComponent } from './complex-list-field';
@@ -52,6 +53,7 @@ import { SHARED_PIPES, SHARED_SERVICES } from './shared';
     PdfViewerComponent,
     ...SHARED_PIPES,
     AddFieldDropdownComponent,
+    AddNewElementButtonComponent,
     AnyTypeFieldComponent,
     AutocompleteInputComponent,
     ComplexListFieldComponent,

@@ -1,0 +1,23 @@
+$button-font-size: 21px;
+
+div.button-container {
+  clear: left;
+}
+
+.btn-new-field {
+  font-size: $button-font-size;
+  font-weight: bold;
+  line-height: 1;
+  text-shadow: 0 1px 0 #fff;
+  opacity: 0.4;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  bottom: -5px;
+  left: -5px;
+
+  &:hover {
+    color: green;
+    opacity: 0.6;
+  }
+}

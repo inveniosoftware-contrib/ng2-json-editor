@@ -1,23 +1,26 @@
 <div [id]="path">
-  <table class="table table-bordered">
-    <tr *ngFor="let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema; trackBy:trackByFunction">
-      <td>
-        <div>
-          <strong>{{key}}</strong>
-        </div>
-      </td>
-      <td>
-        <any-type-field [value]="value[key] | selfOrEmpty:schema.properties[key]" (onValueChange)="onPropertyChange($event, key)" [schema]=schema.properties[key] [path]="getFieldPath(key)"></any-type-field>
-      </td>
-      <td class="button-holder">
-        <button type="button" class="editor-btn-delete" (click)="deleteField(key)">&times;</button>
-      </td>
-    </tr>
-    <!-- ADD-FIELD-FROM-SCHEMA -->
-    <tr *ngIf="schema.properties">
-      <td class="button-holder">
-        <add-field-dropdown [fields]="keys" (onFieldAdd)="onFieldAdd($event)" [schema]="schema.properties"></add-field-dropdown>
-      </td>
-    </tr>
-  </table>
+	<table class="table table-bordered">
+		<tr *ngFor="let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema; trackBy:trackByFunction">
+			<td>
+				<div>
+					<strong>{{key | underscoreToSpace}}</strong>
+					<add-new-element-button *ngIf="schema.properties[key].type === 'array'" [key]="key" [schema]="schema.properties[key]" [values]="value[key] | selfOrEmpty:schema.properties[key]"
+						(onNewElementAdd)="onPropertyChange($event, key)"></add-new-element-button>
+				</div>
+			</td>
+			<td>
+				<any-type-field [value]="value[key] | selfOrEmpty:schema.properties[key]" (onValueChange)="onPropertyChange($event, key)"
+					[schema]=schema.properties[key] [path]="getFieldPath(key)"></any-type-field>
+			</td>
+			<td class="button-holder">
+				<button type="button" class="editor-btn-delete" (click)="deleteField(key)">&times;</button>
+			</td>
+		</tr>
+		<!-- ADD-FIELD-FROM-SCHEMA -->
+		<tr *ngIf="schema.properties">
+			<td class="button-holder">
+				<add-field-dropdown [fields]="keys" (onFieldAdd)="onFieldAdd($event)" [schema]="schema.properties"></add-field-dropdown>
+			</td>
+		</tr>
+	</table>
 </div>
