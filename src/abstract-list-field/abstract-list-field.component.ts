@@ -22,6 +22,8 @@
 
 import { EventEmitter } from '@angular/core';
 
+import { List } from 'immutable';
+
 import { AbstractFieldComponent } from '../abstract-field';
 
 /**
@@ -32,9 +34,9 @@ import { AbstractFieldComponent } from '../abstract-field';
  */
 export abstract class AbstractListFieldComponent extends AbstractFieldComponent {
 
-  values: Array<any>;
+  values: List<any>;
   schema: Object;
-  onValuesChange: EventEmitter<Array<any>>;
+  onValuesChange: EventEmitter<List<any>>;
   path: string;
 
   /**
@@ -47,7 +49,7 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
    * 
    */
   onValueChange(value: any, index: number, key: string) {
-    this.values[index][key] = value;
+    this.values = this.values.setIn([index, key], value);
     this.onValuesChange.emit(this.values);
   }
 
@@ -57,9 +59,10 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
    */
   moveElement(index: number, direction: number) {
     let newIndex = index + direction;
-    let temp = this.values[index];
-    this.values[index] = this.values[newIndex];
-    this.values[newIndex] = temp;
+    let temp = this.values.get(index);
+    this.values = this.values
+      .set(index, this.values.get(newIndex))
+      .set(newIndex, temp);
     this.onValuesChange.emit(this.values);
   }
 
@@ -67,7 +70,7 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
    * @param {number} index - Index of the element to be deleted
    */
   deleteElement(index: number) {
-    this.values.splice(index, 1);
+    this.values = this.values.remove(index);
     this.onValuesChange.emit(this.values);
   }
 

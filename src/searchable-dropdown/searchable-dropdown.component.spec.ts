@@ -80,10 +80,11 @@ describe('SearchableDropdownComponent', () => {
     expect(component.value).toEqual('shortcut');
   });
 
-  it('should show all items if prefix is empty', () => {
+  it('should show all items when clicked if prefix is empty', () => {
     // set enum.items
     let items = ['First', 'Second'];
     component.items = items;
+    inputEl.dispatchEvent(new Event('click'));
     fixture.detectChanges();
     let dropdownItems = Array.prototype
       .slice.call(nativeEl.querySelectorAll('.dropdown-item'))

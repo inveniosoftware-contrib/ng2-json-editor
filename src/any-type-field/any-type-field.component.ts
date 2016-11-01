@@ -25,6 +25,7 @@ import {
   EventEmitter,
   Input,
   Output,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import {
@@ -46,7 +47,8 @@ import {
   styleUrls: [
     './any-type-field.component.scss'
   ],
-  templateUrl: './any-type-field.component.html'
+  templateUrl: './any-type-field.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AnyTypeFieldComponent {
 

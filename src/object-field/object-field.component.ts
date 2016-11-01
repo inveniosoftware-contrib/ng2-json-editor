@@ -20,7 +20,9 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, ChangeDetectionStrategy } from '@angular/core';
+
+import { Map } from 'immutable';
 
 import { AbstractFieldComponent } from '../abstract-field';
 
@@ -31,17 +33,18 @@ import { AppGlobalsService } from '../shared/services';
   styleUrls: [
     './object-field.component.scss'
   ],
-  templateUrl: './object-field.component.html'
+  templateUrl: './object-field.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ObjectFieldComponent extends AbstractFieldComponent implements OnInit {
 
-  @Input() value: Object;
+  @Input() value: Map<string, any>;
   @Input() schema: Object;
   @Input() path: string;
 
   keys: Array<string>;
 
-  @Output() onValueChange: EventEmitter<Object> = new EventEmitter<Object>();
+  @Output() onValueChange: EventEmitter<Map<string, any>> = new EventEmitter<any>();
 
   constructor(public appGlobalsService: AppGlobalsService) {
     super();
@@ -50,16 +53,16 @@ export class ObjectFieldComponent extends AbstractFieldComponent implements OnIn
   ngOnInit() {
     super.ngOnInit();
 
-    this.keys = Object.keys(this.value);
+    this.keys = this.value.keySeq().toArray();
   }
 
   onPropertyChange(propertyValue: any, key: string) {
-    this.value[key] = propertyValue;
+    this.value = this.value.set(key, propertyValue);
     this.onValueChange.emit(this.value);
   }
 
   deleteField(name: string) {
-    delete this.value[name];
+    this.value = this.value.remove(name);
     this.onValueChange.emit(this.value);
   }
 

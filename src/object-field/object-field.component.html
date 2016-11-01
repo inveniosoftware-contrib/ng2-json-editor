@@ -9,7 +9,7 @@
 				</div>
 			</td>
 			<td>
-				<any-type-field [value]="value[key] | selfOrEmpty:schema.properties[key]" (onValueChange)="onPropertyChange($event, key)"
+				<any-type-field [value]="value.get(key) | selfOrEmpty:schema.properties[key]" (onValueChange)="onPropertyChange($event, key)"
 					[schema]=schema.properties[key] [path]="getFieldPath(key)"></any-type-field>
 			</td>
 			<td class="button-holder">

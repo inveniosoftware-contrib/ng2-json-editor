@@ -20,7 +20,9 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
+
+import { List } from 'immutable';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
 
@@ -31,16 +33,17 @@ import { AppGlobalsService, EmptyValueService } from '../shared/services';
   styleUrls: [
     './primitive-list-field.component.scss'
   ],
-  templateUrl: './primitive-list-field.component.html'
+  templateUrl: './primitive-list-field.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 // FIXME: this doesn't have all stuff of AbstractListFieldComponent. Maybe, it shouldn't extend it.
 export class PrimitiveListFieldComponent extends AbstractListFieldComponent {
 
-  @Input() values: Array<any>;
+  @Input() values: List<any>;
   @Input() schema: Object;
   @Input() path: string;
 
-  @Output() onValuesChange: EventEmitter<Array<any>> = new EventEmitter<Array<any>>();
+  @Output() onValuesChange: EventEmitter<List<any>> = new EventEmitter<any>();
 
   constructor(public emptyValueService: EmptyValueService,
     public appGlobalsService: AppGlobalsService) {
@@ -58,7 +61,7 @@ export class PrimitiveListFieldComponent extends AbstractListFieldComponent {
    * 
    */
   onValueChange(event: any, index: number) {
-    this.values[index] = event;
+    this.values = this.values.set(index, event);
     this.onValuesChange.emit(this.values);
   }
 

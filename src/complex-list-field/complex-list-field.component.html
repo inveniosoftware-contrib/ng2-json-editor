@@ -7,23 +7,23 @@
 						<div>
 							<strong>{{key | underscoreToSpace}}</strong>
 							<add-new-element-button *ngIf="schema.items.properties[key].type === 'array'" [key]="key" [schema]="schema.items.properties[key]"
-								[values]="value[key] | selfOrEmpty:schema.items.properties[key]" (onNewElementAdd)="onNewElementAddToChildsProperty($event, i, key)"></add-new-element-button>
+								[values]="value.get(key) | selfOrEmpty:schema.items.properties[key]" (onNewElementAdd)="onValueChange($event, i, key)"></add-new-element-button>
 						</div>
 					</td>
 					<td>
-						<any-type-field [value]="value[key] | selfOrEmpty:schema.items.properties[key]" (onValueChange)="onValueChange($event, i, key)" [schema]="schema.items.properties[key]"
+						<any-type-field [value]="value.get(key) | selfOrEmpty:schema.items.properties[key]" (onValueChange)="onValueChange($event, i, key)" [schema]="schema.items.properties[key]"
 							[path]="getValuePath(i, key)"></any-type-field>
 					</td>
 				</tr>
 				<!-- ADD-FIELD-FROM-SCHEMA, UP/DOWN and DELETE buttons for each row group -->
-				<tr *ngIf="values.length > 0">
+				<tr *ngIf="values.size > 0">
 					<td class="button-holder">
 						<add-field-dropdown [fields]="keys[i]" (onFieldAdd)="onFieldAdd($event, i)" [schema]="schema.items.properties"></add-field-dropdown>
 					</td>
 					<td class="button-holder">
 						<button type="button" class="editor-btn-delete" (click)="deleteElement(i)">&times;</button>
 						<button *ngIf="i > 0" type="button" class="editor-btn-move-up" (click)="moveElement(i, -1)">▲</button>
-						<button *ngIf="i < (values.length - 1)" class="editor-btn-move-down" type="button" (click)="moveElement(i, 1)">▼</button>
+						<button *ngIf="i < (values.size - 1)" class="editor-btn-move-down" type="button" (click)="moveElement(i, 1)">▼</button>
 					</td>
 				</tr>
 			</tbody>

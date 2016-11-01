@@ -5,7 +5,7 @@
     <ul>
       <div *ngSwitchCase="'object'">
         <li *ngFor="let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema; trackBy:trackByFunction">
-          <tree-menu-item [label]="key" [value]="value[key]" [schema]="schema.properties[key]" [path]="path + '.' + key"></tree-menu-item>
+          <tree-menu-item [label]="key" [value]="value.get(key)" [schema]="schema.properties[key]" [path]="path + '.' + key"></tree-menu-item>
         </li>
       </div>
       <div *ngSwitchCase="'array'">
