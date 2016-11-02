@@ -27,7 +27,7 @@ Then add it to your module's `imports`.
 ```
 
 - `config` : configuration object. See [configuration section](#configuration) for options.
-- `schema` : valid json-schema for the record.
+- `schema` : valid json-schema for the record. See [json schema limitations](#json-schema-limitations)
 - `record` : valid json to be edited.
 - `onRecordChange` emitted when record change, `$event` is the edited record.
 - `errorMap (={})`: errors for individual parts of the record (format should be [errors-map.json](./example/assets/mock-data/error-map.json) 
@@ -136,6 +136,14 @@ Configuration for previews to be displayed in previewer (on the right side).
   }
 ]
 ```
+
+## <a name="json-schema-limitations"></a>Json Schema Limitations
+
+### anyOf
+
+`ng2-json-editor` has very limited support for `anyOf`, support where all `anyOf` items have same properties
+and they are objects with primitive properties. Before display, it picks the first `anyOf` item, merges all enum values and
+removes `pattern` and `format` rules.
 
 # DEVELOPMENT
 
