@@ -4,7 +4,7 @@
 			<td>
 				<div>
 					<strong>{{key | underscoreToSpace}}</strong>
-					<add-new-element-button *ngIf="schema.properties[key].type === 'array'" [key]="key" [schema]="schema.properties[key]" [values]="value[key] | selfOrEmpty:schema.properties[key]"
+					<add-new-element-button *ngIf="schema.properties[key].type === 'array'" [key]="key" [schema]="schema.properties[key]" [values]="value.get(key) | selfOrEmpty:schema.properties[key]"
 						(onNewElementAdd)="onPropertyChange($event, key)"></add-new-element-button>
 				</div>
 			</td>
