@@ -29,7 +29,7 @@ import {
 import { SearchableDropdownComponent } from './searchable-dropdown.component';
 
 import { Ng2BootstrapModule } from 'ng2-bootstrap/ng2-bootstrap';
-import { FilterByPrefixPipe } from '../shared/pipes';
+import { FilterByExpressionPipe } from '../shared/pipes';
 
 describe('SearchableDropdownComponent', () => {
 
@@ -41,7 +41,7 @@ describe('SearchableDropdownComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        FilterByPrefixPipe,
+        FilterByExpressionPipe,
         SearchableDropdownComponent,
       ],
       imports: [

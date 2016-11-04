@@ -123,6 +123,19 @@ number
 default: 0
 ```
 
+#### x_editor_enum_shortcut_map
+
+Shortcut map for enum fields, to map shorthand values to enum values
+
+```
+{
+  a: "An value in enum array",
+  abc: "Another value in enum array"
+}
+```
+
+So when `a` typed in enum field and enter is pressed, enum field value will be set to `Another value in enum array`.
+
 ### <a name="previews"></a>Previews
 
 Configuration for previews to be displayed in previewer (on the right side).

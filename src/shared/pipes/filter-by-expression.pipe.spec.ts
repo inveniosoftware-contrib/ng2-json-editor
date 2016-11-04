@@ -20,16 +20,21 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Pipe, PipeTransform } from '@angular/core';
+import { FilterByExpressionPipe } from './filter-by-expression.pipe';
 
-@Pipe({
-  name: 'filterByPrefix',
-  // http://stackoverflow.com/questions/34456430/ngfor-doesnt-update-data-with-pipe-in-angular2
-  pure: false
-})
-export class FilterByPrefixPipe implements PipeTransform {
+describe('FilterByExpressionPipe', () => {
+  let pipe: FilterByExpressionPipe;
 
-  transform(array: Array<string>, prefix: string): Array<string> {
-    return array.filter(value => value.startsWith(prefix));
-  }
-}
+  beforeEach(() => {
+    pipe = new FilterByExpressionPipe();
+  });
+
+  it('should filter by expression', () => {
+    let values = ['ab', '_ab_', '_ab', 'ab_', 'a', 'b', 'xyz'];
+    let expression = 'ab';
+    let filtered = ['ab', '_ab_', '_ab', 'ab_'];
+    let pipeResult = pipe.transform(values, expression);
+    expect(pipeResult).toEqual(filtered);
+  });
+
+});

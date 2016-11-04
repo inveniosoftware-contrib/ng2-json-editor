@@ -20,21 +20,16 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { FilterByPrefixPipe } from './filter-by-prefix.pipe';
+import { Pipe, PipeTransform } from '@angular/core';
 
-describe('FilterByPrefixPipe', () => {
-  let pipe: FilterByPrefixPipe;
+@Pipe({
+  name: 'filterByExpression',
+  pure: false
+})
+export class FilterByExpressionPipe implements PipeTransform {
 
-  beforeEach(() => {
-    pipe = new FilterByPrefixPipe();
-  });
-
-  it('should filter by prefix', () => {
-    let values = ['ab1', 'ab2', 'ac1', 'bc1'];
-    let prefix = 'ab';
-    let filtered = ['ab1', 'ab2'];
-    let pipeResult = pipe.transform(values, prefix);
-    expect(pipeResult).toEqual(filtered);
-  });
-
-});
+  transform(array: Array<string>, prefix: string): Array<string> {
+    let pattern = new RegExp(prefix, 'i');
+    return array.filter(value => value.match(pattern));
+  }
+}

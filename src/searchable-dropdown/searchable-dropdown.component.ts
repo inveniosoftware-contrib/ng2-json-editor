@@ -35,27 +35,28 @@ export class SearchableDropdownComponent {
   @Input() items: Array<string>;
   @Input() shortcutMap: Object;
   @Input() value: string;
-  prefix: string = '';
+  expression: string = '';
   status: { isOpen: boolean } = { isOpen: false };
 
   @Output() onSelect: EventEmitter<string> = new EventEmitter<string>();
 
-  onPrefixChange(prefix: string) {
-    this.prefix = prefix;
+  onExpressionChange(expression: string) {
+    this.expression = expression;
   }
 
   onItemClick(item: string) {
     this.value = item;
+    this.expression = '';
     this.onSelect.emit(item);
   }
 
   onKeypress(key: string) {
     if (key === 'Enter') {
       this.status.isOpen = false;
-      if (this.shortcutMap && this.shortcutMap[this.prefix]) {
-        this.onItemClick(this.shortcutMap[this.prefix]);
+      if (this.shortcutMap && this.shortcutMap[this.expression]) {
+        this.onItemClick(this.shortcutMap[this.expression]);
       }
-      this.prefix = '';
+      this.expression = '';
     }
   }
 

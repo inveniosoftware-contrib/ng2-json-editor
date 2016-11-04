@@ -32,7 +32,7 @@ import { SearchableDropdownComponent } from '../searchable-dropdown';
 import { AutocompleteInputComponent } from '../autocomplete-input';
 import { PrimitiveFieldComponent } from './primitive-field.component';
 
-import { ErrorsToMessagesHtmlPipe, FilterByPrefixPipe } from '../shared/pipes';
+import { ErrorsToMessagesHtmlPipe, FilterByExpressionPipe } from '../shared/pipes';
 
 import {
   AppGlobalsService,
@@ -67,7 +67,7 @@ describe('PrimitiveFieldComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         ErrorsToMessagesHtmlPipe,
-        FilterByPrefixPipe,
+        FilterByExpressionPipe,
         AutocompleteInputComponent,
         SearchableDropdownComponent,
         PrimitiveFieldComponent
