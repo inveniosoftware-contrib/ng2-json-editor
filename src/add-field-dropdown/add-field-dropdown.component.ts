@@ -39,10 +39,19 @@ export class AddFieldDropdownComponent {
 
   @Output() onFieldAdd: EventEmitter<string> = new EventEmitter<string>();
 
+  expression: string = '';
+
   constructor(private emptyValueService: EmptyValueService) { }
 
   get disabled(): boolean {
     return Object.keys(this.schema).length === this.fields.length;
+  }
+
+  focusElementIfOpen(isDropdownOpen: boolean, el: HTMLElement) {
+    if (isDropdownOpen) {
+      // focus doesn't work without setTimeout, since dropdown is closed when this is called.
+      setTimeout(() => el.focus());
+    }
   }
 
 }

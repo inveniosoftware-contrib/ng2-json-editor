@@ -26,7 +26,7 @@ import { AddFieldDropdownComponent } from './add-field-dropdown.component';
 
 import { Ng2BootstrapModule } from 'ng2-bootstrap/ng2-bootstrap';
 
-import { DifferentKeysPipe } from '../shared/pipes';
+import { DifferentKeysPipe, FilterByExpressionPipe } from '../shared/pipes';
 
 import { EmptyValueService } from '../shared/services';
 
@@ -57,6 +57,7 @@ describe('AddFieldToObjectDropdownComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         DifferentKeysPipe,
+        FilterByExpressionPipe,
         AddFieldDropdownComponent
       ],
       imports: [

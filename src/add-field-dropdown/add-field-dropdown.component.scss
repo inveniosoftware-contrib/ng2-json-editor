@@ -19,3 +19,9 @@
   left: inherit;
   right: -45px;
 }
+
+$filter-input-margin: 3px;
+input.dropdown-filter {
+  margin-left: $filter-input-margin;
+  margin-right: $filter-input-margin;
+}
