@@ -88,9 +88,22 @@ describe('ComponentTypeService', () => {
 
   it('should return object', () => {
     let schema = {
-      type: 'object'
+      type: 'object',
+      properties: {}
     };
     expect(service.getComponentType(schema)).toEqual('object');
+  });
+
+  it('should return ref', () => {
+    let schema = {
+      type: 'object',
+      properties: {
+        $ref: {
+          type: 'string'
+        }
+      }
+    };
+    expect(service.getComponentType(schema)).toEqual('ref');
   });
 
   it('should return autocomplete', () => {

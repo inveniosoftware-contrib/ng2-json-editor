@@ -39,6 +39,7 @@ import { JsonEditorComponent } from './json-editor.component';
 import { ObjectFieldComponent } from './object-field';
 import { PrimitiveListFieldComponent } from './primitive-list-field';
 import { PrimitiveFieldComponent } from './primitive-field';
+import { RefFieldComponent } from './ref-field';
 import { TableListFieldComponent } from './table-list-field';
 import {
   TreeMenuComponent,
@@ -61,6 +62,7 @@ import { SHARED_PIPES, SHARED_SERVICES } from './shared';
     EditorPreviewerComponent,
     PrimitiveListFieldComponent,
     PrimitiveFieldComponent,
+    RefFieldComponent,
     SearchableDropdownComponent,
     TableListFieldComponent,
     TreeMenuItemComponent,
