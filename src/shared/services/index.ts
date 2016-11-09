@@ -1,5 +1,5 @@
 import { AppGlobalsService } from './app-globals.service';
-import { AutocompletionService } from './autocompletion.service';
+import { RemoteAutocompletionService } from './remote-autocompletion.service';
 import { ComponentTypeService } from './component-type.service';
 import { DomUtilService } from './dom-util.service';
 import { EmptyValueService } from './empty-value.service';
@@ -11,7 +11,7 @@ import { WindowHrefService } from './window-href.service';
 
 export {
   AppGlobalsService,
-  AutocompletionService,
+  RemoteAutocompletionService,
   ComponentTypeService,
   DomUtilService,
   EmptyValueService,
@@ -24,7 +24,7 @@ export {
 
 export const SHARED_SERVICES = [
   AppGlobalsService,
-  AutocompletionService,
+  RemoteAutocompletionService,
   ComponentTypeService,
   DomUtilService,
   EmptyValueService,

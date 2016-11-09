@@ -27,8 +27,9 @@ interface AutocompletionResult {
 }
 
 interface AutocompletionOptions {
-  url: string;
-  path: string;
+  source?: Array<string>;
+  url?: string;
+  path?: string;
   size: number;
 }
 

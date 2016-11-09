@@ -33,14 +33,14 @@ import { Ng2BootstrapModule } from 'ng2-bootstrap/ng2-bootstrap';
 
 import { AutocompleteInputComponent } from '../autocomplete-input';
 
-import { AutocompletionService } from '../shared/services';
+import { RemoteAutocompletionService } from '../shared/services';
 
 const autocompletionServiceResults = [
   { text: 'Result1' },
   { text: 'Result2' },
   { text: 'Result3' }
 ];
-class MockAutocompletionService extends AutocompletionService {
+class MockAutocompletionService extends RemoteAutocompletionService {
   getAutocompletionResults(options: AutocompletionOptions,
     token: string): Observable<Array<AutocompletionResult>> {
     return Observable.of(autocompletionServiceResults);
@@ -63,7 +63,7 @@ describe('AutocompleteInputComponent', () => {
         HttpModule
       ],
       providers: [
-        AutocompletionService
+        RemoteAutocompletionService
       ]
     }).compileComponents();
   }));

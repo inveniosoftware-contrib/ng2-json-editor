@@ -52,7 +52,6 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   @Input() value: string | number | boolean;
   @Input() schema: Object;
   @Input() path: string;
-  valueType: string;
 
   @Output() onValueChange = new EventEmitter<any>();
 
@@ -62,10 +61,13 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     super();
   }
 
+  get valueType(): string {
+    return this.componentTypeService.getComponentType(this.schema);
+  }
+
   ngOnInit() {
     super.ngOnInit();
     this.schema = this.schema || {};
-    this.valueType = this.componentTypeService.getComponentType(this.schema);
   }
 
   onModelChange(value: any) {

@@ -22,18 +22,6 @@
 
 declare var System: any;
 
-// removes the error when testing!
-interface AutocompletionResult {
-  text: string;
-  payload?: Object;
-}
-
-interface AutocompletionOptions {
-  url: string;
-  path: string;
-  size: number;
-}
-
 interface AppConfig {
   schemaOptions?: Object;
   previews?: Array<Object>;

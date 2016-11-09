@@ -83,20 +83,37 @@ export class SchemaFixerService {
    */
   private fixAnyOf(schema: Object): Object {
     let anyOf: Array<Object> = schema['anyOf'];
-    // find enum types
-    let anyOfProps = anyOf[0]['properties'];
-    let enumPropNames = Object.keys(anyOfProps)
-      .filter(prop => anyOfProps[prop]['enum']);
-    // concat enum values for each enum property
-    let enums = {};
+
+    // find existence count of all enum properties in anyOf elements
+    // the reason of this, a field could be enum type for some and not for some other anyOf element
+    let enumPropCount = {};
     anyOf.forEach(anyOfElement => {
-      enumPropNames.forEach(propName => {
-        if (!enums[propName]) {
-          enums[propName] = [];
-        }
-        enums[propName] = enums[propName].concat(anyOfElement['properties'][propName]['enum']);
-      });
+      Object.keys(anyOfElement['properties'])
+        .filter(prop => anyOfElement['properties'][prop]['enum'])
+        .forEach(prop => {
+          if (!enumPropCount[prop]) {
+            enumPropCount[prop] = 0;
+          }
+          enumPropCount[prop]++;
+        });
     });
+
+    // combine all enum arrays in anyOf elements
+    let enums = {};
+    Object.keys(enumPropCount)
+      .forEach(prop => {
+        anyOf.forEach(anyOfElement => {
+          if (!enums[prop]) {
+            enums[prop] = [];
+          }
+          let enumValues = anyOfElement['properties'][prop]['enum'];
+          // check if current field is enum for current anyOf element
+          if (enumValues) {
+            enums[prop] = enums[prop].concat(enumValues);
+          }
+        });
+      });
+
     let fixedSchema = anyOf[0];
     // shallow cleaning of format and pattern
     Object.keys(fixedSchema['properties'])
@@ -104,11 +121,24 @@ export class SchemaFixerService {
         delete fixedSchema['properties'][prop]['format'];
         delete fixedSchema['properties'][prop]['pattern'];
       });
-    // merge all values of each enum property
-    enumPropNames.forEach(propName => {
-      // use Set to have unique values
-      fixedSchema['properties'][propName]['enum'] = Array.from(new Set(enums[propName]));
-    });
+
+    Object.keys(enumPropCount)
+      .forEach(prop => {
+        let uniqueEnumValues = Array.from(new Set(enums[prop]));
+        // if a field enum for all anyOf elements
+        if (enumPropCount[prop] === anyOf.length) {
+          // merge all enum values into one
+          fixedSchema['properties'][prop]['enum'] = uniqueEnumValues;
+        // if a field enum for some of anyOf elements
+        } else {
+          // create a autocomplete config so that it will allow any values
+          // but autocomplete from enum values from where the field is defined as enum
+          delete fixedSchema['properties'][prop]['enum'];
+          fixedSchema['properties'][prop]['x_editor_autocomplete'] = {
+            source: uniqueEnumValues
+          };
+        }
+      });
     return fixedSchema;
   }
 

@@ -33,7 +33,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
 
-import { AutocompletionService } from './autocompletion.service';
+import { RemoteAutocompletionService } from './remote-autocompletion.service';
 
 // results will be returened in body of MockHttp response.
 const mockResults = [
@@ -60,20 +60,20 @@ class MockHttp extends Http {
 
 describe('AutocompletionService', () => {
 
-  let service: AutocompletionService;
+  let service: RemoteAutocompletionService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpModule],
       providers: [
         ConnectionBackend,
-        AutocompletionService,
+        RemoteAutocompletionService,
         { provide: Http, useClass: MockHttp }
       ]
     });
   });
 
-  beforeEach(inject([AutocompletionService], (autocompletionService) => {
+  beforeEach(inject([RemoteAutocompletionService], (autocompletionService) => {
     service = autocompletionService;
   }));
 
