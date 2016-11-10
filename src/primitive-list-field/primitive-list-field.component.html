@@ -1,6 +1,6 @@
 <div [id]="path">
   <div class="wide">
-    <table class="table table-bordered">
+    <table class="table">
       <tr *ngFor="let value of values; let i = index; trackBy:trackByFunction" [id]="path + '.' + i">
         <td>
           <primitive-field [value]="values.get(i)" (onValueChange)="onValueChange($event, i)" [schema]="schema.items" [path]="getValuePath(i)"></primitive-field>

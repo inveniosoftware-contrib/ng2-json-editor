@@ -1,11 +1,11 @@
 <div [id]="path">
-	<div>
-		<table class="table table-bordered">
-			<tbody *ngFor="let value of values; let i = index; trackBy:trackByFunction" [id]="path + '.' + i">
+	<div *ngFor="let value of values; let i = index; trackBy:trackByFunction" [id]="path + '.' + i" >
+		<div class="complex-list-field-wrapper">
+			<table class="table">
 				<tr *ngFor="let key of keys[i] | addAlwaysShowFields:schema.items | filterAndSortBySchema:schema.items; trackBy:trackByFunction">
 					<td class="label-holder">
 						<div>
-							<strong>{{key | underscoreToSpace}}</strong>
+							<label>{{key | underscoreToSpace}}</label>
 							<add-new-element-button *ngIf="schema.items.properties[key].type === 'array'" [key]="key" [schema]="schema.items.properties[key]"
 								[values]="value.get(key) | selfOrEmpty:schema.items.properties[key]" (onNewElementAdd)="onValueChange($event, i, key)"></add-new-element-button>
 						</div>
@@ -17,16 +17,16 @@
 				</tr>
 				<!-- ADD-FIELD-FROM-SCHEMA, UP/DOWN and DELETE buttons for each row group -->
 				<tr *ngIf="values.size > 0">
-					<td class="button-holder">
-						<add-field-dropdown [fields]="keys[i]" (onFieldAdd)="onFieldAdd($event, i)" [schema]="schema.items.properties"></add-field-dropdown>
-					</td>
-					<td class="button-holder">
-						<button type="button" class="editor-btn-delete" (click)="deleteElement(i)">&times;</button>
-						<button *ngIf="i > 0" type="button" class="editor-btn-move-up" (click)="moveElement(i, -1)">▲</button>
-						<button *ngIf="i < (values.size - 1)" class="editor-btn-move-down" type="button" (click)="moveElement(i, 1)">▼</button>
-					</td>
+						<td class="button-holder">
+							<add-field-dropdown [fields]="keys[i]" (onFieldAdd)="onFieldAdd($event, i)" [schema]="schema.items.properties"></add-field-dropdown>
+						</td>
+						<td class="button-holder button-holder-complex-list-actions">
+							<button type="button" class="editor-btn-delete editor-btn-delete-complex" (click)="deleteElement(i)">&times;</button>
+							<button *ngIf="i > 0" type="button" class="editor-btn-move-up editor-btn-move-up-complex" (click)="moveElement(i, -1)">▲</button>
+							<button *ngIf="i < (values.size - 1)" class="editor-btn-move-down editor-btn-move-down-complex" type="button" (click)="moveElement(i, 1)">▼</button>
+						</td>
 				</tr>
-			</tbody>
-		</table>
+			</table>
+		</div>
 	</div>
 </div>

@@ -1,6 +1,7 @@
 $text-button-font-size: 13px;
-$button-font-size: 21px;
+$button-font-size: 16px;
 $table-editable-rows-background: #edf6fd;
+$label-color: #c1c1c1;
 
 body, html {
   height:100%;
@@ -17,6 +18,7 @@ body, html {
     height: 100%;
     overflow: auto;
     max-width: 900px;
+    padding-right: 0;
   }
 
   .right {
@@ -39,21 +41,40 @@ table {
 
 #editor {
   font-size: 13px;
+  border: 2px solid #a5adb5;
 
-  > tbody > tr {
-    border: 2px solid #a5adb5;
+  .field-wrapper {
+    border-bottom: 2px solid #a5adb5;
   }
 
   td {
     background-color: #f9f9f9;
+    border: none;
+    padding: 0;
   }
 
-  td, th {
-    padding: 3px;
+  td > * {
+    vertical-align : middle;
+  }
+
+  th {
+    font-weight: 400;
+    padding: 1px 0px 1px 3px;
   }
   
   td.label-holder {
     width: 1%;
+    white-space: nowrap;
+    padding-right: 5px;
+
+    .label-top-level {
+      padding-left: 3px;
+      margin-bottom: 2px;
+    }
+  }
+
+  tbody {
+    border: none;
   }
 }
 
@@ -66,6 +87,7 @@ table {
   cursor: pointer;
   background: transparent;
   border: 0;
+  padding: 0 0 3px 3px;
 
   &:hover {
     color: red;
@@ -76,25 +98,36 @@ table {
     font-size: $text-button-font-size;
     opacity: 0.5;
   }
+
+  &.editor-btn-delete-complex {
+    font-size: 21px;
+  }
 }
 
+.editor-btn-move-down {
+  padding-bottom: 0;
+}
+
+.editor-btn-move-up-complex, .editor-btn-move-down-complex {
+    font-size: 14px !important;
+    vertical-align: bottom !important;
+    padding-bottom: 2px !important;
+  }
+
 .editor-btn-move-up, .editor-btn-move-down {
+  padding: 0;
+  font-size: 11px;
   border: 0;
   background: transparent;
   opacity: 0.2;
 
   &:hover {
     opacity: 0.6;
-  }
+  } 
 }
 
 td.button-holder, th.button-holder {
   width: 65px;
-  vertical-align: middle !important;
-
-  button {
-    padding: 2px;
-  }
 }
 
 div.error {
@@ -120,6 +153,23 @@ div.right-side-container {
   border-left: 2px solid lightgray;
 }
 
+label {
+   color: $label-color;
+}
+
 .flash {
   border: 2px solid yellow;
+}
+
+table.editable-inner-table {
+  label {
+    display: inline;
+    font-weight: initial;
+    padding-left: 5px;
+  }
+
+  .dropdown-menu {
+    left: inherit;
+    right: 0px;
+  }
 }
