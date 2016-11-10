@@ -102,6 +102,72 @@ describe('SchemaFixerService', () => {
     expect(fixed).toEqual(expected);
   });
 
+  it('should fix anyOf with partial enum properties', () => {
+    let schema = {
+      anyOf: [
+        {
+          type: 'object',
+          properties: {
+            enumProp: {
+              type: 'string',
+              enum: [
+                'enumProp1',
+                'enumProp2',
+              ]
+            },
+            partialEnumProp: {
+              type: 'string',
+              enum: [
+                'partialEnumProp1',
+                'partialEnumProp2'
+              ]
+            }
+          }
+        },
+        {
+          type: 'object',
+          properties: {
+            enumProp: {
+              type: 'string',
+              enum: [
+                'enumProp3',
+                'enumProp4'
+              ]
+            },
+            partialEnumProp: {
+              type: 'string'
+            }
+          }
+        }
+      ]
+    };
+    let expected = {
+      type: 'object',
+      properties: {
+        enumProp: {
+          type: 'string',
+          enum: [
+            'enumProp1',
+            'enumProp2',
+            'enumProp3',
+            'enumProp4'
+          ]
+        },
+        partialEnumProp: {
+          type: 'string',
+          x_editor_autocomplete: {
+            source: [
+              'partialEnumProp1',
+              'partialEnumProp2'
+            ]
+          }
+        }
+      }
+    };
+    let fixed = service.fixSchema(schema, {});
+    expect(fixed).toEqual(expected);
+  });
+
   it('should enrich schema with config', () => {
     let schema = {
       type: 'object',

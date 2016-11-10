@@ -24,7 +24,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
-import { AutocompletionService } from '../shared/services';
+import { RemoteAutocompletionService } from '../shared/services';
 
 @Component({
   selector: 'autocomplete-input',
@@ -42,16 +42,24 @@ export class AutocompleteInputComponent implements OnInit {
 
   @Output() onValueChange: EventEmitter<string> = new EventEmitter<string>();
 
-  dataSource: Observable<string>;
+  dataSource: Observable<string> | Array<string>;
+  typeaheadOptionField: string;
 
-  constructor(private autocompletionService: AutocompletionService) { }
+  constructor(private remoteAutocompletionService: RemoteAutocompletionService) { }
 
   ngOnInit() {
-    this.dataSource = Observable.create((observer: any) => {
-      // Runs on every search
-      observer.next(this.value);
-    }).mergeMap((token: string) =>
-      this.autocompletionService.getAutocompletionResults(this.autocompletionOptions, token));
+    // if url option set then use remote autocompletion service
+    if (this.autocompletionOptions.url) {
+      this.typeaheadOptionField = 'text';
+      this.dataSource = Observable.create((observer: any) => {
+        // Runs on every search
+        observer.next(this.value);
+      }).mergeMap((token: string) =>
+        this.remoteAutocompletionService.getAutocompletionResults(this.autocompletionOptions, token));
+    } else {
+      this.dataSource = this.autocompletionOptions.source;
+    }
+
   }
 
   onModelChange(value: string) {

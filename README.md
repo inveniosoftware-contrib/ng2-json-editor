@@ -60,23 +60,25 @@ The keys of this object correspond the path in the schema that wants to be confi
 
 Continue reading for available configuration available for fields.
 
-#### x_editor_autocompletion
+#### x_editor_autocomplete
 
-Configuration for autocompletion of a field from remote source. Field to be autocompleted must have the `x_editor_autocompletion` property
+Configuration for autocompletion of a field from remote or local source. Field to be autocompleted must have the `x_editor_autocomplete` property
 with configuration object that has the following properties below.
 
 ```
 {
-  url: string; (remote source url that returns the autocompletion results)
-  path: string; (path to array of autocompletion results in response from the url, seprated by dot '.')
+  url?: string; (remote source url that returns the autocompletion results)
+  path?: string; (path to array of autocompletion results in response from the url, separated by dot '.')
+  source?: Array<string>; (source array that will be used to autocomplete locally)
   size: number; (maximum number of items to be showed)
 }
 ```
 
 Note that:
 
-- query string is appended to `url`, so it should end like `.../foo?bar=`
+- query string is appended to `url`, so it should end like `.../foo?bar=`.
 - autocompletion results array which is located in `path`, must be a array of objects which have `text` property inside.
+- **either `url` and `path` or `source` must be set.**
 
 #### x_editor_hidden
 
