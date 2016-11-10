@@ -136,6 +136,27 @@ Shortcut map for enum fields, to map shorthand values to enum values
 
 So when `a` typed in enum field and enter is pressed, enum field value will be set to `Another value in enum array`.
 
+#### <a name="x_editor_ref_config"></a>x_editor_ref_config
+
+Config for objects that has `$ref` string as a property which points to another json.
+
+```
+{
+  template: string; (html template where you can access json that is pointed by $ref by using 'context')
+  lazy: boolean; (flag to indicate if template should be rendered on request or on page load, a preview button is inserted if set true)
+}
+```
+
+Example template:
+```
+<div>aValue: {{(context | async)?.aValue}}<div>
+```
+
+Note that:
+
+- you have to use async pipe since the Observable passed as context.
+- you can use other angular2 common pipes such as `lowercase`, `json` etc.
+
 ### <a name="previews"></a>Previews
 
 Configuration for previews to be displayed in previewer (on the right side).
@@ -149,6 +170,12 @@ Configuration for previews to be displayed in previewer (on the right side).
   }
 ]
 ```
+
+### $ref fields
+
+These are object fields which has `$ref` string value that points to another json (remote or local).
+
+If you don't configure [like here](#x_editor_ref_config) it will be displayed as a clickable, not editable `$ref` link that opens to the link in a new tab.
 
 ## <a name="json-schema-limitations"></a>Json Schema Limitations
 

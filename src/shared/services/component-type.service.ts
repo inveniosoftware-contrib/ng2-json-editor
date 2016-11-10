@@ -55,6 +55,10 @@ export class ComponentTypeService {
       if (Object.keys(schema).length === 0) { // if shema === {} (empty object)
         return 'raw';
       }
+    } else if (schemaType === 'object') {
+      if (schema['properties']['$ref']) {
+        return 'ref';
+      }
     } else if (schemaType === 'array') {
       let itemSchema = schema['items'];
       if (itemSchema['type'] === 'object') {

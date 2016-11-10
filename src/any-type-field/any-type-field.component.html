@@ -11,6 +11,9 @@
 	<div *ngSwitchCase="'object'">
 		<object-field [value]="value" (onValueChange)="onValueChange.emit($event)" [schema]="schema" [path]="path"></object-field>
 	</div>
+	<div *ngSwitchCase="'ref'">
+		<ref-field [refValue]="value.get('$ref')" [schema]="schema" [path]="path"></ref-field>
+	</div>
 	<div *ngSwitchDefault>
 		<primitive-field [value]="value" (onValueChange)="onValueChange.emit($event)" [schema]="schema" [path]="path"></primitive-field>
 	</div>

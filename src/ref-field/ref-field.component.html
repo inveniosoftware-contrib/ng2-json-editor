@@ -1,0 +1,8 @@
+<div [id]="path" [ngSwitch]="shouldDisplayWithTemplate" >
+  <div *ngSwitchCase="true">
+    <button class="btn-preview-template" *ngIf="isLazy" (click)="onPreviewClick($event)">👁</button>
+  </div>
+  <div *ngSwitchDefault>
+    <a target="_blank" [href]="refValue">{{refValue}}</a>
+  </div>
+</div>
