@@ -37,7 +37,7 @@ import { AbstractTrackerComponent } from './abstract-tracker';
 
 import {
   AppGlobalsService,
-  ComponentTypeService,
+  JsonStoreService,
   JsonUtilService,
   RecordFixerService,
   SchemaFixerService
@@ -62,27 +62,17 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
 
   @Output() onRecordChange: EventEmitter<Object> = new EventEmitter<Object>();
 
+  _record: Map<string, any>;
   previews: Array<any> = [];
   keys: Array<string>;
-  private _record: Map<string, any>;
 
-  constructor(private http: Http,
-    private appGlobalsService: AppGlobalsService,
-    private componentTypeService: ComponentTypeService,
-    private jsonUtilService: JsonUtilService,
-    private recordFixerService: RecordFixerService,
-    private schemaFixerService: SchemaFixerService) {
+  constructor(public http: Http,
+    public appGlobalsService: AppGlobalsService,
+    public jsonStoreService: JsonStoreService,
+    public jsonUtilService: JsonUtilService,
+    public recordFixerService: RecordFixerService,
+    public schemaFixerService: SchemaFixerService) {
     super();
-  }
-
-  onValueChange(event: any, key: string) {
-    this._record = this._record.set(key, event);
-    this.onRecordChange.emit(this._record.toJS());
-  }
-
-  getFieldType(field: string): string {
-    let fieldScehma = this.schema['properties'][field];
-    return this.componentTypeService.getComponentType(fieldScehma);
   }
 
   ngOnInit() {
@@ -92,17 +82,26 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     }
     this.record = this.recordFixerService.fixRecord(this.record, this.schema);
     this.previews = this.extractPreviews();
+    // set errors that is used by other components
     this.appGlobalsService.globalErrors = this.errorMap;
-
+    // get names of top-level fields
     this.keys = Object.keys(this.record);
-    // convert input to immutable
+    // use fromJS to convert input to immutable then pass it to the store
     this._record = fromJS(this.record);
+    this.jsonStoreService.setJson(this._record);
+    // listen for all changes on json
+    this.jsonStoreService.jsonChange
+      .subscribe((json) => {
+        this._record = json;
+        // emit the change as plain JS object
+        this.onRecordChange.emit(json.toJS());
+      });
   }
 
   /**
    * Extracts previews from record using defined path in schema.
    */
-  private extractPreviews(): Array<any> {
+  public extractPreviews(): Array<any> {
     let previews = this.config.previews;
     if (previews) {
       previews.forEach(preview => {
@@ -110,5 +109,9 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
       });
     }
     return previews;
+  }
+
+  getPathForField(field: string): Array<any> {
+    return [field];
   }
 }

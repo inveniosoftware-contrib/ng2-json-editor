@@ -1,4 +1,4 @@
-<div [id]="path" [ngSwitch]="shouldDisplayWithTemplate" >
+<div [id]="path.join('.')" [ngSwitch]="shouldDisplayWithTemplate" >
   <div *ngSwitchCase="true">
     <button class="btn-preview-template" *ngIf="isLazy" (click)="onPreviewClick($event)">👁</button>
   </div>

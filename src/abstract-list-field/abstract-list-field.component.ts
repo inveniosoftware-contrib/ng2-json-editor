@@ -20,11 +20,11 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { EventEmitter } from '@angular/core';
-
 import { List } from 'immutable';
 
 import { AbstractFieldComponent } from '../abstract-field';
+
+import { JsonStoreService, AppGlobalsService } from '../shared/services';
 
 /**
  * Abstract component to share code of common operations of all array fields
@@ -36,23 +36,12 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
 
   values: List<any>;
   schema: Object;
-  onValuesChange: EventEmitter<List<any>>;
-  path: string;
+  path: Array<any>;
 
-  /**
-   * Called when a property of any element of the values is changed
-   * Used if values is a object array.
-   * 
-   * @param {any} value - new value
-   * @param {number} index - index of changed element in array
-   * @param {key} key - name of the changed property of the element in given index
-   * 
-   */
-  onValueChange(value: any, index: number, key: string) {
-    this.values = this.values.setIn([index, key], value);
-    this.onValuesChange.emit(this.values);
+  constructor(public appGlobalsService: AppGlobalsService,
+    public jsonStoreService: JsonStoreService) {
+    super(appGlobalsService);
   }
-
   /**
    * @param {number} index - Index of the element that is moved
    * @param {number} direction - Movement direction. -1 for UP, +1 for DOWN
@@ -63,22 +52,22 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
     this.values = this.values
       .set(index, this.values.get(newIndex))
       .set(newIndex, temp);
-    this.onValuesChange.emit(this.values);
+    this.jsonStoreService.setIn(this.path, this.values);
   }
 
   /**
    * @param {number} index - Index of the element to be deleted
    */
   deleteElement(index: number) {
-    this.values = this.values.remove(index);
-    this.onValuesChange.emit(this.values);
+    this.jsonStoreService.setIn(this.path, this.values.remove(index));
+    this.values = this.jsonStoreService.getIn(this.path);
   }
 
   /**
    * Returns path of the property of an element at index.
    */
-  getValuePath(index: number, property: string): string {
-    return `${this.path}.${index}.${property}`;
+  getValuePath(index: number, property: string): Array<any> {
+    return this.path.concat(index, property);
   }
 
 }

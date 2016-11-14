@@ -1,26 +1,25 @@
 <div class="row editor-container">
-	<div class="col-md-2 left">
-		<tree-menu [record]="_record" [schema]="schema"></tree-menu>
-	</div>
-	<div class="col-md-6 middle">
-		<table id="editor" class="table">
-			<div class="field-wrapper" *ngFor="let key of keys | addAlwaysShowFields:schema |filterAndSortBySchema:schema; trackBy:trackByFunction">
-			<tr>
-				<td class="label-holder">
-					<label class="label-top-level">{{key | underscoreToSpace}}</label>
-					<add-new-element-button *ngIf="schema.properties[key].type === 'array'" [key]="key" [schema]="schema.properties[key]" [values]="_record.get(key) | selfOrEmpty:schema.properties[key]"
-						(onNewElementAdd)="onValueChange($event, key)"></add-new-element-button>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<any-type-field [value]="_record.get(key)" (onValueChange)="onValueChange($event, key)" [schema]="schema.properties[key]" [path]="key"></any-type-field>
-				</td>
-			</tr>
-			</div>
-		</table>
-	</div>
-	<div class="col-md-4 right">
-		<editor-previewer [previews]="previews"> </editor-previewer>
-	</div>
+  <div class="col-md-2 left">
+    <tree-menu [record]="_record" [schema]="schema"></tree-menu>
+  </div>
+  <div class="col-md-6 middle">
+    <table id="editor" class="table">
+      <div class="field-wrapper" *ngFor="let key of keys | addAlwaysShowFields:schema |filterAndSortBySchema:schema; trackBy:trackByFunction">
+      <tr>
+        <td class="label-holder">
+          <label class="label-top-level">{{key | underscoreToSpace}}</label>
+          <add-new-element-button *ngIf="schema.properties[key].type === 'array'" [path]="getPathForField(key)" [schema]="schema.properties[key]"></add-new-element-button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <any-type-field [value]="_record.get(key)" [schema]="schema.properties[key]" [path]="getPathForField(key)"></any-type-field>
+        </td>
+      </tr>
+      </div>
+    </table>
+  </div>
+  <div class="col-md-4 right">
+    <editor-previewer [previews]="previews"> </editor-previewer>
+  </div>
 </div>

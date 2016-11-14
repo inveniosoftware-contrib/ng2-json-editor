@@ -4,6 +4,7 @@ import { ComponentTypeService } from './component-type.service';
 import { DomUtilService } from './dom-util.service';
 import { DynamicTemplateLoaderService } from './dynamic-template-loader.service';
 import { EmptyValueService } from './empty-value.service';
+import { JsonStoreService } from './json-store.service';
 import { JsonUtilService } from './json-util.service';
 import { RecordFixerService } from './record-fixer.service';
 import { SchemaFixerService } from './schema-fixer.service';
@@ -17,6 +18,7 @@ export {
   DomUtilService,
   DynamicTemplateLoaderService,
   EmptyValueService,
+  JsonStoreService,
   JsonUtilService,
   RecordFixerService,
   SchemaFixerService,
@@ -31,6 +33,7 @@ export const SHARED_SERVICES = [
   DomUtilService,
   DynamicTemplateLoaderService,
   EmptyValueService,
+  JsonStoreService,
   JsonUtilService,
   RecordFixerService,
   SchemaFixerService,

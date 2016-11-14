@@ -22,15 +22,11 @@
 
 import {
   Component,
-  EventEmitter,
   Input,
-  Output,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
 } from '@angular/core';
 
-import {
-  ComponentTypeService,
-} from '../shared/services';
+import { ComponentTypeService } from '../shared/services';
 
 /**
  * AnyFieldComponent
@@ -52,11 +48,9 @@ import {
 })
 export class AnyTypeFieldComponent {
 
-  @Input() value: any;
   @Input() schema: Object;
-  @Input() path: string;
-
-  @Output() onValueChange: EventEmitter<any> = new EventEmitter<any>();
+  @Input() path: Array<any>;
+  @Input() value: any;
 
   constructor(public componentTypeService: ComponentTypeService) { }
 

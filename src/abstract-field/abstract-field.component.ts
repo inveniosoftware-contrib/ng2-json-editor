@@ -39,16 +39,19 @@ export abstract class AbstractFieldComponent
   extends AbstractTrackerComponent
   implements OnInit, OnDestroy {
 
-  path: string;
+  path: Array<any>;
   errors: Array<Object> = [];
   errorsSubsciption: Subscription;
-  appGlobalsService: AppGlobalsService;
+
+  constructor(public appGlobalsService: AppGlobalsService) {
+    super();
+  }
 
   ngOnInit() {
     this.errorsSubsciption = this.appGlobalsService
       .globalErrorsSubject
       .subscribe((globalErrors) => {
-        this.errors = globalErrors[this.path] || [];
+        this.errors = globalErrors[this.path.join('.')] || [];
       });
   }
 
