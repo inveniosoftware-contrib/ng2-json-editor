@@ -4,7 +4,7 @@ import { ReplaySubject } from 'rxjs';
 
 
 @Injectable()
-export class JsonStoreService {
+export class JsonStoreService implements NestedStore {
 
   private json: Map<string, any>;
   private _jsonChange: ReplaySubject<Map<string, any>> = new ReplaySubject<any>(1);

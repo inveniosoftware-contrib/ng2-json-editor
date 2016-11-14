@@ -33,14 +33,14 @@ import { Ng2BootstrapModule } from 'ng2-bootstrap/ng2-bootstrap';
 
 import { AutocompleteInputComponent } from '../autocomplete-input';
 
-import { RemoteAutocompletionService } from '../shared/services';
+import { RemoteAutocompletionService, JsonStoreService } from '../shared/services';
 
 const autocompletionServiceResults = [
   { text: 'Result1' },
   { text: 'Result2' },
   { text: 'Result3' }
 ];
-class MockAutocompletionService extends RemoteAutocompletionService {
+class MockRemoteAutocompletionService extends RemoteAutocompletionService {
   getAutocompletionResults(options: AutocompletionOptions,
     token: string): Observable<Array<AutocompletionResult>> {
     return Observable.of(autocompletionServiceResults);
@@ -63,7 +63,8 @@ describe('AutocompleteInputComponent', () => {
         HttpModule
       ],
       providers: [
-        RemoteAutocompletionService
+        { provide: RemoteAutocompletionService, useClass: MockRemoteAutocompletionService },
+        JsonStoreService
       ]
     }).compileComponents();
   }));
@@ -77,6 +78,7 @@ describe('AutocompleteInputComponent', () => {
       url: '',
       path: '',
       size: 3,
+      onCompletionSelect: (path, completion, store) => {}
     };
     component.value = '';
     fixture.detectChanges();

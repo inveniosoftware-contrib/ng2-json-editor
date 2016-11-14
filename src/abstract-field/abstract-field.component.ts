@@ -41,14 +41,14 @@ export abstract class AbstractFieldComponent
 
   path: Array<any>;
   errors: Array<Object> = [];
-  errorsSubsciption: Subscription;
+  errorsSubscription: Subscription;
 
   constructor(public appGlobalsService: AppGlobalsService) {
     super();
   }
 
   ngOnInit() {
-    this.errorsSubsciption = this.appGlobalsService
+    this.errorsSubscription = this.appGlobalsService
       .globalErrorsSubject
       .subscribe((globalErrors) => {
         this.errors = globalErrors[this.path.join('.')] || [];
@@ -56,8 +56,8 @@ export abstract class AbstractFieldComponent
   }
 
   ngOnDestroy() {
-    if (this.errorsSubsciption) {
-      this.errorsSubsciption.unsubscribe();
+    if (this.errorsSubscription) {
+      this.errorsSubscription.unsubscribe();
     }
   }
 
