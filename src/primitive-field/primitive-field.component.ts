@@ -83,5 +83,4 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     this.value = value;
     this.onValueChange.emit(value);
   }
-
 }

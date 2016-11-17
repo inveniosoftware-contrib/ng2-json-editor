@@ -47,12 +47,13 @@ import {
 } from './tree-menu';
 import { SearchableDropdownComponent } from './searchable-dropdown';
 
-import { SHARED_PIPES, SHARED_SERVICES } from './shared';
+import { SHARED_PIPES, SHARED_SERVICES, SHARED_DIRECTIVES } from './shared';
 
 @NgModule({
   declarations: [
     PdfViewerComponent,
     ...SHARED_PIPES,
+    ...SHARED_DIRECTIVES,
     AddFieldDropdownComponent,
     AddNewElementButtonComponent,
     AnyTypeFieldComponent,
