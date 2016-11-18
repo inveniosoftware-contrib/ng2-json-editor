@@ -48,6 +48,11 @@ interface OnCompletionSelectFunction {
   (path: Array<any>, completion: AutocompletionResult, store: NestedStore);
 }
 
+interface HttpHeader {
+  name: string;
+  value: string;
+}
+
 interface EditorConfig {
   schemaOptions?: Object;
   previews?: Array<Object>;

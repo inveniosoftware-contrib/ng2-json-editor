@@ -12,7 +12,7 @@
     <object-field [value]="value" [schema]="schema" [path]="path"></object-field>
   </div>
   <div *ngSwitchCase="'ref'">
-    <ref-field [refValue]="value.get('$ref')" [schema]="schema" [path]="path"></ref-field>
+    <ref-field [value]="value" [schema]="schema" [path]="path"></ref-field>
   </div>
   <div *ngSwitchCase="'value-change-watcher'">
     <value-change-watcher [value]="value" [schema]="schema" [path]="path"></value-change-watcher>

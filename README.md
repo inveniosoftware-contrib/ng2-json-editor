@@ -148,18 +148,29 @@ Config for objects that has `$ref` string as a property which points to another 
 {
   template: string; (html template where you can access json that is pointed by $ref by using 'context')
   lazy: boolean; (flag to indicate if template should be rendered on request or on page load, a preview button is inserted if set true)
+  headers?: Array<Object>; (array of headers which will be used for http request that fetches the $ref data)
 }
 ```
 
-Example template:
+Example `template`:
 ```
 <div>aValue: {{(context | async)?.aValue}}<div>
+```
+
+Example `headers`:
+```
+[
+  { 'Accept': 'application/json' },
+  { 'Custom': 'custom-header-value' },
+  ...
+]
 ```
 
 Note that:
 
 - you have to use async pipe since the Observable passed as context.
 - you can use other angular2 common pipes such as `lowercase`, `json` etc.
+- you can access the error during http request, via `context.error`.  
 
 #### x_editor_on_value_change
 
