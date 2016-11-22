@@ -37,7 +37,8 @@ import { ErrorsToMessagesHtmlPipe, FilterByExpressionPipe } from '../shared/pipe
 import {
   AppGlobalsService,
   ComponentTypeService,
-  SchemaValidationService
+  SchemaValidationService,
+  JsonStoreService
 } from '../shared/services';
 
 /**
@@ -54,6 +55,10 @@ import {
 function changeInputElementValue(el: HTMLInputElement, value: string) {
   el.value = value;
   el.dispatchEvent(new Event('input'));
+}
+
+class MockJsonStoreService extends JsonStoreService {
+  setIn(path: Array<any>, value: any) { }
 }
 
 describe('PrimitiveFieldComponent', () => {
@@ -78,7 +83,8 @@ describe('PrimitiveFieldComponent', () => {
       providers: [
         AppGlobalsService,
         ComponentTypeService,
-        SchemaValidationService
+        SchemaValidationService,
+        { provide: JsonStoreService, useClass: MockJsonStoreService }
       ]
     }).compileComponents();
   }));
@@ -89,6 +95,7 @@ describe('PrimitiveFieldComponent', () => {
 
     // force component to render completely by setting @Input() manually 
     component.value = 'defaultStringValue';
+    component.path = ['default', 'path'];
     component.schema = {
       type: 'string'
     };
@@ -115,11 +122,11 @@ describe('PrimitiveFieldComponent', () => {
     expect(component.value).toEqual(inputValue);
   });
 
-  it('should propagate change event to the parent', () => {
-    spyOn(component.onValueChange, 'emit');
+  it('should call jsonStore to change', () => {
+    spyOn(component.jsonStoreService, 'setIn');
     let newValue = 'newValue';
     changeInputElementValue(inputEl, newValue);
     fixture.detectChanges();
-    expect(component.onValueChange.emit).toHaveBeenCalledWith(newValue);
+    expect(component.jsonStoreService.setIn).toHaveBeenCalledWith(component.path, newValue);
   });
 });

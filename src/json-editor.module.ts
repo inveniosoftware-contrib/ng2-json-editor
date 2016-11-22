@@ -37,6 +37,7 @@ import { ComplexListFieldComponent } from './complex-list-field';
 import { EditorPreviewerComponent } from './editor-previewer';
 import { JsonEditorComponent } from './json-editor.component';
 import { ObjectFieldComponent } from './object-field';
+import { ValueChangeWatcherComponent } from './value-change-watcher';
 import { PrimitiveListFieldComponent } from './primitive-list-field';
 import { PrimitiveFieldComponent } from './primitive-field';
 import { RefFieldComponent } from './ref-field';
@@ -60,6 +61,7 @@ import { SHARED_PIPES, SHARED_SERVICES, SHARED_DIRECTIVES } from './shared';
     AutocompleteInputComponent,
     ComplexListFieldComponent,
     ObjectFieldComponent,
+    ValueChangeWatcherComponent,
     EditorPreviewerComponent,
     PrimitiveListFieldComponent,
     PrimitiveFieldComponent,

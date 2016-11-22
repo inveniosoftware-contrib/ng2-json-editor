@@ -20,13 +20,13 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, EventEmitter, Input, Output, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { Map } from 'immutable';
 
 import { AbstractFieldComponent } from '../abstract-field';
 
-import { AppGlobalsService } from '../shared/services';
+import { AppGlobalsService, JsonStoreService } from '../shared/services';
 
 @Component({
   selector: 'object-field',
@@ -40,14 +40,13 @@ export class ObjectFieldComponent extends AbstractFieldComponent implements OnIn
 
   @Input() value: Map<string, any>;
   @Input() schema: Object;
-  @Input() path: string;
+  @Input() path: Array<any>;
 
   keys: Array<string>;
 
-  @Output() onValueChange: EventEmitter<Map<string, any>> = new EventEmitter<any>();
-
-  constructor(public appGlobalsService: AppGlobalsService) {
-    super();
+  constructor(public appGlobalsService: AppGlobalsService,
+    public jsonStoreService: JsonStoreService) {
+    super(appGlobalsService);
   }
 
   ngOnInit() {
@@ -56,18 +55,16 @@ export class ObjectFieldComponent extends AbstractFieldComponent implements OnIn
     this.keys = this.value.keySeq().toArray();
   }
 
-  onPropertyChange(propertyValue: any, key: string) {
-    this.value = this.value.set(key, propertyValue);
-    this.onValueChange.emit(this.value);
-  }
-
   deleteField(name: string) {
+    // remove it from the record
     this.value = this.value.remove(name);
-    this.onValueChange.emit(this.value);
+    this.jsonStoreService.setIn(this.path, this.value);
+    // remove the key too, so that it will not be displayed as empty
+    this.keys.splice(this.keys.indexOf(name), 1);
   }
 
-  getFieldPath(name: string): string {
-    return `${this.path}.${name}`;
+  getFieldPath(name: string): Array<any> {
+    return this.path.concat(name);
   }
 
   onFieldAdd(field: string) {

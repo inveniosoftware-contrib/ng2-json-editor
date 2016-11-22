@@ -1,8 +1,8 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { List } from 'immutable';
 
-import { EmptyValueService } from '../shared/services';
+import { EmptyValueService, JsonStoreService } from '../shared/services';
 
 @Component({
   selector: 'add-new-element-button',
@@ -14,19 +14,21 @@ import { EmptyValueService } from '../shared/services';
 })
 export class AddNewElementButtonComponent {
 
-  @Input() key: string;
-  @Input() values: List<any>;
+  @Input() path: Array<any>;
   @Input() schema: Object;
 
-  @Output() onNewElementAdd: EventEmitter<any> = new EventEmitter<any>();
+  constructor(public emptyValueService: EmptyValueService,
+    public jsonStoreService: JsonStoreService) { }
 
-  constructor(private emptyValueService: EmptyValueService) { }
+  get tooltipName(): string {
+    return this.path[this.path.length - 1];
+  }
 
   addNewElement() {
     let itemSchema = this.schema['items'];
     let emptyValue = this.emptyValueService.generateEmptyValue(itemSchema);
-    this.values = this.values.push(emptyValue);
-    this.onNewElementAdd.emit(this.values);
+    let values = this.jsonStoreService.getIn(this.path) || List.of([]);
+    this.jsonStoreService.setIn(this.path, values.push(emptyValue));
   }
 
 }

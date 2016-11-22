@@ -23,9 +23,7 @@
 import {
   Component,
   Input,
-  Output,
   OnInit,
-  EventEmitter,
   ViewEncapsulation,
   ChangeDetectionStrategy
 } from '@angular/core';
@@ -35,6 +33,7 @@ import { AbstractFieldComponent } from '../abstract-field';
 import {
   AppGlobalsService,
   ComponentTypeService,
+  JsonStoreService,
   SchemaValidationService
 } from '../shared/services';
 
@@ -49,16 +48,16 @@ import {
 })
 export class PrimitiveFieldComponent extends AbstractFieldComponent implements OnInit {
 
-  @Input() value: string | number | boolean;
   @Input() schema: Object;
-  @Input() path: string;
+  @Input() path: Array<any>;
 
-  @Output() onValueChange = new EventEmitter<any>();
+  @Input() value: string | number | boolean;
 
-  constructor(private schemaValidationService: SchemaValidationService,
-    private componentTypeService: ComponentTypeService,
-    public appGlobalsService: AppGlobalsService) {
-    super();
+  constructor(public schemaValidationService: SchemaValidationService,
+    public componentTypeService: ComponentTypeService,
+    public appGlobalsService: AppGlobalsService,
+    public jsonStoreService: JsonStoreService) {
+    super(appGlobalsService);
   }
 
   get valueType(): string {
@@ -81,6 +80,6 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     }
     // TODO: should we make the change even if it is not validated
     this.value = value;
-    this.onValueChange.emit(value);
+    this.jsonStoreService.setIn(this.path, value);
   }
 }

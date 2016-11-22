@@ -20,13 +20,13 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { List } from 'immutable';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
 
-import { AppGlobalsService, EmptyValueService } from '../shared/services';
+import { AppGlobalsService, JsonStoreService } from '../shared/services';
 
 @Component({
   selector: 'primitive-list-field',
@@ -38,38 +38,20 @@ import { AppGlobalsService, EmptyValueService } from '../shared/services';
 })
 // FIXME: this doesn't have all stuff of AbstractListFieldComponent. Maybe, it shouldn't extend it.
 export class PrimitiveListFieldComponent extends AbstractListFieldComponent {
-
   @Input() values: List<any>;
   @Input() schema: Object;
-  @Input() path: string;
+  @Input() path: Array<any>;
 
-  @Output() onValuesChange: EventEmitter<List<any>> = new EventEmitter<any>();
-
-  constructor(public emptyValueService: EmptyValueService,
-    public appGlobalsService: AppGlobalsService) {
-    super();
-  }
-
-  /**
-   * Called when any element of is changed of the values is changed
-   * @override
-   * 
-   * It casts new value to appropriate type.
-   * 
-   * @param {any} event - new value
-   * @param {number} index - index of changed element in array
-   * 
-   */
-  onValueChange(event: any, index: number) {
-    this.values = this.values.set(index, event);
-    this.onValuesChange.emit(this.values);
+  constructor(public appGlobalsService: AppGlobalsService,
+    public jsonStoreService: JsonStoreService) {
+    super(appGlobalsService, jsonStoreService);
   }
 
   /**
    * Returns path of an element at index.
    * @override
    */
-  getValuePath(index: number): string {
-    return `${this.path}.${index}`;
+  getValuePath(index: number): Array<any> {
+    return this.path.concat(index);
   }
 }

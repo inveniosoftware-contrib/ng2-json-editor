@@ -28,7 +28,7 @@ export class DomUtilService {
   focusAndSelectFirstInputChildById(id: string) {
     let el = document.getElementById(id);
     if (el) {
-      let firstInput = el.querySelector('input, textarea') as HTMLInputElement;
+      let firstInput = el.querySelector('div.editable-field-container input, textarea') as HTMLInputElement;
       if (firstInput) {
         firstInput.focus();
         firstInput.select();

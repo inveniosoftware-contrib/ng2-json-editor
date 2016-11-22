@@ -22,9 +22,10 @@
 
 import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+
 import 'rxjs/add/observable/of';
 
-import { RemoteAutocompletionService } from '../shared/services';
+import { JsonStoreService, RemoteAutocompletionService } from '../shared/services';
 
 @Component({
   selector: 'autocomplete-input',
@@ -37,23 +38,27 @@ import { RemoteAutocompletionService } from '../shared/services';
 export class AutocompleteInputComponent implements OnInit {
 
   @Input() autocompletionOptions: AutocompletionOptions;
+  @Input() path: Array<any>;
   @Input() value: string;
   @Input() placeholder: string;
 
-  @Output() onValueChange: EventEmitter<string> = new EventEmitter<string>();
+  @Output() onValueChange: EventEmitter<string> = new EventEmitter<any>();
 
   dataSource: Observable<string> | Array<string>;
   typeaheadOptionField: string;
 
-  constructor(private remoteAutocompletionService: RemoteAutocompletionService) { }
+  constructor(public remoteAutocompletionService: RemoteAutocompletionService,
+    public jsonStoreService: JsonStoreService) { }
 
   ngOnInit() {
     // if url option set then use remote autocompletion service
     if (this.autocompletionOptions.url) {
       this.typeaheadOptionField = 'text';
       this.dataSource = Observable.create((observer: any) => {
-        // Runs on every search
-        observer.next(this.value);
+        // Runs on every 
+        if (this.value && this.value.length > 0) {
+          observer.next(this.value);
+        }
       }).mergeMap((token: string) =>
         this.remoteAutocompletionService.getAutocompletionResults(this.autocompletionOptions, token));
     } else {
@@ -65,5 +70,14 @@ export class AutocompleteInputComponent implements OnInit {
   onModelChange(value: string) {
     this.value = value;
     this.onValueChange.emit(value);
+  }
+
+  onCompletionSelect(completionItem: AutocompletionResult) {
+    let onCompletionSelect = this.autocompletionOptions.onCompletionSelect;
+    // if callback set and it is remote autocompletion source
+    if (onCompletionSelect && this.typeaheadOptionField) {
+      // .slice() is used to pass by value instead of reference
+      onCompletionSelect(this.path.slice(), completionItem, this.jsonStoreService);
+    }
   }
 }

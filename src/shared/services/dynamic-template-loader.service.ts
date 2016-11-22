@@ -1,4 +1,13 @@
-import { Injectable, Compiler, ViewContainerRef, Component, NgModule, ComponentFactory } from '@angular/core';
+import {
+  Injectable,
+  Compiler,
+  ViewContainerRef,
+  Component,
+  NgModule,
+  ComponentFactory,
+  ComponentRef,
+  Input
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Injectable()
@@ -17,17 +26,21 @@ export class DynamicTemplateLoaderService {
    * @param {any} context - context data which is referenced in `template` as `context`
    * @param {ViewContainerRef} viewContainer - view container where the template will inserted
    */
-  public loadTemplate(template: string, context: any, viewContainer: ViewContainerRef) {
+  public loadTemplate(template: string, context: any, viewContainer: ViewContainerRef): Promise<ComponentRef<any>> {
     // check if factory for dummy component is created before for the template
     if (this.cache.has(template)) {
-      let component = viewContainer.createComponent(this.cache.get(template));
-      component.instance.context = context;
-      return;
+      return new Promise((resolve) => {
+        let component = viewContainer.createComponent(this.cache.get(template));
+        component.instance.context = context;
+        resolve(component);
+      });
     }
 
     // dummy component with given template
     @Component({ template: template })
-    class DynamicTemplateComponent { }
+    class DynamicTemplateComponent {
+      @Input() context: any;
+    }
 
     // dummy module that wraps dummy component and CommonModule (for core pipes such as async)
     @NgModule({
@@ -37,7 +50,7 @@ export class DynamicTemplateLoaderService {
     class DynamicTemplateModule { }
 
     // compile the module in runtime which will create the factory for dummy component
-    this.compiler.compileModuleAndAllComponentsAsync(DynamicTemplateModule)
+    return this.compiler.compileModuleAndAllComponentsAsync(DynamicTemplateModule)
       .then(module => module.componentFactories
         .find(factory => factory.componentType === DynamicTemplateComponent))
       .then(factory => {
@@ -45,6 +58,7 @@ export class DynamicTemplateLoaderService {
         let component = viewContainer.createComponent(factory);
         component.instance.context = context;
         component.changeDetectorRef.markForCheck();
+        return component;
       });
   }
 }

@@ -21,16 +21,36 @@
 */
 
 // TODO: investigate if it is good to define shared models here
+
 interface AutocompletionResult {
   text: string;
   payload?: Object;
+}
+
+interface NestedStore {
+  getIn(path: Array<any>): any;
+  setIn(path: Array<any>, value: any);
+}
+
+interface OnValueChangeFunction {
+  (path: Array<any>, value: any, store: NestedStore);
 }
 
 interface AutocompletionOptions {
   source?: Array<string>;
   url?: string;
   path?: string;
+  onCompletionSelect?: OnCompletionSelectFunction;
   size: number;
+}
+
+interface OnCompletionSelectFunction {
+  (path: Array<any>, completion: AutocompletionResult, store: NestedStore);
+}
+
+interface HttpHeader {
+  name: string;
+  value: string;
 }
 
 interface EditorConfig {

@@ -48,6 +48,8 @@ export class ComponentTypeService {
       return 'autocomplete';
     } else if (schema['enum']) {
       return 'enum';
+    } else if (schema['x_editor_on_value_change']) {
+      return 'value-change-watcher';
     }
 
     let schemaType = schema['type'];

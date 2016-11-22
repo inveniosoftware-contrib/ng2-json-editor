@@ -70,6 +70,8 @@ with configuration object that has the following properties below.
   url?: string; (remote source url that returns the autocompletion results)
   path?: string; (path to array of autocompletion results in response from the url, separated by dot '.')
   source?: Array<string>; (source array that will be used to autocomplete locally)
+  onCompletionSelect?: function(path: Array<any>, completion: [AutocompletionResult](./src/typings.d.ts), store: [NestedStore](./src/typings.d.ts));
+    (function to be called when a completion results is selected)
   size: number; (maximum number of items to be showed)
 }
 ```
@@ -146,18 +148,51 @@ Config for objects that has `$ref` string as a property which points to another 
 {
   template: string; (html template where you can access json that is pointed by $ref by using 'context')
   lazy: boolean; (flag to indicate if template should be rendered on request or on page load, a preview button is inserted if set true)
+  headers?: Array<Object>; (array of headers which will be used for http request that fetches the $ref data)
 }
 ```
 
-Example template:
+Example `template`:
 ```
 <div>aValue: {{(context | async)?.aValue}}<div>
+```
+
+Example `headers`:
+```
+[
+  { 'Accept': 'application/json' },
+  { 'Custom': 'custom-header-value' },
+  ...
+]
 ```
 
 Note that:
 
 - you have to use async pipe since the Observable passed as context.
 - you can use other angular2 common pipes such as `lowercase`, `json` etc.
+- you can access the error during http request, via `context.error`.  
+
+#### x_editor_on_value_change
+
+Function that will be called when the value of configured property is changed.
+This function can access the whole json thanks to [`store`](./src/shared/services/json-store.service.ts), and 
+can change all other properties if required.
+
+```
+function(path: Array<any>, value: any, store: NestedStore)
+```
+
+Example function:
+
+```
+(path, value, store) => {
+  // do stuff with params here
+}
+```
+
+Note that:
+
+- JsonStoreService's `getIn` and `setIn` returns and takes `immutable.js`'s `List` and `Map` instead of `Array` and `Object`
 
 ### <a name="previews"></a>Previews
 

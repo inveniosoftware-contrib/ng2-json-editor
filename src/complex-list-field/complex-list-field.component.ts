@@ -20,16 +20,19 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, EventEmitter, Input, Output, OnChanges, ChangeDetectionStrategy, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  ChangeDetectionStrategy,
+  SimpleChanges
+} from '@angular/core';
 
 import { List, Map } from 'immutable';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
 
-import {
-  AppGlobalsService,
-  EmptyValueService
-} from '../shared/services';
+import { AppGlobalsService, JsonStoreService } from '../shared/services';
 
 @Component({
   selector: 'complex-list-field',
@@ -43,15 +46,13 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
 
   @Input() values: List<Map<string, any>>;
   @Input() schema: Object;
-  @Input() path: string;
+  @Input() path: Array<any>;
 
   keys: Array<Array<string>>;
 
-  @Output() onValuesChange: EventEmitter<List<Map<string, any>>> = new EventEmitter<any>();
-
-  constructor(public emptyValueService: EmptyValueService,
-    public appGlobalsService: AppGlobalsService) {
-    super();
+  constructor(public appGlobalsService: AppGlobalsService,
+    public jsonStoreService: JsonStoreService) {
+    super(appGlobalsService, jsonStoreService);
   }
 
   onFieldAdd(field: string, index: number) {

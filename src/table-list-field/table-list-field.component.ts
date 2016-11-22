@@ -20,16 +20,13 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, EventEmitter, Input, Output, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { List, Map } from 'immutable';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
 
-import {
-  AppGlobalsService,
-  EmptyValueService
-} from '../shared/services';
+import { AppGlobalsService, JsonStoreService } from '../shared/services';
 
 @Component({
   selector: 'table-list-field',
@@ -43,15 +40,13 @@ export class TableListFieldComponent extends AbstractListFieldComponent implemen
 
   @Input() values: List<Map<string, any>>;
   @Input() schema: Object;
-  @Input() path: string;
-
-  @Output() onValuesChange: EventEmitter<List<Map<string, any>>> = new EventEmitter<any>();
+  @Input() path: Array<any>;
 
   keys: Array<string>;
 
-  constructor(public emptyValueService: EmptyValueService,
-    public appGlobalsService: AppGlobalsService) {
-    super();
+  constructor(public appGlobalsService: AppGlobalsService,
+    public jsonStoreService: JsonStoreService) {
+    super(appGlobalsService, jsonStoreService);
   }
 
   ngOnInit() {
