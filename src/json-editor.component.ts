@@ -99,14 +99,24 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   }
 
   /**
-   * Extracts previews from record using defined path in schema.
+   * Extracts previews from config, and populates url if necessary
+   * by using `getUrl` or `urlPath` configs and the record.
    */
-  public extractPreviews(): Array<any> {
+  extractPreviews(): Array<any> {
     let previews = this.config.previews;
     if (previews) {
-      previews.forEach(preview => {
-        preview['url'] = this.jsonUtilService.getValueInPath(this.record, preview['url_path']);
-      });
+      // if url is not set directly, populate it
+      previews
+        .filter(preview => !preview.url)
+        .forEach(preview => {
+          if (preview.getUrl) {
+            preview.url = preview.getUrl(this.record);
+          } else if (preview.urlPath) {
+            preview.url = this.jsonUtilService.getValueInPath(this.record, preview['urlPath']);
+          } else {
+            throw new Error('Either url, urlPath or getUrl should be set for a preview');
+          }
+        });
     }
     return previews;
   }

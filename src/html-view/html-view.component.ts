@@ -22,23 +22,16 @@
 
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { AbstractTrackerComponent } from '../abstract-tracker';
-
 @Component({
-  selector: 'editor-previewer',
+  selector: 'html-view',
   styleUrls: [
-    './editor-previewer.component.scss'
+    './html-view.component.scss'
   ],
-  templateUrl: './editor-previewer.component.html',
+  templateUrl: './html-view.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EditorPreviewerComponent extends AbstractTrackerComponent {
+export class HtmlViewComponent {
 
-  @Input() previews: Array<Preview>;
-  hidden: boolean = false;
-
-  get toggleButtonActionName(): string {
-    return this.hidden ? 'Show' : 'Hide';
-  }
+  @Input() url: string;
 
 }
