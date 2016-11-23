@@ -42,9 +42,3 @@ export class EditorPreviewerComponent extends AbstractTrackerComponent {
   }
 
 }
-
-export interface Preview {
-  name: string;
-  type: string;
-  url: string;
-}

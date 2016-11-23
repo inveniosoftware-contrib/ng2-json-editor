@@ -53,7 +53,19 @@ interface HttpHeader {
   value: string;
 }
 
+interface GetUrlFunction {
+  (record: Object): string;
+}
+
+interface Preview {
+  name: string;
+  type: string;
+  url?: string;
+  urlPath?: string;
+  getUrl?: GetUrlFunction;
+}
+
 interface EditorConfig {
   schemaOptions?: Object;
-  previews?: Array<Object>;
+  previews?: Array<Preview>;
 }
