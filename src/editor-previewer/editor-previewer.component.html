@@ -6,6 +6,9 @@
         <div *ngSwitchCase="'pdf'" class="preview-container">
           <pdf-viewer [src]="preview.url" [show-all]="true" [original-size]="true" style="display: block;"></pdf-viewer>
         </div>
+        <div *ngSwitchCase="'html'" class="preview-container">
+          <html-view [url]="preview.url"></html-view>
+        </div>
         <div *ngSwitchDefault>
           ##Unrecognized preview type: {{preview.type}}
         </div>

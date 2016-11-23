@@ -105,7 +105,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     let previews = this.config.previews;
     if (previews) {
       previews.forEach(preview => {
-        preview['url'] = this.jsonUtilService.getValueInPath(this.record, preview['url_path']);
+        preview['url'] = this.jsonUtilService.getValueInPath(this.record, preview['urlPath']);
       });
     }
     return previews;

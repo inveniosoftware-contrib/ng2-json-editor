@@ -20,31 +20,25 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
-import { AbstractTrackerComponent } from '../abstract-tracker';
-
-@Component({
-  selector: 'editor-previewer',
-  styleUrls: [
-    './editor-previewer.component.scss'
-  ],
-  templateUrl: './editor-previewer.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+@Pipe({
+  name: 'sanitizeUrl',
+  pure: false
 })
-export class EditorPreviewerComponent extends AbstractTrackerComponent {
 
-  @Input() previews: Array<Preview>;
-  hidden: boolean = false;
+export class SanitizeUrlPipe implements PipeTransform {
 
-  get toggleButtonActionName(): string {
-    return this.hidden ? 'Show' : 'Hide';
+  constructor(public domSanitizer: DomSanitizer) { }
+
+  /**
+   * Transforms url to safe url that can be used for `<script src>` or `<iframe src>`
+   * 
+   * @param {string} url
+   * @return {SafeResourceUrl} 
+   */
+  transform(url: string): SafeResourceUrl {
+    return this.domSanitizer.bypassSecurityTrustResourceUrl(url);
   }
-
-}
-
-export interface Preview {
-  name: string;
-  type: string;
-  url: string;
 }

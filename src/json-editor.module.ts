@@ -35,6 +35,7 @@ import { AnyTypeFieldComponent } from './any-type-field';
 import { AutocompleteInputComponent } from './autocomplete-input';
 import { ComplexListFieldComponent } from './complex-list-field';
 import { EditorPreviewerComponent } from './editor-previewer';
+import { HtmlViewComponent } from './html-view';
 import { JsonEditorComponent } from './json-editor.component';
 import { ObjectFieldComponent } from './object-field';
 import { ValueChangeWatcherComponent } from './value-change-watcher';
@@ -71,6 +72,7 @@ import { SHARED_PIPES, SHARED_SERVICES, SHARED_DIRECTIVES } from './shared';
     TreeMenuItemComponent,
     TreeMenuComponent,
     JsonEditorComponent,
+    HtmlViewComponent
   ],
   exports: [JsonEditorComponent],
   imports: [

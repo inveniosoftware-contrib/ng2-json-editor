@@ -203,11 +203,17 @@ Configuration for previews to be displayed in previewer (on the right side).
   {
     name: string; (name of the tab which preview is displayed)
     type: string; (type of the preview, such as "pdf")
-    url_path: string; (dot separated path to url in the record)
+    urlPath: string; (dot separated path to url in the record)
   }
 ]
 ```
 
+Types:
+
+```
+html
+pdf
+```
 ### $ref fields
 
 These are object fields which has `$ref` string value that points to another json (remote or local).
