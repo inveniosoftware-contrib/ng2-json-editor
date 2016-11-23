@@ -202,7 +202,7 @@ Configuration for previews to be displayed in previewer (on the right side).
 [
   {
     name: string; (name of the tab which preview is displayed)
-    type: string; (type of the preview, such as "pdf")
+    type: string; (type of the preview, such as "html")
     url?: string; (preview url)
     getUrl?: function(record: Object): string; (function that takes record and returns preview url) 
     urlPath?: string; (dot separated path to preview url in the record)
@@ -214,12 +214,12 @@ Types:
 
 ```
 html
-pdf
 ```
 
 Note that:
 
 - Either `url`, `getUrl`, or `urlPath` must be present.
+- `html` type uses `iframe` and can display `.pdf` if supported by browser.
 
 ### $ref fields
 
