@@ -1,4 +1,4 @@
 <div>
-  <input [ngModel]="value" (ngModelChange)="onModelChange($event)" [typeahead]="dataSource" [typeaheadOptionsLimit]="autocompletionOptions.size"
+  <input [ngModel]="value" (ngModelChange)="onModelChange($event)" (keypress)="onKeypress.emit($event)" (blur)="onBlur.emit()" [typeahead]="dataSource" [typeaheadOptionsLimit]="autocompletionOptions.size"
     [typeaheadOptionField]="typeaheadOptionField" (typeaheadOnSelect)="onCompletionSelect($event.item)" [typeaheadWaitMs]="200" placeholder="{{placeholder}}">
 </div>

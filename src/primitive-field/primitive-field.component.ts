@@ -69,17 +69,33 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     this.schema = this.schema || {};
   }
 
-  onModelChange(value: any) {
+  commitValueChange() {
     // Validation
     if (this.schema['type'] === 'string' && this.schema['enum'] === undefined) {
       try {
-        this.schemaValidationService.validateStringValue(value.toString(), this.schema);
+        this.schemaValidationService.validateStringValue(this.value.toString(), this.schema);
       } catch (error) {
         console.error(error);
       }
     }
     // TODO: should we make the change even if it is not validated
-    this.value = value;
-    this.jsonStoreService.setIn(this.path, value);
+    this.jsonStoreService.setIn(this.path, this.value);
   }
+
+  onKeypress(event: KeyboardEvent) {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      this.commitValueChange();
+      event.preventDefault();
+    }
+  }
+
+  onAutcompleteInputValueChange(value: string) {
+    this.value = value;
+  }
+
+  onSearchableDropdownSelect(value: string) {
+    this.value = value;
+    this.commitValueChange();
+  }
+
 }

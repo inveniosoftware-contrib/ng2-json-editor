@@ -194,6 +194,24 @@ Note that:
 
 - JsonStoreService's `getIn` and `setIn` returns and takes `immutable.js`'s `List` and `Map` instead of `Array` and `Object`
 
+#### x_editor_long_list_navigator
+
+```
+{
+  findSingle?: function(item: any, expression: string): boolean;
+    (the first item for which function returns true is set as search result)
+  findMultiple?: function(item: any, expression: string): boolean;
+    (all items for which function returns true is set as search results)
+  itemsPerPage: number; (number of items are displayed per page)
+  maxVisiblePageCount: number; (number of pages that are displayed in pagination view)
+}
+```
+
+Note that:
+
+- If both `findSingle` and `findMultiple` are defined in configuration, at first `findSingle` is executed for all items,
+if there is no result found then `findMultiple` is executed.
+
 ### <a name="previews"></a>Previews
 
 Configuration for previews to be displayed in previewer (on the right side).
