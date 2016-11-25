@@ -3,7 +3,7 @@
     <table class="table">
       <tr *ngFor="let value of values; let i = index; trackBy:trackByFunction">
         <td>
-          <primitive-field [schema]="schema.items" [path]="getValuePath(i)"></primitive-field>
+          <primitive-field [schema]="schema.items" [value]="value" [path]="getValuePath(i)"></primitive-field>
         </td>
 
         <!-- UP/DOWN and DELETE buttons for each row -->

@@ -1,19 +1,34 @@
 <div [id]="path.join('.')">
-  <div *ngFor="let value of values; let i = index; trackBy:trackByFunction" [id]="path.join('.') + '.' + i">
-    <div class="complex-list-field-wrapper">
+  <!-- Navigator -->
+  <table *ngIf="navigator" class="navigator-container">
+    <tr>
+      <td class="form-group navigator-item-left">
+        <div class="input-group input-group-sm">
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" (click)="onFindClick()">⚲</button>
+          </span>
+          <input type="search" class="form-control" [(ngModel)]="expression" placeholder="Find" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" [disabled]="currentFound <= 0" (click)="onFoundNavigate(-1)">❮</button>
+          </span>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" [disabled]="currentFound >= foundIndices.length - 1" (click)="onFoundNavigate(1)">❯</button>
+          </span>
+          <span *ngIf="foundIndices.length > 0" class="input-group-addon">
+            {{foundIndices.length}} out of {{values.size}}
+          </span>
+        </div>
+      </td>
+      <td class="navigator-item-right">
+        <pagination [totalItems]="values.size" [itemsPerPage]="navigator.itemsPerPage" [(ngModel)]="currentPage" [maxSize]="6" class="pagination-sm no-margin"
+          [boundaryLinks]="true" [rotate]="false"></pagination>
+      </td>
+    </tr>
+  </table>
+  <div *ngFor="let value of values; let i = index; trackBy:trackByFunction">
+    <div *ngIf="shouldDisplayItem(i)" class="complex-list-field-wrapper">
       <table class="table">
-        <tr *ngFor="let key of keys[i] | addAlwaysShowFields:schema.items | filterAndSortBySchema:schema.items; trackBy:trackByFunction">
-          <td class="label-holder">
-            <div>
-              <label>{{key | underscoreToSpace}}</label>
-              <add-new-element-button *ngIf="schema.items.properties[key].type === 'array'" [path]="getValuePath(i, key)" [schema]="schema.items.properties[key]"></add-new-element-button>
-            </div>
-          </td>
-          <td>
-            <any-type-field [value]="value.get(key) | selfOrEmpty:schema.items.properties[key]" [schema]="schema.items.properties[key]"
-              [path]="getValuePath(i, key)"></any-type-field>
-          </td>
-        </tr>
+        <complex-list-field-item [path]="getValuePath(i)" [keys]="keys[i]" [value]="values.get(i)" [schema]="schema.items"></complex-list-field-item>
         <!-- ADD-FIELD-FROM-SCHEMA, UP/DOWN and DELETE buttons for each row group -->
         <tr *ngIf="values.size > 0">
           <td class="button-holder">
