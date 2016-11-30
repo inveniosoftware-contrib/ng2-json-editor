@@ -50,6 +50,7 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
   @Input() path: Array<any>;
 
   keys: Array<Array<string>>;
+  paginatedIndices: Array<number>;
 
   foundIndices: Array<number> = [];
   currentFound: number = 0;
@@ -65,15 +66,21 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
 
   ngOnInit() {
     this.navigator = this.schema['x_editor_long_list_navigator'];
+    if (this.navigator) {
+      this.paginatedIndices = this.getIndicesForPage(this.currentPage);
+    } else {
+      this.paginatedIndices = this.values.keySeq().toArray();
+    }
+    this.keys = this.paginatedIndices
+      .map(pIndex => this.values.get(pIndex).keySeq().toArray());
   }
 
+
   ngOnChanges(changes: SimpleChanges) {
-    let valuesChanges = changes['values'];
-    if (valuesChanges) {
-      // FIXME: extract keys for only visible elements
-      this.keys = valuesChanges.currentValue
-        .map(value => value.keySeq().toArray())
-        .toArray();
+    let valuesChange = changes['values'];
+    if (valuesChange && !valuesChange.isFirstChange()) {
+      this.keys = this.paginatedIndices
+        .map(pIndex => this.values.get(pIndex).keySeq().toArray());
     }
   }
 
@@ -122,16 +129,25 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
     setTimeout(() => this.domUtilService.focusAndSelectFirstInputChildById(itemId));
   }
 
-  shouldDisplayItem(index: number): boolean {
-    // if navigator is not enabled, show all
-    if (!this.navigator) {
-      return true;
-    }
-
-    let endIndex = this.currentPage * this.navigator.itemsPerPage;
-    return index < endIndex && index >= (endIndex - this.navigator.itemsPerPage);
+  onPageChange(page: number) {
+    this.paginatedIndices = this.getIndicesForPage(page);
+    this.keys = this.paginatedIndices
+      .map(pIndex => this.values.get(pIndex).keySeq().toArray());
   }
 
+  getIndicesForPage(page: number): Array<number> {
+    let start = (page - 1) * this.navigator.itemsPerPage;
+    let indices: Array<number> = Array.apply(0, Array(this.navigator.itemsPerPage))
+      .map((el, index) => start + index);
+    // check if the indices includes some numbers that are out of values index range.
+    let lastIndexDiff = indices[indices.length - 1] - (this.values.size - 1);
+    if (lastIndexDiff > 0) {
+      indices.splice(lastIndexDiff - indices.length - 1);
+    }
+    return indices;
+  }
+
+  // TODO: change AbstractListFieldComponent instead and overwrite it in TableList
   getValuePath(index: number): Array<any> {
     return this.path.concat(index);
   }

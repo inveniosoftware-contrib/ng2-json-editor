@@ -1,0 +1,8734 @@
+{
+  "$schema": "http://localhost:5000/schemas/records/hep.json",
+  "_collections": [
+    "Literature"
+  ],
+  "abstracts": [
+    {
+      "value": "Cosmology and particle physics are in an exciting data-rich era, with several collider and astronomical searches underway. In this dissertation, we have explored some problems which are not addressed by the standard models of particle physics and cosmology. The implications of the Higgs discovery and lack of new physics results are far reaching. To better understand the nature of Higgs and its connections to electroweak symmetry breaking, we have performed a model independent study of spin-1 contributions in gauge extensions of Standard model. The null results of all low energy supersymmetric searches has lead to the development of Split SUSY models which are based only on gauge unification and dark matter as guiding principles. We study in detail the cosmic probes of Split SUSY using indirect dark matter detection constraints and hints of small tensor to scalar ratio. We also investigate the phenomenological viability of models with light dilatons that ameliorate the cosmological constant problem by studying conformal phase transitions using holography. Finally, we have also checked the robustness of soft-wall geometry by including\nhigher curvature terms in the five dimensional bulk action."
+    }
+  ],
+  "authors": [
+    {
+      "affiliations": [
+        {
+          "value": "Syracuse U."
+        }
+      ],
+      "curated_relation": false,
+      "full_name": "Jain, Bithika",
+      "ids": [
+        {
+          "type": "INSPIRE BAI",
+          "value": "Bithika.Jain.1"
+        }
+      ],
+      "uuid": "c55e6595-9e81-4869-9721-754ead19287d"
+    },
+    {
+      "affiliations": [
+        {
+          "curated_relation": false,
+          "value": "Syracuse U."
+        }
+      ],
+      "contributor_roles": [
+        {
+          "schema": "CRediT",
+          "value": "Supervision"
+        }
+      ],
+      "full_name": "Hubisz, Jay M.",
+      "uuid": "6fa1d556-2d6b-4811-8716-7a1910f47a37"
+    }
+  ],
+  "collections": [
+    {
+      "primary": "HEP"
+    },
+    {
+      "primary": "THESIS"
+    },
+    {
+      "primary": "CORE"
+    },
+    {
+      "primary": "Thesis"
+    }
+  ],
+  "control_number": 1408252,
+  "creation_modification_date": [
+    {
+      "creation_date": "2016-03-03",
+      "modification_date": "2015-12-06"
+    }
+  ],
+  "date_and_time_of_latest_transaction": "20160303134354.0",
+  "external_system_numbers": [
+    {
+      "institute": "DESY",
+      "obsolete": true
+    }
+  ],
+  "field_categories": [
+    {
+      "_scheme": "INSPIRE",
+      "_term": "Gravitation and Cosmology",
+      "scheme": "INSPIRE",
+      "source": "submitter",
+      "term": "Gravitation and Cosmology"
+    },
+    {
+      "_scheme": "INSPIRE",
+      "_term": "Phenomenology-HEP",
+      "scheme": "INSPIRE",
+      "source": "submitter",
+      "term": "Phenomenology-HEP"
+    },
+    {
+      "_scheme": "INSPIRE",
+      "_term": "Gravitation and Cosmology",
+      "scheme": "INSPIRE",
+      "term": "Gravitation and Cosmology"
+    },
+    {
+      "_scheme": "INSPIRE",
+      "_term": "Phenomenology-HEP",
+      "scheme": "INSPIRE",
+      "term": "Phenomenology-HEP"
+    }
+  ],
+  "keywords": [
+    {
+      "classification_scheme": "INSPIRE",
+      "keyword": "supersymmetry: split"
+    },
+    {
+      "classification_scheme": "INSPIRE",
+      "keyword": "electroweak interaction: symmetry breaking"
+    },
+    {
+      "classification_scheme": "INSPIRE",
+      "keyword": "critical phenomena: conformal"
+    },
+    {
+      "classification_scheme": "INSPIRE",
+      "keyword": "effective Lagrangian"
+    },
+    {
+      "classification_scheme": "INSPIRE",
+      "keyword": "Higgs particle: decay"
+    },
+    {
+      "classification_scheme": "INSPIRE",
+      "keyword": "coupling: Higgs"
+    },
+    {
+      "classification_scheme": "INSPIRE",
+      "keyword": "Z'"
+    },
+    {
+      "classification_scheme": "INSPIRE",
+      "keyword": "dark matter"
+    },
+    {
+      "classification_scheme": "INSPIRE",
+      "keyword": "gravitino"
+    },
+    {
+      "classification_scheme": "INSPIRE",
+      "keyword": "Wino"
+    },
+    {
+      "classification_scheme": "INSPIRE",
+      "keyword": "radion"
+    },
+    {
+      "classification_scheme": "INSPIRE",
+      "keyword": "curvature: high"
+    },
+    {
+      "classification_scheme": "INSPIRE",
+      "keyword": "cosmological model"
+    },
+    {
+      "classification_scheme": "INSPIRE",
+      "keyword": "holography"
+    },
+    {
+      "classification_scheme": "INSPIRE",
+      "keyword": "dilaton"
+    },
+    {
+      "classification_scheme": "INSPIRE",
+      "keyword": "inflation"
+    },
+    {
+      "classification_scheme": "INSPIRE",
+      "keyword": "numerical calculations"
+    },
+    {
+      "classification_scheme": "INSPIRE",
+      "keyword": "CERN LHC Coll"
+    },
+    {
+      "classification_scheme": "INSPIRE",
+      "keyword": "BICEP"
+    },
+    {
+      "classification_scheme": "INSPIRE",
+      "keyword": "satellite: Planck"
+    },
+    {
+      "classification_scheme": "INSPIRE",
+      "keyword": "new physics"
+    }
+  ],
+  "page_nr": [
+    "214"
+  ],
+  "references": [
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "S. L. Glashow"
+          },
+          {
+            "full_name": "H. Georgi"
+          }
+        ],
+        "misc": [
+          "New York Times Magazine (26-09-)"
+        ],
+        "number": 1,
+        "publication_info": {
+          "year": 1982
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1209.2716"
+        ],
+        "authors": [
+          {
+            "full_name": "M. Baak"
+          },
+          {
+            "full_name": "M. Goebel"
+          },
+          {
+            "full_name": "J. Haller"
+          },
+          {
+            "full_name": "A. Hoecker"
+          },
+          {
+            "full_name": "D. Kennedy"
+          }
+        ],
+        "number": 2,
+        "publication_info": {
+          "artid": "2205",
+          "journal_title": "Eur.Phys.J.",
+          "journal_volume": "C72",
+          "page_start": "2205",
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1307.1427"
+        ],
+        "authors": [
+          {
+            "full_name": "G. Aad"
+          }
+        ],
+        "misc": [
+          "(ATLAS)"
+        ],
+        "number": 3,
+        "publication_info": {
+          "artid": "88",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B726",
+          "page_start": "88",
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "misc": [
+          "C. Collaboration (CMS)"
+        ],
+        "number": 4,
+        "publication_info": {
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "F. Iocco"
+          },
+          {
+            "full_name": "M. Pato"
+          },
+          {
+            "full_name": "G. Bertone"
+          },
+          {
+            "full_name": "P. Jetzer"
+          }
+        ],
+        "misc": [
+          "1107. 5810"
+        ],
+        "number": 5,
+        "publication_info": {
+          "artid": "029",
+          "journal_title": "JCAP",
+          "journal_volume": "1111",
+          "page_start": "029",
+          "year": 2011
+        }
+      }
+    },
+    {
+      "curated_relation": false,
+      "record": {
+        "$ref": "http://localhost:5000/api/literature/1343079"
+      },
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1502.01589"
+        ],
+        "authors": [
+          {
+            "full_name": "P. Ade"
+          }
+        ],
+        "misc": [
+          "(Planck)"
+        ],
+        "number": 6,
+        "publication_info": {
+          "year": 2015
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "H. Weyl"
+          }
+        ],
+        "number": 7,
+        "publication_info": {
+          "artid": "330",
+          "journal_title": "Z.Phys.",
+          "journal_volume": "56",
+          "page_start": "330",
+          "year": 1929
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "C. N. Yang"
+          },
+          {
+            "full_name": "R. L. Mills"
+          }
+        ],
+        "dois": [
+          "10.1103/PhysRev.96.191"
+        ],
+        "misc": [
+          "URL"
+        ],
+        "number": 8,
+        "publication_info": {
+          "artid": "191",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "96",
+          "page_start": "191",
+          "year": 1954
+        },
+        "urls": [
+          {
+            "value": "http://link.aps.org/doi/"
+          }
+        ]
+      }
+    },
+    {
+      "curated_relation": false,
+      "record": {
+        "$ref": "http://localhost:5000/api/literature/4328"
+      },
+      "reference": {
+        "authors": [
+          {
+            "full_name": "S. Glashow"
+          }
+        ],
+        "number": 9,
+        "publication_info": {
+          "artid": "579",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "22",
+          "page_start": "579",
+          "year": 1961
+        }
+      }
+    },
+    {
+      "curated_relation": false,
+      "record": {
+        "$ref": "http://localhost:5000/api/literature/51188"
+      },
+      "reference": {
+        "authors": [
+          {
+            "full_name": "S. Weinberg"
+          }
+        ],
+        "number": 10,
+        "publication_info": {
+          "artid": "1264",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "19",
+          "page_start": "1264",
+          "year": 1967
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "H. D. Politzer"
+          }
+        ],
+        "number": 11,
+        "publication_info": {
+          "artid": "1346",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "30",
+          "page_start": "1346",
+          "year": 1973
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "D. J. Gross"
+          },
+          {
+            "full_name": "F. Wilczek"
+          }
+        ],
+        "number": 12,
+        "publication_info": {
+          "artid": "1343",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "30",
+          "page_start": "1343",
+          "year": 1973
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "D. Gross"
+          },
+          {
+            "full_name": "F. Wilczek"
+          }
+        ],
+        "misc": [
+          "162"
+        ],
+        "number": 13,
+        "publication_info": {
+          "artid": "3633",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D8",
+          "page_start": "3633",
+          "year": 1973
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "H. Yukawa"
+          }
+        ],
+        "number": 14,
+        "publication_info": {
+          "artid": "48",
+          "journal_title": "Proc.Phys.Math.Soc.Jap.",
+          "journal_volume": "17",
+          "page_start": "48",
+          "year": 1935
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "N. Cabibbo"
+          }
+        ],
+        "number": 15,
+        "publication_info": {
+          "artid": "531",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "10",
+          "page_start": "531",
+          "year": 1963
+        }
+      }
+    },
+    {
+      "curated_relation": false,
+      "record": {
+        "$ref": "http://localhost:5000/api/literature/81350"
+      },
+      "reference": {
+        "authors": [
+          {
+            "full_name": "M. Kobayashi"
+          },
+          {
+            "full_name": "T. Maskawa"
+          }
+        ],
+        "number": 16,
+        "publication_info": {
+          "artid": "652",
+          "journal_title": "Prog.Theor.Phys.",
+          "journal_volume": "49",
+          "page_start": "652",
+          "year": 1973
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "B. Pontecorvo"
+          }
+        ],
+        "number": 17,
+        "publication_info": {
+          "artid": "429",
+          "journal_title": "Sov.Phys.JETP",
+          "journal_volume": "6",
+          "page_start": "429",
+          "year": 1957
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "B. Pontecorvo"
+          }
+        ],
+        "number": 18,
+        "publication_info": {
+          "artid": "172",
+          "journal_title": "Sov.Phys.JETP",
+          "journal_volume": "7",
+          "page_start": "172",
+          "year": 1958
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "B. Pontecorvo"
+          }
+        ],
+        "number": 19,
+        "publication_info": {
+          "artid": "984",
+          "journal_title": "Sov.Phys.JETP",
+          "journal_volume": "26",
+          "page_start": "984",
+          "year": 1968
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "Z. Maki"
+          },
+          {
+            "full_name": "M. Nakagawa"
+          },
+          {
+            "full_name": "S. Sakata"
+          }
+        ],
+        "misc": [
+          "and and, pp. 663-666"
+        ],
+        "number": 20,
+        "publication_info": {
+          "year": 1962
+        }
+      }
+    },
+    {
+      "curated_relation": false,
+      "record": {
+        "$ref": "http://localhost:5000/api/literature/12291"
+      },
+      "reference": {
+        "authors": [
+          {
+            "full_name": "F. Englert"
+          },
+          {
+            "full_name": "R. Brout"
+          }
+        ],
+        "number": 21,
+        "publication_info": {
+          "artid": "321",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "13",
+          "page_start": "321",
+          "year": 1964
+        }
+      }
+    },
+    {
+      "curated_relation": false,
+      "record": {
+        "$ref": "http://localhost:5000/api/literature/12292"
+      },
+      "reference": {
+        "authors": [
+          {
+            "full_name": "G. Guralnik"
+          },
+          {
+            "full_name": "C. Hagen"
+          },
+          {
+            "full_name": "T. Kibble"
+          }
+        ],
+        "number": 22,
+        "publication_info": {
+          "artid": "585",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "13",
+          "page_start": "585",
+          "year": 1964
+        }
+      }
+    },
+    {
+      "curated_relation": false,
+      "record": {
+        "$ref": "http://localhost:5000/api/literature/40440"
+      },
+      "reference": {
+        "authors": [
+          {
+            "full_name": "P. W. Higgs"
+          }
+        ],
+        "number": 23,
+        "publication_info": {
+          "artid": "132",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "12",
+          "page_start": "132",
+          "year": 1964
+        }
+      }
+    },
+    {
+      "curated_relation": false,
+      "record": {
+        "$ref": "http://localhost:5000/api/literature/11883"
+      },
+      "reference": {
+        "authors": [
+          {
+            "full_name": "P. W. Higgs"
+          }
+        ],
+        "number": 24,
+        "publication_info": {
+          "artid": "508",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "13",
+          "page_start": "508",
+          "year": 1964
+        }
+      }
+    },
+    {
+      "curated_relation": false,
+      "record": {
+        "$ref": "http://localhost:5000/api/literature/50073"
+      },
+      "reference": {
+        "authors": [
+          {
+            "full_name": "P. W. Higgs"
+          }
+        ],
+        "number": 25,
+        "publication_info": {
+          "artid": "1156",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "145",
+          "page_start": "1156",
+          "year": 1966
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "T. Kibble"
+          }
+        ],
+        "number": 26,
+        "publication_info": {
+          "artid": "1554",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "155",
+          "page_start": "1554",
+          "year": 1967
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1005.4269"
+        ],
+        "authors": [
+          {
+            "full_name": "R. Contino"
+          }
+        ],
+        "number": 27,
+        "publication_info": {
+          "year": 2010
+        }
+      }
+    },
+    {
+      "reference": {
+        "misc": [
+          "G. \u2019t Hooft and M. Veltman"
+        ],
+        "number": 28,
+        "publication_info": {
+          "artid": "189",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B44",
+          "page_start": "189",
+          "year": 1972
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "M. Gell-Mann"
+          }
+        ],
+        "number": 29,
+        "publication_info": {
+          "artid": "214",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "8",
+          "page_start": "214",
+          "year": 1964
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "M. E. Peskin"
+          },
+          {
+            "full_name": "D. V. Schroeder"
+          }
+        ],
+        "misc": [
+          "An Introduction to quantum field theory"
+        ],
+        "number": 30,
+        "publication_info": {
+          "year": 1995
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "B. Kayser"
+          },
+          {
+            "full_name": "F. Gibrat-Debu"
+          },
+          {
+            "full_name": "F. Perrier"
+          }
+        ],
+        "misc": [
+          "vol. 25 . 163"
+        ],
+        "number": 31,
+        "publication_info": {
+          "year": 1989
+        },
+        "titles": [
+          {
+            "title": "The Physics of massive neutrinos"
+          }
+        ]
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "H. Georgi"
+          }
+        ],
+        "number": 32,
+        "publication_info": {
+          "artid": "209",
+          "journal_title": "Ann.Rev.Nucl.Part.Sci.",
+          "journal_volume": "43",
+          "page_start": "209",
+          "year": 1993
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "P. Sikivie"
+          },
+          {
+            "full_name": "L. Susskind"
+          },
+          {
+            "full_name": "M. B. Voloshin"
+          },
+          {
+            "full_name": "V. I. Zakharov"
+          }
+        ],
+        "number": 33,
+        "publication_info": {
+          "artid": "189",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B173",
+          "page_start": "189",
+          "year": 1980
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/9503230"
+        ],
+        "authors": [
+          {
+            "full_name": "R. S. Chivukula"
+          },
+          {
+            "full_name": "M. J. Dugan"
+          },
+          {
+            "full_name": "M. Golden"
+          },
+          {
+            "full_name": "E. H. Simmons"
+          }
+        ],
+        "number": 34,
+        "publication_info": {
+          "artid": "255",
+          "journal_title": "Ann.Rev.Nucl.Part.Sci.",
+          "journal_volume": "45",
+          "page_start": "255",
+          "year": 1995
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/9807516"
+        ],
+        "authors": [
+          {
+            "full_name": "R. Peccei"
+          }
+        ],
+        "number": 35,
+        "publication_info": {
+          "artid": "1",
+          "journal_title": "Lect.Notes Phys.",
+          "journal_volume": "521",
+          "page_start": "1",
+          "year": 1999
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "G. Lemaitre"
+          }
+        ],
+        "number": 36,
+        "publication_info": {
+          "artid": "49",
+          "journal_title": "Annales Soc.Sci.Brux.Ser.I Sci.Math.Astron.Phys.",
+          "journal_volume": "A47",
+          "page_start": "49",
+          "year": 1927
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "A. Friedman"
+          }
+        ],
+        "dois": [
+          "10.1007/BF01332580"
+        ],
+        "misc": [
+          "Zeitschrift fr Physik 10, 377 , ISSN 0044-3328, URL"
+        ],
+        "number": 37,
+        "publication_info": {
+          "year": 1922
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "A. Friedmann"
+          }
+        ],
+        "number": 38,
+        "publication_info": {
+          "artid": "326",
+          "journal_title": "Z.Phys.",
+          "journal_volume": "21",
+          "page_start": "326",
+          "year": 1924
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "H. P. Robertson"
+          }
+        ],
+        "number": 39,
+        "publication_info": {
+          "artid": "284",
+          "journal_title": "Astrophys.J.",
+          "journal_volume": "82",
+          "page_start": "284",
+          "year": 1935
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "H. P. Robertson"
+          }
+        ],
+        "number": 40,
+        "publication_info": {
+          "artid": "187",
+          "journal_title": "Astrophys.J.",
+          "journal_volume": "83",
+          "page_start": "187",
+          "year": 1936
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "H. P. Robertson"
+          }
+        ],
+        "number": 41,
+        "publication_info": {
+          "artid": "257",
+          "journal_title": "Astrophys.J.",
+          "journal_volume": "83",
+          "page_start": "257",
+          "year": 1936
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "A. G. Walker"
+          }
+        ],
+        "misc": [
+          "Proc. London Math. Soc. pp. 90-127"
+        ],
+        "number": 42,
+        "publication_info": {
+          "year": 1937
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "E. Hubble"
+          }
+        ],
+        "number": 43,
+        "publication_info": {
+          "artid": "168",
+          "journal_title": "Proc.Nat.Acad.Sci.",
+          "journal_volume": "15",
+          "page_start": "168",
+          "year": 1929
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:astro-ph/9506041"
+        ],
+        "authors": [
+          {
+            "full_name": "N. A. Bahcall"
+          },
+          {
+            "full_name": "L. M. Lubin"
+          },
+          {
+            "full_name": "V. Dorman"
+          }
+        ],
+        "number": 44,
+        "publication_info": {
+          "artid": "L81",
+          "journal_title": "Astrophys.J.",
+          "journal_volume": "447",
+          "page_start": "L81",
+          "year": 1995
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:astro-ph/9402049"
+        ],
+        "authors": [
+          {
+            "full_name": "I. Smail"
+          },
+          {
+            "full_name": "R. S. Ellis"
+          },
+          {
+            "full_name": "M. J. Fitchett"
+          },
+          {
+            "full_name": "A. C. Edge"
+          }
+        ],
+        "number": 45,
+        "publication_info": {
+          "artid": "277",
+          "journal_title": "Mon.Not.Roy.Astron.Soc.",
+          "journal_volume": "273",
+          "page_start": "277",
+          "year": 1995
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:astro-ph/9901062"
+        ],
+        "authors": [
+          {
+            "full_name": "A. D. Lewis"
+          },
+          {
+            "full_name": "E. Ellingson"
+          },
+          {
+            "full_name": "S. L. Morris"
+          },
+          {
+            "full_name": "R. Carlberg"
+          }
+        ],
+        "misc": [
+          "164"
+        ],
+        "number": 46,
+        "publication_info": {
+          "artid": "587",
+          "journal_title": "Astrophys.J.",
+          "journal_volume": "517",
+          "page_start": "587",
+          "year": 1999
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "S. D. White"
+          },
+          {
+            "full_name": "J. F. Navarro"
+          },
+          {
+            "full_name": "A. E. Evrard"
+          },
+          {
+            "full_name": "C. S. Frenk"
+          }
+        ],
+        "number": 47,
+        "publication_info": {
+          "artid": "429",
+          "journal_title": "Nature",
+          "journal_volume": "366",
+          "page_start": "429",
+          "year": 1993
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:astro-ph/9712020"
+        ],
+        "authors": [
+          {
+            "full_name": "M. Fukugita"
+          },
+          {
+            "full_name": "C. Hogan"
+          },
+          {
+            "full_name": "P. Peebles"
+          }
+        ],
+        "number": 48,
+        "publication_info": {
+          "artid": "518",
+          "journal_title": "Astrophys.J.",
+          "journal_volume": "503",
+          "page_start": "518",
+          "year": 1998
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "S. Dodelson"
+          },
+          {
+            "full_name": "E. I. Gates"
+          },
+          {
+            "full_name": "M. S. Turner"
+          }
+        ],
+        "misc": [
+          "astro-ph/ 9603081"
+        ],
+        "number": 49,
+        "publication_info": {
+          "artid": "69",
+          "journal_title": "Science",
+          "journal_volume": "274",
+          "page_start": "69",
+          "year": 1996
+        }
+      }
+    },
+    {
+      "curated_relation": false,
+      "record": {
+        "$ref": "http://localhost:5000/api/literature/613135"
+      },
+      "reference": {
+        "authors": [
+          {
+            "full_name": "D. Spergel"
+          }
+        ],
+        "misc": [
+          "(WMAP) astro-ph/ 0302209"
+        ],
+        "number": 50,
+        "publication_info": {
+          "artid": "175",
+          "journal_title": "Astrophys.J.Suppl.",
+          "journal_volume": "148",
+          "page_start": "175",
+          "year": 2003
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "G. Hinshaw"
+          }
+        ],
+        "misc": [
+          "(WMAP) astro-ph/ 0302217"
+        ],
+        "number": 51,
+        "publication_info": {
+          "artid": "135",
+          "journal_title": "Astrophys.J.Suppl.",
+          "journal_volume": "148",
+          "page_start": "135",
+          "year": 2003
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:astro-ph/0306272"
+        ],
+        "authors": [
+          {
+            "full_name": "L. Verde"
+          }
+        ],
+        "number": 52,
+        "publication_info": {
+          "year": 2003
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:astro-ph/9903300"
+        ],
+        "authors": [
+          {
+            "full_name": "S. Burles"
+          },
+          {
+            "full_name": "K. Nollett"
+          },
+          {
+            "full_name": "M. S. Turner"
+          }
+        ],
+        "number": 53,
+        "publication_info": {
+          "year": 1999
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "E. W. Kolb"
+          },
+          {
+            "full_name": "M. S. Turner"
+          }
+        ],
+        "number": 54,
+        "publication_info": {
+          "year": 1990
+        },
+        "titles": [
+          {
+            "title": "The Early universe"
+          }
+        ]
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "A. D. Linde"
+          }
+        ],
+        "misc": [
+          "The physics of elementary particles and inflationary cosmology"
+        ],
+        "number": 55,
+        "publication_info": {
+          "year": 1990
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "P. J. E. Peebles"
+          }
+        ],
+        "misc": [
+          "Principles of Physical Cosmology"
+        ],
+        "number": 56,
+        "publication_info": {
+          "year": 1993
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "G. Bertone"
+          },
+          {
+            "full_name": "D. Hooper"
+          },
+          {
+            "full_name": "J. Silk"
+          }
+        ],
+        "misc": [
+          "hep-ph/ 0404175"
+        ],
+        "number": 57,
+        "publication_info": {
+          "artid": "279",
+          "journal_title": "Phys.Rept.",
+          "journal_volume": "405",
+          "page_start": "279",
+          "year": 2005
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0205279"
+        ],
+        "authors": [
+          {
+            "full_name": "W. Bernreuther"
+          }
+        ],
+        "number": 58,
+        "publication_info": {
+          "artid": "237",
+          "journal_title": "Lect.Notes Phys.",
+          "journal_volume": "591",
+          "page_start": "237",
+          "year": 2002
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "U. Amaldi"
+          },
+          {
+            "full_name": "W. de Boer"
+          },
+          {
+            "full_name": "H. Furstenau"
+          }
+        ],
+        "number": 59,
+        "publication_info": {
+          "artid": "447",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B260",
+          "page_start": "447",
+          "year": 1991
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "H. Georgi"
+          }
+        ],
+        "number": 60,
+        "publication_info": {
+          "artid": "231",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B169",
+          "page_start": "231",
+          "year": 1986
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1207.7235"
+        ],
+        "authors": [
+          {
+            "full_name": "S. Chatrchyan"
+          }
+        ],
+        "misc": [
+          "(CMS) 165"
+        ],
+        "number": 61,
+        "publication_info": {
+          "artid": "30",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B716",
+          "page_start": "30",
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1207.7214"
+        ],
+        "authors": [
+          {
+            "full_name": "G. Aad"
+          }
+        ],
+        "misc": [
+          "(ATLAS)"
+        ],
+        "number": 62,
+        "publication_info": {
+          "artid": "1",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B716",
+          "page_start": "1",
+          "year": 2012
+        }
+      }
+    },
+    {
+      "curated_relation": false,
+      "record": {
+        "$ref": "http://localhost:5000/api/literature/1315335"
+      },
+      "reference": {
+        "authors": [
+          {
+            "full_name": "J. Bernon"
+          },
+          {
+            "full_name": "B. Dumont"
+          },
+          {
+            "full_name": "S. Kraml"
+          }
+        ],
+        "misc": [
+          "1409. 1588"
+        ],
+        "number": 63,
+        "publication_info": {
+          "artid": "071301",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D90",
+          "year": 2014
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "Y. B. Zeldovich"
+          }
+        ],
+        "number": 64,
+        "publication_info": {
+          "artid": "241",
+          "journal_title": "Adv.Astron.Astrophys.",
+          "journal_volume": "3",
+          "page_start": "241",
+          "year": 1965
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "H.-Y. Chiu"
+          }
+        ],
+        "number": 65,
+        "publication_info": {
+          "artid": "712",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "17",
+          "page_start": "712",
+          "year": 1966
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "G. Steigman"
+          }
+        ],
+        "number": 66,
+        "publication_info": {
+          "artid": "313",
+          "journal_title": "Ann.Rev.Nucl.Part.Sci.",
+          "journal_volume": "29",
+          "page_start": "313",
+          "year": 1979
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "R. J. Scherrer"
+          },
+          {
+            "full_name": "M. S. Turner"
+          }
+        ],
+        "number": 67,
+        "publication_info": {
+          "artid": "1585",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D33",
+          "page_start": "1585",
+          "year": 1986
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "S. Nussinov"
+          }
+        ],
+        "number": 68,
+        "publication_info": {
+          "artid": "55",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B165",
+          "page_start": "55",
+          "year": 1985
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "D. B. Kaplan"
+          }
+        ],
+        "number": 69,
+        "publication_info": {
+          "artid": "741",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "68",
+          "page_start": "741",
+          "year": 1992
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "S. M. Barr"
+          }
+        ],
+        "number": 70,
+        "publication_info": {
+          "artid": "3062",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D44",
+          "page_start": "3062",
+          "year": 1991
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:0901.4117"
+        ],
+        "authors": [
+          {
+            "full_name": "D. E. Kaplan"
+          },
+          {
+            "full_name": "M. A. Luty"
+          },
+          {
+            "full_name": "K. M. Zurek"
+          }
+        ],
+        "number": 71,
+        "publication_info": {
+          "artid": "115016",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D79",
+          "year": 2009
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "R. Peccei"
+          },
+          {
+            "full_name": "H. R. Quinn"
+          }
+        ],
+        "number": 72,
+        "publication_info": {
+          "artid": "1791",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D16",
+          "page_start": "1791",
+          "year": 1977
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "S. Weinberg"
+          }
+        ],
+        "number": 73,
+        "publication_info": {
+          "artid": "223",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "40",
+          "page_start": "223",
+          "year": 1978
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "F. Wilczek"
+          }
+        ],
+        "number": 74,
+        "publication_info": {
+          "artid": "279",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "40",
+          "page_start": "279",
+          "year": 1978
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "S. J. Asztalos"
+          },
+          {
+            "full_name": "L. J. Rosenberg"
+          },
+          {
+            "full_name": "K. van Bibber"
+          },
+          {
+            "full_name": "P. Sikivie"
+          },
+          {
+            "full_name": "K. Zioutas"
+          }
+        ],
+        "number": 75,
+        "publication_info": {
+          "artid": "293",
+          "journal_title": "Ann.Rev.Nucl.Part.Sci.",
+          "journal_volume": "56",
+          "page_start": "293",
+          "year": 2006
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/9303287"
+        ],
+        "authors": [
+          {
+            "full_name": "S. Dodelson"
+          },
+          {
+            "full_name": "L. M. Widrow"
+          }
+        ],
+        "number": 76,
+        "publication_info": {
+          "artid": "17",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "72",
+          "page_start": "17",
+          "year": 1994
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:0906.2968"
+        ],
+        "authors": [
+          {
+            "full_name": "A. Kusenko"
+          }
+        ],
+        "number": 77,
+        "publication_info": {
+          "artid": "1",
+          "journal_title": "Phys.Rept.",
+          "journal_volume": "481",
+          "page_start": "1",
+          "year": 2009
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1204.5379"
+        ],
+        "authors": [
+          {
+            "full_name": "K. Abazajian"
+          },
+          {
+            "full_name": "M. Acero"
+          },
+          {
+            "full_name": "S. Agarwalla"
+          },
+          {
+            "full_name": "A. Aguilar-Arevalo"
+          },
+          {
+            "full_name": "C. Albright"
+          }
+        ],
+        "misc": [
+          "166"
+        ],
+        "number": 78,
+        "publication_info": {
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "H. Georgi"
+          },
+          {
+            "full_name": "S. L. Glashow"
+          }
+        ],
+        "dois": [
+          "10.1103/PhysRevLett.32.438"
+        ],
+        "misc": [
+          "URL"
+        ],
+        "number": 79,
+        "publication_info": {
+          "artid": "438",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "32",
+          "page_start": "438",
+          "year": 1974
+        },
+        "urls": [
+          {
+            "value": "http://link.aps.org/doi/"
+          }
+        ]
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "J. C. Pati"
+          },
+          {
+            "full_name": "A. Salam"
+          }
+        ],
+        "dois": [
+          "10.1103/PhysRevD.10.275"
+        ],
+        "misc": [
+          "URL"
+        ],
+        "number": 80,
+        "publication_info": {
+          "artid": "275",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D10",
+          "page_start": "275",
+          "year": 1974
+        },
+        "urls": [
+          {
+            "value": "http://link.aps.org/doi/"
+          }
+        ]
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "A. Buras"
+          },
+          {
+            "full_name": "J. R. Ellis"
+          },
+          {
+            "full_name": "M. Gaillard"
+          },
+          {
+            "full_name": "D. V. Nanopoulos"
+          }
+        ],
+        "number": 81,
+        "publication_info": {
+          "artid": "66",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B135",
+          "page_start": "66",
+          "year": 1978
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "D. V. Nanopoulos"
+          }
+        ],
+        "misc": [
+          "p. 91"
+        ],
+        "number": 82,
+        "publication_info": {
+          "year": 1978
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "P. Langacker"
+          }
+        ],
+        "number": 83,
+        "publication_info": {
+          "artid": "185",
+          "journal_title": "Phys.Rept.",
+          "journal_volume": "72",
+          "page_start": "185",
+          "year": 1981
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/9709356"
+        ],
+        "authors": [
+          {
+            "full_name": "S. P. Martin"
+          }
+        ],
+        "number": 84,
+        "publication_info": {
+          "artid": "1",
+          "journal_title": "Adv.Ser.Direct.High Energy Phys.",
+          "journal_volume": "21",
+          "page_start": "1",
+          "year": 2010
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "R. Haag"
+          },
+          {
+            "full_name": "J. T. Lopuszanski"
+          },
+          {
+            "full_name": "M. Sohnius"
+          }
+        ],
+        "number": 85,
+        "publication_info": {
+          "artid": "257",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B88",
+          "page_start": "257",
+          "year": 1975
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "S. R. Coleman"
+          },
+          {
+            "full_name": "J. Mandula"
+          }
+        ],
+        "number": 86,
+        "publication_info": {
+          "artid": "1251",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "159",
+          "page_start": "1251",
+          "year": 1967
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "J. Wess"
+          },
+          {
+            "full_name": "J. Bagger"
+          }
+        ],
+        "misc": [
+          "(Princeton University Press, Princeton, USA.,)"
+        ],
+        "number": 87,
+        "publication_info": {
+          "year": 1992
+        },
+        "titles": [
+          {
+            "title": "Supersymmetry and supergravity"
+          }
+        ]
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "J. Terning"
+          }
+        ],
+        "misc": [
+          "(Oxford University Press, Oxford, United Kingdom.,)"
+        ],
+        "number": 88,
+        "publication_info": {
+          "year": 2006
+        },
+        "titles": [
+          {
+            "title": "Modern supersymmetry: Dynamics and duality"
+          }
+        ]
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "S. Dawson"
+          },
+          {
+            "full_name": "H. Georgi"
+          }
+        ],
+        "number": 89,
+        "publication_info": {
+          "artid": "821",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "43",
+          "page_start": "821",
+          "year": 1979
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "M. Einhorn"
+          },
+          {
+            "full_name": "D. Jones"
+          }
+        ],
+        "number": 90,
+        "publication_info": {
+          "artid": "475",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B196",
+          "page_start": "475",
+          "year": 1982
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "S. Dimopoulos"
+          },
+          {
+            "full_name": "H. Georgi"
+          }
+        ],
+        "number": 91,
+        "publication_info": {
+          "artid": "150",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B193",
+          "page_start": "150",
+          "year": 1981
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "M. Dine"
+          },
+          {
+            "full_name": "W. Fischler"
+          }
+        ],
+        "number": 92,
+        "publication_info": {
+          "artid": "227",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B110",
+          "page_start": "227",
+          "year": 1982
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/9709450"
+        ],
+        "authors": [
+          {
+            "full_name": "H. E. Haber"
+          }
+        ],
+        "number": 93,
+        "publication_info": {
+          "artid": "469",
+          "journal_title": "Nucl.Phys.Proc.Suppl.",
+          "journal_volume": "62",
+          "page_start": "469",
+          "year": 1998
+        }
+      }
+    },
+    {
+      "curated_relation": false,
+      "record": {
+        "$ref": "http://localhost:5000/api/literature/1375491"
+      },
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1506.03091"
+        ],
+        "authors": [
+          {
+            "full_name": "P. Bechtle"
+          },
+          {
+            "full_name": "T. Plehn"
+          },
+          {
+            "full_name": "C. Sander"
+          }
+        ],
+        "misc": [
+          "167"
+        ],
+        "number": 94,
+        "publication_info": {
+          "year": 2015
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "M. Papucci"
+          },
+          {
+            "full_name": "J. T. Ruderman"
+          },
+          {
+            "full_name": "A. Weiler"
+          }
+        ],
+        "misc": [
+          "1110. 6926"
+        ],
+        "number": 95,
+        "publication_info": {
+          "artid": "035",
+          "journal_title": "JHEP",
+          "journal_volume": "1209",
+          "page_start": "035",
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-th/0004134"
+        ],
+        "authors": [
+          {
+            "full_name": "R. Bousso"
+          },
+          {
+            "full_name": "J. Polchinski"
+          }
+        ],
+        "number": 96,
+        "publication_info": {
+          "artid": "006",
+          "journal_title": "JHEP",
+          "journal_volume": "0006",
+          "page_start": "006",
+          "year": 2000
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-th/0301240"
+        ],
+        "authors": [
+          {
+            "full_name": "S. Kachru"
+          },
+          {
+            "full_name": "R. Kallosh"
+          },
+          {
+            "full_name": "A. D. Linde"
+          },
+          {
+            "full_name": "S. P. Trivedi"
+          }
+        ],
+        "number": 97,
+        "publication_info": {
+          "artid": "046005",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D68",
+          "year": 2003
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0409232"
+        ],
+        "authors": [
+          {
+            "full_name": "N. Arkani-Hamed"
+          },
+          {
+            "full_name": "S. Dimopoulos"
+          },
+          {
+            "full_name": "G. Giudice"
+          },
+          {
+            "full_name": "A. Romanino"
+          }
+        ],
+        "number": 98,
+        "publication_info": {
+          "artid": "3",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B709",
+          "page_start": "3",
+          "year": 2005
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0406088"
+        ],
+        "authors": [
+          {
+            "full_name": "G. Giudice"
+          },
+          {
+            "full_name": "A. Romanino"
+          }
+        ],
+        "number": 99,
+        "publication_info": {
+          "artid": "65",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B699",
+          "page_start": "65",
+          "year": 2004
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1111.4519"
+        ],
+        "authors": [
+          {
+            "full_name": "L. J. Hall"
+          },
+          {
+            "full_name": "Y. Nomura"
+          }
+        ],
+        "number": 100,
+        "publication_info": {
+          "artid": "082",
+          "journal_title": "JHEP",
+          "journal_volume": "1201",
+          "page_start": "082",
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1210.0555"
+        ],
+        "authors": [
+          {
+            "full_name": "A. Arvanitaki"
+          },
+          {
+            "full_name": "N. Craig"
+          },
+          {
+            "full_name": "S. Dimopoulos"
+          },
+          {
+            "full_name": "G. Villadoro"
+          }
+        ],
+        "number": 101,
+        "publication_info": {
+          "artid": "126",
+          "journal_title": "JHEP",
+          "journal_volume": "1302",
+          "page_start": "126",
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "S. Weinberg"
+          }
+        ],
+        "number": 102,
+        "publication_info": {
+          "artid": "974",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D13",
+          "page_start": "974",
+          "year": 1976
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "L. Susskind"
+          }
+        ],
+        "number": 103,
+        "publication_info": {
+          "artid": "2619",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D20",
+          "page_start": "2619",
+          "year": 1979
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0305237"
+        ],
+        "authors": [
+          {
+            "full_name": "C. Csaki"
+          },
+          {
+            "full_name": "C. Grojean"
+          },
+          {
+            "full_name": "H. Murayama"
+          },
+          {
+            "full_name": "L. Pilo"
+          },
+          {
+            "full_name": "J. Terning"
+          }
+        ],
+        "number": 104,
+        "publication_info": {
+          "artid": "055006",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D69",
+          "year": 2004
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0308038"
+        ],
+        "authors": [
+          {
+            "full_name": "C. Csaki"
+          },
+          {
+            "full_name": "C. Grojean"
+          },
+          {
+            "full_name": "L. Pilo"
+          },
+          {
+            "full_name": "J. Terning"
+          }
+        ],
+        "number": 105,
+        "publication_info": {
+          "artid": "101802",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "92",
+          "year": 2004
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0203079"
+        ],
+        "authors": [
+          {
+            "full_name": "C. T. Hill"
+          },
+          {
+            "full_name": "E. H. Simmons"
+          }
+        ],
+        "number": 106,
+        "publication_info": {
+          "artid": "235",
+          "journal_title": "Phys.Rept.",
+          "journal_volume": "381",
+          "page_start": "235",
+          "year": 2003
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "E. Eichten"
+          },
+          {
+            "full_name": "K. D. Lane"
+          }
+        ],
+        "number": 107,
+        "publication_info": {
+          "artid": "125",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B90",
+          "page_start": "125",
+          "year": 1980
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "S. Dimopoulos"
+          },
+          {
+            "full_name": "L. Susskind"
+          }
+        ],
+        "number": 108,
+        "publication_info": {
+          "artid": "237",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B155",
+          "page_start": "237",
+          "year": 1979
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "B. Holdom"
+          }
+        ],
+        "misc": [
+          "168"
+        ],
+        "number": 109,
+        "publication_info": {
+          "artid": "301",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B150",
+          "page_start": "301",
+          "year": 1985
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "T. W. Appelquist"
+          },
+          {
+            "full_name": "D. Karabali"
+          },
+          {
+            "full_name": "L. Wijewardhana"
+          }
+        ],
+        "number": 110,
+        "publication_info": {
+          "artid": "957",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "57",
+          "page_start": "957",
+          "year": 1986
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "K. Yamawaki"
+          },
+          {
+            "full_name": "M. Bando"
+          }
+        ],
+        "misc": [
+          "and K.-i. Matumoto"
+        ],
+        "number": 111,
+        "publication_info": {
+          "artid": "1335",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "56",
+          "page_start": "1335",
+          "year": 1986
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "T. Appelquist"
+          },
+          {
+            "full_name": "L. Wijewardhana"
+          }
+        ],
+        "number": 112,
+        "publication_info": {
+          "artid": "774",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D35",
+          "page_start": "774",
+          "year": 1987
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "K. D. Lane"
+          },
+          {
+            "full_name": "E. Eichten"
+          }
+        ],
+        "number": 113,
+        "publication_info": {
+          "artid": "274",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B222",
+          "page_start": "274",
+          "year": 1989
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/9704455"
+        ],
+        "authors": [
+          {
+            "full_name": "E. Eichten"
+          },
+          {
+            "full_name": "K. D. Lane"
+          },
+          {
+            "full_name": "J. Womersley"
+          }
+        ],
+        "number": 114,
+        "publication_info": {
+          "artid": "305",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B405",
+          "page_start": "305",
+          "year": 1997
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ex/9503002"
+        ],
+        "authors": [
+          {
+            "full_name": "F. Abe"
+          }
+        ],
+        "misc": [
+          "(CDF)"
+        ],
+        "number": 115,
+        "publication_info": {
+          "artid": "2626",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "74",
+          "page_start": "2626",
+          "year": 1995
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ex/9503003"
+        ],
+        "authors": [
+          {
+            "full_name": "S. Abachi"
+          }
+        ],
+        "misc": [
+          "(D0)"
+        ],
+        "number": 116,
+        "publication_info": {
+          "artid": "2632",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "74",
+          "page_start": "2632",
+          "year": 1995
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1011.0745"
+        ],
+        "authors": [
+          {
+            "full_name": "A. Delgado"
+          },
+          {
+            "full_name": "K. Lane"
+          },
+          {
+            "full_name": "A. Martin"
+          }
+        ],
+        "number": 117,
+        "publication_info": {
+          "artid": "482",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B696",
+          "page_start": "482",
+          "year": 2011
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "D. B. Kaplan"
+          },
+          {
+            "full_name": "H. Georgi"
+          },
+          {
+            "full_name": "S. Dimopoulos"
+          }
+        ],
+        "number": 118,
+        "publication_info": {
+          "artid": "187",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B136",
+          "page_start": "187",
+          "year": 1984
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "H. Georgi"
+          },
+          {
+            "full_name": "D. B. Kaplan"
+          }
+        ],
+        "number": 119,
+        "publication_info": {
+          "artid": "216",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B145",
+          "page_start": "216",
+          "year": 1984
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "B. Holdom"
+          },
+          {
+            "full_name": "J. Terning"
+          }
+        ],
+        "number": 120,
+        "publication_info": {
+          "artid": "88",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B247",
+          "page_start": "88",
+          "year": 1990
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "M. Golden"
+          },
+          {
+            "full_name": "L. Randall"
+          }
+        ],
+        "number": 121,
+        "publication_info": {
+          "artid": "3",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B361",
+          "page_start": "3",
+          "year": 1991
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "M. E. Peskin"
+          },
+          {
+            "full_name": "T. Takeuchi"
+          }
+        ],
+        "number": 122,
+        "publication_info": {
+          "artid": "381",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D46",
+          "page_start": "381",
+          "year": 1992
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-th/0104005"
+        ],
+        "authors": [
+          {
+            "full_name": "N. Arkani-Hamed"
+          },
+          {
+            "full_name": "A. G. Cohen"
+          },
+          {
+            "full_name": "H. Georgi"
+          }
+        ],
+        "number": 123,
+        "publication_info": {
+          "artid": "4757",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "86",
+          "page_start": "4757",
+          "year": 2001
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "C. T. Hill"
+          },
+          {
+            "full_name": "S. Pokorski"
+          },
+          {
+            "full_name": "J. Wang"
+          }
+        ],
+        "misc": [
+          "hep-th/ 0104035"
+        ],
+        "number": 124,
+        "publication_info": {
+          "artid": "105005",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D64",
+          "year": 2001
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0206021"
+        ],
+        "authors": [
+          {
+            "full_name": "N. Arkani-Hamed"
+          },
+          {
+            "full_name": "A. Cohen"
+          },
+          {
+            "full_name": "E. Katz"
+          },
+          {
+            "full_name": "A. Nelson"
+          }
+        ],
+        "misc": [
+          "169"
+        ],
+        "number": 125,
+        "publication_info": {
+          "artid": "034",
+          "journal_title": "JHEP",
+          "journal_volume": "0207",
+          "page_start": "034",
+          "year": 2002
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0502182"
+        ],
+        "authors": [
+          {
+            "full_name": "M. Schmaltz"
+          },
+          {
+            "full_name": "D. Tucker-Smith"
+          }
+        ],
+        "number": 126,
+        "publication_info": {
+          "artid": "229",
+          "journal_title": "Ann.Rev.Nucl.Part.Sci.",
+          "journal_volume": "55",
+          "page_start": "229",
+          "year": 2005
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0407143"
+        ],
+        "authors": [
+          {
+            "full_name": "M. Schmaltz"
+          }
+        ],
+        "number": 127,
+        "publication_info": {
+          "artid": "056",
+          "journal_title": "JHEP",
+          "journal_volume": "0408",
+          "page_start": "056",
+          "year": 2004
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "H. Georgi"
+          },
+          {
+            "full_name": "A. Pais"
+          }
+        ],
+        "number": 128,
+        "publication_info": {
+          "artid": "539",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D10",
+          "page_start": "539",
+          "year": 1974
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "D. B. Kaplan"
+          },
+          {
+            "full_name": "H. Georgi"
+          }
+        ],
+        "number": 129,
+        "publication_info": {
+          "artid": "183",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B136",
+          "page_start": "183",
+          "year": 1984
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0105239"
+        ],
+        "authors": [
+          {
+            "full_name": "N. Arkani-Hamed"
+          },
+          {
+            "full_name": "A. G. Cohen"
+          },
+          {
+            "full_name": "H. Georgi"
+          }
+        ],
+        "number": 130,
+        "publication_info": {
+          "artid": "232",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B513",
+          "page_start": "232",
+          "year": 2001
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0206023"
+        ],
+        "authors": [
+          {
+            "full_name": "T. Gregoire"
+          },
+          {
+            "full_name": "J. G. Wacker"
+          }
+        ],
+        "number": 131,
+        "publication_info": {
+          "artid": "019",
+          "journal_title": "JHEP",
+          "journal_volume": "0208",
+          "page_start": "019",
+          "year": 2002
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0506256"
+        ],
+        "authors": [
+          {
+            "full_name": "Z. Chacko"
+          },
+          {
+            "full_name": "H.-S. Goh"
+          },
+          {
+            "full_name": "R. Harnik"
+          }
+        ],
+        "number": 132,
+        "publication_info": {
+          "artid": "231802",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "96",
+          "year": 2006
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "Z. Chacko"
+          },
+          {
+            "full_name": "H.-S. Goh"
+          },
+          {
+            "full_name": "R. Harnik"
+          }
+        ],
+        "misc": [
+          "hep-ph/ 0512088"
+        ],
+        "number": 133,
+        "publication_info": {
+          "artid": "108",
+          "journal_title": "JHEP",
+          "journal_volume": "0601",
+          "page_start": "108",
+          "year": 2006
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "D. B. Kaplan"
+          }
+        ],
+        "number": 134,
+        "publication_info": {
+          "artid": "259",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B365",
+          "page_start": "259",
+          "year": 1991
+        }
+      }
+    },
+    {
+      "curated_relation": false,
+      "record": {
+        "$ref": "http://localhost:5000/api/literature/499284"
+      },
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/9905221"
+        ],
+        "authors": [
+          {
+            "full_name": "L. Randall"
+          },
+          {
+            "full_name": "R. Sundrum"
+          }
+        ],
+        "number": 135,
+        "publication_info": {
+          "artid": "3370",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "83",
+          "page_start": "3370",
+          "year": 1999
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-th/9906064"
+        ],
+        "authors": [
+          {
+            "full_name": "L. Randall"
+          },
+          {
+            "full_name": "R. Sundrum"
+          }
+        ],
+        "number": 136,
+        "publication_info": {
+          "artid": "4690",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "83",
+          "page_start": "4690",
+          "year": 1999
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0308036"
+        ],
+        "authors": [
+          {
+            "full_name": "K. Agashe"
+          },
+          {
+            "full_name": "A. Delgado"
+          },
+          {
+            "full_name": "M. J. May"
+          },
+          {
+            "full_name": "R. Sundrum"
+          }
+        ],
+        "number": 137,
+        "publication_info": {
+          "artid": "050",
+          "journal_title": "JHEP",
+          "journal_volume": "0308",
+          "page_start": "050",
+          "year": 2003
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "H. Davoudiasl"
+          },
+          {
+            "full_name": "J. Hewett"
+          },
+          {
+            "full_name": "T. Rizzo"
+          }
+        ],
+        "misc": [
+          "hep-ph/ 9911262"
+        ],
+        "number": 138,
+        "publication_info": {
+          "artid": "43",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B473",
+          "page_start": "43",
+          "year": 2000
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0306259"
+        ],
+        "authors": [
+          {
+            "full_name": "R. Contino"
+          },
+          {
+            "full_name": "Y. Nomura"
+          },
+          {
+            "full_name": "A. Pomarol"
+          }
+        ],
+        "number": 139,
+        "publication_info": {
+          "artid": "148",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B671",
+          "page_start": "148",
+          "year": 2003
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "K. Agashe"
+          },
+          {
+            "full_name": "R. Contino"
+          },
+          {
+            "full_name": "A. Pomarol"
+          }
+        ],
+        "misc": [
+          "hep-ph/ 0412089. 170"
+        ],
+        "number": 140,
+        "publication_info": {
+          "artid": "165",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B719",
+          "page_start": "165",
+          "year": 2005
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "Y. Hosotani"
+          }
+        ],
+        "number": 141,
+        "publication_info": {
+          "artid": "309",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B126",
+          "page_start": "309",
+          "year": 1983
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "I. Antoniadis"
+          },
+          {
+            "full_name": "K. Benakli"
+          },
+          {
+            "full_name": "M. Quiros"
+          }
+        ],
+        "misc": [
+          "hep-th/ 0108005"
+        ],
+        "number": 142,
+        "publication_info": {
+          "artid": "20",
+          "journal_title": "New J.Phys.",
+          "journal_volume": "3",
+          "page_start": "20",
+          "year": 2001
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "H. Hatanaka"
+          },
+          {
+            "full_name": "T. Inami"
+          },
+          {
+            "full_name": "C. Lim"
+          }
+        ],
+        "misc": [
+          "hep-th/ 9805067"
+        ],
+        "number": 143,
+        "publication_info": {
+          "artid": "2601",
+          "journal_title": "Mod.Phys.Lett.",
+          "journal_volume": "A13",
+          "page_start": "2601",
+          "year": 1998
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-th/0204223"
+        ],
+        "authors": [
+          {
+            "full_name": "G. von Gersdorff"
+          },
+          {
+            "full_name": "N. Irges"
+          },
+          {
+            "full_name": "M. Quiros"
+          }
+        ],
+        "number": 144,
+        "publication_info": {
+          "artid": "127",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B635",
+          "page_start": "127",
+          "year": 2002
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0107331"
+        ],
+        "authors": [
+          {
+            "full_name": "L. J. Hall"
+          },
+          {
+            "full_name": "Y. Nomura"
+          },
+          {
+            "full_name": "D. Tucker-Smith"
+          }
+        ],
+        "number": 145,
+        "publication_info": {
+          "artid": "307",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B639",
+          "page_start": "307",
+          "year": 2002
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0210133"
+        ],
+        "authors": [
+          {
+            "full_name": "C. Csaki"
+          },
+          {
+            "full_name": "C. Grojean"
+          },
+          {
+            "full_name": "H. Murayama"
+          }
+        ],
+        "number": 146,
+        "publication_info": {
+          "artid": "085012",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D67",
+          "year": 2003
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0304220"
+        ],
+        "authors": [
+          {
+            "full_name": "C. A. Scrucca"
+          },
+          {
+            "full_name": "M. Serone"
+          },
+          {
+            "full_name": "L. Silvestrini"
+          }
+        ],
+        "number": 147,
+        "publication_info": {
+          "artid": "128",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B669",
+          "page_start": "128",
+          "year": 2003
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-th/0312267"
+        ],
+        "authors": [
+          {
+            "full_name": "C. Scrucca"
+          },
+          {
+            "full_name": "M. Serone"
+          },
+          {
+            "full_name": "L. Silvestrini"
+          },
+          {
+            "full_name": "A. Wulzer"
+          }
+        ],
+        "number": 148,
+        "publication_info": {
+          "artid": "049",
+          "journal_title": "JHEP",
+          "journal_volume": "0402",
+          "page_start": "049",
+          "year": 2004
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0703164"
+        ],
+        "authors": [
+          {
+            "full_name": "G. Giudice"
+          },
+          {
+            "full_name": "C. Grojean"
+          },
+          {
+            "full_name": "A. Pomarol"
+          },
+          {
+            "full_name": "R. Rattazzi"
+          }
+        ],
+        "number": 149,
+        "publication_info": {
+          "artid": "045",
+          "journal_title": "JHEP",
+          "journal_volume": "0706",
+          "page_start": "045",
+          "year": 2007
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:0706.0432"
+        ],
+        "authors": [
+          {
+            "full_name": "R. Barbieri"
+          },
+          {
+            "full_name": "B. Bellazzini"
+          },
+          {
+            "full_name": "V. S. Rychkov"
+          },
+          {
+            "full_name": "A. Varagnolo"
+          }
+        ],
+        "number": 150,
+        "publication_info": {
+          "artid": "115008",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D76",
+          "year": 2007
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1401.2457"
+        ],
+        "authors": [
+          {
+            "full_name": "B. Bellazzini"
+          },
+          {
+            "full_name": "C. Cski"
+          },
+          {
+            "full_name": "J. Serra"
+          }
+        ],
+        "number": 151,
+        "publication_info": {
+          "artid": "2766",
+          "journal_title": "Eur.Phys.J.",
+          "journal_volume": "C74",
+          "page_start": "2766",
+          "year": 2014
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "W. D. Goldberger"
+          },
+          {
+            "full_name": "M. B. Wise"
+          }
+        ],
+        "misc": [
+          "hep-ph/ 9911457. 171"
+        ],
+        "number": 152,
+        "publication_info": {
+          "artid": "275",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B475",
+          "page_start": "275",
+          "year": 2000
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "W. D. Goldberger"
+          },
+          {
+            "full_name": "M. B. Wise"
+          }
+        ],
+        "misc": [
+          "hep-ph/ 9907447"
+        ],
+        "number": 153,
+        "publication_info": {
+          "artid": "4922",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "83",
+          "page_start": "4922",
+          "year": 1999
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1209.3299"
+        ],
+        "authors": [
+          {
+            "full_name": "B. Bellazzini"
+          },
+          {
+            "full_name": "C. Csaki"
+          },
+          {
+            "full_name": "J. Hubisz"
+          },
+          {
+            "full_name": "J. Serra"
+          },
+          {
+            "full_name": "J. Terning"
+          }
+        ],
+        "number": 154,
+        "publication_info": {
+          "artid": "2333",
+          "journal_title": "Eur.Phys.J.",
+          "journal_volume": "C73",
+          "page_start": "2333",
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1209.3022"
+        ],
+        "authors": [
+          {
+            "full_name": "Z. Chacko"
+          },
+          {
+            "full_name": "R. K. Mishra"
+          }
+        ],
+        "number": 155,
+        "publication_info": {
+          "artid": "115006",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D87",
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1306.4601"
+        ],
+        "authors": [
+          {
+            "full_name": "F. Coradeschi"
+          },
+          {
+            "full_name": "P. Lodone"
+          },
+          {
+            "full_name": "D. Pappadopulo"
+          },
+          {
+            "full_name": "R. Rattazzi"
+          },
+          {
+            "full_name": "L. Vitale"
+          }
+        ],
+        "number": 156,
+        "publication_info": {
+          "artid": "057",
+          "journal_title": "JHEP",
+          "journal_volume": "1311",
+          "page_start": "057",
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1401.4998"
+        ],
+        "authors": [
+          {
+            "full_name": "E. Megias"
+          },
+          {
+            "full_name": "O. Pujolas"
+          }
+        ],
+        "number": 157,
+        "publication_info": {
+          "artid": "081",
+          "journal_title": "JHEP",
+          "journal_volume": "1408",
+          "page_start": "081",
+          "year": 2014
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-th/0012248"
+        ],
+        "authors": [
+          {
+            "full_name": "R. Rattazzi"
+          },
+          {
+            "full_name": "A. Zaffaroni"
+          }
+        ],
+        "number": 158,
+        "publication_info": {
+          "artid": "021",
+          "journal_title": "JHEP",
+          "journal_volume": "0104",
+          "page_start": "021",
+          "year": 2001
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1309.7988"
+        ],
+        "authors": [
+          {
+            "full_name": "D. Bunk"
+          },
+          {
+            "full_name": "J. Hubisz"
+          },
+          {
+            "full_name": "B. Jain"
+          }
+        ],
+        "number": 159,
+        "publication_info": {
+          "artid": "035014",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D89",
+          "year": 2014
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "H. Cai"
+          },
+          {
+            "full_name": "H.-C. Cheng"
+          },
+          {
+            "full_name": "J. Terning"
+          }
+        ],
+        "misc": [
+          "0806. 0386"
+        ],
+        "number": 160,
+        "publication_info": {
+          "artid": "171805",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "101",
+          "year": 2008
+        }
+      }
+    },
+    {
+      "curated_relation": false,
+      "record": {
+        "$ref": "http://localhost:5000/api/literature/1289060"
+      },
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1404.1914"
+        ],
+        "authors": [
+          {
+            "full_name": "J. Fan"
+          },
+          {
+            "full_name": "B. Jain"
+          },
+          {
+            "full_name": "O. Ozsoy"
+          }
+        ],
+        "number": 161,
+        "publication_info": {
+          "artid": "073",
+          "journal_title": "JHEP",
+          "journal_volume": "1407",
+          "page_start": "073",
+          "year": 2014
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1207.7235"
+        ],
+        "authors": [
+          {
+            "full_name": "S. Chatrchyan"
+          }
+        ],
+        "misc": [
+          "(CMS)"
+        ],
+        "number": 162,
+        "publication_info": {
+          "artid": "30",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B716",
+          "page_start": "30",
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1207.7214"
+        ],
+        "authors": [
+          {
+            "full_name": "G. Aad"
+          }
+        ],
+        "misc": [
+          "(ATLAS)"
+        ],
+        "number": 163,
+        "publication_info": {
+          "artid": "1",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B716",
+          "page_start": "1",
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1202.3144"
+        ],
+        "authors": [
+          {
+            "full_name": "D. Carmi"
+          },
+          {
+            "full_name": "A. Falkowski"
+          },
+          {
+            "full_name": "E. Kuflik"
+          },
+          {
+            "full_name": "T. Volansky"
+          }
+        ],
+        "number": 164,
+        "publication_info": {
+          "artid": "136",
+          "journal_title": "JHEP",
+          "journal_volume": "1207",
+          "page_start": "136",
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1202.3415"
+        ],
+        "authors": [
+          {
+            "full_name": "A. Azatov"
+          },
+          {
+            "full_name": "R. Contino"
+          },
+          {
+            "full_name": "J. Galloway"
+          }
+        ],
+        "number": 165,
+        "publication_info": {
+          "artid": "127",
+          "journal_title": "JHEP",
+          "journal_volume": "1204",
+          "page_start": "127",
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1202.3697"
+        ],
+        "authors": [
+          {
+            "full_name": "J. Espinosa"
+          },
+          {
+            "full_name": "C. Grojean"
+          },
+          {
+            "full_name": "M. Muhlleitner"
+          },
+          {
+            "full_name": "M. Trott"
+          }
+        ],
+        "number": 166,
+        "publication_info": {
+          "artid": "097",
+          "journal_title": "JHEP",
+          "journal_volume": "1205",
+          "page_start": "097",
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1203.4254"
+        ],
+        "authors": [
+          {
+            "full_name": "P. P. Giardino"
+          },
+          {
+            "full_name": "K. Kannike"
+          },
+          {
+            "full_name": "M. Raidal"
+          },
+          {
+            "full_name": "A. Strumia"
+          }
+        ],
+        "misc": [
+          "172"
+        ],
+        "number": 167,
+        "publication_info": {
+          "artid": "117",
+          "journal_title": "JHEP",
+          "journal_volume": "1206",
+          "page_start": "117",
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1204.0464"
+        ],
+        "authors": [
+          {
+            "full_name": "J. Ellis"
+          },
+          {
+            "full_name": "T. You"
+          }
+        ],
+        "number": 168,
+        "publication_info": {
+          "artid": "140",
+          "journal_title": "JHEP",
+          "journal_volume": "1206",
+          "page_start": "140",
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:0708.1463"
+        ],
+        "authors": [
+          {
+            "full_name": "W. D. Goldberger"
+          },
+          {
+            "full_name": "B. Grinstein"
+          },
+          {
+            "full_name": "W. Skiba"
+          }
+        ],
+        "number": 169,
+        "publication_info": {
+          "artid": "111802",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "100",
+          "year": 2008
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:0803.2040"
+        ],
+        "authors": [
+          {
+            "full_name": "J. Fan"
+          },
+          {
+            "full_name": "W. D. Goldberger"
+          },
+          {
+            "full_name": "A. Ross"
+          },
+          {
+            "full_name": "W. Skiba"
+          }
+        ],
+        "number": 170,
+        "publication_info": {
+          "artid": "035017",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D79",
+          "year": 2009
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "Z. Chacko"
+          },
+          {
+            "full_name": "R. Franceschini"
+          },
+          {
+            "full_name": "R. K. Mishra"
+          }
+        ],
+        "misc": [
+          "1209. 3259"
+        ],
+        "number": 171,
+        "publication_info": {
+          "artid": "015",
+          "journal_title": "JHEP",
+          "journal_volume": "1304",
+          "page_start": "015",
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-th/0008151"
+        ],
+        "authors": [
+          {
+            "full_name": "C. Csaki"
+          },
+          {
+            "full_name": "M. L. Graesser"
+          },
+          {
+            "full_name": "G. D. Kribs"
+          }
+        ],
+        "number": 172,
+        "publication_info": {
+          "artid": "065002",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D63",
+          "year": 2001
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:0705.3844"
+        ],
+        "authors": [
+          {
+            "full_name": "C. Csaki"
+          },
+          {
+            "full_name": "J. Hubisz"
+          },
+          {
+            "full_name": "S. J. Lee"
+          }
+        ],
+        "number": 173,
+        "publication_info": {
+          "artid": "125015",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D76",
+          "year": 2007
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:0907.5413"
+        ],
+        "authors": [
+          {
+            "full_name": "I. Low"
+          },
+          {
+            "full_name": "R. Rattazzi"
+          },
+          {
+            "full_name": "A. Vichi"
+          }
+        ],
+        "number": 174,
+        "publication_info": {
+          "artid": "126",
+          "journal_title": "JHEP",
+          "journal_volume": "1004",
+          "page_start": "126",
+          "year": 2010
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1002.1011"
+        ],
+        "authors": [
+          {
+            "full_name": "R. Contino"
+          },
+          {
+            "full_name": "C. Grojean"
+          },
+          {
+            "full_name": "M. Moretti"
+          },
+          {
+            "full_name": "F. Piccinini"
+          },
+          {
+            "full_name": "R. Rattazzi"
+          }
+        ],
+        "number": 175,
+        "publication_info": {
+          "artid": "089",
+          "journal_title": "JHEP",
+          "journal_volume": "1005",
+          "page_start": "089",
+          "year": 2010
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1109.1570"
+        ],
+        "authors": [
+          {
+            "full_name": "R. Contino"
+          },
+          {
+            "full_name": "D. Marzocca"
+          },
+          {
+            "full_name": "D. Pappadopulo"
+          },
+          {
+            "full_name": "R. Rattazzi"
+          }
+        ],
+        "number": 176,
+        "publication_info": {
+          "artid": "081",
+          "journal_title": "JHEP",
+          "journal_volume": "1110",
+          "page_start": "081",
+          "year": 2011
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1205.0011"
+        ],
+        "authors": [
+          {
+            "full_name": "M. Farina"
+          },
+          {
+            "full_name": "C. Grojean"
+          },
+          {
+            "full_name": "E. Salvioni"
+          }
+        ],
+        "number": 177,
+        "publication_info": {
+          "artid": "012",
+          "journal_title": "JHEP",
+          "journal_volume": "1207",
+          "page_start": "012",
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "C. H. Llewellyn Smith"
+          }
+        ],
+        "number": 178,
+        "publication_info": {
+          "artid": "233",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B46",
+          "page_start": "233",
+          "year": 1973
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "D. Dicus"
+          },
+          {
+            "full_name": "V. Mathur"
+          }
+        ],
+        "number": 179,
+        "publication_info": {
+          "artid": "3111",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D7",
+          "page_start": "3111",
+          "year": 1973
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "J. M. Cornwall"
+          },
+          {
+            "full_name": "D. N. Levin"
+          },
+          {
+            "full_name": "G. Tiktopoulos"
+          }
+        ],
+        "number": 180,
+        "publication_info": {
+          "artid": "1268",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "30",
+          "page_start": "1268",
+          "year": 1973
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "J. M. Cornwall"
+          },
+          {
+            "full_name": "D. N. Levin"
+          },
+          {
+            "full_name": "G. Tiktopoulos"
+          }
+        ],
+        "number": 181,
+        "publication_info": {
+          "artid": "1145",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D10",
+          "page_start": "1145",
+          "year": 1974
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "B. W. Lee"
+          },
+          {
+            "full_name": "C. Quigg"
+          },
+          {
+            "full_name": "H. Thacker"
+          }
+        ],
+        "misc": [
+          "173"
+        ],
+        "number": 182,
+        "publication_info": {
+          "artid": "883",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "38",
+          "page_start": "883",
+          "year": 1977
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "B. W. Lee"
+          },
+          {
+            "full_name": "C. Quigg"
+          },
+          {
+            "full_name": "H. Thacker"
+          }
+        ],
+        "number": 183,
+        "publication_info": {
+          "artid": "1519",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D16",
+          "page_start": "1519",
+          "year": 1977
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "M. S. Chanowitz"
+          },
+          {
+            "full_name": "M. K. Gaillard"
+          }
+        ],
+        "number": 184,
+        "publication_info": {
+          "artid": "379",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B261",
+          "page_start": "379",
+          "year": 1985
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0408058"
+        ],
+        "authors": [
+          {
+            "full_name": "M. Papucci"
+          }
+        ],
+        "number": 185,
+        "publication_info": {
+          "year": 2004
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "R. Foadi"
+          },
+          {
+            "full_name": "M. Jarvinen"
+          },
+          {
+            "full_name": "F. Sannino"
+          }
+        ],
+        "misc": [
+          "0811. 3719"
+        ],
+        "number": 186,
+        "publication_info": {
+          "artid": "035010",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D79",
+          "year": 2009
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:0806.1624"
+        ],
+        "authors": [
+          {
+            "full_name": "R. Barbieri"
+          },
+          {
+            "full_name": "G. Isidori"
+          },
+          {
+            "full_name": "V. S. Rychkov"
+          },
+          {
+            "full_name": "E. Trincherini"
+          }
+        ],
+        "number": 187,
+        "publication_info": {
+          "artid": "036012",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D78",
+          "year": 2008
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1005.3809"
+        ],
+        "authors": [
+          {
+            "full_name": "A. Carcamo Hernandez"
+          },
+          {
+            "full_name": "R. Torre"
+          }
+        ],
+        "number": 188,
+        "publication_info": {
+          "artid": "188",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B841",
+          "page_start": "188",
+          "year": 2010
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1112.0316"
+        ],
+        "authors": [
+          {
+            "full_name": "O. Eboli"
+          },
+          {
+            "full_name": "J. Gonzalez-Fraile"
+          },
+          {
+            "full_name": "M. Gonzalez-Garcia"
+          }
+        ],
+        "number": 189,
+        "publication_info": {
+          "artid": "055019",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D85",
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1205.4032"
+        ],
+        "authors": [
+          {
+            "full_name": "B. Bellazzini"
+          },
+          {
+            "full_name": "C. Csaki"
+          },
+          {
+            "full_name": "J. Hubisz"
+          },
+          {
+            "full_name": "J. Serra"
+          },
+          {
+            "full_name": "J. Terning"
+          }
+        ],
+        "number": 190,
+        "publication_info": {
+          "artid": "003",
+          "journal_title": "JHEP",
+          "journal_volume": "1211",
+          "page_start": "003",
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "J. Erler"
+          },
+          {
+            "full_name": "P. Langacker"
+          }
+        ],
+        "number": 191,
+        "publication_info": {
+          "year": 2008
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "S. R. Coleman"
+          },
+          {
+            "full_name": "J. Wess"
+          },
+          {
+            "full_name": "B. Zumino"
+          }
+        ],
+        "number": 192,
+        "publication_info": {
+          "artid": "2239",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "177",
+          "page_start": "2239",
+          "year": 1969
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "J. Callan"
+          },
+          {
+            "full_name": "Curtis G."
+          },
+          {
+            "full_name": "S. R. Coleman"
+          },
+          {
+            "full_name": "J. Wess"
+          },
+          {
+            "full_name": "B. Zumino"
+          }
+        ],
+        "number": 193,
+        "publication_info": {
+          "artid": "2247",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "177",
+          "page_start": "2247",
+          "year": 1969
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "M. Bando"
+          },
+          {
+            "full_name": "T. Kugo"
+          },
+          {
+            "full_name": "S. Uehara"
+          },
+          {
+            "full_name": "K. Yamawaki"
+          },
+          {
+            "full_name": "T. Yanagida"
+          }
+        ],
+        "number": 194,
+        "publication_info": {
+          "artid": "1215",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "54",
+          "page_start": "1215",
+          "year": 1985
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "M. Bando"
+          },
+          {
+            "full_name": "T. Kugo"
+          },
+          {
+            "full_name": "K. Yamawaki"
+          }
+        ],
+        "number": 195,
+        "publication_info": {
+          "artid": "217",
+          "journal_title": "Phys.Rept.",
+          "journal_volume": "164",
+          "page_start": "217",
+          "year": 1988
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "H. Georgi"
+          }
+        ],
+        "number": 196,
+        "publication_info": {
+          "artid": "311",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B331",
+          "page_start": "311",
+          "year": 1990
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "R. Casalbuoni"
+          },
+          {
+            "full_name": "S. De Curtis"
+          },
+          {
+            "full_name": "D. Dominici"
+          },
+          {
+            "full_name": "R. Gatto"
+          }
+        ],
+        "misc": [
+          "174"
+        ],
+        "number": 197,
+        "publication_info": {
+          "artid": "95",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B155",
+          "page_start": "95",
+          "year": 1985
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "R. Casalbuoni"
+          },
+          {
+            "full_name": "S. De Curtis"
+          },
+          {
+            "full_name": "D. Dominici"
+          },
+          {
+            "full_name": "R. Gatto"
+          }
+        ],
+        "number": 198,
+        "publication_info": {
+          "artid": "235",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B282",
+          "page_start": "235",
+          "year": 1987
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/9502247"
+        ],
+        "authors": [
+          {
+            "full_name": "R. Casalbuoni"
+          },
+          {
+            "full_name": "A. Deandrea"
+          },
+          {
+            "full_name": "S. De Curtis"
+          },
+          {
+            "full_name": "D. Dominici"
+          },
+          {
+            "full_name": "F. Feruglio"
+          }
+        ],
+        "number": 199,
+        "publication_info": {
+          "artid": "533",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B349",
+          "page_start": "533",
+          "year": 1995
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "G. Ecker"
+          },
+          {
+            "full_name": "J. Gasser"
+          },
+          {
+            "full_name": "H. Leutwyler"
+          },
+          {
+            "full_name": "A. Pich"
+          },
+          {
+            "full_name": "E. de Rafael"
+          }
+        ],
+        "number": 200,
+        "publication_info": {
+          "artid": "425",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B223",
+          "page_start": "425",
+          "year": 1989
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1307.5515"
+        ],
+        "authors": [
+          {
+            "full_name": "S. Chatrchyan"
+          }
+        ],
+        "misc": [
+          "(CMS)"
+        ],
+        "number": 201,
+        "publication_info": {
+          "artid": "587",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B726",
+          "page_start": "587",
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1112.1405"
+        ],
+        "authors": [
+          {
+            "full_name": "J. S. Gainer"
+          },
+          {
+            "full_name": "W.-Y. Keung"
+          },
+          {
+            "full_name": "I. Low"
+          },
+          {
+            "full_name": "P. Schwaller"
+          }
+        ],
+        "number": 202,
+        "publication_info": {
+          "artid": "033010",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D86",
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1110.3906"
+        ],
+        "authors": [
+          {
+            "full_name": "R. Torre"
+          }
+        ],
+        "number": 203,
+        "publication_info": {
+          "year": 2011
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1207.1065"
+        ],
+        "authors": [
+          {
+            "full_name": "C.-W. Chiang"
+          },
+          {
+            "full_name": "K. Yagyu"
+          }
+        ],
+        "number": 204,
+        "publication_info": {
+          "artid": "033003",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D87",
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1306.3922"
+        ],
+        "authors": [
+          {
+            "full_name": "H. Cai"
+          }
+        ],
+        "number": 205,
+        "publication_info": {
+          "artid": "052",
+          "journal_title": "JHEP",
+          "journal_volume": "1404",
+          "page_start": "052",
+          "year": 2014
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1308.2676"
+        ],
+        "authors": [
+          {
+            "full_name": "A. Azatov"
+          },
+          {
+            "full_name": "R. Contino"
+          },
+          {
+            "full_name": "A. Di Iura"
+          },
+          {
+            "full_name": "J. Galloway"
+          }
+        ],
+        "number": 206,
+        "publication_info": {
+          "artid": "075019",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D88",
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "M. A. Shifman"
+          },
+          {
+            "full_name": "A. Vainshtein"
+          },
+          {
+            "full_name": "M. Voloshin"
+          },
+          {
+            "full_name": "V. I. Zakharov"
+          }
+        ],
+        "number": 207,
+        "publication_info": {
+          "artid": "711",
+          "journal_title": "Sov.J.Nucl.Phys.",
+          "journal_volume": "30",
+          "page_start": "711",
+          "year": 1979
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "J. F. Gunion"
+          },
+          {
+            "full_name": "H. E. Haber"
+          },
+          {
+            "full_name": "G. L. Kane"
+          },
+          {
+            "full_name": "S. Dawson"
+          }
+        ],
+        "number": 208,
+        "publication_info": {
+          "artid": "1",
+          "journal_title": "Front.Phys.",
+          "journal_volume": "80",
+          "page_start": "1",
+          "year": 2000
+        }
+      }
+    },
+    {
+      "reference": {
+        "misc": [
+          "Higgs Decays"
+        ],
+        "number": 209,
+        "urls": [
+          {
+            "value": "http://www.phy.syr.edu/~jhubisz/HIGGSDECAYS/RL"
+          }
+        ]
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "R. S. Chivukula"
+          },
+          {
+            "full_name": "E. H. Simmons"
+          }
+        ],
+        "misc": [
+          "0808. 2071"
+        ],
+        "number": 210,
+        "publication_info": {
+          "artid": "077701",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D78",
+          "year": 2008
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0405040"
+        ],
+        "authors": [
+          {
+            "full_name": "R. Barbieri"
+          },
+          {
+            "full_name": "A. Pomarol"
+          },
+          {
+            "full_name": "R. Rattazzi"
+          },
+          {
+            "full_name": "A. Strumia"
+          }
+        ],
+        "misc": [
+          "175"
+        ],
+        "number": 211,
+        "publication_info": {
+          "artid": "127",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B703",
+          "page_start": "127",
+          "year": 2004
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0604111"
+        ],
+        "authors": [
+          {
+            "full_name": "G. Cacciapaglia"
+          },
+          {
+            "full_name": "C. Csaki"
+          },
+          {
+            "full_name": "G. Marandella"
+          },
+          {
+            "full_name": "A. Strumia"
+          }
+        ],
+        "number": 212,
+        "publication_info": {
+          "artid": "033011",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D74",
+          "year": 2006
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1111.3534"
+        ],
+        "authors": [
+          {
+            "full_name": "A. Orgogozo"
+          },
+          {
+            "full_name": "S. Rychkov"
+          }
+        ],
+        "number": 213,
+        "publication_info": {
+          "artid": "046",
+          "journal_title": "JHEP",
+          "journal_volume": "1203",
+          "page_start": "046",
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1206.7120"
+        ],
+        "authors": [
+          {
+            "full_name": "M. Gillioz"
+          },
+          {
+            "full_name": "R. Grober"
+          },
+          {
+            "full_name": "C. Grojean"
+          },
+          {
+            "full_name": "M. Muhlleitner"
+          },
+          {
+            "full_name": "E. Salvioni"
+          }
+        ],
+        "number": 214,
+        "publication_info": {
+          "artid": "004",
+          "journal_title": "JHEP",
+          "journal_volume": "1210",
+          "page_start": "004",
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1301.2588"
+        ],
+        "authors": [
+          {
+            "full_name": "C. Grojean"
+          },
+          {
+            "full_name": "E. E. Jenkins"
+          },
+          {
+            "full_name": "A. V. Manohar"
+          },
+          {
+            "full_name": "M. Trott"
+          }
+        ],
+        "number": 215,
+        "publication_info": {
+          "artid": "016",
+          "journal_title": "JHEP",
+          "journal_volume": "1304",
+          "page_start": "016",
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "J. Kublbeck"
+          },
+          {
+            "full_name": "H. Eck"
+          },
+          {
+            "full_name": "R. Mertig"
+          }
+        ],
+        "number": 216,
+        "publication_info": {
+          "artid": "204",
+          "journal_title": "Nucl.Phys.Proc.Suppl.",
+          "journal_volume": "A29",
+          "page_start": "204",
+          "year": 1992
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "M. Bando"
+          },
+          {
+            "full_name": "T. Fujiwara"
+          },
+          {
+            "full_name": "K. Yamawaki"
+          }
+        ],
+        "number": 217,
+        "publication_info": {
+          "artid": "1140",
+          "journal_title": "Prog.Theor.Phys.",
+          "journal_volume": "79",
+          "page_start": "1140",
+          "year": 1988
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "R. Casalbuoni"
+          },
+          {
+            "full_name": "S. De Curtis"
+          },
+          {
+            "full_name": "D. Dominici"
+          },
+          {
+            "full_name": "F. Feruglio"
+          },
+          {
+            "full_name": "R. Gatto"
+          }
+        ],
+        "number": 218,
+        "publication_info": {
+          "artid": "1065",
+          "journal_title": "Int.J.Mod.Phys.",
+          "journal_volume": "A4",
+          "page_start": "1065",
+          "year": 1989
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:0712.3783"
+        ],
+        "authors": [
+          {
+            "full_name": "J. Hirn"
+          },
+          {
+            "full_name": "A. Martin"
+          },
+          {
+            "full_name": "V. Sanz"
+          }
+        ],
+        "number": 219,
+        "publication_info": {
+          "artid": "084",
+          "journal_title": "JHEP",
+          "journal_volume": "0805",
+          "page_start": "084",
+          "year": 2008
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:0704.1821"
+        ],
+        "authors": [
+          {
+            "full_name": "K. Agashe"
+          },
+          {
+            "full_name": "C. Csaki"
+          },
+          {
+            "full_name": "C. Grojean"
+          },
+          {
+            "full_name": "M. Reece"
+          }
+        ],
+        "number": 220,
+        "publication_info": {
+          "artid": "003",
+          "journal_title": "JHEP",
+          "journal_volume": "0712",
+          "page_start": "003",
+          "year": 2007
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0409126"
+        ],
+        "authors": [
+          {
+            "full_name": "G. Cacciapaglia"
+          },
+          {
+            "full_name": "C. Csaki"
+          },
+          {
+            "full_name": "C. Grojean"
+          },
+          {
+            "full_name": "J. Terning"
+          }
+        ],
+        "number": 221,
+        "publication_info": {
+          "artid": "035015",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D71",
+          "year": 2005
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0607146"
+        ],
+        "authors": [
+          {
+            "full_name": "G. Cacciapaglia"
+          },
+          {
+            "full_name": "C. Csaki"
+          },
+          {
+            "full_name": "G. Marandella"
+          },
+          {
+            "full_name": "J. Terning"
+          }
+        ],
+        "number": 222,
+        "publication_info": {
+          "artid": "015003",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D75",
+          "year": 2007
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/9207278"
+        ],
+        "authors": [
+          {
+            "full_name": "H. Georgi"
+          }
+        ],
+        "number": 223,
+        "publication_info": {
+          "artid": "187",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B298",
+          "page_start": "187",
+          "year": 1993
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "P. Langacker"
+          }
+        ],
+        "misc": [
+          "and M.-x. Luo"
+        ],
+        "number": 224,
+        "publication_info": {
+          "artid": "278",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D45",
+          "page_start": "278",
+          "year": 1992
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "B. Holdom"
+          }
+        ],
+        "number": 225,
+        "publication_info": {
+          "artid": "329",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B259",
+          "page_start": "329",
+          "year": 1991
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "G. Altarelli"
+          },
+          {
+            "full_name": "R. Barbieri"
+          },
+          {
+            "full_name": "S. Jadach"
+          }
+        ],
+        "misc": [
+          "176"
+        ],
+        "number": 226,
+        "publication_info": {
+          "artid": "3",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B369",
+          "page_start": "3",
+          "year": 1992
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1204.6622"
+        ],
+        "authors": [
+          {
+            "full_name": "H. Cai"
+          }
+        ],
+        "number": 227,
+        "publication_info": {
+          "artid": "115020",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D85",
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1306.0571"
+        ],
+        "authors": [
+          {
+            "full_name": "M. Baak"
+          },
+          {
+            "full_name": "R. Kogler"
+          }
+        ],
+        "misc": [
+          "pp. 349-358"
+        ],
+        "number": 228,
+        "publication_info": {
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1106.0522"
+        ],
+        "authors": [
+          {
+            "full_name": "J. Alwall"
+          },
+          {
+            "full_name": "M. Herquet"
+          },
+          {
+            "full_name": "F. Maltoni"
+          },
+          {
+            "full_name": "O. Mattelaer"
+          },
+          {
+            "full_name": "T. Stelzer"
+          }
+        ],
+        "number": 229,
+        "publication_info": {
+          "artid": "128",
+          "journal_title": "JHEP",
+          "journal_volume": "1106",
+          "page_start": "128",
+          "year": 2011
+        }
+      }
+    },
+    {
+      "reference": {
+        "misc": [
+          "Tech. Rep CERN, Geneva"
+        ],
+        "number": 230,
+        "publication_info": {
+          "reportnumber": "CMS-PAS-EXO-12-061",
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1307.3536"
+        ],
+        "authors": [
+          {
+            "full_name": "D. Buttazzo"
+          },
+          {
+            "full_name": "G. Degrassi"
+          },
+          {
+            "full_name": "P. P. Giardino"
+          },
+          {
+            "full_name": "G. F. Giudice"
+          },
+          {
+            "full_name": "F. Sala"
+          }
+        ],
+        "number": 231,
+        "publication_info": {
+          "artid": "089",
+          "journal_title": "JHEP",
+          "journal_volume": "1312",
+          "page_start": "089",
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0309149"
+        ],
+        "authors": [
+          {
+            "full_name": "P. Batra"
+          },
+          {
+            "full_name": "A. Delgado"
+          },
+          {
+            "full_name": "D. E. Kaplan"
+          },
+          {
+            "full_name": "T. M. Tait"
+          }
+        ],
+        "number": 232,
+        "publication_info": {
+          "artid": "043",
+          "journal_title": "JHEP",
+          "journal_volume": "0402",
+          "page_start": "043",
+          "year": 2004
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "A. Maloney"
+          },
+          {
+            "full_name": "A. Pierce"
+          },
+          {
+            "full_name": "J. G. Wacker"
+          }
+        ],
+        "misc": [
+          "hep-ph/ 0409127"
+        ],
+        "number": 233,
+        "publication_info": {
+          "artid": "034",
+          "journal_title": "JHEP",
+          "journal_volume": "0606",
+          "page_start": "034",
+          "year": 2006
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1310.8361"
+        ],
+        "authors": [
+          {
+            "full_name": "S. Dawson"
+          },
+          {
+            "full_name": "A. Gritsan"
+          },
+          {
+            "full_name": "H. Logan"
+          },
+          {
+            "full_name": "J. Qian"
+          },
+          {
+            "full_name": "C. Tully"
+          }
+        ],
+        "number": 234,
+        "publication_info": {
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1306.6352"
+        ],
+        "authors": [
+          {
+            "full_name": "H. Baer"
+          },
+          {
+            "full_name": "T. Barklow"
+          },
+          {
+            "full_name": "K. Fujii"
+          },
+          {
+            "full_name": "Y. Gao"
+          },
+          {
+            "full_name": "A. Hoang"
+          }
+        ],
+        "number": 235,
+        "publication_info": {
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1308.6176"
+        ],
+        "authors": [
+          {
+            "full_name": "M. Bicer"
+          },
+          {
+            "full_name": "H. Duran Yildiz"
+          },
+          {
+            "full_name": "I. Yildiz"
+          },
+          {
+            "full_name": "G. Coignet"
+          },
+          {
+            "full_name": "M. Delmastro"
+          }
+        ],
+        "number": 236,
+        "publication_info": {
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0503173"
+        ],
+        "authors": [
+          {
+            "full_name": "A. Djouadi"
+          }
+        ],
+        "number": 237,
+        "publication_info": {
+          "artid": "1",
+          "journal_title": "Phys.Rept.",
+          "journal_volume": "459",
+          "page_start": "1",
+          "year": 2008
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1207.1718"
+        ],
+        "authors": [
+          {
+            "full_name": "D. Carmi"
+          },
+          {
+            "full_name": "A. Falkowski"
+          },
+          {
+            "full_name": "E. Kuflik"
+          },
+          {
+            "full_name": "T. Volansky"
+          },
+          {
+            "full_name": "J. Zupan"
+          }
+        ],
+        "number": 238,
+        "publication_info": {
+          "artid": "196",
+          "journal_title": "JHEP",
+          "journal_volume": "1210",
+          "page_start": "196",
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1305.6068"
+        ],
+        "authors": [
+          {
+            "full_name": "M. Farina"
+          },
+          {
+            "full_name": "M. Perelstein"
+          },
+          {
+            "full_name": "N. Rey-Le"
+          }
+        ],
+        "misc": [
+          "Lorier"
+        ],
+        "number": 239,
+        "publication_info": {
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1305.5251"
+        ],
+        "authors": [
+          {
+            "full_name": "N. Craig"
+          },
+          {
+            "full_name": "C. Englert"
+          },
+          {
+            "full_name": "M. McCullough"
+          }
+        ],
+        "number": 240,
+        "publication_info": {
+          "artid": "121803",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "111",
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "J. R. Ellis"
+          },
+          {
+            "full_name": "M. K. Gaillard"
+          },
+          {
+            "full_name": "D. V. Nanopoulos"
+          }
+        ],
+        "misc": [
+          "177"
+        ],
+        "number": 241,
+        "publication_info": {
+          "artid": "292",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B106",
+          "page_start": "292",
+          "year": 1976
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1308.0598"
+        ],
+        "authors": [
+          {
+            "full_name": "R. D. Ball"
+          }
+        ],
+        "misc": [
+          "(NNPDF)"
+        ],
+        "number": 242,
+        "publication_info": {
+          "artid": "290",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B877",
+          "page_start": "290",
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1308.1636"
+        ],
+        "authors": [
+          {
+            "full_name": "A. Avetisyan"
+          },
+          {
+            "full_name": "J. M. Campbell"
+          },
+          {
+            "full_name": "T. Cohen"
+          },
+          {
+            "full_name": "N. Dhingra"
+          },
+          {
+            "full_name": "J. Hirschauer"
+          }
+        ],
+        "number": 243,
+        "publication_info": {
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "C.-Y. Chen"
+          },
+          {
+            "full_name": "A. Freitas"
+          },
+          {
+            "full_name": "T. Han"
+          },
+          {
+            "full_name": "K. S. Lee"
+          }
+        ],
+        "misc": [
+          "1207. 4794"
+        ],
+        "number": 244,
+        "publication_info": {
+          "artid": "124",
+          "journal_title": "JHEP",
+          "journal_volume": "1211",
+          "page_start": "124",
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1110.6670"
+        ],
+        "authors": [
+          {
+            "full_name": "C. Brust"
+          },
+          {
+            "full_name": "A. Katz"
+          },
+          {
+            "full_name": "S. Lawrence"
+          },
+          {
+            "full_name": "R. Sundrum"
+          }
+        ],
+        "number": 245,
+        "publication_info": {
+          "artid": "103",
+          "journal_title": "JHEP",
+          "journal_volume": "1203",
+          "page_start": "103",
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1205.0013"
+        ],
+        "authors": [
+          {
+            "full_name": "J. Berger"
+          },
+          {
+            "full_name": "J. Hubisz"
+          },
+          {
+            "full_name": "M. Perelstein"
+          }
+        ],
+        "number": 246,
+        "publication_info": {
+          "artid": "016",
+          "journal_title": "JHEP",
+          "journal_volume": "1207",
+          "page_start": "016",
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/9810442"
+        ],
+        "authors": [
+          {
+            "full_name": "G. F. Giudice"
+          },
+          {
+            "full_name": "M. A. Luty"
+          },
+          {
+            "full_name": "H. Murayama"
+          },
+          {
+            "full_name": "R. Rattazzi"
+          }
+        ],
+        "number": 247,
+        "publication_info": {
+          "artid": "027",
+          "journal_title": "JHEP",
+          "journal_volume": "9812",
+          "page_start": "027",
+          "year": 1998
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-th/9810155"
+        ],
+        "authors": [
+          {
+            "full_name": "L. Randall"
+          },
+          {
+            "full_name": "R. Sundrum"
+          }
+        ],
+        "number": 248,
+        "publication_info": {
+          "artid": "79",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B557",
+          "page_start": "79",
+          "year": 1999
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-th/0503216"
+        ],
+        "authors": [
+          {
+            "full_name": "K. Choi"
+          },
+          {
+            "full_name": "A. Falkowski"
+          },
+          {
+            "full_name": "H. P. Nilles"
+          },
+          {
+            "full_name": "M. Olechowski"
+          }
+        ],
+        "number": 249,
+        "publication_info": {
+          "artid": "113",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B718",
+          "page_start": "113",
+          "year": 2005
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "K. Choi"
+          },
+          {
+            "full_name": "K. S. Jeong"
+          }
+        ],
+        "misc": [
+          "and K.-i. Okumura hep-ph/ 0504037"
+        ],
+        "number": 250,
+        "publication_info": {
+          "artid": "039",
+          "journal_title": "JHEP",
+          "journal_volume": "0509",
+          "page_start": "039",
+          "year": 2005
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-th/0605141"
+        ],
+        "authors": [
+          {
+            "full_name": "J. P. Conlon"
+          },
+          {
+            "full_name": "F. Quevedo"
+          }
+        ],
+        "number": 251,
+        "publication_info": {
+          "artid": "029",
+          "journal_title": "JHEP",
+          "journal_volume": "0606",
+          "page_start": "029",
+          "year": 2006
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-th/0610129"
+        ],
+        "authors": [
+          {
+            "full_name": "J. P. Conlon"
+          },
+          {
+            "full_name": "S. S. Abdussalam"
+          },
+          {
+            "full_name": "F. Quevedo"
+          },
+          {
+            "full_name": "K. Suruliz"
+          }
+        ],
+        "number": 252,
+        "publication_info": {
+          "artid": "032",
+          "journal_title": "JHEP",
+          "journal_volume": "0701",
+          "page_start": "032",
+          "year": 2007
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-th/0701034"
+        ],
+        "authors": [
+          {
+            "full_name": "B. S. Acharya"
+          },
+          {
+            "full_name": "K. Bobkov"
+          },
+          {
+            "full_name": "G. L. Kane"
+          },
+          {
+            "full_name": "P. Kumar"
+          },
+          {
+            "full_name": "J. Shao"
+          }
+        ],
+        "number": 253,
+        "publication_info": {
+          "artid": "126010",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D76",
+          "year": 2007
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:0801.0478"
+        ],
+        "authors": [
+          {
+            "full_name": "B. S. Acharya"
+          },
+          {
+            "full_name": "K. Bobkov"
+          },
+          {
+            "full_name": "G. L. Kane"
+          },
+          {
+            "full_name": "J. Shao"
+          },
+          {
+            "full_name": "P. Kumar"
+          }
+        ],
+        "number": 254,
+        "publication_info": {
+          "artid": "065038",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D78",
+          "year": 2008
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0306127"
+        ],
+        "authors": [
+          {
+            "full_name": "J. D. Wells"
+          }
+        ],
+        "misc": [
+          "178"
+        ],
+        "number": 255,
+        "publication_info": {
+          "year": 2003
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "N. Arkani-Hamed"
+          },
+          {
+            "full_name": "S. Dimopoulos"
+          }
+        ],
+        "misc": [
+          "hep-th/ 0405159"
+        ],
+        "number": 256,
+        "publication_info": {
+          "artid": "073",
+          "journal_title": "JHEP",
+          "journal_volume": "0506",
+          "page_start": "073",
+          "year": 2005
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1112.2462"
+        ],
+        "authors": [
+          {
+            "full_name": "M. Ibe"
+          },
+          {
+            "full_name": "T. T. Yanagida"
+          }
+        ],
+        "number": 257,
+        "publication_info": {
+          "artid": "374",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B709",
+          "page_start": "374",
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1212.6971"
+        ],
+        "authors": [
+          {
+            "full_name": "N. Arkani-Hamed"
+          },
+          {
+            "full_name": "A. Gupta"
+          },
+          {
+            "full_name": "D. E. Kaplan"
+          },
+          {
+            "full_name": "N. Weiner"
+          },
+          {
+            "full_name": "T. Zorawski"
+          }
+        ],
+        "number": 258,
+        "publication_info": {
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1210.2395"
+        ],
+        "authors": [
+          {
+            "full_name": "L. J. Hall"
+          },
+          {
+            "full_name": "Y. Nomura"
+          },
+          {
+            "full_name": "S. Shirai"
+          }
+        ],
+        "number": 259,
+        "publication_info": {
+          "artid": "036",
+          "journal_title": "JHEP",
+          "journal_volume": "1301",
+          "page_start": "036",
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1312.6695"
+        ],
+        "authors": [
+          {
+            "full_name": "L. J. Hall"
+          },
+          {
+            "full_name": "Y. Nomura"
+          }
+        ],
+        "number": 260,
+        "publication_info": {
+          "artid": "129",
+          "journal_title": "JHEP",
+          "journal_volume": "1402",
+          "page_start": "129",
+          "year": 2014
+        }
+      }
+    },
+    {
+      "curated_relation": false,
+      "record": {
+        "$ref": "http://localhost:5000/api/literature/1287061"
+      },
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1403.6118"
+        ],
+        "authors": [
+          {
+            "full_name": "M. Baumgart"
+          },
+          {
+            "full_name": "D. Stolarski"
+          },
+          {
+            "full_name": "T. Zorawski"
+          }
+        ],
+        "number": 261,
+        "publication_info": {
+          "year": 2014
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1307.4082"
+        ],
+        "authors": [
+          {
+            "full_name": "T. Cohen"
+          },
+          {
+            "full_name": "M. Lisanti"
+          },
+          {
+            "full_name": "A. Pierce"
+          },
+          {
+            "full_name": "T. R. Slatyer"
+          }
+        ],
+        "number": 262,
+        "publication_info": {
+          "artid": "061",
+          "journal_title": "JCAP",
+          "journal_volume": "1310",
+          "page_start": "061",
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1307.4400"
+        ],
+        "authors": [
+          {
+            "full_name": "J. Fan"
+          },
+          {
+            "full_name": "M. Reece"
+          }
+        ],
+        "number": 263,
+        "publication_info": {
+          "artid": "124",
+          "journal_title": "JHEP",
+          "journal_volume": "1310",
+          "page_start": "124",
+          "year": 2013
+        }
+      }
+    },
+    {
+      "curated_relation": false,
+      "record": {
+        "$ref": "http://localhost:5000/api/literature/1343460"
+      },
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1502.02114"
+        ],
+        "authors": [
+          {
+            "full_name": "P. A. R. Ade"
+          }
+        ],
+        "misc": [
+          "(Planck)"
+        ],
+        "number": 264,
+        "publication_info": {
+          "year": 2015
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0612291"
+        ],
+        "authors": [
+          {
+            "full_name": "J. Pradler"
+          },
+          {
+            "full_name": "F. D. Steffen"
+          }
+        ],
+        "number": 265,
+        "publication_info": {
+          "artid": "224",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B648",
+          "page_start": "224",
+          "year": 2007
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "V. S. Rychkov"
+          },
+          {
+            "full_name": "A. Strumia"
+          }
+        ],
+        "misc": [
+          "hep-ph/ 0701104"
+        ],
+        "number": 266,
+        "publication_info": {
+          "artid": "075011",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D75",
+          "year": 2007
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1103.4394"
+        ],
+        "authors": [
+          {
+            "full_name": "C. Cheung"
+          },
+          {
+            "full_name": "G. Elor"
+          },
+          {
+            "full_name": "L. Hall"
+          }
+        ],
+        "number": 267,
+        "publication_info": {
+          "artid": "115021",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D84",
+          "year": 2011
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:0911.1120"
+        ],
+        "authors": [
+          {
+            "full_name": "L. J. Hall"
+          },
+          {
+            "full_name": "K. Jedamzik"
+          },
+          {
+            "full_name": "J. March-Russell"
+          },
+          {
+            "full_name": "S. M. West"
+          }
+        ],
+        "number": 268,
+        "publication_info": {
+          "artid": "080",
+          "journal_title": "JHEP",
+          "journal_volume": "1003",
+          "page_start": "080",
+          "year": 2010
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "C. Cheung"
+          },
+          {
+            "full_name": "G. Elor"
+          },
+          {
+            "full_name": "L. J. Hall"
+          },
+          {
+            "full_name": "P. Kumar"
+          }
+        ],
+        "misc": [
+          "1010. 0022"
+        ],
+        "number": 269,
+        "publication_info": {
+          "artid": "042",
+          "journal_title": "JHEP",
+          "journal_volume": "1103",
+          "page_start": "042",
+          "year": 2011
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0603265"
+        ],
+        "authors": [
+          {
+            "full_name": "M. Kawasaki"
+          },
+          {
+            "full_name": "F. Takahashi"
+          },
+          {
+            "full_name": "T. Yanagida"
+          }
+        ],
+        "misc": [
+          "179"
+        ],
+        "number": 270,
+        "publication_info": {
+          "artid": "8",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B638",
+          "page_start": "8",
+          "year": 2006
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0605297"
+        ],
+        "authors": [
+          {
+            "full_name": "M. Kawasaki"
+          },
+          {
+            "full_name": "F. Takahashi"
+          },
+          {
+            "full_name": "T. Yanagida"
+          }
+        ],
+        "number": 271,
+        "publication_info": {
+          "artid": "043519",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D74",
+          "year": 2006
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0604140"
+        ],
+        "authors": [
+          {
+            "full_name": "M. Dine"
+          },
+          {
+            "full_name": "R. Kitano"
+          },
+          {
+            "full_name": "A. Morisse"
+          },
+          {
+            "full_name": "Y. Shirman"
+          }
+        ],
+        "number": 272,
+        "publication_info": {
+          "artid": "123518",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D73",
+          "year": 2006
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1209.2583"
+        ],
+        "authors": [
+          {
+            "full_name": "K. Nakayama"
+          },
+          {
+            "full_name": "F. Takahashi"
+          },
+          {
+            "full_name": "T. T. Yanagida"
+          }
+        ],
+        "number": 273,
+        "publication_info": {
+          "artid": "526",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B718",
+          "page_start": "526",
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:0804.3745"
+        ],
+        "authors": [
+          {
+            "full_name": "M. Kawasaki"
+          },
+          {
+            "full_name": "K. Kohri"
+          },
+          {
+            "full_name": "T. Moroi"
+          },
+          {
+            "full_name": "A. Yotsuyanagi"
+          }
+        ],
+        "number": 274,
+        "publication_info": {
+          "artid": "065011",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D78",
+          "year": 2008
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1303.0948"
+        ],
+        "authors": [
+          {
+            "full_name": "T. Moroi"
+          },
+          {
+            "full_name": "M. Nagai"
+          },
+          {
+            "full_name": "M. Takimoto"
+          }
+        ],
+        "number": 275,
+        "publication_info": {
+          "artid": "066",
+          "journal_title": "JHEP",
+          "journal_volume": "1307",
+          "page_start": "066",
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:astro-ph/0406204"
+        ],
+        "authors": [
+          {
+            "full_name": "P. Gondolo"
+          },
+          {
+            "full_name": "J. Edsjo"
+          },
+          {
+            "full_name": "P. Ullio"
+          },
+          {
+            "full_name": "L. Bergstrom"
+          },
+          {
+            "full_name": "M. Schelke"
+          }
+        ],
+        "number": 276,
+        "publication_info": {
+          "artid": "008",
+          "journal_title": "JCAP",
+          "journal_volume": "0407",
+          "page_start": "008",
+          "year": 2004
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0610249"
+        ],
+        "authors": [
+          {
+            "full_name": "J. Hisano"
+          },
+          {
+            "full_name": "S. Matsumoto"
+          },
+          {
+            "full_name": "M. Nagai"
+          },
+          {
+            "full_name": "O. Saito"
+          },
+          {
+            "full_name": "M. Senami"
+          }
+        ],
+        "number": 277,
+        "publication_info": {
+          "artid": "34",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B646",
+          "page_start": "34",
+          "year": 2007
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1111.2916"
+        ],
+        "authors": [
+          {
+            "full_name": "A. Hryczuk"
+          },
+          {
+            "full_name": "R. Iengo"
+          }
+        ],
+        "number": 278,
+        "publication_info": {
+          "artid": "163",
+          "journal_title": "JHEP",
+          "journal_volume": "1201",
+          "page_start": "163",
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1102.4295"
+        ],
+        "authors": [
+          {
+            "full_name": "A. Hryczuk"
+          }
+        ],
+        "number": 279,
+        "publication_info": {
+          "artid": "271",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B699",
+          "page_start": "271",
+          "year": 2011
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1212.5989"
+        ],
+        "authors": [
+          {
+            "full_name": "M. Ibe"
+          },
+          {
+            "full_name": "S. Matsumoto"
+          },
+          {
+            "full_name": "R. Sato"
+          }
+        ],
+        "number": 280,
+        "publication_info": {
+          "artid": "252",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B721",
+          "page_start": "252",
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "M. Ackermann"
+          }
+        ],
+        "misc": [
+          "(Fermi-LAT) 1108. 3546"
+        ],
+        "number": 281,
+        "publication_info": {
+          "artid": "241302",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "107",
+          "year": 2011
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "M. Ackermann"
+          }
+        ],
+        "misc": [
+          "(Fermi-LAT) 1206. 1896"
+        ],
+        "number": 282,
+        "publication_info": {
+          "artid": "4",
+          "journal_title": "Astrophys.J.Suppl.",
+          "journal_volume": "203",
+          "page_start": "4",
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1305.5597"
+        ],
+        "authors": [
+          {
+            "full_name": "M. Ackermann"
+          }
+        ],
+        "misc": [
+          "(Fermi-LAT)"
+        ],
+        "number": 283,
+        "publication_info": {
+          "artid": "082002",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D88",
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "A. Abramowski"
+          }
+        ],
+        "misc": [
+          "(H.E.S.S.) 1103. 3266. 180"
+        ],
+        "number": 284,
+        "publication_info": {
+          "artid": "161301",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "106",
+          "year": 2011
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "A. Drlica-Wagner"
+          }
+        ],
+        "misc": [
+          "Searching for dark matterin dwarf spheroidal satellite galaxies with the fermi-lat [Online"
+        ],
+        "number": 285,
+        "publication_info": {
+          "year": 2012
+        },
+        "urls": [
+          {
+            "value": "http://fermi.gsfc.nasa.gov/science/mtgs/symposia/2012/program/fri/ADrlica-Wagner.pdf"
+          }
+        ]
+      }
+    },
+    {
+      "reference": {
+        "misc": [
+          "accessed 13-March-]"
+        ],
+        "number": 285,
+        "publication_info": {
+          "year": 2012
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1401.6212"
+        ],
+        "authors": [
+          {
+            "full_name": "A. Hryczuk"
+          },
+          {
+            "full_name": "I. Cholis"
+          },
+          {
+            "full_name": "R. Iengo"
+          },
+          {
+            "full_name": "M. Tavakoli"
+          },
+          {
+            "full_name": "P. Ullio"
+          }
+        ],
+        "number": 286,
+        "publication_info": {
+          "year": 2014
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "D. Hooper"
+          },
+          {
+            "full_name": "C. Kelso"
+          },
+          {
+            "full_name": "F. S. Queiroz"
+          }
+        ],
+        "misc": [
+          "1209. 3015"
+        ],
+        "number": 287,
+        "publication_info": {
+          "artid": "55",
+          "journal_title": "Astropart.Phys.",
+          "journal_volume": "46",
+          "page_start": "55",
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "A. Abramowski"
+          }
+        ],
+        "misc": [
+          "(H.E.S.S.) 1301. 1173"
+        ],
+        "number": 288,
+        "publication_info": {
+          "artid": "041301",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "110",
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "M. Cirelli"
+          },
+          {
+            "full_name": "A. Strumia"
+          },
+          {
+            "full_name": "M. Tamburini"
+          }
+        ],
+        "misc": [
+          "0706. 4071"
+        ],
+        "number": 289,
+        "publication_info": {
+          "artid": "152",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B787",
+          "page_start": "152",
+          "year": 2007
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/9906527"
+        ],
+        "authors": [
+          {
+            "full_name": "T. Moroi"
+          },
+          {
+            "full_name": "L. Randall"
+          }
+        ],
+        "number": 290,
+        "publication_info": {
+          "artid": "455",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B570",
+          "page_start": "455",
+          "year": 2000
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1307.2453"
+        ],
+        "authors": [
+          {
+            "full_name": "R. Easther"
+          },
+          {
+            "full_name": "R. Galvez"
+          },
+          {
+            "full_name": "O. Ozsoy"
+          },
+          {
+            "full_name": "S. Watson"
+          }
+        ],
+        "number": 291,
+        "publication_info": {
+          "artid": "023522",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D89",
+          "year": 2014
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1307.5086"
+        ],
+        "authors": [
+          {
+            "full_name": "R. Allahverdi"
+          },
+          {
+            "full_name": "M. Cicoli"
+          },
+          {
+            "full_name": "B. Dutta"
+          },
+          {
+            "full_name": "K. Sinha"
+          }
+        ],
+        "number": 292,
+        "publication_info": {
+          "artid": "095015",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D88",
+          "year": 2013
+        }
+      }
+    },
+    {
+      "curated_relation": false,
+      "record": {
+        "$ref": "http://localhost:5000/api/literature/1342425"
+      },
+      "reference": {
+        "authors": [
+          {
+            "full_name": "P. Ade"
+          }
+        ],
+        "misc": [
+          "(BICEP2, Planck) 1502. 00612"
+        ],
+        "number": 293,
+        "publication_info": {
+          "artid": "101301",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "114",
+          "year": 2015
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:0907.5424"
+        ],
+        "authors": [
+          {
+            "full_name": "D. Baumann"
+          }
+        ],
+        "number": 294,
+        "publication_info": {
+          "year": 2009
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "V. F. Mukhanov"
+          }
+        ],
+        "number": 295,
+        "publication_info": {
+          "artid": "493",
+          "journal_title": "JETP Lett.",
+          "journal_volume": "41",
+          "page_start": "493",
+          "year": 1985
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "V. F. Mukhanov"
+          }
+        ],
+        "number": 296,
+        "publication_info": {
+          "artid": "1297",
+          "journal_title": "Sov.Phys.JETP",
+          "journal_volume": "67",
+          "page_start": "1297",
+          "year": 1988
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:0709.0293"
+        ],
+        "authors": [
+          {
+            "full_name": "C. Cheung"
+          },
+          {
+            "full_name": "P. Creminelli"
+          },
+          {
+            "full_name": "A. L. Fitzpatrick"
+          },
+          {
+            "full_name": "J. Kaplan"
+          },
+          {
+            "full_name": "L. Senatore"
+          }
+        ],
+        "misc": [
+          "181"
+        ],
+        "number": 297,
+        "publication_info": {
+          "artid": "014",
+          "journal_title": "JHEP",
+          "journal_volume": "0803",
+          "page_start": "014",
+          "year": 2008
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "G. F. Smoot"
+          },
+          {
+            "full_name": "C. Bennett"
+          },
+          {
+            "full_name": "A. Kogut"
+          },
+          {
+            "full_name": "E. Wright"
+          },
+          {
+            "full_name": "J. Aymon"
+          }
+        ],
+        "number": 298,
+        "publication_info": {
+          "artid": "L1",
+          "journal_title": "Astrophys.J.",
+          "journal_volume": "396",
+          "page_start": "L1",
+          "year": 1992
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "D. Spergel"
+          }
+        ],
+        "misc": [
+          "(WMAP) astro-ph/ 0603449"
+        ],
+        "number": 299,
+        "publication_info": {
+          "artid": "377",
+          "journal_title": "Astrophys.J.Suppl.",
+          "journal_volume": "170",
+          "page_start": "377",
+          "year": 2007
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/9606387"
+        ],
+        "authors": [
+          {
+            "full_name": "D. H. Lyth"
+          }
+        ],
+        "number": 300,
+        "publication_info": {
+          "artid": "1861",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "78",
+          "page_start": "1861",
+          "year": 1997
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "A. D. Linde"
+          }
+        ],
+        "number": 301,
+        "publication_info": {
+          "artid": "81",
+          "journal_title": "Mod.Phys.Lett.",
+          "journal_volume": "A1",
+          "page_start": "81",
+          "year": 1986
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "A. D. Linde"
+          }
+        ],
+        "number": 302,
+        "publication_info": {
+          "artid": "395",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B175",
+          "page_start": "395",
+          "year": 1986
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "K. Freese"
+          },
+          {
+            "full_name": "J. A. Frieman"
+          },
+          {
+            "full_name": "A. V. Olinto"
+          }
+        ],
+        "number": 303,
+        "publication_info": {
+          "artid": "3233",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "65",
+          "page_start": "3233",
+          "year": 1990
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1403.4536"
+        ],
+        "authors": [
+          {
+            "full_name": "K. Harigaya"
+          },
+          {
+            "full_name": "M. Ibe"
+          },
+          {
+            "full_name": "K. Schmitz"
+          },
+          {
+            "full_name": "T. T. Yanagida"
+          }
+        ],
+        "number": 304,
+        "publication_info": {
+          "year": 2014
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1403.4729"
+        ],
+        "authors": [
+          {
+            "full_name": "K. Harigaya"
+          },
+          {
+            "full_name": "T. T. Yanagida"
+          }
+        ],
+        "number": 305,
+        "publication_info": {
+          "year": 2014
+        }
+      }
+    },
+    {
+      "curated_relation": false,
+      "record": {
+        "$ref": "http://localhost:5000/api/literature/1286727"
+      },
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1403.5277"
+        ],
+        "authors": [
+          {
+            "full_name": "K. Freese"
+          },
+          {
+            "full_name": "W. H. Kinney"
+          }
+        ],
+        "number": 306,
+        "publication_info": {
+          "year": 2014
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:astro-ph/0507632"
+        ],
+        "authors": [
+          {
+            "full_name": "B. A. Bassett"
+          },
+          {
+            "full_name": "S. Tsujikawa"
+          },
+          {
+            "full_name": "D. Wands"
+          }
+        ],
+        "number": 307,
+        "publication_info": {
+          "artid": "537",
+          "journal_title": "Rev.Mod.Phys.",
+          "journal_volume": "78",
+          "page_start": "537",
+          "year": 2006
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-th/9907124"
+        ],
+        "authors": [
+          {
+            "full_name": "R. Kallosh"
+          },
+          {
+            "full_name": "L. Kofman"
+          },
+          {
+            "full_name": "A. D. Linde"
+          },
+          {
+            "full_name": "A. Van Proeyen"
+          }
+        ],
+        "number": 308,
+        "publication_info": {
+          "artid": "103503",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D61",
+          "year": 2000
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "G. Giudice"
+          },
+          {
+            "full_name": "A. Riotto"
+          },
+          {
+            "full_name": "I. Tkachev"
+          }
+        ],
+        "misc": [
+          "hep-ph/ 9911302"
+        ],
+        "number": 309,
+        "publication_info": {
+          "artid": "036",
+          "journal_title": "JHEP",
+          "journal_volume": "9911",
+          "page_start": "036",
+          "year": 1999
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-th/0006179"
+        ],
+        "authors": [
+          {
+            "full_name": "R. Kallosh"
+          },
+          {
+            "full_name": "L. Kofman"
+          },
+          {
+            "full_name": "A. D. Linde"
+          },
+          {
+            "full_name": "A. Van Proeyen"
+          }
+        ],
+        "number": 310,
+        "publication_info": {
+          "artid": "4269",
+          "journal_title": "Class.Quant.Grav.",
+          "journal_volume": "17",
+          "page_start": "4269",
+          "year": 2000
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "A. L. Maroto"
+          },
+          {
+            "full_name": "A. Mazumdar"
+          }
+        ],
+        "misc": [
+          "hep-ph/ 9904206"
+        ],
+        "number": 311,
+        "publication_info": {
+          "artid": "1655",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "84",
+          "page_start": "1655",
+          "year": 2000
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "H. P. Nilles"
+          },
+          {
+            "full_name": "M. Peloso"
+          },
+          {
+            "full_name": "L. Sorbo"
+          }
+        ],
+        "misc": [
+          "hep-th/ 0103202. 182"
+        ],
+        "number": 312,
+        "publication_info": {
+          "artid": "004",
+          "journal_title": "JHEP",
+          "journal_volume": "0104",
+          "page_start": "004",
+          "year": 2001
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0102264"
+        ],
+        "authors": [
+          {
+            "full_name": "H. P. Nilles"
+          },
+          {
+            "full_name": "M. Peloso"
+          },
+          {
+            "full_name": "L. Sorbo"
+          }
+        ],
+        "number": 313,
+        "publication_info": {
+          "artid": "051302",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "87",
+          "year": 2001
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0208276"
+        ],
+        "authors": [
+          {
+            "full_name": "P. B. Greene"
+          },
+          {
+            "full_name": "K. Kadota"
+          },
+          {
+            "full_name": "H. Murayama"
+          }
+        ],
+        "number": 314,
+        "publication_info": {
+          "artid": "043502",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D68",
+          "year": 2003
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "J. R. Ellis"
+          },
+          {
+            "full_name": "C. Kounnas"
+          },
+          {
+            "full_name": "D. V. Nanopoulos"
+          }
+        ],
+        "number": 315,
+        "publication_info": {
+          "artid": "373",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B247",
+          "page_start": "373",
+          "year": 1984
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "J. Scherk"
+          },
+          {
+            "full_name": "J. H. Schwarz"
+          }
+        ],
+        "number": 316,
+        "publication_info": {
+          "artid": "61",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B153",
+          "page_start": "61",
+          "year": 1979
+        }
+      }
+    },
+    {
+      "curated_relation": false,
+      "record": {
+        "$ref": "http://localhost:5000/api/literature/1287957"
+      },
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1403.8138"
+        ],
+        "authors": [
+          {
+            "full_name": "L. J. Hall"
+          },
+          {
+            "full_name": "Y. Nomura"
+          },
+          {
+            "full_name": "S. Shirai"
+          }
+        ],
+        "number": 317,
+        "publication_info": {
+          "year": 2014
+        }
+      }
+    },
+    {
+      "curated_relation": false,
+      "record": {
+        "$ref": "http://localhost:5000/api/literature/1287615"
+      },
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1403.7193"
+        ],
+        "authors": [
+          {
+            "full_name": "N. Craig"
+          },
+          {
+            "full_name": "D. Green"
+          }
+        ],
+        "number": 318,
+        "publication_info": {
+          "year": 2014
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0310123"
+        ],
+        "authors": [
+          {
+            "full_name": "G. Giudice"
+          },
+          {
+            "full_name": "A. Notari"
+          },
+          {
+            "full_name": "M. Raidal"
+          },
+          {
+            "full_name": "A. Riotto"
+          },
+          {
+            "full_name": "A. Strumia"
+          }
+        ],
+        "number": 319,
+        "publication_info": {
+          "artid": "89",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B685",
+          "page_start": "89",
+          "year": 2004
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "M. Kamionkowski"
+          },
+          {
+            "full_name": "J. March-Russell"
+          }
+        ],
+        "misc": [
+          "hep-th/ 9202003"
+        ],
+        "number": 320,
+        "publication_info": {
+          "artid": "137",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B282",
+          "page_start": "137",
+          "year": 1992
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "V. Rubakov"
+          },
+          {
+            "full_name": "M. Shaposhnikov"
+          }
+        ],
+        "misc": [
+          "ISSN 0370-2693, URL"
+        ],
+        "number": 321,
+        "publication_info": {
+          "artid": "139",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B125",
+          "page_start": "139",
+          "year": 1983
+        },
+        "urls": [
+          {
+            "value": "http://www.sciencedirect.com/science/article/pii/0370269383912546"
+          }
+        ]
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "S. Weinberg"
+          }
+        ],
+        "number": 322,
+        "publication_info": {
+          "artid": "1",
+          "journal_title": "Rev.Mod.Phys.",
+          "journal_volume": "61",
+          "page_start": "1",
+          "year": 1989
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-th/0312212"
+        ],
+        "authors": [
+          {
+            "full_name": "R. Sundrum"
+          }
+        ],
+        "number": 323,
+        "publication_info": {
+          "year": 2003
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-th/9912001"
+        ],
+        "authors": [
+          {
+            "full_name": "S. S. Gubser"
+          }
+        ],
+        "number": 324,
+        "publication_info": {
+          "artid": "084017",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D63",
+          "year": 2001
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-th/9906182"
+        ],
+        "authors": [
+          {
+            "full_name": "H. L. Verlinde"
+          }
+        ],
+        "number": 325,
+        "publication_info": {
+          "artid": "264",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B580",
+          "page_start": "264",
+          "year": 2000
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-th/0012148"
+        ],
+        "authors": [
+          {
+            "full_name": "N. Arkani-Hamed"
+          },
+          {
+            "full_name": "M. Porrati"
+          },
+          {
+            "full_name": "L. Randall"
+          }
+        ],
+        "number": 326,
+        "publication_info": {
+          "artid": "017",
+          "journal_title": "JHEP",
+          "journal_volume": "0108",
+          "page_start": "017",
+          "year": 2001
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/9911406"
+        ],
+        "authors": [
+          {
+            "full_name": "C. Csaki"
+          },
+          {
+            "full_name": "M. Graesser"
+          },
+          {
+            "full_name": "L. Randall"
+          },
+          {
+            "full_name": "J. Terning"
+          }
+        ],
+        "misc": [
+          "183"
+        ],
+        "number": 327,
+        "publication_info": {
+          "artid": "045015",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D62",
+          "year": 2000
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "S. Fubini"
+          }
+        ],
+        "number": 328,
+        "publication_info": {
+          "artid": "521",
+          "journal_title": "Nuovo Cim.",
+          "journal_volume": "A34",
+          "page_start": "521",
+          "year": 1976
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "R. Contino"
+          },
+          {
+            "full_name": "A. Pomarol"
+          },
+          {
+            "full_name": "R. Rattazzi"
+          }
+        ],
+        "misc": [
+          "see talks by R. Rattazzi at Planck,and by A. Pomarol at the XVI IFT XmasWorkshop"
+        ],
+        "number": 329,
+        "publication_info": {
+          "year": 2010
+        },
+        "urls": [
+          {
+            "value": "https://indico.cern.ch/event/75810/contribution/163/material/slides/0.pdf"
+          },
+          {
+            "value": "http://www.ift.uam-csic.es/workshops/Xmas10/doc/pomarol.pdf"
+          }
+        ]
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1304.1795"
+        ],
+        "authors": [
+          {
+            "full_name": "Z. Chacko"
+          },
+          {
+            "full_name": "R. K. Mishra"
+          },
+          {
+            "full_name": "D. Stolarski"
+          }
+        ],
+        "number": 330,
+        "publication_info": {
+          "artid": "121",
+          "journal_title": "JHEP",
+          "journal_volume": "1309",
+          "page_start": "121",
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1305.3919"
+        ],
+        "authors": [
+          {
+            "full_name": "B. Bellazzini"
+          },
+          {
+            "full_name": "C. Csaki"
+          },
+          {
+            "full_name": "J. Hubisz"
+          },
+          {
+            "full_name": "J. Serra"
+          },
+          {
+            "full_name": "J. Terning"
+          }
+        ],
+        "number": 331,
+        "publication_info": {
+          "artid": "2790",
+          "journal_title": "Eur.Phys.J.",
+          "journal_volume": "C74",
+          "page_start": "2790",
+          "year": 2014
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/9905487"
+        ],
+        "authors": [
+          {
+            "full_name": "T. Nihei"
+          }
+        ],
+        "number": 332,
+        "publication_info": {
+          "artid": "81",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B465",
+          "page_start": "81",
+          "year": 1999
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-th/9905210"
+        ],
+        "authors": [
+          {
+            "full_name": "N. Kaloper"
+          }
+        ],
+        "number": 333,
+        "publication_info": {
+          "artid": "123506",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D60",
+          "year": 1999
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "P. Creminelli"
+          },
+          {
+            "full_name": "A. Nicolis"
+          },
+          {
+            "full_name": "R. Rattazzi"
+          }
+        ],
+        "misc": [
+          "hep-th/ 0107141"
+        ],
+        "number": 334,
+        "publication_info": {
+          "artid": "051",
+          "journal_title": "JHEP",
+          "journal_volume": "0203",
+          "page_start": "051",
+          "year": 2002
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "W. D. Goldberger"
+          },
+          {
+            "full_name": "M. B. Wise"
+          }
+        ],
+        "misc": [
+          "hep-ph/ 9907447"
+        ],
+        "number": 335,
+        "publication_info": {
+          "artid": "4922",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "83",
+          "page_start": "4922",
+          "year": 1999
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0607158"
+        ],
+        "authors": [
+          {
+            "full_name": "L. Randall"
+          },
+          {
+            "full_name": "G. Servant"
+          }
+        ],
+        "number": 336,
+        "publication_info": {
+          "artid": "054",
+          "journal_title": "JHEP",
+          "journal_volume": "0705",
+          "page_start": "054",
+          "year": 2007
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-th/9912001"
+        ],
+        "authors": [
+          {
+            "full_name": "S. S. Gubser"
+          }
+        ],
+        "number": 337,
+        "publication_info": {
+          "artid": "084017",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D63",
+          "year": 2001
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-th/9803131"
+        ],
+        "authors": [
+          {
+            "full_name": "E. Witten"
+          }
+        ],
+        "number": 338,
+        "publication_info": {
+          "artid": "505",
+          "journal_title": "Adv.Theor.Math.Phys.",
+          "journal_volume": "2",
+          "page_start": "505",
+          "year": 1998
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "A. H. Guth"
+          },
+          {
+            "full_name": "E. J. Weinberg"
+          }
+        ],
+        "number": 339,
+        "publication_info": {
+          "artid": "321",
+          "journal_title": "Nucl.Phys.",
+          "journal_volume": "B212",
+          "page_start": "321",
+          "year": 1983
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "S. Hawking"
+          },
+          {
+            "full_name": "I. Moss"
+          },
+          {
+            "full_name": "J. Stewart"
+          }
+        ],
+        "number": 340,
+        "publication_info": {
+          "artid": "2681",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D26",
+          "page_start": "2681",
+          "year": 1982
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "G. W. Anderson"
+          },
+          {
+            "full_name": "L. J. Hall"
+          }
+        ],
+        "number": 341,
+        "publication_info": {
+          "artid": "2685",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D45",
+          "page_start": "2685",
+          "year": 1992
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "S. R. Coleman"
+          }
+        ],
+        "number": 342,
+        "publication_info": {
+          "artid": "2929",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D15",
+          "page_start": "2929",
+          "year": 1977
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "B. Zwiebach"
+          }
+        ],
+        "misc": [
+          "184"
+        ],
+        "number": 343,
+        "publication_info": {
+          "artid": "315",
+          "journal_title": "Phys.Lett.",
+          "journal_volume": "B156",
+          "page_start": "315",
+          "year": 1985
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "D. G. Boulware"
+          },
+          {
+            "full_name": "S. Deser"
+          }
+        ],
+        "number": 344,
+        "publication_info": {
+          "artid": "2656",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "55",
+          "page_start": "2656",
+          "year": 1985
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "B. Zumino"
+          }
+        ],
+        "number": 345,
+        "publication_info": {
+          "artid": "109",
+          "journal_title": "Phys.Rept.",
+          "journal_volume": "137",
+          "page_start": "109",
+          "year": 1986
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "N. E. Mavromatos"
+          },
+          {
+            "full_name": "J. Rizos"
+          }
+        ],
+        "misc": [
+          "hep-th/ 0008074"
+        ],
+        "number": 346,
+        "publication_info": {
+          "artid": "124004",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D62",
+          "year": 2000
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1011.0544"
+        ],
+        "authors": [
+          {
+            "full_name": "S. Nojiri"
+          },
+          {
+            "full_name": "S. D. Odintsov"
+          }
+        ],
+        "number": 347,
+        "publication_info": {
+          "artid": "59",
+          "journal_title": "Phys.Rept.",
+          "journal_volume": "505",
+          "page_start": "59",
+          "year": 2011
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:0805.1726"
+        ],
+        "authors": [
+          {
+            "full_name": "T. P. Sotiriou"
+          },
+          {
+            "full_name": "V. Faraoni"
+          }
+        ],
+        "number": 348,
+        "publication_info": {
+          "artid": "451",
+          "journal_title": "Rev.Mod.Phys.",
+          "journal_volume": "82",
+          "page_start": "451",
+          "year": 2010
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-th/0307288"
+        ],
+        "authors": [
+          {
+            "full_name": "S. Nojiri"
+          },
+          {
+            "full_name": "S. D. Odintsov"
+          }
+        ],
+        "number": 349,
+        "publication_info": {
+          "artid": "123512",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D68",
+          "year": 2003
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:astro-ph/0306438"
+        ],
+        "authors": [
+          {
+            "full_name": "S. M. Carroll"
+          },
+          {
+            "full_name": "V. Duvvuri"
+          },
+          {
+            "full_name": "M. Trodden"
+          },
+          {
+            "full_name": "M. S. Turner"
+          }
+        ],
+        "number": 350,
+        "publication_info": {
+          "artid": "043528",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D70",
+          "year": 2004
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1002.4928"
+        ],
+        "authors": [
+          {
+            "full_name": "A. De Felice"
+          },
+          {
+            "full_name": "S. Tsujikawa"
+          }
+        ],
+        "number": 351,
+        "publication_info": {
+          "artid": "3",
+          "journal_title": "Living Rev.Rel.",
+          "journal_volume": "13",
+          "page_start": "3",
+          "year": 2010
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:0710.1738"
+        ],
+        "authors": [
+          {
+            "full_name": "S. Nojiri"
+          },
+          {
+            "full_name": "S. D. Odintsov"
+          }
+        ],
+        "number": 352,
+        "publication_info": {
+          "artid": "026007",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D77",
+          "year": 2008
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:0710.1291"
+        ],
+        "authors": [
+          {
+            "full_name": "V. Faraoni"
+          }
+        ],
+        "number": 353,
+        "publication_info": {
+          "artid": "127501",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D76",
+          "year": 2007
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "A. Bustelo"
+          },
+          {
+            "full_name": "D. Barraco"
+          }
+        ],
+        "number": 354,
+        "publication_info": {
+          "artid": "2333",
+          "journal_title": "Class.Quant.Grav.",
+          "journal_volume": "24",
+          "page_start": "2333",
+          "reportnumber": "gr-qc-0611149",
+          "year": 2007
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-ph/0502048"
+        ],
+        "authors": [
+          {
+            "full_name": "M. Parry"
+          },
+          {
+            "full_name": "S. Pichler"
+          },
+          {
+            "full_name": "D. Deeg"
+          }
+        ],
+        "number": 355,
+        "publication_info": {
+          "artid": "014",
+          "journal_title": "JCAP",
+          "journal_volume": "0504",
+          "page_start": "014",
+          "year": 2005
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1004.0150"
+        ],
+        "authors": [
+          {
+            "full_name": "A. Balcerzak"
+          },
+          {
+            "full_name": "M. P. Dabrowski"
+          }
+        ],
+        "number": 356,
+        "publication_info": {
+          "artid": "123527",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D81",
+          "year": 2010
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1111.0213"
+        ],
+        "authors": [
+          {
+            "full_name": "M. Faizal"
+          }
+        ],
+        "number": 357,
+        "publication_info": {
+          "artid": "106011",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D84",
+          "year": 2011
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:1211.6699"
+        ],
+        "authors": [
+          {
+            "full_name": "B. A. Burrington"
+          },
+          {
+            "full_name": "A. W. Peet"
+          },
+          {
+            "full_name": "I. G. Zadeh"
+          }
+        ],
+        "number": 358,
+        "publication_info": {
+          "artid": "106001",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D87",
+          "year": 2013
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "G. Gibbons"
+          },
+          {
+            "full_name": "S. Hawking"
+          }
+        ],
+        "number": 359,
+        "publication_info": {
+          "artid": "2752",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D15",
+          "page_start": "2752",
+          "year": 1977
+        }
+      }
+    },
+    {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "J. York"
+          },
+          {
+            "full_name": "James W."
+          }
+        ],
+        "misc": [
+          "185"
+        ],
+        "number": 360,
+        "publication_info": {
+          "artid": "1082",
+          "journal_title": "Phys.Rev.Lett.",
+          "journal_volume": "28",
+          "page_start": "1082",
+          "year": 1972
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:0809.4033"
+        ],
+        "authors": [
+          {
+            "full_name": "E. Dyer"
+          },
+          {
+            "full_name": "K. Hinterbichler"
+          }
+        ],
+        "number": 361,
+        "publication_info": {
+          "artid": "024028",
+          "journal_title": "Phys.Rev.",
+          "journal_volume": "D79",
+          "year": 2009
+        }
+      }
+    },
+    {
+      "reference": {
+        "arxiv_eprints": [
+          "arXiv:hep-th/0002160"
+        ],
+        "authors": [
+          {
+            "full_name": "S. S. Gubser"
+          }
+        ],
+        "number": 362,
+        "publication_info": {
+          "artid": "679",
+          "journal_title": "Adv.Theor.Math.Phys.",
+          "journal_volume": "4",
+          "page_start": "679",
+          "year": 2000
+        }
+      }
+    }
+  ],
+  "self": {
+    "$ref": "http://localhost:5000/api/literature/1408252"
+  },
+  "thesis": {
+    "_degree_type": "PhD",
+    "degree_type": "PhD",
+    "institutions": [
+      {
+        "name": "Syracuse U."
+      }
+    ]
+  },
+  "titles": [
+    {
+      "title": "Beyond Standard Model Physics under the ground and in the sky"
+    }
+  ],
+  "urls": [
+    {
+      "value": "http://surface.syr.edu/etd/319/"
+    },
+    {
+      "value": "http://inspirehep.net/record/1408252/files/viewcontent.pdf"
+    }
+  ]
+}
