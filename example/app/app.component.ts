@@ -20,7 +20,7 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/zip';
@@ -28,7 +28,6 @@ import { APP_CONFIG } from './app.config';
 
 @Component({
   selector: 'app',
-  encapsulation: ViewEncapsulation.None, //  Apply style (bootstrap.scss) globally
   styleUrls: [
     'app.component.scss'
   ],
@@ -49,7 +48,7 @@ export class AppComponent {
   constructor(private http: Http, @Inject(APP_CONFIG) config: AppConfig) {
     this.config = config;
     Observable.zip(
-      this.http.get('./assets/mock-data/record.json'),
+      this.http.get('./assets/mock-data/big-record.json'),
       this.http.get('./assets/mock-data/schema.json'),
       (recordRes, schemaRes) => {
         return {

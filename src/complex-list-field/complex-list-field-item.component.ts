@@ -20,27 +20,30 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import {
+  Component,
+  Input,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 
-import { JsonEditorModule } from '../../src';
+import { Map } from 'immutable';
 
-import { AppComponent } from './app.component';
-import { APP_CONFIG, EXAMPLE_CONFIG } from './app.config';
-
-@NgModule({
-  declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    JsonEditorModule
+@Component({
+  selector: 'complex-list-field-item',
+  styleUrls: [
+    './complex-list-field-item.component.scss'
   ],
-  providers: [
-    {provide: APP_CONFIG, useValue: EXAMPLE_CONFIG },
-  ],
-  bootstrap: [AppComponent]
+  templateUrl: './complex-list-field-item.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppModule { }
+export class ComplexListFieldItemComponent {
+  @Input() value: Map<string, any>;
+  @Input() schema: Object;
+  @Input() path: Array<any>;
+  @Input() keys: Array<string>;
+
+  getFieldPath(name: string): Array<any> {
+    return this.path.concat(name);
+  }
+
+}

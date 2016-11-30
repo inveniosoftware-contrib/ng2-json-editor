@@ -1,1 +1,1 @@
-export { EditorPreviewerComponent, Preview } from './editor-previewer.component';
+export { EditorPreviewerComponent } from './editor-previewer.component';

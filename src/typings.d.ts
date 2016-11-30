@@ -57,6 +57,16 @@ interface GetUrlFunction {
   (record: Object): string;
 }
 
+interface LongListNavigatorConfig {
+  findSingle?: FindItemFunction;
+  findMultiple?: FindItemFunction;
+  itemsPerPage: number;
+}
+
+interface FindItemFunction {
+  (item: any, expression: string): boolean;
+}
+
 interface Preview {
   name: string;
   type: string;

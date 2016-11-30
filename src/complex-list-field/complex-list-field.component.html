@@ -1,28 +1,43 @@
 <div [id]="path.join('.')">
-  <div *ngFor="let value of values; let i = index; trackBy:trackByFunction" [id]="path.join('.') + '.' + i">
+  <!-- Navigator -->
+  <table *ngIf="navigator" class="navigator-container">
+    <tr>
+      <td class="form-group navigator-item-left">
+        <div class="input-group input-group-sm">
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" (click)="onFindClick()">⚲</button>
+          </span>
+          <input type="search" class="form-control" [(ngModel)]="expression" placeholder="Find" />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" [disabled]="currentFound <= 0" (click)="onFoundNavigate(-1)">❮</button>
+          </span>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" [disabled]="currentFound >= foundIndices.length - 1" (click)="onFoundNavigate(1)">❯</button>
+          </span>
+          <span *ngIf="foundIndices.length > 0" class="input-group-addon">
+            {{foundIndices.length}} out of {{values.size}}
+          </span>
+        </div>
+      </td>
+      <td class="navigator-item-right">
+        <pagination [totalItems]="values.size" [itemsPerPage]="navigator.itemsPerPage" [(ngModel)]="currentPage" [maxSize]="6" class="pagination-sm no-margin"
+          [boundaryLinks]="true" [rotate]="false" (pageChanged)="onPageChange($event.page)"></pagination>
+      </td>
+    </tr>
+  </table>
+  <div *ngFor="let pIndex of paginatedIndices; let i = index; trackBy:trackByFunction">
     <div class="complex-list-field-wrapper">
       <table class="table">
-        <tr *ngFor="let key of keys[i] | addAlwaysShowFields:schema.items | filterAndSortBySchema:schema.items; trackBy:trackByFunction">
-          <td class="label-holder">
-            <div>
-              <label>{{key | underscoreToSpace}}</label>
-              <add-new-element-button *ngIf="schema.items.properties[key].type === 'array'" [path]="getValuePath(i, key)" [schema]="schema.items.properties[key]"></add-new-element-button>
-            </div>
-          </td>
-          <td>
-            <any-type-field [value]="value.get(key) | selfOrEmpty:schema.items.properties[key]" [schema]="schema.items.properties[key]"
-              [path]="getValuePath(i, key)"></any-type-field>
-          </td>
-        </tr>
+        <complex-list-field-item [path]="getValuePath(pIndex)" [keys]="keys[i]" [value]="values.get(pIndex)" [schema]="schema.items"></complex-list-field-item>
         <!-- ADD-FIELD-FROM-SCHEMA, UP/DOWN and DELETE buttons for each row group -->
         <tr *ngIf="values.size > 0">
           <td class="button-holder">
-            <add-field-dropdown [fields]="keys[i]" (onFieldAdd)="onFieldAdd($event, i)" [schema]="schema.items.properties"></add-field-dropdown>
+            <add-field-dropdown [fields]="keys[i]" (onFieldAdd)="onFieldAdd($event, pIndex)" [schema]="schema.items.properties"></add-field-dropdown>
           </td>
           <td class="button-holder button-holder-complex-list-actions">
-            <button type="button" class="editor-btn-delete editor-btn-delete-complex" (click)="deleteElement(i)">&times;</button>
-            <button *ngIf="i > 0" type="button" class="editor-btn-move-up editor-btn-move-up-complex" (click)="moveElement(i, -1)">▲</button>
-            <button *ngIf="i < (values.size - 1)" class="editor-btn-move-down editor-btn-move-down-complex" type="button" (click)="moveElement(i, 1)">▼</button>
+            <button type="button" class="editor-btn-delete editor-btn-delete-complex" (click)="deleteElement(pIndex)">&times;</button>
+            <button *ngIf="pIndex > 0" type="button" class="editor-btn-move-up editor-btn-move-up-complex" (click)="moveElement(pIndex, -1)">▲</button>
+            <button *ngIf="pIndex < (values.size - 1)" class="editor-btn-move-down editor-btn-move-down-complex" type="button" (click)="moveElement(pIndex, 1)">▼</button>
           </td>
         </tr>
       </table>

@@ -1,0 +1,11 @@
+<tr [id]="path.join('.')" *ngFor="let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema; trackBy:trackByFunction">
+  <td class="label-holder">
+    <div>
+      <label>{{key | underscoreToSpace}}</label>
+      <add-new-element-button *ngIf="schema.properties[key].type === 'array'" [path]="getFieldPath(key)" [schema]="schema.properties[key]"></add-new-element-button>
+    </div>
+  </td>
+  <td>
+    <any-type-field [value]="value.get(key) | selfOrEmpty:schema.properties[key]" [schema]="schema.properties[key]" [path]="getFieldPath(key)"></any-type-field>
+  </td>
+</tr>
