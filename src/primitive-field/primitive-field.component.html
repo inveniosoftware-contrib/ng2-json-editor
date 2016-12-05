@@ -2,18 +2,18 @@
   <div class="editable-field-container" [ngClass]="errorNgClass" [tooltipHtml]="errors | errorsToMessagesHtml" tooltipTrigger="mouseenter"
     [tooltipEnable]="isErrorTooltipEnabled">
     <div *ngSwitchCase="'string'">
-      <textarea rows="1" textareaAutofit [(ngModel)]="value" (blur)="commitValueChange()" (keypress)="onKeypress($event)" placeholder="{{schema.title}}"></textarea>
+      <textarea rows="1" [tabindex]="tabIndex" textareaAutofit [(ngModel)]="value" (blur)="commitValueChange()" (keypress)="onKeypress($event)" placeholder="{{schema.title}}"></textarea>
     </div>
     <div *ngSwitchCase="'enum'">
       <!-- TODO: set placeholder -->
-      <searchable-dropdown [value]="value" [items]="schema.enum" [shortcutMap]="schema.x_editor_enum_shortcut_map" (onSelect)="onSearchableDropdownSelect($event)"></searchable-dropdown>
+      <searchable-dropdown [tabindex]="tabIndex" [value]="value" [items]="schema.enum" [shortcutMap]="schema.x_editor_enum_shortcut_map" (onSelect)="onSearchableDropdownSelect($event)"></searchable-dropdown>
     </div>
     <div *ngSwitchCase="'autocomplete'">
-      <autocomplete-input [value]="value" [path]="path" [autocompletionOptions]="schema.x_editor_autocomplete" (onBlur)="commitValueChange()"
+      <autocomplete-input [tabindex]="tabIndex" [value]="value" [path]="path" [autocompletionOptions]="schema.x_editor_autocomplete" (onBlur)="commitValueChange()"
         (onKeypress)="onKeypress($event)" (onValueChange)="onAutcompleteInputValueChange($event)" [placeholder]="schema.title"></autocomplete-input>
     </div>
     <div *ngSwitchCase="'integer'">
-      <input type="number" [(ngModel)]="value" (blur)="commitValueChange()" (keypress)="onKeypress($event)" placeholder="{{schema.title}}">
+      <input type="number" [tabindex]="tabIndex" [(ngModel)]="value" (blur)="commitValueChange()" (keypress)="onKeypress($event)" placeholder="{{schema.title}}">
     </div>
     <div *ngSwitchCase="'boolean'">
       <input type="checkbox" [(ngModel)]="value" (ngModelChange)="commitValueChange()" placeholder="{{schema.title}}">

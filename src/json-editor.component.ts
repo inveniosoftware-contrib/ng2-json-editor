@@ -39,9 +39,12 @@ import {
   AppGlobalsService,
   JsonStoreService,
   JsonUtilService,
+  JsonSchemaService,
   RecordFixerService,
-  SchemaFixerService
+  SchemaFixerService,
+  ShortcutService
 } from './shared/services';
+
 
 @Component({
   selector: 'json-editor',
@@ -70,8 +73,10 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
     public jsonUtilService: JsonUtilService,
+    public jsonSchemaService: JsonSchemaService,
     public recordFixerService: RecordFixerService,
-    public schemaFixerService: SchemaFixerService) {
+    public schemaFixerService: SchemaFixerService,
+    public shortcutsService: ShortcutService) {
     super();
   }
 
@@ -97,13 +102,14 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
         // emit the change as plain JS object
         this.onRecordChange.emit(json.toJS());
       });
+    this.jsonSchemaService.setSchema(this.schema);
   }
 
   /**
    * Extracts previews from config, and populates url if necessary
    * by using `getUrl` or `urlPath` configs and the record.
    */
-  extractPreviews(): Array<any> {
+  private extractPreviews(): Array<any> {
     let previews = this.config.previews;
     if (previews) {
       // if url is not set directly, populate it
@@ -124,5 +130,9 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
 
   getPathForField(field: string): Array<any> {
     return [field];
+  }
+
+  get shortcuts() {
+    return this.shortcutsService.getShortcuts(this.config.shortcuts);
   }
 }

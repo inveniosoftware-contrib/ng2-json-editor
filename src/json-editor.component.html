@@ -2,7 +2,7 @@
   <div class="col-md-2 left">
     <tree-menu [record]="_record" [schema]="schema"></tree-menu>
   </div>
-  <div class="col-md-6 middle">
+  <div class="col-md-6 middle" [shortcuts]="shortcuts">
     <table id="editor" class="table">
       <div class="field-wrapper" *ngFor="let key of keys | addAlwaysShowFields:schema |filterAndSortBySchema:schema; trackBy:trackByFunction">
       <tr>

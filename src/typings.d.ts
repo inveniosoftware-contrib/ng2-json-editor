@@ -79,4 +79,5 @@ interface Preview {
 interface EditorConfig {
   schemaOptions?: Object;
   previews?: Array<Preview>;
+  shortcuts?: Object;
 }

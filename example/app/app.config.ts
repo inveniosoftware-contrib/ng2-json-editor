@@ -19,6 +19,14 @@ export const EXAMPLE_CONFIG: AppConfig = {
         maxVisiblePageCount: 5
       }
     }
+  },
+  shortcuts: {
+    'navigateLeft': {
+      key: 'ctrl+left'
+    },
+    'navigateRight': {
+      key: 'ctrl+right'
+    }
   }
 
 };

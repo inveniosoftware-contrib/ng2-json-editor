@@ -29,12 +29,13 @@ import {
 } from '@angular/core';
 
 import { AbstractFieldComponent } from '../abstract-field';
-
 import {
   AppGlobalsService,
   ComponentTypeService,
   JsonStoreService,
-  SchemaValidationService
+  SchemaValidationService,
+  TabIndexService,
+  ShortcutActionService
 } from '../shared/services';
 
 @Component({
@@ -52,11 +53,14 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   @Input() path: Array<any>;
 
   @Input() value: string | number | boolean;
+  private tabIndex: number;
 
   constructor(public schemaValidationService: SchemaValidationService,
     public componentTypeService: ComponentTypeService,
     public appGlobalsService: AppGlobalsService,
-    public jsonStoreService: JsonStoreService) {
+    public jsonStoreService: JsonStoreService,
+    public tabIndexService: TabIndexService,
+    public shortcutActionService: ShortcutActionService) {
     super(appGlobalsService);
   }
 
@@ -67,6 +71,21 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   ngOnInit() {
     super.ngOnInit();
     this.schema = this.schema || {};
+    if (!(this.valueType === 'boolean')) {
+      this.setTabIndex();
+      this.tabIndexService.tabIndexChange.subscribe(() => {
+        this.tabIndex = this.getTabIndex();
+      });
+    }
+  }
+
+  // TODO: Trigger this function for an external resource such as the record-editor using hooks
+  checkSeparator() {
+    if (this.value.toString().includes('$$')) {
+      let separatedValues = this.value.toString().split('$$');
+      this.shortcutActionService.addRowsAction(this.path, separatedValues);
+      this.value = separatedValues[0];
+    }
   }
 
   commitValueChange() {
@@ -78,8 +97,9 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
         console.error(error);
       }
     }
+    this.checkSeparator();
     // TODO: should we make the change even if it is not validated
-    this.jsonStoreService.setIn(this.path, this.value);
+    this.jsonStoreService.setIn(this.path, this.value.toString());
   }
 
   onKeypress(event: KeyboardEvent) {
@@ -98,4 +118,12 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     this.commitValueChange();
   }
 
+  getTabIndex(): number {
+    return this.tabIndexService.getElemTabIndex(this.path.join('.'));
+  }
+
+  setTabIndex() {
+    this.tabIndex = this.tabIndexService.addElemTabIndex(this.path.join('.'));
+  }
 }
+
