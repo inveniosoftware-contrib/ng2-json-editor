@@ -30,6 +30,14 @@ export const EXAMPLE_CONFIG: AppConfig = {
     'abstracts.items.properties.source': {
       x_editor_column_width: 20
     }
+  },
+  shortcuts: {
+    'navigateLeft': {
+      key: 'mod+left'
+    },
+    'navigateRight': {
+      key: 'mod+right'
+    }
   }
 
 };

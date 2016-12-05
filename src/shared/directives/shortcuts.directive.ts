@@ -20,18 +20,34 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
  */
 
-import { Ng2JsonEditorPage } from './app.po';
-import {browser} from 'protractor/globals';
+import {
+  ElementRef,
+  Directive,
+  OnInit, Input, OnDestroy
+} from '@angular/core';
 
-describe('ng2-json-editor App', function() {
-  let page: Ng2JsonEditorPage;
+import 'mousetrap';
 
-  beforeEach(() => {
-    page = new Ng2JsonEditorPage();
-    page.navigateTo('/');
-  });
+@Directive({
+  selector: '[shortcuts]'
+})
+export class ShortcutsDirective implements OnInit, OnDestroy {
+  @Input() shortcuts: any;
 
-  it('should display app title to be Ng2JsonEditor', () => {
-    expect(browser.getTitle()).toEqual('Ng2JsonEditor');
-  });
-});
+  private mousetrap: MousetrapInstance;
+
+  constructor(private el: ElementRef) {
+    this.mousetrap = new Mousetrap(this.el.nativeElement);
+  }
+
+  ngOnInit(): void {
+    Object.keys(this.shortcuts).forEach(method => {
+      let callbackFunc = this.shortcuts[method]['action'];
+      this.mousetrap.bind(this.shortcuts[method]['key'], callbackFunc);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.mousetrap.unbind(Object.keys(this.shortcuts));
+  }
+}

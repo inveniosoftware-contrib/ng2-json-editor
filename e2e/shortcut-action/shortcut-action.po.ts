@@ -20,18 +20,33 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
  */
 
-import { Ng2JsonEditorPage } from './app.po';
-import {browser} from 'protractor/globals';
+import { element, by } from 'protractor/globals';
+import { Ng2JsonEditorPage } from '../app.po';
+import {ElementFinder} from 'protractor';
 
-describe('ng2-json-editor App', function() {
-  let page: Ng2JsonEditorPage;
+export class ShortcutActionPage extends Ng2JsonEditorPage {
 
-  beforeEach(() => {
-    page = new Ng2JsonEditorPage();
-    page.navigateTo('/');
-  });
+  getNumberOfChildRowsbyId(id: string) {
+    let tableElem = element(by.id(id));
+    return tableElem.all(by.css('tr[id*=\'' + id + '\']')).count();
+  }
 
-  it('should display app title to be Ng2JsonEditor', () => {
-    expect(browser.getTitle()).toEqual('Ng2JsonEditor');
-  });
-});
+  getNumberOfChildTablesbyId(id: string) {
+    let tableElem = element(by.id(id));
+    return tableElem.all(by.css('table[id*=\'' + id + '\']')).count();
+  }
+
+  getChildOfElementByCss(elem: ElementFinder, css: string) {
+    return elem.element(by.css(css));
+  }
+
+  getNumberOfTextareaElementsById(id: string) {
+    let elem = element(by.id(id));
+    return elem.all(by.css('textarea')).count();
+  }
+
+  getNumberOfInputElementsById(id: string) {
+    let elem = element(by.id(id));
+    return elem.all(by.css('input')).count();
+  }
+}

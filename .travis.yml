@@ -4,7 +4,14 @@ language: node_js
 node_js:
 - '6.9.1'
 - node
-sudo: false
+sudo: true
+dist: trusty
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
 cache: yarn
 env:
   global:

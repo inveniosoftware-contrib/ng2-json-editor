@@ -33,7 +33,8 @@ import { List, Map } from 'immutable';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
 
-import { AppGlobalsService, JsonStoreService, DomUtilService } from '../shared/services';
+
+import { AppGlobalsService, JsonStoreService, TabIndexService, DomUtilService } from '../shared/services';
 
 @Component({
   selector: 'complex-list-field',
@@ -61,8 +62,9 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
 
   constructor(public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
-    public domUtilService: DomUtilService) {
-    super(appGlobalsService, jsonStoreService);
+    public domUtilService: DomUtilService,
+    public tabIndexService: TabIndexService) {
+    super(appGlobalsService, jsonStoreService, tabIndexService);
   }
 
   ngOnInit() {
@@ -102,6 +104,9 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
 
   onFieldAdd(index: number, field: string) {
     this.keys[index].push(field);
+    setTimeout(() => {
+      this.tabIndexService.sortAndSynchronizeTabIndexes();
+    });
   }
 
   deleteField(index: number, field: string) {
@@ -166,6 +171,9 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
     this.currentPage = page;
     this.paginatedIndices = this.getIndicesForPage(page);
     this.keys = this.getKeysForCurrentPage();
+    setTimeout(() => {
+      this.tabIndexService.sortAndSynchronizeTabIndexes();
+    });
   }
 
   getIndicesForPage(page: number): Array<number> {
