@@ -32,6 +32,35 @@ export class DomUtilService {
       if (firstInput) {
         firstInput.focus();
         firstInput.select();
+      } else {
+        firstInput = el.querySelector('div.btn-group') as HTMLInputElement;
+        if (firstInput) {
+          // .open is used for opening the dropdownmenu
+          firstInput.classList.add('open');
+          firstInput = el.querySelector('div.btn-group input') as HTMLInputElement;
+          firstInput.focus();
+          firstInput.select();
+        }
+      }
+    }
+  }
+
+  // TO-DO: find the next editable element in row.
+  focusRightOrLeftCell(index: number, direction: number) {
+    let firstInput = document.querySelector('[tabIndex=\'' + index + '\']') as HTMLElement;
+    if (firstInput) {
+      while (firstInput.nodeName !== 'TD') {
+        firstInput = firstInput.parentElement;
+      }
+      let nextSibling = direction > 0 ? firstInput.nextElementSibling : firstInput.previousElementSibling;
+      while (nextSibling && nextSibling.nodeName === 'TD') {
+        let textElem = nextSibling.querySelector('div.editable-field-container textarea') as HTMLInputElement;
+        if (textElem) {
+          textElem.focus();
+          textElem.select();
+          break;
+        }
+        nextSibling = direction > 0 ? nextSibling.nextElementSibling : nextSibling.previousElementSibling;
       }
     }
   }

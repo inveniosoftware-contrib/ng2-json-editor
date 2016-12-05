@@ -42,6 +42,7 @@ Please have a look at [example app](./example/app)
 | ------------- |-------------|-------------|
 | *schemaOptions*      | Object | Enriches JsonSchema with custom properties that `ng2-json-editor` understands. See [possible values](#schemaOptions).|
 | *previews*      | Array | Configures previews for the document. See [configuration syntax](#previews).|
+| *shortcuts*     | Object | Configures shortcuts for the document. See [shortcuts_syntax](#shortcuts).|
 
 ### <a name="schemaOptions"></a>Extended Schema (schemaOptions)
 
@@ -238,6 +239,48 @@ Note that:
 
 - Either `url`, `getUrl`, or `urlPath` must be present.
 - `html` type uses `iframe` and can display `.pdf` if supported by browser.
+
+### <a name="shortcuts"></a>Shortcuts
+
+Configuration for the shortcuts in the document based on focused fields.
+
+```
+{
+ shortcut-functionality: {
+    key: string; (keyboard combination for the specific #shortcutFunctions)
+ }
+}
+```
+
+Continue reading for available values of `shortcut-functionality` to be configured.
+
+#### add
+
+Adds a new empty row in the closest parent list.
+
+#### add_root
+
+Adds a new empty field to the root parent list.
+
+#### move_up/move_down
+
+Moves up/down the the table row of the focused field.
+
+#### arrow_up/arrow_down
+
+Navigates up/down to the above/below focusable field in the table.
+
+#### arrow_left/arrow_right
+
+Navigates left/right to the previous/next focusable field in the table.
+
+#### copy_row
+
+Copies the table row of the focused field below and lets the focused field of the new row empty.
+
+#### copy_item
+
+Copies the table item of the focused field below. This functionality can copy a complex schema item in an array.
 
 ### $ref fields
 

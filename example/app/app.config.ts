@@ -19,6 +19,14 @@ export const EXAMPLE_CONFIG: AppConfig = {
         maxVisiblePageCount: 5
       }
     }
+  },
+  shortcuts: {
+    'arrow_right': {
+      key: 'ctrl+right'
+    },
+    'arrow_left': {
+      key: 'ctrl+left'
+    }
   }
 
 };
