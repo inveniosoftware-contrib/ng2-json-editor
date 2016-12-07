@@ -24,6 +24,7 @@ import {
   Component,
   Input,
   OnChanges,
+  OnInit,
   ChangeDetectionStrategy,
   SimpleChanges
 } from '@angular/core';
@@ -32,7 +33,7 @@ import { List, Map } from 'immutable';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
 
-import { AppGlobalsService, JsonStoreService } from '../shared/services';
+import { AppGlobalsService, JsonStoreService, DomUtilService } from '../shared/services';
 
 @Component({
   selector: 'complex-list-field',
@@ -42,30 +43,141 @@ import { AppGlobalsService, JsonStoreService } from '../shared/services';
   templateUrl: './complex-list-field.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ComplexListFieldComponent extends AbstractListFieldComponent implements OnChanges {
+export class ComplexListFieldComponent extends AbstractListFieldComponent implements OnChanges, OnInit {
 
   @Input() values: List<Map<string, any>>;
   @Input() schema: Object;
   @Input() path: Array<any>;
 
   keys: Array<Array<string>>;
+  paginatedIndices: Array<number>;
+
+  foundIndices: Array<number>;
+  currentFound: number = 0;
+  currentPage: number = 1;
+  findExpression: string;
+  navigator: LongListNavigatorConfig;
+  shouldDisplayFoundNavigation: boolean;
 
   constructor(public appGlobalsService: AppGlobalsService,
-    public jsonStoreService: JsonStoreService) {
+    public jsonStoreService: JsonStoreService,
+    public domUtilService: DomUtilService) {
     super(appGlobalsService, jsonStoreService);
+  }
+
+  ngOnInit() {
+    this.navigator = this.schema['x_editor_long_list_navigator'];
+    if (this.navigator) {
+      this.paginatedIndices = this.getIndicesForPage(this.currentPage);
+    } else {
+      // set all indices as paginated indices if pagination is not enabled.
+      this.paginatedIndices = this.values.keySeq().toArray();
+    }
+    this.keys = this.getKeysForCurrentPage();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    let valuesChange = changes['values'];
+    if (valuesChange && !valuesChange.isFirstChange()) {
+      let preSize = valuesChange.previousValue.size;
+      let curSize = valuesChange.currentValue.size;
+
+      if (curSize !== preSize) {
+        if (this.navigator) {
+          let lastPage = this.getPageForIndex(curSize - 1);
+          // change the page if a new element is added and it's not on the last page
+          if (curSize > preSize && this.currentPage !== lastPage) {
+            this.currentPage = lastPage;
+          } else {
+            this.paginatedIndices = this.getIndicesForPage(this.currentPage);
+          }
+        } else {
+          this.paginatedIndices = this.values.keySeq().toArray();
+        }
+      }
+
+      this.keys = this.getKeysForCurrentPage();
+    }
   }
 
   onFieldAdd(field: string, index: number) {
     this.keys[index].push(field);
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    let valuesChanges = changes['values'];
-    if (valuesChanges) {
-      this.keys = valuesChanges.currentValue
-        .map(value => value.keySeq().toArray())
-        .toArray();
+  onFindClick() {
+    // clear for new search
+    this.foundIndices = [];
+    this.currentFound = 0;
+    // search to look for the first match
+    if (this.navigator.findSingle) {
+      let foundIndex = this.values
+        .findIndex(value => this.navigator.findSingle(value, this.findExpression));
+      if (foundIndex > -1) {
+        this.foundIndices.push(foundIndex);
+      }
+    }
+    // search to look for all matches
+    if (this.foundIndices.length === 0 && this.navigator.findMultiple) {
+      this.values
+        .forEach((value, index) => {
+          if (this.navigator.findMultiple(value, this.findExpression)) {
+            this.foundIndices.push(index);
+          }
+        });
+    }
+    // navigate to first search result if found any
+    if (this.foundIndices.length > 0) {
+      this.navigateToItem(this.foundIndices[0]);
+      this.shouldDisplayFoundNavigation = true;
+    } else {
+      this.shouldDisplayFoundNavigation = false;
     }
   }
 
+  onFindInputKeypress(key: string) {
+    if (key === 'Enter') {
+      this.onFindClick();
+    }
+  }
+
+  onFoundNavigate(direction: number) {
+    // No bound checks, since the buttons are disabled in these cases.
+    this.currentFound += direction;
+    this.navigateToItem(this.foundIndices[this.currentFound]);
+  }
+
+  navigateToItem(index: number) {
+    this.currentPage = this.getPageForIndex(index);
+    let itemId = this.path
+      .concat(index)
+      .join('.');
+    setTimeout(() => this.domUtilService.focusAndSelectFirstInputChildById(itemId));
+  }
+
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.paginatedIndices = this.getIndicesForPage(page);
+    this.keys = this.getKeysForCurrentPage();
+  }
+
+  getIndicesForPage(page: number): Array<number> {
+    let start = (page - 1) * this.navigator.itemsPerPage;
+    let indices: Array<number> = Array.apply(0, Array(this.navigator.itemsPerPage))
+      .map((el, index) => start + index);
+    // check if the indices includes some numbers that are out of values index range.
+    let lastIndexDiff = indices[indices.length - 1] - (this.values.size - 1);
+    if (lastIndexDiff > 0) {
+      indices.splice(indices.length - lastIndexDiff);
+    }
+    return indices;
+  }
+
+  getKeysForCurrentPage(): Array<Array<string>> {
+    return this.paginatedIndices
+      .map(pIndex => this.values.get(pIndex).keySeq().toArray());
+  }
+
+  getPageForIndex(index: number): number {
+    return Math.floor((index / this.navigator.itemsPerPage) + 1);
+  }
 }

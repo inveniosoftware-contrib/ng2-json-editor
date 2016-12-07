@@ -43,6 +43,8 @@ export class AutocompleteInputComponent implements OnInit {
   @Input() placeholder: string;
 
   @Output() onValueChange: EventEmitter<string> = new EventEmitter<any>();
+  @Output() onKeypress: EventEmitter<KeyboardEvent> = new EventEmitter<any>();
+  @Output() onBlur: EventEmitter<any> = new EventEmitter<any>();
 
   dataSource: Observable<string> | Array<string>;
   typeaheadOptionField: string;

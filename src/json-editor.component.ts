@@ -91,7 +91,8 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     this.jsonStoreService.setJson(this._record);
     // listen for all changes on json
     this.jsonStoreService.jsonChange
-      .subscribe((json) => {
+      .skipWhile(json => json === this._record)
+      .subscribe(json => {
         this._record = json;
         // emit the change as plain JS object
         this.onRecordChange.emit(json.toJS());

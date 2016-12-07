@@ -2,7 +2,7 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { List } from 'immutable';
 
-import { EmptyValueService, JsonStoreService } from '../shared/services';
+import { DomUtilService, EmptyValueService, JsonStoreService } from '../shared/services';
 
 @Component({
   selector: 'add-new-element-button',
@@ -17,7 +17,8 @@ export class AddNewElementButtonComponent {
   @Input() path: Array<any>;
   @Input() schema: Object;
 
-  constructor(public emptyValueService: EmptyValueService,
+  constructor(public domUtilService: DomUtilService,
+    public emptyValueService: EmptyValueService,
     public jsonStoreService: JsonStoreService) { }
 
   get tooltipName(): string {
@@ -27,8 +28,15 @@ export class AddNewElementButtonComponent {
   addNewElement() {
     let itemSchema = this.schema['items'];
     let emptyValue = this.emptyValueService.generateEmptyValue(itemSchema);
-    let values = this.jsonStoreService.getIn(this.path) || List.of([]);
+    let values: List<any> = this.jsonStoreService.getIn(this.path) || List();
     this.jsonStoreService.setIn(this.path, values.push(emptyValue));
+    // focus on the new added element
+    let newElementPath = this.path
+      .concat(values.size)
+      .join('.');
+    setTimeout(() =>
+      this.domUtilService.focusAndSelectFirstInputChildById(newElementPath)
+    );
   }
 
 }

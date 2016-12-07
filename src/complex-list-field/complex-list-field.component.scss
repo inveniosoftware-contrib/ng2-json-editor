@@ -1,9 +1,36 @@
 .complex-list-field-wrapper {
-    margin: 5px 15px 15px 15px;
-    padding: 5px;
-    box-shadow: 0 0 3px 1px rgba(0,0,0,0.25);
+  margin: 5px 15px 15px 15px;
+  padding: 5px;
+  box-shadow: 0 0 3px 1px rgba(0,0,0,0.25);
 }
 
 .button-holder-complex-list-actions {
-    text-align: right;
+  text-align: right;
+}
+
+.navigator-container {
+  width: 100%;  
+}
+
+$navigator-item-padding: 13px;
+
+.navigator-item-right {
+  float: right;
+  padding-right: $navigator-item-padding !important;
+  label {
+    position: relative;
+    top: -19px;
+  }
+}
+
+.navigator-item-left {
+  padding-left: $navigator-item-padding !important;
+}
+
+.transparent {
+  background: transparent;
+}
+
+.borderless {
+  border: none;
 }

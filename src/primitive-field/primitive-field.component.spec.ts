@@ -122,11 +122,29 @@ describe('PrimitiveFieldComponent', () => {
     expect(component.value).toEqual(inputValue);
   });
 
-  it('should call jsonStore to change', () => {
+  it('should call jsonStore for change on blur', () => {
     spyOn(component.jsonStoreService, 'setIn');
+    // change the value
     let newValue = 'newValue';
     changeInputElementValue(inputEl, newValue);
     fixture.detectChanges();
+    // blur
+    inputEl.dispatchEvent(new Event('blur'));
+
+    expect(component.jsonStoreService.setIn).toHaveBeenCalledWith(component.path, newValue);
+  });
+
+  it('should call jsonStore for change on enter pressed', () => {
+    spyOn(component.jsonStoreService, 'setIn');
+    // change the value
+    let newValue = 'newValue';
+    changeInputElementValue(inputEl, newValue);
+    fixture.detectChanges();
+    // press enter
+    let enterPressedEvent = new Event('keypress');
+    enterPressedEvent['key'] = 'Enter';
+    inputEl.dispatchEvent(enterPressedEvent);
+
     expect(component.jsonStoreService.setIn).toHaveBeenCalledWith(component.path, newValue);
   });
 });
