@@ -66,11 +66,6 @@ table {
     width: 1%;
     white-space: nowrap;
     padding-right: 5px;
-
-    .label-top-level {
-      padding-left: 3px;
-      margin-bottom: 2px;
-    }
   }
 
   tbody {
@@ -84,7 +79,6 @@ table {
   line-height: 1;
   text-shadow: 0 1px 0 #fff;
   opacity: 0.2;
-  cursor: pointer;
   background: transparent;
   border: 0;
   padding: 0 0 3px 3px;
@@ -97,6 +91,7 @@ table {
   &.editor-btn-delete-text {
     font-size: $text-button-font-size;
     opacity: 0.5;
+    padding: 0px;
   }
 
   &.editor-btn-delete-complex {
@@ -131,7 +126,7 @@ ul.pagination-top {
 }
 
 td.button-holder, th.button-holder {
-  width: 65px;
+  width: 46px;
 }
 
 div.error {
@@ -175,5 +170,20 @@ table.editable-inner-table {
   .dropdown-menu {
     left: inherit;
     right: 0px;
+    min-width: 100px;
+  }
+}
+
+li.title-dropdown-item > a {
+  padding: 0px;
+
+  * {
+    width: 100%;
+  }
+  
+  button {
+    text-align: left;
+    padding-left: 10px !important;
+    line-height: normal !important;
   }
 }
