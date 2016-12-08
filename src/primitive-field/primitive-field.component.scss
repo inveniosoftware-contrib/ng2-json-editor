@@ -1,21 +1,40 @@
 div.editable-field-container textarea,
 div.editable-field-container input {
-    vertical-align: middle;
-    width: 50%;
-    padding: 0 0 0 3px;
-    transition: all 0.5s ease;
-    resize: none;
-    border: none;
-    background-color: transparent;
-    display: inline-block;
-    
-    // Fill parent's width 
-    width:100%;
-    box-sizing: border-box;         // For IE and modern versions of Chrome
-    -moz-box-sizing: border-box;    // For Firefox   
-    -webkit-box-sizing: border-box; // For Safari
+  vertical-align: middle;
+  width: 50%;
+  padding: 0 0 0 3px;
+  transition: all 0.5s ease;
+  resize: none;
+  border: none;
+  background-color: transparent;
+  display: inline-block;
+
+  // Fill parent's width 
+  width:100%;
+  box-sizing: border-box;         // For IE and modern versions of Chrome
+  -moz-box-sizing: border-box;    // For Firefox   
+  -webkit-box-sizing: border-box; // For Safari
 }
 
 div.editable-field-container:hover {
-    background: #ffa;
+  background: #ffa;
+}
+
+table.input-container {
+  width: 100%;
+  td {
+    background: transparent !important;
+  }
+}
+
+td.link-button-holder {
+  width: 22px;
+}
+
+td.value-holder {
+  width: 100%;
+}
+
+a.no-decoration {
+  text-decoration: none;
 }

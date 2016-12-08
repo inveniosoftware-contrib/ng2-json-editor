@@ -34,7 +34,7 @@ import {
   AppGlobalsService,
   ComponentTypeService,
   JsonStoreService,
-  SchemaValidationService
+  SchemaValidationService,
 } from '../shared/services';
 
 @Component({
@@ -89,13 +89,17 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     }
   }
 
-  onAutcompleteInputValueChange(value: string) {
+  onAutocompleteInputValueChange(value: string) {
     this.value = value;
   }
 
   onSearchableDropdownSelect(value: string) {
     this.value = value;
     this.commitValueChange();
+  }
+
+  get linkBuilder(): LinkBuilderFunction {
+    return this.schema['x_editor_link_builder'];
   }
 
 }
