@@ -42,9 +42,9 @@ import {
   JsonSchemaService,
   RecordFixerService,
   SchemaFixerService,
-  ShortcutService
+  ShortcutService,
+  StateChangeStoreService
 } from './shared/services';
-
 
 @Component({
   selector: 'json-editor',
@@ -76,7 +76,8 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     public jsonSchemaService: JsonSchemaService,
     public recordFixerService: RecordFixerService,
     public schemaFixerService: SchemaFixerService,
-    public shortcutsService: ShortcutService) {
+    public shortcutService: ShortcutService,
+    public stateChangeStoreService: StateChangeStoreService) {
     super();
   }
 
@@ -103,6 +104,15 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
         this.onRecordChange.emit(json.toJS());
       });
     this.jsonSchemaService.setSchema(this.schema);
+    this.stateChangeStoreService.jsonStateRestoreChange
+      .subscribe(json => {
+        this.jsonStoreService.setPreModifiedJson(fromJS(json));
+      });
+    this.stateChangeStoreService.jsonStateAddChange
+      .subscribe(json => {
+        this.stateChangeStoreService.addNewJsonState(json);
+      });
+    this.shortcutService.setConfig(this.config.shortcuts);
   }
 
   /**
@@ -133,6 +143,6 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   }
 
   get shortcuts() {
-    return this.shortcutsService.getShortcuts(this.config);
+    return this.shortcutService.getShortcuts();
   }
 }

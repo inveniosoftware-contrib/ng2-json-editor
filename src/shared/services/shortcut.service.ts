@@ -20,13 +20,14 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
  */
 
-
 import { Injectable } from '@angular/core';
 import { TabIndexService } from './tab-index.service';
 import { ShortcutActionService } from './shortcut-action.service';
 
 @Injectable()
 export class ShortcutService {
+
+  private config = {};
 
   shortcuts = {
     'add': {
@@ -48,10 +49,6 @@ export class ShortcutService {
     'delete': {
       'key': 'mod+del',
       'action': this.shortcutActionService.generateShortcutAction('deleteAction')
-    },
-    'undo_delete': {
-      'key': 'mod+shift+del',
-      'action': this.shortcutActionService.generateShortcutAction('undoDeleteAction')
     },
     'arrow_up': {
       'key': 'up',
@@ -82,19 +79,23 @@ export class ShortcutService {
   constructor(public tabIndexService: TabIndexService,
               public shortcutActionService: ShortcutActionService) { }
 
-  getShortcuts(config: EditorConfig) {
-    return this.enrichShortcutsWithConfig(config);
+
+  setConfig(config: Object) {
+    this.config = config;
   }
 
-  enrichShortcutsWithConfig(config: EditorConfig): Object {
-    let shotcutsFromConfig = config['shortcuts'];
-    if (shotcutsFromConfig) {
-      Object.keys(this.shortcuts).map(method => {
-        if (shotcutsFromConfig[method]) {
-          this.shortcuts[method]['key'] = shotcutsFromConfig[method]['key'];
+  getShortcuts() {
+    return this.mergeShortcutsWithConfig(this.shortcuts, this.config);
+  }
+
+  mergeShortcutsWithConfig(shortcuts: Object, shortcutsFromConfig: Object): Object {
+    if (shortcutsFromConfig) {
+      Object.keys(shortcuts).map(method => {
+        if (shortcutsFromConfig[method]) {
+          shortcuts[method]['key'] = shortcutsFromConfig[method]['key'];
         }
       });
     }
-    return this.shortcuts;
+    return shortcuts;
   }
 }

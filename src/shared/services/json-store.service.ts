@@ -31,6 +31,15 @@ export class JsonStoreService implements NestedStore {
     this.json = json;
   }
 
+  getPreModifiedJson() {
+    return this.json;
+  }
+
+  setPreModifiedJson(json: Map<string, any>) {
+    this.json = json;
+    this._jsonChange.next(this.json);
+  }
+
   get jsonChange(): ReplaySubject<Map<string, any>> {
     return this._jsonChange;
   }

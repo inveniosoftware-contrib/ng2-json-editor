@@ -15,6 +15,7 @@ import { ShortcutActionService } from './shortcut-action.service';
 import { ShortcutService } from './shortcut.service';
 import { TabIndexService } from './tab-index.service';
 import { WindowHrefService } from './window-href.service';
+import { StateChangeStoreService } from './state-change-store.service';
 
 export {
   AppGlobalsService,
@@ -30,9 +31,10 @@ export {
   RecordFixerService,
   SchemaFixerService,
   SchemaValidationService,
+  TabIndexService,
   ShortcutActionService,
   ShortcutService,
-  TabIndexService,
+  StateChangeStoreService,
   WindowHrefService
 };
 
@@ -50,8 +52,9 @@ export const SHARED_SERVICES = [
   RecordFixerService,
   SchemaFixerService,
   SchemaValidationService,
+  TabIndexService,
   ShortcutActionService,
   ShortcutService,
-  TabIndexService,
+  StateChangeStoreService,
   WindowHrefService
 ];

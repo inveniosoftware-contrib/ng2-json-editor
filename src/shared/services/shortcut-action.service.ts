@@ -25,6 +25,7 @@ import { EmptyValueService } from './empty-value.service';
 import { JsonStoreService } from './json-store.service';
 import { JsonSchemaService } from './json-schema.service';
 import { DomUtilService } from './dom-util.service';
+import { StateChangeStoreService } from './state-change-store.service';
 import { TabIndexService } from './tab-index.service';
 import { PathUtilService } from './path-util.service';
 import { List } from 'immutable';
@@ -32,13 +33,12 @@ import { List } from 'immutable';
 @Injectable()
 export class ShortcutActionService {
 
-  private deletedList = [];
-
   constructor(public emptyValueService: EmptyValueService,
               public domUtilService: DomUtilService,
               public jsonStoreService: JsonStoreService,
               public jsonSchemaService: JsonSchemaService,
               public pathUtilService: PathUtilService,
+              public stateChangeStoreService: StateChangeStoreService,
               public tabIndexService: TabIndexService) { }
 
   addRootAction(path: Array<any>): void {
@@ -50,6 +50,7 @@ export class ShortcutActionService {
   }
 
   private addAction(path: Array<any>, root: boolean): void {
+    this.stateChangeStoreService.notifyJsonStateModified(this.jsonStoreService.getPreModifiedJson().toJS());
     let _path = this.pathUtilService.getNearestOrRootArrayParentInPath(path, root);
     this.addNewElementInArray(_path, this.jsonSchemaService.getSchemaFromPath(_path));
   }
@@ -78,6 +79,7 @@ export class ShortcutActionService {
   }
 
   private moveAction(path: Array<any>, direction: number): void {
+    this.stateChangeStoreService.notifyJsonStateModified(this.jsonStoreService.getPreModifiedJson().toJS());
     let index = this.pathUtilService.getElementIndexInReversePath(path);
     path[path.length - 2] = this.moveElement(index, direction, this.pathUtilService.getNearestOrRootArrayParentInPath(path, false));
     let _path = path.join('.');
@@ -106,31 +108,22 @@ export class ShortcutActionService {
 
   deleteAction(path: Array<any>) {
     if (window.confirm('Are you sure you want to delete this item?')) {
+      this.stateChangeStoreService.notifyJsonStateModified(this.jsonStoreService.getPreModifiedJson().toJS());
       this.deleteElement(this.pathUtilService.getNearestOrRootArrayParentInPath(path, false),
         this.pathUtilService.getElementIndexInReversePath(path));
     }
   }
 
+  undoAction() {
+    this.stateChangeStoreService.restoreJsonState();
+  }
+
   private deleteElement(path: Array<any>, index: number) {
     let values = this.jsonStoreService.getIn(path);
-    this.deletedList.push(values.get(index));
     this.jsonStoreService.setIn(path, values.delete(index));
     this.tabIndexService.deleteElemTabIndex(path.join('.'));
   }
 
-  undoDeleteAction(path: Array<any>) {
-    this.undoDeleteElement(this.pathUtilService.getNearestOrRootArrayParentInPath(path, false),
-      this.pathUtilService.getElementIndexInReversePath(path));
-  }
-
-  private undoDeleteElement(path: Array<any>, index: number) {
-    let values = this.jsonStoreService.getIn(path);
-    let deletedItem = this.deletedList.pop();
-    if (deletedItem) {
-      this.jsonStoreService.setIn(path, values.insert(index, deletedItem));
-      this.tabIndexService.insertElemTabIndex(path.join('.'));
-    }
-   }
 
   navigateUpAction(path: Array<any>): void {
     this.navigateUpDownAction(path, -1);
@@ -167,11 +160,13 @@ export class ShortcutActionService {
   }
 
   copyRowAction(path: Array<any>) {
+    this.stateChangeStoreService.notifyJsonStateModified(this.jsonStoreService.getPreModifiedJson().toJS());
     let _path = this.pathUtilService.getNearestOrRootArrayParentInPath(path, false);
     this.copyCurrentRowBelow(path, _path);
   }
 
   copyItemAction(path: Array<any>) {
+    this.stateChangeStoreService.notifyJsonStateModified(this.jsonStoreService.getPreModifiedJson().toJS());
     let _path = this.pathUtilService.getNearestOrRootArrayParentInPath(path, true);
     this.copyCurrentSchemaItemBelow(path, _path);
   }
