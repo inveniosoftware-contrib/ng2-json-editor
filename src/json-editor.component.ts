@@ -39,8 +39,11 @@ import {
   AppGlobalsService,
   JsonStoreService,
   JsonUtilService,
+  JsonSchemaService,
   RecordFixerService,
-  SchemaFixerService
+  SchemaFixerService,
+  ShortcutService,
+  StateChangeStoreService
 } from './shared/services';
 
 @Component({
@@ -70,8 +73,11 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
     public jsonUtilService: JsonUtilService,
+    public jsonSchemaService: JsonSchemaService,
     public recordFixerService: RecordFixerService,
-    public schemaFixerService: SchemaFixerService) {
+    public schemaFixerService: SchemaFixerService,
+    public shortcutService: ShortcutService,
+    public stateChangeStoreService: StateChangeStoreService) {
     super();
   }
 
@@ -97,13 +103,23 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
         // emit the change as plain JS object
         this.onRecordChange.emit(json.toJS());
       });
+    this.jsonSchemaService.setSchema(this.schema);
+    this.stateChangeStoreService.jsonStateRestoreChange
+      .subscribe(json => {
+        this.jsonStoreService.setPreModifiedJson(fromJS(json));
+      });
+    this.stateChangeStoreService.jsonStateAddChange
+      .subscribe(json => {
+        this.stateChangeStoreService.addNewJsonState(json);
+      });
+    this.shortcutService.setConfig(this.config.shortcuts);
   }
 
   /**
    * Extracts previews from config, and populates url if necessary
    * by using `getUrl` or `urlPath` configs and the record.
    */
-  extractPreviews(): Array<any> {
+  public extractPreviews(): Array<any> {
     let previews = this.config.previews;
     if (previews) {
       // if url is not set directly, populate it
@@ -124,5 +140,9 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
 
   getPathForField(field: string): Array<any> {
     return [field];
+  }
+
+  get shortcuts() {
+    return this.shortcutService.getShortcuts();
   }
 }

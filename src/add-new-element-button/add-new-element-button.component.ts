@@ -2,7 +2,8 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { List } from 'immutable';
 
-import { DomUtilService, EmptyValueService, JsonStoreService } from '../shared/services';
+
+import { DomUtilService, EmptyValueService, JsonStoreService, TabIndexService } from '../shared/services';
 
 @Component({
   selector: 'add-new-element-button',
@@ -19,7 +20,8 @@ export class AddNewElementButtonComponent {
 
   constructor(public domUtilService: DomUtilService,
     public emptyValueService: EmptyValueService,
-    public jsonStoreService: JsonStoreService) { }
+    public jsonStoreService: JsonStoreService,
+    public tabIndexService: TabIndexService) { }
 
   get tooltipName(): string {
     return this.path[this.path.length - 1];
@@ -34,9 +36,10 @@ export class AddNewElementButtonComponent {
     let newElementPath = this.path
       .concat(values.size)
       .join('.');
-    setTimeout(() =>
-      this.domUtilService.focusAndSelectFirstInputChildById(newElementPath)
-    );
+    setTimeout(() => {
+      this.domUtilService.focusAndSelectFirstInputChildById(newElementPath);
+      this.tabIndexService.sortAndSynchronizeTabIndexes();
+    });
   }
 
 }

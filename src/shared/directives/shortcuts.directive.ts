@@ -18,12 +18,36 @@
  * In applying this license, CERN does not
  * waive the privileges and immunities granted to it by virtue of its status
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
-*/
+ */
 
-declare var System: any;
+import {
+  ElementRef,
+  Directive,
+  OnInit, Input, OnDestroy
+} from '@angular/core';
 
-interface AppConfig {
-  schemaOptions?: Object;
-  previews?: Array<Object>;
-  shortcuts?: Object;
+import 'mousetrap';
+
+@Directive({
+  selector: '[shortcuts]'
+})
+export class ShortcutsDirective implements OnInit, OnDestroy {
+  @Input() shortcuts: any;
+
+  private mousetrap: MousetrapInstance;
+
+  constructor(private el: ElementRef) {
+    this.mousetrap = new Mousetrap(this.el.nativeElement);
+  }
+
+  ngOnInit(): void {
+    Object.keys(this.shortcuts).forEach(method => {
+      let callbackFunc = this.shortcuts[method]['action'];
+      this.mousetrap.bind(this.shortcuts[method]['key'], callbackFunc);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.mousetrap.unbind(Object.keys(this.shortcuts));
+  }
 }

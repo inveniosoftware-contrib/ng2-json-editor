@@ -24,7 +24,7 @@ import { List } from 'immutable';
 
 import { AbstractFieldComponent } from '../abstract-field';
 
-import { JsonStoreService, AppGlobalsService } from '../shared/services';
+import { JsonStoreService, AppGlobalsService, TabIndexService } from '../shared/services';
 
 /**
  * Abstract component to share code of common operations of all array fields
@@ -39,7 +39,8 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
   path: Array<any>;
 
   constructor(public appGlobalsService: AppGlobalsService,
-    public jsonStoreService: JsonStoreService) {
+    public jsonStoreService: JsonStoreService,
+    public tabIndexService: TabIndexService) {
     super(appGlobalsService);
   }
   /**
@@ -61,6 +62,9 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
   deleteElement(index: number) {
     this.jsonStoreService.setIn(this.path, this.values.remove(index));
     this.values = this.jsonStoreService.getIn(this.path);
+    setTimeout(() => {
+      this.tabIndexService.deleteElemTabIndex(this.path.join('.').concat('.' + index));
+    });
   }
 
   /**

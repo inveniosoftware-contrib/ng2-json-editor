@@ -2,7 +2,7 @@
   <div class="editable-field-container" [ngClass]="errorNgClass" [tooltipHtml]="errors | errorsToMessagesHtml" tooltipTrigger="mouseenter"
     [tooltipEnable]="isErrorTooltipEnabled">
     <div *ngSwitchCase="'string'">
-      <textarea rows="1" textareaAutofit [(ngModel)]="value" (blur)="commitValueChange()" (keypress)="onKeypress($event)" placeholder="{{schema.title}}"></textarea>
+      <textarea rows="1" [tabindex]="tabIndex" textareaAutofit [(ngModel)]="value" (blur)="commitValueChange()" (keypress)="onKeypress($event)" placeholder="{{schema.title}}"></textarea>
     </div>
     <div *ngSwitchCase="'enum'">
       <!-- TODO: set placeholder -->

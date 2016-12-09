@@ -18,12 +18,42 @@
  * In applying this license, CERN does not
  * waive the privileges and immunities granted to it by virtue of its status
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
-*/
+ */
 
-declare var System: any;
+import { Injectable } from '@angular/core';
 
-interface AppConfig {
-  schemaOptions?: Object;
-  previews?: Array<Object>;
-  shortcuts?: Object;
+@Injectable()
+export class JsonSchemaService {
+
+  private schema: Object;
+
+  setSchema(schema: Object) {
+    this.schema = schema;
+  }
+
+  getSchemaFromPath(path: Array<any>) {
+    let schema = this.schema['properties'];
+    let _path = path.filter(value => {
+      return isNaN(value);
+    });
+    let pathSize = _path.length;
+    // single element in path is an array.
+    if ( pathSize === 1) {
+      return schema[_path[0]];
+    }
+    for (let i = 0; i < pathSize - 1; i++) {
+      schema = schema[path[i]];
+      if (schema['type']) {
+        if (schema['type'] === 'array') {
+          schema = schema['items']['properties'];
+        }
+        if (schema['type'] === 'object') {
+          schema =  schema['properties'];
+        }
+      }
+    }
+    // return schema of the last element in path.
+    return schema[_path[pathSize - 1]] ;
+  }
 }
+
