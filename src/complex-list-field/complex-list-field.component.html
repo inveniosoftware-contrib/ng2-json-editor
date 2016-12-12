@@ -31,8 +31,8 @@
         </label>
         <br>
         <pagination [totalItems]="values.size" [ngModel]="currentPage" [maxSize]="navigator.maxVisiblePageCount" [itemsPerPage]="navigator.itemsPerPage"
-          class="pagination-sm pagination-top" [boundaryLinks]="true" [rotate]="false" [firstText]="'❮❮'" [previousText]="'❮'" [nextText]="'❯'"
-          [lastText]="'❯❯'" (pageChanged)="onPageChange($event.page)"></pagination>
+          class="pagination-sm pagination-top" [boundaryLinks]="true" [rotate]="false" [firstText]="'❮❮'" [previousText]="'❮'"
+          [nextText]="'❯'" [lastText]="'❯❯'" (pageChanged)="onPageChange($event.page)"></pagination>
       </td>
     </tr>
   </table>
@@ -42,8 +42,18 @@
         <tr *ngFor="let key of keys[i] | addAlwaysShowFields:schema.items | filterAndSortBySchema:schema.items; trackBy:trackByFunction">
           <td class="label-holder">
             <div>
-              <label>{{key | underscoreToSpace}}</label>
-              <add-new-element-button *ngIf="schema.items.properties[key].type === 'array'" [path]="getValuePath(pIndex, key)" [schema]="schema.items.properties[key]"></add-new-element-button>
+              <title-dropdown [title]="key | underscoreToSpace">
+                <li class="title-dropdown-item">
+                  <a *ngIf="schema.items.properties[key].type === 'array'">
+                    <add-new-element-button [path]="getValuePath(pIndex, key)" [schema]="schema.items.properties[key]"></add-new-element-button>
+                  </a>
+                </li>
+                <li class="title-dropdown-item">
+                  <a>
+                    <button type="button" class="editor-btn-delete editor-btn-delete-text" (click)="deleteField(pIndex, key)">Delete</button>
+                  </a>
+                </li>
+              </title-dropdown>
             </div>
           </td>
           <td>
@@ -54,7 +64,7 @@
         <!-- ADD-FIELD-FROM-SCHEMA, UP/DOWN and DELETE buttons for each row group -->
         <tr *ngIf="values.size > 0">
           <td class="button-holder">
-            <add-field-dropdown [fields]="keys[i]" (onFieldAdd)="onFieldAdd($event, i)" [schema]="schema.items.properties"></add-field-dropdown>
+            <add-field-dropdown [fields]="keys[i]" (onFieldAdd)="onFieldAdd(i, $event)" [schema]="schema.items.properties"></add-field-dropdown>
           </td>
           <td class="button-holder button-holder-complex-list-actions">
             <button type="button" class="editor-btn-delete editor-btn-delete-complex" (click)="deleteElement(pIndex)">&times;</button>

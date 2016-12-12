@@ -1,4 +1,4 @@
-$button-font-size: 18px;
+$button-font-size: 13px;
 
 div.button-container {
   display: inline-block;
@@ -9,11 +9,9 @@ div.button-container {
   font-weight: bold;
   line-height: 0;
   text-shadow: 0 1px 0 #fff;
-  opacity: 0.4;
-  cursor: pointer;
+  opacity: 0.5;
   background: transparent;
   border: 0;
-  padding: 0;
   bottom: -5px;
   left: -5px;
 

@@ -21,10 +21,6 @@ export class AddNewElementButtonComponent {
     public emptyValueService: EmptyValueService,
     public jsonStoreService: JsonStoreService) { }
 
-  get tooltipName(): string {
-    return this.path[this.path.length - 1];
-  }
-
   addNewElement() {
     let itemSchema = this.schema['items'];
     let emptyValue = this.emptyValueService.generateEmptyValue(itemSchema);

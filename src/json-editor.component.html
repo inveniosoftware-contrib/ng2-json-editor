@@ -5,17 +5,22 @@
   <div class="col-md-6 middle">
     <table id="editor" class="table">
       <div class="field-wrapper" *ngFor="let key of keys | addAlwaysShowFields:schema |filterAndSortBySchema:schema; trackBy:trackByFunction">
-      <tr>
-        <td class="label-holder">
-          <label class="label-top-level">{{key | underscoreToSpace}}</label>
-          <add-new-element-button *ngIf="schema.properties[key].type === 'array'" [path]="getPathForField(key)" [schema]="schema.properties[key]"></add-new-element-button>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <any-type-field [value]="_record.get(key)" [schema]="schema.properties[key]" [path]="getPathForField(key)"></any-type-field>
-        </td>
-      </tr>
+        <tr>
+          <td class="label-holder">
+            <title-dropdown [title]="key | underscoreToSpace">
+              <li class="title-dropdown-item">
+                <a *ngIf="schema.properties[key].type === 'array'">
+                  <add-new-element-button [path]="getPathForField(key)" [schema]="schema.properties[key]"></add-new-element-button>
+                </a>
+              </li>
+            </title-dropdown>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <any-type-field [value]="_record.get(key)" [schema]="schema.properties[key]" [path]="getPathForField(key)"></any-type-field>
+          </td>
+        </tr>
       </div>
     </table>
   </div>

@@ -42,6 +42,7 @@ import { PrimitiveListFieldComponent } from './primitive-list-field';
 import { PrimitiveFieldComponent } from './primitive-field';
 import { RefFieldComponent } from './ref-field';
 import { TableListFieldComponent } from './table-list-field';
+import { TitleDropdownComponent } from './title-dropdown';
 import {
   TreeMenuComponent,
   TreeMenuItemComponent
@@ -67,6 +68,7 @@ import { SHARED_PIPES, SHARED_SERVICES, SHARED_DIRECTIVES } from './shared';
     RefFieldComponent,
     SearchableDropdownComponent,
     TableListFieldComponent,
+    TitleDropdownComponent,
     TreeMenuItemComponent,
     TreeMenuComponent,
     JsonEditorComponent,

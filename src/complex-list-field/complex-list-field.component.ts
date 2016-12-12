@@ -100,8 +100,16 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
     }
   }
 
-  onFieldAdd(field: string, index: number) {
+  onFieldAdd(index: number, field: string) {
     this.keys[index].push(field);
+  }
+
+  deleteField(index: number, field: string) {
+    this.values = this.values.removeIn([index, field]);
+    this.jsonStoreService.setIn(this.path, this.values);
+
+    // remove it from keys too, so that it will not be displayed as empty
+    this.keys[index].splice(this.keys.indexOf(name), 1);
   }
 
   onFindClick() {
