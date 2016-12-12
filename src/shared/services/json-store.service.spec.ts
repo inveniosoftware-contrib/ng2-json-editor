@@ -27,9 +27,11 @@ import { fromJS } from 'immutable';
 describe('JsonStoreService', () => {
 
   let service: JsonStoreService;
+  let historyLimit;
 
   beforeEach(() => {
     service = new JsonStoreService();
+    historyLimit = service['historyLimit'];
   });
 
   it('should set in path and notify when some lists parents is missing', () => {
@@ -86,4 +88,73 @@ describe('JsonStoreService', () => {
     service.setIn(path, value);
   });
 
+  it('should shift the first element if the new pushed element exceeds the maximum history length', () => {
+    let initialJson = fromJS({
+      aMap: {
+        anotherMap: {
+          innerMap: {
+            innerProperty: 'value'
+          }
+        }
+      }
+    });
+    service.setJson(initialJson);
+    service.addJsonToHistory();
+
+    let anotherJson = fromJS({
+      anotherMap: {
+        anotherAnotherMap: {
+          anotherInnerMap: {
+            anotherInnerProperty: 'anotherValue'
+          }
+        }
+      }
+    });
+    service.setJson(anotherJson);
+
+    for (let i = 0; i < historyLimit; i++) {
+      service.addJsonToHistory();
+    }
+    for (let i = 0; i < historyLimit - 1; i++) {
+      service.rollbackJsonFromHistory();
+    }
+
+    service.jsonChange.subscribe(changedJson => {
+      expect(initialJson.equals(changedJson)).toBeFalsy();
+    });
+
+    service.rollbackJsonFromHistory();
+  });
+
+  it('should get the right history item on history rollback', () => {
+    let initialJson = fromJS({
+      aMap: {
+        anotherMap: {
+          innerMap: {
+            innerProperty: 'value'
+          }
+        }
+      }
+    });
+    service.setJson(initialJson);
+    service.addJsonToHistory();
+
+    let anotherJson = fromJS({
+      anotherMap: {
+        anotherAnotherMap: {
+          anotherInnerMap: {
+            anotherInnerProperty: 'anotherValue'
+          }
+        }
+      }
+    });
+    service.setJson(anotherJson);
+    service.addJsonToHistory();
+
+    service.jsonChange.subscribe(changedJson => {
+      expect(anotherJson.equals(changedJson)).toBeTruthy();
+    });
+
+    service.rollbackJsonFromHistory();
+  });
 });
