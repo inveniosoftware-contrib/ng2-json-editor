@@ -212,6 +212,14 @@ Note that:
 - If both `findSingle` and `findMultiple` are defined in configuration, at first `findSingle` is executed for all items,
 if there is no result found then `findMultiple` is executed.
 
+#### x_editor_link_builder
+
+The function that returns a url string which will be pointed by a small link button at the right side of input element.
+
+```
+function(value: any): string;
+```
+
 ### <a name="previews"></a>Previews
 
 Configuration for previews to be displayed in previewer (on the right side).

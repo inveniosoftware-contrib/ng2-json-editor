@@ -18,6 +18,11 @@ export const EXAMPLE_CONFIG: AppConfig = {
         itemsPerPage: 5,
         maxVisiblePageCount: 5
       }
+    },
+    'arxiv_eprints.items.properties.value': {
+      x_editor_link_builder: (value: any) => {
+        return `http://arxiv.org/abs/${value}`;
+      }
     }
   }
 

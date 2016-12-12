@@ -68,6 +68,10 @@ interface FindItemFunction {
   (item: any, expression: string): boolean;
 }
 
+interface LinkBuilderFunction {
+  (value: any): string;
+}
+
 interface Preview {
   name: string;
   type: string;
