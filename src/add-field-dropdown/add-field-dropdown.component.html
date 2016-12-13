@@ -1,12 +1,12 @@
 <div *ngIf="!disabled" class="btn-group" dropdown keyboardNav="true" (onToggle)="focusElementIfOpen($event, expressionInput)">
-  <button id="simple-btn-keyboard-nav" type="button" class="editor-btn-add-subfield" dropdownToggle>+ <span class="caret"></span></button>
+  <button id="simple-btn-keyboard-nav" type="button" class="btn-add-field-dropdown" dropdownToggle><ng-content></ng-content> <span class="caret"></span></button>
   <ul class="dropdown-menu" dropdownMenu aria-labelledby="simple-btn-keyboard-nav">
-    <li>
-      <input #expressionInput class="dropdown-filter" [(ngModel)]="expression" placeholder="filter">
+    <li class="dropdown-filter-container">
+      <input #expressionInput [(ngModel)]="expression" placeholder="filter">
     </li>
     <li class="divider dropdown-divider"></li>
     <li *ngFor="let key of schema | differentKeys:fields | filterByExpression:expression">
-      <a class="dropdown-item" href="javascript:void(0)" (click)="onFieldAdd.emit(key)">{{key}}</a>
+      <a class="dropdown-item" href="javascript:void(0)" (click)="onFieldSelect(key)">{{key}}</a>
     </li>
   </ul>
 </div>

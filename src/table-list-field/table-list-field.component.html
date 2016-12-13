@@ -1,4 +1,4 @@
-<div [id]="path.join('.')">
+<div [id]="pathString">
   <div>
     <table class="table editable-inner-table">
       <thead class="thead-inverse">
@@ -8,12 +8,12 @@
           </th>
 
           <th class="button-holder">
-            <add-field-dropdown *ngIf="values.size > 0" [fields]="keys" (onFieldAdd)="onFieldAdd($event)" [schema]="schema.items.properties"></add-field-dropdown>
+            <add-field-dropdown *ngIf="values.size > 0" [fields]="keys" [pathString]="getElementPathString(0)" (onFieldAdd)="onFieldAdd($event)" [schema]="schema.items.properties">+</add-field-dropdown>
           </th>
 
         </tr>
       </thead>
-      <tr *ngFor="let row of values; let i = index; trackBy:trackByFunction" [id]="path.join('.') + '.' + i">
+      <tr *ngFor="let row of values; let i = index; trackBy:trackByFunction" [id]="getElementPathString(i)">
         <!-- Element value -->
         <td *ngFor="let key of keys | addAlwaysShowFields:schema.items | filterAndSortBySchema:schema.items; trackBy:trackByFunction">
           <any-type-field [value]="row.get(key) | selfOrEmpty:schema.items.properties[key]" [schema]="schema.items.properties[key]"

@@ -51,7 +51,7 @@ export abstract class AbstractFieldComponent
     this.errorsSubscription = this.appGlobalsService
       .globalErrorsSubject
       .subscribe((globalErrors) => {
-        this.errors = globalErrors[this.path.join('.')] || [];
+        this.errors = globalErrors[this.pathString] || [];
       });
   }
 
@@ -69,5 +69,9 @@ export abstract class AbstractFieldComponent
 
   get isErrorTooltipEnabled(): boolean {
     return this.errors && this.errors.length > 0;
+  }
+
+  get pathString(): string {
+    return this.path.join('.');
   }
 }

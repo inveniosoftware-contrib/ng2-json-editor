@@ -70,4 +70,8 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
     return this.path.concat(index, property);
   }
 
+  getElementPathString(index: number): string {
+    return `${this.pathString}.${index}`;
+  }
+
 }
