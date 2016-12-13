@@ -1,4 +1,4 @@
-<div [id]="path.join('.')">
+<div [id]="pathString">
   <table class="table">
     <tr *ngFor="let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema; trackBy:trackByFunction">
       <td>
@@ -23,7 +23,7 @@
     <!-- ADD-FIELD-FROM-SCHEMA -->
     <tr *ngIf="schema.properties">
       <td class="button-holder">
-        <add-field-dropdown [fields]="keys" (onFieldAdd)="onFieldAdd($event)" [schema]="schema.properties"></add-field-dropdown>
+        <add-field-dropdown [fields]="keys" [pathString]="pathString" (onFieldAdd)="onFieldAdd($event)" [schema]="schema.properties">+</add-field-dropdown>
       </td>
     </tr>
   </table>
