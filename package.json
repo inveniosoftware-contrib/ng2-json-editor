@@ -51,6 +51,7 @@
     "coveralls": "^2.11.12",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
+    "gulp-filter": "^4.0.0",
     "gulp-inline-ng2-template": "^3.0.1",
     "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "^1.6.0",
