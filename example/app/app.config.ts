@@ -7,6 +7,9 @@ export const EXAMPLE_CONFIG: AppConfig = {
     'titles.items.properties.title': {
       x_editor_hidden: true
     },
+    'authors.items.properties.ids': {
+      x_editor_disabled: true
+    },
     'references': {
       x_editor_long_list_navigator: {
         findSingle: (value, expression) => {

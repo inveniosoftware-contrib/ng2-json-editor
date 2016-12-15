@@ -4,10 +4,12 @@ import { ComponentTypeService } from './component-type.service';
 import { DomUtilService } from './dom-util.service';
 import { DynamicTemplateLoaderService } from './dynamic-template-loader.service';
 import { EmptyValueService } from './empty-value.service';
+import { FindReplaceAllService } from './find-replace-all.service';
 import { JsonStoreService } from './json-store.service';
 import { JsonUtilService } from './json-util.service';
 import { JsonSchemaService } from './json-schema.service';
 import { PathUtilService } from './path-util.service';
+import { ModalService } from './modal.service';
 import { RecordFixerService } from './record-fixer.service';
 import { SchemaFixerService } from './schema-fixer.service';
 import { SchemaValidationService } from './schema-validation.service';
@@ -23,10 +25,12 @@ export {
   DomUtilService,
   DynamicTemplateLoaderService,
   EmptyValueService,
+  FindReplaceAllService,
   JsonStoreService,
   JsonUtilService,
   JsonSchemaService,
   PathUtilService,
+  ModalService,
   RecordFixerService,
   SchemaFixerService,
   SchemaValidationService,
@@ -43,10 +47,12 @@ export const SHARED_SERVICES = [
   DomUtilService,
   DynamicTemplateLoaderService,
   EmptyValueService,
+  FindReplaceAllService,
   JsonStoreService,
   JsonUtilService,
   JsonSchemaService,
   PathUtilService,
+  ModalService,
   RecordFixerService,
   SchemaFixerService,
   SchemaValidationService,

@@ -80,6 +80,13 @@ interface Preview {
   getUrl?: GetUrlFunction;
 }
 
+interface ModalOptions {
+  title: string;
+  bodyHtml: any; // TODO: change to SafeHtml
+  type: string;
+  onConfirm?: () => void;
+}
+
 interface EditorConfig {
   schemaOptions?: Object;
   previews?: Array<Preview>;

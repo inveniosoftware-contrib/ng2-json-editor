@@ -1,0 +1,11 @@
+<div class="find-replace-container">
+  <div class="top-container-item">
+    <input placeholder="Find" [(ngModel)]="find" (keypress)="onKeypress($event.key)" />
+  </div>
+  <div>
+    <input placeholder="Replace" [(ngModel)]="replace" (keypress)="onKeypress($event.key)" />
+  </div>
+  <div class="match-whole-container">
+    <input type="checkbox" [(ngModel)]="matchWhole" (keypress)="onKeypress($event.key)" tooltip="Match Whole"/>
+  </div>
+</div>

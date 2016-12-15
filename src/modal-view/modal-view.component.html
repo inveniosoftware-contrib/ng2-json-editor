@@ -1,0 +1,20 @@
+<div class="modal fade" bsModal #modal="bs-modal" tabindex="-1" role="dialog" [config]="{ backdrop: false }">
+  <div class="modal-dialog modal-lg">
+    <div *ngIf="options" class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" (click)="modal.hide()">
+          <span>&times;</span>
+        </button>
+        <h4 class="modal-title">{{options.title}}</h4>
+      </div>
+      <div class="modal-body">
+        <div [innerHTML]="options.bodyHtml"></div>
+        <div [ngSwitch]="options.type">
+          <div *ngSwitchCase="'confirm'">
+            <button class="btn btn-default" (click)="options.onConfirm();">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
