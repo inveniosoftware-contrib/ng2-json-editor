@@ -10,6 +10,7 @@ import { RecordFixerService } from './record-fixer.service';
 import { SchemaFixerService } from './schema-fixer.service';
 import { SchemaValidationService } from './schema-validation.service';
 import { WindowHrefService } from './window-href.service';
+import { HookService } from './hook.service';
 
 export {
   AppGlobalsService,
@@ -23,7 +24,8 @@ export {
   RecordFixerService,
   SchemaFixerService,
   SchemaValidationService,
-  WindowHrefService
+  WindowHrefService,
+  HookService
 };
 
 export const SHARED_SERVICES = [
@@ -38,5 +40,6 @@ export const SHARED_SERVICES = [
   RecordFixerService,
   SchemaFixerService,
   SchemaValidationService,
-  WindowHrefService
+  WindowHrefService,
+  HookService
 ];

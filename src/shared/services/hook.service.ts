@@ -18,27 +18,23 @@
  * In applying this license, CERN does not
  * waive the privileges and immunities granted to it by virtue of its status
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
-*/
+ */
 
 import { Injectable } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
-import { registerOnCommitHook } from '../decorators';
+import { Map, List } from 'immutable';
 
 @Injectable()
-export class AppGlobalsService {
-  private _globalErrorsSubject: ReplaySubject<Object> = new ReplaySubject<Object>(1);
+export class HookService {
+  static hookMap = Map<string, List<any>>();
 
-  set globalErrors(errors: Object) {
-    this._globalErrorsSubject.next(errors);
+  static trigger(method: string, ...args) {
+    HookService.hookMap.get(method)
+      .forEach((hook) => {
+        hook(...args);
+      });
   }
 
-  get globalErrorsSubject(): ReplaySubject<Object> {
-    return this._globalErrorsSubject;
-  }
-
-  @registerOnCommitHook()
-  checkSeparator(value: string, path: string) {
-    console.log('Hook called with args: ', arguments);
-    // TODO: Implement adding new rows from spliting
+  static addHookOnMethod(method: string, hookFunction: any) {
+    HookService.hookMap = HookService.hookMap.set(method, HookService.hookMap.get(method, List()).push(hookFunction));
   }
 }

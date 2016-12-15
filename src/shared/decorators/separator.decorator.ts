@@ -18,27 +18,13 @@
  * In applying this license, CERN does not
  * waive the privileges and immunities granted to it by virtue of its status
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
-*/
+ */
 
-import { Injectable } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
-import { registerOnCommitHook } from '../decorators';
+import {HookService} from '../services/hook.service';
 
-@Injectable()
-export class AppGlobalsService {
-  private _globalErrorsSubject: ReplaySubject<Object> = new ReplaySubject<Object>(1);
-
-  set globalErrors(errors: Object) {
-    this._globalErrorsSubject.next(errors);
-  }
-
-  get globalErrorsSubject(): ReplaySubject<Object> {
-    return this._globalErrorsSubject;
-  }
-
-  @registerOnCommitHook()
-  checkSeparator(value: string, path: string) {
-    console.log('Hook called with args: ', arguments);
-    // TODO: Implement adding new rows from spliting
-  }
+export function registerOnCommitHook(): Ng2MethodDecorator {
+  return function(target: Object, key: string, descriptor: Ng2TypedPropertyDescriptor) {
+    HookService.addHookOnMethod('commitValueChange', descriptor.value);
+  };
 }
+
