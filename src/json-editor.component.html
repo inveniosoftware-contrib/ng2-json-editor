@@ -1,10 +1,11 @@
 <div class="row editor-container">
   <div class="col-md-2 left">
     <tree-menu [record]="_record" [schema]="schema"></tree-menu>
+    <add-field-dropdown [fields]="keys" [pathString]="''" (onFieldAdd)="onFieldAdd($event)" [schema]="schema.properties">Add field</add-field-dropdown>
   </div>
   <div class="col-md-6 middle">
     <table id="editor" class="table">
-      <div class="field-wrapper" *ngFor="let key of keys | addAlwaysShowFields:schema |filterAndSortBySchema:schema; trackBy:trackByFunction">
+      <div class="field-wrapper" *ngFor="let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema; trackBy:trackByFunction">
         <tr>
           <td class="label-holder">
             <title-dropdown [title]="key | underscoreToSpace">
@@ -13,12 +14,15 @@
                   <add-new-element-button [path]="getPathForField(key)" [schema]="schema.properties[key]"></add-new-element-button>
                 </a>
               </li>
+              <li class="title-dropdown-item">
+                <a><button type="button" class="editor-btn-delete editor-btn-delete-text" (click)="deleteField(key)">Delete</button></a>
+              </li>
             </title-dropdown>
           </td>
         </tr>
         <tr>
           <td>
-            <any-type-field [value]="_record.get(key)" [schema]="schema.properties[key]" [path]="getPathForField(key)"></any-type-field>
+            <any-type-field [value]="_record.get(key) | selfOrEmpty:schema.properties[key]" [schema]="schema.properties[key]" [path]="getPathForField(key)"></any-type-field>
           </td>
         </tr>
       </div>

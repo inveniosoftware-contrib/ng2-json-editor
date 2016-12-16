@@ -22,7 +22,7 @@
 
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { EmptyValueService } from '../shared/services';
+import { DomUtilService, EmptyValueService } from '../shared/services';
 
 @Component({
   selector: 'add-field-dropdown',
@@ -36,12 +36,14 @@ export class AddFieldDropdownComponent {
   // 'propeties' of an object schema
   @Input() schema: Object;
   @Input() fields: Array<string>;
+  @Input() pathString: string;
 
   @Output() onFieldAdd: EventEmitter<string> = new EventEmitter<string>();
 
   expression: string = '';
 
-  constructor(private emptyValueService: EmptyValueService) { }
+  constructor(private domUtilService: DomUtilService,
+    private emptyValueService: EmptyValueService) { }
 
   get disabled(): boolean {
     return Object.keys(this.schema).length === this.fields.length;
@@ -52,6 +54,13 @@ export class AddFieldDropdownComponent {
       // focus doesn't work without setTimeout, since dropdown is closed when this is called.
       setTimeout(() => el.focus());
     }
+  }
+
+  onFieldSelect(field: string) {
+    this.onFieldAdd.emit(field);
+
+    let newFieldPathString = `${this.pathString}.${field}`;
+    setTimeout(() => this.domUtilService.focusAndSelectFirstInputChildById(newFieldPathString));
   }
 
 }

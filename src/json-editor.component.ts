@@ -122,7 +122,18 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     return previews;
   }
 
+  deleteField(field: string) {
+    this._record = this._record.remove(field);
+    this.jsonStoreService.setJson(this._record);
+
+    this.keys.splice(this.keys.indexOf(field), 1);
+  }
+
   getPathForField(field: string): Array<any> {
     return [field];
+  }
+
+  onFieldAdd(field: string) {
+    this.keys.push(field);
   }
 }

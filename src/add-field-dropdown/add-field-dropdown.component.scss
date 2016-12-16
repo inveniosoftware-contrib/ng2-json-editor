@@ -1,4 +1,4 @@
-.editor-btn-add-subfield {
+.btn-add-field-dropdown {
   padding: 0;
   font-size: 21px;
   opacity: 0.4;
@@ -7,6 +7,7 @@
   font-weight: bold;
   line-height: 1;
   text-shadow: 0 1px 0 #fff;
+  color: darkslategray;
   margin-bottom: 2px;
 
   &:hover {
@@ -15,8 +16,12 @@
   }
 }
 
-$filter-input-margin: 3px;
-input.dropdown-filter {
-  margin-left: $filter-input-margin;
-  margin-right: $filter-input-margin;
+$filter-padding: 3px;
+.dropdown-filter-container {
+  padding-left: $filter-padding;
+  padding-right: $filter-padding;
+  
+  input {
+    width: 100%;
+  }
 }
