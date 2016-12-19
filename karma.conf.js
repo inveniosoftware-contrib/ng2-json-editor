@@ -1,14 +1,13 @@
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/0.13/config/configuration-file.html
- 
-// process.env.TRAVIS ? PhantomJS : Chrome is for running tests on PhantomJS for TRAVIS
+
 module.exports = function (config) {
   config.set({
     basePath: '',
     frameworks: ['jasmine', 'angular-cli'],
     plugins: [
       require('karma-jasmine'),
-      process.env.TRAVIS ? require('karma-phantomjs-launcher') : require('karma-chrome-launcher'),
+      require('karma-phantomjs-launcher'),
       require('karma-remap-istanbul'),
       require('angular-cli/plugins/karma')
     ],
@@ -33,7 +32,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: process.env.TRAVIS ? ['PhantomJS'] : ['Chrome'],
+    browsers: ['PhantomJS'],
     singleRun: false
   });
 };
