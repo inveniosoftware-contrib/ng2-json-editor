@@ -8,6 +8,8 @@ export class JsonStoreService implements NestedStore {
 
   private json: Map<string, any>;
   private _jsonChange: ReplaySubject<Map<string, any>> = new ReplaySubject<any>(1);
+  private historyLimit = 5;
+  private history = Array<Map<string, any>>();
 
   setIn(path: Array<any>, value: any) {
     // immutablejs setIn creates Map for keys that don't exist in path
@@ -29,6 +31,21 @@ export class JsonStoreService implements NestedStore {
 
   setJson(json: Map<string, any>) {
     this.json = json;
+  }
+
+  addJsonToHistory() {
+    this.history.push(this.json);
+    if (this.history.length > this.historyLimit) {
+      this.history.shift();
+    }
+  }
+
+  rollbackJsonFromHistory() {
+    let rollbackJson = this.history.pop();
+    if (rollbackJson) {
+      this.json = rollbackJson;
+      this.jsonChange.next(this.json);
+    }
   }
 
   get jsonChange(): ReplaySubject<Map<string, any>> {
