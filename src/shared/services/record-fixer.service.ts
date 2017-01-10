@@ -92,6 +92,8 @@ export class RecordFixerService {
     } else if (schema['type'] === 'array') {
       if (!schema['items']) {
         throw new Error(`"${key}"'s schema has "type": "array" but doesn't specify "items"`);
+      } else if (!Array.isArray(value)) {
+        throw new Error(`"${key}" is specified as "array" by schema but it is not an array in input json`);
       }
       value.forEach((element, index) => {
         this.fix(index, value, schema['items']);
@@ -107,6 +109,6 @@ export class RecordFixerService {
    */
   private deleteField(object: Object, field: string) {
     delete object[field];
-    console.warn(`"${field}" is removed from json since it's not in the schema`);
+    console.warn(`"${field}" is removed from input json since it's not in the schema`);
   }
 }
