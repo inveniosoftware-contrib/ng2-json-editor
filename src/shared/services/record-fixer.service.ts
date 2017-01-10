@@ -101,6 +101,6 @@ export class RecordFixerService {
    */
   private deleteField(object: Object, field: string) {
     delete object[field];
-    console.log(`REMOVED: ${field} not in schema`);
+    console.warn(`${field} is removed from json since it's not in the schema`);
   }
 }
