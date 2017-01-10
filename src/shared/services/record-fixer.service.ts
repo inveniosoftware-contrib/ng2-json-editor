@@ -68,7 +68,7 @@ export class RecordFixerService {
    * @param schema - schema of visited field/element
    */
   private fix(key: string | number, parent: Object | Array<any>, schema: Object) {
-    if (schema['x_editor_hidden']) {
+     if (schema['x_editor_hidden']) {
       return;
     }
 
@@ -77,6 +77,9 @@ export class RecordFixerService {
 
     // Recursive calls
     if (schema['type'] === 'object') {
+      if (!schema['properties']) {
+        throw new Error(`"${key}"'s schema has "type": "object" but doesn't specify "properties"`);
+      }
       // Looping over record to filter out fields that are not in schema.
       Object.keys(value).forEach(prop => {
         if (!schema['properties'][prop]) {
@@ -87,6 +90,9 @@ export class RecordFixerService {
         }
       });
     } else if (schema['type'] === 'array') {
+      if (!schema['items']) {
+        throw new Error(`"${key}"'s schema has "type": "array" but doesn't specify "items"`);
+      }
       value.forEach((element, index) => {
         this.fix(index, value, schema['items']);
       });
@@ -101,6 +107,6 @@ export class RecordFixerService {
    */
   private deleteField(object: Object, field: string) {
     delete object[field];
-    console.warn(`${field} is removed from json since it's not in the schema`);
+    console.warn(`"${field}" is removed from json since it's not in the schema`);
   }
 }
