@@ -44,10 +44,6 @@ export class ComponentTypeService {
 
     if (schema['x_editor_disabled']) {
       return 'disabled';
-    } else if (schema['x_editor_autocomplete']) {
-      return 'autocomplete';
-    } else if (schema['enum']) {
-      return 'enum';
     } else if (schema['x_editor_on_value_change']) {
       return 'value-change-watcher';
     }
@@ -56,6 +52,12 @@ export class ComponentTypeService {
     if (!schemaType) {
       if (Object.keys(schema).length === 0) { // if shema === {} (empty object)
         return 'raw';
+      }
+    } else if (schemaType === 'string') {
+      if (schema['x_editor_autocomplete']) {
+        return 'autocomplete';
+      } else if (schema['enum']) {
+        return 'enum';
       }
     } else if (schemaType === 'object') {
       if (schema['properties']['$ref']) {
@@ -82,6 +84,8 @@ export class ComponentTypeService {
         return 'primitive-list';
       }
     }
+    // execution reaches here if schemaType is either
+    // 'number', 'integer', 'string' or something else which is currently not supported
     return schemaType;
   }
 }

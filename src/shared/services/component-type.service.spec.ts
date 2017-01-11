@@ -108,7 +108,8 @@ describe('ComponentTypeService', () => {
 
   it('should return autocomplete', () => {
     let schema = {
-      x_editor_autocomplete: {}
+      x_editor_autocomplete: {},
+      type: 'string'
     };
     expect(service.getComponentType(schema)).toEqual('autocomplete');
   });
@@ -122,7 +123,8 @@ describe('ComponentTypeService', () => {
 
   it('should return enum', () => {
     let schema = {
-      enum: {}
+      enum: {},
+      type: 'string'
     };
     expect(service.getComponentType(schema)).toEqual('enum');
   });
