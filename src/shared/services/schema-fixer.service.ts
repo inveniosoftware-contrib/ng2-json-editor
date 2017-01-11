@@ -37,8 +37,9 @@ export class SchemaFixerService {
    * @return {Object} - fixed schema
    */
   fixSchema(schema: Object, config: Object): Object {
-
-    this.enrichSchemaWithConfig(schema, config);
+    if (config) {
+      this.enrichSchemaWithConfig(schema, config);
+    }
     schema = this.fixRecursively(schema);
     return schema;
   }
@@ -52,8 +53,12 @@ export class SchemaFixerService {
    */
   private enrichSchemaWithConfig(schema: Object, config: Object) {
     Object.keys(config).forEach(field => {
-      let schemaField = this.jsonUtilService.getValueInPath(schema['properties'], field);
-      Object.assign(schemaField, config[field]);
+      try {
+        let schemaField = this.jsonUtilService.getValueInPath(schema['properties'], field);
+        Object.assign(schemaField, config[field]);
+      } catch (error) {
+        console.warn(`Config for "${field}" path is ignored, since it does not exist in schema`);
+      }
     });
   }
   /**
@@ -129,7 +134,7 @@ export class SchemaFixerService {
         if (enumPropCount[prop] === anyOf.length) {
           // merge all enum values into one
           fixedSchema['properties'][prop]['enum'] = uniqueEnumValues;
-        // if a field enum for some of anyOf elements
+          // if a field enum for some of anyOf elements
         } else {
           // create a autocomplete config so that it will allow any values
           // but autocomplete from enum values from where the field is defined as enum

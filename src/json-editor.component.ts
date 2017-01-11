@@ -76,10 +76,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   }
 
   ngOnInit() {
-    let schemaOptions = this.config.schemaOptions;
-    if (schemaOptions) {
-      this.schema = this.schemaFixerService.fixSchema(this.schema, this.config.schemaOptions);
-    }
+    this.schema = this.schemaFixerService.fixSchema(this.schema, this.config.schemaOptions);
     this.record = this.recordFixerService.fixRecord(this.record, this.schema);
     this.previews = this.extractPreviews();
     // set errors that is used by other components
