@@ -28,7 +28,7 @@ import {
 
 import { SearchableDropdownComponent } from './searchable-dropdown.component';
 
-import { Ng2BootstrapModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { FilterByExpressionPipe } from '../shared/pipes';
 
 describe('SearchableDropdownComponent', () => {

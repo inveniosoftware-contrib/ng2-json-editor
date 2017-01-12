@@ -55,7 +55,7 @@ import {
 
 export class JsonEditorComponent extends AbstractTrackerComponent implements OnInit {
 
-  @Input() config: EditorConfig = {};
+  @Input() config: EditorConfig;
   @Input() record: Object;
   @Input() schema: Object;
   @Input() errorMap: Object = {};
@@ -82,6 +82,9 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
           <json-editor *ngIf="mySchema && myRecord" ...> </json-editor>
         in order to wait for them to be fetched before initializing json-editor
       `);
+    } else if (!this.config) {
+      this.config = {};
+      console.warn(`[config] is undefined, make sure that is intended.`);
     }
 
     this.schema = this.schemaFixerService.fixSchema(this.schema, this.config.schemaOptions);
