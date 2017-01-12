@@ -37,6 +37,9 @@ export class JsonUtilService {
     let value = json;
     pathElements.forEach(pathElement => {
       value = value[pathElement];
+      if (!value) {
+        throw new Error(`"${pathElement}" of given path not defined in given json`);
+      }
     });
     return value;
   }

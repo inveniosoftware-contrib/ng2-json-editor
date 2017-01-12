@@ -41,8 +41,12 @@ export class FilterAndSortBySchemaPipe implements PipeTransform {
     let schemaProps = schema['properties'];
     if (!keys) { return undefined; }
     return keys
-      .filter(key => !schemaProps[key]['x_editor_hidden'])
-      .sort((a, b) => {
+      .filter(key => {
+        if (!schemaProps[key]) {
+          throw new Error(`"${key}" is not specified as property in \n${JSON.stringify(schemaProps, undefined, 2)}`);
+        }
+        return !schemaProps[key]['x_editor_hidden'];
+      }).sort((a, b) => {
         // Sort by x_editor_priority, larger is the first.
         let pa = schemaProps[a]['x_editor_priority'] || 0;
         let pb = schemaProps[b]['x_editor_priority'] || 0;

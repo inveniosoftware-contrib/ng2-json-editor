@@ -76,10 +76,15 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   }
 
   ngOnInit() {
-    let schemaOptions = this.config.schemaOptions;
-    if (schemaOptions) {
-      this.schema = this.schemaFixerService.fixSchema(this.schema, this.config.schemaOptions);
+    if (!(this.schema && this.record)) {
+      throw new Error(`[schema] or [record] is undefined 
+        if you are fetching them async then please consider using:
+          <json-editor *ngIf="mySchema && myRecord" ...> </json-editor>
+        in order to wait for them to be fetched before initializing json-editor
+      `);
     }
+
+    this.schema = this.schemaFixerService.fixSchema(this.schema, this.config.schemaOptions);
     this.record = this.recordFixerService.fixRecord(this.record, this.schema);
     this.previews = this.extractPreviews();
     // set errors that is used by other components
