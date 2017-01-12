@@ -24,7 +24,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddFieldDropdownComponent } from './add-field-dropdown.component';
 
-import { Ng2BootstrapModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { Ng2BootstrapModule } from 'ng2-bootstrap';
 
 import { DifferentKeysPipe, FilterByExpressionPipe } from '../shared/pipes';
 
