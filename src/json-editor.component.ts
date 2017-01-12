@@ -31,7 +31,7 @@ import {
 } from '@angular/core';
 import { Http } from '@angular/http';
 
-import { fromJS, Map } from 'immutable';
+import { fromJS, Map, Set } from 'immutable';
 
 import { AbstractTrackerComponent } from './abstract-tracker';
 
@@ -67,7 +67,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
 
   _record: Map<string, any>;
   previews: Array<any> = [];
-  keys: Array<string>;
+  keys: Set<string>;
 
   constructor(public http: Http,
     public appGlobalsService: AppGlobalsService,
@@ -98,7 +98,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     // set errors that is used by other components
     this.appGlobalsService.globalErrors = this.errorMap;
     // get names of top-level fields
-    this.keys = Object.keys(this.record);
+    this.keys = Set.fromKeys(this.record);
     // use fromJS to convert input to immutable then pass it to the store
     this._record = fromJS(this.record);
     this.jsonStoreService.setJson(this._record);
@@ -140,7 +140,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     this._record = this._record.remove(field);
     this.jsonStoreService.setJson(this._record);
 
-    this.keys.splice(this.keys.indexOf(field), 1);
+    this.keys = this.keys.remove(field);
   }
 
   getPathForField(field: string): Array<any> {
@@ -148,7 +148,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   }
 
   onFieldAdd(field: string) {
-    this.keys.push(field);
+    this.keys = this.keys.add(field);
   }
 
   get shortcuts() {

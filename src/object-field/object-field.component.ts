@@ -22,7 +22,7 @@
 
 import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
-import { Map } from 'immutable';
+import { Map, Set } from 'immutable';
 
 import { AbstractFieldComponent } from '../abstract-field';
 
@@ -42,7 +42,7 @@ export class ObjectFieldComponent extends AbstractFieldComponent implements OnIn
   @Input() schema: Object;
   @Input() path: Array<any>;
 
-  keys: Array<string>;
+  keys: Set<string>;
 
   constructor(public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService) {
@@ -52,7 +52,7 @@ export class ObjectFieldComponent extends AbstractFieldComponent implements OnIn
   ngOnInit() {
     super.ngOnInit();
 
-    this.keys = this.value.keySeq().toArray();
+    this.keys = this.value.keySeq().toSet();
   }
 
   deleteField(name: string) {
@@ -60,7 +60,7 @@ export class ObjectFieldComponent extends AbstractFieldComponent implements OnIn
     this.value = this.value.remove(name);
     this.jsonStoreService.setIn(this.path, this.value);
     // remove the key too, so that it will not be displayed as empty
-    this.keys.splice(this.keys.indexOf(name), 1);
+    this.keys = this.keys.remove(name);
   }
 
   getFieldPath(name: string): Array<any> {
@@ -68,7 +68,7 @@ export class ObjectFieldComponent extends AbstractFieldComponent implements OnIn
   }
 
   onFieldAdd(field: string) {
-    this.keys.push(field);
+    this.keys = this.keys.add(field);
   }
 
 }

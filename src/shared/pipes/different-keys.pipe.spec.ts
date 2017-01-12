@@ -22,6 +22,8 @@
 
 import { DifferentKeysPipe } from './different-keys.pipe';
 
+import { Set } from 'immutable';
+
 describe('DifferentKeysPipe', () => {
   let pipe: DifferentKeysPipe;
 
@@ -37,11 +39,11 @@ describe('DifferentKeysPipe', () => {
       propDiff2: 1
     };
 
-    let arr = ['propA', 'propB'];
+    let existingKeys = Set(['propA', 'propB']);
 
-    let differentKeys = ['propDiff1', 'propDiff2'];
+    let differentKeys = Set(['propDiff1', 'propDiff2']);
 
-    let pipeResult = pipe.transform(obj, arr);
+    let pipeResult = pipe.transform(obj, existingKeys);
     expect(pipeResult).toEqual(differentKeys);
   });
 
@@ -51,10 +53,10 @@ describe('DifferentKeysPipe', () => {
       propB: 1
     };
 
-    let arr = ['propA', 'propB'];
+    let existingKeys = Set(['propA', 'propB']);
 
-    let pipeResult = pipe.transform(obj, arr);
-    expect(pipeResult).toEqual([]);
+    let pipeResult = pipe.transform(obj, existingKeys);
+    expect(pipeResult).toEqual(Set());
   });
 
 });

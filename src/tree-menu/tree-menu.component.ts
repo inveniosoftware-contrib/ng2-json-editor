@@ -22,7 +22,7 @@
 
 import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 
-import { Map } from 'immutable';
+import { Map, Set } from 'immutable';
 
 import { AbstractTrackerComponent } from '../abstract-tracker';
 
@@ -41,7 +41,7 @@ export class TreeMenuComponent extends AbstractTrackerComponent implements OnCha
   @Input() record: Map<string, any>;
   @Input() schema: Object;
 
-  keys: Array<string>;
+  keys: Set<string>;
 
   private prefixOrPath: string = '';
 
@@ -54,7 +54,7 @@ export class TreeMenuComponent extends AbstractTrackerComponent implements OnCha
     let recordChange = changes['record'];
     if (recordChange) {
       let currentRecord: Map<string, any> = recordChange.currentValue;
-      this.keys = currentRecord.keySeq().toArray();
+      this.keys = currentRecord.keySeq().toSet();
     }
   }
 

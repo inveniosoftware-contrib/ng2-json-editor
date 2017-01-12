@@ -23,6 +23,8 @@
 import { FilterAndSortBySchemaPipe } from './filter-and-sort-by-schema.pipe';
 import { AppGlobalsService } from '../services';
 
+import { Set, OrderedSet } from 'immutable';
+
 describe('FilterAndSortBySchemaPipe', () => {
   let pipe: FilterAndSortBySchemaPipe;
 
@@ -41,9 +43,9 @@ describe('FilterAndSortBySchemaPipe', () => {
         }
       }
     };
-    let keys = ['key1', 'key2'];
+    let keys = Set(['key1', 'key2']);
 
-    let expected = ['key2', 'key1'];
+    let expected = OrderedSet(['key2', 'key1']);
 
     expect(pipe.transform(keys, schema)).toEqual(expected);
   });
@@ -55,9 +57,9 @@ describe('FilterAndSortBySchemaPipe', () => {
         key2: {}
       }
     };
-    let keys = ['key2', 'key1'];
+    let keys = Set(['key2', 'key1']);
 
-    let expected = ['key1', 'key2'];
+    let expected = OrderedSet(['key1', 'key2']);
 
     expect(pipe.transform(keys, schema)).toEqual(expected);
   });
@@ -76,9 +78,9 @@ describe('FilterAndSortBySchemaPipe', () => {
           key4: {}
         }
       };
-      let keys = ['key1', 'key2', 'key3', 'key4'];
+      let keys = Set(['key1', 'key2', 'key3', 'key4']);
 
-      let expected = ['key2', 'key1', 'key3', 'key4'];
+      let expected = OrderedSet(['key2', 'key1', 'key3', 'key4']);
 
       expect(pipe.transform(keys, schema)).toEqual(expected);
     });
@@ -100,9 +102,9 @@ describe('FilterAndSortBySchemaPipe', () => {
           key5: {}
         }
       };
-      let keys = ['key5', 'key1', 'key2', 'key4', 'key3'];
+      let keys = Set(['key5', 'key1', 'key2', 'key4', 'key3']);
 
-      let expected = ['key4', 'key3', 'key5', 'key2', 'key1'];
+      let expected = OrderedSet(['key4', 'key3', 'key5', 'key2', 'key1']);
 
       expect(pipe.transform(keys, schema)).toEqual(expected);
     });
@@ -117,9 +119,9 @@ describe('FilterAndSortBySchemaPipe', () => {
         }
       }
     };
-    let keys = ['key1', 'key2'];
+    let keys = Set(['key1', 'key2']);
 
-    let expected = ['key2'];
+    let expected = OrderedSet(['key2']);
 
     expect(pipe.transform(keys, schema)).toEqual(expected);
   });

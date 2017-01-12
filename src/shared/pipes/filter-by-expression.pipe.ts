@@ -24,7 +24,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'filterByExpression',
-  pure: false
 })
 export class FilterByExpressionPipe implements PipeTransform {
 

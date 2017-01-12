@@ -21,18 +21,16 @@
 */
 
 import { Pipe, PipeTransform } from '@angular/core';
+
+import { Set } from 'immutable';
 /**
- * It returns array of keys which aren't present in given object (other)
+ * It returns array of keys which aren't present in given object
  */
 @Pipe({
-  name: 'differentKeys',
-  pure: false
+  name: 'differentKeys'
 })
 export class DifferentKeysPipe implements PipeTransform {
-  transform(object: Object, keys: Array<string>): Array<string> {
-    let objectKeys = Object.keys(object);
-    let keysSet = new Set(keys);
-    return objectKeys
-      .filter( objectKey => !keysSet.has(objectKey));
+  transform(object: Object, keys: Set<string>): Set<string> {
+    return Set.fromKeys(object).subtract(keys);
   }
 }
