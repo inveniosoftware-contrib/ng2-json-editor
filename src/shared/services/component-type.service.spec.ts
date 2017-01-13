@@ -114,13 +114,6 @@ describe('ComponentTypeService', () => {
     expect(service.getComponentType(schema)).toEqual('autocomplete');
   });
 
-  it('should return disabled', () => {
-    let schema = {
-      x_editor_disabled: true
-    };
-    expect(service.getComponentType(schema)).toEqual('disabled');
-  });
-
   it('should return enum', () => {
     let schema = {
       enum: {},

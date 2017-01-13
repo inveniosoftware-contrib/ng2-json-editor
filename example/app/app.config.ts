@@ -19,6 +19,9 @@ export const EXAMPLE_CONFIG: AppConfig = {
         maxVisiblePageCount: 5
       }
     },
+    'license': {
+      x_editor_disabled: true
+    },
     'arxiv_eprints.items.properties.value': {
       x_editor_link_builder: (value: any) => {
         return `http://arxiv.org/abs/${value}`;

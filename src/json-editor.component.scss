@@ -216,3 +216,14 @@ li.title-dropdown-item > a {
     }
   }
 }
+
+.disableCursorClass {
+  cursor: not-allowed;
+}
+
+.disableEventsClass {
+  pointer-events: none;
+  input,button,textarea,a {
+    opacity: .5;
+  }
+}

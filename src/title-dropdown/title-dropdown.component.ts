@@ -32,4 +32,5 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 })
 export class TitleDropdownComponent {
   @Input() title: string;
+  @Input() isDisabled: boolean;
 }
