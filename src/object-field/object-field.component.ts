@@ -41,6 +41,7 @@ export class ObjectFieldComponent extends AbstractFieldComponent implements OnIn
   @Input() value: Map<string, any>;
   @Input() schema: Object;
   @Input() path: Array<any>;
+  @Input() isDisabled: boolean;
 
   keys: Array<string>;
 

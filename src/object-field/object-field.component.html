@@ -4,7 +4,7 @@
       <!-- SUB FIELD TITLE MENU -->
       <td>
         <div>
-          <title-dropdown [title]="key | underscoreToSpace">
+          <title-dropdown [title]="key | underscoreToSpace" [disableElem]="isDisabled">
             <li class="title-dropdown-item">
               <a *ngIf="schema.properties[key].type === 'array'">
                 <add-new-element-button [path]="getFieldPath(key)" [schema]="schema.properties[key]"></add-new-element-button>
@@ -18,14 +18,15 @@
       </td>
       <!-- SUB FIELD COMPONENT -->
       <td>
-        <any-type-field [value]="value.get(key) | selfOrEmpty:schema.properties[key]" [schema]=schema.properties[key] [path]="getFieldPath(key)"></any-type-field>
+        <any-type-field [value]="value.get(key) | selfOrEmpty:schema.properties[key]" [schema]=schema.properties[key] [path]="getFieldPath(key)"
+                        [disableElem]="isDisabled"></any-type-field>
       </td>
     </tr>
 
     <!-- ADD SUB FIELD FROM SCHEMA DROPDOWN -->
     <tr>
       <td class="button-holder">
-        <add-field-dropdown [fields]="keys" [pathString]="pathString" (onFieldAdd)="onFieldAdd($event)" [schema]="schema.properties">+</add-field-dropdown>
+        <add-field-dropdown [fields]="keys" [pathString]="pathString" (onFieldAdd)="onFieldAdd($event)" [schema]="schema.properties" [isDisabled]="isDisabled">+</add-field-dropdown>
       </td>
     </tr>
   </table>

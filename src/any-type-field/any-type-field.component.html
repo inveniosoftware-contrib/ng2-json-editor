@@ -1,23 +1,23 @@
 <div [ngSwitch]="componentType">
   <div *ngSwitchCase="'table-list'">
-    <table-list-field [values]="value" [schema]="schema" [path]="path"></table-list-field>
+    <table-list-field [values]="value" [schema]="schema" [path]="path" [isDisabled]="isDisabled"></table-list-field>
   </div>
   <div *ngSwitchCase="'complex-list'">
-    <complex-list-field [values]="value" [schema]="schema" [path]="path"></complex-list-field>
+    <complex-list-field [values]="value" [schema]="schema" [path]="path" [isDisabled]="isDisabled"></complex-list-field>
   </div>
   <div *ngSwitchCase="'primitive-list'">
-    <primitive-list-field [values]="value" [schema]="schema" [path]="path"></primitive-list-field>
+    <primitive-list-field [values]="value" [schema]="schema" [path]="path" [isDisabled]="isDisabled"></primitive-list-field>
   </div>
   <div *ngSwitchCase="'object'">
-    <object-field [value]="value" [schema]="schema" [path]="path"></object-field>
+    <object-field [value]="value" [schema]="schema" [path]="path" [isDisabled]="isDisabled"></object-field>
   </div>
   <div *ngSwitchCase="'ref'">
-    <ref-field [value]="value" [schema]="schema" [path]="path"></ref-field>
+    <ref-field [value]="value" [schema]="schema" [path]="path" [isDisabled]="isDisabled"></ref-field>
   </div>
   <div *ngSwitchCase="'value-change-watcher'">
-    <value-change-watcher [value]="value" [schema]="schema" [path]="path"></value-change-watcher>
+    <value-change-watcher [value]="value" [schema]="schema" [path]="path" [isDisabled]="isDisabled"></value-change-watcher>
   </div>
   <div *ngSwitchDefault>
-    <primitive-field [value]="value" [schema]="schema" [path]="path"></primitive-field>
+    <primitive-field [value]="value" [schema]="schema" [path]="path" [isDisabled]="isDisabled"></primitive-field>
   </div>
 </div>

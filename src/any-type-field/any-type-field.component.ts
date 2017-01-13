@@ -51,10 +51,15 @@ export class AnyTypeFieldComponent {
   @Input() schema: Object;
   @Input() path: Array<any>;
   @Input() value: any;
+  @Input() disableElem: boolean = false;
 
   constructor(public componentTypeService: ComponentTypeService) { }
 
   get componentType(): string {
     return this.componentTypeService.getComponentType(this.schema);
+  }
+
+  get isDisabled(): Object {
+    return this.componentTypeService.checkIfComponentIsDisabled(this.schema) || this.disableElem;
   }
 }

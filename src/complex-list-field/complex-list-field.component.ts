@@ -48,6 +48,7 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
   @Input() values: List<Map<string, any>>;
   @Input() schema: Object;
   @Input() path: Array<any>;
+  @Input() isDisabled: boolean;
 
   keys: Array<Array<string>>;
   paginatedIndices: Array<number>;

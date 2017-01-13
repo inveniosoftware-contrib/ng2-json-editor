@@ -41,6 +41,7 @@ export class PrimitiveListFieldComponent extends AbstractListFieldComponent {
   @Input() values: List<any>;
   @Input() schema: Object;
   @Input() path: Array<any>;
+  @Input() isDisabled: boolean;
 
   constructor(public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService) {

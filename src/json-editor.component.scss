@@ -216,3 +216,11 @@ li.title-dropdown-item > a {
     }
   }
 }
+
+*:disabled {
+  color: darkgrey !important;
+}
+
+.disableLink {
+  pointer-events: none !important;
+}

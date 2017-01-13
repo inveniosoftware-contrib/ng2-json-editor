@@ -47,6 +47,7 @@ export class RefFieldComponent implements OnChanges {
   @Input() schema: Object;
   @Input() value: Map<string, any>;
   @Input() path: string;
+  @Input() isDisabled: boolean;
 
   // shorthand variables to each schema config properties
   isLazy: boolean;
@@ -137,5 +138,11 @@ export class RefFieldComponent implements OnChanges {
     let headers = new Headers();
     configHeaders.forEach(header => headers.append(header.name, header.value));
     return headers;
+  }
+
+  get disableLinkClass(): Object {
+    return {
+      disableLink: this.isDisabled
+    };
   }
 }

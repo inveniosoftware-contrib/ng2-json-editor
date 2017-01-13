@@ -3,14 +3,14 @@
     <table class="table">
       <tr *ngFor="let value of values; let i = index; trackBy:trackByFunction">
         <td>
-          <primitive-field [value]="value" [schema]="schema.items" [path]="getValuePath(i)"></primitive-field>
+          <primitive-field [value]="value" [schema]="schema.items" [path]="getValuePath(i)" [isDisabled]="isDisabled"></primitive-field>
         </td>
 
         <!-- UP/DOWN and DELETE buttons for each row -->
         <td *ngIf="values.size > 0" class="button-holder">
-          <button type="button" class="editor-btn-delete" (click)="deleteElement(i)">&times;</button>
-          <button *ngIf="i > 0" type="button" class="editor-btn-move-up" (click)="moveElement(i, -1)">▲</button>
-          <button *ngIf="i < (values.size - 1)" type="button" class="editor-btn-move-down" (click)="moveElement(i, 1)">▼</button>
+          <button type="button" class="editor-btn-delete" (click)="deleteElement(i)" [disabled]="isDisabled">&times;</button>
+          <button *ngIf="i > 0" type="button" class="editor-btn-move-up" (click)="moveElement(i, -1)" [disabled]="isDisabled">▲</button>
+          <button *ngIf="i < (values.size - 1)" type="button" class="editor-btn-move-down" (click)="moveElement(i, 1)" [disabled]="isDisabled">▼</button>
         </td>
       </tr>
     </table>

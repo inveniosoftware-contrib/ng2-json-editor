@@ -21,6 +21,7 @@
 */
 
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { ComponentTypeService } from '../shared/services/component-type.service';
 
 @Component({
   selector: 'title-dropdown',
@@ -32,4 +33,12 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 })
 export class TitleDropdownComponent {
   @Input() title: string;
+  @Input() disableElem: boolean;
+  @Input() schema: Object;
+
+  constructor(public componentTypeService: ComponentTypeService) { }
+
+  get isDisabled(): Object {
+    return this.componentTypeService.checkIfComponentIsDisabled(this.schema) || this.disableElem;
+  }
 }

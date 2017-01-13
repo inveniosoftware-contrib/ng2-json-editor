@@ -41,6 +41,7 @@ export class AutocompleteInputComponent implements OnInit {
   @Input() path: Array<any>;
   @Input() value: string;
   @Input() placeholder: string;
+  @Input() isDisabled: boolean;
 
   @Output() onValueChange: EventEmitter<string> = new EventEmitter<any>();
   @Output() onKeypress: EventEmitter<KeyboardEvent> = new EventEmitter<any>();

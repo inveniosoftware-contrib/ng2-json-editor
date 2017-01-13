@@ -52,6 +52,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   @Input() path: Array<any>;
 
   @Input() value: string | number | boolean;
+  @Input() isDisabled: boolean;
 
   constructor(public schemaValidationService: SchemaValidationService,
     public componentTypeService: ComponentTypeService,
@@ -102,4 +103,9 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     return this.schema['x_editor_link_builder'];
   }
 
+  get disableLinkClass(): Object {
+    return {
+      disableLink: this.isDisabled
+    };
+  }
 }

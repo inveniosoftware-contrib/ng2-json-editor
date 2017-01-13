@@ -41,6 +41,7 @@ export class TableListFieldComponent extends AbstractListFieldComponent implemen
   @Input() values: List<Map<string, any>>;
   @Input() schema: Object;
   @Input() path: Array<any>;
+  @Input() isDisabled: boolean;
 
   keys: Array<string>;
 

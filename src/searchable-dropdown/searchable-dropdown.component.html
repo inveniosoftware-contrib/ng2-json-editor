@@ -1,5 +1,5 @@
 <div class="btn-group" dropdown keyboardNav="true" [(isOpen)]="status.isOpen">
-  <input id="simple-btn-keyboard-nav" placeholder="{{value}}" [ngModel]="expression" (ngModelChange)="onExpressionChange($event)" (keypress)="onKeypress($event.key)" dropdownToggle>
+  <input id="simple-btn-keyboard-nav" placeholder="{{value}}" [ngModel]="expression" (ngModelChange)="onExpressionChange($event)" (keypress)="onKeypress($event.key)" dropdownToggle [disabled]="isDisabled">
   <ul class="dropdown-menu" dropdownMenu role="menu" aria-labelledby="simple-btn-keyboard-nav">
     <li *ngFor="let item of items | filterByExpression:expression" role="menuitem">
       <!-- href is needed for keyboard navigation -->

@@ -42,9 +42,7 @@ export class ComponentTypeService {
       throw new Error('schema is undefined');
     }
 
-    if (schema['x_editor_disabled']) {
-      return 'disabled';
-    } else if (schema['x_editor_autocomplete']) {
+    if (schema['x_editor_autocomplete']) {
       return 'autocomplete';
     } else if (schema['enum']) {
       return 'enum';
@@ -83,5 +81,12 @@ export class ComponentTypeService {
       }
     }
     return schemaType;
+  }
+
+  checkIfComponentIsDisabled(schema: Object) {
+    if (schema && schema['x_editor_disabled']) {
+      return true;
+    }
+    return false;
   }
 }

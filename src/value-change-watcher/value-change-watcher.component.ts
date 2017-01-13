@@ -50,6 +50,7 @@ export class ValueChangeWatcherComponent implements OnInit, OnChanges {
   @Input() schema: Object;
   @Input() path: Array<any>;
   @Input() value: any;
+  @Input() isDisabled: boolean;
 
   onValueChange: OnValueChangeFunction;
 

@@ -8,7 +8,7 @@
       <div class="field-wrapper" *ngFor="let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema; trackBy:trackByFunction">
         <tr>
           <td class="label-holder">
-            <title-dropdown [title]="key | underscoreToSpace">
+            <title-dropdown [title]="key | underscoreToSpace" [schema]="schema.properties[key]">
               <li class="title-dropdown-item">
                 <a *ngIf="schema.properties[key].type === 'array'">
                   <add-new-element-button [path]="getPathForField(key)" [schema]="schema.properties[key]"></add-new-element-button>

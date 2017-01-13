@@ -37,6 +37,7 @@ export class AddFieldDropdownComponent {
   @Input() schema: Object;
   @Input() fields: Array<string>;
   @Input() pathString: string;
+  @Input() isDisabled: boolean;
 
   @Output() onFieldAdd: EventEmitter<string> = new EventEmitter<string>();
 

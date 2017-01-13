@@ -17,7 +17,17 @@ export const EXAMPLE_CONFIG: AppConfig = {
         },
         itemsPerPage: 5,
         maxVisiblePageCount: 5
-      }
+      },
+      x_editor_disabled: true
+    },
+    'keywords': {
+      x_editor_disabled: true
+    },
+    'authors': {
+      x_editor_disabled: true
+    },
+    'arxiv_eprints': {
+      x_editor_disabled: true
     },
     'arxiv_eprints.items.properties.value': {
       x_editor_link_builder: (value: any) => {
