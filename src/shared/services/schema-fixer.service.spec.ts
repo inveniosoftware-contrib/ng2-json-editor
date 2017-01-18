@@ -168,6 +168,61 @@ describe('SchemaFixerService', () => {
     expect(fixed).toEqual(expected);
   });
 
+  it('should fix allOf', () => {
+    let schema = {
+      allOf: [
+        {
+          type: 'object'
+        },
+        {
+          properties: {
+            strProp: {
+              type: 'string'
+            }
+          }
+        },
+        {
+          properties: {
+            intProp: {
+              type: 'integer'
+            }
+          }
+        },
+        {
+          properties: {
+            enumProp: {
+              type: 'string',
+              enum: [
+                'enumValue1',
+                'enumValue2'
+              ]
+            }
+          }
+        }
+      ]
+    };
+    let expected = {
+      type: 'object',
+      properties: {
+        strProp: {
+          type: 'string'
+        },
+        intProp: {
+          type: 'integer'
+        },
+        enumProp: {
+          type: 'string',
+          enum: [
+            'enumValue1',
+            'enumValue2'
+          ]
+        }
+      }
+    };
+    let fixed = service.fixSchema(schema, {});
+    expect(fixed).toEqual(expected);
+  });
+
   it('should enrich schema with config', () => {
     let schema = {
       type: 'object',
