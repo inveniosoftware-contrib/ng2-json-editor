@@ -23,6 +23,9 @@ export const EXAMPLE_CONFIG: AppConfig = {
       x_editor_link_builder: (value: any) => {
         return `http://arxiv.org/abs/${value}`;
       }
+    },
+    'abstracts.items.properties.source': {
+      x_editor_column_width: 20
     }
   }
 
