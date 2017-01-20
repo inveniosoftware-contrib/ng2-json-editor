@@ -220,6 +220,20 @@ The function that returns a url string which will be pointed by a small link but
 function(value: any): string;
 ```
 
+#### x_editor_column_width
+
+Define the width that a field must acquire in a table.
+
+```
+abstracts.items.properties.source: {
+      x_editor_column_width: 20
+    }
+```
+
+Note that:
+
+- This is only applicable when the parent field is a table.
+
 ### <a name="previews"></a>Previews
 
 Configuration for previews to be displayed in previewer (on the right side).

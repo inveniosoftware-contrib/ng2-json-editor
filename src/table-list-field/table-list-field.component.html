@@ -15,7 +15,7 @@
       </thead>
       <tr *ngFor="let row of values; let i = index; trackBy:trackByFunction" [id]="getElementPathString(i)">
         <!-- Element value -->
-        <td *ngFor="let key of keys | addAlwaysShowFields:schema.items | filterAndSortBySchema:schema.items; trackBy:trackByFunction">
+        <td *ngFor="let key of keys | addAlwaysShowFields:schema.items | filterAndSortBySchema:schema.items; trackBy:trackByFunction" [style.width]="schema.items.properties[key]['x_editor_column_width'] + '%'">
           <any-type-field [value]="row.get(key) | selfOrEmpty:schema.items.properties[key]" [schema]="schema.items.properties[key]"
             [path]="getValuePath(i, key)"></any-type-field>
           <add-new-element-button *ngIf="schema.items.properties[key].type === 'array'" [path]="getValuePath(i, key)" [schema]="schema.items.properties[key]"></add-new-element-button>
