@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "example",
-      "outDir": "dist",
+      "outDir": "example-dist",
       "assets": "assets",
       "index": "index.html",
       "main": "main.ts",
