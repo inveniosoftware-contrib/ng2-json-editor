@@ -42,9 +42,7 @@ export class ComponentTypeService {
       throw new Error('schema is undefined');
     }
 
-    if (schema['x_editor_disabled']) {
-      return 'disabled';
-    } else if (schema['x_editor_on_value_change']) {
+    if (schema['x_editor_on_value_change']) {
       return 'value-change-watcher';
     }
 
