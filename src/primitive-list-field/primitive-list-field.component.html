@@ -1,7 +1,7 @@
 <div [id]="pathString">
   <div class="wide">
     <table class="table">
-      <tr *ngFor="let value of values; let i = index; trackBy:trackByFunction">
+      <tr *ngFor="let value of values | selfOrEmpty:schema; let i = index; trackBy:trackByFunction">
         <td>
           <primitive-field [value]="value" [schema]="schema.items" [path]="getValuePath(i)"></primitive-field>
         </td>
