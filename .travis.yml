@@ -2,16 +2,22 @@ notifications:
   email: false
 language: node_js
 node_js:
-- '5'
+- '6.9.1'
 - node
 sudo: false
+cache: yarn
+env:
+  global:
+    - GH_REF: 'github.com/inveniosoftware-contrib/ng2-json-editor.git'
 before_install:
   - npm install buffer-shims
   - export CHROME_BIN=chromium-browser
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
 before_deploy: npm run build
-after_success: npm run coveralls
+after_success:
+  - npm run coveralls
+  - ./deploy-gh-pages.sh
 deploy:
   provider: npm
   skip_cleanup: true
@@ -22,3 +28,4 @@ deploy:
     tags: true
     repo: inveniosoftware-contrib/ng2-json-editor
     all_branches: true
+    node: '6.9.1'
