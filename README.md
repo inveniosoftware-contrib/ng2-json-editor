@@ -43,6 +43,7 @@ Please have a look at [example app](./example/app)
 | *schemaOptions*      | Object | Enriches JsonSchema with custom properties that `ng2-json-editor` understands. See [possible values](#schemaOptions).|
 | *previews*      | Array | Configures previews for the document. See [configuration syntax](#previews).|
 | *shortcuts*     | Object | Configures shortcuts for the document. See [shortcuts syntax](#shortcuts).|
+| *enableAdminModeSwitch*      | boolean=false | If set, displays the switch that can enable admin mode where any field can be edited.|
 
 ### <a name="schemaOptions"></a>Extended Schema (schemaOptions)
 

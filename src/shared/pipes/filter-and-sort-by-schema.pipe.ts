@@ -22,6 +22,8 @@
 
 import { Pipe, PipeTransform } from '@angular/core';
 
+import { AppGlobalsService } from '../services';
+
 @Pipe({
   name: 'filterAndSortBySchema',
   // http://stackoverflow.com/questions/34456430/ngfor-doesnt-update-data-with-pipe-in-angular2
@@ -29,6 +31,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 
 export class FilterAndSortBySchemaPipe implements PipeTransform {
+
+  constructor(public appGlobalsService: AppGlobalsService) { }
 
   /**
    * It filters out `x_editor_hidden` fields and sorts keys by `x_editor_priority`
@@ -45,7 +49,7 @@ export class FilterAndSortBySchemaPipe implements PipeTransform {
         if (!schemaProps[key]) {
           throw new Error(`"${key}" is not specified as property in \n${JSON.stringify(schemaProps, undefined, 2)}`);
         }
-        return !schemaProps[key]['x_editor_hidden'];
+        return !schemaProps[key]['x_editor_hidden'] || this.appGlobalsService.adminMode;
       }).sort((a, b) => {
         // Sort by x_editor_priority, larger is the first.
         let pa = schemaProps[a]['x_editor_priority'] || 0;

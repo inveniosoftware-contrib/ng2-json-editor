@@ -81,6 +81,7 @@ interface Preview {
 }
 
 interface EditorConfig {
+  enableAdminModeSwitch?: boolean;
   schemaOptions?: Object;
   previews?: Array<Preview>;
   shortcuts?: Object;

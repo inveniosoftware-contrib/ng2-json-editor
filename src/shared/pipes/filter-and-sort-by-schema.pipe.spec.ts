@@ -21,12 +21,13 @@
 */
 
 import { FilterAndSortBySchemaPipe } from './filter-and-sort-by-schema.pipe';
+import { AppGlobalsService } from '../services';
 
 describe('FilterAndSortBySchemaPipe', () => {
   let pipe: FilterAndSortBySchemaPipe;
 
   beforeEach(() => {
-    pipe = new FilterAndSortBySchemaPipe();
+    pipe = new FilterAndSortBySchemaPipe(new AppGlobalsService());
   });
 
   it('should sort by x_editor_priority, larger first', () => {
@@ -119,6 +120,24 @@ describe('FilterAndSortBySchemaPipe', () => {
     let keys = ['key1', 'key2'];
 
     let expected = ['key2'];
+
+    expect(pipe.transform(keys, schema)).toEqual(expected);
+  });
+
+  it('should return hidden keys if adminMode is set', () => {
+    pipe.appGlobalsService.adminMode = true;
+    let schema = {
+      properties: {
+        key1: {
+          x_editor_hidden: true
+        },
+        key2: {
+        }
+      }
+    };
+    let keys = ['key1', 'key2'];
+
+    let expected = ['key1', 'key2'];
 
     expect(pipe.transform(keys, schema)).toEqual(expected);
   });

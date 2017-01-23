@@ -26,7 +26,7 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 
-import { ComponentTypeService } from '../shared/services';
+import { AppGlobalsService, ComponentTypeService } from '../shared/services';
 
 /**
  * AnyFieldComponent
@@ -52,9 +52,14 @@ export class AnyTypeFieldComponent {
   @Input() path: Array<any>;
   @Input() value: any;
 
-  constructor(public componentTypeService: ComponentTypeService) { }
+  constructor(public componentTypeService: ComponentTypeService,
+    public  appGlobalsService: AppGlobalsService) { }
 
   get componentType(): string {
     return this.componentTypeService.getComponentType(this.schema);
+  }
+
+  get isDisabled(): boolean {
+    return this.schema && this.schema['x_editor_disabled'] && !this.appGlobalsService.adminMode;
   }
 }

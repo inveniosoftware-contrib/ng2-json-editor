@@ -26,6 +26,7 @@ import { ReplaySubject } from 'rxjs';
 @Injectable()
 export class AppGlobalsService {
   private _globalErrorsSubject: ReplaySubject<Object> = new ReplaySubject<Object>(1);
+  public adminMode: boolean = false;
 
   set globalErrors(errors: Object) {
     this._globalErrorsSubject.next(errors);

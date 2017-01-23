@@ -1,5 +1,5 @@
-<div [ngClass]="{disableCursorClass: schema && schema.x_editor_disabled}">
-  <div [ngSwitch]="componentType" [ngClass]="{disableEventsClass: schema && schema.x_editor_disabled}">
+<div [ngClass]="{disableCursorClass: isDisabled}">
+  <div [ngSwitch]="componentType" [ngClass]="{disableEventsClass: isDisabled}">
     <div *ngSwitchCase="'table-list'">
       <table-list-field [values]="value" [schema]="schema" [path]="path"></table-list-field>
     </div>
