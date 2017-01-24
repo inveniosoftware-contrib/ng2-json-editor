@@ -22,6 +22,8 @@
 
 import { Injectable } from '@angular/core';
 
+import * as _ from 'lodash';
+
 import { JsonUtilService } from './json-util.service';
 
 @Injectable()
@@ -67,6 +69,8 @@ export class SchemaFixerService {
   private fixRecursively(schema: Object): Object {
     if (schema['anyOf']) {
       schema = this.fixAnyOf(schema);
+    } else if (schema['allOf']) {
+      schema = this.fixAllOf(schema);
     }
     // schema fixes must be done above
 
@@ -145,6 +149,10 @@ export class SchemaFixerService {
         }
       });
     return fixedSchema;
+  }
+
+  private fixAllOf(schema: Object): Object {
+    return _.merge({}, ...schema['allOf']);
   }
 
 }
