@@ -40,6 +40,7 @@ export class AutocompleteInputComponent implements OnInit {
   @Input() autocompletionOptions: AutocompletionOptions;
   @Input() path: Array<any>;
   @Input() value: string;
+  @Input() tabindex: string;
   @Input() placeholder: string;
 
   @Output() onValueChange: EventEmitter<string> = new EventEmitter<any>();

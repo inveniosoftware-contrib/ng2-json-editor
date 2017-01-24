@@ -29,12 +29,12 @@ import {
 } from '@angular/core';
 
 import { AbstractFieldComponent } from '../abstract-field';
-
 import {
   AppGlobalsService,
   ComponentTypeService,
   JsonStoreService,
   SchemaValidationService,
+  TabIndexService
 } from '../shared/services';
 
 @Component({
@@ -52,11 +52,13 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   @Input() path: Array<any>;
 
   @Input() value: string | number | boolean;
+  private tabIndex: number;
 
   constructor(public schemaValidationService: SchemaValidationService,
     public componentTypeService: ComponentTypeService,
     public appGlobalsService: AppGlobalsService,
-    public jsonStoreService: JsonStoreService) {
+    public jsonStoreService: JsonStoreService,
+    public tabIndexService: TabIndexService) {
     super(appGlobalsService);
   }
 
@@ -67,6 +69,12 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   ngOnInit() {
     super.ngOnInit();
     this.schema = this.schema || {};
+    if (!(this.valueType === 'boolean')) {
+      this.setTabIndex();
+      this.tabIndexService.tabIndexChange.subscribe(() => {
+       this.tabIndex = this.getTabIndex();
+      });
+    }
   }
 
   commitValueChange() {
@@ -102,4 +110,11 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     return this.schema['x_editor_link_builder'];
   }
 
+  getTabIndex(): number {
+    return this.tabIndexService.getElemTabIndex(this.path.join('.'));
+  }
+
+  setTabIndex() {
+    this.tabIndex = this.tabIndexService.addElemTabIndex(this.path.join('.'));
+  }
 }

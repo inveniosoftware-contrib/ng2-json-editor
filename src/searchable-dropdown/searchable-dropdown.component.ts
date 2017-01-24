@@ -35,6 +35,7 @@ export class SearchableDropdownComponent {
   @Input() items: Array<string>;
   @Input() shortcutMap: Object;
   @Input() value: string;
+  @Input() tabindex: string;
   expression: string = '';
   status: { isOpen: boolean } = { isOpen: false };
 

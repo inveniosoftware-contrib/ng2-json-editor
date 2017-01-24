@@ -43,7 +43,7 @@ module.exports = function (config) {
     mime: {
       'text/x-typescript': ['ts', 'tsx']
     },
-    client: { captureConsole: true }
+    client: { captureConsole: true },
   });
 
   if (process.env.TRAVIS) {

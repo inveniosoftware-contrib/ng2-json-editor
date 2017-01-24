@@ -48,7 +48,6 @@ import {
   TreeMenuItemComponent
 } from './tree-menu';
 import { SearchableDropdownComponent } from './searchable-dropdown';
-
 import { SHARED_PIPES, SHARED_SERVICES, SHARED_DIRECTIVES } from './shared';
 
 @NgModule({

@@ -25,4 +25,5 @@ declare var System: any;
 interface AppConfig {
   schemaOptions?: Object;
   previews?: Array<Object>;
+  shortcuts?: Object;
 }

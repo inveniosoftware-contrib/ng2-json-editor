@@ -32,6 +32,34 @@ export class DomUtilService {
       if (firstInput) {
         firstInput.focus();
         firstInput.select();
+      } else {
+        firstInput = el.querySelector('div.btn-group') as HTMLInputElement;
+        if (firstInput) {
+          let dropDownButton = el.querySelector('div.btn-group button') as HTMLButtonElement;
+          if (dropDownButton) {
+            dropDownButton.click();
+          }
+        }
+      }
+    }
+  }
+
+  focusRightOrLeftParentCell(id: string, direction: number) {
+    let el = document.getElementById(id);
+    if (el && el.tabIndex) {
+      let elementParentCell = el.parentElement;
+      while (elementParentCell.nodeName !== 'TD') {
+        elementParentCell = elementParentCell.parentElement;
+      }
+      let nextSibling = direction > 0 ? elementParentCell.nextElementSibling : elementParentCell.previousElementSibling;
+      while (nextSibling && nextSibling.nodeName === 'TD') {
+        let inputElement = nextSibling.querySelector('div.editable-field-container input[tabindex],textarea[tabindex]') as HTMLInputElement;
+        if (inputElement) {
+          inputElement.focus();
+          inputElement.select();
+          break;
+        }
+        nextSibling = direction > 0 ? nextSibling.nextElementSibling : nextSibling.previousElementSibling;
       }
     }
   }

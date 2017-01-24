@@ -26,7 +26,7 @@ import { List, Map } from 'immutable';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
 
-import { AppGlobalsService, JsonStoreService } from '../shared/services';
+import { AppGlobalsService, JsonStoreService, TabIndexService } from '../shared/services';
 
 @Component({
   selector: 'table-list-field',
@@ -45,13 +45,13 @@ export class TableListFieldComponent extends AbstractListFieldComponent implemen
   keys: Array<string>;
 
   constructor(public appGlobalsService: AppGlobalsService,
-    public jsonStoreService: JsonStoreService) {
-    super(appGlobalsService, jsonStoreService);
+    public jsonStoreService: JsonStoreService,
+    public tabIndexService: TabIndexService) {
+    super(appGlobalsService, jsonStoreService, tabIndexService);
   }
 
   ngOnInit() {
     super.ngOnInit();
-
     // all unique keys that are present in at least single element
     this.keys = Array.from(
       new Set(
@@ -63,6 +63,8 @@ export class TableListFieldComponent extends AbstractListFieldComponent implemen
 
   onFieldAdd(field: string) {
     this.keys.push(field);
+    setTimeout(() => {
+      this.tabIndexService.sortAndSynchronizeTabIndexes();
+    });
   }
-
 }
