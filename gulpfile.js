@@ -32,6 +32,7 @@ var tsLint = require('gulp-tslint');
 var inlineNg2Template = require('gulp-inline-ng2-template');
 var KarmaServer = require('karma').Server;
 var runSequence = require('run-sequence');
+const gulpFilter = require('gulp-filter');
 
 /**
  * Style processor for gulp-inline-ng2-template plugin
@@ -49,12 +50,14 @@ function compileSass(path, ext, file, cb) {
 }
 
 // file regexps
+var filter = gulpFilter(['./src/**/*.ts', '!./src/**/*d.ts']);
 var tsSourceFiles = './src/**/*.ts';
 var allSourceFiles = './src/**/*';
 
 // run tslint
 gulp.task('tslint', () =>
   gulp.src(tsSourceFiles)
+    .pipe(filter)
     .pipe(tsLint({
       configuration: 'tslint.json',
       formatter: 'prose'
