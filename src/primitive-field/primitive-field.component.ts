@@ -29,12 +29,12 @@ import {
 } from '@angular/core';
 
 import { AbstractFieldComponent } from '../abstract-field';
-
 import {
   AppGlobalsService,
   ComponentTypeService,
   JsonStoreService,
   SchemaValidationService,
+  HookService
 } from '../shared/services';
 
 @Component({
@@ -78,6 +78,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
         console.error(error);
       }
     }
+    HookService.trigger('commitValueChange', this.value, this.path);
     // TODO: should we make the change even if it is not validated
     this.jsonStoreService.setIn(this.path, this.value);
   }

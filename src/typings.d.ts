@@ -20,6 +20,18 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
+interface Ng2TypedPropertyDescriptor {
+  enumerable?: boolean;
+  configurable?: boolean;
+  writable?: boolean;
+  value?: (value: string, path: string) => any;
+  get?: () => (value: string, path: string) => any;
+  set?: (value: (value: string, path: string) => any) => void;
+}
+
+declare type Ng2MethodDecorator = (target: Object, propertyKey: string | symbol, descriptor: Ng2TypedPropertyDescriptor)
+  => Ng2TypedPropertyDescriptor | void;
+
 // TODO: investigate if it is good to define shared models here
 
 interface AutocompletionResult {
@@ -84,3 +96,4 @@ interface EditorConfig {
   schemaOptions?: Object;
   previews?: Array<Preview>;
 }
+
