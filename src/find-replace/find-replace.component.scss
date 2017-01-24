@@ -1,0 +1,33 @@
+.find-replace-container {
+  margin: 4px 3px 3px 2px;
+  input {
+    font-size: 13px;
+  }
+}
+
+.top-container-item {
+  margin-bottom: 3px;
+}
+
+label {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+$padding: 20px;
+.horizontal-padding {
+  padding-right: $padding;
+  padding-left: $padding;
+}
+
+.find-replace-container {
+  div {
+    @extend .horizontal-padding;
+  }
+}
+
+.match-whole-container {
+  input[type=checkbox] {
+    width: 100%;
+  }
+}

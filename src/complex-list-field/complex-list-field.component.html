@@ -43,15 +43,11 @@
           <td class="label-holder">
             <div>
               <title-dropdown [title]="key | underscoreToSpace" [isDisabled]="schema.items.properties[key].x_editor_disabled">
-                <li class="title-dropdown-item">
-                  <a *ngIf="schema.items.properties[key].type === 'array'">
-                    <add-new-element-button [path]="getValuePath(pIndex, key)" [schema]="schema.items.properties[key]"></add-new-element-button>
-                  </a>
+                <li *ngIf="schema.items.properties[key].type === 'array'" class="title-dropdown-item">
+                  <add-new-element-button [path]="getValuePath(pIndex, key)" [schema]="schema.items.properties[key]"></add-new-element-button>
                 </li>
                 <li class="title-dropdown-item">
-                  <a>
-                    <button type="button" class="editor-btn-delete editor-btn-delete-text" (click)="deleteField(pIndex, key)">Delete</button>
-                  </a>
+                  <button type="button" class="editor-btn-delete editor-btn-delete-text" (click)="deleteField(pIndex, key)">Delete</button>
                 </li>
               </title-dropdown>
             </div>

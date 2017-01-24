@@ -5,13 +5,11 @@
       <td>
         <div>
           <title-dropdown [title]="key | underscoreToSpace" [isDisabled]="schema.properties[key].x_editor_disabled">
-            <li class="title-dropdown-item">
-              <a *ngIf="schema.properties[key].type === 'array'">
-                <add-new-element-button [path]="getFieldPath(key)" [schema]="schema.properties[key]"></add-new-element-button>
-              </a>
+            <li *ngIf="schema.properties[key].type === 'array'" class="title-dropdown-item">
+              <add-new-element-button [path]="getFieldPath(key)" [schema]="schema.properties[key]"></add-new-element-button>
             </li>
             <li class="title-dropdown-item">
-              <a><button type="button" class="editor-btn-delete editor-btn-delete-text" (click)="deleteField(key)">Delete</button></a>
+              <button type="button" class="editor-btn-delete editor-btn-delete-text" (click)="deleteField(key)">Delete</button>
             </li>
           </title-dropdown>
         </div>
