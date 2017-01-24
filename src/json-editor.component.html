@@ -2,6 +2,10 @@
   <div class="col-md-2 left">
     <tree-menu [record]="_record" [schema]="schema"></tree-menu>
     <add-field-dropdown [fields]="keys" [pathString]="''" (onFieldAdd)="onFieldAdd($event)" [schema]="schema.properties">Add field</add-field-dropdown>
+    <div *ngIf="config.enableAdminModeSwitch" class="admin-mode" tooltip="Allows editing all fields (use with care)">
+      <input id="admin-mode-checkbox" type="checkbox" [(ngModel)]="appGlobalsService.adminMode" />
+      <label class="admin-mode" for="admin-mode-checkbox">Enable Admin Mode</label>
+    </div>
   </div>
   <div class="col-md-6 middle" [shortcuts]="shortcuts">
     <table id="editor" class="table">

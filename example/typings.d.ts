@@ -23,6 +23,7 @@
 declare var System: any;
 
 interface AppConfig {
+  enableAdminModeSwitch?: boolean;
   schemaOptions?: Object;
   previews?: Array<Object>;
   shortcuts?: Object;

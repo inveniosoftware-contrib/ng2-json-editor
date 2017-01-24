@@ -203,6 +203,19 @@ table.editable-inner-table {
   }
 }
 
+label.admin-mode {
+  color: #e0dfdf;
+  font-size: 13px;
+  font-weight: normal;
+  width: 90%;
+  padding-left: 4px;
+}
+
+div.admin-mode {
+  padding-top: 8px;
+  width: 100%;
+}
+
 .disableCursorClass {
   cursor: not-allowed;
 }

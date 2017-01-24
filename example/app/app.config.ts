@@ -28,10 +28,13 @@ export const EXAMPLE_CONFIG: AppConfig = {
     'arxiv_eprints.items.properties.value': {
       x_editor_link_builder: (value: any) => {
         return `http://arxiv.org/abs/${value}`;
-      }
+      },
     },
     'abstracts.items.properties.source': {
       x_editor_column_width: 20
+    },
+    'collections.items.properties.primary': {
+      x_editor_disabled: true
     }
   },
   shortcuts: {
@@ -41,6 +44,6 @@ export const EXAMPLE_CONFIG: AppConfig = {
     'navigateRight': {
       key: 'mod+right'
     }
-  }
-
+  },
+  enableAdminModeSwitch: true
 };
