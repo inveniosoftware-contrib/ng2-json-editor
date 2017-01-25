@@ -28,7 +28,7 @@ import { HttpModule } from '@angular/http';
 import { JsonEditorModule } from '../../ng2-json-editor';
 
 import { AppComponent } from './app.component';
-import { APP_CONFIG, EXAMPLE_CONFIG } from './app.config';
+import { AppConfig } from './app.config';
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,7 +39,7 @@ import { APP_CONFIG, EXAMPLE_CONFIG } from './app.config';
     JsonEditorModule
   ],
   providers: [
-    {provide: APP_CONFIG, useValue: EXAMPLE_CONFIG },
+    AppConfig
   ],
   bootstrap: [AppComponent]
 })

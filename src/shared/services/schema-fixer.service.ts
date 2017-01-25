@@ -143,7 +143,7 @@ export class SchemaFixerService {
           // create a autocomplete config so that it will allow any values
           // but autocomplete from enum values from where the field is defined as enum
           delete fixedSchema['properties'][prop]['enum'];
-          fixedSchema['properties'][prop]['x_editor_autocomplete'] = {
+          fixedSchema['properties'][prop]['autocompletionConfig'] = {
             source: uniqueEnumValues
           };
         }

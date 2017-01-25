@@ -25,7 +25,7 @@ export class FindReplaceAllService {
     immutableAsMutable.forEach((value, key) => {
       let innerSchema = isList ? schema['items'] : schema['properties'][key];
       // ignore disabled and ref fields
-      if (innerSchema['x_editor_disabled'] || innerSchema['x_editor_hidden'] || key === '$ref') {
+      if (innerSchema['disabled'] || innerSchema['hidden'] || key === '$ref') {
         return;
         // TODO: is `schema['type'] === 'string'` better?
       } else if (typeof value === 'string') {

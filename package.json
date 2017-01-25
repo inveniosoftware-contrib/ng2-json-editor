@@ -28,7 +28,8 @@
     "preversion": "npm test",
     "version": "npm run build",
     "postversion": "git push upstream && git push upstream --tags",
-    "coveralls": "cat coverage/coverage.lcov | coveralls"
+    "coveralls": "cat coverage/coverage.lcov | coveralls",
+    "typedoc": "typedoc --readme none --theme ./docs-theme --module commonjs --out ./example-dist/docs ./src/shared/interfaces/json-editor-config.ts"
   },
   "dependencies": {
     "@angular/common": "~2.1.0",

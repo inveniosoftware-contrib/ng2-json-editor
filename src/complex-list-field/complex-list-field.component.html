@@ -42,7 +42,7 @@
         <tr *ngFor="let key of keys.get(i) | addAlwaysShowFields:schema.items | filterAndSortBySchema:schema.items; trackBy:trackByFunction">
           <td class="label-holder">
             <div>
-              <title-dropdown [title]="key | underscoreToSpace" [isDisabled]="schema.items.properties[key].x_editor_disabled">
+              <title-dropdown [title]="key | underscoreToSpace" [isDisabled]="schema.items.properties[key].disabled">
                 <li *ngIf="schema.items.properties[key].type === 'array'" class="title-dropdown-item">
                   <add-new-element-button [path]="getValuePath(pIndex, key)" [schema]="schema.items.properties[key]"></add-new-element-button>
                 </li>

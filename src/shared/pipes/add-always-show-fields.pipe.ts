@@ -32,7 +32,7 @@ export class AddAlwaysShowFieldsPipe implements PipeTransform {
   transform(fields: Set<string>, schema: Object): Set<string> {
     let schemaProps = schema['properties'];
     let alwayShowFields = Object.keys(schemaProps)
-      .filter(prop => schemaProps[prop]['x_editor_always_show']);
+      .filter(prop => schemaProps[prop]['alwaysShow']);
     return fields.union(alwayShowFields);
   }
 }

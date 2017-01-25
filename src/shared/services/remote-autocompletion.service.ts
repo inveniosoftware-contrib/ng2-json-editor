@@ -24,12 +24,14 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
+import { AutocompletionResult, AutocompletionConfig } from '../interfaces';
+
 @Injectable()
 export class RemoteAutocompletionService {
 
   constructor(private http: Http) { }
 
-  getAutocompletionResults(options: AutocompletionOptions,
+  getAutocompletionResults(options: AutocompletionConfig,
     token: string): Observable<Array<AutocompletionResult>> {
     return this.http.get(`${options.url}${token}`)
       .map(res => this.mapResponseToResults(res, options.path));
