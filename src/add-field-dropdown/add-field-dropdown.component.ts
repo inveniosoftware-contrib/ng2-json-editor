@@ -22,6 +22,8 @@
 
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
+import { Set } from 'immutable';
+
 import { DomUtilService, EmptyValueService } from '../shared/services';
 
 @Component({
@@ -35,7 +37,7 @@ export class AddFieldDropdownComponent {
 
   // 'propeties' of an object schema
   @Input() schema: Object;
-  @Input() fields: Array<string>;
+  @Input() fields: Set<string>;
   @Input() pathString: string;
 
   @Output() onFieldAdd: EventEmitter<string> = new EventEmitter<string>();
@@ -46,7 +48,7 @@ export class AddFieldDropdownComponent {
     private emptyValueService: EmptyValueService) { }
 
   get disabled(): boolean {
-    return Object.keys(this.schema).length === this.fields.length;
+    return Object.keys(this.schema).length === this.fields.size;
   }
 
   focusElementIfOpen(isDropdownOpen: boolean, el: HTMLElement) {

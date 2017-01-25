@@ -24,12 +24,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 import { AppGlobalsService } from '../services';
 
+import { Set, OrderedSet } from 'immutable';
+
 @Pipe({
   name: 'filterAndSortBySchema',
-  // http://stackoverflow.com/questions/34456430/ngfor-doesnt-update-data-with-pipe-in-angular2
-  pure: false
 })
-
 export class FilterAndSortBySchemaPipe implements PipeTransform {
 
   constructor(public appGlobalsService: AppGlobalsService) { }
@@ -37,11 +36,11 @@ export class FilterAndSortBySchemaPipe implements PipeTransform {
   /**
    * It filters out `x_editor_hidden` fields and sorts keys by `x_editor_priority`
    * 
-   * @param {Array<string>} keys
+   * @param {Set<string>} keys
    * @param {Object} schema - the `schema` that has object schema which contains each key in `keys`
-   * @return {Array<string>} - filtered and sortered keys
+   * @return {OrderedSet<string>} - filtered and sorted keys
    */
-  transform(keys: Array<string>, schema: Object): Array<string> {
+  transform(keys: Set<string>, schema: Object): OrderedSet<string> {
     let schemaProps = schema['properties'];
     if (!keys) { return undefined; }
     return keys
@@ -62,6 +61,6 @@ export class FilterAndSortBySchemaPipe implements PipeTransform {
         if (a < b) { return -1; }
         if (a > b) { return 1; }
         return 0;
-      });
+      }) as OrderedSet<string>;
   }
 }

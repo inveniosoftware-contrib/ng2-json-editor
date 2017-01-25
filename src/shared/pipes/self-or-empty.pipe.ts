@@ -27,7 +27,6 @@ import { List } from 'immutable';
 
 @Pipe({
   name: 'selfOrEmpty',
-  pure: false
 })
 
 export class SelfOrEmptyPipe implements PipeTransform {

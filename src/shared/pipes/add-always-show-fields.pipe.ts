@@ -22,21 +22,17 @@
 
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { EmptyValueService } from '../services';
+import { Set } from 'immutable';
 
 @Pipe({
-  name: 'addAlwaysShowFields',
-  pure: false
+  name: 'addAlwaysShowFields'
 })
 export class AddAlwaysShowFieldsPipe implements PipeTransform {
 
-  constructor(public emptyValueService: EmptyValueService) { }
-
-  transform(fields: Array<string>, schema: Object): Object {
-    let fieldsSet = new Set(fields);
+  transform(fields: Set<string>, schema: Object): Set<string> {
     let schemaProps = schema['properties'];
-    let missingAlwayShowFields = Object.keys(schemaProps)
-      .filter(prop => schemaProps[prop]['x_editor_always_show'] && !fieldsSet.has(prop));
-    return fields.concat(missingAlwayShowFields);
+    let alwayShowFields = Object.keys(schemaProps)
+      .filter(prop => schemaProps[prop]['x_editor_always_show']);
+    return fields.union(alwayShowFields);
   }
 }

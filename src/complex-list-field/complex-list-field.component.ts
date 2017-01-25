@@ -29,7 +29,7 @@ import {
   SimpleChanges
 } from '@angular/core';
 
-import { List, Map } from 'immutable';
+import { List, Map, Set } from 'immutable';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
 
@@ -50,7 +50,7 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
   @Input() schema: Object;
   @Input() path: Array<any>;
 
-  keys: Array<Array<string>>;
+  keys: List<Set<string>>;
   paginatedIndices: Array<number>;
 
   foundIndices: Array<number>;
@@ -103,7 +103,8 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
   }
 
   onFieldAdd(index: number, field: string) {
-    this.keys[index].push(field);
+    this.keys = this.keys
+      .update(index, value => value.add(field));
     setTimeout(() => {
       this.tabIndexService.sortAndSynchronizeTabIndexes();
     });
@@ -114,7 +115,8 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
     this.jsonStoreService.setIn(this.path, this.values);
 
     // remove it from keys too, so that it will not be displayed as empty
-    this.keys[index].splice(this.keys.indexOf(name), 1);
+    this.keys = this.keys
+      .update(index, value => value.remove(field));
   }
 
   onFindClick() {
@@ -188,9 +190,11 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
     return indices;
   }
 
-  getKeysForCurrentPage(): Array<Array<string>> {
-    return this.paginatedIndices
-      .map(pIndex => this.values.get(pIndex).keySeq().toArray());
+  getKeysForCurrentPage(): List<Set<string>> {
+    return List(
+      this.paginatedIndices
+        .map(pIndex => this.values.get(pIndex).keySeq().toSet())
+    );
   }
 
   getPageForIndex(index: number): number {

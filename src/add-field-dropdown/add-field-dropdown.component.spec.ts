@@ -22,6 +22,8 @@
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { Set } from 'immutable';
+
 import { AddFieldDropdownComponent } from './add-field-dropdown.component';
 
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
@@ -36,8 +38,8 @@ const schemaProperties = {
   propNotInValueA: {},
   propNotInValueB: {}
 };
-const fields = ['propA', 'propB'];
-const mockDifferentKeys = ['propNotInValueA', 'propNotInValueB'];
+const fields = Set(['propA', 'propB']);
+const mockDifferentKeys = Set(['propNotInValueB', 'propNotInValueA']);
 const emptyValue = 'empty-value';
 
 class MockEmptyValueService extends EmptyValueService {
@@ -83,16 +85,18 @@ describe('AddFieldToObjectDropdownComponent', () => {
 
   it('should show different keys of schema', () => {
     showDropdownButton.dispatchEvent(new Event('click'));
-    let items: Array<string> = Array.prototype
-      .slice.call(nativeEl.querySelectorAll('li a'))
-      .map((a: HTMLAnchorElement) => a.textContent);
+    let items: Set<string> = Set(
+      Array.prototype
+        .slice.call(nativeEl.querySelectorAll('li a'))
+        .map((a: HTMLAnchorElement) => a.textContent) as Array<string>
+    );
     expect(items).toEqual(mockDifferentKeys);
   });
 
   it('should add field with empty value when dropdown item clicked', () => {
     showDropdownButton.dispatchEvent(new Event('click'));
     let anchor = nativeEl.querySelector('li a') as HTMLAnchorElement;
-    expect(component.fields.indexOf(anchor.textContent)).toEqual(-1);
+    expect(component.fields.has(anchor.textContent)).toBeFalsy();
     spyOn(component.onFieldAdd, 'emit');
     anchor.dispatchEvent(new Event('click'));
     expect(component.onFieldAdd.emit).toHaveBeenCalledWith(anchor.textContent);

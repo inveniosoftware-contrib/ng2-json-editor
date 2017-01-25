@@ -24,7 +24,7 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges, ChangeDetectionStra
 
 import { AbstractTrackerComponent } from '../abstract-tracker';
 
-import { Map } from 'immutable';
+import { Map, Set } from 'immutable';
 
 import { DomUtilService, WindowHrefService } from '../shared/services';
 
@@ -44,7 +44,7 @@ export class TreeMenuItemComponent extends AbstractTrackerComponent implements O
   @Input() path: string;
 
   // defined only if schmea.type equals to 'object'
-  keys: Array<string>;
+  keys: Set<string>;
 
   private isCollapsed: boolean = true;
   private href: string;
@@ -62,7 +62,7 @@ export class TreeMenuItemComponent extends AbstractTrackerComponent implements O
     let valueChange = changes['value'];
     if (valueChange && this.schema['type'] === 'object') {
       let currentValue: Map<string, any> = valueChange.currentValue;
-      this.keys = currentValue.keySeq().toArray();
+      this.keys = currentValue.keySeq().toSet();
     }
   }
 

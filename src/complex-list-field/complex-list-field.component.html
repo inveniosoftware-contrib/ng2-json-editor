@@ -39,7 +39,7 @@
   <div *ngFor="let pIndex of paginatedIndices; let i = index; trackBy:trackByFunction">
     <div class="complex-list-field-wrapper">
       <table class="table" [id]="getElementPathString(pIndex)">
-        <tr *ngFor="let key of keys[i] | addAlwaysShowFields:schema.items | filterAndSortBySchema:schema.items; trackBy:trackByFunction">
+        <tr *ngFor="let key of keys.get(i) | addAlwaysShowFields:schema.items | filterAndSortBySchema:schema.items; trackBy:trackByFunction">
           <td class="label-holder">
             <div>
               <title-dropdown [title]="key | underscoreToSpace" [isDisabled]="schema.items.properties[key].x_editor_disabled">
@@ -60,7 +60,7 @@
         <!-- ADD-FIELD-FROM-SCHEMA, UP/DOWN and DELETE buttons for each row group -->
         <tr *ngIf="values.size > 0">
           <td class="button-holder">
-            <add-field-dropdown [fields]="keys[i]" [pathString]="getElementPathString(pIndex)" (onFieldAdd)="onFieldAdd(i, $event)" [schema]="schema.items.properties">+</add-field-dropdown>
+            <add-field-dropdown [fields]="keys.get(i)" [pathString]="getElementPathString(pIndex)" (onFieldAdd)="onFieldAdd(i, $event)" [schema]="schema.items.properties">+</add-field-dropdown>
           </td>
           <td class="button-holder button-holder-complex-list-actions">
             <button type="button" class="editor-btn-delete editor-btn-delete-complex" (click)="deleteElement(pIndex)">&times;</button>

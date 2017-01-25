@@ -22,7 +22,7 @@
 
 import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
-import { List, Map } from 'immutable';
+import { List, Map, Set } from 'immutable';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
 
@@ -42,7 +42,7 @@ export class TableListFieldComponent extends AbstractListFieldComponent implemen
   @Input() schema: Object;
   @Input() path: Array<any>;
 
-  keys: Array<string>;
+  keys: Set<string>;
 
   constructor(public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
@@ -53,16 +53,13 @@ export class TableListFieldComponent extends AbstractListFieldComponent implemen
   ngOnInit() {
     super.ngOnInit();
     // all unique keys that are present in at least single element
-    this.keys = Array.from(
-      new Set(
-        this.values
-          .map(object => object.keySeq().toArray())
-          .reduce((pre, cur) => pre.concat(cur), []))
-    );
+    this.keys = Set(this.values
+      .map(object => object.keySeq().toArray())
+      .reduce((pre, cur) => pre.concat(cur), []));
   }
 
   onFieldAdd(field: string) {
-    this.keys.push(field);
+    this.keys = this.keys.add(field);
     setTimeout(() => {
       this.tabIndexService.sortAndSynchronizeTabIndexes();
     });
