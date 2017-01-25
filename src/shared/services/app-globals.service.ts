@@ -23,16 +23,18 @@
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 
+import { SchemaValidationErrors } from '../interfaces';
+
 @Injectable()
 export class AppGlobalsService {
-  private _globalErrorsSubject: ReplaySubject<Object> = new ReplaySubject<Object>(1);
+  private _globalErrorsSubject: ReplaySubject<SchemaValidationErrors> = new ReplaySubject<any>(1);
   public adminMode: boolean = false;
 
-  set globalErrors(errors: Object) {
+  set globalErrors(errors: SchemaValidationErrors) {
     this._globalErrorsSubject.next(errors);
   }
 
-  get globalErrorsSubject(): ReplaySubject<Object> {
+  get globalErrorsSubject(): ReplaySubject<SchemaValidationErrors> {
     return this._globalErrorsSubject;
   }
 

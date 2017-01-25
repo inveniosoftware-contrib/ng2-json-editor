@@ -34,6 +34,8 @@ import { Observable } from 'rxjs/Observable';
 
 import { DynamicTemplateLoaderService } from '../shared/services';
 
+import { RefConfig } from '../shared/interfaces';
+
 @Component({
   selector: 'ref-field',
   styleUrls: [
@@ -66,12 +68,12 @@ export class RefFieldComponent implements OnChanges {
     let valueChange = changes['value'];
     // ngOnInit but needs to run before loading dynamic template
     if (valueChange && valueChange.isFirstChange()) {
-      let config = this.schema['x_editor_ref_config'];
+      let config: RefConfig = this.schema['refConfig'];
       if (config) {
         this.isLazy = config['lazy'];
         this.customTemplate = config['template'];
         this.requestOptions = new RequestOptions({
-          headers: this.createHeadersWithConfig(config['headers'])
+          headers: this.createHeadersWithConfig(config)
         });
       }
     }
@@ -133,9 +135,10 @@ export class RefFieldComponent implements OnChanges {
     }
   }
 
-  private createHeadersWithConfig(configHeaders: Array<HttpHeader>): Headers {
+  private createHeadersWithConfig(config: RefConfig): Headers {
     let headers = new Headers();
-    configHeaders.forEach(header => headers.append(header.name, header.value));
+    config.headers
+      .forEach(header => headers.append(header.name, header.value));
     return headers;
   }
 }

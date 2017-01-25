@@ -74,13 +74,53 @@
   dependencies:
     tsickle "^0.2"
 
+"@types/fs-extra@0.0.33":
+  version "0.0.33"
+  resolved "https://registry.yarnpkg.com/@types/fs-extra/-/fs-extra-0.0.33.tgz#a8719c417b080c012d3497b28e228ac09745fdf2"
+  dependencies:
+    "@types/node" "*"
+
+"@types/handlebars@^4.0.31":
+  version "4.0.31"
+  resolved "https://registry.yarnpkg.com/@types/handlebars/-/handlebars-4.0.31.tgz#a7fba66fafe42713aee88eeca8db91192efe6e72"
+
+"@types/highlight.js@^9.1.8":
+  version "9.1.9"
+  resolved "https://registry.yarnpkg.com/@types/highlight.js/-/highlight.js-9.1.9.tgz#ed6336955eaf233b75eb7923b9b1f373d045ef01"
+
 "@types/jasmine@^2.2.30", "@types/jasmine@^2.2.31":
   version "2.5.41"
   resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.5.41.tgz#d5e86161a0af80d52062b310a33ed65b051a0713"
 
-"@types/node@^6.0.35":
+"@types/lodash@4.14.50":
+  version "4.14.50"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.50.tgz#2227da4d65fafe249bccd59c7b9396e27674c8f7"
+
+"@types/lodash@^4.14.37":
+  version "4.14.52"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.52.tgz#de5c7ab14da1289733233c9b0ec6f9e377db90f5"
+
+"@types/marked@0.0.28":
+  version "0.0.28"
+  resolved "https://registry.yarnpkg.com/@types/marked/-/marked-0.0.28.tgz#44ba754e9fa51432583e8eb30a7c4dd249b52faa"
+
+"@types/minimatch@^2.0.29":
+  version "2.0.29"
+  resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-2.0.29.tgz#5002e14f75e2d71e564281df0431c8c1b4a2a36a"
+
+"@types/mousetrap@^1.5.32":
+  version "1.5.33"
+  resolved "https://registry.yarnpkg.com/@types/mousetrap/-/mousetrap-1.5.33.tgz#a0804505e76a6b4e597f35430c57fbe2a67794ef"
+
+"@types/node@*", "@types/node@^6.0.35":
   version "6.0.60"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.60.tgz#e7e134ebc674ae6ed93c36c767739b110d2c57fc"
+
+"@types/shelljs@^0.3.32":
+  version "0.3.33"
+  resolved "https://registry.yarnpkg.com/@types/shelljs/-/shelljs-0.3.33.tgz#df613bddb88225ed09ce5c835f620dcaaf155e6b"
+  dependencies:
+    "@types/node" "*"
 
 abbrev@1, abbrev@1.0.x, abbrev@~1.0.7:
   version "1.0.9"
@@ -243,10 +283,6 @@ ansi-escapes@^1.1.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-1.4.0.tgz#d3a8a83b319aa67793662b13e761c7911422306e"
 
-ansi-regex@*, ansi-regex@^2.0.0:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-2.1.1.tgz#c3b33ab5ee360d86e0e628f0468ae7ef27d654df"
-
 ansi-regex@^0.2.0, ansi-regex@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-0.2.1.tgz#0d8e946967a3d8143f93e24e298525fc1b2235f9"
@@ -254,6 +290,10 @@ ansi-regex@^0.2.0, ansi-regex@^0.2.1:
 ansi-regex@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-1.1.1.tgz#41c847194646375e6a1a5d10c3ca054ef9fc980d"
+
+ansi-regex@^2.0.0:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-2.1.1.tgz#c3b33ab5ee360d86e0e628f0468ae7ef27d654df"
 
 ansi-styles@^1.1.0:
   version "1.1.0"
@@ -433,10 +473,6 @@ ast-traverse@~0.1.1:
 ast-types@0.8.12:
   version "0.8.12"
   resolved "https://registry.yarnpkg.com/ast-types/-/ast-types-0.8.12.tgz#a0d90e4351bb887716c83fd637ebf818af4adfcc"
-
-ast-types@0.8.15:
-  version "0.8.15"
-  resolved "https://registry.yarnpkg.com/ast-types/-/ast-types-0.8.15.tgz#8eef0827f04dff0ec8857ba925abe3fea6194e52"
 
 ast-types@0.9.4:
   version "0.9.4"
@@ -1702,7 +1738,7 @@ cross-spawn@^4.0.0:
     lru-cache "^4.0.1"
     which "^1.2.9"
 
-cross-spawn@^5.0.0:
+cross-spawn@^5.0.0, cross-spawn@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-5.0.1.tgz#a3bbb302db2297cbea3c04edf36941f4613aa399"
   dependencies:
@@ -3731,7 +3767,7 @@ immutable@^3.8.1:
   version "3.8.1"
   resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.1.tgz#200807f11ab0f72710ea485542de088075f68cd2"
 
-imurmurhash@*, imurmurhash@^0.1.4:
+imurmurhash@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
 
@@ -4419,6 +4455,15 @@ load-json-file@^1.0.0:
     pinkie-promise "^2.0.0"
     strip-bom "^2.0.0"
 
+load-json-file@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/load-json-file/-/load-json-file-2.0.0.tgz#7947e42149af80d696cbf797bcaabcfe1fe29ca8"
+  dependencies:
+    graceful-fs "^4.1.2"
+    parse-json "^2.2.0"
+    pify "^2.0.0"
+    strip-bom "^3.0.0"
+
 loader-runner@^2.1.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/loader-runner/-/loader-runner-2.2.0.tgz#824c1b699c4e7a2b6501b85902d5b862bf45b3fa"
@@ -4791,6 +4836,10 @@ lodash.words@^3.0.0:
   dependencies:
     lodash._root "^3.0.0"
 
+lodash@4.17.2:
+  version "4.17.2"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.2.tgz#34a3055babe04ce42467b607d700072c7ff6bf42"
+
 lodash@^3.10.0, lodash@^3.10.1, lodash@^3.8.0, lodash@^3.9.3:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
@@ -5155,6 +5204,10 @@ morgan@^1.5.2:
     on-finished "~2.3.0"
     on-headers "~1.0.1"
 
+mousetrap@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/mousetrap/-/mousetrap-1.6.0.tgz#0168fcabb11d07669e87490324c981208121ac4d"
+
 mout@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/mout/-/mout-1.0.0.tgz#9bdf1d4af57d66d47cb353a6335a3281098e1501"
@@ -5449,6 +5502,18 @@ npm-run-all@^3.0.0:
     ps-tree "^1.0.1"
     read-pkg "^1.1.0"
     read-pkg-up "^1.0.1"
+    shell-quote "^1.6.1"
+    string.prototype.padend "^3.0.0"
+
+npm-run-all@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/npm-run-all/-/npm-run-all-4.0.1.tgz#f10144d20b57ed9bbf6c36a8de9502e0b80f2b4e"
+  dependencies:
+    chalk "^1.1.3"
+    cross-spawn "^5.0.1"
+    minimatch "^3.0.2"
+    ps-tree "^1.0.1"
+    read-pkg "^2.0.0"
     shell-quote "^1.6.1"
     string.prototype.padend "^3.0.0"
 
@@ -5887,6 +5952,12 @@ path-type@^1.0.0:
     graceful-fs "^4.1.2"
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
+
+path-type@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/path-type/-/path-type-2.0.0.tgz#f012ccb8415b7096fc2daa1054c3d72389594c73"
+  dependencies:
+    pify "^2.0.0"
 
 pause-stream@0.0.11:
   version "0.0.11"
@@ -6456,6 +6527,14 @@ read-pkg@^1.0.0, read-pkg@^1.1.0:
     normalize-package-data "^2.3.2"
     path-type "^1.0.0"
 
+read-pkg@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/read-pkg/-/read-pkg-2.0.0.tgz#8ef1c0623c6a6db0dc6713c4bfac46332b2368f8"
+  dependencies:
+    load-json-file "^2.0.0"
+    normalize-package-data "^2.3.2"
+    path-type "^2.0.0"
+
 read@1, read@~1.0.1, read@~1.0.7:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/read/-/read-1.0.7.tgz#b3da19bd052431a97671d44a42634adf710b40c4"
@@ -6555,20 +6634,11 @@ realize-package-specifier@~3.0.1:
     dezalgo "^1.0.1"
     npm-package-arg "^4.1.1"
 
-recast@0.10.33:
+recast@0.10.33, recast@^0.10.10:
   version "0.10.33"
   resolved "https://registry.yarnpkg.com/recast/-/recast-0.10.33.tgz#942808f7aa016f1fa7142c461d7e5704aaa8d697"
   dependencies:
     ast-types "0.8.12"
-    esprima-fb "~15001.1001.0-dev-harmony-fb"
-    private "~0.1.5"
-    source-map "~0.5.0"
-
-recast@^0.10.10:
-  version "0.10.43"
-  resolved "https://registry.yarnpkg.com/recast/-/recast-0.10.43.tgz#b95d50f6d60761a5f6252e15d80678168491ce7f"
-  dependencies:
-    ast-types "0.8.15"
     esprima-fb "~15001.1001.0-dev-harmony-fb"
     private "~0.1.5"
     source-map "~0.5.0"
@@ -7519,12 +7589,6 @@ stringstream@~0.0.4:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/stringstream/-/stringstream-0.0.5.tgz#4e484cd4de5a0bbbee18e46307710a8a81621878"
 
-strip-ansi@*, strip-ansi@^3.0.0, strip-ansi@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-3.0.1.tgz#6a385fb8853d952d5ff05d0e8aaf94278dc63dcf"
-  dependencies:
-    ansi-regex "^2.0.0"
-
 strip-ansi@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-0.3.0.tgz#25f48ea22ca79187f3174a4db8759347bb126220"
@@ -7536,6 +7600,12 @@ strip-ansi@^2.0.1:
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-2.0.1.tgz#df62c1aa94ed2f114e1d0f21fd1d50482b79a60e"
   dependencies:
     ansi-regex "^1.0.0"
+
+strip-ansi@^3.0.0, strip-ansi@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-3.0.1.tgz#6a385fb8853d952d5ff05d0e8aaf94278dc63dcf"
+  dependencies:
+    ansi-regex "^2.0.0"
 
 strip-bom-stream@^1.0.0:
   version "1.0.0"
@@ -7556,6 +7626,10 @@ strip-bom@^1.0.0:
   dependencies:
     first-chunk-stream "^1.0.0"
     is-utf8 "^0.2.0"
+
+strip-bom@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/strip-bom/-/strip-bom-3.0.0.tgz#2334c18e9c759f7bdd56fdef7e9ae3d588e68ed3"
 
 strip-indent@^1.0.1:
   version "1.0.1"
@@ -7998,6 +8072,28 @@ typedoc@^0.4.2:
     typedoc-default-themes "^0.4.0"
     typescript "1.8.10"
 
+typedoc@^0.5.5:
+  version "0.5.5"
+  resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.5.5.tgz#7fde3f80eeeecad23100e0d7e4f321c5b79f11fa"
+  dependencies:
+    "@types/fs-extra" "0.0.33"
+    "@types/handlebars" "^4.0.31"
+    "@types/highlight.js" "^9.1.8"
+    "@types/lodash" "^4.14.37"
+    "@types/marked" "0.0.28"
+    "@types/minimatch" "^2.0.29"
+    "@types/shelljs" "^0.3.32"
+    fs-extra "^0.30.0"
+    handlebars "4.0.5"
+    highlight.js "^9.0.0"
+    lodash "^4.13.1"
+    marked "^0.3.5"
+    minimatch "^3.0.0"
+    progress "^1.1.8"
+    shelljs "^0.7.0"
+    typedoc-default-themes "^0.4.0"
+    typescript "2.1.5"
+
 typescript@1.8.10:
   version "1.8.10"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-1.8.10.tgz#b475d6e0dff0bf50f296e5ca6ef9fbb5c7320f1e"
@@ -8005,6 +8101,10 @@ typescript@1.8.10:
 typescript@2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.0.2.tgz#a63f848074498a4dfa7f293afda0835d501d9540"
+
+typescript@2.1.5:
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.1.5.tgz#6fe9479e00e01855247cea216e7561bafcdbcd4a"
 
 typescript@~2.0.3:
   version "2.0.10"

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Map, List } from 'immutable';
 import { ReplaySubject } from 'rxjs';
 
+import { NestedStore } from '../interfaces';
 
 @Injectable()
 export class JsonStoreService implements NestedStore {

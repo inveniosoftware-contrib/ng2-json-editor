@@ -57,7 +57,7 @@ describe('ShortcutService', () => {
     };
     let expectedShortcutKeyAfterMergingWithConfig = 'left';
 
-    shortcutService.mergeShortcutsWithConfig(config.shortcuts);
+    shortcutService.getShortcutsWithConfig(config.shortcuts);
 
     let shortcutKeyAfterMergingWithConfig = shortcutService.shortcuts.navigateLeft.key;
 

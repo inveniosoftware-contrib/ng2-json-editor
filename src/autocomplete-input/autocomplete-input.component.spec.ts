@@ -35,13 +35,15 @@ import { AutocompleteInputComponent } from '../autocomplete-input';
 
 import { RemoteAutocompletionService, JsonStoreService } from '../shared/services';
 
+import { AutocompletionResult, AutocompletionConfig } from '../shared/interfaces';
+
 const autocompletionServiceResults = [
   { text: 'Result1' },
   { text: 'Result2' },
   { text: 'Result3' }
 ];
 class MockRemoteAutocompletionService extends RemoteAutocompletionService {
-  getAutocompletionResults(options: AutocompletionOptions,
+  getAutocompletionResults(options: AutocompletionConfig,
     token: string): Observable<Array<AutocompletionResult>> {
     return Observable.of(autocompletionServiceResults);
   }
@@ -74,11 +76,11 @@ describe('AutocompleteInputComponent', () => {
     component = fixture.componentInstance;
 
     // need to size to render the component!
-    component.autocompletionOptions = {
+    component.autocompletionConfig = {
       url: '',
       path: '',
       size: 3,
-      onCompletionSelect: (path, completion, store) => {}
+      onCompletionSelect: (path, completion, store) => { }
     };
     component.value = '';
     fixture.detectChanges();

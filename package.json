@@ -28,7 +28,8 @@
     "preversion": "npm test",
     "version": "npm run build",
     "postversion": "git push upstream && git push upstream --tags",
-    "coveralls": "cat coverage/coverage.lcov | coveralls"
+    "coveralls": "cat coverage/coverage.lcov | coveralls",
+    "typedoc": "typedoc --readme none --theme ./docs-theme --module commonjs --out ./example-dist/docs ./src/shared/interfaces/json-editor-config.ts"
   },
   "dependencies": {
     "@angular/common": "~2.1.0",
@@ -40,8 +41,8 @@
     "@angular/platform-browser-dynamic": "~2.1.0",
     "@angular/router": "~3.1.0",
     "core-js": "^2.4.1",
-    "lodash": "^4.17.2",
     "immutable": "^3.8.1",
+    "lodash": "4.17.2",
     "ng2-bootstrap": "1.1.16",
     "rxjs": "5.0.0-beta.12",
     "ts-helpers": "^1.1.1",
@@ -49,7 +50,7 @@
   },
   "devDependencies": {
     "@types/jasmine": "^2.2.30",
-    "@types/lodash": "^4.14.50",
+    "@types/lodash": "4.14.50",
     "@types/mousetrap": "^1.5.32",
     "angular-cli": "1.0.0-beta.15",
     "bootstrap-sass": "^3.3.7",
@@ -69,7 +70,6 @@
     "karma-cli": "^1.0.1",
     "karma-jasmine": "^1.0.2",
     "karma-remap-istanbul": "^0.2.1",
-    "lodash": "^4.17.4",
     "merge2": "^1.0.2",
     "mousetrap": "^1.6.0",
     "npm-run-all": "^4.0.1",
@@ -78,6 +78,7 @@
     "run-sequence": "^1.2.2",
     "ts-node": "1.2.1",
     "tslint": "3.13.0",
+    "typedoc": "^0.5.5",
     "typescript": "2.0.2",
     "util-deprecate": "^1.0.2"
   },
