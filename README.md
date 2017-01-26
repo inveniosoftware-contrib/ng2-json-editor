@@ -1,8 +1,15 @@
+[![Build Status](https://travis-ci.org/inveniosoftware-contrib/ng2-json-editor.svg?branch=master)](https://travis-ci.org/inveniosoftware-contrib/ng2-json-editor)
+[![Coverage Status](https://coveralls.io/repos/github/inveniosoftware-contrib/ng2-json-editor/badge.svg?branch=master)](https://coveralls.io/github/inveniosoftware-contrib/ng2-json-editor?branch=master)
+[![npm version](https://badge.fury.io/js/ng2-json-editor.svg)](https://badge.fury.io/js/ng2-json-editor)
+
 # ng2-json-editor
 
 Angular2 component for editing large json documents.
 
 # USAGE
+
+## Live Demo
+Here is a live example of ng2-json-editor: [https://inveniosoftware-contrib.github.io/ng2-json-editor](https://inveniosoftware-contrib.github.io/ng2-json-editor)
 
 ## Quick start
 
