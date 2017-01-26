@@ -1,5 +1,5 @@
-div.editable-field-container textarea,
-div.editable-field-container input {
+td.value-container textarea,
+td.value-container input {
   vertical-align: middle;
   width: 50%;
   padding: 0 0 0 3px;
@@ -16,23 +16,20 @@ div.editable-field-container input {
   -webkit-box-sizing: border-box; // For Safari
 }
 
-div.editable-field-container:hover {
-  background: #ffa;
-}
-
-table.input-container {
+table.primitive-field-container {
   width: 100%;
-  td {
-    background: transparent !important;
-  }
 }
 
-td.link-button-holder {
+td.link-button-container {
   width: 22px;
 }
 
-td.value-holder {
+td.value-container {
   width: 100%;
+  
+  &:hover {
+    background-color: #ffa !important;
+  }
 }
 
 a.no-decoration {
