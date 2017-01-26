@@ -41,4 +41,8 @@ export class EditorPreviewerComponent extends AbstractTrackerComponent {
     return this.hidden ? 'Show' : 'Hide';
   }
 
+  openUrlInNewTab(url: string) {
+    window.open(url);
+  }
+
 }
