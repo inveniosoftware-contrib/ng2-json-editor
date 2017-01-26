@@ -1,37 +1,33 @@
 <div [ngSwitch]="valueType" [id]="pathString">
-  <table class="input-container">
+  <table class="primitive-field-container">
     <tr>
-      <td class="value-holder">
-        <div class="editable-field-container" [ngClass]="errorNgClass" [tooltipHtml]="errors | errorsToMessagesHtml" tooltipTrigger="mouseenter"
-             [tooltipEnable]="isErrorTooltipEnabled">
-          <div *ngSwitchCase="'string'">
-            <textarea rows="1" textareaAutofit [tabindex]="tabIndex" [(ngModel)]="value" (blur)="commitValueChange()" (keypress)="onKeypress($event)" placeholder="{{schema.title}}"></textarea>
-          </div>
-          <div *ngSwitchCase="'enum'">
-            <!-- TODO: set placeholder -->
-            <searchable-dropdown [value]="value" [tabindex]="tabIndex" [items]="schema.enum" [shortcutMap]="schema.x_editor_enum_shortcut_map" (onSelect)="onSearchableDropdownSelect($event)"></searchable-dropdown>
-          </div>
-          <div *ngSwitchCase="'autocomplete'">
-            <autocomplete-input [value]="value" [path]="path" [autocompletionOptions]="schema.x_editor_autocomplete" (onBlur)="commitValueChange()"
-                                (onKeypress)="onKeypress($event)" (onValueChange)="onAutocompleteInputValueChange($event)" [tabindex]="tabIndex" [placeholder]="schema.title"></autocomplete-input>
-          </div>
-          <div *ngSwitchCase="'integer'">
-            <input type="number" [(ngModel)]="value" [tabindex]="tabIndex" (blur)="commitValueChange()" (keypress)="onKeypress($event)" placeholder="{{schema.title}}">
-          </div>
-          <div *ngSwitchCase="'boolean'">
-            <input type="checkbox" [(ngModel)]="value" (ngModelChange)="commitValueChange()" placeholder="{{schema.title}}" [tabindex]="tabIndex">
-          </div>
-          <div *ngSwitchDefault>
-            ## Not recognized type: {{valueType}}
-          </div>
+      <td class="value-container" [ngClass]="errorNgClass" [tooltipHtml]="errors | errorsToMessagesHtml"
+        tooltipTrigger="mouseenter" [tooltipEnable]="isErrorTooltipEnabled">
+        <div *ngSwitchCase="'string'">
+          <textarea rows="1" textareaAutofit [tabindex]="tabIndex" [(ngModel)]="value" (blur)="commitValueChange()" (keypress)="onKeypress($event)"
+            placeholder="{{schema.title}}"></textarea>
         </div>
-        <div>
-          <div *ngSwitchCase="'disabled'">
-            {{value}}
-          </div>
+        <div *ngSwitchCase="'enum'">
+          <searchable-dropdown [value]="value" [tabindex]="tabIndex" [items]="schema.enum" [shortcutMap]="schema.x_editor_enum_shortcut_map"
+            (onSelect)="onSearchableDropdownSelect($event)"></searchable-dropdown>
+        </div>
+        <div *ngSwitchCase="'autocomplete'">
+          <autocomplete-input [value]="value" [path]="path" [autocompletionOptions]="schema.x_editor_autocomplete" (onBlur)="commitValueChange()"
+            (onKeypress)="onKeypress($event)" (onValueChange)="onAutocompleteInputValueChange($event)" [tabindex]="tabIndex"
+            [placeholder]="schema.title"></autocomplete-input>
+        </div>
+        <div *ngSwitchCase="'integer'">
+          <input type="number" [(ngModel)]="value" [tabindex]="tabIndex" (blur)="commitValueChange()" (keypress)="onKeypress($event)"
+            placeholder="{{schema.title}}">
+        </div>
+        <div *ngSwitchCase="'boolean'">
+          <input type="checkbox" [(ngModel)]="value" (ngModelChange)="commitValueChange()" placeholder="{{schema.title}}" [tabindex]="tabIndex">
+        </div>
+        <div *ngSwitchDefault>
+          ## Not recognized type: {{valueType}}
         </div>
       </td>
-      <td class="link-button-holder">
+      <td class="link-button-container">
         <a *ngIf="linkBuilder" class="no-decoration" target="_blank" [href]="linkBuilder(value)">🔗</a>
       </td>
     </tr>

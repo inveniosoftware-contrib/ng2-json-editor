@@ -28,7 +28,7 @@ export class DomUtilService {
   focusAndSelectFirstInputChildById(id: string) {
     let el = document.getElementById(id);
     if (el) {
-      let firstInput = el.querySelector('div.editable-field-container input, textarea') as HTMLInputElement;
+      let firstInput = el.querySelector('input, textarea') as HTMLInputElement;
       if (firstInput) {
         firstInput.focus();
         firstInput.select();
@@ -53,7 +53,7 @@ export class DomUtilService {
       }
       let nextSibling = direction > 0 ? elementParentCell.nextElementSibling : elementParentCell.previousElementSibling;
       while (nextSibling && nextSibling.nodeName === 'TD') {
-        let inputElement = nextSibling.querySelector('div.editable-field-container input[tabindex],textarea[tabindex]') as HTMLInputElement;
+        let inputElement = nextSibling.querySelector('input[tabindex],textarea[tabindex]') as HTMLInputElement;
         if (inputElement) {
           inputElement.focus();
           inputElement.select();
