@@ -26,20 +26,28 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { JsonEditorModule } from '../../dist';
+import { routing } from './app.routing';
 
 import { AppComponent } from './app.component';
 import { AppConfig } from './app.config';
+import { AppEditorComponent } from './app-editor.component';
+import { MockDataFactoryService } from './services/mock-data-factory.service';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    AppEditorComponent
+  ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    routing,
     JsonEditorModule
   ],
   providers: [
-    AppConfig
+    AppConfig,
+    MockDataFactoryService
   ],
   bootstrap: [AppComponent]
 })

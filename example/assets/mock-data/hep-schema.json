@@ -1,0 +1,1759 @@
+{
+  "$schema": "http://json-schema.org/schema#", 
+  "description": "An article or thesis or book or...", 
+  "noAdditionalProperties": true, 
+  "properties": {
+    "$schema": {
+      "format": "url", 
+      "type": "string"
+    }, 
+    "abstracts": {
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "source": {
+            "$schema": "http://json-schema.org/schema#", 
+            "type": "string"
+          }, 
+          "value": {
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "accelerator_experiments": {
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "accelerator": {
+            "type": "string"
+          }, 
+          "curated_relation": {
+            "default": false, 
+            "description": "Was the experiment actually proofchecked by a cataloguer?", 
+            "type": "boolean"
+          }, 
+          "experiment": {
+            "type": "string"
+          }, 
+          "institution": {
+            "type": "string"
+          }, 
+          "record": {
+            "$schema": "http://json-schema.org/schema#", 
+            "noAdditionalProperties": true, 
+            "properties": {
+              "$ref": {
+                "description": "URL to the referenced resource", 
+                "format": "url", 
+                "type": "string"
+              }
+            }, 
+            "required": [
+              "$ref"
+            ], 
+            "type": "object"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "acquisition_source": {
+      "$schema": "http://json-schema.org/schema#", 
+      "noAdditionalProperties": true, 
+      "properties": {
+        "date": {
+          "type": "string"
+        }, 
+        "email": {
+          "type": "string"
+        }, 
+        "method": {
+          "type": "string"
+        }, 
+        "orcid": {
+          "pattern": "^\\d{4}-\\d{4}-\\d{4}-\\d{3}[0-9X]$", 
+          "type": "string"
+        }, 
+        "source": {
+          "type": "string"
+        }, 
+        "submission_number": {
+          "type": "string"
+        }
+      }, 
+      "type": "object"
+    }, 
+    "arxiv_eprints": {
+      "description": "Read only meta-data (identifiers and categories) coming from arXiv", 
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "categories": {
+            "items": {
+              "$schema": "http://json-schema.org/schema#", 
+              "enum": [
+                "alg-geom", 
+                "astro-ph", 
+                "astro-ph.CO", 
+                "astro-ph.EP", 
+                "astro-ph.GA", 
+                "astro-ph.HE", 
+                "astro-ph.IM", 
+                "astro-ph.SR", 
+                "cond-mat", 
+                "cond-mat.dis-nn", 
+                "cond-mat.mes-hall", 
+                "cond-mat.mtrl-sci", 
+                "cond-mat.other", 
+                "cond-mat.quant-gas", 
+                "cond-mat.soft", 
+                "cond-mat.stat-mech", 
+                "cond-mat.str-el", 
+                "cond-mat.supr-con", 
+                "cs", 
+                "cs.AI", 
+                "cs.AR", 
+                "cs.CC", 
+                "cs.CE", 
+                "cs.CG", 
+                "cs.CL", 
+                "cs.CR", 
+                "cs.CV", 
+                "cs.CY", 
+                "cs.DB", 
+                "cs.DC", 
+                "cs.DL", 
+                "cs.DM", 
+                "cs.DS", 
+                "cs.ET", 
+                "cs.FL", 
+                "cs.GL", 
+                "cs.GR", 
+                "cs.GT", 
+                "cs.HC", 
+                "cs.IR", 
+                "cs.IT", 
+                "cs.LG", 
+                "cs.LO", 
+                "cs.MA", 
+                "cs.MM", 
+                "cs.MS", 
+                "cs.NA", 
+                "cs.NE", 
+                "cs.NI", 
+                "cs.OH", 
+                "cs.OS", 
+                "cs.PF", 
+                "cs.PL", 
+                "cs.RO", 
+                "cs.SC", 
+                "cs.SD", 
+                "cs.SE", 
+                "cs.SI", 
+                "cs.SY", 
+                "dg-ga", 
+                "gr-qc", 
+                "hep-ex", 
+                "hep-lat", 
+                "hep-ph", 
+                "hep-th", 
+                "math", 
+                "math-ph", 
+                "math.AC", 
+                "math.AG", 
+                "math.AP", 
+                "math.AT", 
+                "math.CA", 
+                "math.CO", 
+                "math.CT", 
+                "math.CV", 
+                "math.DG", 
+                "math.DS", 
+                "math.FA", 
+                "math.GM", 
+                "math.GN", 
+                "math.GR", 
+                "math.GT", 
+                "math.HO", 
+                "math.IT", 
+                "math.KT", 
+                "math.LO", 
+                "math.MG", 
+                "math.MP", 
+                "math.NA", 
+                "math.NT", 
+                "math.OA", 
+                "math.OC", 
+                "math.PR", 
+                "math.QA", 
+                "math.RA", 
+                "math.RT", 
+                "math.SG", 
+                "math.SP", 
+                "math.ST", 
+                "nlin", 
+                "nlin.AO", 
+                "nlin.CD", 
+                "nlin.CG", 
+                "nlin.PS", 
+                "nlin.SI", 
+                "nucl-ex", 
+                "nucl-th", 
+                "patt-sol", 
+                "physics", 
+                "physics.acc-ph", 
+                "physics.ao-ph", 
+                "physics.atm-clus", 
+                "physics.atom-ph", 
+                "physics.bio-ph", 
+                "physics.chem-ph", 
+                "physics.class-ph", 
+                "physics.comp-ph", 
+                "physics.data-an", 
+                "physics.ed-ph", 
+                "physics.flu-dyn", 
+                "physics.gen-ph", 
+                "physics.geo-ph", 
+                "physics.hist-ph", 
+                "physics.ins-det", 
+                "physics.med-ph", 
+                "physics.optics", 
+                "physics.plasm-ph", 
+                "physics.pop-ph", 
+                "physics.soc-ph", 
+                "physics.space-ph", 
+                "q-alg", 
+                "q-bio", 
+                "q-bio.BM", 
+                "q-bio.CB", 
+                "q-bio.GN", 
+                "q-bio.MN", 
+                "q-bio.NC", 
+                "q-bio.OT", 
+                "q-bio.PE", 
+                "q-bio.QM", 
+                "q-bio.SC", 
+                "q-bio.TO", 
+                "q-fin", 
+                "q-fin.CP", 
+                "q-fin.EC", 
+                "q-fin.GN", 
+                "q-fin.MF", 
+                "q-fin.PM", 
+                "q-fin.PR", 
+                "q-fin.RM", 
+                "q-fin.ST", 
+                "q-fin.TR", 
+                "quant-ph", 
+                "solv-int", 
+                "stat", 
+                "stat.AP", 
+                "stat.CO", 
+                "stat.ME", 
+                "stat.ML", 
+                "stat.OT", 
+                "stat.TH"
+              ], 
+              "title": "All arXiv categoires", 
+              "type": "string"
+            }, 
+            "type": "array"
+          }, 
+          "value": {
+            "description": "arXiv eprint number, e.g. math.DG/0307245 or 1701.01431", 
+            "pattern": "^\\d{4}.\\d{4,5}|[\\w.]+(-[\\w.]+)?/\\d+$", 
+            "type": "string"
+          }
+        }, 
+        "required": [
+          "value"
+        ], 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "authors": {
+      "description": "Anybody who has acted on a given document (including supervisors, editors, etc.)", 
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "affiliations": {
+            "items": {
+              "noAdditionalProperties": true, 
+              "properties": {
+                "curated_relation": {
+                  "description": "Does this affiliation point to the correct Institution?", 
+                  "type": "boolean"
+                }, 
+                "record": {
+                  "$schema": "http://json-schema.org/schema#", 
+                  "noAdditionalProperties": true, 
+                  "properties": {
+                    "$ref": {
+                      "description": "URL to the referenced resource", 
+                      "format": "url", 
+                      "type": "string"
+                    }
+                  }, 
+                  "required": [
+                    "$ref"
+                  ], 
+                  "type": "object"
+                }, 
+                "value": {
+                  "description": "The normalized affiliation, i.e. the institution identifier.", 
+                  "type": "string"
+                }
+              }, 
+              "title": "Affiliation", 
+              "type": "object"
+            }, 
+            "title": "Affiliations", 
+            "type": "array", 
+            "uniqueItems": true
+          }, 
+          "alternative_names": {
+            "items": {
+              "description": "E.g. '\u697c \u7acb\u6d0b', or 'Smith, Joe John'", 
+              "type": "string"
+            }, 
+            "type": "array"
+          }, 
+          "credit_roles": {
+            "items": {
+              "description": "CRediT http://dictionary.casrai.org/Contributor_Roles role for authors", 
+              "enum": [
+                "Conceptualization", 
+                "Data curation", 
+                "Formal analysis", 
+                "Funding acquisition", 
+                "Investigation", 
+                "Methodology", 
+                "Project administration", 
+                "Resources", 
+                "Software", 
+                "Supervision", 
+                "Validation", 
+                "Visualization", 
+                "Writing - original draft", 
+                "Writing - review & editing"
+              ], 
+              "type": "string"
+            }, 
+            "type": "array"
+          }, 
+          "curated_relation": {
+            "default": false, 
+            "description": "Does this signature point to the correct author profile?", 
+            "title": "The relation is curated?", 
+            "type": "boolean"
+          }, 
+          "emails": {
+            "items": {
+              "format": "email", 
+              "type": "string"
+            }, 
+            "type": "array"
+          }, 
+          "full_name": {
+            "description": "'family names, first names' of the author (as they appear on the paper)", 
+            "title": "Author name", 
+            "type": "string"
+          }, 
+          "ids": {
+            "items": {
+              "$schema": "http://json-schema.org/schema#", 
+              "anyOf": [
+                {
+                  "noAdditionalProperties": true, 
+                  "properties": {
+                    "type": {
+                      "enum": [
+                        "INSPIRE ID"
+                      ], 
+                      "type": "string"
+                    }, 
+                    "value": {
+                      "pattern": "^INSPIRE-\\d{8}$", 
+                      "type": "string"
+                    }
+                  }, 
+                  "type": "object"
+                }, 
+                {
+                  "noAdditionalProperties": true, 
+                  "properties": {
+                    "type": {
+                      "enum": [
+                        "INSPIRE BAI"
+                      ], 
+                      "type": "string"
+                    }, 
+                    "value": {
+                      "pattern": "^(\\w+\\.)+\\d+$", 
+                      "type": "string"
+                    }
+                  }, 
+                  "type": "object"
+                }, 
+                {
+                  "noAdditionalProperties": true, 
+                  "properties": {
+                    "type": {
+                      "enum": [
+                        "ORCID"
+                      ], 
+                      "type": "string"
+                    }, 
+                    "value": {
+                      "pattern": "^\\d{4}-\\d{4}-\\d{4}-\\d{3}[0-9X]$", 
+                      "type": "string"
+                    }
+                  }, 
+                  "type": "object"
+                }, 
+                {
+                  "noAdditionalProperties": true, 
+                  "properties": {
+                    "type": {
+                      "enum": [
+                        "JACOW"
+                      ], 
+                      "type": "string"
+                    }, 
+                    "value": {
+                      "pattern": "^JACoW-\\d{8}$", 
+                      "type": "string"
+                    }
+                  }, 
+                  "type": "object"
+                }, 
+                {
+                  "noAdditionalProperties": true, 
+                  "properties": {
+                    "type": {
+                      "enum": [
+                        "KAKEN"
+                      ], 
+                      "type": "string"
+                    }, 
+                    "value": {
+                      "pattern": "^KAKEN-\\d{8}$", 
+                      "type": "string"
+                    }
+                  }, 
+                  "type": "object"
+                }, 
+                {
+                  "noAdditionalProperties": true, 
+                  "properties": {
+                    "type": {
+                      "enum": [
+                        "ARXIV"
+                      ], 
+                      "type": "string"
+                    }, 
+                    "value": {
+                      "pattern": "^\\w+_(\\w_)?\\d+$", 
+                      "type": "string"
+                    }
+                  }, 
+                  "type": "object"
+                }, 
+                {
+                  "noAdditionalProperties": true, 
+                  "properties": {
+                    "type": {
+                      "enum": [
+                        "CERN"
+                      ], 
+                      "type": "string"
+                    }, 
+                    "value": {
+                      "pattern": "^CERN-\\d+$", 
+                      "type": "string"
+                    }
+                  }, 
+                  "type": "object"
+                }, 
+                {
+                  "noAdditionalProperties": true, 
+                  "properties": {
+                    "type": {
+                      "enum": [
+                        "DESY"
+                      ], 
+                      "type": "string"
+                    }, 
+                    "value": {
+                      "pattern": "^DESY-\\d+$", 
+                      "type": "string"
+                    }
+                  }, 
+                  "type": "object"
+                }, 
+                {
+                  "noAdditionalProperties": true, 
+                  "properties": {
+                    "type": {
+                      "enum": [
+                        "GOOGLESCHOLAR"
+                      ], 
+                      "type": "string"
+                    }, 
+                    "value": {
+                      "pattern": "^(\\w|-){12}$", 
+                      "type": "string"
+                    }
+                  }, 
+                  "type": "object"
+                }, 
+                {
+                  "noAdditionalProperties": true, 
+                  "properties": {
+                    "type": {
+                      "enum": [
+                        "VIAF"
+                      ], 
+                      "type": "string"
+                    }, 
+                    "value": {
+                      "pattern": "^\\d{7,9}$", 
+                      "type": "string"
+                    }
+                  }, 
+                  "type": "object"
+                }, 
+                {
+                  "noAdditionalProperties": true, 
+                  "properties": {
+                    "type": {
+                      "enum": [
+                        "RESEARCHERID"
+                      ], 
+                      "type": "string"
+                    }, 
+                    "value": {
+                      "pattern": "^[A-z]-\\d{4}-\\d{4}$", 
+                      "type": "string"
+                    }
+                  }, 
+                  "type": "object"
+                }, 
+                {
+                  "noAdditionalProperties": true, 
+                  "properties": {
+                    "type": {
+                      "enum": [
+                        "SCOPUS"
+                      ], 
+                      "type": "string"
+                    }, 
+                    "value": {
+                      "pattern": "^\\d{10,11}$", 
+                      "type": "string"
+                    }
+                  }, 
+                  "type": "object"
+                }, 
+                {
+                  "noAdditionalProperties": true, 
+                  "properties": {
+                    "type": {
+                      "enum": [
+                        "WIKIPEDIA"
+                      ], 
+                      "type": "string"
+                    }, 
+                    "value": {
+                      "pattern": "^\\w+$", 
+                      "type": "string"
+                    }
+                  }, 
+                  "type": "object"
+                }, 
+                {
+                  "noAdditionalProperties": true, 
+                  "properties": {
+                    "type": {
+                      "enum": [
+                        "SLAC"
+                      ], 
+                      "type": "string"
+                    }, 
+                    "value": {
+                      "pattern": "^SLAC-\\d+$", 
+                      "type": "string"
+                    }
+                  }, 
+                  "type": "object"
+                }
+              ], 
+              "required": [
+                "type", 
+                "value"
+              ]
+            }, 
+            "type": "array", 
+            "uniqueItems": true
+          }, 
+          "inspire_roles": {
+            "items": {
+              "default": "author", 
+              "enum": [
+                "author", 
+                "supervisor", 
+                "editor"
+              ], 
+              "type": "string"
+            }, 
+            "type": "array"
+          }, 
+          "raw_affiliations": {
+            "items": {
+              "noAdditionalProperties": true, 
+              "properties": {
+                "source": {
+                  "$schema": "http://json-schema.org/schema#", 
+                  "type": "string"
+                }, 
+                "value": {
+                  "description": "The affiliation as it appears on the paper", 
+                  "type": "string"
+                }
+              }, 
+              "required": [
+                "value"
+              ], 
+              "type": "object"
+            }, 
+            "type": "array"
+          }, 
+          "record": {
+            "$schema": "http://json-schema.org/schema#", 
+            "noAdditionalProperties": true, 
+            "properties": {
+              "$ref": {
+                "description": "URL to the referenced resource", 
+                "format": "url", 
+                "type": "string"
+              }
+            }, 
+            "required": [
+              "$ref"
+            ], 
+            "type": "object"
+          }, 
+          "uuid": {
+            "description": "Signature identifier. (read-only)", 
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", 
+            "title": "UUID", 
+            "type": "string"
+          }
+        }, 
+        "required": [
+          "full_name"
+        ], 
+        "title": "Author", 
+        "type": "object"
+      }, 
+      "title": "Authors", 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "book_series": {
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "title": {
+            "description": "Title of the book series", 
+            "type": "string"
+          }, 
+          "volume": {
+            "description": "Specific volume number", 
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array"
+    }, 
+    "citeable": {
+      "description": "Whether this document can be cited. FIXME: can this be derived from other properties?", 
+      "title": "Citeable?", 
+      "type": "boolean"
+    }, 
+    "collaborations": {
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "record": {
+            "$schema": "http://json-schema.org/schema#", 
+            "noAdditionalProperties": true, 
+            "properties": {
+              "$ref": {
+                "description": "URL to the referenced resource", 
+                "format": "url", 
+                "type": "string"
+              }
+            }, 
+            "required": [
+              "$ref"
+            ], 
+            "type": "object"
+          }, 
+          "value": {
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "collections": {
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "primary": {
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "minItems": 1, 
+      "title": "Collection", 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "control_number": {
+      "type": "integer"
+    }, 
+    "copyright": {
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "holder": {
+            "description": "Copyright holder.", 
+            "type": "string"
+          }, 
+          "material": {
+            "$schema": "http://json-schema.org/schema#", 
+            "enum": [
+              "preprint", 
+              "publication", 
+              "reprint", 
+              "erratum", 
+              "addendum"
+            ], 
+            "type": "string"
+          }, 
+          "statement": {
+            "description": "FIXME: What's that? there are all sorts of usages on production!", 
+            "type": "string"
+          }, 
+          "url": {
+            "format": "url", 
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array"
+    }, 
+    "core": {
+      "description": "Whether this document is CORE and hence need special curation. NOTE: set this explicitly to false, in order to have real noncore.", 
+      "type": "boolean"
+    }, 
+    "corporate_author": {
+      "items": {
+        "title": "Corporate author", 
+        "type": "string"
+      }, 
+      "title": "Corporate authors", 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "deleted": {
+      "type": "boolean"
+    }, 
+    "deleted_records": {
+      "description": "List of deleted records referring to this record",
+      "items":{
+        "$schema": "http://json-schema.org/schema#",
+        "noAdditionalProperties": true,
+        "properties": {
+          "record": {
+            "$schema": "http://json-schema.org/schema#",
+            "properties": {
+              "$ref": {
+                "description": "URL to the referenced resource",
+                "format": "url",
+                "type": "string"
+              }
+            },
+            "required": [
+              "$ref"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "$ref"
+        ],
+        "type": "object"
+      },
+      "title": "Deleted Records",
+      "type": "array"
+    }, 
+    "document_type": {
+      "items": {
+        "enum": [
+          "article", 
+          "book", 
+          "book chapter", 
+          "conference paper", 
+          "note", 
+          "proceedings", 
+          "report", 
+          "thesis"
+        ], 
+        "type": "string"
+      }, 
+      "minItems": 1, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "dois": {
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "material": {
+            "$schema": "http://json-schema.org/schema#", 
+            "enum": [
+              "preprint", 
+              "publication", 
+              "reprint", 
+              "erratum", 
+              "addendum"
+            ], 
+            "type": "string"
+          }, 
+          "source": {
+            "$schema": "http://json-schema.org/schema#", 
+            "type": "string"
+          }, 
+          "value": {
+            "pattern": "^10\\.\\d+(\\.\\d+)?/.+$", 
+            "title": "DOI", 
+            "type": "string"
+          }
+        }, 
+        "title": "DOI", 
+        "type": "object"
+      }, 
+      "title": "DOIs", 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "edition": {
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "edition": {
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "energy_ranges": {
+      "description": "Ranges of energies the record refers to", 
+      "items": {
+        "minimum": 0, 
+        "type": "integer"
+      }, 
+      "type": "array"
+    }, 
+    "external_system_identifiers": {
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "schema": {
+            "type": "string"
+          }, 
+          "value": {
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "funding_info": {
+      "description": "Information related to funding. FIXME: Do we care about this? So far only 349 records were tagged and all for a single EU project.", 
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "agency": {
+            "title": "Agency", 
+            "type": "string"
+          }, 
+          "grant_number": {
+            "title": "Grant number", 
+            "type": "string"
+          }, 
+          "project_number": {
+            "title": "Project number", 
+            "type": "string"
+          }
+        }, 
+        "title": "Grant information", 
+        "type": "object"
+      }, 
+      "title": "Funding information", 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "hidden_notes": {
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "source": {
+            "$schema": "http://json-schema.org/schema#", 
+            "type": "string"
+          }, 
+          "value": {
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "imprints": {
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "date": {
+            "format": "date", 
+            "type": "string"
+          }, 
+          "place": {
+            "type": "string"
+          }, 
+          "publisher": {
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "inspire_categories": {
+      "items": {
+        "$schema": "http://json-schema.org/schema#", 
+        "noAdditionalProperties": true, 
+        "properties": {
+          "source": {
+            "enum": [
+              "curator", 
+              "magpie", 
+              "arxiv", 
+              "user", 
+              "undefined"
+            ], 
+            "type": "string"
+          }, 
+          "term": {
+            "enum": [
+              "Accelerators", 
+              "Astrophysics", 
+              "Computing", 
+              "Data Analysis and Statistics", 
+              "Experiment-HEP", 
+              "Experiment-Nucl", 
+              "General Physics", 
+              "Gravitation and Cosmology", 
+              "Instrumentation", 
+              "Lattice", 
+              "Math and Math Physics", 
+              "Other", 
+              "Phenomenology-HEP", 
+              "Theory-HEP", 
+              "Theory-Nucl"
+            ], 
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "isbns": {
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "comment": {
+            "description": "Further information about type.", 
+            "type": "string"
+          }, 
+          "material": {
+            "$schema": "http://json-schema.org/schema#", 
+            "enum": [
+              "preprint", 
+              "publication", 
+              "reprint", 
+              "erratum", 
+              "addendum"
+            ], 
+            "type": "string"
+          }, 
+          "value": {
+            "pattern": "^(97(8|9))?\\d{9}(\\d|X)$", 
+            "type": "string"
+          }
+        }, 
+        "required": [
+          "value"
+        ], 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "keywords": {
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "schema": {
+            "description": "The particular vocabulary against which this keyword is valid and found. Leave empty for free form keywords", 
+            "enum": [
+              "INSPIRE", 
+              "PACS", 
+              "PDG"
+            ], 
+            "type": "string"
+          }, 
+          "source": {
+            "$schema": "http://json-schema.org/schema#", 
+            "type": "string"
+          }, 
+          "value": {
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "languages": {
+      "items": {
+        "pattern": "^\\w{2}$", 
+        "title": "Language", 
+        "type": "string"
+      }, 
+      "type": "array"
+    }, 
+    "license": {
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "imposing": {
+            "description": "FIXME: what is this!?", 
+            "title": "Imposing", 
+            "type": "string"
+          }, 
+          "license": {
+            "title": "License name", 
+            "type": "string"
+          }, 
+          "material": {
+            "$schema": "http://json-schema.org/schema#", 
+            "enum": [
+              "preprint", 
+              "publication", 
+              "reprint", 
+              "erratum", 
+              "addendum"
+            ], 
+            "type": "string"
+          }, 
+          "url": {
+            "format": "url", 
+            "title": "URL of the license", 
+            "type": "string"
+          }
+        }, 
+        "title": "License", 
+        "type": "object"
+      }, 
+      "title": "License information", 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "new_record": {
+      "$schema": "http://json-schema.org/schema#", 
+      "noAdditionalProperties": true, 
+      "properties": {
+        "$ref": {
+          "description": "URL to the referenced resource", 
+          "format": "url", 
+          "type": "string"
+        }
+      }, 
+      "required": [
+        "$ref"
+      ], 
+      "type": "object"
+    }, 
+    "number_of_pages": {
+      "minimum": 1, 
+      "type": "integer"
+    }, 
+    "persistent_identifiers": {
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "schema": {
+            "title": "Type of persistent identifier (e.g. HDL, URN)", 
+            "type": "string"
+          }, 
+          "source": {
+            "$schema": "http://json-schema.org/schema#", 
+            "type": "string"
+          }, 
+          "value": {
+            "title": "Value of the persistent identifier", 
+            "type": "string"
+          }
+        }, 
+        "title": "Persistent Identifier", 
+        "type": "object"
+      }, 
+      "title": "Persistent Identifiers", 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "preprint_date": {
+      "format": "date", 
+      "type": "string"
+    }, 
+    "public_notes": {
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "source": {
+            "$schema": "http://json-schema.org/schema#", 
+            "type": "string"
+          }, 
+          "value": {
+            "type": "string"
+          }
+        }, 
+        "required": [
+          "value"
+        ], 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "publication_info": {
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "artid": {
+            "description": "Electronic Article ID", 
+            "type": "string"
+          }, 
+          "cnum": {
+            "$schema": "http://json-schema.org/schema#", 
+            "pattern": "^C\\d\\d-\\d\\d-\\d\\d(\\.\\d+)?$", 
+            "title": "INSPIRE Conference ID (CNUM)", 
+            "type": "string"
+          }, 
+          "conf_acronym": {
+            "type": "string"
+          }, 
+          "conference_record": {
+            "$schema": "http://json-schema.org/schema#", 
+            "noAdditionalProperties": true, 
+            "properties": {
+              "$ref": {
+                "description": "URL to the referenced resource", 
+                "format": "url", 
+                "type": "string"
+              }
+            }, 
+            "required": [
+              "$ref"
+            ], 
+            "type": "object"
+          }, 
+          "confpaper_info": {
+            "type": "string"
+          }, 
+          "curated_relation": {
+            "type": "boolean"
+          }, 
+          "journal_issue": {
+            "type": "string"
+          }, 
+          "journal_record": {
+            "$schema": "http://json-schema.org/schema#", 
+            "noAdditionalProperties": true, 
+            "properties": {
+              "$ref": {
+                "description": "URL to the referenced resource", 
+                "format": "url", 
+                "type": "string"
+              }
+            }, 
+            "required": [
+              "$ref"
+            ], 
+            "type": "object"
+          }, 
+          "journal_title": {
+            "type": "string"
+          }, 
+          "journal_volume": {
+            "type": "string"
+          }, 
+          "material": {
+            "$schema": "http://json-schema.org/schema#", 
+            "enum": [
+              "preprint", 
+              "publication", 
+              "reprint", 
+              "erratum", 
+              "addendum"
+            ], 
+            "type": "string"
+          }, 
+          "page_end": {
+            "description": "Last page", 
+            "type": "string"
+          }, 
+          "page_start": {
+            "description": "First page", 
+            "type": "string"
+          }, 
+          "parent_isbn": {
+            "pattern": "^(97(8|9))?\\d{9}(\\d|X)$", 
+            "type": "string"
+          }, 
+          "parent_record": {
+            "$schema": "http://json-schema.org/schema#", 
+            "noAdditionalProperties": true, 
+            "properties": {
+              "$ref": {
+                "description": "URL to the referenced resource", 
+                "format": "url", 
+                "type": "string"
+              }
+            }, 
+            "required": [
+              "$ref"
+            ], 
+            "type": "object"
+          }, 
+          "parent_report_number": {
+            "type": "string"
+          }, 
+          "pubinfo_freetext": {
+            "type": "string"
+          }, 
+          "year": {
+            "maximum": 2050, 
+            "minimum": 1000, 
+            "type": "integer"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "publication_type": {
+      "enum": [
+        "introductory", 
+        "lecture", 
+        "review"
+      ], 
+      "type": "string"
+    }, 
+    "published": {
+      "type": "boolean"
+    }, 
+    "references": {
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "curated_relation": {
+            "type": "boolean"
+          }, 
+          "raw_refs": {
+            "items": {
+              "noAdditionalProperties": true, 
+              "properties": {
+                "position": {
+                  "description": "The position of the reference as it appears on the document", 
+                  "type": "string"
+                }, 
+                "schema": {
+                  "description": "E.g. text, or Elsevier XML, or refexract", 
+                  "type": "string"
+                }, 
+                "source": {
+                  "$schema": "http://json-schema.org/schema#", 
+                  "type": "string"
+                }, 
+                "value": {
+                  "type": "string"
+                }
+              }, 
+              "required": [
+                "value", 
+                "schema"
+              ], 
+              "type": "object"
+            }, 
+            "type": "array"
+          }, 
+          "record": {
+            "$schema": "http://json-schema.org/schema#", 
+            "noAdditionalProperties": true, 
+            "properties": {
+              "$ref": {
+                "description": "URL to the referenced resource", 
+                "format": "url", 
+                "type": "string"
+              }
+            }, 
+            "required": [
+              "$ref"
+            ], 
+            "type": "object"
+          }, 
+          "reference": {
+            "$schema": "http://json-schema.org/schema#", 
+            "description": "record-like Schema for a Publication's reference", 
+            "noAdditionalProperties": true, 
+            "properties": {
+              "arxiv_eprints": {
+                "items": {
+                  "pattern": "^\\d{4}.\\d{4,5}|\\w+-\\w+/\\d+|\\w+/\\d+$", 
+                  "type": "string"
+                }, 
+                "type": "array", 
+                "uniqueItems": true
+              }, 
+              "authors": {
+                "description": "List with all the authors", 
+                "items": {
+                  "noAdditionalProperties": true, 
+                  "properties": {
+                    "full_name": {
+                      "type": "string"
+                    }, 
+                    "role": {
+                      "type": "string"
+                    }
+                  }, 
+                  "type": "object"
+                }, 
+                "title": "Authors", 
+                "type": "array", 
+                "uniqueItems": true
+              }, 
+              "book_series": {
+                "noAdditionalProperties": true, 
+                "properties": {
+                  "title": {
+                    "description": "Title of the book series", 
+                    "type": "string"
+                  }, 
+                  "volume": {
+                    "description": "Specific volume number", 
+                    "type": "string"
+                  }
+                }, 
+                "type": "object"
+              }, 
+              "collaboration": {
+                "items": {
+                  "type": "string"
+                }, 
+                "type": "array", 
+                "uniqueItems": true
+              }, 
+              "dois": {
+                "items": {
+                  "pattern": "^10\\.\\d+(\\.\\d+)?/.+$", 
+                  "type": "string"
+                }, 
+                "type": "array", 
+                "uniqueItems": true
+              }, 
+              "imprint": {
+                "noAdditionalProperties": true, 
+                "properties": {
+                  "date": {
+                    "format": "date", 
+                    "type": "string"
+                  }, 
+                  "place": {
+                    "type": "string"
+                  }, 
+                  "publisher": {
+                    "type": "string"
+                  }
+                }, 
+                "type": "object"
+              }, 
+              "misc": {
+                "items": {
+                  "type": "string"
+                }, 
+                "type": "array"
+              }, 
+              "number": {
+                "description": "Position within the reference list of a record (the number you find in brackets on the PDF).", 
+                "type": "integer"
+              }, 
+              "persistent_identifiers": {
+                "items": {
+                  "type": "string"
+                }, 
+                "title": "Persistent Identifiers", 
+                "type": "array", 
+                "uniqueItems": true
+              }, 
+              "publication_info": {
+                "noAdditionalProperties": true, 
+                "properties": {
+                  "artid": {
+                    "description": "Electronic Article ID", 
+                    "type": "string"
+                  }, 
+                  "cnum": {
+                    "type": "string"
+                  }, 
+                  "isbn": {
+                    "description": "ISBN", 
+                    "type": "string"
+                  }, 
+                  "journal_issue": {
+                    "type": "string"
+                  }, 
+                  "journal_title": {
+                    "type": "string"
+                  }, 
+                  "journal_volume": {
+                    "type": "string"
+                  }, 
+                  "page_end": {
+                    "description": "Last page", 
+                    "type": "string"
+                  }, 
+                  "page_start": {
+                    "description": "First page", 
+                    "type": "string"
+                  }, 
+                  "reportnumber": {
+                    "type": "string"
+                  }, 
+                  "year": {
+                    "maximum": 2050, 
+                    "minimum": 1000, 
+                    "type": "integer"
+                  }
+                }, 
+                "type": "object"
+              }, 
+              "texkey": {
+                "description": "INSPIRE Provided texkey.", 
+                "type": "string"
+              }, 
+              "titles": {
+                "items": {
+                  "$schema": "http://json-schema.org/schema#", 
+                  "noAdditionalProperties": true, 
+                  "properties": {
+                    "source": {
+                      "type": "string"
+                    }, 
+                    "subtitle": {
+                      "type": "string"
+                    }, 
+                    "title": {
+                      "type": "string"
+                    }
+                  }, 
+                  "type": "object"
+                }, 
+                "type": "array", 
+                "uniqueItems": true
+              }, 
+              "urls": {
+                "items": {
+                  "$schema": "http://json-schema.org/schema#", 
+                  "noAdditionalProperties": true, 
+                  "properties": {
+                    "description": {
+                      "type": "string"
+                    }, 
+                    "value": {
+                      "format": "url", 
+                      "type": "string"
+                    }
+                  }, 
+                  "type": "object"
+                }, 
+                "type": "array", 
+                "uniqueItems": true
+              }
+            }, 
+            "title": "Reference", 
+            "type": "object"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "report_numbers": {
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "source": {
+            "$schema": "http://json-schema.org/schema#", 
+            "type": "string"
+          }, 
+          "value": {
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "self": {
+      "$schema": "http://json-schema.org/schema#", 
+      "noAdditionalProperties": true, 
+      "properties": {
+        "$ref": {
+          "description": "URL to the referenced resource", 
+          "format": "url", 
+          "type": "string"
+        }
+      }, 
+      "required": [
+        "$ref"
+      ], 
+      "type": "object"
+    }, 
+    "special_collection": {
+      "items": {
+        "enum": [
+          "CDF-INTERNAL-NOTE", 
+          "CDF-NOTE", 
+          "CDS", 
+          "D0-INTERNAL-NOTE", 
+          "D0-PRELIMINARY-NOTE", 
+          "H1-INTERNAL-NOTE", 
+          "H1-PRELIMINARY-NOTE", 
+          "HALhidden", 
+          "HEPHIDDEN", 
+          "HERMES-INTERNAL-NOTE", 
+          "LARSOFT-INTERNAL-NOTE", 
+          "LARSOFT-NOTE", 
+          "ZEUS-INTERNAL-NOTE", 
+          "ZEUS-PRELIMINARY-NOTE"
+        ], 
+        "type": "string"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "succeeding_entry": {
+      "description": "Reference to previously merged records.", 
+      "noAdditionalProperties": true, 
+      "properties": {
+        "isbn": {
+          "pattern": "^(97(8|9))?\\d{9}(\\d|X)$", 
+          "type": "string"
+        }, 
+        "record": {
+          "$schema": "http://json-schema.org/schema#", 
+          "noAdditionalProperties": true, 
+          "properties": {
+            "$ref": {
+              "description": "URL to the referenced resource", 
+              "format": "url", 
+              "type": "string"
+            }
+          }, 
+          "required": [
+            "$ref"
+          ], 
+          "type": "object"
+        }, 
+        "relationship_code": {
+          "type": "string"
+        }
+      }, 
+      "type": "object"
+    }, 
+    "texkeys": {
+      "items": {
+        "type": "string"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "thesis_info": {
+      "noAdditionalProperties": true, 
+      "properties": {
+        "date": {
+          "format": "date", 
+          "type": "string"
+        }, 
+        "defense_date": {
+          "format": "date", 
+          "type": "string"
+        }, 
+        "degree_type": {
+          "$schema": "http://json-schema.org/schema#", 
+          "enum": [
+            "Other", 
+            "Diploma", 
+            "Bachelor", 
+            "Laurea", 
+            "Master", 
+            "PhD", 
+            "Habilitation"
+          ], 
+          "title": "Degree type", 
+          "type": "string"
+        }, 
+        "institutions": {
+          "items": {
+            "noAdditionalProperties": true, 
+            "properties": {
+              "curated_relation": {
+                "type": "boolean"
+              }, 
+              "name": {
+                "type": "string"
+              }, 
+              "record": {
+                "$schema": "http://json-schema.org/schema#", 
+                "noAdditionalProperties": true, 
+                "properties": {
+                  "$ref": {
+                    "description": "URL to the referenced resource", 
+                    "format": "url", 
+                    "type": "string"
+                  }
+                }, 
+                "required": [
+                  "$ref"
+                ], 
+                "type": "object"
+              }
+            }, 
+            "type": "object"
+          }, 
+          "type": "array"
+        }
+      }, 
+      "type": "object"
+    }, 
+    "title_translations": {
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "language": {
+            "pattern": "^\\w{2}$", 
+            "type": "string"
+          }, 
+          "source": {
+            "$schema": "http://json-schema.org/schema#", 
+            "type": "string"
+          }, 
+          "subtitle": {
+            "type": "string"
+          }, 
+          "title": {
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "titles": {
+      "items": {
+        "$schema": "http://json-schema.org/schema#", 
+        "noAdditionalProperties": true, 
+        "properties": {
+          "source": {
+            "type": "string"
+          }, 
+          "subtitle": {
+            "type": "string"
+          }, 
+          "title": {
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "urls": {
+      "items": {
+        "$schema": "http://json-schema.org/schema#", 
+        "noAdditionalProperties": true, 
+        "properties": {
+          "description": {
+            "type": "string"
+          }, 
+          "value": {
+            "format": "url", 
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "withdrawn": {
+      "type": "boolean"
+    }
+  }, 
+  "title": "Publication", 
+  "type": "object"
+}

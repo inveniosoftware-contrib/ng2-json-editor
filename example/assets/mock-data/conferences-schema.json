@@ -1,0 +1,553 @@
+{
+  "$schema": "http://json-schema.org/schema#", 
+  "noAdditionalProperties": true, 
+  "properties": {
+    "acronym": {
+      "items": {
+        "type": "string"
+      }, 
+      "title": "Conference acronym", 
+      "type": "array"
+    }, 
+    "address": {
+      "items": {
+        "$schema": "http://json-schema.org/schema#", 
+        "description": "Address", 
+        "noAdditionalProperties": true, 
+        "properties": {
+          "city": {
+            "description": "City", 
+            "type": "string"
+          }, 
+          "country_code": {
+            "$schema": "http://json-schema.org/schema#", 
+            "enum": [
+              "AB", 
+              "AF", 
+              "AN", 
+              "AX", 
+              "AL", 
+              "DZ", 
+              "AS", 
+              "AD", 
+              "AO", 
+              "AI", 
+              "AQ", 
+              "AG", 
+              "AR", 
+              "AM", 
+              "AW", 
+              "AU", 
+              "AT", 
+              "AZ", 
+              "BS", 
+              "BH", 
+              "BD", 
+              "BB", 
+              "BY", 
+              "BE", 
+              "BZ", 
+              "BJ", 
+              "BM", 
+              "BT", 
+              "BO", 
+              "BQ", 
+              "BA", 
+              "BW", 
+              "BV", 
+              "BR", 
+              "IO", 
+              "BN", 
+              "BG", 
+              "BF", 
+              "BI", 
+              "KH", 
+              "CM", 
+              "CA", 
+              "CV", 
+              "KY", 
+              "CF", 
+              "TD", 
+              "CL", 
+              "CN", 
+              "CX", 
+              "CC", 
+              "CO", 
+              "CS", 
+              "KM", 
+              "CG", 
+              "CD", 
+              "CK", 
+              "CR", 
+              "CI", 
+              "HR", 
+              "CU", 
+              "CW", 
+              "CY", 
+              "CZ", 
+              "DK", 
+              "DJ", 
+              "DM", 
+              "DO", 
+              "EC", 
+              "EG", 
+              "SV", 
+              "GQ", 
+              "ER", 
+              "EE", 
+              "ET", 
+              "FK", 
+              "FO", 
+              "FJ", 
+              "FI", 
+              "FR", 
+              "GF", 
+              "PF", 
+              "TF", 
+              "GA", 
+              "GM", 
+              "GE", 
+              "DE", 
+              "GH", 
+              "GI", 
+              "GR", 
+              "GL", 
+              "GD", 
+              "GP", 
+              "GU", 
+              "GT", 
+              "GG", 
+              "GN", 
+              "GW", 
+              "GY", 
+              "HT", 
+              "HM", 
+              "VA", 
+              "HN", 
+              "HK", 
+              "HU", 
+              "IS", 
+              "IN", 
+              "ID", 
+              "IR", 
+              "IQ", 
+              "IE", 
+              "IM", 
+              "IL", 
+              "IT", 
+              "JM", 
+              "JP", 
+              "JE", 
+              "JO", 
+              "KZ", 
+              "KE", 
+              "KI", 
+              "KP", 
+              "KR", 
+              "KW", 
+              "KG", 
+              "LA", 
+              "LV", 
+              "LB", 
+              "LS", 
+              "LR", 
+              "LY", 
+              "LI", 
+              "LT", 
+              "LU", 
+              "MO", 
+              "MK", 
+              "MG", 
+              "MW", 
+              "MY", 
+              "MV", 
+              "ML", 
+              "MT", 
+              "MH", 
+              "MQ", 
+              "MR", 
+              "MU", 
+              "YT", 
+              "MX", 
+              "FM", 
+              "MD", 
+              "MC", 
+              "MN", 
+              "ME", 
+              "MS", 
+              "MA", 
+              "MZ", 
+              "MM", 
+              "NA", 
+              "NR", 
+              "NP", 
+              "NL", 
+              "NC", 
+              "NT", 
+              "NZ", 
+              "NI", 
+              "NE", 
+              "NG", 
+              "NU", 
+              "NF", 
+              "MP", 
+              "NO", 
+              "OM", 
+              "PK", 
+              "PW", 
+              "PS", 
+              "PA", 
+              "PG", 
+              "PY", 
+              "PE", 
+              "PH", 
+              "PN", 
+              "PL", 
+              "PT", 
+              "PR", 
+              "QA", 
+              "RE", 
+              "RO", 
+              "RU", 
+              "RW", 
+              "BL", 
+              "SH", 
+              "KN", 
+              "LC", 
+              "MF", 
+              "PM", 
+              "VC", 
+              "WS", 
+              "SM", 
+              "ST", 
+              "SA", 
+              "SN", 
+              "RS", 
+              "SC", 
+              "SL", 
+              "SG", 
+              "SX", 
+              "SK", 
+              "SI", 
+              "SB", 
+              "SO", 
+              "ZA", 
+              "GS", 
+              "SS", 
+              "ES", 
+              "LK", 
+              "SD", 
+              "SR", 
+              "SJ", 
+              "SU", 
+              "SZ", 
+              "SE", 
+              "CH", 
+              "SY", 
+              "TW", 
+              "TJ", 
+              "TZ", 
+              "TH", 
+              "TL", 
+              "TG", 
+              "TK", 
+              "TO", 
+              "TT", 
+              "TN", 
+              "TR", 
+              "TM", 
+              "TC", 
+              "TV", 
+              "UG", 
+              "UA", 
+              "AE", 
+              "GB", 
+              "US", 
+              "UM", 
+              "UY", 
+              "UZ", 
+              "VU", 
+              "VE", 
+              "VN", 
+              "VG", 
+              "VI", 
+              "WF", 
+              "EH", 
+              "YE", 
+              "YU", 
+              "ZM", 
+              "ZW"
+            ], 
+            "maxLength": 2, 
+            "minLength": 2, 
+            "title": "Country code according to ISO 3166-1-alpha-2 with few additions (CS - Czechoslovakia, YU - Yugoslavia, AB - Serbia and Montenegro, AN - Netherlands Antilles, NT - Neutral Zone)", 
+            "type": "string"
+          }, 
+          "latitude": {
+            "description": "Latitude of the place", 
+            "type": "integer"
+          }, 
+          "longitude": {
+            "description": "Longitude of the place", 
+            "type": "integer"
+          },
+          "original address": {
+            "description": "Original address, entities separeted with a comma", 
+            "type": "string"
+          }, 
+          "postal_code": {
+            "description": "Postal code", 
+            "type": "string"
+          }, 
+          "state": {
+            "description": "State or province", 
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "alternative_titles": {
+      "items": {
+        "$schema": "http://json-schema.org/schema#", 
+        "noAdditionalProperties": true, 
+        "properties": {
+          "source": {
+            "type": "string"
+          }, 
+          "subtitle": {
+            "type": "string"
+          }, 
+          "title": {
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "closing_date": {
+      "format": "date", 
+      "title": "Conference closing date", 
+      "type": "string"
+    }, 
+    "cnum": {
+      "$schema": "http://json-schema.org/schema#", 
+      "pattern": "^C\\d\\d-\\d\\d-\\d\\d(\\.\\d+)?$", 
+      "title": "INSPIRE Conference ID (CNUM)", 
+      "type": "string"
+    }, 
+    "contact_details": {
+      "items": {
+        "$schema": "http://json-schema.org/schema#", 
+        "description": "Contact person's data", 
+        "noAdditionalProperties": true, 
+        "properties": {
+          "email": {
+            "description": "Contact person's e-mail", 
+            "format": "email", 
+            "type": "string"
+          }, 
+          "name": {
+            "description": "Contact person's name", 
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "deleted": {
+      "type": "boolean"
+    }, 
+    "inspire_categories": {
+      "items": {
+        "$schema": "http://json-schema.org/schema#", 
+        "noAdditionalProperties": true, 
+        "properties": {
+          "source": {
+            "enum": [
+              "curator", 
+              "magpie", 
+              "arxiv", 
+              "user", 
+              "undefined"
+            ], 
+            "type": "string"
+          }, 
+          "term": {
+            "enum": [
+              "Accelerators", 
+              "Astrophysics", 
+              "Computing", 
+              "Data Analysis and Statistics", 
+              "Experiment-HEP", 
+              "Experiment-Nucl", 
+              "General Physics", 
+              "Gravitation and Cosmology", 
+              "Instrumentation", 
+              "Lattice", 
+              "Math and Math Physics", 
+              "Other", 
+              "Phenomenology-HEP", 
+              "Theory-HEP", 
+              "Theory-Nucl"
+            ], 
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "keywords": {
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "source": {
+            "type": "string"
+          }, 
+          "value": {
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "title": "Keywords", 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "new_record": {
+      "$schema": "http://json-schema.org/schema#", 
+      "noAdditionalProperties": true, 
+      "properties": {
+        "$ref": {
+          "description": "URL to the referenced resource", 
+          "format": "url", 
+          "type": "string"
+        }
+      }, 
+      "required": [
+        "$ref"
+      ], 
+      "type": "object"
+    }, 
+    "nonpublic_note": {
+      "title": "Non public note", 
+      "type": "string"
+    }, 
+    "note": {
+      "items": {
+        "type": "string"
+      }, 
+      "title": "Note", 
+      "type": "array"
+    }, 
+    "opening_date": {
+      "format": "date", 
+      "title": "Conference opening date", 
+      "type": "string"
+    }, 
+    "place": {
+      "pattern": "^.+,.+,?.*$", 
+      "title": "Conference place", 
+      "type": "string"
+    }, 
+    "self": {
+      "$schema": "http://json-schema.org/schema#", 
+      "noAdditionalProperties": true, 
+      "properties": {
+        "$ref": {
+          "description": "URL to the referenced resource", 
+          "format": "url", 
+          "type": "string"
+        }
+      }, 
+      "required": [
+        "$ref"
+      ], 
+      "type": "object"
+    }, 
+    "series": {
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "name": {
+            "type": "string"
+          }, 
+          "number": {
+            "type": "integer"
+          }
+        }, 
+        "required": [
+          "name"
+        ], 
+        "type": "object"
+      }, 
+      "title": "Conference series to which a conference belongs.", 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "short_description": {
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "source": {
+            "type": "string"
+          }, 
+          "value": {
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "title": "Short description", 
+      "type": "array"
+    }, 
+    "titles": {
+      "items": {
+        "$schema": "http://json-schema.org/schema#", 
+        "noAdditionalProperties": true, 
+        "properties": {
+          "source": {
+            "type": "string"
+          }, 
+          "subtitle": {
+            "type": "string"
+          }, 
+          "title": {
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "urls": {
+      "items": {
+        "$schema": "http://json-schema.org/schema#", 
+        "noAdditionalProperties": true, 
+        "properties": {
+          "description": {
+            "type": "string"
+          }, 
+          "value": {
+            "format": "url", 
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }
+  }, 
+  "title": "Conference", 
+  "type": "object"
+}

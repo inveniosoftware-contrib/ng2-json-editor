@@ -98,6 +98,7 @@ describe('ShortcutAction', function() {
     expect(firstColAfterCopyInputElemValue).toEqual('');
     expect(secondColAfterCopyInputElemValue).toEqual(secondColInputElemValue);
   });
+
   it(`should copy new row under references table using 'mod+alt+r' shortcut.
     It must copy the exact value of the root element eg Copy the whole author under the focused one.`, () => {
     let inputElem = page.getChildOfElementByCss(page.getElementById('authors.0.affiliations.0.value'), 'textarea');

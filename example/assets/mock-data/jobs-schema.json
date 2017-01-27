@@ -1,0 +1,550 @@
+{
+  "$schema": "http://json-schema.org/schema#", 
+  "noAdditionalProperties": true, 
+  "properties": {
+    "address": {
+      "items": {
+        "$schema": "http://json-schema.org/schema#", 
+        "description": "Address", 
+        "noAdditionalProperties": true, 
+        "properties": {
+          "city": {
+            "description": "City", 
+            "type": "string"
+          }, 
+          "country_code": {
+            "$schema": "http://json-schema.org/schema#", 
+            "enum": [
+              "AB", 
+              "AF", 
+              "AN", 
+              "AX", 
+              "AL", 
+              "DZ", 
+              "AS", 
+              "AD", 
+              "AO", 
+              "AI", 
+              "AQ", 
+              "AG", 
+              "AR", 
+              "AM", 
+              "AW", 
+              "AU", 
+              "AT", 
+              "AZ", 
+              "BS", 
+              "BH", 
+              "BD", 
+              "BB", 
+              "BY", 
+              "BE", 
+              "BZ", 
+              "BJ", 
+              "BM", 
+              "BT", 
+              "BO", 
+              "BQ", 
+              "BA", 
+              "BW", 
+              "BV", 
+              "BR", 
+              "IO", 
+              "BN", 
+              "BG", 
+              "BF", 
+              "BI", 
+              "KH", 
+              "CM", 
+              "CA", 
+              "CV", 
+              "KY", 
+              "CF", 
+              "TD", 
+              "CL", 
+              "CN", 
+              "CX", 
+              "CC", 
+              "CO", 
+              "CS", 
+              "KM", 
+              "CG", 
+              "CD", 
+              "CK", 
+              "CR", 
+              "CI", 
+              "HR", 
+              "CU", 
+              "CW", 
+              "CY", 
+              "CZ", 
+              "DK", 
+              "DJ", 
+              "DM", 
+              "DO", 
+              "EC", 
+              "EG", 
+              "SV", 
+              "GQ", 
+              "ER", 
+              "EE", 
+              "ET", 
+              "FK", 
+              "FO", 
+              "FJ", 
+              "FI", 
+              "FR", 
+              "GF", 
+              "PF", 
+              "TF", 
+              "GA", 
+              "GM", 
+              "GE", 
+              "DE", 
+              "GH", 
+              "GI", 
+              "GR", 
+              "GL", 
+              "GD", 
+              "GP", 
+              "GU", 
+              "GT", 
+              "GG", 
+              "GN", 
+              "GW", 
+              "GY", 
+              "HT", 
+              "HM", 
+              "VA", 
+              "HN", 
+              "HK", 
+              "HU", 
+              "IS", 
+              "IN", 
+              "ID", 
+              "IR", 
+              "IQ", 
+              "IE", 
+              "IM", 
+              "IL", 
+              "IT", 
+              "JM", 
+              "JP", 
+              "JE", 
+              "JO", 
+              "KZ", 
+              "KE", 
+              "KI", 
+              "KP", 
+              "KR", 
+              "KW", 
+              "KG", 
+              "LA", 
+              "LV", 
+              "LB", 
+              "LS", 
+              "LR", 
+              "LY", 
+              "LI", 
+              "LT", 
+              "LU", 
+              "MO", 
+              "MK", 
+              "MG", 
+              "MW", 
+              "MY", 
+              "MV", 
+              "ML", 
+              "MT", 
+              "MH", 
+              "MQ", 
+              "MR", 
+              "MU", 
+              "YT", 
+              "MX", 
+              "FM", 
+              "MD", 
+              "MC", 
+              "MN", 
+              "ME", 
+              "MS", 
+              "MA", 
+              "MZ", 
+              "MM", 
+              "NA", 
+              "NR", 
+              "NP", 
+              "NL", 
+              "NC", 
+              "NT", 
+              "NZ", 
+              "NI", 
+              "NE", 
+              "NG", 
+              "NU", 
+              "NF", 
+              "MP", 
+              "NO", 
+              "OM", 
+              "PK", 
+              "PW", 
+              "PS", 
+              "PA", 
+              "PG", 
+              "PY", 
+              "PE", 
+              "PH", 
+              "PN", 
+              "PL", 
+              "PT", 
+              "PR", 
+              "QA", 
+              "RE", 
+              "RO", 
+              "RU", 
+              "RW", 
+              "BL", 
+              "SH", 
+              "KN", 
+              "LC", 
+              "MF", 
+              "PM", 
+              "VC", 
+              "WS", 
+              "SM", 
+              "ST", 
+              "SA", 
+              "SN", 
+              "RS", 
+              "SC", 
+              "SL", 
+              "SG", 
+              "SX", 
+              "SK", 
+              "SI", 
+              "SB", 
+              "SO", 
+              "ZA", 
+              "GS", 
+              "SS", 
+              "ES", 
+              "LK", 
+              "SD", 
+              "SR", 
+              "SJ", 
+              "SU", 
+              "SZ", 
+              "SE", 
+              "CH", 
+              "SY", 
+              "TW", 
+              "TJ", 
+              "TZ", 
+              "TH", 
+              "TL", 
+              "TG", 
+              "TK", 
+              "TO", 
+              "TT", 
+              "TN", 
+              "TR", 
+              "TM", 
+              "TC", 
+              "TV", 
+              "UG", 
+              "UA", 
+              "AE", 
+              "GB", 
+              "US", 
+              "UM", 
+              "UY", 
+              "UZ", 
+              "VU", 
+              "VE", 
+              "VN", 
+              "VG", 
+              "VI", 
+              "WF", 
+              "EH", 
+              "YE", 
+              "YU", 
+              "ZM", 
+              "ZW"
+            ], 
+            "maxLength": 2, 
+            "minLength": 2, 
+            "title": "Country code according to ISO 3166-1-alpha-2 with few additions (CS - Czechoslovakia, YU - Yugoslavia, AB - Serbia and Montenegro, AN - Netherlands Antilles, NT - Neutral Zone)", 
+            "type": "string"
+          }, 
+          "latitude": {
+            "description": "Latitude of the place", 
+            "type": "integer"
+          }, 
+          "longitude": {
+            "description": "Longitude of the place", 
+            "type": "integer"
+          }, 
+          "original address": {
+            "description": "Original address, entities separeted with a comma", 
+            "type": "string"
+          }, 
+          "postal_code": {
+            "description": "Postal code", 
+            "type": "string"
+          }, 
+          "state": {
+            "description": "State or province", 
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "closed_date": {
+      "format": "date", 
+      "title": "Date when the job was closed", 
+      "type": "string"
+    }, 
+    "contact_details": {
+      "items": {
+        "$schema": "http://json-schema.org/schema#", 
+        "description": "Contact person's data", 
+        "noAdditionalProperties": true, 
+        "properties": {
+          "email": {
+            "description": "Contact person's e-mail", 
+            "format": "email", 
+            "type": "string"
+          }, 
+          "name": {
+            "description": "Contact person's name", 
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "deadline_date": {
+      "format": "date", 
+      "title": "Application deadline", 
+      "type": "string"
+    }, 
+    "deleted": {
+      "type": "boolean"
+    }, 
+    "description": {
+      "title": "Job description", 
+      "type": "string"
+    }, 
+    "experiments": {
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "curated_relation": {
+            "type": "boolean"
+          }, 
+          "name": {
+            "title": "Experiment name", 
+            "type": "string"
+          }, 
+          "record": {
+            "$schema": "http://json-schema.org/schema#", 
+            "noAdditionalProperties": true, 
+            "properties": {
+              "$ref": {
+                "description": "URL to the referenced resource", 
+                "format": "url", 
+                "type": "string"
+              }
+            }, 
+            "required": [
+              "$ref"
+            ], 
+            "type": "object"
+          }
+        }, 
+        "title": "Experiments associated with Job", 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "inspire_categories": {
+      "items": {
+        "$schema": "http://json-schema.org/schema#", 
+        "noAdditionalProperties": true, 
+        "properties": {
+          "source": {
+            "enum": [
+              "curator", 
+              "magpie", 
+              "arxiv", 
+              "user", 
+              "undefined"
+            ], 
+            "type": "string"
+          }, 
+          "term": {
+            "enum": [
+              "Accelerators", 
+              "Astrophysics", 
+              "Computing", 
+              "Data Analysis and Statistics", 
+              "Experiment-HEP", 
+              "Experiment-Nucl", 
+              "General Physics", 
+              "Gravitation and Cosmology", 
+              "Instrumentation", 
+              "Lattice", 
+              "Math and Math Physics", 
+              "Other", 
+              "Phenomenology-HEP", 
+              "Theory-HEP", 
+              "Theory-Nucl"
+            ], 
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "institutions": {
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "curated_relation": {
+            "type": "boolean"
+          }, 
+          "name": {
+            "title": "Institution name", 
+            "type": "string"
+          }, 
+          "record": {
+            "$schema": "http://json-schema.org/schema#", 
+            "noAdditionalProperties": true, 
+            "properties": {
+              "$ref": {
+                "description": "URL to the referenced resource", 
+                "format": "url", 
+                "type": "string"
+              }
+            }, 
+            "required": [
+              "$ref"
+            ], 
+            "type": "object"
+          }
+        }, 
+        "title": "Institution", 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "new_record": {
+      "$schema": "http://json-schema.org/schema#", 
+      "noAdditionalProperties": true, 
+      "properties": {
+        "$ref": {
+          "description": "URL to the referenced resource", 
+          "format": "url", 
+          "type": "string"
+        }
+      }, 
+      "required": [
+        "$ref"
+      ], 
+      "type": "object"
+    }, 
+    "position": {
+      "title": "Job position", 
+      "type": "string"
+    }, 
+    "ranks": {
+      "items": {
+        "$schema": "http://json-schema.org/schema#", 
+        "enum": [
+          "STAFF", 
+          "SENIOR", 
+          "JUNIOR", 
+          "VISITOR", 
+          "POSTDOC", 
+          "PHD", 
+          "MASTER", 
+          "UNDERGRADUATE", 
+          "OTHER"
+        ], 
+        "title": "Scientific position rank", 
+        "type": "string"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "reference_email": {
+      "items": {
+        "description": "FIXME: what is the difference from contact_email!?", 
+        "format": "email", 
+        "title": "Reference email", 
+        "type": "string"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "regions": {
+      "items": {
+        "enum": [
+          "Africa", 
+          "Australasia", 
+          "Asia", 
+          "Europe", 
+          "Middle East", 
+          "North America", 
+          "South America"
+        ], 
+        "type": "string"
+      }, 
+      "type": "array"
+    }, 
+    "self": {
+      "$schema": "http://json-schema.org/schema#", 
+      "noAdditionalProperties": true, 
+      "properties": {
+        "$ref": {
+          "description": "URL to the referenced resource", 
+          "format": "url", 
+          "type": "string"
+        }
+      }, 
+      "required": [
+        "$ref"
+      ], 
+      "type": "object"
+    }, 
+    "urls": {
+      "items": {
+        "$schema": "http://json-schema.org/schema#", 
+        "noAdditionalProperties": true, 
+        "properties": {
+          "description": {
+            "type": "string"
+          }, 
+          "value": {
+            "format": "url", 
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }
+  }, 
+  "title": "HEP Job", 
+  "type": "object"
+}

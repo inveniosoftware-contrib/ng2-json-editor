@@ -1,6 +1,6 @@
 /*
  * This file is part of ng2-json-editor.
- * Copyright (C) 2016 CERN.
+ * Copyright (C) 2017 CERN.
  *
  * ng2-json-editor is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -18,18 +18,8 @@
  * In applying this license, CERN does not
  * waive the privileges and immunities granted to it by virtue of its status
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
-*/
+ */
 
-import {Component, ViewEncapsulation } from '@angular/core';
+import { MockDataFactoryService } from '../../../example/app/services/mock-data-factory.service';
 
-@Component({
-  selector: 'app',
-  encapsulation: ViewEncapsulation.None, //  Apply style (bootstrap.scss) globally
-  styleUrls: [
-    'app.component.scss'
-  ],
-  template: `
-    <router-outlet></router-outlet>
-  `
-})
-export class AppComponent { }
+export { MockDataFactoryService }

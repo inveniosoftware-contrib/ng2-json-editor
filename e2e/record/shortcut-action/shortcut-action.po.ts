@@ -21,7 +21,7 @@
  */
 
 import { element, by, ElementFinder } from 'protractor';
-import { Ng2JsonEditorPage } from '../app.po';
+import { Ng2JsonEditorPage } from '../../app.po';
 
 export class ShortcutActionPage extends Ng2JsonEditorPage {
 

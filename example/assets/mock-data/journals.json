@@ -1,0 +1,120 @@
+{
+  "coden": [
+    "XULTN",
+    "KTN._W",
+    "8LHX"
+  ],
+  "deleted": true,
+  "history": "dolor commodo minim",
+  "issn": [
+    {
+      "comment": "esse id in sit",
+      "medium": "online",
+      "value": "3144-7818"
+    },
+    {
+      "comment": "nisi enim id",
+      "medium": "print",
+      "value": "3937-956X"
+    }
+  ],
+  "journal_handling": "laboris irure sit esse",
+  "journal_titles": [
+    {
+      "source": "Excepteur cupidat",
+      "subtitle": "sit",
+      "title": "officia nostrud"
+    },
+    {
+      "source": "sunt aliqua a",
+      "subtitle": "nulla",
+      "title": "nulla"
+    },
+    {
+      "source": "adipisicing elit in sit",
+      "subtitle": "amet mollit occaecat laboris eu",
+      "title": "ex laborum nulla enim"
+    }
+  ],
+  "license": "is",
+  "license_urls": [
+    {
+      "description": "do in",
+      "value": "http://18[U.2Y"
+    },
+    {
+      "description": "sunt",
+      "value": "http://1/[~e\""
+    },
+    {
+      "description": "nisi et aliquip",
+      "value": "http://1"
+    },
+    {
+      "description": "ad irure",
+      "value": "http://1"
+    }
+  ],
+  "new_record": {
+    "$ref": "http://1:"
+  },
+  "nonpublic_note": "eu dolore in",
+  "peer_reviewed": true,
+  "public_note": "qui ea minim dolor sunt",
+  "publisher": [
+    "aliqua aliquip",
+    "sint cillum esse"
+  ],
+  "relation": {
+    "curated_relation": false,
+    "issn": "1654-2565",
+    "record": {
+      "$ref": "http://1brHXU"
+    },
+    "relation": "superseded record"
+  },
+  "self": {
+    "$ref": "http://1>#!0n3Qa"
+  },
+  "short_titles": [
+    {
+      "source": "proident",
+      "subtitle": "veniam",
+      "title": "exercitation"
+    }
+  ],
+  "title_variants": [
+    {
+      "source": "consequat",
+      "subtitle": "Ut sed veniam consectetur dolore",
+      "title": "Lorem esse ullamco reprehenderit"
+    },
+    {
+      "source": "ea officia",
+      "subtitle": "pariatur velit tempor elit",
+      "title": "veniam do consectetur elit reprehenderit"
+    }
+  ],
+  "urls": [
+    {
+      "description": "adipisicing",
+      "value": "http://1gwtVj@i]"
+    },
+    {
+      "description": "dolor",
+      "value": "http://1f"
+    },
+    {
+      "description": "do",
+      "value": "http://1}-nXXGzZe"
+    },
+    {
+      "description": "commodo minim dolore",
+      "value": "http://1"
+    },
+    {
+      "description": "sit do eu",
+      "value": "http://1q"
+    }
+  ]
+}

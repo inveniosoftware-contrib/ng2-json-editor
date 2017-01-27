@@ -1,0 +1,155 @@
+{
+  "address": [
+    {
+      "city": "dolor do commodo esse",
+      "country_code": "KG",
+      "latitude": 33463720,
+      "longitude": -16168087,
+      "original address": "nostrud velit laborum",
+      "postal_code": "laboris in esse et",
+      "state": "ut Duis aliqua do est"
+    },
+    {
+      "city": "aliqua",
+      "country_code": "MK",
+      "latitude": 97640378,
+      "longitude": 17090929,
+      "original address": "dolore dolore id",
+      "postal_code": "elit",
+      "state": "fugiat exercitation"
+    },
+    {
+      "city": "eiusmod qui incididunt",
+      "country_code": "CW",
+      "latitude": -96480944,
+      "longitude": 20724452,
+      "original address": "voluptate adipisicing",
+      "postal_code": "quis ex ut Lorem",
+      "state": "esse Lorem nisi dolor"
+    },
+    {
+      "city": "cupidatat",
+      "country_code": "RW",
+      "latitude": -22578618,
+      "longitude": 37854678,
+      "original address": "aliqua dolor laborum mollit",
+      "postal_code": "Excepteur aliqua elit",
+      "state": "consequat esse voluptate"
+    }
+  ],
+  "closed_date": "dddd-dd-dd",
+  "contact_details": [
+    {
+      "email": "Umks0@JGjgvDbrzUygWkoiAHuEbRhlaYUp.cwwm",
+      "name": "sit qui culpa in"
+    },
+    {
+      "email": "IbGBZV@StRkiaX.zz",
+      "name": "minim ullamco dolor"
+    },
+    {
+      "email": "fI0cQ@huWptYEuaxBSFBRMFpHcvB.ehpe",
+      "name": "sunt sed anim"
+    },
+    {
+      "email": "mfqHHNAZTT@cJpJQvGxwaGLeEvXJUWnAdendHSvzbc.sfzn",
+      "name": "ad"
+    }
+  ],
+  "deadline_date": "dddd-dd-dd",
+  "deleted": false,
+  "description": "eiusmod",
+  "experiments": [
+    {
+      "curated_relation": false,
+      "name": "voluptate officia",
+      "record": {
+        "$ref": "http://1"
+      }
+    }
+  ],
+  "inspire_categories": [
+    {
+      "source": "magpie",
+      "term": "Computing"
+    },
+    {
+      "source": "user",
+      "term": "Accelerators"
+    },
+    {
+      "source": "arxiv",
+      "term": "General Physics"
+    },
+    {
+      "source": "curator",
+      "term": "Phenomenology-HEP"
+    },
+    {
+      "source": "undefined",
+      "term": "Experiment-HEP"
+    }
+  ],
+  "institutions": [
+    {
+      "curated_relation": true,
+      "name": "cillum",
+      "record": {
+        "$ref": "http://1?`pN7z"
+      }
+    },
+    {
+      "curated_relation": false,
+      "name": "do consequat in",
+      "record": {
+        "$ref": "http://1["
+      }
+    }
+  ],
+  "new_record": {
+    "$ref": "http://1Lo"
+  },
+  "position": "tempor proident culpa est",
+  "ranks": [
+    "UNDERGRADUATE",
+    "SENIOR",
+    "STAFF",
+    "VISITOR"
+  ],
+  "reference_email": [
+    "xXKMjN6xF2hDv@ajpooRDBHMonx.pik",
+    "OdH@LbuWhzgqIxTTn.aqrs",
+    "jmCZA@hWckRJXPkNnfdbK.ctuf"
+  ],
+  "regions": [
+    "Europe",
+    "Australasia",
+    "South America",
+    "Australasia"
+  ],
+  "self": {
+    "$ref": "http://1]h@?7Fph"
+  },
+  "urls": [
+    {
+      "description": "ad",
+      "value": "http://1Xk$H4#c6r"
+    },
+    {
+      "description": "aliqua",
+      "value": "http://1HxqQWc|X`m"
+    },
+    {
+      "description": "esse nulla",
+      "value": "http://1Idc!-\\j"
+    },
+    {
+      "description": "nulla ci",
+      "value": "http://1B8Y"
+    },
+    {
+      "description": "aliqua aute ea",
+      "value": "http://1a "
+    }
+  ]
+}
