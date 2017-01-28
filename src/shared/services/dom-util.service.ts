@@ -74,4 +74,12 @@ export class DomUtilService {
       }, 500);
     }
   }
+
+  blurFirstInputChildById(id: string) {
+    let el = document.getElementById(id);
+    let firstInput = el.querySelector('input, textarea') as HTMLInputElement;
+    if (firstInput) {
+      firstInput.blur();
+    }
+  }
 }

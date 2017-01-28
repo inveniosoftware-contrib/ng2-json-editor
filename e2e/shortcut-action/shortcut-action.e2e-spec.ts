@@ -37,7 +37,7 @@ describe('ShortcutAction', function() {
       });
   });
 
-  it(`should add a new row under authors.0.affiliations table using 'alt+a' shortcut`, () => {
+ it(`should add a new row under authors.0.affiliations table using 'alt+a' shortcut`, () => {
     page.getNumberOfChildRowsbyId('authors.0.affiliations')
       .then(tableRowsNum => {
         let inputElem = page.getChildOfElementByCss(page.getElementById('authors.0.affiliations.0.value'), 'textarea');
@@ -58,19 +58,29 @@ describe('ShortcutAction', function() {
   });
 
   it(`should move row up using 'mod+shift+up' shortcut`, () => {
-    let inputElem = page.getChildOfElementByCss(page.getElementById('accelerator_experiments.1.experiment'), 'textarea');
-    let inputElemValue = inputElem.getAttribute('value');
-    inputElem.sendKeys(protractor.Key.chord(mod, protractor.Key.SHIFT, protractor.Key.UP));
-    let movedUpInputElem = page.getChildOfElementByCss(page.getElementById('accelerator_experiments.0.experiment'), 'textarea');
-    expect(movedUpInputElem.getAttribute('value')).toEqual(inputElemValue);
+    let currentFirstRow = page.getValuesOfChildrenById('keywords.0');
+    let currentSecondRow = page.getValuesOfChildrenById('keywords.1');
+    let currentElem = page.getChildOfElementByCss(page.getElementById('keywords.1.keyword'), 'textarea');
+    currentElem.sendKeys(protractor.Key.chord(mod, protractor.Key.SHIFT, protractor.Key.UP));
+    let targetFirstRow = page.getValuesOfChildrenById('keywords.0');
+    let targetSecondRow = page.getValuesOfChildrenById('keywords.1');
+    expect(targetFirstRow).toEqual(currentSecondRow);
+    expect(targetSecondRow).toEqual(currentFirstRow);
+    // Test for issue of overriding the new value with the old one when moving up because of triggering the commitValueChange()
+    // on blur with the old values. As a result the when moving up the switched cells has the same value
+    expect(targetSecondRow).not.toEqual(targetFirstRow);
   });
 
   it(`should move row down using 'mod+shift+down' shortcut`, () => {
-    let inputElem = page.getChildOfElementByCss(page.getElementById('accelerator_experiments.0.experiment'), 'textarea');
-    let inputElemValue = inputElem.getAttribute('value');
-    inputElem.sendKeys(protractor.Key.chord(mod, protractor.Key.SHIFT, protractor.Key.DOWN));
-    let movedDownInputElem = page.getChildOfElementByCss(page.getElementById('accelerator_experiments.1.experiment'), 'textarea');
-    expect(movedDownInputElem.getAttribute('value')).toEqual(inputElemValue);
+   let currentRow = page.getValuesOfChildrenById('keywords.0');
+   let currentElem = page.getChildOfElementByCss(page.getElementById('keywords.0.keyword'), 'textarea');
+   currentElem.sendKeys(protractor.Key.chord(mod, protractor.Key.SHIFT, protractor.Key.DOWN));
+   currentElem = page.getChildOfElementByCss(page.getElementById('keywords.1.keyword'), 'textarea');
+   // Trigger move down shortcut two time in a row to test issue of not updating tabindexes correctly on sequential
+   // trigger of the shortcut. As a result the shortcut was not working properly.
+   currentElem.sendKeys(protractor.Key.chord(mod, protractor.Key.SHIFT, protractor.Key.DOWN));
+   let targetRow = page.getValuesOfChildrenById('keywords.2');
+   expect(targetRow).toEqual(currentRow);
   });
 
   it(`should delete the current row in table  using 'mod+backspace' shortcut`, () => {
@@ -86,18 +96,19 @@ describe('ShortcutAction', function() {
 
   it(`should copy new row under keywords.0 table using 'alt+c' shortcut. 
     The copied cell under the focused one must be empty and the remaining cells must be exactly copied.`, () => {
-    let firstColInputElem = page.getChildOfElementByCss(page.getElementById('keywords.0.classification_scheme'), 'textarea');
-    let secondColInputElemValue = page.getChildOfElementByCss(page.getElementById('keywords.0.keyword'), 'textarea')
-      .getAttribute('value');
-    firstColInputElem.sendKeys(protractor.Key.chord(protractor.Key.ALT, 'c'));
-    let firstColAfterCopyInputElemValue = page
-      .getChildOfElementByCss(page.getElementById('keywords.1.classification_scheme'), 'textarea')
-      .getAttribute('value');
-    let secondColAfterCopyInputElemValue = page.getChildOfElementByCss(page.getElementById('keywords.1.keyword'), 'textarea')
-      .getAttribute('value');
-    expect(firstColAfterCopyInputElemValue).toEqual('');
-    expect(secondColAfterCopyInputElemValue).toEqual(secondColInputElemValue);
+    let currentRowPromise = page.getValuesOfChildrenById('keywords.0');
+    let inputElem = page.getChildOfElementByCss(page.getElementById('keywords.0.classification_scheme'), 'textarea');
+    inputElem.sendKeys(protractor.Key.chord(protractor.Key.ALT, 'c'));
+    let targetRowPromise = page.getValuesOfChildrenById('keywords.1');
+    protractor.promise.all([currentRowPromise, targetRowPromise])
+    .then(data => {
+      let currentRow = data[0];
+      let targetRow = data[1];
+      expect(targetRow[0]).toEqual('');
+      expect(targetRow.slice(1, targetRow.length)).toEqual(currentRow.slice(1, currentRow.length));
+    });
   });
+
   it(`should copy new row under references table using 'mod+alt+r' shortcut.
     It must copy the exact value of the root element eg Copy the whole author under the focused one.`, () => {
     let inputElem = page.getChildOfElementByCss(page.getElementById('authors.0.affiliations.0.value'), 'textarea');

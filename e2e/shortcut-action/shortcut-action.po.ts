@@ -20,32 +20,46 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
  */
 
-import { element, by, ElementFinder } from 'protractor';
-import { Ng2JsonEditorPage } from '../app.po';
+import { element, by, ElementFinder, ElementArrayFinder } from 'protractor';
+import { Ng2JsonEditorPage, WDPromise } from '../app.po';
+
 
 export class ShortcutActionPage extends Ng2JsonEditorPage {
 
-  getNumberOfChildRowsbyId(id: string) {
+  getNumberOfChildRowsbyId(id: string): WDPromise<number> {
     let tableElem = element(by.id(id));
     return tableElem.all(by.css('tr[id*=\'' + id + '\']')).count();
   }
 
-  getNumberOfChildTablesbyId(id: string) {
+  getNumberOfChildTablesbyId(id: string): WDPromise<number> {
     let tableElem = element(by.id(id));
     return tableElem.all(by.css('table[id*=\'' + id + '\']')).count();
   }
 
-  getChildOfElementByCss(elem: ElementFinder, css: string) {
+  getChildOfElementByCss(elem: ElementFinder, css: string): ElementFinder {
     return elem.element(by.css(css));
   }
 
-  getNumberOfTextareaElementsById(id: string) {
+  getChildrenOfElementByCss(elem: ElementFinder, css: string): ElementArrayFinder {
+    return elem.all((by.css(css)));
+  }
+
+  getNumberOfTextareaElementsById(id: string): WDPromise<number> {
     let elem = element(by.id(id));
     return elem.all(by.css('textarea')).count();
   }
 
-  getNumberOfInputElementsById(id: string) {
+  getNumberOfInputElementsById(id: string): WDPromise<number> {
     let elem = element(by.id(id));
     return elem.all(by.css('input')).count();
   }
+
+  getValuesOfChildrenById(id: string): WDPromise<string> {
+    let elems = this.getChildrenOfElementByCss(this.getElementById(id), 'textarea,input');
+    return elems
+      .map(elem => {
+        return elem.getAttribute('value');
+      });
+   }
 }
+

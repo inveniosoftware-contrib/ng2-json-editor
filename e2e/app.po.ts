@@ -32,3 +32,5 @@ export class Ng2JsonEditorPage {
     return element(by.id(id));
   }
 }
+
+export type WDPromise<T> = webdriver.promise.Promise<T>;

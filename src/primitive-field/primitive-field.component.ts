@@ -52,7 +52,6 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   @Input() path: Array<any>;
 
   @Input() value: string | number | boolean;
-  private tabIndex: number;
 
   constructor(public schemaValidationService: SchemaValidationService,
     public componentTypeService: ComponentTypeService,
@@ -71,9 +70,6 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     this.schema = this.schema || {};
     if (!(this.valueType === 'boolean')) {
       this.setTabIndex();
-      this.tabIndexService.tabIndexChange.subscribe(() => {
-       this.tabIndex = this.getTabIndex();
-      });
     }
   }
 
@@ -106,11 +102,11 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     this.commitValueChange();
   }
 
-  getTabIndex(): number {
-    return this.tabIndexService.getElemTabIndex(this.path.join('.'));
+  get tabIndex(): number {
+    return this.tabIndexService.getElemTabIndex(this.pathString);
   }
 
   setTabIndex() {
-    this.tabIndex = this.tabIndexService.addElemTabIndex(this.path.join('.'));
+    this.tabIndexService.addElemTabIndex(this.pathString);
   }
 }
