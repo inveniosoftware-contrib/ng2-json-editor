@@ -1,0 +1,143 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>JsonEditorConfig | ng2-json-editor</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-title" style="padding-top: 20px;">
+		<div class="container">
+			<h1>JsonEditorConfig</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_json_editor_config_.jsoneditorconfig.html#enableadminmodeswitch" class="tsd-kind-icon">enable<wbr>Admin<wbr>Mode<wbr>Switch</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_json_editor_config_.jsoneditorconfig.html#previews" class="tsd-kind-icon">previews</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_json_editor_config_.jsoneditorconfig.html#schemaoptions" class="tsd-kind-icon">schema<wbr>Options</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_json_editor_config_.jsoneditorconfig.html#shortcuts" class="tsd-kind-icon">shortcuts</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="enableadminmodeswitch" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enable<wbr>Admin<wbr>Mode<wbr>Switch</h3>
+					<div class="tsd-signature tsd-kind-icon">enable<wbr>Admin<wbr>Mode<wbr>Switch<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If set, displays the switch that can enable admin mode where any field can be edited.</p>
+						</div>
+						<ul>
+							<li>It is <code>false</code> by default.</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="previews" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> previews</h3>
+					<div class="tsd-signature tsd-kind-icon">previews<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="_preview_config_.previewconfig.html" class="tsd-signature-type">PreviewConfig</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Configuration for previews to be displayed in previewer (on the right side).</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="schemaoptions" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> schema<wbr>Options</h3>
+					<div class="tsd-signature tsd-kind-icon">schema<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Configurations for properties defined in the schema.</p>
+						</div>
+						<p>Example:</p>
+						<pre><code>{
+ <span class="hljs-string">'anArray.items.properties.anElementProp'</span>: { ...SchemaOption... },
+ <span class="hljs-string">'anObject.properties.aProp'</span> : { ...SchemaOption... },
+ <span class="hljs-string">'anObject.properties.anotherProp'</span> : { ...SchemaOption... },
+ <span class="hljs-string">'anotherObject'</span>: { ...SchemaOption... },
+ ...
+}
+</code></pre>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>dotSeparatedPath: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><a href="_schema_option_.schemaoption.html" class="tsd-signature-type">SchemaOption</a></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="shortcuts" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> shortcuts</h3>
+					<div class="tsd-signature tsd-kind-icon">shortcuts<span class="tsd-signature-symbol">:</span> <a href="_custom_shortcuts_.customshortcuts.html" class="tsd-signature-type">CustomShortcuts</a></div>
+					<aside class="tsd-sources">
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Configuration for the shortcuts.</p>
+						</div>
+					</div>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_json_editor_config_.jsoneditorconfig.html" class="tsd-kind-icon">Json<wbr>Editor<wbr>Config</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_json_editor_config_.jsoneditorconfig.html#enableadminmodeswitch" class="tsd-kind-icon">enable<wbr>Admin<wbr>Mode<wbr>Switch</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_json_editor_config_.jsoneditorconfig.html#previews" class="tsd-kind-icon">previews</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_json_editor_config_.jsoneditorconfig.html#schemaoptions" class="tsd-kind-icon">schema<wbr>Options</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_json_editor_config_.jsoneditorconfig.html#shortcuts" class="tsd-kind-icon">shortcuts</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
