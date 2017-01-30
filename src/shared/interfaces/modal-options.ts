@@ -5,4 +5,5 @@ export interface ModalOptions {
   bodyHtml: SafeHtml;
   type: string;
   onConfirm?: () => void;
+  onShow?: () => void;
 }

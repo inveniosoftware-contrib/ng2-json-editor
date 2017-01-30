@@ -1,4 +1,4 @@
-<div class="modal fade" bsModal #modal="bs-modal" tabindex="-1" role="dialog" [config]="{ backdrop: false }">
+<div class="modal fade" (onShown)="onShow()" bsModal #modal="bs-modal" tabindex="-1" role="dialog" [config]="{ backdrop: false }">
   <div class="modal-dialog modal-lg">
     <div *ngIf="options" class="modal-content">
       <div class="modal-header">
