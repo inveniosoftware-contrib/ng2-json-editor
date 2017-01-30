@@ -24,7 +24,7 @@ import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/zip';
-import { APP_CONFIG } from './app.config';
+import { AppConfig } from './app.config';
 
 @Component({
   selector: 'app',
@@ -34,7 +34,7 @@ import { APP_CONFIG } from './app.config';
   ],
   template: `
     <json-editor *ngIf="record && schema" 
-      [config]="config"
+      [config]="config.jsonEditorConfig"
       [record]="record"
       (onRecordChange)="onRecordChange($event)"
       [schema]="schema">
@@ -44,10 +44,8 @@ import { APP_CONFIG } from './app.config';
 export class AppComponent {
   record: Object;
   schema: Object;
-  config: Object;
 
-  constructor(private http: Http, @Inject(APP_CONFIG) config: AppConfig) {
-    this.config = config;
+  constructor(private http: Http, private config: AppConfig ) {
     Observable.zip(
       this.http.get('./assets/mock-data/record.json'),
       this.http.get('./assets/mock-data/schema.json'),

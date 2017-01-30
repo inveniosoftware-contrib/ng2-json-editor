@@ -33,8 +33,9 @@ import { List, Map, Set } from 'immutable';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
 
-
 import { AppGlobalsService, JsonStoreService, TabIndexService, DomUtilService } from '../shared/services';
+
+import { LongListNavigatorConfig } from '../shared/interfaces';
 
 @Component({
   selector: 'complex-list-field',
@@ -68,7 +69,7 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
   }
 
   ngOnInit() {
-    this.navigator = this.schema['x_editor_long_list_navigator'];
+    this.navigator = this.schema['longListNavigatorConfig'];
     if (this.navigator) {
       this.paginatedIndices = this.getIndicesForPage(this.currentPage);
     } else {

@@ -315,7 +315,7 @@ describe('FindReplaceAllService', () => {
                   },
                   b: {
                     type: 'string',
-                    x_editor_disabled: true
+                    disabled: true
                   }
                 }
               }
@@ -401,14 +401,14 @@ describe('FindReplaceAllService', () => {
                     type: 'string',
                   },
                   c: {
-                    x_editor_disabled: true,
+                    disabled: true,
                     type: 'array',
                     items: {
                       type: 'string'
                     }
                   },
                   d: {
-                    x_editor_disabled: true,
+                    disabled: true,
                     type: 'array',
                     items: {
                       type: 'object',
@@ -420,7 +420,7 @@ describe('FindReplaceAllService', () => {
                     }
                   },
                   e: {
-                    x_editor_disabled: true,
+                    disabled: true,
                     type: 'object',
                     properties: {
                       ea: {
@@ -538,7 +538,7 @@ describe('FindReplaceAllService', () => {
       properties: {
         hiddenProp: {
           type: 'string',
-          x_editor_hidden: true
+          hidden: true
         },
         notHiddenProp: {
           type: 'string'

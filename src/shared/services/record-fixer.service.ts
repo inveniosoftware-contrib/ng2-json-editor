@@ -68,7 +68,7 @@ export class RecordFixerService {
    * @param schema - schema of visited field/element
    */
   private fix(key: string | number, parent: Object | Array<any>, schema: Object) {
-     if (schema['x_editor_hidden']) {
+     if (schema['hidden']) {
       return;
     }
 

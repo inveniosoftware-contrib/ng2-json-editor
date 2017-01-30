@@ -60,6 +60,6 @@ export class AnyTypeFieldComponent {
   }
 
   get isDisabled(): boolean {
-    return this.schema && this.schema['x_editor_disabled'] && !this.appGlobalsService.adminMode;
+    return this.schema && this.schema['disabled'] && !this.appGlobalsService.adminMode;
   }
 }

@@ -34,7 +34,7 @@ export class FilterAndSortBySchemaPipe implements PipeTransform {
   constructor(public appGlobalsService: AppGlobalsService) { }
 
   /**
-   * It filters out `x_editor_hidden` fields and sorts keys by `x_editor_priority`
+   * It filters out `hidden` fields and sorts keys by `priority`
    * 
    * @param {Set<string>} keys
    * @param {Object} schema - the `schema` that has object schema which contains each key in `keys`
@@ -48,11 +48,11 @@ export class FilterAndSortBySchemaPipe implements PipeTransform {
         if (!schemaProps[key]) {
           throw new Error(`"${key}" is not specified as property in \n${JSON.stringify(schemaProps, undefined, 2)}`);
         }
-        return !schemaProps[key]['x_editor_hidden'] || this.appGlobalsService.adminMode;
+        return !schemaProps[key]['hidden'] || this.appGlobalsService.adminMode;
       }).sort((a, b) => {
-        // Sort by x_editor_priority, larger is the first.
-        let pa = schemaProps[a]['x_editor_priority'] || 0;
-        let pb = schemaProps[b]['x_editor_priority'] || 0;
+        // Sort by priority, larger is the first.
+        let pa = schemaProps[a]['priority'] || 0;
+        let pb = schemaProps[b]['priority'] || 0;
 
         if (pa > pb) { return -1; }
         if (pa < pb) { return 1; }

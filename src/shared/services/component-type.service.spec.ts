@@ -108,7 +108,7 @@ describe('ComponentTypeService', () => {
 
   it('should return autocomplete', () => {
     let schema = {
-      x_editor_autocomplete: {},
+      autocompletionConfig: {},
       type: 'string'
     };
     expect(service.getComponentType(schema)).toEqual('autocomplete');

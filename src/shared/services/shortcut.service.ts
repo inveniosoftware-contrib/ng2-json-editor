@@ -25,13 +25,15 @@ import { Injectable } from '@angular/core';
 import { TabIndexService } from './tab-index.service';
 import { ShortcutActionService } from './shortcut-action.service';
 
+import { CustomShortcuts } from '../interfaces/custom-shortcuts';
+
 @Injectable()
 export class ShortcutService {
 
   shortcuts = {
     add: {
       key: 'alt+a',
-      action : this.shortcutActionService.generateShortcutAction('addAction')
+      action: this.shortcutActionService.generateShortcutAction('addAction')
     },
     addToRoot: {
       key: 'mod+shift+a',
@@ -39,7 +41,7 @@ export class ShortcutService {
     },
     moveUp: {
       key: 'mod+shift+up',
-      action : this.shortcutActionService.generateShortcutAction('moveUpAction')
+      action: this.shortcutActionService.generateShortcutAction('moveUpAction')
     },
     moveDown: {
       key: 'mod+shift+down',
@@ -76,17 +78,13 @@ export class ShortcutService {
   };
 
   constructor(public tabIndexService: TabIndexService,
-              public shortcutActionService: ShortcutActionService) { }
+    public shortcutActionService: ShortcutActionService) { }
 
-  getShortcuts(config: Object) {
-    return this.mergeShortcutsWithConfig(config);
-  }
-
-  mergeShortcutsWithConfig(shortcutsFromConfig: Object): Object {
-    if (shortcutsFromConfig) {
+  getShortcutsWithConfig(customShortcuts: CustomShortcuts): Object {
+    if (customShortcuts) {
       Object.keys(this.shortcuts).forEach(method => {
-        if (shortcutsFromConfig[method]) {
-          this.shortcuts[method]['key'] = shortcutsFromConfig[method]['key'];
+        if (customShortcuts[method]) {
+          this.shortcuts[method]['key'] = customShortcuts[method]['key'];
         }
       });
     }

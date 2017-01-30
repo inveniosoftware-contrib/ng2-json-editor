@@ -22,10 +22,6 @@
 
 import { Injectable } from '@angular/core';
 
-/**
- * WARNING: this doesn't work when the root json object is an array!
- * TODO: make these custom rxjs operator
- */
 @Injectable()
 export class JsonUtilService {
 

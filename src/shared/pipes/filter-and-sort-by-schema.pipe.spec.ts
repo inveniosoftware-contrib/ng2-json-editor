@@ -32,14 +32,14 @@ describe('FilterAndSortBySchemaPipe', () => {
     pipe = new FilterAndSortBySchemaPipe(new AppGlobalsService());
   });
 
-  it('should sort by x_editor_priority, larger first', () => {
+  it('should sort by priority, larger first', () => {
     let schema = {
       properties: {
         key1: {
-          x_editor_priority: 10
+          priority: 10
         },
         key2: {
-          x_editor_priority: 100
+          priority: 100
         }
       }
     };
@@ -50,7 +50,7 @@ describe('FilterAndSortBySchemaPipe', () => {
     expect(pipe.transform(keys, schema)).toEqual(expected);
   });
 
-  it('should sort alphabetically if x_editor_priority not set', () => {
+  it('should sort alphabetically if priority not set', () => {
     let schema = {
       properties: {
         key1: {},
@@ -64,15 +64,15 @@ describe('FilterAndSortBySchemaPipe', () => {
     expect(pipe.transform(keys, schema)).toEqual(expected);
   });
 
-  it('should sort by x_editor_priority, larger first then alphabetically if it is not set for some',
+  it('should sort by priority, larger first then alphabetically if it is not set for some',
     () => {
       let schema = {
         properties: {
           key1: {
-            x_editor_priority: 10
+            priority: 10
           },
           key2: {
-            x_editor_priority: 100
+            priority: 100
           },
           key3: {},
           key4: {}
@@ -85,19 +85,19 @@ describe('FilterAndSortBySchemaPipe', () => {
       expect(pipe.transform(keys, schema)).toEqual(expected);
     });
 
-  it('should sort by x_editor_priority, positive larger first, then alphabetically, then negative',
+  it('should sort by priority, positive larger first, then alphabetically, then negative',
     () => {
       let schema = {
         properties: {
           key1: {
-            x_editor_priority: -100
+            priority: -100
           },
           key2: {
-            x_editor_priority: -10
+            priority: -10
           },
           key3: {},
           key4: {
-            x_editor_priority: 10
+            priority: 10
           },
           key5: {}
         }
@@ -113,7 +113,7 @@ describe('FilterAndSortBySchemaPipe', () => {
     let schema = {
       properties: {
         key1: {
-          x_editor_hidden: true
+          hidden: true
         },
         key2: {
         }
@@ -131,15 +131,15 @@ describe('FilterAndSortBySchemaPipe', () => {
     let schema = {
       properties: {
         key1: {
-          x_editor_hidden: true
+          hidden: true
         },
         key2: {
         }
       }
     };
-    let keys = ['key1', 'key2'];
+    let keys = Set(['key1', 'key2']);
 
-    let expected = ['key1', 'key2'];
+    let expected = OrderedSet(['key1', 'key2']);
 
     expect(pipe.transform(keys, schema)).toEqual(expected);
   });

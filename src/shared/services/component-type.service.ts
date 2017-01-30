@@ -42,7 +42,7 @@ export class ComponentTypeService {
       throw new Error('schema is undefined');
     }
 
-    if (schema['x_editor_on_value_change']) {
+    if (schema['onValueChange']) {
       return 'value-change-watcher';
     }
 
@@ -52,7 +52,7 @@ export class ComponentTypeService {
         return 'raw';
       }
     } else if (schemaType === 'string') {
-      if (schema['x_editor_autocomplete']) {
+      if (schema['autocompletionConfig']) {
         return 'autocomplete';
       } else if (schema['enum']) {
         return 'enum';
