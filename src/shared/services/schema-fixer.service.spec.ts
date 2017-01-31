@@ -155,7 +155,7 @@ describe('SchemaFixerService', () => {
         },
         partialEnumProp: {
           type: 'string',
-          x_editor_autocomplete: {
+          autocompletionConfig: {
             source: [
               'partialEnumProp1',
               'partialEnumProp2'

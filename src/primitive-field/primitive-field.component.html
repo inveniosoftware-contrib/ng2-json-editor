@@ -1,18 +1,17 @@
 <div [ngSwitch]="valueType" [id]="pathString">
   <table class="primitive-field-container">
     <tr>
-      <td class="value-container" [ngClass]="errorNgClass" [tooltipHtml]="errors | errorsToMessagesHtml"
-        tooltipTrigger="mouseenter" [tooltipEnable]="isErrorTooltipEnabled">
+      <td class="value-container" [ngClass]="errorNgClass" [tooltipHtml]="errors | errorsToMessagesHtml" tooltipTrigger="mouseenter"
+        [tooltipEnable]="isErrorTooltipEnabled">
         <div *ngSwitchCase="'string'">
           <textarea rows="1" textareaAutofit [tabindex]="tabIndex" [(ngModel)]="value" (blur)="commitValueChange()" (keypress)="onKeypress($event)"
             placeholder="{{schema.title}}"></textarea>
         </div>
         <div *ngSwitchCase="'enum'">
-          <searchable-dropdown [value]="value" [tabindex]="tabIndex" [items]="schema.enum" [shortcutMap]="schema.x_editor_enum_shortcut_map"
-            (onSelect)="onSearchableDropdownSelect($event)"></searchable-dropdown>
+          <searchable-dropdown [value]="value" [tabindex]="tabIndex" [items]="schema.enum" [shortcutMap]="schema.enumShorcutMap" (onSelect)="onSearchableDropdownSelect($event)"></searchable-dropdown>
         </div>
         <div *ngSwitchCase="'autocomplete'">
-          <autocomplete-input [value]="value" [path]="path" [autocompletionOptions]="schema.x_editor_autocomplete" (onBlur)="commitValueChange()"
+          <autocomplete-input [value]="value" [path]="path" [autocompletionConfig]="schema.autocompletionConfig" (onBlur)="commitValueChange()"
             (onKeypress)="onKeypress($event)" (onValueChange)="onAutocompleteInputValueChange($event)" [tabindex]="tabIndex"
             [placeholder]="schema.title"></autocomplete-input>
         </div>
@@ -28,7 +27,7 @@
         </div>
       </td>
       <td class="link-button-container">
-        <a *ngIf="linkBuilder" class="no-decoration" target="_blank" [href]="linkBuilder(value)">🔗</a>
+        <a *ngIf="schema.linkBuilder" class="no-decoration" target="_blank" [href]="schema.linkBuilder(value)">🔗</a>
       </td>
     </tr>
   </table>

@@ -106,10 +106,6 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     this.commitValueChange();
   }
 
-  get linkBuilder(): LinkBuilderFunction {
-    return this.schema['x_editor_link_builder'];
-  }
-
   getTabIndex(): number {
     return this.tabIndexService.getElemTabIndex(this.path.join('.'));
   }

@@ -45,6 +45,8 @@ import {
   ShortcutService
 } from './shared/services';
 
+import { JsonEditorConfig, Preview, SchemaValidationErrors } from './shared/interfaces';
+
 
 @Component({
   selector: 'json-editor',
@@ -58,15 +60,15 @@ import {
 
 export class JsonEditorComponent extends AbstractTrackerComponent implements OnInit {
 
-  @Input() config: EditorConfig;
+  @Input() config: JsonEditorConfig;
   @Input() record: Object;
   @Input() schema: Object;
-  @Input() errorMap: Object = {};
+  @Input() errorMap: SchemaValidationErrors = {};
 
   @Output() onRecordChange: EventEmitter<Object> = new EventEmitter<Object>();
 
   _record: Map<string, any>;
-  previews: Array<any> = [];
+  previews: Array<Preview> = [];
   keys: Set<string>;
 
   constructor(public http: Http,
@@ -94,7 +96,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
 
     this.schema = this.schemaFixerService.fixSchema(this.schema, this.config.schemaOptions);
     this.record = this.recordFixerService.fixRecord(this.record, this.schema);
-    this.previews = this.extractPreviews();
+    this.extractPreviews();
     // set errors that is used by other components
     this.appGlobalsService.globalErrors = this.errorMap;
     // get names of top-level fields
@@ -114,26 +116,31 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   }
 
   /**
-   * Extracts previews from config, and populates url if necessary
-   * by using `getUrl` or `urlPath` configs and the record.
+   * Converts PreviewConfig instances to Preview instances and appends to `previews` array.
    */
-  private extractPreviews(): Array<any> {
-    let previews = this.config.previews;
-    if (previews) {
+  private extractPreviews() {
+    let previewConfigs = this.config.previews;
+    if (previewConfigs) {
       // if url is not set directly, populate it
-      previews
-        .filter(preview => !preview.url)
-        .forEach(preview => {
-          if (preview.getUrl) {
-            preview.url = preview.getUrl(this.record);
-          } else if (preview.urlPath) {
-            preview.url = this.jsonUtilService.getValueInPath(this.record, preview['urlPath']);
+      previewConfigs
+        .forEach(previewConfig => {
+          let url;
+          if (previewConfig.url) {
+            url = previewConfig.url;
+          } else if (previewConfig.getUrl) {
+            url = previewConfig.getUrl(this.record);
+          } else if (previewConfig.urlPath) {
+            url = this.jsonUtilService.getValueInPath(this.record, previewConfig.urlPath);
           } else {
             throw new Error('Either url, urlPath or getUrl should be set for a preview');
           }
+          this.previews.push({
+            name: previewConfig.name,
+            type: previewConfig.type,
+            url: url
+          });
         });
     }
-    return previews;
   }
 
   deleteField(field: string) {
@@ -152,6 +159,6 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   }
 
   get shortcuts() {
-    return this.shortcutsService.getShortcuts(this.config.shortcuts);
+    return this.shortcutsService.getShortcutsWithConfig(this.config.shortcuts);
   }
 }

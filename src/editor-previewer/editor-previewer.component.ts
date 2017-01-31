@@ -24,6 +24,8 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { AbstractTrackerComponent } from '../abstract-tracker';
 
+import { Preview } from '../shared/interfaces';
+
 @Component({
   selector: 'editor-previewer',
   styleUrls: [

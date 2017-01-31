@@ -26,6 +26,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
 import { JsonStoreService, RemoteAutocompletionService } from '../shared/services';
+import { AutocompletionConfig, AutocompletionResult } from '../shared/interfaces';
 
 @Component({
   selector: 'autocomplete-input',
@@ -37,7 +38,7 @@ import { JsonStoreService, RemoteAutocompletionService } from '../shared/service
 })
 export class AutocompleteInputComponent implements OnInit {
 
-  @Input() autocompletionOptions: AutocompletionOptions;
+  @Input() autocompletionConfig: AutocompletionConfig;
   @Input() path: Array<any>;
   @Input() value: string;
   @Input() tabindex: string;
@@ -55,7 +56,7 @@ export class AutocompleteInputComponent implements OnInit {
 
   ngOnInit() {
     // if url option set then use remote autocompletion service
-    if (this.autocompletionOptions.url) {
+    if (this.autocompletionConfig.url) {
       this.typeaheadOptionField = 'text';
       this.dataSource = Observable.create((observer: any) => {
         // Runs on every 
@@ -63,9 +64,9 @@ export class AutocompleteInputComponent implements OnInit {
           observer.next(this.value);
         }
       }).mergeMap((token: string) =>
-        this.remoteAutocompletionService.getAutocompletionResults(this.autocompletionOptions, token));
+        this.remoteAutocompletionService.getAutocompletionResults(this.autocompletionConfig, token));
     } else {
-      this.dataSource = this.autocompletionOptions.source;
+      this.dataSource = this.autocompletionConfig.source;
     }
 
   }
@@ -76,7 +77,7 @@ export class AutocompleteInputComponent implements OnInit {
   }
 
   onCompletionSelect(completionItem: AutocompletionResult) {
-    let onCompletionSelect = this.autocompletionOptions.onCompletionSelect;
+    let onCompletionSelect = this.autocompletionConfig.onCompletionSelect;
     // if callback set and it is remote autocompletion source
     if (onCompletionSelect && this.typeaheadOptionField) {
       // .slice() is used to pass by value instead of reference
