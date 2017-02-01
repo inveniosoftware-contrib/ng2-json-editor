@@ -20,7 +20,7 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, ViewChild } from '@angular/core';
+import { Component, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 
 import { ModalDirective } from 'ng2-bootstrap/ng2-bootstrap';
 
@@ -34,6 +34,7 @@ import { ModalOptions } from '../shared/interfaces';
     './modal-view.component.scss'
   ],
   templateUrl: './modal-view.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ModalViewComponent {
 
@@ -41,10 +42,24 @@ export class ModalViewComponent {
   private options: ModalOptions;
 
   // TODO: unsubcribe on destroy
-  constructor(private modalService: ModalService) {
+  constructor(
+    private modalService: ModalService,
+    private cd: ChangeDetectorRef
+  ) {
     this.modalService
-      .display$.subscribe(display => { display ? this.modal.show() : this.modal.hide(); });
+      .display$.subscribe(display => {
+        display ? this.modal.show() : this.modal.hide();
+      });
     this.modalService
-      .options$.subscribe(options => { this.options = options; });
+      .options$.subscribe(options => {
+        this.options = options;
+        this.cd.markForCheck();
+      });
+  }
+
+  onShow() {
+    if ( this.options && this.options.onShow ) {
+      this.options.onShow();
+    }
   }
 }
