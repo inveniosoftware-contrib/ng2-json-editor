@@ -63,7 +63,7 @@ describe('AddFieldToObjectDropdownComponent', () => {
         AddFieldDropdownComponent
       ],
       imports: [
-        Ng2BootstrapModule
+        Ng2BootstrapModule.forRoot()
       ],
       providers: [
         { provide: EmptyValueService, useClass: MockEmptyValueService },

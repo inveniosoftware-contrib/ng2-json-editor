@@ -32,7 +32,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: process.env.TRAVIS ? ['Chrome_travis_ci'] : ['Chrome'],
     singleRun: false,
     customLaunchers: {
       Chrome_travis_ci: {
@@ -45,8 +45,4 @@ module.exports = function (config) {
     },
     client: { captureConsole: true },
   });
-
-  if (process.env.TRAVIS) {
-    config.browsers = ['Chrome_travis_ci'];
-  }
 };

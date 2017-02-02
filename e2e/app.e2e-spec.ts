@@ -21,9 +21,9 @@
  */
 
 import { Ng2JsonEditorPage } from './app.po';
-import {browser} from 'protractor/globals';
+import { browser } from 'protractor';
 
-describe('ng2-json-editor App', function() {
+describe('App', function () {
   let page: Ng2JsonEditorPage;
 
   beforeEach(() => {

@@ -61,7 +61,7 @@ describe('AutocompleteInputComponent', () => {
         AutocompleteInputComponent,
       ],
       imports: [
-        Ng2BootstrapModule,
+        Ng2BootstrapModule.forRoot(),
         HttpModule
       ],
       providers: [

@@ -1,8 +1,7 @@
 <div [ngSwitch]="valueType" [id]="pathString">
   <table class="primitive-field-container">
     <tr>
-      <td class="value-container" [ngClass]="errorNgClass" [tooltipHtml]="errors | errorsToMessagesHtml" tooltipTrigger="mouseenter"
-        [tooltipEnable]="isErrorTooltipEnabled">
+      <td class="value-container" [ngClass]="errorNgClass" [tooltipHtml]="errors | errorsToMessagesHtml" [isDisabled]="!isErrorTooltipEnabled">
         <div *ngSwitchCase="'string'">
           <textarea rows="1" textareaAutofit [tabindex]="tabIndex" [(ngModel)]="value" (blur)="commitValueChange()" (keypress)="onKeypress($event)"
             placeholder="{{schema.title}}"></textarea>

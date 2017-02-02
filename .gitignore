@@ -1,4 +1,4 @@
-# @RecordEditor
+# @ng2-json-editor
 
 # Logs
 logs
@@ -52,9 +52,9 @@ npm-debug.log
 /public/dist/
 /src/*/dist/
 /dist/**
+/staging
 .webpack.json
-ng2-json-editor.js
-ng2-json-editor.d.ts
+*.metadata.json
 
 
 # Doc #

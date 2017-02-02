@@ -38,7 +38,7 @@ export class SchemaFixerService {
    * @param {Object} config - schema specific options
    * @return {Object} - fixed schema
    */
-  fixSchema(schema: Object, config: Object): Object {
+  fixSchema(schema: Object, config?: Object): Object {
     if (config) {
       this.enrichSchemaWithConfig(schema, config);
     }

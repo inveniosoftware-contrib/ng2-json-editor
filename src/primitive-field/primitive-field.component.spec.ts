@@ -79,7 +79,7 @@ describe('PrimitiveFieldComponent', () => {
         PrimitiveFieldComponent
       ],
       imports: [
-        Ng2BootstrapModule
+        Ng2BootstrapModule.forRoot()
       ],
       providers: [
         AppGlobalsService,

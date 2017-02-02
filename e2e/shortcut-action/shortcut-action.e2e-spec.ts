@@ -21,9 +21,9 @@
  */
 
 import { ShortcutActionPage } from './shortcut-action.po';
-import { browser, protractor } from 'protractor/globals';
+import { browser, protractor } from 'protractor';
 
-describe('Shortcut-action App', function() {
+describe('ShortcutAction', function() {
   let page: ShortcutActionPage;
   let mod;
 

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "../",
+    "baseUrl": "staging",
     "declaration": true,
     "stripInternal": true,
     "experimentalDecorators": true,
@@ -11,22 +11,22 @@
     ],
     "paths": {
       "@angular/core": [
-        "../node_modules/@angular/core"
+        "node_modules/@angular/core"
       ],
       "@angular/common": [
-        "../node_modules/@angular/common"
+        "node_modules/@angular/common"
       ],
       "@angular/forms": [
-        "../node_modules/@angular/forms"
+        "node_modules/@angular/forms"
       ],
       "@angular/http": [
-        "../node_modules/@angular/http"
+        "node_modules/@angular/http"
       ],
       "rxjs/*": [
-        "../node_modules/rxjs/*"
+        "node_modules/rxjs/*"
       ]
     },
-    "rootDir": "../",
+    "rootDir": "staging",
     "module": "es6",
     "moduleResolution": "node",
     "outDir": "dist",
@@ -38,14 +38,15 @@
       "jasmine"
     ],
     "typeRoots": [
-      "../node_modules/@types"
+      "node_modules/@types"
     ]
   },
   "files": [
-    "../index.ts"
+    "staging/index.ts"
   ],
   "exclude": [
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "example"
   ],
   "angularCompilerOptions": {
     "strictMetadataEmit": true

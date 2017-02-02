@@ -124,7 +124,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
       // if url is not set directly, populate it
       previewConfigs
         .forEach(previewConfig => {
-          let url;
+          let url: string;
           if (previewConfig.url) {
             url = previewConfig.url;
           } else if (previewConfig.getUrl) {

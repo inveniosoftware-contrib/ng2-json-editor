@@ -25,7 +25,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { JsonEditorModule } from '../../ng2-json-editor';
+import { JsonEditorModule } from '../../dist';
 
 import { AppComponent } from './app.component';
 import { AppConfig } from './app.config';
