@@ -28,6 +28,7 @@
       </td>
       <td class="link-button-container">
         <a *ngIf="schema.linkBuilder" class="no-decoration" target="_blank" [href]="schema.linkBuilder(value)">🔗</a>
+        <a *ngIf="!schema.linkBuilder && schema.format === 'url'" class="no-decoration" target="_blank" [href]="value">🔗</a>
       </td>
     </tr>
   </table>
