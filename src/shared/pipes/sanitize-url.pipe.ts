@@ -33,9 +33,9 @@ export class SanitizeUrlPipe implements PipeTransform {
 
   /**
    * Transforms url to safe url that can be used for `<script src>` or `<iframe src>`
-   * 
+   *
    * @param {string} url
-   * @return {SafeResourceUrl} 
+   * @return {SafeResourceUrl}
    */
   transform(url: string): SafeResourceUrl {
     return this.domSanitizer.bypassSecurityTrustResourceUrl(url);

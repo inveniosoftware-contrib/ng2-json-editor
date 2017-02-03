@@ -27,11 +27,11 @@ export class SchemaValidationService {
 
   /**
    * Validate string value against schema
-   * 
+   *
    * @throws {Error} if value can not be validated
-   * 
+   *
    * Checks: pattern
-   * 
+   *
    */
   validateStringValue(value: string, schema: Object) {
     let pattern = schema['pattern'];
@@ -42,11 +42,11 @@ export class SchemaValidationService {
 
   /**
    * Validate array value against schema
-   * 
+   *
    * @throws {Error} if array can not be validated
-   * 
+   *
    * Checks: uniqueItems
-   * 
+   *
    */
   validateArray(array: Array<any>, schema) {
     if (schema['uniqueItems']) {

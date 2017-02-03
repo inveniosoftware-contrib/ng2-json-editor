@@ -21,7 +21,7 @@
 */
 
 import { Injectable } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import { ModalOptions } from '../interfaces';
 

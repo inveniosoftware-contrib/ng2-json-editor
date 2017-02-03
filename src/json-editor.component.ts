@@ -32,6 +32,8 @@ import {
 import { Http } from '@angular/http';
 
 import { fromJS, Map, Set } from 'immutable';
+import 'rxjs/add/operator/skipWhile';
+
 
 import { AbstractTrackerComponent } from './abstract-tracker';
 

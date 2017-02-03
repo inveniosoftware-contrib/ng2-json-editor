@@ -36,7 +36,7 @@ export class SearchableDropdownComponent {
   @Input() shortcutMap: Object;
   @Input() value: string;
   @Input() tabindex: string;
-  expression: string = '';
+  expression = '';
   status: { isOpen: boolean } = { isOpen: false };
 
   @Output() onSelect: EventEmitter<string> = new EventEmitter<string>();

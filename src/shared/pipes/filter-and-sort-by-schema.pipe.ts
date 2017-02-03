@@ -35,7 +35,7 @@ export class FilterAndSortBySchemaPipe implements PipeTransform {
 
   /**
    * It filters out `hidden` fields and sorts keys by `priority`
-   * 
+   *
    * @param {Set<string>} keys
    * @param {Object} schema - the `schema` that has object schema which contains each key in `keys`
    * @return {OrderedSet<string>} - filtered and sorted keys

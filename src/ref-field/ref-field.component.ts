@@ -30,10 +30,11 @@ import {
   ComponentRef
 } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
+
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
 
 import { DynamicTemplateLoaderService } from '../shared/services';
-
 import { RefConfig } from '../shared/interfaces';
 
 @Component({
@@ -56,8 +57,8 @@ export class RefFieldComponent implements OnChanges {
   requestOptions: RequestOptions;
 
   refData$: Observable<Object>;
-  shouldDisplayWithTemplate: boolean = false;
-  isPreviewButtonHidden: boolean = false;
+  shouldDisplayWithTemplate = false;
+  isPreviewButtonHidden = false;
   dynamicTemplateComponentRef: ComponentRef<any>;
 
   constructor(private viewContainer: ViewContainerRef,
@@ -97,16 +98,16 @@ export class RefFieldComponent implements OnChanges {
 
   /**
    * Displays the template
-   * 
+   *
    * if the template hasn't loaded, loads the template asyncw with current $ref in this.value
    * then assigns the loaded to this.dynamicTemplateComponentRef
-   * 
+   *
    * if the template has already loaded, refreshes its context value with the data that
    * is fetched from current $ref in this.value
-   * 
+   *
    * Note: if called by onPreviewClick, hides the preview button.
-   * 
-   * 
+   *
+   *
    * @param {boolean} force - should be set to load the template when it is lazy.
    */
   private loadTemplateWithRef(force: boolean) {

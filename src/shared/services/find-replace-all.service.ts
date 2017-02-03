@@ -8,7 +8,7 @@ export class FindReplaceAllService {
   /**
    * Does deep replace when it finds the occurance in an immutable List and Map
    * uses schema to skip disabled properties
-   * 
+   *
    * @param {List<any> | Map<string, any} immutable
    * @param {Object} schema
    * @param {string} find

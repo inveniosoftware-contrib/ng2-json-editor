@@ -38,7 +38,9 @@ gulp.task('tslint', () => {
       configuration: 'tslint.json',
       formatter: 'prose'
     }))
-    .pipe(tsLint.report())
+    .pipe(tsLint.report({
+      summarizeFailureOutput: true
+    }))
 });
 
 // compile typescript files with ngc
@@ -80,7 +82,7 @@ gulp.task('compile-scss', () => {
 // build the library
 gulp.task('build.ts', (done) => {
   runSequence(
-    // 'tslint',
+    'tslint',
     'copy-to-staging-and-inline-resources',
     'compile.ts',
     done);

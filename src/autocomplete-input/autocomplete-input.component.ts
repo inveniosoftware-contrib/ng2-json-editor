@@ -59,7 +59,7 @@ export class AutocompleteInputComponent implements OnInit {
     if (this.autocompletionConfig.url) {
       this.typeaheadOptionField = 'text';
       this.dataSource = Observable.create((observer: any) => {
-        // Runs on every 
+        // Runs on every
         if (this.value && this.value.length > 0) {
           observer.next(this.value);
         }

@@ -45,11 +45,11 @@ import {
 /**
  * Change input html element value
  * and dispatches/fires an input event.
- * 
+ *
  * Used to mock changing element value on UI.
- * 
+ *
  * TODO: create a test helper class for this kind of functions!
- * 
+ *
  * @param {HTMLInputElement} el - <textarea> or <input> html element
  * @param {string} value - new value to be set to el.value
  */
@@ -94,7 +94,7 @@ describe('PrimitiveFieldComponent', () => {
     fixture = TestBed.createComponent(PrimitiveFieldComponent);
     component = fixture.componentInstance;
 
-    // force component to render completely by setting @Input() manually 
+    // force component to render completely by setting @Input() manually
     component.value = 'defaultStringValue';
     component.path = ['default', 'path'];
     component.schema = {
@@ -109,7 +109,7 @@ describe('PrimitiveFieldComponent', () => {
   });
 
   it('should be binded to view', () => {
-    /** 
+    /**
      * inputEl.value is not updated in test environment
     let modelValue = 'modelValue';
     component.value = modelValue;
