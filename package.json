@@ -28,6 +28,7 @@
     "e2e:travis:delay": "sleep 15 && npm run e2e",
     "preversion": "npm test",
     "version": "npm run build",
+    "copy": "copyfiles LICENSE README.md package.json dist",
     "postversion": "git push upstream && git push upstream --tags",
     "coveralls": "cat coverage/coverage.lcov | coveralls",
     "typedoc": "typedoc --readme none --theme ./docs-theme --module commonjs --out ./example-dist/docs ./src/shared/interfaces/json-editor-config.ts"
@@ -65,6 +66,7 @@
     "angular-cli": "^1.0.0-beta.26",
     "bootstrap-sass": "^3.3.7",
     "codelyzer": "~2.0.0-beta.1",
+    "copyfiles": "^1.2.0",
     "core-js": "^2.4.1",
     "coveralls": "^2.11.12",
     "del": "^2.2.2",
