@@ -4,18 +4,18 @@
 module.exports = function (config) {
   config.set({
     basePath: '',
-    frameworks: ['jasmine', 'angular-cli'],
+    frameworks: ['jasmine', '@angular/cli'],
     plugins: [
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
       require('karma-remap-istanbul'),
-      require('angular-cli/plugins/karma')
+      require('@angular/cli/plugins/karma')
     ],
     files: [
       { pattern: './example/test.ts', watched: false }
     ],
     preprocessors: {
-      './example/test.ts': ['angular-cli']
+      './example/test.ts': ['@angular/cli']
     },
     remapIstanbulReporter: {
       reports: {
