@@ -21,7 +21,8 @@ module.exports = function (config) {
       reports: {
         html: 'coverage',
         lcovonly: './coverage/coverage.lcov'
-      }
+      },
+      includeAllSources: true
     },
     angularCli: {
       config: './angular-cli.json',
