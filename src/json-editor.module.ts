@@ -87,3 +87,26 @@ import { SHARED_PIPES, SHARED_SERVICES, SHARED_DIRECTIVES } from './shared';
   providers: SHARED_SERVICES
 })
 export class JsonEditorModule { }
+
+export {
+  AddFieldDropdownComponent,
+  AddNewElementButtonComponent,
+  AnyTypeFieldComponent,
+  AutocompleteInputComponent,
+  ComplexListFieldComponent,
+  ObjectFieldComponent,
+  ValueChangeWatcherComponent,
+  EditorPreviewerComponent,
+  FindReplaceComponent,
+  ModalViewComponent,
+  PrimitiveListFieldComponent,
+  PrimitiveFieldComponent,
+  RefFieldComponent,
+  SearchableDropdownComponent,
+  TableListFieldComponent,
+  TitleDropdownComponent,
+  TreeMenuItemComponent,
+  TreeMenuComponent,
+  JsonEditorComponent,
+  HtmlViewComponent
+}
