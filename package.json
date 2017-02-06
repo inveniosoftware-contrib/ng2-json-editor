@@ -31,7 +31,7 @@
     "copy": "copyfiles LICENSE README.md package.json dist",
     "postversion": "git push upstream && git push upstream --tags",
     "coveralls": "cat coverage/coverage.lcov | coveralls",
-    "typedoc": "typedoc --readme none --theme ./docs-theme --module commonjs --out ./example-dist/docs ./src/shared/interfaces/json-editor-config.ts"
+    "typedoc": "typedoc --readme none --theme ./docs-theme --module commonjs --out ./example-dist/docs --tsconfig ./src/shared/interfaces/tsconfig.json ."
   },
   "peerDependencies": {
     "@angular/common": "^2.3.1",

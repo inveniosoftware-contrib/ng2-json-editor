@@ -1,0 +1,24 @@
+{
+  "__comment": "This is only used by typedoc to include only config in docs",
+  "compilerOptions": {
+    "declaration": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "mapRoot": "./",
+    "module": "es6",
+    "moduleResolution": "node",
+    "outDir": "../../../dist/out-tsc",
+    "sourceMap": true,
+    "target": "es5",
+    "typeRoots": [
+      "../../../node_modules/@types"
+    ]
+  },
+  "files": [
+    "./json-editor-config.ts"
+  ]
+}
