@@ -54,7 +54,7 @@ export class ShortcutActionPage extends Ng2JsonEditorPage {
     return elem.all(by.css('input')).count();
   }
 
-  getValuesOfChildrenById(id: string): WDPromise<string> {
+  getValuesOfChildrenById(id: string): WDPromise<string[]> {
     let elems = this.getChildrenOfElementByCss(this.getElementById(id), 'textarea,input');
     return elems
       .map(elem => {
@@ -62,4 +62,3 @@ export class ShortcutActionPage extends Ng2JsonEditorPage {
       });
    }
 }
-

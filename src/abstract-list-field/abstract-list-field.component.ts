@@ -54,6 +54,9 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
       .set(index, this.values.get(newIndex))
       .set(newIndex, temp);
     this.jsonStoreService.setIn(this.path, this.values);
+    setTimeout(() => {
+      this.tabIndexService.sortAndSynchronizeTabIndexes();
+    });
   }
 
   /**

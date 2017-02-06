@@ -21,6 +21,7 @@
  */
 
 import { browser, element, by } from 'protractor';
+import * as webdriver from 'selenium-webdriver';
 
 export class Ng2JsonEditorPage {
 
