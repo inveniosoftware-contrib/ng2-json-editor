@@ -40,4 +40,5 @@ deploy:
     all_branches: true
     node: '6.9.1'
 after_deploy:
+  - "cd .."
   - ./deploy-gh-pages.sh
