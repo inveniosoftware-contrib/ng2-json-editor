@@ -34,11 +34,11 @@ export class SelfOrEmptyPipe implements PipeTransform {
   constructor(public emptyValueService: EmptyValueService) {}
 
   /**
-   * Transforms a value to empty value if it is undefined, 
+   * Transforms a value to empty value if it is undefined,
    * returns self if it is already defined
-   * 
+   *
    * @param {any} value
-   * @param {Object} schema 
+   * @param {Object} schema
    * @return {any} - empty value if given value is undefined or value itself.
    */
   transform(value: any, schema: Object): any {

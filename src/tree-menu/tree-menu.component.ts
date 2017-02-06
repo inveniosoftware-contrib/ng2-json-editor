@@ -43,7 +43,7 @@ export class TreeMenuComponent extends AbstractTrackerComponent implements OnCha
 
   keys: Set<string>;
 
-  private prefixOrPath: string = '';
+  private prefixOrPath = '';
 
   constructor(private windowHrefService: WindowHrefService,
     private domUtilService: DomUtilService) {

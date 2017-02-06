@@ -28,12 +28,12 @@ export class ComponentTypeService {
   /**
    * It returns the editor specific type of given schema
    * In other words, which component to use for given schema.
-   * 
+   *
    * Possible values:
    *  - string, number, boolean, object, enum
    *  - primitive-list, table-list, complex-list
    *  - disabled, autocomplete
-   * 
+   *
    * @param {Object} schema
    * @return {string}
    */
@@ -64,7 +64,7 @@ export class ComponentTypeService {
     } else if (schemaType === 'array') {
       let itemSchema = schema['items'];
       if (itemSchema['type'] === 'object') {
-        // complex-array: if it's an object array 
+        // complex-array: if it's an object array
         // where at least one property of this object is also an object array.
         // so object array in an object array. Array<{property: Array<{...}>...}>
         let isComplexArray = Object.keys(itemSchema['properties'])

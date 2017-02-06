@@ -30,12 +30,12 @@ import { AppGlobalsService, ComponentTypeService } from '../shared/services';
 
 /**
  * AnyFieldComponent
- * 
+ *
  * This is a dummy component that has no logic, just passes @Input to its child and
  * propagates its child's output to its parent.
- * 
- * IMPORTANT: 
- * On the other hand it has smart template which has logic to decide which type of 
+ *
+ * IMPORTANT:
+ * On the other hand it has smart template which has logic to decide which type of
  * component to use according to schema.
  */
 @Component({

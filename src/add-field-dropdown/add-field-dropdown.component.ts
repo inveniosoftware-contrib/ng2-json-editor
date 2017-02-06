@@ -42,7 +42,7 @@ export class AddFieldDropdownComponent {
 
   @Output() onFieldAdd: EventEmitter<string> = new EventEmitter<string>();
 
-  expression: string = '';
+  expression = '';
 
   constructor(private domUtilService: DomUtilService,
     private emptyValueService: EmptyValueService) { }

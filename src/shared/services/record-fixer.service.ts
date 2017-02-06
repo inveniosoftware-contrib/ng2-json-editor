@@ -34,7 +34,7 @@ export class RecordFixerService {
   /**
    * Fixes given record according to given schema, in other words
    * changes it to match the format expected the by te json-editor
-   * 
+   *
    * @param {Object} rawRecord - json record to be fixed
    * @param {Object} schema - extended schema of rawRecord
    * @return {Object} - fixed record
@@ -56,13 +56,13 @@ export class RecordFixerService {
   /**
    * Visits all parts of record recursivly, along with the subschema of the part
    * and apply required fixes.
-   * 
+   *
    * NOTE: the reason that parent and key are passed instead of the direct value
    * is to be able do some operations that needs the parent such as `delete`.
-   * 
+   *
    * TODO: add special case for arrays because fixes are the same for
    * all elements.
-   * 
+   *
    * @param key {string | number} - field name or element index
    * @param parent {Object | Array<any>} - parent of the field/element
    * @param schema - schema of visited field/element
@@ -104,7 +104,7 @@ export class RecordFixerService {
   /**
    * Deletes given field from the given object.
    * Used for deleting fields that aren't on the schema.
-   * 
+   *
    * TODO: replace this with only `delete` when logging is not necessary!
    */
   private deleteField(object: Object, field: string) {

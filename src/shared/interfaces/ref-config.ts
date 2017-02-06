@@ -3,9 +3,9 @@ import { HttpHeader } from './http-header';
 export interface RefConfig {
   /**
    * Html template where you can access json that is pointed by $ref by using `context`
-   * 
+   *
    * Example: '<div>aValue: {{(context | async)?.aValue}}<div>'
-   * 
+   *
    * - Async pipe must be used since the Observable passed as context.
    * - Other angular2 common pipes can be used such as lowercase, json etc.
    * - The error during http request can be accessed, via `context.error`

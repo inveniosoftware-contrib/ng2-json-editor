@@ -5,15 +5,15 @@ import { CustomShortcuts } from './custom-shortcuts';
 export interface JsonEditorConfig {
   /**
    * If set, displays the switch that can enable admin mode where any field can be edited.
-   * 
+   *
    * - It is `false` by default.
    */
   enableAdminModeSwitch?: boolean;
 
   /**
    * Configurations for properties defined in the schema.
-   * 
-   * Example: 
+   *
+   * Example:
    * ```
    * {
    *  'anArray.items.properties.anElementProp': { ...SchemaOption... },

@@ -28,8 +28,8 @@ import { JsonStoreService, AppGlobalsService, TabIndexService } from '../shared/
 
 /**
  * Abstract component to share code of common operations of all array fields
- * 
- * Instance properties declared here only to resolve syntax errors. 
+ *
+ * Instance properties declared here only to resolve syntax errors.
  * Hence they need to be declared in children extending components (with decarators if necessary)
  */
 export abstract class AbstractListFieldComponent extends AbstractFieldComponent {

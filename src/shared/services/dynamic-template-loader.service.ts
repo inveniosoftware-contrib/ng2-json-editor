@@ -21,7 +21,7 @@ export class DynamicTemplateLoaderService {
   /**
    * Creates a dummy component with given template and context
    * and inserts it in given view container.
-   * 
+   *
    * @param {string} template - html template string
    * @param {any} context - context data which is referenced in `template` as `context`
    * @param {ViewContainerRef} viewContainer - view container where the template will inserted

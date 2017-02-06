@@ -21,14 +21,14 @@
 */
 
 import { Injectable } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import { SchemaValidationErrors } from '../interfaces';
 
 @Injectable()
 export class AppGlobalsService {
   private _globalErrorsSubject: ReplaySubject<SchemaValidationErrors> = new ReplaySubject<any>(1);
-  public adminMode: boolean = false;
+  public adminMode = false;
 
   set globalErrors(errors: SchemaValidationErrors) {
     this._globalErrorsSubject.next(errors);

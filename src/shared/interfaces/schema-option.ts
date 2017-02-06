@@ -6,7 +6,7 @@ import { OnValueChangeFunction } from './on-value-change-function';
 export interface SchemaOption {
   /**
    * Define the width that a field must acquire in a table.
-   * 
+   *
    * - This is only applicable when the parent field is a table.
    */
   columnWidth?: number;
@@ -28,7 +28,7 @@ export interface SchemaOption {
 
   /**
    * Indicator to be used for sorting all fields on the UI. Larger priority fields appears up-most/left-most on the UI.
-   * 
+   *
    * - It is `0` by default.
    * - It can be negative.
    */
@@ -36,7 +36,7 @@ export interface SchemaOption {
 
   /**
    * Shortcut map for enum fields, to map shorthand values to enum values.
-   * 
+   *
    * - When a key from the the map is typed in enum field then `enter` is pressed enum field value will be set value of that key.
    */
   enumShortcutMap?: { [key: string]: string };
@@ -58,14 +58,14 @@ export interface SchemaOption {
 
   /**
    * The function that returns a url string which will be pointed by a small link button at the right side of input element.
-   * 
+   *
    * @param value value of the configured property
    */
   linkBuilder?: (value: any) => string;
 
   /**
    * Configuration to autocomplete a field from remote or local source.
-   * 
+   *
    * - Either url and path (for remote) or source (for local) must be set.
    */
   autocompletionConfig?: AutocompletionConfig;

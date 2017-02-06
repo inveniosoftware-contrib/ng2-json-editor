@@ -80,7 +80,7 @@ export class ShortcutService {
   constructor(public tabIndexService: TabIndexService,
     public shortcutActionService: ShortcutActionService) { }
 
-  getShortcutsWithConfig(customShortcuts: CustomShortcuts): Object {
+  getShortcutsWithConfig(customShortcuts?: CustomShortcuts): Object {
     if (customShortcuts) {
       Object.keys(this.shortcuts).forEach(method => {
         if (customShortcuts[method]) {

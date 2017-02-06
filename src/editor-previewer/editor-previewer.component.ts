@@ -37,7 +37,7 @@ import { Preview } from '../shared/interfaces';
 export class EditorPreviewerComponent extends AbstractTrackerComponent {
 
   @Input() previews: Array<Preview>;
-  hidden: boolean = false;
+  hidden = false;
 
   get toggleButtonActionName(): string {
     return this.hidden ? 'Show' : 'Hide';

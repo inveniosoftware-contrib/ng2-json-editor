@@ -29,10 +29,10 @@ import { AppGlobalsService } from '../shared/services';
 
 /**
  * This is the base class for fields
- * WARNING: 
+ * WARNING:
  *  FieldComponent which extends this class should have AppGlobalsService in their constructor!
  *  EX: constructor(...public appGlobalService: AppGlobalService, ...) {...}
- * 
+ *
  * It provides trackByFunction from AbstractTrackerComponent, and handles errors for the component.
  */
 export abstract class AbstractFieldComponent

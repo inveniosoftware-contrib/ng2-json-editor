@@ -21,12 +21,12 @@
 */
 
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 // TODO: investigate if all modules or only used ones are in the bundle of the example app.
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 
 import { AddFieldDropdownComponent } from './add-field-dropdown';
 import { AddNewElementButtonComponent } from './add-new-element-button';
@@ -79,8 +79,8 @@ import { SHARED_PIPES, SHARED_SERVICES, SHARED_DIRECTIVES } from './shared';
   ],
   exports: [JsonEditorComponent],
   imports: [
-    Ng2BootstrapModule,
-    BrowserModule,
+    Ng2BootstrapModule.forRoot(),
+    CommonModule,
     FormsModule,
     HttpModule
   ],

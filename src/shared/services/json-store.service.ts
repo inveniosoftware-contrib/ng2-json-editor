@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Map, List } from 'immutable';
-import { ReplaySubject } from 'rxjs';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import { NestedStore } from '../interfaces';
 

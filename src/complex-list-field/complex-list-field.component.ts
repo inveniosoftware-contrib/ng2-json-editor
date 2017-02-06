@@ -55,8 +55,8 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
   paginatedIndices: Array<number>;
 
   foundIndices: Array<number>;
-  currentFound: number = 0;
-  currentPage: number = 1;
+  currentFound = 0;
+  currentPage = 1;
   findExpression: string;
   navigator: LongListNavigatorConfig;
   shouldDisplayFoundNavigation: boolean;

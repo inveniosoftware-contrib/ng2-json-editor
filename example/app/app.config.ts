@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { JsonEditorConfig } from '../../ng2-json-editor';
+import { JsonEditorConfig } from '../../dist';
 
 @Injectable()
 export class AppConfig {

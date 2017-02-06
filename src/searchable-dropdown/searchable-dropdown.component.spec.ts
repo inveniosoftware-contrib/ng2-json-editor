@@ -45,7 +45,7 @@ describe('SearchableDropdownComponent', () => {
         SearchableDropdownComponent,
       ],
       imports: [
-        Ng2BootstrapModule
+        Ng2BootstrapModule.forRoot()
       ]
     }).compileComponents();
   }));

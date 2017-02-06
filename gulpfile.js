@@ -22,97 +22,89 @@
 
 // modules
 var gulp = require('gulp');
-var sass = require('node-sass');
-var tsc = require('gulp-typescript');
-var typescript = require('typescript'); // don't use global typescript!
-var sourcemaps = require('gulp-sourcemaps');
-var merge = require('merge2');
+var sass = require('gulp-sass');
+var extReplace = require('gulp-ext-replace');
+var ngc = require('gulp-ngc');
 var del = require('del');
 var tsLint = require('gulp-tslint');
-var inlineNg2Template = require('gulp-inline-ng2-template');
+var inlineResources = require('inline-ng2-resources');
 var KarmaServer = require('karma').Server;
 var runSequence = require('run-sequence');
 
-/**
- * Style processor for gulp-inline-ng2-template plugin
- * It takes scss files' content and returns css content.
- */
-function compileSass(path, ext, file, cb) {
-  if (file === '') {
-    cb(null, css);
-  } else {
-    var css = sass.renderSync({
-      data: file
-    }).css;
-    cb(null, css);
-  }
-}
-
-// file regexps
-var tsSourceFiles = './src/**/*.ts';
-var allSourceFiles = './src/**/*';
-
 // run tslint
-gulp.task('tslint', () =>
-  gulp.src(tsSourceFiles)
+gulp.task('tslint', () => {
+  return gulp.src('./src/**/*.ts')
     .pipe(tsLint({
       configuration: 'tslint.json',
       formatter: 'prose'
     }))
-    .pipe(tsLint.report())
-);
-
-// generate .d.ts, .js, js.map from .ts files in src then copy them into dist
-gulp.task('build.ts.src', () => {
-  var tsResult = gulp.src(tsSourceFiles)
-    .pipe(inlineNg2Template({ base: '/src', useRelativePaths: true, styleProcessor: compileSass }))
-    .pipe(sourcemaps.init())
-    .pipe(tsc(tsc.createProject('./src/tsconfig.json', { typescript })))
-
-  return merge([
-    tsResult.dts
-      .pipe(gulp.dest('dist')),
-    tsResult.js
-      .pipe(sourcemaps.write('.'))
-      .pipe(gulp.dest('dist'))
-  ]);
+    .pipe(tsLint.report({
+      summarizeFailureOutput: true
+    }))
 });
 
-// generate .d.ts and js for npm export file
-gulp.task('build.ts.npm-export', () => {
-  var npmFile = gulp.src('ng2-json-editor.ts')
-    .pipe(tsc(tsc.createProject('./src/tsconfig.json', { typescript })));
-
-  return merge([npmFile.dts
-    .pipe(gulp.dest('.')),
-  npmFile.js
-    .pipe(gulp.dest('.'))
-  ]);
+// compile typescript files with ngc
+gulp.task('compile.ts', () => {
+  return ngc('tsconfig.json');
 });
 
-// build all typscript files
+gulp.task('inline-resources', (done) => {
+  inlineResources('./staging/src');
+  done();
+});
+
+gulp.task('copy-to-staging.src', () => {
+  return gulp.src('./src/**/*')
+    .pipe(gulp.dest('./staging/src'))
+});
+
+gulp.task('copy-to-staging.index', () => {
+  return gulp.src('index.ts')
+    .pipe(gulp.dest('./staging'))
+});
+
+gulp.task('copy-to-staging-and-inline-resources', (done) => {
+  runSequence(
+    'copy-to-staging.src',
+    'copy-to-staging.index',
+    'compile-scss',
+    'inline-resources',
+    done);
+});
+
+gulp.task('compile-scss', () => {
+  return gulp.src('./staging/src/**/*.scss')
+    .pipe(sass.sync().on('error', sass.logError))
+    .pipe(extReplace('.scss'))
+    .pipe(gulp.dest('./staging/src'));
+});
+
+// build the library
 gulp.task('build.ts', (done) => {
   runSequence(
     'tslint',
-    'build.ts.src',
-    'build.ts.npm-export',
+    'copy-to-staging-and-inline-resources',
+    'compile.ts',
     done);
 });
 
 // remove dist folder
-gulp.task('clean.build', () => del(['ng2-json-editor.js', 'ng2-json-editor.d.ts', 'dist']));
+gulp.task('clean.dist', () => del(['dist']));
 
 // run all tasks required for build 
 gulp.task('build', (done) => {
   runSequence(
-    'clean.build',
+    'clean.dist',
     'build.ts',
+    'clean.staging',
     done);
 });
 
+gulp.task('clean.staging', () => del(['staging']));
+
 // watch changes for all files
 gulp.task('watch', () => {
-  gulp.watch(allSourceFiles, ['build.ts']);
+  gulp.watch('./src/**/*', ['build']);
 });
 
 // builds then run tests with karma

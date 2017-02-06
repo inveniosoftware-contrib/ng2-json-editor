@@ -4,14 +4,14 @@ import { AutocompletionResult } from './autocompletion-result';
 export interface AutocompletionConfig {
   /**
    * Remote source url that returns the autocompletion results.
-   * 
+   *
    * - Query string is appended to url, that's why it should end like .../foo?bar=.
    */
   url?: string;
 
   /**
    * Path to array of autocompletion results in response from the url, separated by dot `.`.
-   * 
+   *
    * - Must point to array of objects which have a property called `text`.
    */
   path?: string;

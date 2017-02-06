@@ -20,9 +20,8 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
  */
 
-import { element, by } from 'protractor/globals';
+import { element, by, ElementFinder } from 'protractor';
 import { Ng2JsonEditorPage } from '../app.po';
-import {ElementFinder} from 'protractor';
 
 export class ShortcutActionPage extends Ng2JsonEditorPage {
 

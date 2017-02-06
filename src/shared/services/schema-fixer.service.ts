@@ -33,12 +33,12 @@ export class SchemaFixerService {
 
   /**
    * Fixes schema to be in a format that expected by json-editor
-   * 
+   *
    * @param {Object} schema - json schema
    * @param {Object} config - schema specific options
    * @return {Object} - fixed schema
    */
-  fixSchema(schema: Object, config: Object): Object {
+  fixSchema(schema: Object, config?: Object): Object {
     if (config) {
       this.enrichSchemaWithConfig(schema, config);
     }
@@ -49,7 +49,7 @@ export class SchemaFixerService {
   /**
    * Enriches given schema with given configuration objects
    * puts config into correct places in schema.
-   * 
+   *
    * @param {Object} schema - json schema
    * @param {Object} config - schema specific options
    */

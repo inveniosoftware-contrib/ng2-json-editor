@@ -32,7 +32,7 @@ import { SearchableDropdownComponent } from '../searchable-dropdown';
 import { AutocompleteInputComponent } from '../autocomplete-input';
 import { PrimitiveFieldComponent } from './primitive-field.component';
 
-import { ErrorsToMessagesHtmlPipe, FilterByExpressionPipe } from '../shared/pipes';
+import { FilterByExpressionPipe } from '../shared/pipes';
 
 import {
   AppGlobalsService,
@@ -45,11 +45,11 @@ import {
 /**
  * Change input html element value
  * and dispatches/fires an input event.
- * 
+ *
  * Used to mock changing element value on UI.
- * 
+ *
  * TODO: create a test helper class for this kind of functions!
- * 
+ *
  * @param {HTMLInputElement} el - <textarea> or <input> html element
  * @param {string} value - new value to be set to el.value
  */
@@ -72,14 +72,13 @@ describe('PrimitiveFieldComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        ErrorsToMessagesHtmlPipe,
         FilterByExpressionPipe,
         AutocompleteInputComponent,
         SearchableDropdownComponent,
         PrimitiveFieldComponent
       ],
       imports: [
-        Ng2BootstrapModule
+        Ng2BootstrapModule.forRoot()
       ],
       providers: [
         AppGlobalsService,
@@ -95,7 +94,7 @@ describe('PrimitiveFieldComponent', () => {
     fixture = TestBed.createComponent(PrimitiveFieldComponent);
     component = fixture.componentInstance;
 
-    // force component to render completely by setting @Input() manually 
+    // force component to render completely by setting @Input() manually
     component.value = 'defaultStringValue';
     component.path = ['default', 'path'];
     component.schema = {
@@ -110,7 +109,7 @@ describe('PrimitiveFieldComponent', () => {
   });
 
   it('should be binded to view', () => {
-    /** 
+    /**
      * inputEl.value is not updated in test environment
     let modelValue = 'modelValue';
     component.value = modelValue;
