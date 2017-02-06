@@ -1,4 +1,5 @@
 {
+  "__comment": "This is only used by IDE to avoid tsc errors",
   "compilerOptions": {
     "baseUrl": "../",
     "declaration": true,
@@ -9,23 +10,6 @@
       "es6",
       "dom"
     ],
-    "paths": {
-      "@angular/core": [
-        "../node_modules/@angular/core"
-      ],
-      "@angular/common": [
-        "../node_modules/@angular/common"
-      ],
-      "@angular/forms": [
-        "../node_modules/@angular/forms"
-      ],
-      "@angular/http": [
-        "../node_modules/@angular/http"
-      ],
-      "rxjs/*": [
-        "../node_modules/rxjs/*"
-      ]
-    },
     "rootDir": "../",
     "module": "es6",
     "moduleResolution": "node",
@@ -40,14 +24,5 @@
     "typeRoots": [
       "../node_modules/@types"
     ]
-  },
-  "files": [
-    "../index.ts"
-  ],
-  "exclude": [
-    "**/*.spec.ts"
-  ],
-  "angularCompilerOptions": {
-    "strictMetadataEmit": true
   }
 }
