@@ -22,7 +22,7 @@ npm install --save ng2-json-editor
 ### Import
 
 ```typescript
-import { JsonEditorModule } from 'ng2-json-editor/ng2-json-editor';
+import { JsonEditorModule } from 'ng2-json-editor';
 ```
 
 Then add it to your module's `imports`.
@@ -55,13 +55,13 @@ removes `pattern` and `format` rules.
 
 ## Quick start
 
-**Make sure you have Node version >= 4.0 and NPM >= 3**
+**Make sure you have Node version >= 6.9 and NPM >= 3**
 
 ### Setup
 
 ```bash
 # clone our repo or alternatively your fork
-git clone https://github.com/inspirehep/ng2-json-editor.git
+git clone https://github.com/inveniosoftware-contrib/ng2-json-editor.git
 
 # change directory to our repo
 cd ng2-json-editor
@@ -83,10 +83,11 @@ gulp watch
 # build the editor and start the server with example app
 npm start
 
-# test
-gulp test
-# or
-ng test --watch=false
+# run unit tests
+npm run test:unit
+
+# run e2e tests (an instance should be running)
+npm run test:e2e
 
 # test and watch (for usually debugging tests)
 ng test
