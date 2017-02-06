@@ -25,6 +25,7 @@ before_install:
 before_deploy: 
   - npm run build
   - npm run copy
+  - "cd dist"
 after_success:
   - npm run coveralls
 deploy:
