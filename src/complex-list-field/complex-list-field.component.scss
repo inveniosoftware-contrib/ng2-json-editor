@@ -34,3 +34,12 @@ $navigator-item-padding: 13px;
 .borderless {
   border: none;
 }
+
+.find-button {
+  color: darkslategray;
+  opacity: 0.83;
+  
+  .fa-search {
+    opacity: 0.83;
+  }
+}

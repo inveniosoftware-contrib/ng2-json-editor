@@ -5,7 +5,9 @@
       <div [ngSwitch]="preview.type">
         <div *ngSwitchCase="'html'" class="preview-container">
           <template tabHeading>
-            <span class="preview-link" (click)="openUrlInNewTab(preview.url)">&#10138;</span>
+            <span class="preview-link" (click)="openUrlInNewTab(preview.url)">
+              <i class="fa fa-external-link"></i>
+            </span>
           </template>
           <html-view [url]="preview.url"></html-view>
         </div>
