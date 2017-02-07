@@ -2,16 +2,16 @@
   <div class="modal-dialog modal-lg">
     <div *ngIf="options" class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" (click)="modal.hide()">
-          <span>&times;</span>
-        </button>
+        <button type="button" class="close" (click)="modal.hide()">&times;</button>
         <h4 class="modal-title">{{options.title}}</h4>
       </div>
       <div class="modal-body">
         <div [innerHTML]="options.bodyHtml"></div>
         <div [ngSwitch]="options.type">
           <div *ngSwitchCase="'confirm'">
-            <button class="btn btn-default" (click)="options.onConfirm();">Confirm</button>
+            <button class="btn btn-default" (click)="options.onConfirm();">
+              Confirm <i class="fa fa-check"></i>
+            </button>
           </div>
         </div>
       </div>

@@ -19,6 +19,14 @@ Here is a live example of ng2-json-editor: [https://inveniosoftware-contrib.gith
 npm install --save ng2-json-editor
 ```
 
+#### Style Requirements
+
+- [Bootstrap](http://getbootstrap.com/)
+- [Font Awesone](http://fontawesome.io/)
+
+Styles above must be available globally in your application, if you are using [Angular CLI](https://cli.angular.io/) you can have a look at example-app's [angular-cli.json](./angular-cli.json) to
+see how to include those styles in your application. 
+
 ### Import
 
 ```typescript

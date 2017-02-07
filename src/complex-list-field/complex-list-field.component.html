@@ -5,7 +5,9 @@
       <td class="form-group navigator-item-left">
         <div class="input-group input-group-sm">
           <span class="input-group-btn">
-            <button type="button" class="btn btn-default" (click)="onFindClick()">⚲</button>
+            <button type="button" class="btn btn-default find-button" (click)="onFindClick()">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
           </span>
           <input type="search" class="form-control" [(ngModel)]="findExpression" (keypress)="onFindInputKeypress($event.key)" placeholder="Find"
           />
@@ -60,12 +62,17 @@
         <!-- ADD-FIELD-FROM-SCHEMA, UP/DOWN and DELETE buttons for each row group -->
         <tr *ngIf="values.size > 0">
           <td class="button-holder">
-            <add-field-dropdown [fields]="keys.get(i)" [pathString]="getElementPathString(pIndex)" (onFieldAdd)="onFieldAdd(i, $event)" [schema]="schema.items.properties">+</add-field-dropdown>
+            <add-field-dropdown [fields]="keys.get(i)" [pathString]="getElementPathString(pIndex)" (onFieldAdd)="onFieldAdd(i, $event)"
+              [schema]="schema.items.properties">+</add-field-dropdown>
           </td>
           <td class="button-holder button-holder-complex-list-actions">
             <button type="button" class="editor-btn-delete editor-btn-delete-complex" (click)="deleteElement(pIndex)">&times;</button>
-            <button *ngIf="pIndex > 0" type="button" class="editor-btn-move-up editor-btn-move-up-complex" (click)="moveElement(pIndex, -1)">▲</button>
-            <button *ngIf="pIndex < (values.size - 1)" class="editor-btn-move-down editor-btn-move-down-complex" type="button" (click)="moveElement(pIndex, 1)">▼</button>
+            <button *ngIf="pIndex > 0" type="button" class="editor-btn-move-up editor-btn-move-up-complex" (click)="moveElement(pIndex, -1)">
+              <i class="fa fa-chevron-up" aria-hidden="true"></i>
+            </button>
+            <button *ngIf="pIndex < (values.size - 1)" class="editor-btn-move-down editor-btn-move-down-complex" type="button" (click)="moveElement(pIndex, 1)">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </button>
           </td>
         </tr>
       </table>

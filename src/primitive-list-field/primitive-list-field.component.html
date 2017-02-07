@@ -8,9 +8,15 @@
 
         <!-- UP/DOWN and DELETE buttons for each row -->
         <td *ngIf="values.size > 0" class="button-holder">
-          <button type="button" class="editor-btn-delete" (click)="deleteElement(i)">&times;</button>
-          <button *ngIf="i > 0" type="button" class="editor-btn-move-up" (click)="moveElement(i, -1)">▲</button>
-          <button *ngIf="i < (values.size - 1)" type="button" class="editor-btn-move-down" (click)="moveElement(i, 1)">▼</button>
+          <button type="button" class="editor-btn-delete" (click)="deleteElement(i)">
+            &times;
+          </button>
+          <button *ngIf="i > 0" type="button" class="editor-btn-move-up" (click)="moveElement(i, -1)">
+            <i class="fa fa-chevron-up" aria-hidden="true"></i>
+          </button>
+          <button *ngIf="i < (values.size - 1)" type="button" class="editor-btn-move-down" (click)="moveElement(i, 1)">
+            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+          </button>
         </td>
       </tr>
     </table>
