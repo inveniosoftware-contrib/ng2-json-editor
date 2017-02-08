@@ -22,9 +22,9 @@ export interface SchemaOption {
   hidden?: boolean;
 
   /**
-   * Flag to show fields on the UI, even if they aren't present in the record.
+   * Array of keys that should always be shown in UI, even if they aren't present in the record.
    */
-  alwaysShow?: boolean;
+  alwaysShow?: Array<string>;
 
   /**
    * Indicator to be used for sorting all fields on the UI. Larger priority fields appears up-most/left-most on the UI.
@@ -69,4 +69,9 @@ export interface SchemaOption {
    * - Either url and path (for remote) or source (for local) must be set.
    */
   autocompletionConfig?: AutocompletionConfig;
+
+  /**
+   * Array of keys that indicates the order in which they should be displayed in the UI.
+   */
+  order?: Array<string>;
 }

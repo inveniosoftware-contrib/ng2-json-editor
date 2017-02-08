@@ -71,6 +71,8 @@ export class SchemaFixerService {
       schema = this.fixAnyOf(schema);
     } else if (schema['allOf']) {
       schema = this.fixAllOf(schema);
+    } else if (schema['order']) {
+      schema = this.fixOrder(schema);
     }
     // schema fixes must be done above
 
@@ -83,6 +85,22 @@ export class SchemaFixerService {
     } else if (schema['items']) {
       schema['items'] = this.fixRecursively(schema['items']);
     }
+    return schema;
+  }
+
+  /**
+   * Fixes order config to assign the right priority to properties
+   */
+  private fixOrder(schema: Object): Object {
+    let order: Array<string> = schema['order'];
+    order.forEach((orderKey: string, index: number) => {
+      let priority = order.length - index;
+      if ( orderKey in schema['properties'] ) {
+        schema['properties'][orderKey]['priority'] = priority;
+      } else {
+        console.warn(`${orderKey} defined in order config does not exist in schema.`);
+      }
+    });
     return schema;
   }
 
