@@ -71,6 +71,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
 
   _record: Map<string, any>;
   previews: Array<Preview> = [];
+  isPreviewerHidden: boolean;
   keys: Set<string>;
 
   constructor(public http: Http,
