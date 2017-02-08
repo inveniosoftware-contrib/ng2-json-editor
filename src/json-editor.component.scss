@@ -17,7 +17,6 @@ body, html {
   .middle {
     height: 100%;
     overflow: auto;
-    max-width: 900px;
   }
 
   .right {
@@ -249,4 +248,18 @@ div.admin-mode {
 
 .value-container {
   background-color: $table-editable-rows-background !important;
+}
+
+.narrowColumn4 {
+  width: 8.33333% !important;
+}
+
+.widerColumn6 {
+  width: 75% !important;
+}
+
+button.btn-toggle {
+  float: right;
+  margin-top: 5px;
+  margin-right: 5px;
 }

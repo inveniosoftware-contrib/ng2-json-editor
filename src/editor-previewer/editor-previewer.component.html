@@ -1,6 +1,5 @@
 <div>
-  <button type="button" class="btn toggle" (click)="hidden = !hidden">{{toggleButtonActionName}}</button>
-  <tabset [hidden]="hidden">
+  <tabset>
     <tab *ngFor="let preview of previews trackBy:trackByFunction" [heading]="preview.name">
       <div [ngSwitch]="preview.type">
         <div *ngSwitchCase="'html'" class="preview-container">

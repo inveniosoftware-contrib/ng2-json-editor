@@ -37,11 +37,6 @@ import { Preview } from '../shared/interfaces';
 export class EditorPreviewerComponent extends AbstractTrackerComponent {
 
   @Input() previews: Array<Preview>;
-  hidden = false;
-
-  get toggleButtonActionName(): string {
-    return this.hidden ? 'Show' : 'Hide';
-  }
 
   openUrlInNewTab(url: string) {
     window.open(url);
