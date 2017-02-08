@@ -1,0 +1,257 @@
+{
+  "$schema": "http://json-schema.org/schema#", 
+  "noAdditionalProperties": true, 
+  "properties": {
+    "coden": {
+      "items": {
+        "pattern": "^[0-9\\.A-Z_-]{4,6}$", 
+        "title": "CODEN", 
+        "type": "string"
+      }, 
+      "title": "CODEN", 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "deleted": {
+      "type": "boolean"
+    }, 
+    "history": {
+      "title": "History", 
+      "type": "string"
+    }, 
+    "issn": {
+      "items": {
+        "noAdditionalProperties": true, 
+        "properties": {
+          "comment": {
+            "description": "Further information about type.", 
+            "type": "string"
+          }, 
+          "medium": {
+            "description": "Medium (type) of the ISSN.", 
+            "enum": [
+              "online", 
+              "print"
+            ], 
+            "type": "string"
+          }, 
+          "value": {
+            "pattern": "^\\d{4}-\\d{3}[\\dX]$", 
+            "type": "string"
+          }
+        }, 
+        "required": [
+          "value"
+        ], 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "journal_handling": {
+      "title": "Journal handling", 
+      "type": "string"
+    }, 
+    "journal_titles": {
+      "items": {
+        "$schema": "http://json-schema.org/schema#", 
+        "noAdditionalProperties": true, 
+        "properties": {
+          "source": {
+            "type": "string"
+          }, 
+          "subtitle": {
+            "type": "string"
+          }, 
+          "title": {
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "license": {
+      "enum": [
+        "probably", 
+        "it", 
+        "is", 
+        "needed"
+      ], 
+      "title": "License", 
+      "type": "string"
+    }, 
+    "license_urls": {
+      "items": {
+        "$schema": "http://json-schema.org/schema#", 
+        "noAdditionalProperties": true, 
+        "properties": {
+          "description": {
+            "type": "string"
+          }, 
+          "value": {
+            "format": "url", 
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "new_record": {
+      "$schema": "http://json-schema.org/schema#", 
+      "noAdditionalProperties": true, 
+      "properties": {
+        "$ref": {
+          "description": "URL to the referenced resource", 
+          "format": "url", 
+          "type": "string"
+        }
+      }, 
+      "required": [
+        "$ref"
+      ], 
+      "type": "object"
+    }, 
+    "nonpublic_note": {
+      "title": "Non public note", 
+      "type": "string"
+    }, 
+    "peer_reviewed": {
+      "title": "Is the journal peer-reviewed?", 
+      "type": "boolean"
+    }, 
+    "public_note": {
+      "title": "Publisher", 
+      "type": "string"
+    }, 
+    "publisher": {
+      "items": {
+        "type": "string"
+      }, 
+      "title": "Publisher", 
+      "type": "array"
+    }, 
+    "relation": {
+      "noAdditionalProperties": true, 
+      "properties": {
+        "curated_relation": {
+          "title": "Is the relation curated?", 
+          "type": "boolean"
+        }, 
+        "issn": {
+          "pattern": "^\\d{4}-\\d{3}[\\dX]$", 
+          "title": "ISSN of the related record", 
+          "type": "string"
+        }, 
+        "record": {
+          "$schema": "http://json-schema.org/schema#", 
+          "noAdditionalProperties": true, 
+          "properties": {
+            "$ref": {
+              "description": "URL to the referenced resource", 
+              "format": "url", 
+              "type": "string"
+            }
+          }, 
+          "required": [
+            "$ref"
+          ], 
+          "type": "object"
+        }, 
+        "relation": {
+          "description": "FIXME: as usual, shall we capture only superseeded records and derive the symmetric relation automatically?", 
+          "enum": [
+            "superseded record", 
+            "superseeding record"
+          ], 
+          "title": "Type of relation", 
+          "type": "string"
+        }
+      }, 
+      "required": [
+        "relation", 
+        "issn"
+      ], 
+      "title": "Relation", 
+      "type": "object"
+    }, 
+    "self": {
+      "$schema": "http://json-schema.org/schema#", 
+      "noAdditionalProperties": true, 
+      "properties": {
+        "$ref": {
+          "description": "URL to the referenced resource", 
+          "format": "url", 
+          "type": "string"
+        }
+      }, 
+      "required": [
+        "$ref"
+      ], 
+      "type": "object"
+    }, 
+    "short_titles": {
+      "items": {
+        "$schema": "http://json-schema.org/schema#", 
+        "noAdditionalProperties": true, 
+        "properties": {
+          "source": {
+            "type": "string"
+          }, 
+          "subtitle": {
+            "type": "string"
+          }, 
+          "title": {
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "title_variants": {
+      "items": {
+        "$schema": "http://json-schema.org/schema#", 
+        "noAdditionalProperties": true, 
+        "properties": {
+          "source": {
+            "type": "string"
+          }, 
+          "subtitle": {
+            "type": "string"
+          }, 
+          "title": {
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }, 
+    "urls": {
+      "items": {
+        "$schema": "http://json-schema.org/schema#", 
+        "noAdditionalProperties": true, 
+        "properties": {
+          "description": {
+            "type": "string"
+          }, 
+          "value": {
+            "format": "url", 
+            "type": "string"
+          }
+        }, 
+        "type": "object"
+      }, 
+      "type": "array", 
+      "uniqueItems": true
+    }
+  }, 
+  "title": "Journal", 
+  "type": "object"
+}

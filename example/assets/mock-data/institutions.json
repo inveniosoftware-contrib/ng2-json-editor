@@ -1,0 +1,200 @@
+{
+  "ICN": [
+    "Excepteur veniam dolore ea",
+    "deserunt aliqua incididunt aliq",
+    "anim",
+    "dolore"
+  ],
+  "address": [
+    {
+      "city": "deserunt",
+      "country_code": "GB",
+      "latitude": -39663177,
+      "longitude": -22281658,
+      "original address": "laborum cupidatat eu nisi est",
+      "postal_code": "exercitation commodo adipisicing reprehenderit dolore",
+      "state": "ipsum consequat dolor enim ex"
+    },
+    {
+      "city": "amet irure ullamco eu culpa",
+      "country_code": "NT",
+      "latitude": 82361131,
+      "longitude": 87368296,
+      "original address": "eu et dolore in",
+      "postal_code": "reprehenderit occaecat pariatur",
+      "state": "mollit do Ut in incididunt"
+    },
+    {
+      "city": "incididunt cillum tempor",
+      "country_code": "PG",
+      "latitude": -25596441,
+      "longitude": -19424458,
+      "original address": "quis",
+      "postal_code": "in",
+      "state": "labore in anim"
+    },
+    {
+      "city": "i",
+      "country_code": "LI",
+      "latitude": 60759164,
+      "longitude": -27431765,
+      "original address": "commodo laborum",
+      "postal_code": "aliquip minim Lorem ut dolor",
+      "state": "tempor anim Excepteur mollit aute"
+    },
+    {
+      "city": "aliqua Ut sed",
+      "country_code": "CR",
+      "latitude": -92616445,
+      "longitude": 38587160,
+      "original address": "velit eiusmod",
+      "postal_code": "non in Excepteur ut ad",
+      "state": "et consectetur deserunt ipsum"
+    }
+  ],
+  "core": true,
+  "deleted": false,
+  "department": [
+    "dolore",
+    "enim",
+    "id laboris enim adipisicing",
+    "consectetur reprehenderit"
+  ],
+  "department_acronym": "adipisicing",
+  "extra_words": [
+    "Lorem labore nostrud",
+    "consequat Excepteur",
+    "eu"
+  ],
+  "field_activity": [
+    "Company",
+    "University"
+  ],
+  "hidden_notes": [
+    "proident irure sed",
+    "amet tempor"
+  ],
+  "historical_data": [
+    "officia sint",
+    "ipsum"
+  ],
+  "ids": [
+    {
+      "type": "HAL",
+      "value": "3"
+    },
+    {
+      "type": "HAL",
+      "value": "02043107025"
+    }
+  ],
+  "inspire_categories": [
+    {
+      "source": "user",
+      "term": "Theory-Nucl"
+    },
+    {
+      "source": "undefined",
+      "term": "Computing"
+    },
+    {
+      "source": "curator",
+      "term": "Computing"
+    },
+    {
+      "source": "user",
+      "term": "Theory-HEP"
+    },
+    {
+      "source": "arxiv",
+      "term": "Astrophysics"
+    }
+  ],
+  "institution": [
+    "exercitation commodo eu ex",
+    "enim in sint",
+    "dolore",
+    "in enim"
+  ],
+  "institution_acronym": "velit ullamco incididunt mol",
+  "location": {
+    "latitude": -34224204,
+    "longitude": -84039479
+  },
+  "name_variants": [
+    {
+      "source": "INSPIRE",
+      "value": [
+        "amet mollit",
+        "eiusmod et Lorem Duis Ut",
+        "reprehenderit aliqua nostrud adipisicing",
+        "mollit adipisicing",
+        "aliquip Duis sunt"
+      ]
+    },
+    {
+      "source": "DESY_AFF",
+      "value": [
+        "Ut officia ut",
+        "",
+        "ut"
+      ]
+    },
+    {
+      "source": "DESY_AFF",
+      "value": [
+        "labore dolore sunt ullamco id",
+        "cupidatat Lorem ad",
+        "irure",
+        "adipisicing Lorem esse aute"
+      ]
+    },
+    {
+      "source": "ADS",
+      "value": [
+        "cupidatat",
+        "id ex exercitation",
+        "ipsum in Lorem sint",
+        "deserunt"
+      ]
+    }
+  ],
+  "new_record": {
+    "$ref": "http://1E=0?2"
+  },
+  "non_public_notes": [
+    "culpa"
+  ],
+  "public_notes": [
+    "reprehenderit eiusmod ea",
+    "id laboris"
+  ],
+  "related_institutes": [
+    {
+      "curated_relation": false,
+      "name": "proident elit dolor",
+      "record": {
+        "$ref": "http://1["
+      },
+      "relation_type": "superseded"
+    },
+    {
+      "curated_relation": true,
+      "name": "et nostrud",
+      "record": {
+        "$ref": "http://1FY)ZA"
+      },
+      "relation_type": "predecessor"
+    }
+  ],
+  "self": {
+    "$ref": "http://17"
+  },
+  "time_zone": "one",
+  "urls": [
+    {
+      "description": "",
+      "value": "http://1)4"
+    }
+  ]
+}

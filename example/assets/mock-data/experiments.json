@@ -1,0 +1,252 @@
+{
+  "accelerator": "mollit sed officia cil",
+  "affiliations": [
+    {
+      "curated_relation": true,
+      "name": "enim Excepteur eiusmod id",
+      "record": {
+        "$ref": "http://1"
+      }
+    },
+    {
+      "curated_relation": false,
+      "name": "commodo",
+      "record": {
+        "$ref": "http://1YWt/;<SJi"
+      }
+    },
+    {
+      "curated_relation": false,
+      "name": "minim Excepteur consequat ut",
+      "record": {
+        "$ref": "http://1D1R@ "
+      }
+    }
+  ],
+  "collaboration": "velit pariatur",
+  "collaboration_alternative_names": [
+    "sunt aute labore ea",
+    "Lorem nulla eu qui magna",
+    "eu in pariatur qui quis",
+    "proident ipsum sit fugiat culpa",
+    "ipsum "
+  ],
+  "contact_details": [
+    {
+      "email": "ABGSplUkIYKccz@uWFZKQZLUFaWJdHLADPPTeAlbhV.sgnh",
+      "name": "laboris dolor tempor Ut sed"
+    },
+    {
+      "email": "bVucEOBVajosS@MqlhBxHjo.jb",
+      "name": "officia Lorem elit"
+    },
+    {
+      "email": "Dhy1YFdgI4x3JEt@hjtPThIfGaBonS.ujxc",
+      "name": "in Duis deserunt quis ex"
+    },
+    {
+      "email": "P84JG@ZkKjywlBbwqXom.glx",
+      "name": "Lorem magna"
+    }
+  ],
+  "curated_relation": true,
+  "date_approved": "dddd-dd-dd",
+  "date_cancelled": "dddd-dd-dd",
+  "date_completed": "dddd-dd-dd",
+  "date_proposed": "dddd-dd-dd",
+  "date_started": "dddd-dd-dd",
+  "deleted": false,
+  "description": [
+    "laboris labore ea anim ut",
+    "incididunt quis",
+    "laborum est non",
+    "enim e"
+  ],
+  "experiment_names": [
+    {
+      "source": "fugiat",
+      "subtitle": "velit Duis ad",
+      "title": "eiusmod in esse ullamco elit"
+    }
+  ],
+  "free_keywords": [
+    "enim labore",
+    "et"
+  ],
+  "hidden_note": "est quis",
+  "inspire_categories": [
+    {
+      "source": "curator",
+      "term": "Experiment-Nucl"
+    },
+    {
+      "source": "curator",
+      "term": "Computing"
+    }
+  ],
+  "new_record": {
+    "$ref": "http://1*,K"
+  },
+  "nonpublic_note": "nulla ut",
+  "other_experiment_names": [
+    {
+      "source": "ut",
+      "subtitle": "laboris",
+      "title": "eiusmod do labore consequat velit"
+    },
+    {
+      "source": "deserunt exercitation consequat proident",
+      "subtitle": "proident laborum exercitation",
+      "title": "nostrud nulla"
+    },
+    {
+      "source": "deserunt tempor consectetur Ut",
+      "subtitle": "Excepteur commodo esse culpa",
+      "title": "pariatur Excepteur dolore"
+    }
+  ],
+  "public_note": "veniam officia aliqua aliquip nisi",
+  "related_experiments": [
+    {
+      "curated_relation": false,
+      "name": "mollit",
+      "record": {
+        "$ref": "http://1KnFy[+eEf"
+      },
+      "relation": "successor"
+    },
+    {
+      "curated_relation": true,
+      "name": "velit",
+      "record": {
+        "$ref": "http://1K4Q"
+      },
+      "relation": "predecessor"
+    }
+  ],
+  "self": {
+    "$ref": "http://1SZp@D3[!0"
+  },
+  "spokespersons": [
+    {
+      "curated_relation": true,
+      "current": false,
+      "end_date": "dddd-dd-dd",
+      "ids": [
+        {
+          "type": "KAKEN",
+          "value": "KAKEN-87182593"
+        }
+      ],
+      "name": "laborum in ad",
+      "record": {
+        "$ref": "http://1<}+u2Tr"
+      },
+      "start_date": "dddd-dd-dd"
+    },
+    {
+      "curated_relation": true,
+      "current": true,
+      "end_date": "dddd-dd-dd",
+      "ids": [
+        {
+          "type": "KAKEN",
+          "value": "KAKEN-76028386"
+        }
+      ],
+      "name": "est dolore",
+      "record": {
+        "$ref": "http://1)qH[Xg:(X]"
+      },
+      "start_date": "dddd-dd-dd"
+    },
+    {
+      "curated_relation": false,
+      "current": false,
+      "end_date": "dddd-dd-dd",
+      "ids": [
+        {
+          "type": "KAKEN",
+          "value": "KAKEN-23996332"
+        },
+        {
+          "type": "KAKEN",
+          "value": "KAKEN-01352928"
+        },
+        {
+          "type": "KAKEN",
+          "value": "KAKEN-23136290"
+        },
+        {
+          "type": "KAKEN",
+          "value": "KAKEN-57118831"
+        }
+      ],
+      "name": "eiusmod do proident id",
+      "record": {
+        "$ref": "http://1V5a6"
+      },
+      "start_date": "dddd-dd-dd"
+    },
+    {
+      "curated_relation": true,
+      "current": true,
+      "end_date": "dddd-dd-dd",
+      "ids": [
+        {
+          "type": "KAKEN",
+          "value": "KAKEN-81751386"
+        },
+        {
+          "type": "KAKEN",
+          "value": "KAKEN-12336793"
+        },
+        {
+          "type": "KAKEN",
+          "value": "KAKEN-73661888"
+        }
+      ],
+      "name": "commodo anim culpa dolor",
+      "record": {
+        "$ref": "http://1/J="
+      },
+      "start_date": "dddd-dd-dd"
+    }
+  ],
+  "titles": [
+    {
+      "source": "in fugiat ad enim consectetur",
+      "subtitle": "aute nulla exercitation do dolor",
+      "title": "cillum Lorem fugiat"
+    },
+    {
+      "source": "commodo eiusmod consequat sunt",
+      "subtitle": "sunt dolor",
+      "title": "aliquip ex pariatur Lorem ea"
+    },
+    {
+      "source": "minim",
+      "subtitle": "exercitation eiusm",
+      "title": "qui"
+    },
+    {
+      "source": "irure",
+      "subtitle": "nulla",
+      "title": "laborum Ut Excepteur"
+    }
+  ],
+  "urls": [
+    {
+      "description": "volupt",
+      "value": "http://1|sYH1"
+    },
+    {
+      "description": "commodo dolor incididunt id",
+      "value": "http://1!h7H?9=k"
+    },
+    {
+      "description": "ad nulla",
+      "value": "http://1BKGlj?2\""
+    }
+  ]
+}
