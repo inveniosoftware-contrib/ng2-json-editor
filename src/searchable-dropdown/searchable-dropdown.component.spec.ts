@@ -67,7 +67,9 @@ describe('SearchableDropdownComponent', () => {
       s: 'shortcut'
     };
 
-    // input change, to update component.prefix;
+    // open the dropdown
+    component.status.isOpen = true;
+    // input change, to update component.expression;
     inputEl.value = 's';
     inputEl.dispatchEvent(new Event('input'));
     fixture.detectChanges();
@@ -80,7 +82,7 @@ describe('SearchableDropdownComponent', () => {
     expect(component.value).toEqual('shortcut');
   });
 
-  it('should show all items when clicked if prefix is empty', () => {
+  it('should show all items when clicked if expression is empty', () => {
     // set enum.items
     let items = ['First', 'Second'];
     component.items = items;
@@ -92,15 +94,16 @@ describe('SearchableDropdownComponent', () => {
     expect(dropdownItems).toEqual(items);
   });
 
-  it('should show filtered items by pipe if prefix is not empty', () => {
+  it('should show filtered items by pipe if expression is not empty', () => {
     component.items = ['a1', 'a2', 'b1'];
-    let itemsStartsWithA = ['a1', 'a2'];
+    let itemsWithA = ['a1', 'a2'];
+    component.status.isOpen = true;
     inputEl.value = 'a';
     inputEl.dispatchEvent(new Event('input'));
     fixture.detectChanges();
     let dropdownItems = Array.prototype
       .slice.call(nativeEl.querySelectorAll('.dropdown-item'))
       .map((item: HTMLElement) => item.textContent);
-    expect(dropdownItems).toEqual(itemsStartsWithA);
+    expect(dropdownItems).toEqual(itemsWithA);
   });
 });

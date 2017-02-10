@@ -217,7 +217,7 @@ div.admin-mode {
 
 .disableEventsClass {
   pointer-events: none;
-  input,button,textarea,a {
+  input, button, textarea, a, i, span {
     opacity: .5;
   }
 }

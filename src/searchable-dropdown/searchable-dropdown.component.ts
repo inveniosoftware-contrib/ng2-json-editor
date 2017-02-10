@@ -20,7 +20,7 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'searchable-dropdown',
@@ -30,35 +30,56 @@ import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from 
   templateUrl: './searchable-dropdown.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchableDropdownComponent {
+export class SearchableDropdownComponent implements OnInit {
 
   @Input() items: Array<string>;
   @Input() shortcutMap: Object;
   @Input() value: string;
-  @Input() tabindex: string;
+  @Input() tabIndex: number;
+  @Input() placeholder: string;
   expression = '';
   status: { isOpen: boolean } = { isOpen: false };
 
-  @Output() onSelect: EventEmitter<string> = new EventEmitter<string>();
+  @Output() onSelect = new EventEmitter<string>();
 
-  onExpressionChange(expression: string) {
-    this.expression = expression;
+  ngOnInit() {
+    this.placeholder = this.value || this.placeholder || '';
+  }
+
+  get expressionOrValue(): string {
+    return this.status.isOpen ? this.expression : this.value;
+  }
+
+  set expressionOrValue(expressionOrValue: string) {
+    if (this.status.isOpen) {
+      this.expression = expressionOrValue;
+    } else {
+      this.value = expressionOrValue;
+    }
   }
 
   onItemClick(item: string) {
     this.value = item;
-    this.expression = '';
     this.onSelect.emit(item);
   }
 
   onKeypress(key: string) {
     if (key === 'Enter') {
-      this.status.isOpen = false;
       if (this.shortcutMap && this.shortcutMap[this.expression]) {
         this.onItemClick(this.shortcutMap[this.expression]);
       }
-      this.expression = '';
+      this.status.isOpen = false;
     }
   }
 
+  onFocus(event: FocusEvent) {
+    /**
+     * Open dropdown manually only if it was focused by `TAB`.
+     * Setting it manually all the time breaks auto-toggle by click.
+     * event.relatedTarget is set when the FocusEvent caused by `TAB`.
+     */
+    if (event.relatedTarget) {
+      this.status.isOpen = true;
+    }
+  }
 }

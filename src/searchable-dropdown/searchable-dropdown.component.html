@@ -1,6 +1,10 @@
 <div class="btn-group" dropdown keyboardNav="true" [(isOpen)]="status.isOpen">
-  <input id="simple-btn-keyboard-nav" placeholder="{{value}}" [ngModel]="expression" (ngModelChange)="onExpressionChange($event)" (keypress)="onKeypress($event.key)"  [tabIndex]="tabindex" dropdownToggle>
-  <ul class="dropdown-menu" dropdownMenu role="menu" aria-labelledby="simple-btn-keyboard-nav">
+  <div class="toggle-container">
+    <input #inputToggle [placeholder]="placeholder" [(ngModel)]="expressionOrValue" (keypress)="onKeypress($event.key)" [tabindex]="tabIndex"
+      (focus)="onFocus($event)" dropdownToggle>
+      <i class="fa fa-caret-down" (click)="inputToggle.focus()" dropdownToggle></i>
+  </div>
+  <ul class="dropdown-menu" dropdownMenu role="menu">
     <li *ngFor="let item of items | filterByExpression:expression" role="menuitem">
       <!-- href is needed for keyboard navigation -->
       <a class="dropdown-item" href="javascript:void(0)" (click)="onItemClick(item)">{{item}}</a>

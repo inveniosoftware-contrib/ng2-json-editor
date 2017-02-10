@@ -1,25 +1,26 @@
-
-$placeholder-color: #000;
-
-::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color: $placeholder-color;
-}
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color: $placeholder-color;
-   opacity: 1;
-}
-::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color: $placeholder-color;
-   opacity: 1;
-}
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color: $placeholder-color;
-}
-
 div.btn-group {
-    width: 100%;
+  width: 100%;
 }
 
 .dropdown-menu {
-    left: 0px !important;
+  left: 0px !important;
+}
+
+$input-width: 93%;
+
+.toggle-container {
+  width: 100%;
+  
+  input {
+    width: $input-width;
+  }
+
+  i {
+    width: 98 - $input-width;
+    height: 100%;
+  }
+}
+
+.dropdown-toggle {
+  box-shadow: none !important;
 }
