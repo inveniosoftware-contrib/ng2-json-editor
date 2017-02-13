@@ -26,6 +26,10 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class PathUtilService {
 
+  get separator() {
+    return '/';
+  }
+
   /**
    *
    * @param {Array<any>} path - Element's path
@@ -65,6 +69,24 @@ export class PathUtilService {
       }
     }
     return -1;
+  }
+
+  /**
+   * Converts path array `/` separated path string.
+   * Example: from ['foo', 'bar', 0] to '/foo/bar/0'
+   */
+  toPathString(path: Array<any>): string {
+    return `${this.separator}${path.join(this.separator)}`;
+  }
+
+  /**
+   * Converts `/` separated path string to path array.
+   * Example from '/foo/bar/0' to ['foo', 'bar', 0]
+   */
+  toPathArray(pathString: string): Array<any> {
+    return pathString.split(this.separator)
+      .slice(1) // remove the empty
+      .map((key) => isNaN(parseInt(key, 10)) ? key : parseInt(key, 10));
   }
 }
 

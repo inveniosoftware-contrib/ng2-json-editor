@@ -24,7 +24,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Set } from 'immutable';
 
-import { DomUtilService, EmptyValueService } from '../shared/services';
+import { DomUtilService, EmptyValueService, PathUtilService } from '../shared/services';
 
 @Component({
   selector: 'add-field-dropdown',
@@ -45,7 +45,8 @@ export class AddFieldDropdownComponent {
   expression = '';
 
   constructor(private domUtilService: DomUtilService,
-    private emptyValueService: EmptyValueService) { }
+    private emptyValueService: EmptyValueService,
+    private pathUtilService: PathUtilService) { }
 
   get disabled(): boolean {
     return Object.keys(this.schema).length === this.fields.size;
@@ -61,7 +62,7 @@ export class AddFieldDropdownComponent {
   onFieldSelect(field: string) {
     this.onFieldAdd.emit(field);
 
-    let newFieldPathString = `${this.pathString}.${field}`;
+    let newFieldPathString = `${this.pathString}${this.pathUtilService.separator}${field}`;
     setTimeout(() => this.domUtilService.focusAndSelectFirstInputChildById(newFieldPathString));
   }
 

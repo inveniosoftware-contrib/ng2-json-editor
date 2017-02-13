@@ -26,7 +26,7 @@ import { Map, Set } from 'immutable';
 
 import { AbstractFieldComponent } from '../abstract-field';
 
-import { AppGlobalsService, JsonStoreService } from '../shared/services';
+import { AppGlobalsService, JsonStoreService, PathUtilService } from '../shared/services';
 
 @Component({
   selector: 'object-field',
@@ -45,8 +45,9 @@ export class ObjectFieldComponent extends AbstractFieldComponent implements OnIn
   keys: Set<string>;
 
   constructor(public appGlobalsService: AppGlobalsService,
-    public jsonStoreService: JsonStoreService) {
-    super(appGlobalsService);
+    public jsonStoreService: JsonStoreService,
+    public pathUtilService: PathUtilService) {
+    super(appGlobalsService, pathUtilService);
   }
 
   ngOnInit() {

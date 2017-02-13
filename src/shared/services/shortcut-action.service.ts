@@ -63,7 +63,7 @@ export class ShortcutActionService {
     this.jsonStoreService.setIn(path, values.push(emptyValue));
     path.push(values.size);
     setTimeout(() => {
-      this.updateTabIndexesAndFocusElementInPath(path.join('.'));
+      this.updateTabIndexesAndFocusElementInPath(this.pathUtilService.toPathString(path));
     });
   }
 
@@ -80,10 +80,10 @@ export class ShortcutActionService {
    * @param {number} direction - Movement direction. -1 for UP, +1 for DOWN
    */
   private move(path: Array<any>, direction: number): void {
-    this.domUtilService.blurFirstInputChildById(path.join('.'));
+    this.domUtilService.blurFirstInputChildById(this.pathUtilService.toPathString(path));
     let index = this.pathUtilService.getElementIndexInForwardOrReversePath(path, false);
     path[path.length - 2] = this.moveElement(index, direction, this.pathUtilService.getNearestOrRootArrayParentInPath(path, false));
-    let pathString = path.join('.');
+    let pathString = this.pathUtilService.toPathString(path);
     setTimeout(() => {
       this.domUtilService.flashElementById(pathString);
       this.domUtilService.focusAndSelectFirstInputChildById(pathString);
@@ -110,7 +110,7 @@ export class ShortcutActionService {
 
   deleteAction(path: Array<any>) {
     // blur element before delete for ensuring that `commitValueChange` will not show again the deleted value
-    this.domUtilService.blurFirstInputChildById(path.join('.'));
+    this.domUtilService.blurFirstInputChildById(this.pathUtilService.toPathString(path));
     this.deleteElement(this.pathUtilService.getNearestOrRootArrayParentInPath(path, false),
       this.pathUtilService.getElementIndexInForwardOrReversePath(path, false));
   }
@@ -122,7 +122,7 @@ export class ShortcutActionService {
   private deleteElement(path: Array<any>, index: number) {
     let values = this.jsonStoreService.getIn(path);
     this.jsonStoreService.setIn(path, values.remove(index));
-    let pathString = `${path.join('.')}`;
+    let pathString = this.pathUtilService.toPathString(path);
     setTimeout(() => {
       this.tabIndexService.deleteElemTabIndex(pathString);
     });
@@ -149,7 +149,8 @@ export class ShortcutActionService {
       } else {
         path[path.length - 2] = values.size - Math.abs((elemIndexInPath + direction));
       }
-      this.domUtilService.focusAndSelectFirstInputChildById(path.join('.'));
+      let pathString = this.pathUtilService.toPathString(path);
+      this.domUtilService.focusAndSelectFirstInputChildById(pathString);
     }
   }
 
@@ -166,7 +167,8 @@ export class ShortcutActionService {
    * @param {number} direction - Navigation direction. -1 for LEFT, +1 for RIGHT
    */
   private navigateRightLeft(path: Array<any>, direction: number) {
-    this.domUtilService.focusRightOrLeftParentCell(path.join('.'), direction);
+    let pathString = this.pathUtilService.toPathString(path);
+    this.domUtilService.focusRightOrLeftParentCell(pathString, direction);
   }
 
   /**
@@ -197,10 +199,11 @@ export class ShortcutActionService {
       let elemIndex = this.pathUtilService.getElementIndexInForwardOrReversePath(originalPath, root);
       let valuesList = this.jsonStoreService.getIn(arrayParentPath) || List();
       let newValue = valuesList.get(elemIndex);
-      let newPathString = `${arrayParentPath.concat(elemIndex + 1).join('.')}`;
+      let newPath = arrayParentPath.concat(elemIndex + 1);
+      let newPathString = this.pathUtilService.toPathString(newPath);
       if (!root) {
         newValue = newValue.set(originalPath[originalPath.length - 1]);
-        newPathString = `${newPathString}.${originalPath[originalPath.length - 1]}`;
+        newPathString = `${newPathString}${this.pathUtilService.separator}${originalPath[originalPath.length - 1]}`;
       }
       this.jsonStoreService.setIn(arrayParentPath, valuesList.insert(elemIndex + 1, newValue));
       setTimeout(() => {

@@ -24,7 +24,7 @@ import { List } from 'immutable';
 
 import { AbstractFieldComponent } from '../abstract-field';
 
-import { JsonStoreService, AppGlobalsService, TabIndexService } from '../shared/services';
+import { JsonStoreService, AppGlobalsService, TabIndexService, PathUtilService } from '../shared/services';
 
 /**
  * Abstract component to share code of common operations of all array fields
@@ -40,8 +40,9 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
 
   constructor(public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
-    public tabIndexService: TabIndexService) {
-    super(appGlobalsService);
+    public tabIndexService: TabIndexService,
+    public pathUtilService: PathUtilService) {
+    super(appGlobalsService, pathUtilService);
   }
   /**
    * @param {number} index - Index of the element that is moved
@@ -65,9 +66,9 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
   deleteElement(index: number) {
     this.jsonStoreService.setIn(this.path, this.values.remove(index));
     this.values = this.jsonStoreService.getIn(this.path);
-    let pathString = `${this.path.join('.')}.${index}`;
+    let elementPathString = this.getElementPathString(index);
     setTimeout(() => {
-      this.tabIndexService.deleteElemTabIndex(pathString);
+      this.tabIndexService.deleteElemTabIndex(elementPathString);
     });
   }
 
@@ -79,7 +80,7 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
   }
 
   getElementPathString(index: number): string {
-    return `${this.pathString}.${index}`;
+    return `${this.pathString}${this.pathUtilService.separator}${index}`;
   }
 
 }

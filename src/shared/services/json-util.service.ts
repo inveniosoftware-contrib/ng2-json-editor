@@ -22,14 +22,18 @@
 
 import { Injectable } from '@angular/core';
 
+import { PathUtilService } from './path-util.service';
+
 @Injectable()
 export class JsonUtilService {
+
+  constructor(private pathUtilService: PathUtilService) { }
 
   /**
    * Returns value of the property located in dot separated path of json.
    */
   getValueInPath(json: any, path: string): any {
-    let pathElements = path.split('.');
+    let pathElements = this.pathUtilService.toPathArray(path);
     let value = json;
     pathElements.forEach(pathElement => {
       value = value[pathElement];

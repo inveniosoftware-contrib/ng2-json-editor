@@ -34,7 +34,8 @@ import {
   ComponentTypeService,
   JsonStoreService,
   SchemaValidationService,
-  TabIndexService
+  TabIndexService,
+  PathUtilService
 } from '../shared/services';
 
 @Component({
@@ -57,8 +58,9 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     public componentTypeService: ComponentTypeService,
     public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
-    public tabIndexService: TabIndexService) {
-    super(appGlobalsService);
+    public tabIndexService: TabIndexService,
+    public pathUtilService: PathUtilService) {
+    super(appGlobalsService, pathUtilService);
   }
 
   get valueType(): string {

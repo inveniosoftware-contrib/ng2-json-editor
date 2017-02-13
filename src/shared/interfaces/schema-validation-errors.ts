@@ -1,5 +1,5 @@
 export interface SchemaValidationErrors {
-  [dotSeparatedPath: string]: Array<{
+  [jsonPointer: string]: Array<{
     message: string;
   }>;
 }

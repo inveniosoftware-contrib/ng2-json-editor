@@ -33,7 +33,7 @@ import { List, Map, Set } from 'immutable';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
 
-import { AppGlobalsService, JsonStoreService, TabIndexService, DomUtilService } from '../shared/services';
+import { AppGlobalsService, JsonStoreService, TabIndexService, DomUtilService, PathUtilService } from '../shared/services';
 
 import { LongListNavigatorConfig } from '../shared/interfaces';
 
@@ -64,8 +64,9 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
   constructor(public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
     public domUtilService: DomUtilService,
-    public tabIndexService: TabIndexService) {
-    super(appGlobalsService, jsonStoreService, tabIndexService);
+    public tabIndexService: TabIndexService,
+    public pathUtilService: PathUtilService) {
+    super(appGlobalsService, jsonStoreService, tabIndexService, pathUtilService);
   }
 
   ngOnInit() {
@@ -164,9 +165,8 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
 
   navigateToItem(index: number) {
     this.currentPage = this.getPageForIndex(index);
-    let itemId = this.path
-      .concat(index)
-      .join('.');
+    let itemPath = this.path.concat(index);
+    let itemId = this.pathUtilService.toPathString(itemPath);
     setTimeout(() => this.domUtilService.focusAndSelectFirstInputChildById(itemId));
   }
 

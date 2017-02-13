@@ -3,7 +3,7 @@
     <input class="wide" type="text" [(ngModel)]="prefixOrPath" (keypress)="onKeypress($event.key)" placeholder="Search or go">
     <ul class="menu-item-container">
       <li *ngFor="let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema; trackBy:trackByFunction" [hidden]="!filter(key)">
-        <tree-menu-item [label]="key" [value]="record.get(key)" [schema]="schema.properties[key]" [path]="key"></tree-menu-item>
+        <tree-menu-item [label]="key" [value]="record.get(key)" [schema]="schema.properties[key]" [path]="getChildPath(key)"></tree-menu-item>
       </li>
     </ul>
   </div>

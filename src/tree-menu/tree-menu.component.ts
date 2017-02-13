@@ -26,7 +26,7 @@ import { Map, Set } from 'immutable';
 
 import { AbstractTrackerComponent } from '../abstract-tracker';
 
-import { DomUtilService, WindowHrefService } from '../shared/services';
+import { DomUtilService, WindowHrefService, PathUtilService } from '../shared/services';
 
 @Component({
   selector: 'tree-menu',
@@ -46,7 +46,8 @@ export class TreeMenuComponent extends AbstractTrackerComponent implements OnCha
   private prefixOrPath = '';
 
   constructor(private windowHrefService: WindowHrefService,
-    private domUtilService: DomUtilService) {
+    private domUtilService: DomUtilService,
+    private pathUtilService: PathUtilService) {
     super();
   }
 
@@ -68,5 +69,9 @@ export class TreeMenuComponent extends AbstractTrackerComponent implements OnCha
       this.domUtilService.focusAndSelectFirstInputChildById(this.prefixOrPath);
       this.domUtilService.flashElementById(this.prefixOrPath);
     }
+  }
+
+  getChildPath(key: string) {
+    return `${this.pathUtilService.separator}${key}`;
   }
 }

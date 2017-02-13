@@ -21,12 +21,17 @@
  */
 
 import { Injectable } from '@angular/core';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
+
+import { PathUtilService } from './path-util.service';
 
 @Injectable()
 export class TabIndexService {
 
   private fieldTabIndexList = Array<string>();
   private fieldPathToIndexMap = {};
+
+  constructor(private pathUtilService: PathUtilService) {}
 
   // http://stackoverflow.com/a/15479354/890185
   naturalCompare(a, b) {
@@ -78,7 +83,6 @@ export class TabIndexService {
 
   getPathFromTabIndex(tabIndex: number): Array<any> {
     let path = this.fieldTabIndexList[tabIndex];
-    return path.split('.')
-      .map((key) => isNaN(parseInt(key, 10)) ? key : parseInt(key, 10));
+    return this.pathUtilService.toPathArray(path);
   }
 }
