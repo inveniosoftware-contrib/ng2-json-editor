@@ -6,6 +6,14 @@ import { JsonEditorConfig } from '../../dist';
 export class AppConfig {
   jsonEditorConfig: JsonEditorConfig = {
     schemaOptions: {
+      'authors.items': {
+        order: ['full_name', 'affiliations'],
+        alwaysShow: ['contributor_roles']
+      },
+      'authors.items.properties.contributor_roles.items': {
+        order: ['value', 'schema'],
+        alwaysShow: ['value', 'schema']
+      },
       'authors.items.properties.ids': {
         disabled: true
       },

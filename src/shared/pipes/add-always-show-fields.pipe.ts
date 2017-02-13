@@ -30,9 +30,7 @@ import { Set } from 'immutable';
 export class AddAlwaysShowFieldsPipe implements PipeTransform {
 
   transform(fields: Set<string>, schema: Object): Set<string> {
-    let schemaProps = schema['properties'];
-    let alwayShowFields = Object.keys(schemaProps)
-      .filter(prop => schemaProps[prop]['alwaysShow']);
-    return fields.union(alwayShowFields);
+    let alwaysShowFields = schema['alwaysShow'] || [];
+    return fields.union(alwaysShowFields);
   }
 }

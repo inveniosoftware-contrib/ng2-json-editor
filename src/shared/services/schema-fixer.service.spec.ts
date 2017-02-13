@@ -223,6 +223,88 @@ describe('SchemaFixerService', () => {
     expect(fixed).toEqual(expected);
   });
 
+  it('should fix order config', () => {
+    let schema = {
+      type: 'object',
+      properties: {
+        parent: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+                prop1: {
+                  type: 'string'
+              },
+                prop2: {
+                  type: 'string'
+                }
+            }
+          }
+        }
+      }
+    };
+    let config = {
+      'parent.items': {
+        order: ['prop2', 'prop1']
+      }
+    };
+    let expected = {
+      type: 'object',
+      properties: {
+        parent: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+                prop1: {
+                  type: 'string',
+                  priority: 1
+              },
+                prop2: {
+                  type: 'string',
+                  priority: 2
+                }
+            },
+            order: ['prop2', 'prop1']
+          }
+        }
+      }
+    };
+    let fixed = service.fixSchema(schema, config);
+    expect(fixed).toEqual(expected);
+  });
+
+  it('should warn user when config order key does not exist', () => {
+    let schema = {
+      type: 'object',
+      properties: {
+        parent: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+                prop1: {
+                  type: 'string'
+              },
+                prop2: {
+                  type: 'string'
+                }
+            }
+          }
+        }
+      }
+    };
+    let config = {
+      'parent.items': {
+        order: ['prop2', 'prop1', 'doesnotexist']
+      }
+    };
+    spyOn(console, 'warn');
+
+    let fixed = service.fixSchema(schema, config);
+    expect(console.warn).toHaveBeenCalledWith('doesnotexist defined in order config does not exist in schema.');
+  });
+
   it('should enrich schema with config', () => {
     let schema = {
       type: 'object',
