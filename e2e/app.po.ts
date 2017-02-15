@@ -21,6 +21,7 @@
  */
 
 import { browser, element, by } from 'protractor';
+import * as webdriver from 'selenium-webdriver';
 
 export class Ng2JsonEditorPage {
 
@@ -32,3 +33,5 @@ export class Ng2JsonEditorPage {
     return element(by.id(id));
   }
 }
+
+export type WDPromise<T> = webdriver.promise.Promise<T>;

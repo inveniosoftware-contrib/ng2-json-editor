@@ -20,16 +20,13 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
  */
 
-import { Injectable, OnDestroy } from '@angular/core';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
-
+import { Injectable } from '@angular/core';
 
 @Injectable()
-export class TabIndexService implements OnDestroy {
+export class TabIndexService {
 
   private fieldTabIndexList = Array<string>();
   private fieldPathToIndexMap = {};
-  private _tabIndexChange: ReplaySubject<any> = new ReplaySubject(1);
 
   // http://stackoverflow.com/a/15479354/890185
   naturalCompare(a, b) {
@@ -63,14 +60,12 @@ export class TabIndexService implements OnDestroy {
     for (let i = 0; i < this.fieldTabIndexList.length; i++) {
       this.fieldPathToIndexMap[this.fieldTabIndexList[i]] = i;
     }
-    this._tabIndexChange.next(1);
   }
 
-  addElemTabIndex(path: string): number {
+  addElemTabIndex(path: string) {
     this.fieldTabIndexList.push(path);
     let elemIndex = this.fieldTabIndexList.indexOf(path);
     this.fieldPathToIndexMap[path] = elemIndex;
-    return this.getElemTabIndex(path);
   }
 
   deleteElemTabIndex(path: string) {
@@ -85,13 +80,5 @@ export class TabIndexService implements OnDestroy {
     let path = this.fieldTabIndexList[tabIndex];
     return path.split('.')
       .map((key) => isNaN(parseInt(key, 10)) ? key : parseInt(key, 10));
-  }
-
-  get tabIndexChange(): ReplaySubject<Array<string>> {
-    return this._tabIndexChange;
-  }
-
-  ngOnDestroy(): void {
-    this._tabIndexChange.unsubscribe();
   }
 }

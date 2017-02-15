@@ -80,12 +80,14 @@ export class ShortcutActionService {
    * @param {number} direction - Movement direction. -1 for UP, +1 for DOWN
    */
   private move(path: Array<any>, direction: number): void {
+    this.domUtilService.blurFirstInputChildById(path.join('.'));
     let index = this.pathUtilService.getElementIndexInForwardOrReversePath(path, false);
     path[path.length - 2] = this.moveElement(index, direction, this.pathUtilService.getNearestOrRootArrayParentInPath(path, false));
     let pathString = path.join('.');
     setTimeout(() => {
       this.domUtilService.flashElementById(pathString);
       this.domUtilService.focusAndSelectFirstInputChildById(pathString);
+      this.tabIndexService.sortAndSynchronizeTabIndexes();
     });
   }
 
@@ -108,9 +110,7 @@ export class ShortcutActionService {
 
   deleteAction(path: Array<any>) {
     // blur element before delete for ensuring that `commitValueChange` will not show again the deleted value
-    (document.getElementById(path.join('.'))
-      .querySelector('input,textarea') as HTMLInputElement)
-      .blur();
+    this.domUtilService.blurFirstInputChildById(path.join('.'));
     this.deleteElement(this.pathUtilService.getNearestOrRootArrayParentInPath(path, false),
       this.pathUtilService.getElementIndexInForwardOrReversePath(path, false));
   }
