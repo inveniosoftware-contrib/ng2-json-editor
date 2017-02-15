@@ -26,7 +26,7 @@ import { AbstractTrackerComponent } from '../abstract-tracker';
 
 import { Map, Set } from 'immutable';
 
-import { DomUtilService, WindowHrefService } from '../shared/services';
+import { DomUtilService, WindowHrefService, PathUtilService } from '../shared/services';
 
 @Component({
   selector: 'tree-menu-item',
@@ -50,7 +50,8 @@ export class TreeMenuItemComponent extends AbstractTrackerComponent implements O
   private href: string;
 
   constructor(private windowHrefService: WindowHrefService,
-    private domUtilService: DomUtilService) {
+    private domUtilService: DomUtilService,
+    private pathUtilService: PathUtilService) {
     super();
   }
 
@@ -82,6 +83,10 @@ export class TreeMenuItemComponent extends AbstractTrackerComponent implements O
   get isCollapsable(): boolean {
     let schemaType = this.schema['type'];
     return (schemaType === 'object' || schemaType === 'array');
+  }
+
+  getChildPath(indexOrKey: number | string) {
+    return `${this.path}${this.pathUtilService.separator}${indexOrKey}`;
   }
 
 }

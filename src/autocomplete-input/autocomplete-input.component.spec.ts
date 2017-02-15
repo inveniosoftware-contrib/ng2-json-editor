@@ -33,7 +33,7 @@ import { Ng2BootstrapModule } from 'ng2-bootstrap';
 
 import { AutocompleteInputComponent } from '../autocomplete-input';
 
-import { RemoteAutocompletionService, JsonStoreService } from '../shared/services';
+import { RemoteAutocompletionService, JsonStoreService, PathUtilService } from '../shared/services';
 
 import { AutocompletionResult, AutocompletionConfig } from '../shared/interfaces';
 
@@ -66,7 +66,8 @@ describe('AutocompleteInputComponent', () => {
       ],
       providers: [
         { provide: RemoteAutocompletionService, useClass: MockRemoteAutocompletionService },
-        JsonStoreService
+        JsonStoreService,
+        PathUtilService
       ]
     }).compileComponents();
   }));

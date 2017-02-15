@@ -25,11 +25,13 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { AutocompletionResult, AutocompletionConfig } from '../interfaces';
+import { PathUtilService } from './path-util.service';
 
 @Injectable()
 export class RemoteAutocompletionService {
 
-  constructor(private http: Http) { }
+  constructor(private http: Http,
+    private pathUtilService: PathUtilService) { }
 
   getAutocompletionResults(options: AutocompletionConfig,
     token: string): Observable<Array<AutocompletionResult>> {
@@ -37,9 +39,8 @@ export class RemoteAutocompletionService {
       .map(res => this.mapResponseToResults(res, options.path));
   }
 
-  private mapResponseToResults(response: Response,
-    resultsPath: string): Array<AutocompletionResult> {
-    let pathElements = resultsPath.split('.');
+  private mapResponseToResults(response: Response, resultsPath: string): Array<AutocompletionResult> {
+    let pathElements = this.pathUtilService.toPathArray(resultsPath);
     let responseJson = response.json();
     pathElements.forEach(pathElement => {
       responseJson = responseJson[pathElement];

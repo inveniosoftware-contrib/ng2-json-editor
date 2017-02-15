@@ -16,15 +16,15 @@ export interface JsonEditorConfig {
    * Example:
    * ```
    * {
-   *  'anArray.items.properties.anElementProp': { ...SchemaOption... },
-   *  'anObject.properties.aProp' : { ...SchemaOption... },
-   *  'anObject.properties.anotherProp' : { ...SchemaOption... },
-   *  'anotherObject': { ...SchemaOption... },
+   *  '/anArray/items/properties/anElementProp': { ...SchemaOption... },
+   *  '/anObject/properties/aProp' : { ...SchemaOption... },
+   *  '/anObject/properties/anotherProp' : { ...SchemaOption... },
+   *  '/anotherObject': { ...SchemaOption... },
    *  ...
    * }
    * ```
    */
-  schemaOptions?: { [dotSeparatedPath: string]: SchemaOption };
+  schemaOptions?: { [jsonPointer: string]: SchemaOption };
   /**
    * Configuration for previews to be displayed in previewer (on the right side).
    */

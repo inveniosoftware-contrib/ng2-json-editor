@@ -51,4 +51,18 @@ describe('PathUtilService', () => {
     let expectedReverseIndex = 0;
     expect(pathUtilService.getElementIndexInForwardOrReversePath(path, false)).toBe(expectedReverseIndex);
   });
+
+  it('should convert path string (json-pointer) to path array', () => {
+    let pathString = '/foo/bar/0';
+    let expected = ['foo', 'bar', 0];
+    let result = pathUtilService.toPathArray(pathString);
+    expect(result).toEqual(expected);
+  });
+
+  it('should convert path array to path string (json-pointer)', () => {
+    let path = ['foo', 'bar', 0];
+    let expected = '/foo/bar/0';
+    let result = pathUtilService.toPathString(path);
+    expect(result).toEqual(expected);
+  });
 });

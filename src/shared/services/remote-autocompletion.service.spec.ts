@@ -34,6 +34,7 @@ import 'rxjs/add/observable/of';
 
 
 import { RemoteAutocompletionService } from './remote-autocompletion.service';
+import { PathUtilService } from './path-util.service';
 
 // results will be returened in body of MockHttp response.
 const mockResults = [
@@ -41,7 +42,7 @@ const mockResults = [
   { text: 'result2' }
 ];
 // path option for AutocompletionService.
-const mockOptionsPath = 'stuff.0.results';
+const mockOptionsPath = '/stuff/0/results';
 // reponse will be returned to any get request by MockHttp.
 const getResponseJson = {
   stuff: [
@@ -58,7 +59,7 @@ class MockHttp extends Http {
   }
 }
 
-describe('AutocompletionService', () => {
+describe('RemoteAutocompletionService', () => {
 
   let service: RemoteAutocompletionService;
 
@@ -68,6 +69,7 @@ describe('AutocompletionService', () => {
       providers: [
         ConnectionBackend,
         RemoteAutocompletionService,
+        PathUtilService,
         { provide: Http, useClass: MockHttp }
       ]
     });
@@ -79,7 +81,7 @@ describe('AutocompletionService', () => {
 
   it('should get autocompletion results', (done) => {
     let options = {
-      url: 'whatever.json', // ignored for test
+      url: '/whatever/json', // ignored for test
       path: mockOptionsPath,
       size: 1 // ignored for test
     };

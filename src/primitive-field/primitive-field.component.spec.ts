@@ -39,7 +39,8 @@ import {
   ComponentTypeService,
   SchemaValidationService,
   JsonStoreService,
-  TabIndexService
+  TabIndexService,
+  PathUtilService
 } from '../shared/services';
 
 /**
@@ -85,6 +86,7 @@ describe('PrimitiveFieldComponent', () => {
         ComponentTypeService,
         SchemaValidationService,
         TabIndexService,
+        PathUtilService,
         { provide: JsonStoreService, useClass: MockJsonStoreService }
       ]
     }).compileComponents();

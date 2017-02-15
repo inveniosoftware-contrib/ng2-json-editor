@@ -37,33 +37,33 @@ describe('ShortcutAction', function() {
       });
   });
 
-  it(`should add a new row under authors.0.affiliations table using 'alt+a' shortcut`, () => {
-    page.getNumberOfChildRowsbyId('authors.0.affiliations')
+  it(`should add a new row under /authors/0/affiliations table using 'alt+a' shortcut`, () => {
+    page.getNumberOfChildRowsbyId('/authors/0/affiliations')
       .then(tableRowsNum => {
-        let inputElem = page.getChildOfElementByCss(page.getElementById('authors.0.affiliations.0.value'), 'textarea');
+        let inputElem = page.getChildOfElementByCss(page.getElementById('/authors/0/affiliations/0/value'), 'textarea');
         inputElem.sendKeys(protractor.Key.chord(protractor.Key.ALT, 'a'));
-        let newTableRowsNumPromise = page.getNumberOfChildRowsbyId('authors.0.affiliations');
+        let newTableRowsNumPromise = page.getNumberOfChildRowsbyId('/authors/0/affiliations');
         expect(newTableRowsNumPromise).toEqual(tableRowsNum + 1);
       });
   });
 
   it(`should add a new row under authors table using 'mod+shift+a' shortcut`, () => {
-    page.getNumberOfChildTablesbyId('authors')
+    page.getNumberOfChildTablesbyId('/authors')
       .then(tableRowsNum => {
-        let inputElem = page.getChildOfElementByCss(page.getElementById('authors.0.affiliations.0.value'), 'textarea');
+        let inputElem = page.getChildOfElementByCss(page.getElementById('/authors/0/affiliations/0/value'), 'textarea');
         inputElem.sendKeys(protractor.Key.chord(mod, protractor.Key.SHIFT, 'a'));
-        let newTableRowsNumPromise = page.getNumberOfChildTablesbyId('authors');
+        let newTableRowsNumPromise = page.getNumberOfChildTablesbyId('/authors');
         expect(newTableRowsNumPromise).toEqual(tableRowsNum + 1);
       });
   });
 
   it(`should move row up using 'mod+shift+up' shortcut`, () => {
-    let currentFirstRowPromise = page.getValuesOfChildrenById('keywords.0');
-    let currentSecondRowPromise = page.getValuesOfChildrenById('keywords.1');
-    let currentElem = page.getChildOfElementByCss(page.getElementById('keywords.1.keyword'), 'textarea');
+    let currentFirstRowPromise = page.getValuesOfChildrenById('/keywords/0');
+    let currentSecondRowPromise = page.getValuesOfChildrenById('/keywords/1');
+    let currentElem = page.getChildOfElementByCss(page.getElementById('/keywords/1/keyword'), 'textarea');
     currentElem.sendKeys(protractor.Key.chord(mod, protractor.Key.SHIFT, protractor.Key.UP));
-    let targetFirstRowPromise = page.getValuesOfChildrenById('keywords.0');
-    let targetSecondRowPromise = page.getValuesOfChildrenById('keywords.1');
+    let targetFirstRowPromise = page.getValuesOfChildrenById('/keywords/0');
+    let targetSecondRowPromise = page.getValuesOfChildrenById('/keywords/1');
     expect(targetFirstRowPromise).toEqual(currentSecondRowPromise);
     expect(targetSecondRowPromise).toEqual(currentFirstRowPromise);
     // Test for issue of overriding the new value with the old one when moving up because of triggering the commitValueChange()
@@ -72,56 +72,56 @@ describe('ShortcutAction', function() {
   });
 
   it(`should move row down using 'mod+shift+down' shortcut`, () => {
-   let currentRowPromise = page.getValuesOfChildrenById('keywords.0');
-   let currentElem = page.getChildOfElementByCss(page.getElementById('keywords.0.keyword'), 'textarea');
+   let currentRowPromise = page.getValuesOfChildrenById('/keywords/0');
+   let currentElem = page.getChildOfElementByCss(page.getElementById('/keywords/0/keyword'), 'textarea');
    currentElem.sendKeys(protractor.Key.chord(mod, protractor.Key.SHIFT, protractor.Key.DOWN));
-   currentElem = page.getChildOfElementByCss(page.getElementById('keywords.1.keyword'), 'textarea');
+   currentElem = page.getChildOfElementByCss(page.getElementById('/keywords/1/keyword'), 'textarea');
    // Trigger move down shortcut two time in a row to test issue of not updating tabindexes correctly on sequential
    // trigger of the shortcut. As a result the shortcut was not working properly.
    currentElem.sendKeys(protractor.Key.chord(mod, protractor.Key.SHIFT, protractor.Key.DOWN));
-   let targetRowPromise = page.getValuesOfChildrenById('keywords.2');
+   let targetRowPromise = page.getValuesOfChildrenById('/keywords/2');
    expect(targetRowPromise).toEqual(currentRowPromise);
   });
 
   it(`should update tabindexes correctly of the switched rows when moving up clicking the button`, () => {
-    page.getChildOfElementByCss(page.getElementById('accelerator_experiments.1.experiment'), 'textarea')
+    page.getChildOfElementByCss(page.getElementById('/accelerator_experiments/1/experiment'), 'textarea')
       .getAttribute('tabIndex')
       .then(currentTabindex => {
-        page.getChildOfElementByCss( page.getElementById('accelerator_experiments.1'), '.editor-btn-move-up').click();
-        let targetRowElem = page.getChildOfElementByCss(page.getElementById('accelerator_experiments.0.experiment'), 'textarea');
+        page.getChildOfElementByCss( page.getElementById('/accelerator_experiments/1'), '.editor-btn-move-up').click();
+        let targetRowElem = page.getChildOfElementByCss(page.getElementById('/accelerator_experiments/0/experiment'), 'textarea');
         // moved element's tabindex must have decreased by 1
         expect((parseInt(currentTabindex, 10) - 1).toString()).toEqual(targetRowElem.getAttribute('tabIndex'));
       });
   });
 
   it(`should update tabindexes correctly of the switched rows when moving down clicking the button`, () => {
-    page.getChildOfElementByCss(page.getElementById('accelerator_experiments.0.experiment'), 'textarea')
+    page.getChildOfElementByCss(page.getElementById('/accelerator_experiments/0/experiment'), 'textarea')
     .getAttribute('tabIndex')
     .then(currentTabindex => {
-      page.getChildOfElementByCss( page.getElementById('accelerator_experiments.0'), '.editor-btn-move-down').click();
-      let targetRowElem = page.getChildOfElementByCss(page.getElementById('accelerator_experiments.1.experiment'), 'textarea');
+      page.getChildOfElementByCss( page.getElementById('/accelerator_experiments/0'), '.editor-btn-move-down').click();
+      let targetRowElem = page.getChildOfElementByCss(page.getElementById('/accelerator_experiments/1/experiment'), 'textarea');
       // moved element's tabindex must have decreased by 1
       expect((parseInt(currentTabindex, 10) + 1).toString()).toEqual(targetRowElem.getAttribute('tabIndex'));
     });
   });
 
   it(`should delete the current row in table  using 'mod+backspace' shortcut`, () => {
-    let elem = page.getChildOfElementByCss(page.getElementById('keywords.0.keyword'), 'textarea');
-    let elemBeforeDeletionThatWillBeShifted = page.getChildOfElementByCss(page.getElementById('keywords.1.keyword'), 'textarea')
+    let elem = page.getChildOfElementByCss(page.getElementById('/keywords/0/keyword'), 'textarea');
+    let elemBeforeDeletionThatWillBeShifted = page.getChildOfElementByCss(page.getElementById('/keywords/1/keyword'), 'textarea')
       .getAttribute('value');
     let elemValuePromise = elem.getAttribute('value');
     elem.sendKeys(protractor.Key.chord(mod, protractor.Key.BACK_SPACE));
-    let elemAfterDeletionAndThatWasShifted = page.getChildOfElementByCss(page.getElementById('keywords.0.keyword'), 'textarea');
+    let elemAfterDeletionAndThatWasShifted = page.getChildOfElementByCss(page.getElementById('/keywords/0/keyword'), 'textarea');
     expect(elemAfterDeletionAndThatWasShifted.getAttribute('value')).not.toEqual(elemValuePromise);
     expect(elemAfterDeletionAndThatWasShifted.getAttribute('value')).toEqual(elemBeforeDeletionThatWillBeShifted);
   });
 
   it(`should copy new row under keywords.0 table using 'alt+c' shortcut. 
     The copied cell under the focused one must be empty and the remaining cells must be exactly copied.`, () => {
-    let currentRowPromise = page.getValuesOfChildrenById('keywords.0');
-    let inputElem = page.getChildOfElementByCss(page.getElementById('keywords.0.classification_scheme'), 'textarea');
+    let currentRowPromise = page.getValuesOfChildrenById('/keywords/0');
+    let inputElem = page.getChildOfElementByCss(page.getElementById('/keywords/0/classification_scheme'), 'textarea');
     inputElem.sendKeys(protractor.Key.chord(protractor.Key.ALT, 'c'));
-    let targetRowPromise = page.getValuesOfChildrenById('keywords.1');
+    let targetRowPromise = page.getValuesOfChildrenById('/keywords/1');
     protractor.promise.all([currentRowPromise, targetRowPromise])
     .then(data => {
       let currentRow = data[0];
@@ -133,15 +133,15 @@ describe('ShortcutAction', function() {
 
   it(`should copy new row under references table using 'mod+alt+r' shortcut.
     It must copy the exact value of the root element eg Copy the whole author under the focused one.`, () => {
-    let inputElem = page.getChildOfElementByCss(page.getElementById('authors.0.affiliations.0.value'), 'textarea');
-    let numberOfTextareaElementsBeforeCopyPromise = page.getNumberOfTextareaElementsById('authors.0');
-    let numberOfInputElementsBeforeCopyPromise = page.getNumberOfInputElementsById('authors.0');
+    let inputElem = page.getChildOfElementByCss(page.getElementById('/authors/0/affiliations/0/value'), 'textarea');
+    let numberOfTextareaElementsBeforeCopyPromise = page.getNumberOfTextareaElementsById('/authors/0');
+    let numberOfInputElementsBeforeCopyPromise = page.getNumberOfInputElementsById('/authors/0');
     inputElem.sendKeys(protractor.Key.chord(mod, protractor.Key.ALT, 'r'));
-    let afterCopyInputElemValue = page.getChildOfElementByCss(page.getElementById('authors.1.affiliations.0.value'), 'textarea')
+    let afterCopyInputElemValue = page.getChildOfElementByCss(page.getElementById('/authors/1/affiliations/0/value'), 'textarea')
       .getAttribute('value');
     expect(inputElem.getAttribute('value')).toEqual(afterCopyInputElemValue);
-    let numberOfTextareaElementsAfterCopyPromise = page.getNumberOfTextareaElementsById('authors.1');
-    let numberOfInputElementsAfterCopyPromise = page.getNumberOfInputElementsById('authors.1');
+    let numberOfTextareaElementsAfterCopyPromise = page.getNumberOfTextareaElementsById('/authors/1');
+    let numberOfInputElementsAfterCopyPromise = page.getNumberOfInputElementsById('/authors/1');
     expect(numberOfTextareaElementsBeforeCopyPromise).toEqual(numberOfTextareaElementsAfterCopyPromise);
     expect(numberOfInputElementsBeforeCopyPromise).toEqual(numberOfInputElementsAfterCopyPromise);
   });

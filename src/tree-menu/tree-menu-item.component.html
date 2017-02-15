@@ -5,12 +5,12 @@
     <ul>
       <div *ngSwitchCase="'object'">
         <li *ngFor="let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema; trackBy:trackByFunction">
-          <tree-menu-item [label]="key" [value]="value.get(key)" [schema]="schema.properties[key]" [path]="path + '.' + key"></tree-menu-item>
+          <tree-menu-item [label]="key" [value]="value.get(key)" [schema]="schema.properties[key]" [path]="getChildPath(key)"></tree-menu-item>
         </li>
       </div>
       <div *ngSwitchCase="'array'">
         <li *ngFor="let element of value; let i = index; trackBy:trackByFunction">
-          <tree-menu-item [label]="i" [value]="element" [schema]="schema.items" [path]="path + '.' + i"></tree-menu-item>
+          <tree-menu-item [label]="i" [value]="element" [schema]="schema.items" [path]="getChildPath(i)"></tree-menu-item>
         </li>
       </div>
     </ul>

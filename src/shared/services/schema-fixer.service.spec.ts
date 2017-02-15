@@ -23,13 +23,14 @@
 
 import { SchemaFixerService } from './schema-fixer.service';
 import { JsonUtilService } from './json-util.service';
+import { PathUtilService } from './path-util.service';
 
 describe('SchemaFixerService', () => {
 
   let service: SchemaFixerService;
 
   beforeEach(() => {
-    service = new SchemaFixerService(new JsonUtilService);
+    service = new SchemaFixerService(new JsonUtilService(new PathUtilService()));
   });
 
   it('should fix anyOf with multiple enum properties', () => {
@@ -244,7 +245,7 @@ describe('SchemaFixerService', () => {
       }
     };
     let config = {
-      'parent.items': {
+      '/parent/items': {
         order: ['prop2', 'prop1']
       }
     };
@@ -295,7 +296,7 @@ describe('SchemaFixerService', () => {
       }
     };
     let config = {
-      'parent.items': {
+      '/parent/items': {
         order: ['prop2', 'prop1', 'doesnotexist']
       }
     };
@@ -320,7 +321,7 @@ describe('SchemaFixerService', () => {
       }
     };
     let config = {
-      'parent.properties.prop': {
+      '/parent/properties/prop': {
         configTrue: true,
         configFalse: false
       }

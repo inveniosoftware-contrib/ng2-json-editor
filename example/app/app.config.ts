@@ -6,18 +6,18 @@ import { JsonEditorConfig } from '../../dist';
 export class AppConfig {
   jsonEditorConfig: JsonEditorConfig = {
     schemaOptions: {
-      'authors.items': {
+      '/authors/items': {
         order: ['full_name', 'affiliations'],
         alwaysShow: ['contributor_roles']
       },
-      'authors.items.properties.contributor_roles.items': {
+      '/authors/items/properties/contributor_roles/items': {
         order: ['value', 'schema'],
         alwaysShow: ['value', 'schema']
       },
-      'authors.items.properties.ids': {
+      '/authors/items/properties/ids': {
         disabled: true
       },
-      'references': {
+      '/references': {
         longListNavigatorConfig: {
           findSingle: (value, expression) => {
             return value.getIn(['reference', 'number']) === parseInt(expression, 10);
@@ -29,12 +29,12 @@ export class AppConfig {
           maxVisiblePageCount: 5
         }
       },
-      'arxiv_eprints.items.properties.value': {
+      '/arxiv_eprints/items/properties/value': {
         linkBuilder: (value: any) => {
           return `http://arxiv.org/abs/${value}`;
         },
       },
-      'abstracts.items.properties.source': {
+      '/abstracts/items/properties/source': {
         columnWidth: 20
       }
     },

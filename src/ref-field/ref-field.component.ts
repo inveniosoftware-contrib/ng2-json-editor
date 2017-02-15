@@ -34,7 +34,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 
-import { DynamicTemplateLoaderService } from '../shared/services';
+import { DynamicTemplateLoaderService, PathUtilService } from '../shared/services';
 import { RefConfig } from '../shared/interfaces';
 
 @Component({
@@ -49,7 +49,7 @@ export class RefFieldComponent implements OnChanges {
 
   @Input() schema: Object;
   @Input() value: Map<string, any>;
-  @Input() path: string;
+  @Input() path: Array<any>;
 
   // shorthand variables to each schema config properties
   isLazy: boolean;
@@ -63,7 +63,8 @@ export class RefFieldComponent implements OnChanges {
 
   constructor(private viewContainer: ViewContainerRef,
     private http: Http,
-    private dynamicTemplateLoaderService: DynamicTemplateLoaderService) { }
+    private dynamicTemplateLoaderService: DynamicTemplateLoaderService,
+    private pathUtilService: PathUtilService) { }
 
   ngOnChanges(changes: SimpleChanges) {
     let valueChange = changes['value'];
@@ -94,6 +95,10 @@ export class RefFieldComponent implements OnChanges {
   onPreviewClick() {
     this.loadTemplateWithRef(true);
     this.isPreviewButtonHidden = true;
+  }
+
+  get pathString() {
+    return this.pathUtilService.toPathString(this.path);
   }
 
   /**

@@ -25,12 +25,12 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { AbstractTrackerComponent } from '../abstract-tracker';
 
-import { AppGlobalsService } from '../shared/services';
+import { AppGlobalsService, PathUtilService } from '../shared/services';
 
 /**
  * This is the base class for fields
  * WARNING:
- *  FieldComponent which extends this class should have AppGlobalsService in their constructor!
+ *  XFieldComponent which extends this class should have all services in this constructor, in their constructor!
  *  EX: constructor(...public appGlobalService: AppGlobalService, ...) {...}
  *
  * It provides trackByFunction from AbstractTrackerComponent, and handles errors for the component.
@@ -43,7 +43,8 @@ export abstract class AbstractFieldComponent
   errors: Array<Object> = [];
   errorsSubscription: Subscription;
 
-  constructor(public appGlobalsService: AppGlobalsService) {
+  constructor(public appGlobalsService: AppGlobalsService,
+    public pathUtilService: PathUtilService) {
     super();
   }
 
@@ -72,6 +73,6 @@ export abstract class AbstractFieldComponent
   }
 
   get pathString(): string {
-    return this.path.join('.');
+    return this.pathUtilService.toPathString(this.path);
   }
 }
