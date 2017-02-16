@@ -56,7 +56,13 @@ export class SchemaFixerService {
   private enrichSchemaWithConfig(schema: Object, config: Object) {
     Object.keys(config).forEach(field => {
       try {
-        let schemaField = this.jsonUtilService.getValueInPath(schema['properties'], field);
+        let schemaField;
+        if (field === '') {
+          // enrich root schema when the config path is empty
+          schemaField = schema;
+        } else {
+          schemaField = this.jsonUtilService.getValueInPath(schema['properties'], field);
+        }
         Object.assign(schemaField, config[field]);
       } catch (error) {
         console.warn(`Config for "${field}" path is ignored, since it does not exist in schema`);
@@ -95,7 +101,7 @@ export class SchemaFixerService {
     let order: Array<string> = schema['order'];
     order.forEach((orderKey: string, index: number) => {
       let priority = order.length - index;
-      if ( orderKey in schema['properties'] ) {
+      if (orderKey in schema['properties']) {
         schema['properties'][orderKey]['priority'] = priority;
       } else {
         console.warn(`${orderKey} defined in order config does not exist in schema.`);

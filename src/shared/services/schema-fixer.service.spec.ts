@@ -233,12 +233,12 @@ describe('SchemaFixerService', () => {
           items: {
             type: 'object',
             properties: {
-                prop1: {
-                  type: 'string'
+              prop1: {
+                type: 'string'
               },
-                prop2: {
-                  type: 'string'
-                }
+              prop2: {
+                type: 'string'
+              }
             }
           }
         }
@@ -257,14 +257,14 @@ describe('SchemaFixerService', () => {
           items: {
             type: 'object',
             properties: {
-                prop1: {
-                  type: 'string',
-                  priority: 1
+              prop1: {
+                type: 'string',
+                priority: 1
               },
-                prop2: {
-                  type: 'string',
-                  priority: 2
-                }
+              prop2: {
+                type: 'string',
+                priority: 2
+              }
             },
             order: ['prop2', 'prop1']
           }
@@ -284,12 +284,12 @@ describe('SchemaFixerService', () => {
           items: {
             type: 'object',
             properties: {
-                prop1: {
-                  type: 'string'
+              prop1: {
+                type: 'string'
               },
-                prop2: {
-                  type: 'string'
-                }
+              prop2: {
+                type: 'string'
+              }
             }
           }
         }
@@ -338,6 +338,35 @@ describe('SchemaFixerService', () => {
               configFalse: false
             }
           }
+        }
+      }
+    };
+    let fixed = service.fixSchema(schema, config);
+    expect(fixed).toEqual(expected);
+  });
+
+  it('should enrich root schema with config when path is empty', () => {
+    let schema = {
+      type: 'object',
+      properties: {
+        foo: {
+          type: 'string'
+        }
+      }
+    };
+    let config = {
+      '': {
+        configTrue: true,
+        configFalse: false
+      }
+    };
+    let expected = {
+      type: 'object',
+      configTrue: true,
+      configFalse: false,
+      properties: {
+        foo: {
+          type: 'string'
         }
       }
     };
