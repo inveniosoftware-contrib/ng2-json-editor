@@ -1,4 +1,4 @@
-<div class="row editor-container">
+<div class="row editor-container" [ngClass]="shorterEditorContainerClass">
   <div class="col-md-2 menu-container">
     <tree-menu [record]="_record" [schema]="schema"></tree-menu>
     <add-field-dropdown [fields]="keys" [pathString]="''" (onFieldAdd)="onFieldAdd($event)" [schema]="schema">Add field</add-field-dropdown>
@@ -6,12 +6,13 @@
       <input id="admin-mode-checkbox" type="checkbox" [(ngModel)]="appGlobalsService.adminMode" />
       <label class="admin-mode" for="admin-mode-checkbox">Enable Admin Mode</label>
     </div>
+    <validation-badges (onBadgeClick)="openPanel($event)"></validation-badges>
   </div>
   <div id="middle-main-container" class="middle main-container" [ngClass]="middleContainerColMdClass" [shortcuts]="shortcuts">
     <tabset *ngIf="config.tabsConfig">
       <tab *ngFor="let tabName of tabNames; trackBy:trackByElement" [heading]="tabName" (select)="activeTabName = tabName" [active]="isActiveTab(tabName)">
         <sub-record [value]="_record" [tabName]="tabName" [schema]="tabNameToSubSchema[tabName]" [keys]="tabNameToKeys[tabName]"
-                    (onDeleteKey)="onDeleteKey($event)"></sub-record>
+                    (onDeleteKey)="onDeleteKey($event)" (onOpenPanelClick)="openPanel($event)"></sub-record>
       </tab>
     </tabset>
     <sub-record *ngIf="!config.tabsConfig" [value]="_record" [schema]="schema" (onDeleteKey)="onDeleteKey($event)" [keys]="keys"></sub-record>
@@ -22,6 +23,7 @@
   </div>
 </div>
 
+<error-panel [activeTab]="errorPanelActiveTab" [isOpen]="isErrorPanelOpen" (onCollapse)="isErrorPanelOpen = $event"></error-panel>
 <!-- Modal View controlled by ModalService -->
 <modal-view>
 </modal-view>

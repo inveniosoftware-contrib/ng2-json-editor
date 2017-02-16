@@ -1,9 +1,12 @@
 <div [ngSwitch]="valueType" [id]="pathString">
   <table class="primitive-field-container">
-    <tr [ngClass]="errorNgClass">
+    <tr [ngClass]="{error: hasErrors}">
       <ng-template #errorsTooltipTemplate>
         <ul class="tooltip-left-align">
-          <li *ngFor="let error of errors">
+          <li *ngFor="let error of internalErrors" >
+            {{error.message}}
+          </li>
+          <li *ngFor="let error of externalErrors" >
             {{error.message}}
           </li>
         </ul>

@@ -26,8 +26,9 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 
-import { AppGlobalsService, ComponentTypeService } from '../shared/services';
+import { AppGlobalsService, ComponentTypeService, PathUtilService } from '../shared/services';
 import { JSONSchema } from '../shared/interfaces';
+
 
 /**
  * AnyFieldComponent
@@ -54,7 +55,8 @@ export class AnyTypeFieldComponent {
   @Input() value: any;
 
   constructor(public componentTypeService: ComponentTypeService,
-    public  appGlobalsService: AppGlobalsService) { }
+    public  appGlobalsService: AppGlobalsService,
+    public pathUtilService: PathUtilService) { }
 
   get componentType(): string {
     return this.componentTypeService.getComponentType(this.schema);

@@ -31,7 +31,6 @@ import {
   TemplateRef
 } from '@angular/core';
 import { Http } from '@angular/http';
-
 import { fromJS, Map, Set } from 'immutable';
 import 'rxjs/add/operator/skipWhile';
 
@@ -49,7 +48,7 @@ import {
   TabsUtilService
 } from './shared/services';
 
-import { JsonEditorConfig, Preview, SchemaValidationErrors, PathCache } from './shared/interfaces';
+import { JsonEditorConfig, Preview, SchemaValidationErrors } from './shared/interfaces';
 
 
 @Component({
@@ -67,12 +66,20 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   @Input() config: JsonEditorConfig;
   @Input() record: Object;
   @Input() schema: any;
-  @Input() errorMap: SchemaValidationErrors = {};
-  @Input() templates: { [templateName: string]: TemplateRef<any> } = {};
+  @Input() set errorMap(errors: SchemaValidationErrors) {
+    this._errorMap = errors;
+    this.appGlobalsService.externalErrors = this.errorMap;
+  }
 
+  get errorMap(): SchemaValidationErrors {
+    return this._errorMap;
+  }
+
+  @Input() templates: { [templateName: string]: TemplateRef<any> } = {};
 
   @Output() onRecordChange: EventEmitter<Object> = new EventEmitter<Object>();
 
+  private _errorMap: SchemaValidationErrors = {};
   _record: Map<string, any>;
   tabNameToSubSchema: {};
   tabNames: Array<string>;
@@ -81,6 +88,8 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   previews: Array<Preview>;
   isPreviewerHidden: boolean;
   keys: Set<string>;
+  isErrorPanelOpen = false;
+  errorPanelActiveTab = '';
 
   constructor(public http: Http,
     public appGlobalsService: AppGlobalsService,
@@ -114,7 +123,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     this.keys = Set.fromKeys(this.record);
 
     // set errors that is used by other components
-    this.appGlobalsService.globalErrors = this.errorMap;
+    this.appGlobalsService.externalErrors = this.errorMap;
     this.appGlobalsService.templates = this.templates;
 
     // use fromJS to convert input to immutable then pass it to the store
@@ -225,4 +234,14 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   isActiveTab(tabName) {
     return this.appGlobalsService.activeTabName === tabName;
   }
+
+  get shorterEditorContainerClass(): string {
+    return this.isErrorPanelOpen ? 'shorter-editor-container' : '';
+  }
+
+  openPanel(event) {
+    this.isErrorPanelOpen = true;
+    this.errorPanelActiveTab = event;
+  }
+
 }

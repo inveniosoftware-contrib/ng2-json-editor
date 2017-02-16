@@ -25,7 +25,8 @@ import {
   Input,
   OnInit,
   ViewEncapsulation,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
 } from '@angular/core';
 
 import { AbstractFieldComponent } from '../abstract-field';
@@ -38,7 +39,6 @@ import {
   DomUtilService
 } from '../shared/services';
 import { JSONSchema } from '../shared/interfaces';
-
 
 @Component({
   selector: 'primitive-field',
@@ -60,9 +60,9 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
     public pathUtilService: PathUtilService,
-    public domUtilService: DomUtilService
-  ) {
-    super(appGlobalsService, pathUtilService);
+    public domUtilService: DomUtilService,
+    public changeDetectorRef: ChangeDetectorRef) {
+    super(appGlobalsService, pathUtilService, changeDetectorRef);
   }
 
   get valueType(): string {
@@ -75,12 +75,10 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
 
   commitValueChange() {
     this.domUtilService.clearHighlight();
-
     let errors = this.schemaValidationService.validateValue(this.value, this.schema);
-    if (!errors.length) {
-      this.jsonStoreService.setIn(this.path, this.value);
-    }
-    this.errors = errors;
+    this.jsonStoreService.setIn(this.path, this.value);
+    this.internalErrors = errors;
+    this.appGlobalsService.extendInternalErrors(this.pathString, errors);
   }
 
   onKeypress(event: KeyboardEvent) {

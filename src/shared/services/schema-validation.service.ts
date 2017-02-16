@@ -22,13 +22,15 @@
 
 import { Injectable } from '@angular/core';
 import * as Ajv from 'ajv';
+import { AppGlobalsService } from './app-globals.service';
 
-import { JSONSchema } from '../interfaces';
+import { JSONSchema, ValidationError } from '../interfaces';
 
 @Injectable()
 export class SchemaValidationService {
 
   private ajv = new Ajv({ allErrors: true });
+
   // https://gist.github.com/dperini/729294
   private reWebUrl = new RegExp(
     '^' +
@@ -69,8 +71,8 @@ export class SchemaValidationService {
     '$', 'i'
   );
 
-  constructor() {
-    // ajv didn't support format:url, so was added using web url regex for validation
+  constructor(public appGlobalsService: AppGlobalsService) {
+    //  ajv didn't support format:url, so was added using web url regex for validation
     this.ajv.addFormat('url', this.reWebUrl);
   }
 
@@ -80,16 +82,19 @@ export class SchemaValidationService {
    * Uses: ajv package for json-schema validation
    *
    */
-  validateValue(value: any, schema: JSONSchema): Array<{ message: string }> {
-    let schemaValidationErrors = [];
+  validateValue(value: any, schema: JSONSchema): Array<ValidationError> {
+    let validationErrors = [];
     if (!this.ajv.validate(schema, value)) {
       this.ajv.errors.forEach(error => {
-        schemaValidationErrors.push({
-          message: error.message
+        validationErrors.push({
+          message: error.message,
+          type: 'Error'
         });
       });
     }
-    return schemaValidationErrors;
+    return validationErrors;
   }
 
 }
+
+

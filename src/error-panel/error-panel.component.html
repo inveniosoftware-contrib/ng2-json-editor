@@ -1,0 +1,34 @@
+<div *ngIf="isOpen" [ngClass]="{'error-panel-container': isOpen}">
+  <tabset>
+    <tab *ngFor="let tab of tabs" [active]="isTabActive(tab.title)" [disabled]="!isTabEnabled(tab.title)">
+      <ng-template tabHeading>
+        <div *ngIf="tab.title === 'Errors' then errorBlock else warningBlock"></div>
+        <ng-template #errorBlock>
+          <span [ngClass]="tab.customClass">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </span>
+          <span [ngClass]="'error-link'">{{tab.title}}
+            <span class="badge">{{internalErrorCount + externalErrorCount}}</span>
+          </span>
+        </ng-template>
+        <ng-template #warningBlock>
+          <span [ngClass]="tab.customClass">
+             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+          </span>
+          <span [ngClass]="'warning-link'">{{tab.title}}
+            <span class="badge">{{internalWarningCount + externalWarningCount}}</span>
+          </span>
+        </ng-template>
+      </ng-template>
+      <div [ngClass]="'error-panel-item-container'">
+        <error-panel-item [heading]="tab.title" [errorMap]="externalErrorMap[tab.title]"></error-panel-item>
+        <error-panel-item [heading]="tab.title" [errorMap]="internalErrorMap[tab.title]"></error-panel-item>
+      </div>
+    </tab>
+    <tab (select)="closePanel()" [customClass]="'tab-align-right'">
+      <ng-template tabHeading>
+        <i class="fa fa-window-close" aria-hidden="true"></i>
+      </ng-template>
+    </tab>
+  </tabset>
+</div>

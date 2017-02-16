@@ -66,7 +66,6 @@ export class TabsUtilService {
       .forEach(key => {
         keyToTabName[key] = tabsConfig.defaultTabName;
       });
-
     this._schemaKeyToTabName = keyToTabName;
     return keyToTabName;
   }

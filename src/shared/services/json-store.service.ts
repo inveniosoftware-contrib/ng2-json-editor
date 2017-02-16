@@ -12,6 +12,7 @@ export class JsonStoreService implements NestedStore {
   private historyLimit = 5;
   private history = Array<Map<string, any>>();
 
+
   setIn(path: Array<any>, value: any) {
     // immutablejs setIn creates Map for keys that don't exist in path
     // therefore List() should be set manually for some of those keys.

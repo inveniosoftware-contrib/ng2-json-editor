@@ -1,0 +1,73 @@
+/*
+ * This file is part of ng2-json-editor.
+ * Copyright (C) 2017 CERN.
+ *
+ * ng2-json-editor is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * ng2-json-editor is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ * In applying this license, CERN does not
+ * waive the privileges and immunities granted to it by virtue of its status
+ * as an Intergovernmental Organization or submit itself to any jurisdiction.
+ */
+
+import { Component, Output, EventEmitter, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+
+import { AppGlobalsService } from '../shared/services';
+import { Subscription } from 'rxjs/Subscription';
+
+@Component({
+  selector: 'validation-badges',
+  styleUrls: [
+    './validation-badges.component.scss'
+  ],
+  templateUrl: './validation-badges.component.html'
+})
+export class ValidationBadgesComponent  implements OnInit, OnDestroy {
+
+  @Output() onBadgeClick: EventEmitter<string> = new EventEmitter<{}>();
+
+  globalErrorCount = 0;
+  internalErrorCount = 0;
+  globalWarningCount = 0;
+  internalWarningCount = 0;
+  externalErrorCounterSubscription: Subscription;
+  internalErrorCounterSubscription: Subscription;
+
+  constructor(public appGlobalsService: AppGlobalsService,
+              public changeDetectorRef: ChangeDetectorRef) { }
+
+  ngOnInit() {
+    this.externalErrorCounterSubscription = this.appGlobalsService.externalErrorCountersSubject
+    .subscribe(errorCounters => {
+      this.globalErrorCount = errorCounters.errors;
+      this.globalWarningCount = errorCounters.warnings;
+      this.changeDetectorRef.markForCheck();
+    });
+    this.internalErrorCounterSubscription = this.appGlobalsService.internalErrorCountersSubject
+    .subscribe(errorCounters => {
+      this.internalErrorCount = errorCounters.errors;
+      this.internalWarningCount = errorCounters.warnings;
+      this.changeDetectorRef.markForCheck();
+    });
+  }
+
+  _onBadgeClick(event: Event, badgeName: string) {
+    event.preventDefault();
+    this.onBadgeClick.emit(badgeName);
+  }
+
+  ngOnDestroy() {
+    this.externalErrorCounterSubscription.unsubscribe();
+    this.internalErrorCounterSubscription.unsubscribe();
+  }
+}

@@ -1,0 +1,18 @@
+<ul class="list-group" *ngFor="let key of keys(errorMap)">
+  <div [ngSwitch]="isJsonPointerPath(key)" *ngFor="let error of errorMap[key]">
+    <div *ngSwitchCase="true" class="list-group">
+      <a (click)="focusPath($event, key)" class="list-group-item">
+        <i *ngIf="heading === 'Errors'" class="fa fa-times" aria-hidden="true"></i>
+        <i *ngIf="heading === 'Warnings'" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+        {{error.message}}
+      </a>
+    </div>
+    <div *ngSwitchDefault>
+      <li class="list-group-item">
+        <i *ngIf="heading === 'Errors'" class="fa fa-times" aria-hidden="true"></i>
+        <i *ngIf="heading === 'Warnings'" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+        {{error.message}}
+      </li>
+    </div>
+  </div>
+</ul>

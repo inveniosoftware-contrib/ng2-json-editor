@@ -15,6 +15,42 @@ body, html {
     margin-left: 0px;
     margin-right: 0px;
   }
+
+}
+
+.shorter-editor-container {
+  height: 75%;
+}
+
+.error-panel-container {
+  height: 25%;
+  overflow: hidden;
+
+  .tab-content {
+    height: 90%;
+    overflow: auto;
+  }
+
+  .nav-tabs > .tab-align-right {
+    float: right;
+  }
+
+}
+
+.error-link {
+  color: #D14024;
+
+  .badge {
+    background-color: #a94442;
+  }
+}
+
+.warning-link {
+  color: #FFDD00;
+
+  .badge {
+    background-color: #8a6d3b;
+  }
 }
 
 table {
@@ -155,10 +191,6 @@ td.button-holder, th.button-holder {
   }
 }
 
-div.error {
-  background: #f2968d;
-}
-
 label {
    color: $label-color;
 }
@@ -251,3 +283,4 @@ label.admin-mode {
   width: 90%;
   padding-left: 4px;
 }
+

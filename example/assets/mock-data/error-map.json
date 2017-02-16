@@ -1,25 +1,29 @@
 {
   "/abstracts/0/source": [
     {
-      "message": "Mock-Error 1: abstracts.0.source"
+      "message": "Mock-Error 1: /abstracts/0/source",
+      "type": "Error"
     },
     {
-      "message": "Mock-Error 2: abstracts.0.source"
+      "message": "Mock-Warning 1: /abstracts/0/source",
+      "type": "Warning"
     }
   ],
   "/abstracts/0/value": [
     {
-      "message": "Mock-Error 1: abstracts.0.value"
+      "message": "Mock-Error 1: /abstracts/0/value"
     }
   ],
   "/field_categories/0/scheme": [
     {
-      "message": "Mock-Error 1: field_categories.0.term"
+      "message": "Mock-Error 1: /field_categories/0/term",
+      "type": "Error"
     }
   ],
   "/control_number": [
     {
-      "message": "Mock-Error 1: control_number"
+      "message": "Mock-Error 1: /control_number",
+      "type": "Error"
     }
   ]
 }

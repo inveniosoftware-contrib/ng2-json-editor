@@ -22,6 +22,7 @@
 
 
 import { SchemaValidationService } from './schema-validation.service';
+import { AppGlobalsService } from './app-globals.service';
 
 describe('SchemaValidationService', () => {
 
@@ -30,12 +31,13 @@ describe('SchemaValidationService', () => {
   let service: SchemaValidationService;
 
   beforeEach(() => {
-    service = new SchemaValidationService();
+    service = new SchemaValidationService(new AppGlobalsService());
   });
 
   it('should validate pattern correctly', () => {
     let expectedInValid = [{
-      message: `should match pattern "[0-9]"`
+      message: `should match pattern "[0-9]"`,
+      type: 'Error'
     }];
 
     expect(service.validateValue('1', schema)).toEqual([]);

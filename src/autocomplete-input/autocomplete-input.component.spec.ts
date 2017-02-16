@@ -33,7 +33,7 @@ import { Ng2BootstrapModule } from 'ng2-bootstrap';
 
 import { AutocompleteInputComponent } from '../autocomplete-input';
 
-import { RemoteAutocompletionService, JsonStoreService, PathUtilService, AppGlobalsService } from '../shared/services';
+import { RemoteAutocompletionService, JsonStoreService, PathUtilService, AppGlobalsService, ErrorMapUtilService } from '../shared/services';
 
 import { AutocompletionResult, AutocompletionConfig } from '../shared/interfaces';
 
@@ -73,6 +73,7 @@ describe('AutocompleteInputComponent', () => {
         { provide: AppGlobalsService, useClass: MockAppGlobalsService },
         JsonStoreService,
         PathUtilService,
+        ErrorMapUtilService
       ]
     }).compileComponents();
   }));

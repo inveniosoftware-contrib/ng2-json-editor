@@ -1,6 +1,6 @@
 /*
  * This file is part of ng2-json-editor.
- * Copyright (C) 2016 CERN.
+ * Copyright (C) 2017 CERN.
  *
  * ng2-json-editor is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -18,35 +18,43 @@
  * In applying this license, CERN does not
  * waive the privileges and immunities granted to it by virtue of its status
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
-*/
+ */
 
-import { Component, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import {
+  Component, Input, ChangeDetectionStrategy
+} from '@angular/core';
 
-import { List } from 'immutable';
-
-import { AbstractListFieldComponent } from '../abstract-list-field';
-
-import { AppGlobalsService, JsonStoreService, PathUtilService } from '../shared/services';
-import { JSONSchema } from '../shared/interfaces';
+import { DomUtilService, PathUtilService } from '../../shared/services';
+import { SchemaValidationErrors } from '../../shared/interfaces';
 
 @Component({
-  selector: 'primitive-list-field',
+  selector: 'error-panel-item',
   styleUrls: [
-    './primitive-list-field.component.scss'
+    './error-panel-item.component.scss'
   ],
-  templateUrl: './primitive-list-field.component.html',
+  templateUrl: './error-panel-item.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PrimitiveListFieldComponent extends AbstractListFieldComponent {
-  @Input() values: List<any>;
-  @Input() schema: JSONSchema;
-  @Input() path: Array<any>;
+export class ErrorPanelItemComponent {
 
-  constructor(public appGlobalsService: AppGlobalsService,
-    public jsonStoreService: JsonStoreService,
-    public pathUtilService: PathUtilService,
-    public changeDetectorRef: ChangeDetectorRef) {
-    super(appGlobalsService, jsonStoreService, pathUtilService, changeDetectorRef);
+  @Input() errorMap: SchemaValidationErrors;
+  @Input() heading;
+
+
+  constructor(public domUtilService: DomUtilService,
+              public pathUtilService: PathUtilService) { }
+
+  isJsonPointerPath(key: string) {
+    return key.startsWith(this.pathUtilService.separator);
   }
 
+  keys(errorMap: SchemaValidationErrors) {
+    return Object.keys(errorMap);
+  }
+
+  focusPath(event: Event, path: string) {
+    event.preventDefault();
+    this.domUtilService.focusAndSelectFirstEditableChildById(path, true);
+  }
 }
+

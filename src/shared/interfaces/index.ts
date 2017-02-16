@@ -17,3 +17,5 @@ export { PathCache } from './path-cache';
 export { TabsConfig } from './tabs-config';
 export { Tab } from './tab';
 export { JSONSchema } from './json-schema';
+export { CategorizedValidationErrors } from './categorized-validation-errors';
+export { ValidationError } from './validation-error';
