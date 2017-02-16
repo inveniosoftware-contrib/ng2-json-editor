@@ -1,5 +1,5 @@
 {
-  "abstracts.0.source": [
+  "/abstracts/0/source": [
     {
       "message": "Mock-Error 1: abstracts.0.source"
     },
@@ -7,17 +7,17 @@
       "message": "Mock-Error 2: abstracts.0.source"
     }
   ],
-  "abstracts.0.value": [
+  "/abstracts/0/value": [
     {
       "message": "Mock-Error 1: abstracts.0.value"
     }
   ],
-  "field_categories.0.scheme": [
+  "/field_categories/0/scheme": [
     {
       "message": "Mock-Error 1: field_categories.0.term"
     }
   ],
-  "control_number": [
+  "/control_number": [
     {
       "message": "Mock-Error 1: control_number"
     }
