@@ -14,7 +14,8 @@
             placeholder="{{schema.title}}"></textarea>
         </div>
         <div *ngSwitchCase="'enum'">
-          <searchable-dropdown [value]="value" [tabindex]="tabIndex" [items]="schema.enum" [shortcutMap]="schema.enumShorcutMap" (onSelect)="onSearchableDropdownSelect($event)"></searchable-dropdown>
+          <searchable-dropdown [value]="value" [tabIndex]="tabIndex" [placeholder]="schema.title" [items]="schema.enum" [shortcutMap]="schema.enumShorcutMap"
+            (onSelect)="onSearchableDropdownSelect($event)"></searchable-dropdown>
         </div>
         <div *ngSwitchCase="'autocomplete'">
           <autocomplete-input [value]="value" [path]="path" [autocompletionConfig]="schema.autocompletionConfig" (onBlur)="commitValueChange()"
