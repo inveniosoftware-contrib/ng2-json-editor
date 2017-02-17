@@ -263,3 +263,12 @@ button.btn-toggle {
   margin-top: 5px;
   margin-right: 5px;
 }
+
+// Fix typeahead position and size 
+.autocomplete-container {
+  .dropdown {
+    position: relative !important;
+    top: 0px !important;
+    left: 0px !important;
+  }
+}
