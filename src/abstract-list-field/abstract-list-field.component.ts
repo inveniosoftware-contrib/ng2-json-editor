@@ -25,6 +25,7 @@ import { List } from 'immutable';
 import { AbstractFieldComponent } from '../abstract-field';
 
 import { JsonStoreService, AppGlobalsService, TabIndexService, PathUtilService } from '../shared/services';
+import { PathCache } from '../shared/interfaces';
 
 /**
  * Abstract component to share code of common operations of all array fields
@@ -37,6 +38,7 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
   values: List<any>;
   schema: Object;
   path: Array<any>;
+  pathCache: PathCache = {};
 
   constructor(public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
@@ -76,7 +78,11 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
    * Returns path of the property of an element at index.
    */
   getValuePath(index: number, property: string): Array<any> {
-    return this.path.concat(index, property);
+    let valuePathString = `${this.getElementPathString(index)}${this.pathUtilService.separator}${property}`;
+    if (!this.pathCache[valuePathString]) {
+      this.pathCache[valuePathString] = this.path.concat(index, property);
+    }
+    return this.pathCache[valuePathString];
   }
 
   getElementPathString(index: number): string {

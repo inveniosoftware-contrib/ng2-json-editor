@@ -54,6 +54,10 @@ export class PrimitiveListFieldComponent extends AbstractListFieldComponent {
    * @override
    */
   getValuePath(index: number): Array<any> {
-    return this.path.concat(index);
+    let valuePathString = this.getElementPathString(index);
+    if (!this.pathCache[valuePathString]) {
+      this.pathCache[valuePathString] = this.path.concat(index);
+    }
+    return this.pathCache[valuePathString];
   }
 }
