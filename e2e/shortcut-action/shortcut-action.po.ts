@@ -44,9 +44,9 @@ export class ShortcutActionPage extends Ng2JsonEditorPage {
     return elem.all((by.css(css)));
   }
 
-  getNumberOfTextareaElementsById(id: string): WDPromise<number> {
+  getNumberOfContentEditableElementsById(id: string): WDPromise<number> {
     let elem = element(by.id(id));
-    return elem.all(by.css('textarea')).count();
+    return elem.all(by.css('div[contenteditable=true]')).count();
   }
 
   getNumberOfInputElementsById(id: string): WDPromise<number> {
@@ -54,11 +54,18 @@ export class ShortcutActionPage extends Ng2JsonEditorPage {
     return elem.all(by.css('input')).count();
   }
 
-  getValuesOfChildrenById(id: string): WDPromise<string[]> {
-    let elems = this.getChildrenOfElementByCss(this.getElementById(id), 'textarea,input');
+  getValuesOfChildrenById(id: string): WDPromise<Array<string>> {
+    let elems = this.getChildrenOfElementByCss(this.getElementById(id), 'div[contenteditable=true], input');
     return elems
       .map(elem => {
-        return elem.getAttribute('value');
+        return elem.getTagName()
+          .then(tagName => {
+            if (tagName === 'input') {
+              return elem.getAttribute('value');
+            } else {
+              return elem.getText();
+            }
+          });
       });
    }
 }

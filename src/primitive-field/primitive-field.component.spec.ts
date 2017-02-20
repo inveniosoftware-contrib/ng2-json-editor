@@ -41,6 +41,7 @@ import {
   JsonStoreService,
   PathUtilService
 } from '../shared/services';
+import { ContentModelDirective } from '../shared/directives';
 
 /**
  * Change input html element value
@@ -50,12 +51,16 @@ import {
  *
  * TODO: create a test helper class for this kind of functions!
  *
- * @param {HTMLInputElement} el - <textarea> or <input> html element
+ * @param {HTMLElement} el - <div contenteditable=true> or <input> html element
  * @param {string} value - new value to be set to el.value
  */
-function changeInputElementValue(el: HTMLInputElement, value: string) {
-  el.value = value;
-  el.dispatchEvent(new Event('input'));
+function changeInputElementValue(el: HTMLElement, value: string) {
+  if (el instanceof HTMLInputElement) {
+    el.value = value;
+  } else {
+    el.innerText = value;
+  }
+  el.dispatchEvent(new Event('blur'));
 }
 
 class MockJsonStoreService extends JsonStoreService {
@@ -67,7 +72,7 @@ describe('PrimitiveFieldComponent', () => {
   let fixture: ComponentFixture<PrimitiveFieldComponent>;
   let component: PrimitiveFieldComponent;
   let nativeEl: HTMLElement;
-  let inputEl: HTMLInputElement;
+  let inputEl: HTMLElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -75,7 +80,8 @@ describe('PrimitiveFieldComponent', () => {
         FilterByExpressionPipe,
         AutocompleteInputComponent,
         SearchableDropdownComponent,
-        PrimitiveFieldComponent
+        PrimitiveFieldComponent,
+        ContentModelDirective
       ],
       imports: [
         Ng2BootstrapModule.forRoot()
@@ -105,7 +111,7 @@ describe('PrimitiveFieldComponent', () => {
     // get useful elements to use in tests
     nativeEl = fixture.nativeElement;
     inputEl = nativeEl
-      .querySelector('input, textarea') as HTMLInputElement;
+      .querySelector('input, div[contenteditable=true]') as HTMLElement;
   });
 
   it('should be binded to view', () => {

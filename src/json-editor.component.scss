@@ -179,7 +179,7 @@ table.editable-inner-table {
 
 .disableEventsClass {
   pointer-events: none;
-  input, button, textarea, a, i, span {
+  input, button, div[contenteditable=true], a, i, span {
     opacity: .5;
   }
 }

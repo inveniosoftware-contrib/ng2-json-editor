@@ -57,7 +57,7 @@ export class AppConfig {
         {
           name: 'Authors',
           properties: [
-            'collaborations',
+            'collaboration',
             'accelerator_experiments',
             'authors',
             'corporate_author'
