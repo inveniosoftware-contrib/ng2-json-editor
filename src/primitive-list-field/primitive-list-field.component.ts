@@ -26,7 +26,7 @@ import { List } from 'immutable';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
 
-import { AppGlobalsService, JsonStoreService, PathUtilService } from '../shared/services';
+import { AppGlobalsService, JsonStoreService, PathUtilService, JsonPatchService } from '../shared/services';
 
 @Component({
   selector: 'primitive-list-field',
@@ -44,8 +44,9 @@ export class PrimitiveListFieldComponent extends AbstractListFieldComponent {
 
   constructor(public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
-    public pathUtilService: PathUtilService) {
-    super(appGlobalsService, jsonStoreService, pathUtilService);
+    public pathUtilService: PathUtilService,
+    public jsonPatchService: JsonPatchService) {
+    super(appGlobalsService, jsonStoreService, pathUtilService, jsonPatchService);
   }
 
   /**

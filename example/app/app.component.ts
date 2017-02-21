@@ -33,9 +33,10 @@ import { AppConfig } from './app.config';
     'app.component.scss'
   ],
   template: `
-    <json-editor *ngIf="record && schema" 
+    <json-editor *ngIf="record && schema && patches" 
       [config]="config.jsonEditorConfig"
       [record]="record"
+      [patches]="patches"
       (onRecordChange)="onRecordChange($event)"
       [schema]="schema">
     </json-editor>
@@ -44,20 +45,24 @@ import { AppConfig } from './app.config';
 export class AppComponent {
   record: Object;
   schema: Object;
+  patches: Array<any>;
 
   constructor(private http: Http, public config: AppConfig ) {
     Observable.zip(
       this.http.get('./assets/mock-data/record.json'),
       this.http.get('./assets/mock-data/schema.json'),
-      (recordRes, schemaRes) => {
+      this.http.get('./assets/mock-data/patches.json'),
+      (recordRes, schemaRes, patchesRes) => {
         return {
           record: recordRes.json(),
-          schema: schemaRes.json()
+          schema: schemaRes.json(),
+          patches: patchesRes.json()
         };
       }
     ).subscribe((data) => {
       this.record = data.record; // set ./assets/mock-data/record.json
       this.schema = data.schema; // set ./assets/mock-data/schema.json
+      this.patches = data.patches; // set ./assets/mock-data/patches.json
     });
   }
 

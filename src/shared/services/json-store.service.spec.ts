@@ -88,6 +88,72 @@ describe('JsonStoreService', () => {
     service.setIn(path, value);
   });
 
+  it('should insert a new element if addIn path is to an array index', () => {
+    let json = fromJS({
+      aMap: {
+        aList: ['val1', 'val2', 'val3']
+      }
+    });
+    service.setJson(json);
+
+    let path = ['aMap', 'aList', 1];
+    let value = 'toBeInsertedAt1';
+    let expected = fromJS({
+      aMap: {
+        aList: ['val1', 'toBeInsertedAt1', 'val2', 'val3']
+      }
+    });
+
+    service.jsonChange.subscribe(changedJson => {
+      expect(changedJson.equals(expected)).toBeTruthy();
+    });
+
+    service.addIn(path, value);
+  });
+
+  it('should append a new element if addIn path is to the index -1', () => {
+    let json = fromJS({
+      aMap: {
+        aList: ['val1', 'val2', 'val3']
+      }
+    });
+    service.setJson(json);
+
+    let path = ['aMap', 'aList', -1];
+    let value = 'toBeAppended';
+    let expected = fromJS({
+      aMap: {
+        aList: ['val1', 'val2', 'val3', 'toBeAppended']
+      }
+    });
+
+    service.jsonChange.subscribe(changedJson => {
+      expect(changedJson.equals(expected)).toBeTruthy();
+    });
+
+    service.addIn(path, value);
+  });
+
+  it('should add new field if addIn path is to an object property', () => {
+    let json = fromJS({
+      aMap: {}
+    });
+    service.setJson(json);
+    let value = 'value';
+    let path = ['aMap', 'aProp'];
+    let expected = fromJS({
+      aMap: {
+        aProp: 'value'
+      }
+    });
+
+    service.jsonChange.subscribe(changedJson => {
+      expect(changedJson.equals(expected)).toBeTruthy();
+    });
+
+    service.addIn(path, value);
+  });
+
   it('should shift the first element if the new pushed element exceeds the maximum history length', () => {
     let initialJson = fromJS({
       aMap: {

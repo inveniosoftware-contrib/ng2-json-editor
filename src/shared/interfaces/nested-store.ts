@@ -11,4 +11,17 @@ export interface NestedStore {
    * Set the value in path, in global store value.
    */
   setIn(path: Array<any>, value: any);
+
+  /**
+   * Removes the value in path, in global store value.
+   */
+  removeIn(path: Array<any>): any;
+
+  /**
+   * Adds the value to the path, in global store value.
+   *
+   * Inserts the value to the given path if the path is to an array index. (-1 for appending)
+   * calls `setIn` otherwise.
+   */
+  addIn(path: Array<any>, value: any);
 }

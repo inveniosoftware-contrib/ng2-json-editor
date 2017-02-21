@@ -1,4 +1,4 @@
-<div [ngSwitch]="valueType" [id]="pathString">
+<div [id]="pathString">
   <table class="primitive-field-container">
     <tr>
       <template #errorsTooltipTemplate>
@@ -9,28 +9,45 @@
         </ul>
       </template>
       <td class="value-container" [ngClass]="errorNgClass" [tooltip]="errorsTooltipTemplate" [isDisabled]="!isErrorTooltipEnabled">
-        <div *ngSwitchCase="'string'">
-          <textarea rows="1" textareaAutofit  attr.data-path="{{pathString}}" [tabindex]="tabIndex" [(ngModel)]="value" (blur)="commitValueChange()" (keypress)="onKeypress($event)"
-            placeholder="{{schema.title}}"></textarea>
-        </div>
-        <div *ngSwitchCase="'enum'">
-          <searchable-dropdown [pathString]="pathString" [value]="value" [placeholder]="schema.title" [items]="schema.enum" [shortcutMap]="schema.enumShorcutMap"
-                               (onSelect)="onSearchableDropdownSelect($event)" [tabIndex]="tabIndex"></searchable-dropdown>
-        </div>
-        <div *ngSwitchCase="'autocomplete'">
-          <autocomplete-input [pathString]="pathString" [value]="value" [path]="path" [autocompletionConfig]="schema.autocompletionConfig" (onBlur)="commitValueChange()"
-                              (onKeypress)="onKeypress($event)" (onValueChange)="onAutocompleteInputValueChange($event)"
-                              [placeholder]="schema.title" [tabIndex]="tabIndex"></autocomplete-input>
-        </div>
-        <div *ngSwitchCase="'integer'">
-          <input type="number" [(ngModel)]="value" [tabindex]="tabIndex" attr.data-path="{{pathString}}" (blur)="commitValueChange()" (keypress)="onKeypress($event)"
-            placeholder="{{schema.title}}">
-        </div>
-        <div *ngSwitchCase="'boolean'">
-          <input type="checkbox" [(ngModel)]="value" (ngModelChange)="commitValueChange()" placeholder="{{schema.title}}">
-        </div>
-        <div *ngSwitchDefault>
-          ## Not recognized type: {{valueType}}
+        <!-- EDITABLE VALUE -->
+        <div [ngSwitch]="jsonPatches.length">
+          <div *ngSwitchCase="0" [ngSwitch]="valueType">
+            <div *ngSwitchCase="'string'">
+              <textarea rows="1" textareaAutofit attr.data-path="{{pathString}}" [tabindex]="tabIndex" [(ngModel)]="value" (blur)="commitValueChange()"
+                (keypress)="onKeypress($event)" placeholder="{{schema.title}}"></textarea>
+            </div>
+            <div *ngSwitchCase="'enum'">
+              <searchable-dropdown [pathString]="pathString" [value]="value" [placeholder]="schema.title" [items]="schema.enum" [shortcutMap]="schema.enumShorcutMap"
+                (onSelect)="onSearchableDropdownSelect($event)" [tabIndex]="tabIndex"></searchable-dropdown>
+            </div>
+            <div *ngSwitchCase="'autocomplete'">
+              <autocomplete-input [pathString]="pathString" [value]="value" [path]="path" [autocompletionConfig]="schema.autocompletionConfig"
+                (onBlur)="commitValueChange()" (onKeypress)="onKeypress($event)" (onValueChange)="onAutocompleteInputValueChange($event)"
+                [placeholder]="schema.title" [tabIndex]="tabIndex"></autocomplete-input>
+            </div>
+            <div *ngSwitchCase="'integer'">
+              <input type="number" [(ngModel)]="value" [tabindex]="tabIndex" attr.data-path="{{pathString}}" (blur)="commitValueChange()"
+                (keypress)="onKeypress($event)" placeholder="{{schema.title}}">
+            </div>
+            <div *ngSwitchCase="'boolean'">
+              <input type="checkbox" [(ngModel)]="value" (ngModelChange)="commitValueChange()" placeholder="{{schema.title}}">
+            </div>
+            <div *ngSwitchDefault>
+              ## Not recognized type: {{valueType}}
+            </div>
+          </div>
+          <!-- PATCHES -->
+          <div *ngSwitchDefault>
+            <button class="btn btn-default" type="button" [popover]="mergePopover" popoverTitle="Merge" container="body">
+              {{value}} <i class="fa fa-exclamation-circle"></i>
+            </button>
+            <template #mergePopover>
+              <div *ngFor="let patch of jsonPatches; let i = index">
+                <text-diff [currentText]="value" [newText]="patch.value"></text-diff>
+                <patch-button-group (onAccept)="onPatchAccept(i)" (onReject)="onPatchReject(i)" (onAddNew)="onPatchAddNew(i)"></patch-button-group>
+              </div>
+            </template>
+          </div>
         </div>
       </td>
       <td class="link-button-container">

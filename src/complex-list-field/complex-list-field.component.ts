@@ -33,7 +33,13 @@ import { List, Map, Set } from 'immutable';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
 
-import { AppGlobalsService, JsonStoreService, DomUtilService, PathUtilService } from '../shared/services';
+import {
+  AppGlobalsService,
+  JsonStoreService,
+  DomUtilService,
+  PathUtilService,
+  JsonPatchService
+} from '../shared/services';
 
 import { LongListNavigatorConfig } from '../shared/interfaces';
 
@@ -64,8 +70,9 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
   constructor(public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
     public domUtilService: DomUtilService,
-    public pathUtilService: PathUtilService) {
-    super(appGlobalsService, jsonStoreService, pathUtilService);
+    public pathUtilService: PathUtilService,
+    public jsonPatchService: JsonPatchService) {
+    super(appGlobalsService, jsonStoreService, pathUtilService, jsonPatchService);
   }
 
   ngOnInit() {

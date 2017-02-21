@@ -26,8 +26,8 @@ import { Map, Set } from 'immutable';
 
 import { AbstractFieldComponent } from '../abstract-field';
 
-import { AppGlobalsService, JsonStoreService, PathUtilService } from '../shared/services';
 import { PathCache } from '../shared/interfaces';
+import { AppGlobalsService, JsonStoreService, PathUtilService, JsonPatchService } from '../shared/services';
 
 @Component({
   selector: 'object-field',
@@ -48,8 +48,9 @@ export class ObjectFieldComponent extends AbstractFieldComponent implements OnIn
 
   constructor(public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
-    public pathUtilService: PathUtilService) {
-    super(appGlobalsService, pathUtilService);
+    public pathUtilService: PathUtilService,
+    public jsonPatchService: JsonPatchService) {
+    super(appGlobalsService, pathUtilService, jsonPatchService);
   }
 
   ngOnInit() {

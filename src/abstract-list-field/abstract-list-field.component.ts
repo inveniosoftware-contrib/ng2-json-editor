@@ -24,8 +24,8 @@ import { List } from 'immutable';
 
 import { AbstractFieldComponent } from '../abstract-field';
 
-import { JsonStoreService, AppGlobalsService, PathUtilService } from '../shared/services';
 import { PathCache } from '../shared/interfaces';
+import { JsonStoreService, AppGlobalsService, PathUtilService, JsonPatchService } from '../shared/services';
 
 /**
  * Abstract component to share code of common operations of all array fields
@@ -42,8 +42,9 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
 
   constructor(public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
-    public pathUtilService: PathUtilService) {
-    super(appGlobalsService, pathUtilService);
+    public pathUtilService: PathUtilService,
+    public jsonPatchService: JsonPatchService) {
+    super(appGlobalsService, pathUtilService, jsonPatchService);
   }
   /**
    * @param {number} index - Index of the element that is moved

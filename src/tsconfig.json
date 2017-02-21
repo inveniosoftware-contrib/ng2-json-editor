@@ -19,7 +19,8 @@
     "inlineSources": true,
     "skipLibCheck": true,
     "types": [
-      "jasmine"
+      "jasmine",
+      "diff"
     ],
     "typeRoots": [
       "../node_modules/@types"

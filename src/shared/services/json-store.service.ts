@@ -30,6 +30,25 @@ export class JsonStoreService implements NestedStore {
     return this.json.getIn(path);
   }
 
+  removeIn(path: Array<any>): any {
+    // TODO: test??
+    this.json = this.json.removeIn(path);
+    this._jsonChange.next(this.json);
+  }
+
+  addIn(path: Array<any>, value: any) {
+    let lastPathElement = path[path.length - 1];
+    let isToIndex = typeof lastPathElement === 'number';
+    if (isToIndex) {
+      let pathWithoutIndex = path.slice(0, path.length - 1);
+      let list = this.getIn(pathWithoutIndex) as List<any>;
+      list = lastPathElement < 0 ? list.push(value) : list.insert(lastPathElement, value);
+      this.setIn(pathWithoutIndex, list);
+    } else {
+      this.setIn(path, value);
+    }
+  }
+
   setJson(json: Map<string, any>) {
     this.json = json;
   }

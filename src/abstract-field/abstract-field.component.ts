@@ -25,7 +25,9 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { AbstractTrackerComponent } from '../abstract-tracker';
 
-import { AppGlobalsService, PathUtilService } from '../shared/services';
+import { AppGlobalsService, PathUtilService, JsonPatchService } from '../shared/services';
+
+import { JsonPatch } from '../shared/interfaces';
 
 /**
  * This is the base class for fields
@@ -41,10 +43,13 @@ export abstract class AbstractFieldComponent
 
   path: Array<any>;
   errors: Array<Object> = [];
+  jsonPatches: Array<JsonPatch>;
   errorsSubscription: Subscription;
+  jsonPatchesSubscription: Subscription;
 
   constructor(public appGlobalsService: AppGlobalsService,
-    public pathUtilService: PathUtilService) {
+    public pathUtilService: PathUtilService,
+    public jsonPatchService: JsonPatchService) {
     super();
   }
 
@@ -54,12 +59,36 @@ export abstract class AbstractFieldComponent
       .subscribe((globalErrors) => {
         this.errors = globalErrors[this.pathString] || [];
       });
+
+    this.jsonPatchesSubscription = this.jsonPatchService
+      .patchesByPath$
+      .subscribe(patchesByPath => {
+        this.jsonPatches = patchesByPath[this.pathString] || [];
+      });
   }
 
   ngOnDestroy() {
     if (this.errorsSubscription) {
       this.errorsSubscription.unsubscribe();
     }
+  }
+
+  onPatchAccept(patchIndex: number) {
+    this.jsonPatchService.apply(this.jsonPatches[patchIndex]);
+    this.jsonPatches.splice(0, this.jsonPatches.length);
+  }
+
+  onPatchReject(patchIndex: number) {
+    this.jsonPatchService.apply(this.jsonPatches[patchIndex]);
+    this.jsonPatches.splice(patchIndex, 1);
+  }
+
+  onPatchAdd(patchIndex: number) {
+    let patch = this.jsonPatches[patchIndex];
+    patch.op = 'add';
+    // FIXME: what if patch.path is not to an index.
+    this.jsonPatchService.apply(patch);
+    this.jsonPatches.splice(patchIndex, 1);
   }
 
   get errorNgClass(): Object {
