@@ -47,7 +47,7 @@ import {
   ShortcutService
 } from './shared/services';
 
-import { JsonEditorConfig, Preview, SchemaValidationErrors } from './shared/interfaces';
+import { JsonEditorConfig, Preview, SchemaValidationErrors, PathCache } from './shared/interfaces';
 
 
 @Component({
@@ -73,6 +73,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   previews: Array<Preview> = [];
   isPreviewerHidden: boolean;
   keys: Set<string>;
+  pathCache: PathCache = {};
 
   constructor(public http: Http,
     public appGlobalsService: AppGlobalsService,
@@ -154,7 +155,10 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   }
 
   getPathForField(field: string): Array<any> {
-    return [field];
+    if (!this.pathCache[field]) {
+      this.pathCache[field] = [field];
+    }
+    return this.pathCache[field];
   }
 
   onFieldAdd(field: string) {
