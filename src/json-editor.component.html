@@ -9,7 +9,7 @@
   </div>
   <div id="editor-middle-column" [ngClass]="{widerColumn6: isPreviewerHidden}" class="col-md-6 middle" [shortcuts]="shortcuts">
     <table id="editor" class="table">
-      <div class="field-wrapper" *ngFor="let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema; trackBy:trackByFunction">
+      <div class="field-wrapper" *ngFor="let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema; trackBy:trackByElement">
         <tr>
           <td class="label-holder">
             <title-dropdown [title]="key | underscoreToSpace" [isDisabled]="schema.properties[key].disabled">

@@ -22,7 +22,11 @@
 
 export abstract class AbstractTrackerComponent {
 
-  trackByFunction(index: number, element: any): any {
+  trackByElement(index: number, element: any): any {
     return element;
+  }
+
+  trackByIndex(index: number, element: any): any {
+    return index;
   }
 }

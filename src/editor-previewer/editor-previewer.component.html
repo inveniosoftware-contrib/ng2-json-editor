@@ -1,6 +1,6 @@
 <div>
   <tabset>
-    <tab *ngFor="let preview of previews trackBy:trackByFunction" [heading]="preview.name">
+    <tab *ngFor="let preview of previews trackBy:trackByElement" [heading]="preview.name">
       <div [ngSwitch]="preview.type">
         <div *ngSwitchCase="'html'" class="preview-container">
           <template tabHeading>

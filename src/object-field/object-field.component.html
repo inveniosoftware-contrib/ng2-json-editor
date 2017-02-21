@@ -1,6 +1,6 @@
 <div [id]="pathString">
   <table class="table">
-    <tr *ngFor="let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema; trackBy:trackByFunction">
+    <tr *ngFor="let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema; trackBy:trackByElement">
       <!-- SUB FIELD TITLE MENU -->
       <td>
         <div>
