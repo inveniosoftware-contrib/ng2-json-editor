@@ -148,8 +148,8 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   }
 
   deleteField(field: string) {
-    this._record = this._record.remove(field);
-    this.jsonStoreService.setJson(this._record);
+    let record = this._record.remove(field);
+    this.jsonStoreService.setIn([], record);
 
     this.keys = this.keys.remove(field);
   }
