@@ -105,7 +105,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   }
 
   get tabIndex(): number {
-    return this.tabIndexService.getElemTabIndex(this.pathString);
+    return this.schema['disabled'] ? -1 : this.tabIndexService.getElemTabIndex(this.pathString);
   }
 
   setTabIndex() {
