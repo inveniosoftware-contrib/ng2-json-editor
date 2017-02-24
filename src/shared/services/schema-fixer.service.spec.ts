@@ -275,6 +275,59 @@ describe('SchemaFixerService', () => {
     expect(fixed).toEqual(expected);
   });
 
+  it(`should pass disable config for an element to all items and properties
+      of its children `, () => {
+    let schema = {
+      type: 'object',
+      properties: {
+        parent: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              prop1: {
+                type: 'string'
+              },
+              prop2: {
+                type: 'string'
+              }
+            }
+          }
+        }
+      }
+    };
+    let config = {
+      '/parent': {
+        disabled: true
+      }
+    };
+    let expected = {
+      type: 'object',
+      properties: {
+        parent: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              prop1: {
+                type: 'string',
+                disabled: true
+              },
+              prop2: {
+                type: 'string',
+                disabled: true
+              }
+            },
+            disabled: true
+          },
+          disabled: true
+        }
+      }
+    };
+    let fixed = service.fixSchema(schema, config);
+    expect(fixed).toEqual(expected);
+  });
+
   it('should warn user when config order key does not exist', () => {
     let schema = {
       type: 'object',

@@ -77,8 +77,12 @@ export class SchemaFixerService {
       schema = this.fixAnyOf(schema);
     } else if (schema['allOf']) {
       schema = this.fixAllOf(schema);
-    } else if (schema['order']) {
+    }
+    if (schema['order']) {
       schema = this.fixOrder(schema);
+    }
+    if (schema['disabled']) {
+      schema = this.fixDisabled(schema);
     }
     // schema fixes must be done above
 
@@ -90,6 +94,22 @@ export class SchemaFixerService {
         });
     } else if (schema['items']) {
       schema['items'] = this.fixRecursively(schema['items']);
+    }
+    return schema;
+  }
+
+  /**
+   * Fixes disabled config to assign the disabled attribute
+   * to array items or object properties
+   */
+  fixDisabled(schema: Object): Object {
+    if (schema['items']) {
+      schema['items']['disabled'] = true;
+    } else if (schema['properties']) {
+      Object.keys(schema['properties'])
+        .forEach(prop => {
+          schema['properties'][prop]['disabled'] = true;
+        });
     }
     return schema;
   }
@@ -172,6 +192,11 @@ export class SchemaFixerService {
           };
         }
       });
+    // copy disabled attribute inside fixedSchema because it
+    // is outside anyOf element and is ignored
+    if (schema['disabled']) {
+      fixedSchema['disabled'] = true;
+    }
     return fixedSchema;
   }
 
