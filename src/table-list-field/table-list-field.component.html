@@ -3,7 +3,7 @@
     <table class="table editable-inner-table">
       <thead class="thead-inverse">
         <tr>
-          <th *ngFor="let key of keys | addAlwaysShowFields:schema.items | filterAndSortBySchema:schema.items; trackBy:trackByFunction">
+          <th *ngFor="let key of keys | addAlwaysShowFields:schema.items | filterAndSortBySchema:schema.items; trackBy:trackByElement">
             {{key | underscoreToSpace}}
           </th>
 
@@ -14,9 +14,9 @@
 
         </tr>
       </thead>
-      <tr *ngFor="let row of values; let i = index; trackBy:trackByFunction" [id]="getElementPathString(i)">
+      <tr *ngFor="let row of values; let i = index; trackBy:trackByIndex" [id]="getElementPathString(i)">
         <!-- Element value -->
-        <td *ngFor="let key of keys | addAlwaysShowFields:schema.items | filterAndSortBySchema:schema.items; trackBy:trackByFunction"
+        <td *ngFor="let key of keys | addAlwaysShowFields:schema.items | filterAndSortBySchema:schema.items; trackBy:trackByElement"
           [style.width]="schema.items.properties[key].columnWidth + '%'">
           <any-type-field [value]="row.get(key) | selfOrEmpty:schema.items.properties[key]" [schema]="schema.items.properties[key]"
             [path]="getValuePath(i, key)"></any-type-field>
