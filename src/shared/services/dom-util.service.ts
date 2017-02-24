@@ -53,7 +53,7 @@ export class DomUtilService {
       }
       let nextSibling = direction > 0 ? elementParentCell.nextElementSibling : elementParentCell.previousElementSibling;
       while (nextSibling && nextSibling.nodeName === 'TD') {
-        let inputElement = nextSibling.querySelector('input[tabindex],textarea[tabindex]') as HTMLInputElement;
+        let inputElement = nextSibling.querySelector(`input[tabindex='1'],textarea[tabindex='1']`) as HTMLInputElement;
         if (inputElement) {
           inputElement.focus();
           inputElement.select();

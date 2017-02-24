@@ -22,7 +22,6 @@
 
 import { TestBed, inject } from '@angular/core/testing';
 import {ShortcutService} from './shortcut.service';
-import {TabIndexService} from './tab-index.service';
 import {ShortcutActionService} from './shortcut-action.service';
 import {EmptyValueService} from './empty-value.service';
 import {JsonStoreService} from './json-store.service';
@@ -35,7 +34,6 @@ describe('ShortcutService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        TabIndexService,
         ShortcutActionService,
         ShortcutService,
         EmptyValueService,

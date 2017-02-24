@@ -25,7 +25,6 @@ import { EmptyValueService } from './empty-value.service';
 import { JsonStoreService } from './json-store.service';
 import { JsonSchemaService } from './json-schema.service';
 import { DomUtilService } from './dom-util.service';
-import { TabIndexService } from './tab-index.service';
 import { PathUtilService } from './path-util.service';
 import { List } from 'immutable';
 
@@ -36,8 +35,7 @@ export class ShortcutActionService {
               public domUtilService: DomUtilService,
               public jsonStoreService: JsonStoreService,
               public jsonSchemaService: JsonSchemaService,
-              public pathUtilService: PathUtilService,
-              public tabIndexService: TabIndexService) { }
+              public pathUtilService: PathUtilService) { }
 
   addToRootAction(path: Array<any>): void {
     this.add(path, true);
@@ -63,7 +61,7 @@ export class ShortcutActionService {
     this.jsonStoreService.setIn(path, values.push(emptyValue));
     path.push(values.size);
     setTimeout(() => {
-      this.updateTabIndexesAndFocusElementInPath(this.pathUtilService.toPathString(path));
+      this.focusElementInPath(this.pathUtilService.toPathString(path));
     });
   }
 
@@ -85,9 +83,7 @@ export class ShortcutActionService {
     path[path.length - 2] = this.moveElement(index, direction, this.pathUtilService.getNearestOrRootArrayParentInPath(path, false));
     let pathString = this.pathUtilService.toPathString(path);
     setTimeout(() => {
-      this.domUtilService.flashElementById(pathString);
-      this.domUtilService.focusAndSelectFirstInputChildById(pathString);
-      this.tabIndexService.sortAndSynchronizeTabIndexes();
+      this.focusElementInPath(pathString);
     });
   }
 
@@ -122,10 +118,6 @@ export class ShortcutActionService {
   private deleteElement(path: Array<any>, index: number) {
     let values = this.jsonStoreService.getIn(path);
     this.jsonStoreService.setIn(path, values.remove(index));
-    let pathString = this.pathUtilService.toPathString(path);
-    setTimeout(() => {
-      this.tabIndexService.deleteElemTabIndex(pathString);
-    });
   }
 
   navigateUpAction(path: Array<any>): void {
@@ -207,13 +199,12 @@ export class ShortcutActionService {
       }
       this.jsonStoreService.setIn(arrayParentPath, valuesList.insert(elemIndex + 1, newValue));
       setTimeout(() => {
-        this.updateTabIndexesAndFocusElementInPath(newPathString);
+        this.focusElementInPath(newPathString);
       });
     }
   }
 
-  private updateTabIndexesAndFocusElementInPath(path: string) {
-    this.tabIndexService.insertElemTabIndex(path);
+  private focusElementInPath(path: string) {
     this.domUtilService.flashElementById(path);
     this.domUtilService.focusAndSelectFirstInputChildById(path);
   }
@@ -223,7 +214,7 @@ export class ShortcutActionService {
     return (event: KeyboardEvent) => {
       event.preventDefault();
       let eventTarget = event.target as HTMLInputElement;
-      this[action](this.tabIndexService.getPathFromTabIndex(eventTarget.tabIndex));
+      this[action](this.pathUtilService.toPathArray(eventTarget.getAttribute('data-path')));
       return false;
     };
   }

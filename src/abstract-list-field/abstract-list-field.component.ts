@@ -24,7 +24,7 @@ import { List } from 'immutable';
 
 import { AbstractFieldComponent } from '../abstract-field';
 
-import { JsonStoreService, AppGlobalsService, TabIndexService, PathUtilService } from '../shared/services';
+import { JsonStoreService, AppGlobalsService, PathUtilService } from '../shared/services';
 import { PathCache } from '../shared/interfaces';
 
 /**
@@ -42,7 +42,6 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
 
   constructor(public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
-    public tabIndexService: TabIndexService,
     public pathUtilService: PathUtilService) {
     super(appGlobalsService, pathUtilService);
   }
@@ -57,9 +56,6 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
       .set(index, this.values.get(newIndex))
       .set(newIndex, temp);
     this.jsonStoreService.setIn(this.path, this.values);
-    setTimeout(() => {
-      this.tabIndexService.sortAndSynchronizeTabIndexes();
-    });
   }
 
   /**
@@ -69,9 +65,6 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
     this.jsonStoreService.setIn(this.path, this.values.remove(index));
     this.values = this.jsonStoreService.getIn(this.path);
     let elementPathString = this.getElementPathString(index);
-    setTimeout(() => {
-      this.tabIndexService.deleteElemTabIndex(elementPathString);
-    });
   }
 
   /**

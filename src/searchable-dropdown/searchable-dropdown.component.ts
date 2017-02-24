@@ -35,6 +35,7 @@ export class SearchableDropdownComponent implements OnInit {
   @Input() items: Array<string>;
   @Input() shortcutMap: Object;
   @Input() value: string;
+  @Input() pathString: string;
   @Input() tabIndex: number;
   @Input() placeholder: string;
   expression = '';

@@ -3,7 +3,7 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { List } from 'immutable';
 
 
-import { DomUtilService, EmptyValueService, JsonStoreService, TabIndexService, PathUtilService } from '../shared/services';
+import { DomUtilService, EmptyValueService, JsonStoreService, PathUtilService } from '../shared/services';
 
 @Component({
   selector: 'add-new-element-button',
@@ -21,7 +21,6 @@ export class AddNewElementButtonComponent {
   constructor(public domUtilService: DomUtilService,
     public emptyValueService: EmptyValueService,
     public jsonStoreService: JsonStoreService,
-    public tabIndexService: TabIndexService,
     public pathUtilService: PathUtilService) { }
 
   addNewElement() {
@@ -34,7 +33,6 @@ export class AddNewElementButtonComponent {
     let newElementPathString = this.pathUtilService.toPathString(newElementPath);
     setTimeout(() => {
       this.domUtilService.focusAndSelectFirstInputChildById(newElementPathString);
-      this.tabIndexService.sortAndSynchronizeTabIndexes();
     });
   }
 

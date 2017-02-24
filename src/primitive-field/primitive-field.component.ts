@@ -34,7 +34,6 @@ import {
   ComponentTypeService,
   JsonStoreService,
   SchemaValidationService,
-  TabIndexService,
   PathUtilService
 } from '../shared/services';
 
@@ -58,7 +57,6 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     public componentTypeService: ComponentTypeService,
     public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
-    public tabIndexService: TabIndexService,
     public pathUtilService: PathUtilService) {
     super(appGlobalsService, pathUtilService);
   }
@@ -70,9 +68,6 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   ngOnInit() {
     super.ngOnInit();
     this.schema = this.schema || {};
-    if (!(this.valueType === 'boolean')) {
-      this.setTabIndex();
-    }
   }
 
   commitValueChange() {
@@ -105,10 +100,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   }
 
   get tabIndex(): number {
-    return this.schema['disabled'] ? -1 : this.tabIndexService.getElemTabIndex(this.pathString);
+    return this.schema['disabled'] ? -1 : 1;
   }
 
-  setTabIndex() {
-    this.tabIndexService.addElemTabIndex(this.pathString);
-  }
 }

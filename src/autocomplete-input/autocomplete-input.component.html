@@ -1,4 +1,4 @@
 <div class="autocomplete-container">
-  <input [ngModel]="value" (ngModelChange)="onModelChange($event)" (keypress)="onKeypress.emit($event)" (blur)="onBlur.emit()" [typeahead]="dataSource" [typeaheadOptionsLimit]="autocompletionConfig.size"
-    [typeaheadOptionField]="typeaheadOptionField" (typeaheadOnSelect)="onCompletionSelect($event.item)" [typeaheadWaitMs]="200" [tabIndex]="tabindex" placeholder="{{placeholder}}">
+  <input attr.data-path="{{pathString}}" [ngModel]="value" (ngModelChange)="onModelChange($event)" (keypress)="onKeypress.emit($event)" (blur)="onBlur.emit()" [typeahead]="dataSource" [typeaheadOptionsLimit]="autocompletionConfig.size"
+         [typeaheadOptionField]="typeaheadOptionField" (typeaheadOnSelect)="onCompletionSelect($event.item)" [typeaheadWaitMs]="200" [tabindex]="tabIndex" placeholder="{{placeholder}}">
 </div>

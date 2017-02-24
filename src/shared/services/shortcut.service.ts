@@ -22,7 +22,6 @@
 
 
 import { Injectable } from '@angular/core';
-import { TabIndexService } from './tab-index.service';
 import { ShortcutActionService } from './shortcut-action.service';
 
 import { CustomShortcuts } from '../interfaces/custom-shortcuts';
@@ -77,8 +76,7 @@ export class ShortcutService {
     }
   };
 
-  constructor(public tabIndexService: TabIndexService,
-    public shortcutActionService: ShortcutActionService) { }
+  constructor(public shortcutActionService: ShortcutActionService) { }
 
   getShortcutsWithConfig(customShortcuts?: CustomShortcuts): Object {
     if (customShortcuts) {
