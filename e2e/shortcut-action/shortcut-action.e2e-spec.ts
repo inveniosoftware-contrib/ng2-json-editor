@@ -83,28 +83,6 @@ describe('ShortcutAction', function() {
    expect(targetRowPromise).toEqual(currentRowPromise);
   });
 
-  it(`should update tabindexes correctly of the switched rows when moving up clicking the button`, () => {
-    page.getChildOfElementByCss(page.getElementById('/accelerator_experiments/1/experiment'), 'textarea')
-      .getAttribute('tabIndex')
-      .then(currentTabindex => {
-        page.getChildOfElementByCss( page.getElementById('/accelerator_experiments/1'), '.editor-btn-move-up').click();
-        let targetRowElem = page.getChildOfElementByCss(page.getElementById('/accelerator_experiments/0/experiment'), 'textarea');
-        // moved element's tabindex must have decreased by 1
-        expect((parseInt(currentTabindex, 10) - 1).toString()).toEqual(targetRowElem.getAttribute('tabIndex'));
-      });
-  });
-
-  it(`should update tabindexes correctly of the switched rows when moving down clicking the button`, () => {
-    page.getChildOfElementByCss(page.getElementById('/accelerator_experiments/0/experiment'), 'textarea')
-    .getAttribute('tabIndex')
-    .then(currentTabindex => {
-      page.getChildOfElementByCss( page.getElementById('/accelerator_experiments/0'), '.editor-btn-move-down').click();
-      let targetRowElem = page.getChildOfElementByCss(page.getElementById('/accelerator_experiments/1/experiment'), 'textarea');
-      // moved element's tabindex must have decreased by 1
-      expect((parseInt(currentTabindex, 10) + 1).toString()).toEqual(targetRowElem.getAttribute('tabIndex'));
-    });
-  });
-
   it(`should delete the current row in table  using 'mod+backspace' shortcut`, () => {
     let elem = page.getChildOfElementByCss(page.getElementById('/keywords/0/keyword'), 'textarea');
     let elemBeforeDeletionThatWillBeShifted = page.getChildOfElementByCss(page.getElementById('/keywords/1/keyword'), 'textarea')

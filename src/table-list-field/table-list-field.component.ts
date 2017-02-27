@@ -26,7 +26,7 @@ import { List, Map, Set } from 'immutable';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
 
-import { AppGlobalsService, JsonStoreService, TabIndexService, PathUtilService } from '../shared/services';
+import { AppGlobalsService, JsonStoreService, PathUtilService } from '../shared/services';
 
 @Component({
   selector: 'table-list-field',
@@ -46,9 +46,8 @@ export class TableListFieldComponent extends AbstractListFieldComponent implemen
 
   constructor(public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
-    public tabIndexService: TabIndexService,
     public pathUtilService: PathUtilService) {
-    super(appGlobalsService, jsonStoreService, tabIndexService, pathUtilService);
+    super(appGlobalsService, jsonStoreService, pathUtilService);
   }
 
   ngOnInit() {
@@ -61,8 +60,5 @@ export class TableListFieldComponent extends AbstractListFieldComponent implemen
 
   onFieldAdd(field: string) {
     this.keys = this.keys.add(field);
-    setTimeout(() => {
-      this.tabIndexService.sortAndSynchronizeTabIndexes();
-    });
   }
 }

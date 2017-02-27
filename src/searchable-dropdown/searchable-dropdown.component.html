@@ -1,6 +1,6 @@
 <div class="btn-group" dropdown keyboardNav="true" [(isOpen)]="status.isOpen">
   <div class="toggle-container">
-    <input #inputToggle [placeholder]="placeholder" [(ngModel)]="expressionOrValue" (keypress)="onKeypress($event.key)" [tabindex]="tabIndex"
+    <input #inputToggle attr.data-path="{{pathString}}" [placeholder]="placeholder" [(ngModel)]="expressionOrValue" (keypress)="onKeypress($event.key)" [tabindex]="tabIndex"
       (focus)="onFocus($event)" dropdownToggle>
       <i class="fa fa-caret-down" (click)="inputToggle.focus()" dropdownToggle></i>
   </div>

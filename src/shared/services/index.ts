@@ -15,7 +15,6 @@ import { SchemaFixerService } from './schema-fixer.service';
 import { SchemaValidationService } from './schema-validation.service';
 import { ShortcutActionService } from './shortcut-action.service';
 import { ShortcutService } from './shortcut.service';
-import { TabIndexService } from './tab-index.service';
 import { WindowHrefService } from './window-href.service';
 
 export {
@@ -36,7 +35,6 @@ export {
   SchemaValidationService,
   ShortcutActionService,
   ShortcutService,
-  TabIndexService,
   WindowHrefService
 };
 
@@ -58,6 +56,5 @@ export const SHARED_SERVICES = [
   SchemaValidationService,
   ShortcutActionService,
   ShortcutService,
-  TabIndexService,
   WindowHrefService
 ];
