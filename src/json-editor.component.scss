@@ -2,6 +2,7 @@ $text-button-font-size: 13px;
 $button-font-size: 16px;
 $table-editable-rows-background: #edf6fd;
 $label-color: #c1c1c1;
+$error-color: #f2968d;
 
 body, html {
   height:100%;
@@ -99,6 +100,10 @@ table {
     width: 1%;
     white-space: nowrap;
     padding-right: 5px;
+  }
+
+  td.error {
+    background-color: $error-color !important;
   }
 
   tbody {

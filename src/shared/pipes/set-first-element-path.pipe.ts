@@ -1,6 +1,6 @@
 /*
  * This file is part of ng2-json-editor.
- * Copyright (C) 2016 CERN.
+ * Copyright (C) 2017 CERN.
  *
  * ng2-json-editor is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -18,27 +18,23 @@
  * In applying this license, CERN does not
  * waive the privileges and immunities granted to it by virtue of its status
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
-*/
+ */
 
+import { Pipe, PipeTransform } from '@angular/core';
 
-import { SchemaValidationService } from './schema-validation.service';
+import { Set } from 'immutable';
+import { AppGlobalsService, PathUtilService } from '../services';
 
-describe('SchemaValidationService', () => {
+@Pipe({
+  name: 'setFirstElementPath'
+})
+export class SetFirstElementPathPipe implements PipeTransform {
 
-  const schema = { 'type': 'string', 'pattern': '[0-9]' };
+  constructor(public appGlobalsService: AppGlobalsService,
+              public pathUtilService: PathUtilService) { }
 
-  let service: SchemaValidationService;
-
-  beforeEach(() => {
-    service = new SchemaValidationService();
-  });
-
-  it('should validate pattern correctly', () => {
-    let expectedInValid = [{
-      message: `should match pattern "[0-9]"`
-    }];
-
-    expect(service.validateValue('1', schema)).toEqual([]);
-    expect(service.validateValue('a', schema)).toEqual(expectedInValid);
-  });
-});
+  transform(fields: Set<string>, tabName: string): Set<string> {
+    this.appGlobalsService.tabNameToFirstTopLevelElement[tabName] = `${this.pathUtilService.separator}${fields.first()}`;
+    return fields;
+  }
+}

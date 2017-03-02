@@ -21,40 +21,73 @@
 */
 
 import { Injectable } from '@angular/core';
+import * as Ajv from 'ajv';
 
 @Injectable()
 export class SchemaValidationService {
 
-  /**
-   * Validate string value against schema
-   *
-   * @throws {Error} if value can not be validated
-   *
-   * Checks: pattern
-   *
-   */
-  validateStringValue(value: string, schema: Object) {
-    let pattern = schema['pattern'];
-    if (pattern && !value.match(pattern)) {
-      throw Error(`Does not match with pattern: ${pattern}`);
-    }
+  private ajv = new Ajv({allErrors: true});
+  // https://gist.github.com/dperini/729294
+  private reWebUrl = new RegExp(
+    '^' +
+    // protocol identifier
+    '(?:(?:https?|ftp)://)' +
+    // user:pass authentication
+    '(?:\\S+(?::\\S*)?@)?' +
+    '(?:' +
+    // IP address exclusion
+    // private & local networks
+    '(?!(?:10)(?:\\.\\d{1,3}){3})' +
+    '(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})' +
+    '(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})' +
+    // IP address dotted notation octets
+    // excludes loopback network 0.0.0.0
+    // excludes reserved space >= 224.0.0.0
+    // excludes network & broacast addresses
+    // (first & last IP address of each class)
+    '(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])' +
+    '(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}' +
+    '(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))' +
+    '|' +
+    'localhost' +
+    '|' +
+    // host name
+    '(?:(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)' +
+    // domain name
+    '(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*' +
+    // TLD identifier
+    '(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))' +
+    // TLD may end with dot
+    '\\.?' +
+    ')' +
+    // port number
+    '(?::\\d{2,5})?' +
+    // resource path
+    '(?:[/?#]\\S*)?' +
+    '$', 'i'
+  );
+
+  constructor() {
+    // ajv didn't support format:url, so was added using web url regex for validation
+    this.ajv.addFormat('url', this.reWebUrl);
   }
 
   /**
-   * Validate array value against schema
+   * Validates a specific value against schema
    *
-   * @throws {Error} if array can not be validated
-   *
-   * Checks: uniqueItems
+   * Uses: ajv package for json-schema validation
    *
    */
-  validateArray(array: Array<any>, schema) {
-    if (schema['uniqueItems']) {
-      let hasUniqueItems = (new Set(array)).size === array.length;
-      if (hasUniqueItems) {
-        throw Error(`All items must be unique`);
-      }
+  validateValue(value: any, schema: Object): Array<{message: string}> {
+    let schemaValidationErrors = [];
+    if (!this.ajv.validate(schema, value)) {
+      this.ajv.errors.forEach(error => {
+        schemaValidationErrors.push({
+          message: error.message
+        });
+      });
     }
+    return schemaValidationErrors;
   }
 
 }

@@ -5,6 +5,7 @@ import { FilterAndSortBySchemaPipe } from './filter-and-sort-by-schema.pipe';
 import { SanitizeUrlPipe } from './sanitize-url.pipe';
 import { SelfOrEmptyPipe } from './self-or-empty.pipe';
 import { UnderscoreToSpacePipe } from './underscore-to-space.pipe';
+import { SetFirstElementPathPipe } from './set-first-element-path.pipe';
 
 export {
   AddAlwaysShowFieldsPipe,
@@ -13,7 +14,8 @@ export {
   FilterAndSortBySchemaPipe,
   SanitizeUrlPipe,
   SelfOrEmptyPipe,
-  UnderscoreToSpacePipe
+  UnderscoreToSpacePipe,
+  SetFirstElementPathPipe
 };
 
 export const SHARED_PIPES = [
@@ -23,5 +25,6 @@ export const SHARED_PIPES = [
   FilterAndSortBySchemaPipe,
   SanitizeUrlPipe,
   SelfOrEmptyPipe,
-  UnderscoreToSpacePipe
+  UnderscoreToSpacePipe,
+  SetFirstElementPathPipe
 ];
