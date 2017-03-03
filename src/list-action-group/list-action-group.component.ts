@@ -20,31 +20,28 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  Output,
+  EventEmitter,
+  OnInit,
+  ViewEncapsulation,
+  ChangeDetectionStrategy
+} from '@angular/core';
 
-import { List } from 'immutable';
-
-import { AbstractListFieldComponent } from '../abstract-list-field';
-
-import { AppGlobalsService, JsonStoreService, PathUtilService } from '../shared/services';
 
 @Component({
-  selector: 'primitive-list-field',
+  selector: 'list-action-group',
+  encapsulation: ViewEncapsulation.None,
   styleUrls: [
-    './primitive-list-field.component.scss'
+    './list-action-group.component.scss'
   ],
-  templateUrl: './primitive-list-field.component.html',
+  templateUrl: './list-action-group.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PrimitiveListFieldComponent extends AbstractListFieldComponent {
-  @Input() values: List<any>;
-  @Input() schema: Object;
-  @Input() path: Array<any>;
+export class ListActionGroupComponent {
 
-  constructor(public appGlobalsService: AppGlobalsService,
-    public jsonStoreService: JsonStoreService,
-    public pathUtilService: PathUtilService) {
-    super(appGlobalsService, jsonStoreService, pathUtilService);
-  }
+  @Output() onDelete = new EventEmitter<void>();
+  @Output() onMove = new EventEmitter<number>();
 
 }

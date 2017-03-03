@@ -44,12 +44,14 @@ import { PrimitiveListFieldComponent } from './primitive-list-field';
 import { PrimitiveFieldComponent } from './primitive-field';
 import { RefFieldComponent } from './ref-field';
 import { TableListFieldComponent } from './table-list-field';
+import { TableItemFieldComponent } from './table-item-field';
 import { TitleDropdownComponent } from './title-dropdown';
 import {
   TreeMenuComponent,
   TreeMenuItemComponent
 } from './tree-menu';
 import { SearchableDropdownComponent } from './searchable-dropdown';
+import { ListActionGroupComponent } from './list-action-group';
 import { SHARED_PIPES, SHARED_SERVICES, SHARED_DIRECTIVES } from './shared';
 
 @NgModule({
@@ -70,7 +72,9 @@ import { SHARED_PIPES, SHARED_SERVICES, SHARED_DIRECTIVES } from './shared';
     PrimitiveFieldComponent,
     RefFieldComponent,
     SearchableDropdownComponent,
+    ListActionGroupComponent,
     TableListFieldComponent,
+    TableItemFieldComponent,
     TitleDropdownComponent,
     TreeMenuItemComponent,
     TreeMenuComponent,
@@ -103,7 +107,9 @@ export {
   PrimitiveFieldComponent,
   RefFieldComponent,
   SearchableDropdownComponent,
+  ListActionGroupComponent,
   TableListFieldComponent,
+  TableItemFieldComponent,
   TitleDropdownComponent,
   TreeMenuItemComponent,
   TreeMenuComponent,

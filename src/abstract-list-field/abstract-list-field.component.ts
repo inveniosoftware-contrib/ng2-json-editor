@@ -51,6 +51,10 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
    */
   moveElement(index: number, direction: number) {
     let newIndex = index + direction;
+    // Do nothing if the last moved down or the first moved up.
+    if (newIndex < 0 || newIndex >= this.values.size) {
+      return;
+    }
     let temp = this.values.get(index);
     this.values = this.values
       .set(index, this.values.get(newIndex))
@@ -67,19 +71,16 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
     let elementPathString = this.getElementPathString(index);
   }
 
-  /**
-   * Returns path of the property of an element at index.
-   */
-  getValuePath(index: number, property: string): Array<any> {
-    let valuePathString = `${this.getElementPathString(index)}${this.pathUtilService.separator}${property}`;
-    if (!this.pathCache[valuePathString]) {
-      this.pathCache[valuePathString] = this.path.concat(index, property);
-    }
-    return this.pathCache[valuePathString];
-  }
-
   getElementPathString(index: number): string {
     return `${this.pathString}${this.pathUtilService.separator}${index}`;
+  }
+
+  getElementPath(index: number): Array<any> {
+    let valuePathString = this.getElementPathString(index);
+    if (!this.pathCache[valuePathString]) {
+      this.pathCache[valuePathString] = this.path.concat(index);
+    }
+    return this.pathCache[valuePathString];
   }
 
 }
