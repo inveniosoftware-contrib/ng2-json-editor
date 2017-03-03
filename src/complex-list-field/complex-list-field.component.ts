@@ -57,7 +57,6 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
   @Input() schema: Object;
   @Input() path: Array<any>;
 
-  keys: List<Set<string>>;
   paginatedIndices: Array<number>;
 
   foundIndices: Array<number>;
@@ -83,7 +82,6 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
       // set all indices as paginated indices if pagination is not enabled.
       this.paginatedIndices = this.values.keySeq().toArray();
     }
-    this.keys = this.getKeysForCurrentPage();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -106,22 +104,7 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
         }
       }
 
-      this.keys = this.getKeysForCurrentPage();
     }
-  }
-
-  onFieldAdd(index: number, field: string) {
-    this.keys = this.keys
-      .update(index, value => value.add(field));
-  }
-
-  deleteField(index: number, field: string) {
-    this.values = this.values.removeIn([index, field]);
-    this.jsonStoreService.setIn(this.path, this.values);
-
-    // remove it from keys too, so that it will not be displayed as empty
-    this.keys = this.keys
-      .update(index, value => value.remove(field));
   }
 
   onFindClick() {
@@ -176,7 +159,6 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
   onPageChange(page: number) {
     this.currentPage = page;
     this.paginatedIndices = this.getIndicesForPage(page);
-    this.keys = this.getKeysForCurrentPage();
   }
 
   getIndicesForPage(page: number): Array<number> {
@@ -191,12 +173,6 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
     return indices;
   }
 
-  getKeysForCurrentPage(): List<Set<string>> {
-    return List(
-      this.paginatedIndices
-        .map(pIndex => this.values.get(pIndex).keySeq().toSet())
-    );
-  }
 
   getPageForIndex(index: number): number {
     return Math.floor((index / this.navigator.itemsPerPage) + 1);
