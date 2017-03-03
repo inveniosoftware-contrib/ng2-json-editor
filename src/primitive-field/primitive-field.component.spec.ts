@@ -30,6 +30,8 @@ import { Ng2BootstrapModule } from 'ng2-bootstrap';
 
 import { SearchableDropdownComponent } from '../searchable-dropdown';
 import { AutocompleteInputComponent } from '../autocomplete-input';
+import { TextDiffComponent } from '../text-diff';
+import { PatchButtonGroupComponent } from '../patch-button-group';
 import { PrimitiveFieldComponent } from './primitive-field.component';
 
 import { FilterByExpressionPipe } from '../shared/pipes';
@@ -39,7 +41,8 @@ import {
   ComponentTypeService,
   SchemaValidationService,
   JsonStoreService,
-  PathUtilService
+  PathUtilService,
+  JsonPatchService
 } from '../shared/services';
 
 /**
@@ -75,7 +78,9 @@ describe('PrimitiveFieldComponent', () => {
         FilterByExpressionPipe,
         AutocompleteInputComponent,
         SearchableDropdownComponent,
-        PrimitiveFieldComponent
+        PrimitiveFieldComponent,
+        TextDiffComponent,
+        PatchButtonGroupComponent
       ],
       imports: [
         Ng2BootstrapModule.forRoot()
@@ -85,6 +90,7 @@ describe('PrimitiveFieldComponent', () => {
         ComponentTypeService,
         SchemaValidationService,
         PathUtilService,
+        JsonPatchService,
         { provide: JsonStoreService, useClass: MockJsonStoreService }
       ]
     }).compileComponents();
@@ -93,6 +99,8 @@ describe('PrimitiveFieldComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PrimitiveFieldComponent);
     component = fixture.componentInstance;
+    // no patches by default
+    component.jsonPatches = [];
 
     // force component to render completely by setting @Input() manually
     component.value = 'defaultStringValue';

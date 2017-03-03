@@ -65,4 +65,11 @@ describe('PathUtilService', () => {
     let result = pathUtilService.toPathString(path);
     expect(result).toEqual(expected);
   });
+
+  it('should get last path element from path string (json-pointer)', () => {
+    let path = 'foo/bar/10';
+    let expected = '10';
+    let result = pathUtilService.getLastPathElement(path);
+    expect(result).toEqual(expected);
+  });
 });

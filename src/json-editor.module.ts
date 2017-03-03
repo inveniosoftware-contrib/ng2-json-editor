@@ -44,12 +44,16 @@ import { PrimitiveListFieldComponent } from './primitive-list-field';
 import { PrimitiveFieldComponent } from './primitive-field';
 import { RefFieldComponent } from './ref-field';
 import { TableListFieldComponent } from './table-list-field';
+import { TableItemFieldComponent } from './table-item-field';
+import { TextDiffComponent } from './text-diff';
 import { TitleDropdownComponent } from './title-dropdown';
 import {
   TreeMenuComponent,
   TreeMenuItemComponent
 } from './tree-menu';
 import { SearchableDropdownComponent } from './searchable-dropdown';
+import { PatchButtonGroupComponent } from './patch-button-group';
+import { ListActionGroupComponent } from './list-action-group';
 import { SHARED_PIPES, SHARED_SERVICES, SHARED_DIRECTIVES } from './shared';
 
 @NgModule({
@@ -70,12 +74,16 @@ import { SHARED_PIPES, SHARED_SERVICES, SHARED_DIRECTIVES } from './shared';
     PrimitiveFieldComponent,
     RefFieldComponent,
     SearchableDropdownComponent,
+    PatchButtonGroupComponent,
+    ListActionGroupComponent,
     TableListFieldComponent,
+    TableItemFieldComponent,
     TitleDropdownComponent,
     TreeMenuItemComponent,
     TreeMenuComponent,
     JsonEditorComponent,
-    HtmlViewComponent
+    HtmlViewComponent,
+    TextDiffComponent
   ],
   exports: [JsonEditorComponent],
   imports: [
@@ -103,10 +111,14 @@ export {
   PrimitiveFieldComponent,
   RefFieldComponent,
   SearchableDropdownComponent,
+  PatchButtonGroupComponent,
+  ListActionGroupComponent,
   TableListFieldComponent,
+  TableItemFieldComponent,
   TitleDropdownComponent,
   TreeMenuItemComponent,
   TreeMenuComponent,
   JsonEditorComponent,
-  HtmlViewComponent
+  HtmlViewComponent,
+  TextDiffComponent
 }

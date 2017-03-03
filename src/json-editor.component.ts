@@ -44,11 +44,11 @@ import {
   JsonSchemaService,
   RecordFixerService,
   SchemaFixerService,
-  ShortcutService
+  ShortcutService,
+  JsonPatchService
 } from './shared/services';
 
-import { JsonEditorConfig, Preview, SchemaValidationErrors, PathCache } from './shared/interfaces';
-
+import { JsonEditorConfig, Preview, SchemaValidationErrors, JsonPatch, PathCache } from './shared/interfaces';
 
 @Component({
   selector: 'json-editor',
@@ -66,6 +66,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   @Input() record: Object;
   @Input() schema: Object;
   @Input() errorMap: SchemaValidationErrors = {};
+  @Input() patches: Array<JsonPatch>;
 
   @Output() onRecordChange: EventEmitter<Object> = new EventEmitter<Object>();
 
@@ -82,7 +83,8 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     public jsonSchemaService: JsonSchemaService,
     public recordFixerService: RecordFixerService,
     public schemaFixerService: SchemaFixerService,
-    public shortcutsService: ShortcutService) {
+    public shortcutsService: ShortcutService,
+    public jsonPatchService: JsonPatchService) {
     super();
   }
 
@@ -117,6 +119,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
         this.onRecordChange.emit(json.toJS());
       });
     this.jsonSchemaService.setSchema(this.schema);
+    this.jsonPatchService.setJsonPatches(this.patches);
   }
 
   /**

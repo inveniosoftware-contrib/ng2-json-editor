@@ -18,34 +18,14 @@
  * In applying this license, CERN does not
  * waive the privileges and immunities granted to it by virtue of its status
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
-*/
+ */
 
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { diffWords, IDiffResult } from 'diff';
 
-import { List } from 'immutable';
-
-import { AbstractListFieldComponent } from '../abstract-list-field';
-
-import { AppGlobalsService, JsonStoreService, PathUtilService, JsonPatchService } from '../shared/services';
-
-@Component({
-  selector: 'primitive-list-field',
-  styleUrls: [
-    './primitive-list-field.component.scss'
-  ],
-  templateUrl: './primitive-list-field.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
-})
-export class PrimitiveListFieldComponent extends AbstractListFieldComponent {
-  @Input() values: List<any>;
-  @Input() schema: Object;
-  @Input() path: Array<any>;
-
-  constructor(public appGlobalsService: AppGlobalsService,
-    public jsonStoreService: JsonStoreService,
-    public pathUtilService: PathUtilService,
-    public jsonPatchService: JsonPatchService) {
-    super(appGlobalsService, jsonStoreService, pathUtilService, jsonPatchService);
+@Injectable()
+export class TextDiffService {
+  diffByWord(currentText: string, newText = ''): Array<IDiffResult> {
+    return diffWords(currentText, newText);
   }
-
 }

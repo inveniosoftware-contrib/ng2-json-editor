@@ -62,7 +62,7 @@ export class PathUtilService {
    * @returns {number} - Returns found index in path or -1 if not found
    */
   findIndexFromPath(path: Array<any>, directPathSearch: boolean): number {
-    path = directPathSearch ?  path : path.reverse();
+    path = directPathSearch ? path : path.reverse();
     for (let index in path) {
       if (!isNaN(path[index])) {
         return path[index];
@@ -87,6 +87,15 @@ export class PathUtilService {
     return pathString.split(this.separator)
       .slice(1) // remove the empty
       .map((key) => isNaN(parseInt(key, 10)) ? key : parseInt(key, 10));
+  }
+
+  /**
+   * Gets the last path element from `/` seperated path string.
+   * Example it returns '0' for '/foo/bar/0'
+   */
+  getLastPathElement(pathString: string): string {
+    let pathElements = pathString.split(this.separator);
+    return pathElements[pathElements.length - 1];
   }
 }
 

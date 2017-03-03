@@ -20,32 +20,40 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  Input,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
+} from '@angular/core';
 
-import { List } from 'immutable';
+import { IDiffResult } from 'diff';
 
-import { AbstractListFieldComponent } from '../abstract-list-field';
-
-import { AppGlobalsService, JsonStoreService, PathUtilService, JsonPatchService } from '../shared/services';
-
+import { TextDiffService } from '../shared/services';
+/**
+ * This component has dummy html but a logic to change the value of another part
+ * in top level json when its value changed. It's inserted in component tree
+ * just before the actual field, so that it can detect its change and
+ * run the call-back function
+ */
 @Component({
-  selector: 'primitive-list-field',
+  selector: 'text-diff',
+  templateUrl: './text-diff.component.html',
   styleUrls: [
-    './primitive-list-field.component.scss'
+    './text-diff.component.scss'
   ],
-  templateUrl: './primitive-list-field.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PrimitiveListFieldComponent extends AbstractListFieldComponent {
-  @Input() values: List<any>;
-  @Input() schema: Object;
-  @Input() path: Array<any>;
+export class TextDiffComponent {
 
-  constructor(public appGlobalsService: AppGlobalsService,
-    public jsonStoreService: JsonStoreService,
-    public pathUtilService: PathUtilService,
-    public jsonPatchService: JsonPatchService) {
-    super(appGlobalsService, jsonStoreService, pathUtilService, jsonPatchService);
+  @Input() newText: string;
+  @Input() currentText: string;
+
+  constructor(public textDiffService: TextDiffService) { }
+
+  get diffs(): Array<IDiffResult> {
+    return this.textDiffService
+      .diffByWord(this.currentText, this.newText);
   }
 
 }

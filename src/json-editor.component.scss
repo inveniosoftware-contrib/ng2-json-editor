@@ -92,21 +92,11 @@ table {
     opacity: 0.5;
     padding: 0px;
   }
-
-  &.editor-btn-delete-complex {
-    font-size: 21px;
-  }
 }
 
 .editor-btn-move-down {
   padding-bottom: 0;
 }
-
-.editor-btn-move-up-complex, .editor-btn-move-down-complex {
-    font-size: 14px !important;
-    vertical-align: bottom !important;
-    padding-bottom: 2px !important;
-  }
 
 .editor-btn-move-up, .editor-btn-move-down {
   padding: 0;
@@ -271,4 +261,15 @@ button.btn-toggle {
     top: 0px !important;
     left: 0px !important;
   }
+}
+
+.list-action-group-container {
+	text-align: right;
+	button {
+		font-size: 21px !important;
+	}
+
+	i {
+		font-size: 15px !important;
+	}
 }

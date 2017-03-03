@@ -20,32 +20,18 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-
-import { List } from 'immutable';
-
-import { AbstractListFieldComponent } from '../abstract-list-field';
-
-import { AppGlobalsService, JsonStoreService, PathUtilService, JsonPatchService } from '../shared/services';
+import { Component, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'primitive-list-field',
+  selector: 'patch-button-group',
   styleUrls: [
-    './primitive-list-field.component.scss'
+    './patch-button-group.component.scss'
   ],
-  templateUrl: './primitive-list-field.component.html',
+  templateUrl: './patch-button-group.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PrimitiveListFieldComponent extends AbstractListFieldComponent {
-  @Input() values: List<any>;
-  @Input() schema: Object;
-  @Input() path: Array<any>;
-
-  constructor(public appGlobalsService: AppGlobalsService,
-    public jsonStoreService: JsonStoreService,
-    public pathUtilService: PathUtilService,
-    public jsonPatchService: JsonPatchService) {
-    super(appGlobalsService, jsonStoreService, pathUtilService, jsonPatchService);
-  }
-
+export class PatchButtonGroupComponent {
+  @Output() onAccept = new EventEmitter<void>();
+  @Output() onReject = new EventEmitter<void>();
+  @Output() onAddNew = new EventEmitter<void>();
 }

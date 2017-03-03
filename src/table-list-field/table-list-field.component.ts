@@ -26,7 +26,7 @@ import { List, Map, Set } from 'immutable';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
 
-import { AppGlobalsService, JsonStoreService, PathUtilService } from '../shared/services';
+import { AppGlobalsService, JsonStoreService, PathUtilService, JsonPatchService } from '../shared/services';
 
 @Component({
   selector: 'table-list-field',
@@ -46,8 +46,9 @@ export class TableListFieldComponent extends AbstractListFieldComponent implemen
 
   constructor(public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
-    public pathUtilService: PathUtilService) {
-    super(appGlobalsService, jsonStoreService, pathUtilService);
+    public pathUtilService: PathUtilService,
+    public jsonPatchService: JsonPatchService) {
+    super(appGlobalsService, jsonStoreService, pathUtilService, jsonPatchService);
   }
 
   ngOnInit() {

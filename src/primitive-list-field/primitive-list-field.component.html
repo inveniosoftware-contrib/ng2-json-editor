@@ -3,20 +3,10 @@
     <table class="table">
       <tr *ngFor="let value of values | selfOrEmpty:schema; let i = index; trackBy:trackByElement">
         <td>
-          <primitive-field [value]="value" [schema]="schema.items" [path]="getValuePath(i)"></primitive-field>
+          <primitive-field [value]="value" [schema]="schema.items" [path]="getElementPath(i)"></primitive-field>
         </td>
-
-        <!-- UP/DOWN and DELETE buttons for each row -->
         <td *ngIf="values.size > 0" class="button-holder">
-          <button type="button" class="editor-btn-delete" (click)="deleteElement(i)">
-            &times;
-          </button>
-          <button *ngIf="i > 0" type="button" class="editor-btn-move-up" (click)="moveElement(i, -1)">
-            <i class="fa fa-chevron-up" aria-hidden="true"></i>
-          </button>
-          <button *ngIf="i < (values.size - 1)" type="button" class="editor-btn-move-down" (click)="moveElement(i, 1)">
-            <i class="fa fa-chevron-down" aria-hidden="true"></i>
-          </button>
+          <list-action-group (onMove)="moveElement(i, $event)" (onDelete)="deleteElement(i)"></list-action-group>
         </td>
       </tr>
     </table>

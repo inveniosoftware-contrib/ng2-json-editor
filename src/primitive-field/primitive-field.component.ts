@@ -34,7 +34,8 @@ import {
   ComponentTypeService,
   JsonStoreService,
   SchemaValidationService,
-  PathUtilService
+  PathUtilService,
+  JsonPatchService
 } from '../shared/services';
 
 @Component({
@@ -57,8 +58,9 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     public componentTypeService: ComponentTypeService,
     public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
-    public pathUtilService: PathUtilService) {
-    super(appGlobalsService, pathUtilService);
+    public pathUtilService: PathUtilService,
+    public jsonPatchService: JsonPatchService) {
+    super(appGlobalsService, pathUtilService, jsonPatchService);
   }
 
   get valueType(): string {

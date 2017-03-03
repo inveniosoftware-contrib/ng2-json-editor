@@ -1,0 +1,42 @@
+[
+  {
+    "op": "remove",
+    "path": "/abstracts/0/source"
+  },
+  {
+    "op": "replace",
+    "path": "/abstracts/0/source",
+    "value": "arXiv PATCHED"
+  },
+  {
+    "op": "replace",
+    "path": "/abstracts/0/source",
+    "value": "Completely different thing"
+  },
+  {
+    "op": "replace",
+    "path": "/collaboration/0/value",
+    "value": "PATCH 1"
+  },
+  {
+    "op": "replace",
+    "path": "/collaboration/0/value",
+    "value": "PATCH 2"
+  },
+  {
+    "op": "add",
+    "path": "/public_notes/-",
+    "value": {
+      "source": "Patch at the end",
+      "value": "This an add patch (end)"
+    }
+  },
+  {
+    "op": "add",
+    "path": "/public_notes/0",
+    "value": {
+      "source": "Patch at 0",
+      "value": "This an add patch (0)"
+    }
+  }
+]
