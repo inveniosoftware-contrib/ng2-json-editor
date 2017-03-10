@@ -46,6 +46,24 @@ export class AppConfig {
         key: 'mod+right'
       }
     },
-    enableAdminModeSwitch: true
+    enableAdminModeSwitch: true,
+    tabsConfig: {
+      defaultTabName: 'Main',
+      tabs: [
+        {
+          name: 'References',
+          properties: ['references']
+        },
+        {
+          name: 'Authors',
+          properties: [
+            'collaborations',
+            'accelerator_experiments',
+            'authors',
+            'corporate_author'
+          ]
+        }
+      ]
+    }
   };
 }

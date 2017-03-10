@@ -37,22 +37,22 @@ describe('ShortcutAction', function() {
       });
   });
 
-  it(`should add a new row under /authors/0/affiliations table using 'alt+a' shortcut`, () => {
-    page.getNumberOfChildRowsbyId('/authors/0/affiliations')
+  it(`should add a new row under table using 'alt+a' shortcut`, () => {
+    page.getNumberOfChildRowsbyId('/keywords')
       .then(tableRowsNum => {
-        let inputElem = page.getChildOfElementByCss(page.getElementById('/authors/0/affiliations/0/value'), 'textarea');
+        let inputElem = page.getChildOfElementByCss(page.getElementById('/keywords/0'), 'textarea');
         inputElem.sendKeys(protractor.Key.chord(protractor.Key.ALT, 'a'));
-        let newTableRowsNumPromise = page.getNumberOfChildRowsbyId('/authors/0/affiliations');
+        let newTableRowsNumPromise = page.getNumberOfChildRowsbyId('/keywords');
         expect(newTableRowsNumPromise).toEqual(tableRowsNum + 1);
       });
   });
 
-  it(`should add a new row under authors table using 'mod+shift+a' shortcut`, () => {
-    page.getNumberOfChildTablesbyId('/authors')
+  it(`should add a new row under table using 'mod+shift+a' shortcut`, () => {
+    page.getNumberOfChildRowsbyId('/arxiv_eprints')
       .then(tableRowsNum => {
-        let inputElem = page.getChildOfElementByCss(page.getElementById('/authors/0/affiliations/0/value'), 'textarea');
+        let inputElem = page.getChildOfElementByCss(page.getElementById('/arxiv_eprints/0/categories/0'), 'input');
         inputElem.sendKeys(protractor.Key.chord(mod, protractor.Key.SHIFT, 'a'));
-        let newTableRowsNumPromise = page.getNumberOfChildTablesbyId('/authors');
+        let newTableRowsNumPromise = page.getNumberOfChildRowsbyId('/arxiv_eprints');
         expect(newTableRowsNumPromise).toEqual(tableRowsNum + 1);
       });
   });
@@ -110,16 +110,16 @@ describe('ShortcutAction', function() {
   });
 
   it(`should copy new row under references table using 'mod+alt+r' shortcut.
-    It must copy the exact value of the root element eg Copy the whole author under the focused one.`, () => {
-    let inputElem = page.getChildOfElementByCss(page.getElementById('/authors/0/affiliations/0/value'), 'textarea');
-    let numberOfTextareaElementsBeforeCopyPromise = page.getNumberOfTextareaElementsById('/authors/0');
-    let numberOfInputElementsBeforeCopyPromise = page.getNumberOfInputElementsById('/authors/0');
+    It must copy the exact value of the root element eg Copy the whole element under the focused one.`, () => {
+    let inputElem = page.getChildOfElementByCss(page.getElementById('/keywords/0/keyword'), 'textarea');
+    let numberOfTextareaElementsBeforeCopyPromise = page.getNumberOfTextareaElementsById('/keywords/0');
+    let numberOfInputElementsBeforeCopyPromise = page.getNumberOfInputElementsById('/keywords/0');
     inputElem.sendKeys(protractor.Key.chord(mod, protractor.Key.ALT, 'r'));
-    let afterCopyInputElemValue = page.getChildOfElementByCss(page.getElementById('/authors/1/affiliations/0/value'), 'textarea')
+    let afterCopyInputElemValue = page.getChildOfElementByCss(page.getElementById('/keywords/1/keyword'), 'textarea')
       .getAttribute('value');
     expect(inputElem.getAttribute('value')).toEqual(afterCopyInputElemValue);
-    let numberOfTextareaElementsAfterCopyPromise = page.getNumberOfTextareaElementsById('/authors/1');
-    let numberOfInputElementsAfterCopyPromise = page.getNumberOfInputElementsById('/authors/1');
+    let numberOfTextareaElementsAfterCopyPromise = page.getNumberOfTextareaElementsById('/keywords/1');
+    let numberOfInputElementsAfterCopyPromise = page.getNumberOfInputElementsById('/keywords/1');
     expect(numberOfTextareaElementsBeforeCopyPromise).toEqual(numberOfTextareaElementsAfterCopyPromise);
     expect(numberOfInputElementsBeforeCopyPromise).toEqual(numberOfInputElementsAfterCopyPromise);
   });

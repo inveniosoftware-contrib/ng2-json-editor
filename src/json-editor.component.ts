@@ -31,6 +31,7 @@ import {
 } from '@angular/core';
 import { Http } from '@angular/http';
 
+import * as _ from 'lodash';
 import { fromJS, Map, Set } from 'immutable';
 import 'rxjs/add/operator/skipWhile';
 
@@ -70,9 +71,12 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   @Output() onRecordChange: EventEmitter<Object> = new EventEmitter<Object>();
 
   _record: Map<string, any>;
+  tabNameToSubRecordMap: Map<string, Map<string, any>>;
+  tabNameToSubSchema: {};
+  tabNames: Array<string>;
+  keyToTabName: { [key: string]: string };
   previews: Array<Preview> = [];
   isPreviewerHidden: boolean;
-  keys: Set<string>;
   pathCache: PathCache = {};
 
   constructor(public http: Http,
@@ -103,8 +107,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     this.extractPreviews();
     // set errors that is used by other components
     this.appGlobalsService.globalErrors = this.errorMap;
-    // get names of top-level fields
-    this.keys = Set.fromKeys(this.record);
+
     // use fromJS to convert input to immutable then pass it to the store
     this._record = fromJS(this.record);
     this.jsonStoreService.setJson(this._record);
@@ -113,10 +116,20 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
       .skipWhile(json => json === this._record)
       .subscribe(json => {
         this._record = json;
+        // update groups!
+        this.tabNameToSubRecordMap = this.geTabNameToSubRecordMap();
         // emit the change as plain JS object
         this.onRecordChange.emit(json.toJS());
       });
     this.jsonSchemaService.setSchema(this.schema);
+
+    // get things for tabs FIXME: better comment
+    this.keyToTabName = this.getKeyToTabName();
+    this.tabNameToSubRecordMap = this.geTabNameToSubRecordMap();
+    this.tabNameToSubSchema = this.getTabNameToSubSchema();
+    // TODO: remove?
+    this.tabNames = this.tabNameToSubRecordMap.keySeq().toArray();
+
   }
 
   /**
@@ -147,25 +160,59 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     }
   }
 
-  deleteField(field: string) {
-    let record = this._record.remove(field);
-    this.jsonStoreService.setIn([], record);
-
-    this.keys = this.keys.remove(field);
-  }
-
-  getPathForField(field: string): Array<any> {
-    if (!this.pathCache[field]) {
-      this.pathCache[field] = [field];
-    }
-    return this.pathCache[field];
-  }
-
-  onFieldAdd(field: string) {
-    this.keys = this.keys.add(field);
-  }
-
   get shortcuts() {
     return this.shortcutsService.getShortcutsWithConfig(this.config.shortcuts);
   }
+
+  // FIXME: return type
+  // TODO: shouldn't access `this`
+  geTabNameToSubRecordMap(): any {
+    return this._record
+      .groupBy((value, key) => this.keyToTabName[key]);
+  }
+
+  // TODO: shouldn't access `this`
+  getKeyToTabName(): {} {
+    // set tab.name for configured keys
+    let keyToTabName = this.config.tabsConfig.tabs
+      .map(tab => {
+        let keysWithTabName = {};
+        tab.properties.forEach(key => {
+          keysWithTabName[key] = tab.name;
+        });
+        return keysWithTabName;
+      }).reduce((pre, cur) => Object.assign(pre, cur));
+    // set defaultTabName for all other keys in the schema
+    Object.keys(this.schema['properties'])
+      .filter(key => !keyToTabName[key])
+      .forEach(key => {
+        keyToTabName[key] = this.config.tabsConfig.defaultTabName;
+      });
+    return keyToTabName;
+  }
+
+  // TODO: shouldn't acces this
+  getTabNameToSubSchema(): {} {
+    let schemaProps = this.schema['properties'];
+
+    let tabNameToSchemaProps = Object.keys(schemaProps)
+      .map(prop => {
+        return {
+          [this.keyToTabName[prop]]: {
+            [prop]: schemaProps[prop]
+          }
+        };
+      }).reduce((pre, cur) => _.merge(pre, cur));
+    let tabNameToSchemaPart = {};
+
+    Object.keys(tabNameToSchemaProps)
+      .forEach(tabName => {
+        tabNameToSchemaPart[tabName] = {
+          type: 'object',
+          properties: tabNameToSchemaProps[tabName]
+        };
+      });
+    return tabNameToSchemaPart;
+  }
+
 }

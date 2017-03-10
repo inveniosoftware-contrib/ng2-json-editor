@@ -14,3 +14,5 @@ export { CustomShortcuts } from './custom-shortcuts';
 export { ShortcutConfig } from './shortcut-config';
 export { SchemaValidationErrors } from './schema-validation-errors';
 export { PathCache } from './path-cache';
+export { TabsConfig } from './tabs-config';
+export { Tab } from './tab';

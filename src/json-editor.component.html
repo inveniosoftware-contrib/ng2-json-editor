@@ -1,40 +1,12 @@
 <div class="row editor-container">
-  <div id="editor-left-column" class="col-md-2 left">
-    <tree-menu [record]="_record" [schema]="schema"></tree-menu>
-    <add-field-dropdown [fields]="keys" [pathString]="''" (onFieldAdd)="onFieldAdd($event)" [schema]="schema.properties">Add field</add-field-dropdown>
-    <div *ngIf="config.enableAdminModeSwitch" class="admin-mode" tooltip="Allows editing all fields (use with care)">
-      <input id="admin-mode-checkbox" type="checkbox" [(ngModel)]="appGlobalsService.adminMode" />
-      <label class="admin-mode" for="admin-mode-checkbox">Enable Admin Mode</label>
-    </div>
+  <div id="left-main-container" class="col-md-8 left main-container" [ngClass]="{widerColumn8: isPreviewerHidden}" [shortcuts]="shortcuts">
+    <tabset>
+      <tab *ngFor="let tabName of tabNames; trackBy:trackByElement" [heading]="tabName">
+        <sub-record [value]="tabNameToSubRecordMap.get(tabName)" [schema]="tabNameToSubSchema[tabName]"></sub-record>
+      </tab>
+    </tabset>
   </div>
-  <div id="editor-middle-column" [ngClass]="{widerColumn6: isPreviewerHidden}" class="col-md-6 middle" [shortcuts]="shortcuts">
-    <table id="editor" class="table">
-      <div class="field-wrapper" *ngFor="let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema; trackBy:trackByElement">
-        <tr>
-          <td class="label-holder">
-            <title-dropdown [title]="key | underscoreToSpace" [isDisabled]="schema.properties[key].disabled">
-              <li *ngIf="schema.properties[key].type === 'array'" class="title-dropdown-item">
-                <add-new-element-button [path]="getPathForField(key)" [schema]="schema.properties[key]"></add-new-element-button>
-              </li>
-              <li class="title-dropdown-item">
-                <button type="button" class="editor-btn-delete editor-btn-delete-text" (click)="deleteField(key)">Delete</button>
-              </li>
-              <li class="divider"></li>
-              <li class="title-dropdown-item">
-                <find-replace [path]="getPathForField(key)" [schema]="schema.properties[key]"></find-replace>
-              </li>
-            </title-dropdown>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <any-type-field [value]="_record.get(key) | selfOrEmpty:schema.properties[key]" [schema]="schema.properties[key]" [path]="getPathForField(key)"></any-type-field>
-          </td>
-        </tr>
-      </div>
-    </table>
-  </div>
-  <div id="editor-right-column" [ngClass]="{narrowColumn4: isPreviewerHidden}" class="col-md-4 right">
+  <div id="right-main-container" [ngClass]="{narrowColumn4: isPreviewerHidden}" class="col-md-4 right main-container">
     <button id="btn-preview-toggle" type="button" class="btn btn-default btn-toggle" (click)="isPreviewerHidden = !isPreviewerHidden">{{isPreviewerHidden ? "Show Preview" : "Hide Preview"}}</button>
     <editor-previewer [hidden]="isPreviewerHidden" [previews]="previews"> </editor-previewer>
   </div>

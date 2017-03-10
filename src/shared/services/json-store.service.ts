@@ -30,6 +30,11 @@ export class JsonStoreService implements NestedStore {
     return this.json.getIn(path);
   }
 
+  removeIn(path: Array<any>): any {
+    this.json = this.json.removeIn(path);
+    this._jsonChange.next(this.json);
+  }
+
   setJson(json: Map<string, any>) {
     this.json = json;
   }

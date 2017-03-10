@@ -34,7 +34,6 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/throttleTime';
 
-
 @Directive({
   selector: '[textareaAutofit]'
 })
@@ -78,8 +77,10 @@ export class TextareaAutofitDirective implements OnInit, OnDestroy {
 
   resizeElementToFitContent(): void {
     // Set element's height:auto every time to be able to override it.
-    this.renderer.setElementStyle(this.el.nativeElement, 'height', 'auto');
-    this.renderer.setElementStyle(this.el.nativeElement, 'height', this.el.nativeElement.scrollHeight + 'px');
+    if (this.el.nativeElement.scrollHeight > 0) {
+      this.renderer.setElementStyle(this.el.nativeElement, 'height', 'auto');
+      this.renderer.setElementStyle(this.el.nativeElement, 'height', this.el.nativeElement.scrollHeight + 'px');
+    }
   }
 }
 
