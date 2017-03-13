@@ -3,7 +3,7 @@
     <table class="table editable-inner-table">
       <thead class="thead-inverse">
         <tr>
-          <th *ngFor="let key of keys | addAlwaysShowFields:schema.items | filterAndSortBySchema:schema.items; trackBy:trackByElement">
+          <th *ngFor="let key of keys | addAlwaysShowFields:schema.items | filterAndSortBySchema:schema.items; trackBy:trackByElement" [style.width]="schema.items.properties[key].columnWidth + '%'">
             {{key | underscoreToSpace}}
           </th>
           <th class="button-holder">

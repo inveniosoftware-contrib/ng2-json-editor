@@ -104,7 +104,7 @@ gulp.task('clean.staging', () => del(['staging']));
 
 // watch changes for all files
 gulp.task('watch', () => {
-  gulp.watch('./src/**/*', ['build']);
+  gulp.watch('./src/**/*', ['build.ts', 'clean.staging']);
 });
 
 // builds then run tests with karma

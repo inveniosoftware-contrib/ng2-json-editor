@@ -29,9 +29,15 @@ table {
 
 .left.main-container {
   padding: 0px;
+  overflow: hidden;
 
   .tab-content, .tab-pane {
     height: 100%;
+  }
+
+  .nav-tabs {
+    float: right;
+    padding-left: 1px;
   }
 }
 
@@ -171,6 +177,8 @@ table.editable-inner-table {
     right: 0px;
     min-width: 100px;
   }
+
+  table-layout: fixed;
 }
 
 .disableCursorClass {
@@ -212,14 +220,6 @@ table.editable-inner-table {
   background-color: $table-editable-rows-background !important;
 }
 
-.narrowColumn4 {
-  width: 8.33333% !important;
-}
-
-.widerColumn8 {
-  width: 91.66666% !important;
-}
-
 button.btn-toggle {
   float: right;
   margin-top: 5px;
@@ -235,6 +235,35 @@ button.btn-toggle {
   }
 }
 
+$col-md-9-8-width: 81.818182%;
+$col-md-9-width: 75%;
+$col-md-10-width: 83.333333%;
+
+.col-md-override-2-2 {
+  width: 18.181818% !important;
+}
+
+.col-md-override-9-8 {
+  width: $col-md-9-8-width !important;
+}
+
+@mixin nav-tabs-width($width) {
+  .nav-tabs {
+    width: $width;  
+  }
+}
+
+.nav-tabs-col-md-9-8 {
+  @include nav-tabs-width($col-md-9-8-width);
+}
+
+.nav-tabs-col-md-9 {
+  @include nav-tabs-width($col-md-9-width);
+}
+
+.nav-tabs-col-md-10 {
+  @include nav-tabs-width($col-md-10-width);
+}
 .list-action-group-container {
 	text-align: right;
 	button {

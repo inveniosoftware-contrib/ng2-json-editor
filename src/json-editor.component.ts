@@ -45,7 +45,8 @@ import {
   JsonSchemaService,
   RecordFixerService,
   SchemaFixerService,
-  ShortcutService
+  ShortcutService,
+  TabsUtilService
 } from './shared/services';
 
 import { JsonEditorConfig, Preview, SchemaValidationErrors, PathCache } from './shared/interfaces';
@@ -75,7 +76,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   tabNameToSubSchema: {};
   tabNames: Array<string>;
   keyToTabName: { [key: string]: string };
-  previews: Array<Preview> = [];
+  previews: Array<Preview>;
   isPreviewerHidden: boolean;
   pathCache: PathCache = {};
 
@@ -86,7 +87,8 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     public jsonSchemaService: JsonSchemaService,
     public recordFixerService: RecordFixerService,
     public schemaFixerService: SchemaFixerService,
-    public shortcutsService: ShortcutService) {
+    public shortcutsService: ShortcutService,
+    public tabsUtilService: TabsUtilService) {
     super();
   }
 
@@ -116,19 +118,22 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
       .skipWhile(json => json === this._record)
       .subscribe(json => {
         this._record = json;
-        // update groups!
-        this.tabNameToSubRecordMap = this.geTabNameToSubRecordMap();
+        if (this.config.tabsConfig) {
+          // update tab groups!
+          this.tabNameToSubRecordMap = this.tabsUtilService.getTabNameToSubRecordMap(json, this.keyToTabName);
+        }
         // emit the change as plain JS object
         this.onRecordChange.emit(json.toJS());
       });
     this.jsonSchemaService.setSchema(this.schema);
 
-    // get things for tabs FIXME: better comment
-    this.keyToTabName = this.getKeyToTabName();
-    this.tabNameToSubRecordMap = this.geTabNameToSubRecordMap();
-    this.tabNameToSubSchema = this.getTabNameToSubSchema();
-    // TODO: remove?
-    this.tabNames = this.tabNameToSubRecordMap.keySeq().toArray();
+    // setup variables need for tab grouping.
+    if (this.config.tabsConfig) {
+      this.keyToTabName = this.tabsUtilService.getKeyToTabName(this.config.tabsConfig, this.schema);
+      this.tabNameToSubRecordMap = this.tabsUtilService.getTabNameToSubRecordMap(this._record, this.keyToTabName);
+      this.tabNameToSubSchema = this.tabsUtilService.getTabNameToSubSchema(this.schema, this.keyToTabName);
+      this.tabNames = this.tabNameToSubRecordMap.keySeq().toArray();
+    }
 
   }
 
@@ -136,10 +141,10 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
    * Converts PreviewConfig instances to Preview instances and appends to `previews` array.
    */
   private extractPreviews() {
-    let previewConfigs = this.config.previews;
-    if (previewConfigs) {
+    if (!this.isPreviewerDisabled) {
       // if url is not set directly, populate it
-      previewConfigs
+      this.previews = [];
+      this.config.previews
         .forEach(previewConfig => {
           let url: string;
           if (previewConfig.url) {
@@ -164,55 +169,20 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     return this.shortcutsService.getShortcutsWithConfig(this.config.shortcuts);
   }
 
-  // FIXME: return type
-  // TODO: shouldn't access `this`
-  geTabNameToSubRecordMap(): any {
-    return this._record
-      .groupBy((value, key) => this.keyToTabName[key]);
+  get isPreviewerDisabled(): boolean {
+    return this.config.previews === undefined || this.config.previews.length === 0;
   }
 
-  // TODO: shouldn't access `this`
-  getKeyToTabName(): {} {
-    // set tab.name for configured keys
-    let keyToTabName = this.config.tabsConfig.tabs
-      .map(tab => {
-        let keysWithTabName = {};
-        tab.properties.forEach(key => {
-          keysWithTabName[key] = tab.name;
-        });
-        return keysWithTabName;
-      }).reduce((pre, cur) => Object.assign(pre, cur));
-    // set defaultTabName for all other keys in the schema
-    Object.keys(this.schema['properties'])
-      .filter(key => !keyToTabName[key])
-      .forEach(key => {
-        keyToTabName[key] = this.config.tabsConfig.defaultTabName;
-      });
-    return keyToTabName;
+  get rightContainerColMdClass(): string {
+    return this.isPreviewerHidden ? 'col-md-1' : 'col-md-4';
   }
 
-  // TODO: shouldn't acces this
-  getTabNameToSubSchema(): {} {
-    let schemaProps = this.schema['properties'];
-
-    let tabNameToSchemaProps = Object.keys(schemaProps)
-      .map(prop => {
-        return {
-          [this.keyToTabName[prop]]: {
-            [prop]: schemaProps[prop]
-          }
-        };
-      }).reduce((pre, cur) => _.merge(pre, cur));
-    let tabNameToSchemaPart = {};
-
-    Object.keys(tabNameToSchemaProps)
-      .forEach(tabName => {
-        tabNameToSchemaPart[tabName] = {
-          type: 'object',
-          properties: tabNameToSchemaProps[tabName]
-        };
-      });
-    return tabNameToSchemaPart;
+  get leftContainerColMdClass(): string {
+    if (!this.isPreviewerDisabled) {
+      return this.isPreviewerHidden ? 'col-md-11 nav-tabs-col-md-9-8' : 'col-md-8 nav-tabs-col-md-9';
+    } else {
+      return 'col-md-12 nav-tabs-col-md-10';
+    }
   }
 
 }

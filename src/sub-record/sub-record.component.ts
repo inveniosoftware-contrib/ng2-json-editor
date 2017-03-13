@@ -25,7 +25,7 @@ import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core
 import { Map, Set } from 'immutable';
 
 import { PathCache } from '../shared/interfaces';
-import { JsonStoreService } from '../shared/services';
+import { JsonStoreService, AppGlobalsService } from '../shared/services';
 
 @Component({
   selector: 'sub-record',
@@ -39,11 +39,14 @@ export class SubRecordComponent implements OnInit {
   @Input() value: Map<string, any>;
   @Input() schema: Object;
   @Input() enableAdminModeSwitch: boolean;
+  @Input() isPreviewerHidden: boolean;
+  @Input() isPreviewerDisabled: boolean;
 
   keys: Set<string>;
   pathCache: PathCache = {};
 
-  constructor(public jsonStoreService: JsonStoreService) { }
+  constructor(public jsonStoreService: JsonStoreService,
+    public appGlobalsService: AppGlobalsService) { }
 
   ngOnInit() {
     this.keys = this.value.keySeq().toSet();
@@ -63,5 +66,20 @@ export class SubRecordComponent implements OnInit {
 
   onFieldAdd(field: string) {
     this.keys = this.keys.add(field);
+  }
+
+  get rightContainerColMdClass(): string {
+    if (this.isPreviewerDisabled) {
+      return 'col-md-10';
+    } else {
+      return this.isPreviewerHidden ? 'col-md-9 col-md-override-9-8' : 'col-md-9';
+    }
+  }
+
+  get leftContainerColMdClass(): string {
+    if (this.isPreviewerDisabled) {
+      return 'col-md-2';
+    }
+    return this.isPreviewerHidden ? 'col-md-3 col-md-override-2-2' : 'col-md-3';
   }
 }

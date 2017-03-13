@@ -1,12 +1,14 @@
 <div class="row editor-container">
-  <div id="left-main-container" class="col-md-8 left main-container" [ngClass]="{widerColumn8: isPreviewerHidden}" [shortcuts]="shortcuts">
-    <tabset>
+  <div id="left-main-container" class="left main-container" [ngClass]="leftContainerColMdClass" [shortcuts]="shortcuts">
+    <tabset *ngIf="config.tabsConfig">
       <tab *ngFor="let tabName of tabNames; trackBy:trackByElement" [heading]="tabName">
-        <sub-record [value]="tabNameToSubRecordMap.get(tabName)" [schema]="tabNameToSubSchema[tabName]"></sub-record>
+        <sub-record [value]="tabNameToSubRecordMap.get(tabName)" [schema]="tabNameToSubSchema[tabName]" [enableAdminModeSwitch]="config.enableAdminModeSwitch"
+          [isPreviewerHidden]="isPreviewerHidden" [isPreviewerDisabled]="isPreviewerDisabled"></sub-record>
       </tab>
     </tabset>
+    <sub-record *ngIf="!config.tabsConfig" [value]="_record" [schema]="schema"></sub-record>
   </div>
-  <div id="right-main-container" [ngClass]="{narrowColumn4: isPreviewerHidden}" class="col-md-4 right main-container">
+  <div id="right-main-container" *ngIf="!isPreviewerDisabled" [ngClass]="rightContainerColMdClass" class="right main-container">
     <button id="btn-preview-toggle" type="button" class="btn btn-default btn-toggle" (click)="isPreviewerHidden = !isPreviewerHidden">{{isPreviewerHidden ? "Show Preview" : "Hide Preview"}}</button>
     <editor-previewer [hidden]="isPreviewerHidden" [previews]="previews"> </editor-previewer>
   </div>

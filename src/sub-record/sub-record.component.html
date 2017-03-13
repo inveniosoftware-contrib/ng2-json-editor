@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-3 left menu-container">
+  <div class="left menu-container" [ngClass]="leftContainerColMdClass">
     <tree-menu [record]="value" [schema]="schema"></tree-menu>
     <add-field-dropdown [fields]="keys" [pathString]="''" (onFieldAdd)="onFieldAdd($event)" [schema]="schema.properties">Add field</add-field-dropdown>
     <div *ngIf="enableAdminModeSwitch" class="admin-mode" tooltip="Allows editing all fields (use with care)">
@@ -7,7 +7,7 @@
       <label class="admin-mode" for="admin-mode-checkbox">Enable Admin Mode</label>
     </div>
   </div>
-  <div class="col-md-9 right record-fields-container">
+  <div class="right record-fields-container" [ngClass]="rightContainerColMdClass">
     <table id="editor" class="table">
       <div class="field-wrapper" *ngFor="let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema; trackBy:trackByElement">
         <tr>

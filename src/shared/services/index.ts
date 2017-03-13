@@ -16,6 +16,7 @@ import { SchemaValidationService } from './schema-validation.service';
 import { ShortcutActionService } from './shortcut-action.service';
 import { ShortcutService } from './shortcut.service';
 import { WindowHrefService } from './window-href.service';
+import { TabsUtilService } from './tabs-util.service';
 
 export {
   AppGlobalsService,
@@ -35,7 +36,8 @@ export {
   SchemaValidationService,
   ShortcutActionService,
   ShortcutService,
-  WindowHrefService
+  WindowHrefService,
+  TabsUtilService
 };
 
 export const SHARED_SERVICES = [
@@ -56,5 +58,6 @@ export const SHARED_SERVICES = [
   SchemaValidationService,
   ShortcutActionService,
   ShortcutService,
-  WindowHrefService
+  WindowHrefService,
+  TabsUtilService
 ];
