@@ -38,44 +38,12 @@
       </td>
     </tr>
   </table>
+  <!-- Elements -->
   <div *ngFor="let pIndex of paginatedIndices; let i = index; trackBy:trackByElement">
     <div class="complex-list-field-wrapper">
-      <table class="table" [id]="getElementPathString(pIndex)">
-        <tr *ngFor="let key of keys.get(i) | addAlwaysShowFields:schema.items | filterAndSortBySchema:schema.items; trackBy:trackByElement">
-          <td class="label-holder">
-            <div>
-              <title-dropdown [title]="key | underscoreToSpace" [isDisabled]="schema.items.properties[key].disabled">
-                <li *ngIf="schema.items.properties[key].type === 'array'" class="title-dropdown-item">
-                  <add-new-element-button [path]="getValuePath(pIndex, key)" [schema]="schema.items.properties[key]"></add-new-element-button>
-                </li>
-                <li class="title-dropdown-item">
-                  <button type="button" class="editor-btn-delete editor-btn-delete-text" (click)="deleteField(pIndex, key)">Delete</button>
-                </li>
-              </title-dropdown>
-            </div>
-          </td>
-          <td>
-            <any-type-field [value]="values.get(pIndex).get(key) | selfOrEmpty:schema.items.properties[key]" [schema]="schema.items.properties[key]"
-              [path]="getValuePath(pIndex, key)"></any-type-field>
-          </td>
-        </tr>
-        <!-- ADD-FIELD-FROM-SCHEMA, UP/DOWN and DELETE buttons for each row group -->
-        <tr *ngIf="values.size > 0">
-          <td class="button-holder">
-            <add-field-dropdown [fields]="keys.get(i)" [pathString]="getElementPathString(pIndex)" (onFieldAdd)="onFieldAdd(i, $event)"
-              [schema]="schema.items.properties">+</add-field-dropdown>
-          </td>
-          <td class="button-holder button-holder-complex-list-actions">
-            <button type="button" class="editor-btn-delete editor-btn-delete-complex" (click)="deleteElement(pIndex)">&times;</button>
-            <button *ngIf="pIndex > 0" type="button" class="editor-btn-move-up editor-btn-move-up-complex" (click)="moveElement(pIndex, -1)">
-              <i class="fa fa-chevron-up" aria-hidden="true"></i>
-            </button>
-            <button *ngIf="pIndex < (values.size - 1)" class="editor-btn-move-down editor-btn-move-down-complex" type="button" (click)="moveElement(pIndex, 1)">
-              <i class="fa fa-chevron-down" aria-hidden="true"></i>
-            </button>
-          </td>
-        </tr>
-      </table>
+      <object-field [value]="values.get(pIndex)" [schema]="schema.items" [path]="getElementPath(pIndex)">
+        <list-action-group (onMove)="moveElement(i, $event)" (onDelete)="deleteElement(i)"></list-action-group>
+      </object-field>
     </div>
   </div>
 </div>

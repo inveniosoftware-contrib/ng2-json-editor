@@ -20,31 +20,56 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  ChangeDetectionStrategy,
+  SimpleChanges
+} from '@angular/core';
 
-import { List } from 'immutable';
+import { List, Set } from 'immutable';
 
-import { AbstractListFieldComponent } from '../abstract-list-field';
+import { AbstractFieldComponent } from '../abstract-field';
 
-import { AppGlobalsService, JsonStoreService, PathUtilService } from '../shared/services';
+import {
+  AppGlobalsService,
+  JsonStoreService,
+  PathUtilService
+} from '../shared/services';
+import { PathCache } from '../shared/interfaces';
 
 @Component({
-  selector: 'primitive-list-field',
+  // Defined as attribute selector not to break table > tr > td html structure
+  // tslint:disable-next-line
+  selector: '[table-item-field]',
   styleUrls: [
-    './primitive-list-field.component.scss'
+    './table-item-field.component.scss'
   ],
-  templateUrl: './primitive-list-field.component.html',
+  templateUrl: './table-item-field.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PrimitiveListFieldComponent extends AbstractListFieldComponent {
-  @Input() values: List<any>;
+export class TableItemFieldComponent extends AbstractFieldComponent {
+
+  @Input() value: Map<string, any>;
   @Input() schema: Object;
   @Input() path: Array<any>;
+  @Input() keys: Set<string>;
+  pathCache: PathCache = {};
 
   constructor(public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
     public pathUtilService: PathUtilService) {
-    super(appGlobalsService, jsonStoreService, pathUtilService);
+    super(appGlobalsService, pathUtilService);
+  }
+
+
+  getFieldPath(name: string): Array<any> {
+    if (!this.pathCache[name]) {
+      this.pathCache[name] = this.path.concat(name);
+    }
+    return this.pathCache[name];
   }
 
 }

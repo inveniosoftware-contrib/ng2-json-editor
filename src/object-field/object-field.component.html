@@ -1,30 +1,31 @@
-<div [id]="pathString">
-  <table class="table">
-    <tr *ngFor="let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema; trackBy:trackByElement">
-      <!-- SUB FIELD TITLE MENU -->
-      <td>
-        <div>
-          <title-dropdown [title]="key | underscoreToSpace" [isDisabled]="schema.properties[key].disabled">
-            <li *ngIf="schema.properties[key].type === 'array'" class="title-dropdown-item">
-              <add-new-element-button [path]="getFieldPath(key)" [schema]="schema.properties[key]"></add-new-element-button>
-            </li>
-            <li class="title-dropdown-item">
-              <button type="button" class="editor-btn-delete editor-btn-delete-text" (click)="deleteField(key)">Delete</button>
-            </li>
-          </title-dropdown>
-        </div>
-      </td>
-      <!-- SUB FIELD COMPONENT -->
-      <td>
-        <any-type-field [value]="value.get(key) | selfOrEmpty:schema.properties[key]" [schema]=schema.properties[key] [path]="getFieldPath(key)"></any-type-field>
-      </td>
-    </tr>
-
-    <!-- ADD SUB FIELD FROM SCHEMA DROPDOWN -->
-    <tr>
-      <td class="button-holder">
-        <add-field-dropdown [fields]="keys" [pathString]="pathString" (onFieldAdd)="onFieldAdd($event)" [schema]="schema.properties">+</add-field-dropdown>
-      </td>
-    </tr>
-  </table>
-</div>
+<table [id]="pathString" class="table">
+  <tr *ngFor="let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema; trackBy:trackByElement">
+    <!-- SUB FIELD TITLE MENU -->
+    <td class="label-holder">
+      <div>
+        <title-dropdown [title]="key | underscoreToSpace" [isDisabled]="schema.properties[key].disabled">
+          <li *ngIf="schema.properties[key].type === 'array'" class="title-dropdown-item">
+            <add-new-element-button [path]="getFieldPath(key)" [schema]="schema.properties[key]"></add-new-element-button>
+          </li>
+          <li class="title-dropdown-item">
+            <button type="button" class="editor-btn-delete editor-btn-delete-text" (click)="deleteField(key)">Delete</button>
+          </li>
+        </title-dropdown>
+      </div>
+    </td>
+    <!-- SUB FIELD COMPONENT -->
+    <td>
+      <any-type-field [value]="value.get(key) | selfOrEmpty:schema.properties[key]" [schema]=schema.properties[key] [path]="getFieldPath(key)"></any-type-field>
+    </td>
+  </tr>
+  <!-- ADD SUB FIELD FROM SCHEMA DROPDOWN -->
+  <tr>
+    <td class="button-holder">
+      <add-field-dropdown [fields]="keys" [pathString]="pathString" (onFieldAdd)="onFieldAdd($event)" [schema]="schema.properties">+</add-field-dropdown>
+    </td>
+    <td class="button-holder list-action-group-container">
+      <!-- list-action-group (up/down and delete buttons), Set only if it's an element of an list (complex-list) -->
+      <ng-content></ng-content>
+    </td>
+  </tr>
+</table>
