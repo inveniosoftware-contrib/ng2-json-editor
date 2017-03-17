@@ -2,7 +2,9 @@
     "$schema": "http://localhost:5000/schemas/records/hep.json", 
     "_collections": [
       "Literature"
-    ], 
+    ],
+    "citeable": false,
+    "core": true,
     "abstracts": [
       {
         "source": "arXiv", 

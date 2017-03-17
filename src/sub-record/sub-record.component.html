@@ -1,7 +1,7 @@
 <div class="row">
   <div class="left menu-container" [ngClass]="leftContainerColMdClass">
     <tree-menu [record]="value" [schema]="schema"></tree-menu>
-    <add-field-dropdown [fields]="keys" [pathString]="''" (onFieldAdd)="onFieldAdd($event)" [schema]="schema.properties">Add field</add-field-dropdown>
+    <add-field-dropdown [fields]="allKeys" [pathString]="''" (onFieldAdd)="onFieldAdd($event)" [schema]="schema.properties">Add field</add-field-dropdown>
     <div *ngIf="enableAdminModeSwitch" class="admin-mode" tooltip="Allows editing all fields (use with care)">
       <input id="admin-mode-checkbox" type="checkbox" [(ngModel)]="appGlobalsService.adminMode" />
       <label class="admin-mode" for="admin-mode-checkbox">Enable Admin Mode</label>
@@ -9,7 +9,15 @@
   </div>
   <div class="right record-fields-container" [ngClass]="rightContainerColMdClass">
     <table id="editor" class="table">
-      <div class="field-wrapper" *ngFor="let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema | setFirstElementPath:tabName; trackBy:trackByElement">
+      <div class="field-wrapper">
+        <tr *ngIf="keysByType.toggles">
+          <td *ngFor="let key of keysByType.toggles | addAlwaysShowFields:schema:true | filterAndSortBySchema:schema; trackBy:trackByElement">
+            <slide-toggle [value]="value.get(key) | selfOrEmpty:schema.properties[key]" (valueChange)="onToggleValueChange(key, $event)"
+              [onText]="key" [offText]="key" [onColor]="schema.properties[key].toggleColor"></slide-toggle>
+          </td>
+        </tr>
+      </div>
+      <div class="field-wrapper" *ngFor="let key of keysByType.others | addAlwaysShowFields:schema | filterAndSortBySchema:schema | setFirstElementPath:tabName; trackBy:trackByElement">
         <tr>
           <td class="label-holder">
             <title-dropdown [title]="key | underscoreToSpace" [isDisabled]="schema.properties[key].disabled">

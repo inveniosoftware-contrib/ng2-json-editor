@@ -74,4 +74,12 @@ export interface SchemaOption {
    * Array of keys that indicates the order in which they should be displayed in the UI.
    */
   order?: Array<string>;
+
+  /**
+   * Toggle color for boolean, it will be displayed as a toggle on top if this is set.
+   *
+   * - It works only for top-level properties.
+   * - Toggle can not be deleted once they are added.
+   */
+  toggleColor?: string;
 }

@@ -29,8 +29,10 @@ import { Set } from 'immutable';
 })
 export class AddAlwaysShowFieldsPipe implements PipeTransform {
 
-  transform(fields: Set<string>, schema: Object): Set<string> {
-    let alwaysShowFields = schema['alwaysShow'] || [];
+  transform(fields: Set<string>, schema: Object, onlyToggles = false): Set<string> {
+    let alwaysShowFields: Array<string> = schema['alwaysShow'] || [];
+    alwaysShowFields = alwaysShowFields
+        .filter(prop => (schema['properties'][prop]['toggleColor'] !== undefined) === onlyToggles);
     return fields.union(alwaysShowFields);
   }
 }
