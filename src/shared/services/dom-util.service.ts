@@ -25,14 +25,17 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class DomUtilService {
 
+  private inputSelector = '.value-container input, div[contenteditable=true]';
+
   focusAndSelectFirstInputChildById(id: string) {
     let el = document.getElementById(id);
     if (el) {
-      let firstInput = el.querySelector('input, textarea') as HTMLInputElement;
+      let firstInput = el.querySelector(this.inputSelector) as HTMLElement;
       if (firstInput) {
         firstInput.focus();
-        firstInput.select();
+        this.selectAllContent(firstInput);
       } else {
+        // if element doesn't have any input, open add-field-dropdown if it exists.
         firstInput = el.querySelector('div.btn-group') as HTMLInputElement;
         if (firstInput) {
           let dropDownButton = el.querySelector('div.btn-group button') as HTMLButtonElement;
@@ -53,10 +56,10 @@ export class DomUtilService {
       }
       let nextSibling = direction > 0 ? elementParentCell.nextElementSibling : elementParentCell.previousElementSibling;
       while (nextSibling && nextSibling.nodeName === 'TD') {
-        let inputElement = nextSibling.querySelector(`input[tabindex='1'],textarea[tabindex='1']`) as HTMLInputElement;
+        let inputElement = nextSibling.querySelector(`input[tabindex='1'], div[contenteditable=true][tabindex='1']`) as HTMLElement;
         if (inputElement) {
           inputElement.focus();
-          inputElement.select();
+          this.selectAllContent(inputElement);
           break;
         }
         nextSibling = direction > 0 ? nextSibling.nextElementSibling : nextSibling.previousElementSibling;
@@ -77,9 +80,22 @@ export class DomUtilService {
 
   blurFirstInputChildById(id: string) {
     let el = document.getElementById(id);
-    let firstInput = el.querySelector('input, textarea') as HTMLInputElement;
+    let firstInput = el.querySelector(this.inputSelector) as HTMLElement;
     if (firstInput) {
       firstInput.blur();
+    }
+  }
+
+  private selectAllContent(el: HTMLElement) {
+    if (el instanceof HTMLInputElement) {
+      el.select();
+    } else {
+      // select all content for contenteditable element.
+      let range = document.createRange();
+      range.selectNodeContents(el);
+      let sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
     }
   }
 }

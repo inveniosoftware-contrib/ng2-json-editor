@@ -34,8 +34,8 @@ describe('Preview panel', function() {
 
   it(`should expand/collapse preview window`, () => {
     let previewToggleButton = element(by.id('btn-preview-toggle'));
-    let middleColumn = element(by.id('editor-middle-column'));
-    let rightColumn = element(by.id('editor-right-column'));
+    let middleColumn = element(by.id('left-main-container'));
+    let rightColumn = element(by.id('right-main-container'));
 
     expect(previewToggleButton.getText()).toEqual('Hide Preview');
 

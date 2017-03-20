@@ -31,6 +31,7 @@ import {
 } from '@angular/core';
 import { Http } from '@angular/http';
 
+import * as _ from 'lodash';
 import { fromJS, Map, Set } from 'immutable';
 import 'rxjs/add/operator/skipWhile';
 
@@ -44,7 +45,8 @@ import {
   JsonSchemaService,
   RecordFixerService,
   SchemaFixerService,
-  ShortcutService
+  ShortcutService,
+  TabsUtilService
 } from './shared/services';
 
 import { JsonEditorConfig, Preview, SchemaValidationErrors, PathCache } from './shared/interfaces';
@@ -70,9 +72,12 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   @Output() onRecordChange: EventEmitter<Object> = new EventEmitter<Object>();
 
   _record: Map<string, any>;
-  previews: Array<Preview> = [];
+  tabNameToSubRecordMap: Map<string, Map<string, any>>;
+  tabNameToSubSchema: {};
+  tabNames: Array<string>;
+  keyToTabName: { [key: string]: string };
+  previews: Array<Preview>;
   isPreviewerHidden: boolean;
-  keys: Set<string>;
   pathCache: PathCache = {};
 
   constructor(public http: Http,
@@ -82,7 +87,8 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     public jsonSchemaService: JsonSchemaService,
     public recordFixerService: RecordFixerService,
     public schemaFixerService: SchemaFixerService,
-    public shortcutsService: ShortcutService) {
+    public shortcutsService: ShortcutService,
+    public tabsUtilService: TabsUtilService) {
     super();
   }
 
@@ -103,8 +109,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     this.extractPreviews();
     // set errors that is used by other components
     this.appGlobalsService.globalErrors = this.errorMap;
-    // get names of top-level fields
-    this.keys = Set.fromKeys(this.record);
+
     // use fromJS to convert input to immutable then pass it to the store
     this._record = fromJS(this.record);
     this.jsonStoreService.setJson(this._record);
@@ -113,20 +118,33 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
       .skipWhile(json => json === this._record)
       .subscribe(json => {
         this._record = json;
+        if (this.config.tabsConfig) {
+          // update tab groups!
+          this.tabNameToSubRecordMap = this.tabsUtilService.getTabNameToSubRecordMap(json, this.keyToTabName);
+        }
         // emit the change as plain JS object
         this.onRecordChange.emit(json.toJS());
       });
     this.jsonSchemaService.setSchema(this.schema);
+
+    // setup variables need for tab grouping.
+    if (this.config.tabsConfig) {
+      this.keyToTabName = this.tabsUtilService.getKeyToTabName(this.config.tabsConfig, this.schema);
+      this.tabNameToSubRecordMap = this.tabsUtilService.getTabNameToSubRecordMap(this._record, this.keyToTabName);
+      this.tabNameToSubSchema = this.tabsUtilService.getTabNameToSubSchema(this.schema, this.keyToTabName);
+      this.tabNames = this.tabNameToSubRecordMap.keySeq().toArray();
+    }
+
   }
 
   /**
    * Converts PreviewConfig instances to Preview instances and appends to `previews` array.
    */
   private extractPreviews() {
-    let previewConfigs = this.config.previews;
-    if (previewConfigs) {
+    if (!this.isPreviewerDisabled) {
       // if url is not set directly, populate it
-      previewConfigs
+      this.previews = [];
+      this.config.previews
         .forEach(previewConfig => {
           let url: string;
           if (previewConfig.url) {
@@ -147,25 +165,24 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     }
   }
 
-  deleteField(field: string) {
-    let record = this._record.remove(field);
-    this.jsonStoreService.setIn([], record);
-
-    this.keys = this.keys.remove(field);
-  }
-
-  getPathForField(field: string): Array<any> {
-    if (!this.pathCache[field]) {
-      this.pathCache[field] = [field];
-    }
-    return this.pathCache[field];
-  }
-
-  onFieldAdd(field: string) {
-    this.keys = this.keys.add(field);
-  }
-
   get shortcuts() {
     return this.shortcutsService.getShortcutsWithConfig(this.config.shortcuts);
   }
+
+  get isPreviewerDisabled(): boolean {
+    return this.config.previews === undefined || this.config.previews.length === 0;
+  }
+
+  get rightContainerColMdClass(): string {
+    return this.isPreviewerHidden ? 'col-md-1' : 'col-md-4';
+  }
+
+  get leftContainerColMdClass(): string {
+    if (!this.isPreviewerDisabled) {
+      return this.isPreviewerHidden ? 'col-md-11 nav-tabs-col-md-9-8' : 'col-md-8 nav-tabs-col-md-9';
+    } else {
+      return 'col-md-12 nav-tabs-col-md-10';
+    }
+  }
+
 }

@@ -10,21 +10,21 @@
       </template>
       <td class="value-container" [ngClass]="errorNgClass" [tooltip]="errorsTooltipTemplate" [isDisabled]="!isErrorTooltipEnabled">
         <div *ngSwitchCase="'string'">
-          <textarea rows="1" textareaAutofit  attr.data-path="{{pathString}}" [tabindex]="tabIndex" [(ngModel)]="value" (blur)="commitValueChange()" (keypress)="onKeypress($event)"
-            placeholder="{{schema.title}}"></textarea>
+          <div contenteditable="true" attr.data-path="{{pathString}}" [tabindex]="tabIndex" [(contentModel)]="value" (blur)="commitValueChange()"
+            (keypress)="onKeypress($event)" attr.placeholder="{{schema.title}}"></div>
         </div>
         <div *ngSwitchCase="'enum'">
           <searchable-dropdown [pathString]="pathString" [value]="value" [placeholder]="schema.title" [items]="schema.enum" [shortcutMap]="schema.enumShorcutMap"
-                               (onSelect)="onSearchableDropdownSelect($event)" [tabIndex]="tabIndex"></searchable-dropdown>
+            (onSelect)="onSearchableDropdownSelect($event)" [tabIndex]="tabIndex"></searchable-dropdown>
         </div>
         <div *ngSwitchCase="'autocomplete'">
-          <autocomplete-input [pathString]="pathString" [value]="value" [path]="path" [autocompletionConfig]="schema.autocompletionConfig" (onBlur)="commitValueChange()"
-                              (onKeypress)="onKeypress($event)" (onValueChange)="onAutocompleteInputValueChange($event)"
-                              [placeholder]="schema.title" [tabIndex]="tabIndex"></autocomplete-input>
+          <autocomplete-input [pathString]="pathString" [value]="value" [path]="path" [autocompletionConfig]="schema.autocompletionConfig"
+            (onBlur)="commitValueChange()" (onKeypress)="onKeypress($event)" (onValueChange)="onAutocompleteInputValueChange($event)"
+            [placeholder]="schema.title" [tabIndex]="tabIndex"></autocomplete-input>
         </div>
         <div *ngSwitchCase="'integer'">
-          <input type="number" [(ngModel)]="value" [tabindex]="tabIndex" attr.data-path="{{pathString}}" (blur)="commitValueChange()" (keypress)="onKeypress($event)"
-            placeholder="{{schema.title}}">
+          <input type="number" [(ngModel)]="value" [tabindex]="tabIndex" attr.data-path="{{pathString}}" (blur)="commitValueChange()"
+            (keypress)="onKeypress($event)" placeholder="{{schema.title}}">
         </div>
         <div *ngSwitchCase="'boolean'">
           <input type="checkbox" [(ngModel)]="value" (ngModelChange)="commitValueChange()" placeholder="{{schema.title}}">

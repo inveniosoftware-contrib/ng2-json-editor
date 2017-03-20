@@ -1,11 +1,12 @@
-import { TextareaAutofitDirective } from './textarea-autofit.directive';
 import { ShortcutsDirective } from './shortcuts.directive';
+import { ContentModelDirective } from './content-model.directive';
 
 export {
-  TextareaAutofitDirective
+  ShortcutsDirective,
+  ContentModelDirective
 };
 
 export const SHARED_DIRECTIVES = [
-  TextareaAutofitDirective,
-  ShortcutsDirective
+  ShortcutsDirective,
+  ContentModelDirective
 ];

@@ -1,6 +1,7 @@
 import { PreviewConfig } from './preview-config';
 import { SchemaOption } from './schema-option';
 import { CustomShortcuts } from './custom-shortcuts';
+import { TabsConfig } from './tabs-config';
 
 export interface JsonEditorConfig {
   /**
@@ -25,6 +26,7 @@ export interface JsonEditorConfig {
    * ```
    */
   schemaOptions?: { [jsonPointer: string]: SchemaOption };
+
   /**
    * Configuration for previews to be displayed in previewer (on the right side).
    */
@@ -34,4 +36,10 @@ export interface JsonEditorConfig {
    * Configuration for the shortcuts.
    */
   shortcuts?: CustomShortcuts;
+
+  /**
+   * Configuration for custom tabs to group top level properties.
+   */
+  tabsConfig?: TabsConfig;
+
 }

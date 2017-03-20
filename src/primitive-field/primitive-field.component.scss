@@ -1,4 +1,4 @@
-td.value-container textarea,
+td.value-container div[contenteditable=true],
 td.value-container input {
   vertical-align: middle;
   width: 50%;
@@ -34,4 +34,14 @@ td.value-container {
 
 a.no-decoration {
   text-decoration: none;
+}
+
+[contenteditable=true] {
+  min-height: 18px;
+  
+  &:empty:before {
+    content: attr(placeholder);
+    color: darkgray;
+    display: block; /* For Firefox */
+  }
 }
