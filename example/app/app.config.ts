@@ -64,6 +64,13 @@ export class AppConfig {
           ]
         }
       ]
-    }
+    },
+    previews: [
+      {
+        name: 'pdf',
+        type: 'html',
+        urlPath: '/urls/0/value'
+      }
+    ]
   };
 }
