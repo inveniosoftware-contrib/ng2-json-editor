@@ -20,7 +20,7 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 
 import { Map, Set } from 'immutable';
 
@@ -37,7 +37,7 @@ import { PathCache } from '../shared/interfaces';
   templateUrl: './object-field.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ObjectFieldComponent extends AbstractFieldComponent implements OnInit {
+export class ObjectFieldComponent extends AbstractFieldComponent implements OnChanges {
 
   @Input() value: Map<string, any>;
   @Input() schema: Object;
@@ -52,10 +52,12 @@ export class ObjectFieldComponent extends AbstractFieldComponent implements OnIn
     super(appGlobalsService, pathUtilService);
   }
 
-  ngOnInit() {
-    super.ngOnInit();
-
-    this.keys = this.value.keySeq().toSet();
+  ngOnChanges(changes: SimpleChanges) {
+    let valueChange = changes['value'];
+    if (valueChange) {
+      // should be cached somewhere like keysByPath if this causes performance issues.
+      this.keys = this.value.keySeq().toSet();
+    }
   }
 
   deleteField(name: string) {
