@@ -68,7 +68,7 @@ export class RecordFixerService {
    * @param schema - schema of visited field/element
    */
   private fix(key: string | number, parent: Object | Array<any>, schema: Object) {
-     if (schema['hidden']) {
+    if (schema['hidden']) {
       return;
     }
 
@@ -79,6 +79,8 @@ export class RecordFixerService {
     if (schema['type'] === 'object') {
       if (!schema['properties']) {
         throw new Error(`"${key}"'s schema has "type": "object" but doesn't specify "properties"`);
+      } else if (!(value instanceof Object)) {
+        throw new Error(`"${key}" in ${JSON.stringify(value, null, 2)} is specified as "object" by schema but it is not an object in json`);
       }
       // Looping over record to filter out fields that are not in schema.
       Object.keys(value).forEach(prop => {
@@ -93,7 +95,7 @@ export class RecordFixerService {
       if (!schema['items']) {
         throw new Error(`"${key}"'s schema has "type": "array" but doesn't specify "items"`);
       } else if (!Array.isArray(value)) {
-        throw new Error(`"${key}" is specified as "array" by schema but it is not an array in input json`);
+        throw new Error(`"${key}" in ${JSON.stringify(value, null, 2)} is specified as "array" by schema but it is not an array in json`);
       }
       value.forEach((element, index) => {
         this.fix(index, value, schema['items']);

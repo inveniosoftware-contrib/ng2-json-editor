@@ -84,6 +84,9 @@ export class SchemaFixerService {
     if (schema['disabled']) {
       schema = this.fixDisabled(schema);
     }
+    if (schema['alwaysShow']) {
+      schema = this.fixAlwaysShow(schema);
+    }
     // schema fixes must be done above
 
     // recursively call for deeper parts of schema
@@ -102,7 +105,7 @@ export class SchemaFixerService {
    * Fixes disabled config to assign the disabled attribute
    * to array items or object properties
    */
-  fixDisabled(schema: Object): Object {
+  private fixDisabled(schema: Object): Object {
     if (schema['items']) {
       schema['items']['disabled'] = true;
     } else if (schema['properties']) {
@@ -202,6 +205,22 @@ export class SchemaFixerService {
 
   private fixAllOf(schema: Object): Object {
     return _.merge({}, ...schema['allOf']);
+  }
+
+  /**
+   * Removes alwayShow fields that aren't in the schema.properties
+   * and warns on console.
+   */
+  private fixAlwaysShow(schema: Object): Object {
+    let alwaysShow: Array<string> = schema['alwaysShow'];
+    schema['alwaysShow'] = alwaysShow.filter(key => {
+      if (schema['properties'][key]) {
+        return true;
+      } else {
+        console.warn(`${key} is configured as alwaysShow but it is not in ${JSON.stringify(Object.keys(schema['properties']))}`);
+      }
+    });
+    return schema;
   }
 
 }

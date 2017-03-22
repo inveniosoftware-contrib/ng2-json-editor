@@ -277,56 +277,56 @@ describe('SchemaFixerService', () => {
 
   it(`should pass disable config for an element to all items and properties
       of its children `, () => {
-    let schema = {
-      type: 'object',
-      properties: {
-        parent: {
-          type: 'array',
-          items: {
-            type: 'object',
-            properties: {
-              prop1: {
-                type: 'string'
-              },
-              prop2: {
-                type: 'string'
+      let schema = {
+        type: 'object',
+        properties: {
+          parent: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                prop1: {
+                  type: 'string'
+                },
+                prop2: {
+                  type: 'string'
+                }
               }
             }
           }
         }
-      }
-    };
-    let config = {
-      '/parent': {
-        disabled: true
-      }
-    };
-    let expected = {
-      type: 'object',
-      properties: {
-        parent: {
-          type: 'array',
-          items: {
-            type: 'object',
-            properties: {
-              prop1: {
-                type: 'string',
-                disabled: true
-              },
-              prop2: {
-                type: 'string',
-                disabled: true
-              }
-            },
-            disabled: true
-          },
+      };
+      let config = {
+        '/parent': {
           disabled: true
         }
-      }
-    };
-    let fixed = service.fixSchema(schema, config);
-    expect(fixed).toEqual(expected);
-  });
+      };
+      let expected = {
+        type: 'object',
+        properties: {
+          parent: {
+            type: 'array',
+            items: {
+              type: 'object',
+              properties: {
+                prop1: {
+                  type: 'string',
+                  disabled: true
+                },
+                prop2: {
+                  type: 'string',
+                  disabled: true
+                }
+              },
+              disabled: true
+            },
+            disabled: true
+          }
+        }
+      };
+      let fixed = service.fixSchema(schema, config);
+      expect(fixed).toEqual(expected);
+    });
 
   it('should warn user when config order key does not exist', () => {
     let schema = {
@@ -396,6 +396,30 @@ describe('SchemaFixerService', () => {
     };
     let fixed = service.fixSchema(schema, config);
     expect(fixed).toEqual(expected);
+  });
+
+  it('should remove alwayShow keys that are not in the schema', () => {
+    let schema = {
+      type: 'object',
+      properties: {
+        prop1: {
+          type: 'string'
+        },
+        prop2: {
+          type: 'string'
+        }
+      }
+    };
+    let config = {
+      '': {
+        alwaysShow: ['prop1', 'doesnotexist']
+      }
+    };
+    spyOn(console, 'warn');
+
+    let fixed = service.fixSchema(schema, config);
+    expect(console.warn).toHaveBeenCalledWith('doesnotexist is configured as alwaysShow but it is not in ["prop1","prop2"]');
+    expect(fixed['alwaysShow'].includes('doesnotexist')).toBeFalsy();
   });
 
   it('should enrich root schema with config when path is empty', () => {
