@@ -38,6 +38,7 @@ a.no-decoration {
 
 [contenteditable=true] {
   min-height: 18px;
+  word-break: break-word;
   
   &:empty:before {
     content: attr(placeholder);
