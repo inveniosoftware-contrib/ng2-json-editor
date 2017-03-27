@@ -25,16 +25,16 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Set } from 'immutable';
 
 @Pipe({
-  name: 'addAlwaysShowFields'
+  name: 'addAlwaysShowToggles'
 })
-export class AddAlwaysShowFieldsPipe implements PipeTransform {
+export class AddAlwaysShowTogglesPipe implements PipeTransform {
 
   transform(fields: Set<string>, schema: Object): Set<string> {
     let alwaysShowFields: Array<string> = schema['alwaysShow'] || [];
-    alwaysShowFields = alwaysShowFields.filter(field => {
+    let alwaysShowToggles = alwaysShowFields.filter(field => {
       let isToggle = schema['properties'][field]['toggleColor'];
-      return !isToggle;
+      return isToggle;
     });
-    return fields.union(alwaysShowFields);
+    return fields.union(alwaysShowToggles);
   }
 }

@@ -27,6 +27,7 @@ import { HttpModule } from '@angular/http';
 
 // TODO: investigate if all modules or only used ones are in the bundle of the example app.
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
+import { SlideToggleModule } from 'ng2-slide-toggle';
 
 import { AddFieldDropdownComponent } from './add-field-dropdown';
 import { AddNewElementButtonComponent } from './add-new-element-button';
@@ -86,6 +87,7 @@ import { SHARED_PIPES, SHARED_SERVICES, SHARED_DIRECTIVES } from './shared';
   exports: [JsonEditorComponent],
   imports: [
     Ng2BootstrapModule.forRoot(),
+    SlideToggleModule,
     CommonModule,
     FormsModule,
     HttpModule

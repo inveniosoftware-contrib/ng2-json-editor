@@ -22,3 +22,10 @@ label.admin-mode {
 .row {
   height: 100%;
 }
+
+tr.align-right td:first-child {
+  width: 100%;
+  slide-toggle {
+    float: right;
+  }
+}

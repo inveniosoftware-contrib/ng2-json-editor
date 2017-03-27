@@ -6,6 +6,18 @@ import { JsonEditorConfig } from '../../dist';
 export class AppConfig {
   jsonEditorConfig: JsonEditorConfig = {
     schemaOptions: {
+      '': {
+        alwaysShow: ['deleted']
+      },
+      '/deleted': {
+        toggleColor: '#e74c3c'
+      },
+      '/citeable': {
+        toggleColor: '#3498db'
+      },
+      '/core': {
+        toggleColor: '#27ae60'
+      },
       '/authors/items': {
         order: ['full_name', 'affiliations'],
         alwaysShow: ['contributor_roles']
