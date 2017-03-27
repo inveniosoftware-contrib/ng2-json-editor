@@ -60,7 +60,7 @@ export class FindReplaceComponent {
       let stringyfiedDiffHtml = JSON.stringify(result.diffHtml, undefined, 2);
       this.modalService.displayModal({
         title: 'After Replace',
-        bodyHtml: this.domSanitizer.bypassSecurityTrustHtml(`<pre><code>${stringyfiedDiffHtml}</code></pre>`),
+        bodyHtml: this.domSanitizer.bypassSecurityTrustHtml(`<pre class="max-height-70-vh"><code>${stringyfiedDiffHtml}</code></pre>`),
         type: 'confirm',
         onConfirm: () => {
           this.modalService.closeCurrentModal();
