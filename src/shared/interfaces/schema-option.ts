@@ -79,7 +79,7 @@ export interface SchemaOption {
    * Toggle color for boolean, it will be displayed as a toggle on top if this is set.
    *
    * - It works only for top-level properties.
-   * - Toggle can not be deleted once they are added.
+   * - Toggle cannot be deleted once it is added.
    */
   toggleColor?: string;
 }

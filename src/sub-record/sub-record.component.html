@@ -11,7 +11,7 @@
     <table id="editor" class="table">
       <div class="field-wrapper">
         <tr *ngIf="keysByType.toggles" class="align-right">
-          <td *ngFor="let key of keysByType.toggles | addAlwaysShowFields:schema:true | filterAndSortBySchema:schema; trackBy:trackByElement">
+          <td *ngFor="let key of keysByType.toggles | addAlwaysShowToggles:schema| filterAndSortBySchema:schema; trackBy:trackByElement">
             <slide-toggle [value]="value.get(key) | selfOrEmpty:schema.properties[key]" (valueChange)="onToggleValueChange(key, $event)"
               [onText]="key" [offText]="key" [onColor]="schema.properties[key].toggleColor"></slide-toggle>
           </td>
