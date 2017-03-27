@@ -6,7 +6,8 @@
           [isPreviewerHidden]="isPreviewerHidden" [isPreviewerDisabled]="isPreviewerDisabled"></sub-record>
       </tab>
     </tabset>
-    <sub-record *ngIf="!config.tabsConfig" [value]="_record" [schema]="schema"></sub-record>
+    <sub-record *ngIf="!config.tabsConfig" [value]="_record" [schema]="schema" [enableAdminModeSwitch]="config.enableAdminModeSwitch"
+      [isPreviewerHidden]="isPreviewerHidden" [isPreviewerDisabled]="isPreviewerDisabled"></sub-record>
   </div>
   <div id="right-main-container" *ngIf="!isPreviewerDisabled" [ngClass]="rightContainerColMdClass" class="right main-container">
     <button id="btn-preview-toggle" type="button" class="btn btn-default btn-toggle" (click)="isPreviewerHidden = !isPreviewerHidden">{{isPreviewerHidden ? "Show Preview" : "Hide Preview"}}</button>
