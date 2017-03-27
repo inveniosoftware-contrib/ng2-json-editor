@@ -41,7 +41,7 @@ export class SubRecordComponent implements OnInit {
   @Input() enableAdminModeSwitch: boolean;
   @Input() isPreviewerHidden: boolean;
   @Input() isPreviewerDisabled: boolean;
-
+  @Input() tabName = '';
   keys: Set<string>;
   pathCache: PathCache = {};
 

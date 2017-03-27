@@ -37,6 +37,7 @@ import {
   PathUtilService
 } from '../shared/services';
 
+
 @Component({
   selector: 'primitive-field',
   encapsulation: ViewEncapsulation.None,
@@ -50,7 +51,6 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
 
   @Input() schema: Object;
   @Input() path: Array<any>;
-
   @Input() value: string | number | boolean;
 
   constructor(public schemaValidationService: SchemaValidationService,
@@ -72,15 +72,11 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
 
   commitValueChange() {
     // Validation
-    if (this.schema['type'] === 'string' && this.schema['enum'] === undefined) {
-      try {
-        this.schemaValidationService.validateStringValue(this.value.toString(), this.schema);
-      } catch (error) {
-        console.error(error);
-      }
+    let errors = this.schemaValidationService.validateValue(this.value, this.schema);
+    if (!errors.length) {
+      this.jsonStoreService.setIn(this.path, this.value);
     }
-    // TODO: should we make the change even if it is not validated
-    this.jsonStoreService.setIn(this.path, this.value);
+    this.errors = errors;
   }
 
   onKeypress(event: KeyboardEvent) {
@@ -101,6 +97,14 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
 
   get tabIndex(): number {
     return this.schema['disabled'] ? -1 : 1;
+  }
+
+  get tooltipPosition() {
+    let tooltipPlacement = 'top';
+    if (this.pathString.startsWith(this.appGlobalsService.firstElementPathForCurrentTab)) {
+      tooltipPlacement = 'bottom';
+    }
+    return tooltipPlacement;
   }
 
 }

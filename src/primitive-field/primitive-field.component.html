@@ -2,13 +2,13 @@
   <table class="primitive-field-container">
     <tr>
       <template #errorsTooltipTemplate>
-        <ul>
-          <li *ngFor="let error of errors">
+        <ul class="tooltip-left-align">
+          <li *ngFor="let error of errors" >
             {{error.message}}
           </li>
         </ul>
       </template>
-      <td class="value-container" [ngClass]="errorNgClass" [tooltip]="errorsTooltipTemplate" [isDisabled]="!isErrorTooltipEnabled">
+      <td class="value-container" [ngClass]="errorNgClass" [tooltip]="errorsTooltipTemplate" [isDisabled]="!isErrorTooltipEnabled" placement="{{tooltipPosition}}" container="body">
         <div *ngSwitchCase="'string'">
           <div contenteditable="true" attr.data-path="{{pathString}}" [tabindex]="tabIndex" [(contentModel)]="value" (blur)="commitValueChange()"
             (keypress)="onKeypress($event)" attr.placeholder="{{schema.title}}"></div>

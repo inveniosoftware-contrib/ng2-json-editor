@@ -9,7 +9,7 @@
   </div>
   <div class="right record-fields-container" [ngClass]="rightContainerColMdClass">
     <table id="editor" class="table">
-      <div class="field-wrapper" *ngFor="let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema; trackBy:trackByElement">
+      <div class="field-wrapper" *ngFor="let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema | setFirstElementPath:tabName; trackBy:trackByElement">
         <tr>
           <td class="label-holder">
             <title-dropdown [title]="key | underscoreToSpace" [isDisabled]="schema.properties[key].disabled">

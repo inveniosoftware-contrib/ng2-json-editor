@@ -22,13 +22,14 @@
 
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-
 import { SchemaValidationErrors } from '../interfaces';
 
 @Injectable()
 export class AppGlobalsService {
   private _globalErrorsSubject: ReplaySubject<SchemaValidationErrors> = new ReplaySubject<any>(1);
   public adminMode = false;
+  public activeTabName = 'Main';
+  public tabNameToFirstTopLevelElement: {[tabName: string]: string} = {};
 
   set globalErrors(errors: SchemaValidationErrors) {
     this._globalErrorsSubject.next(errors);
@@ -38,4 +39,7 @@ export class AppGlobalsService {
     return this._globalErrorsSubject;
   }
 
+  get firstElementPathForCurrentTab() {
+    return this.tabNameToFirstTopLevelElement[this.activeTabName];
+  }
 }

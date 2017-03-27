@@ -44,6 +44,7 @@
     "ts-helpers": "^1.1.1"
   },
   "dependencies": {
+    "ajv": "^4.11.3",
     "immutable": "^3.8.1",
     "lodash": "4.17.2",
     "mousetrap": "^1.6.0",

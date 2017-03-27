@@ -1,8 +1,8 @@
 <div class="row editor-container">
   <div id="left-main-container" class="left main-container" [ngClass]="leftContainerColMdClass" [shortcuts]="shortcuts">
     <tabset *ngIf="config.tabsConfig">
-      <tab *ngFor="let tabName of tabNames; trackBy:trackByElement" [heading]="tabName">
-        <sub-record [value]="tabNameToSubRecordMap.get(tabName)" [schema]="tabNameToSubSchema[tabName]" [enableAdminModeSwitch]="config.enableAdminModeSwitch"
+      <tab *ngFor="let tabName of tabNames; trackBy:trackByElement" [heading]="tabName" (select)="activeTabName = tabName">
+        <sub-record [value]="tabNameToSubRecordMap.get(tabName)" [tabName]="tabName" [schema]="tabNameToSubSchema[tabName]" [enableAdminModeSwitch]="config.enableAdminModeSwitch"
           [isPreviewerHidden]="isPreviewerHidden" [isPreviewerDisabled]="isPreviewerDisabled"></sub-record>
       </tab>
     </tabset>
