@@ -39,7 +39,7 @@
     </tr>
   </table>
   <!-- Elements -->
-  <div *ngFor="let pIndex of paginatedIndices; let i = index; trackBy:trackByElement">
+  <div *ngFor="let pIndex of paginatedIndices; let i = index; trackBy:trackByIndex">
     <div class="complex-list-field-wrapper">
       <object-field [value]="values.get(pIndex)" [schema]="schema.items" [path]="getElementPath(pIndex)">
         <list-action-group (onMove)="moveElement(i, $event)" (onDelete)="deleteElement(i)"></list-action-group>
