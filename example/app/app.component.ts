@@ -27,6 +27,7 @@ import 'rxjs/add/observable/zip';
 import { AppConfig } from './app.config';
 
 @Component({
+  // tslint:disable-next-line
   selector: 'app',
   encapsulation: ViewEncapsulation.None, //  Apply style (bootstrap.scss) globally
   styleUrls: [
@@ -45,7 +46,7 @@ export class AppComponent {
   record: Object;
   schema: Object;
 
-  constructor(private http: Http, public config: AppConfig ) {
+  constructor(private http: Http, public config: AppConfig) {
     Observable.zip(
       this.http.get('./assets/mock-data/record.json'),
       this.http.get('./assets/mock-data/schema.json'),

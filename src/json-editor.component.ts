@@ -27,7 +27,8 @@ import {
   Output,
   OnInit,
   ViewEncapsulation,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  TemplateRef
 } from '@angular/core';
 import { Http } from '@angular/http';
 
@@ -68,6 +69,8 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   @Input() record: Object;
   @Input() schema: Object;
   @Input() errorMap: SchemaValidationErrors = {};
+  @Input() templates: { [templateName: string]: TemplateRef<any> } = {};
+
 
   @Output() onRecordChange: EventEmitter<Object> = new EventEmitter<Object>();
 
@@ -109,6 +112,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     this.extractPreviews();
     // set errors that is used by other components
     this.appGlobalsService.globalErrors = this.errorMap;
+    this.appGlobalsService.templates = this.templates;
 
     // use fromJS to convert input to immutable then pass it to the store
     this._record = fromJS(this.record);

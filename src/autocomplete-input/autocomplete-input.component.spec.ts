@@ -33,7 +33,7 @@ import { Ng2BootstrapModule } from 'ng2-bootstrap';
 
 import { AutocompleteInputComponent } from '../autocomplete-input';
 
-import { RemoteAutocompletionService, JsonStoreService, PathUtilService } from '../shared/services';
+import { RemoteAutocompletionService, JsonStoreService, PathUtilService, AppGlobalsService } from '../shared/services';
 
 import { AutocompletionResult, AutocompletionConfig } from '../shared/interfaces';
 
@@ -47,6 +47,10 @@ class MockRemoteAutocompletionService extends RemoteAutocompletionService {
     token: string): Observable<Array<AutocompletionResult>> {
     return Observable.of(autocompletionServiceResults);
   }
+}
+
+class MockAppGlobalsService extends AppGlobalsService {
+  templates = {};
 }
 
 describe('AutocompleteInputComponent', () => {
@@ -66,8 +70,9 @@ describe('AutocompleteInputComponent', () => {
       ],
       providers: [
         { provide: RemoteAutocompletionService, useClass: MockRemoteAutocompletionService },
+        { provide: AppGlobalsService, useClass: MockAppGlobalsService },
         JsonStoreService,
-        PathUtilService
+        PathUtilService,
       ]
     }).compileComponents();
   }));
