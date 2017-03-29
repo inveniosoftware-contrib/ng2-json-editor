@@ -45,7 +45,8 @@ Then add it to your module's `imports`.
 - `schema` : valid json-schema for the record. See [json schema limitations](#json-schema-limitations)
 - `record` : valid json to  be edited.
 - `onRecordChange` emitted when record change, `$event` is the edited record.
-- `errorMap (={})`: errors for individual parts of the record (format should be [errors-map.json](./example/assets/mock-data/error-map.json) 
+- `errorMap (={})`: errors for individual parts of the record (format should be [errors-map.json](./example/assets/mock-data/error-map.json)
+- `templates: { [templateName: string]: TemplateRef<any> }`: `Templates with name, to be used by configured fields for example autocomplete result item.
 
 ## Example
 

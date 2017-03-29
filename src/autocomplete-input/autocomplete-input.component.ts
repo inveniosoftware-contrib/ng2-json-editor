@@ -20,12 +20,12 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/observable/of';
 
-import { JsonStoreService, RemoteAutocompletionService } from '../shared/services';
+import { JsonStoreService, RemoteAutocompletionService, AppGlobalsService } from '../shared/services';
 import { AutocompletionConfig, AutocompletionResult } from '../shared/interfaces';
 
 @Component({
@@ -53,14 +53,14 @@ export class AutocompleteInputComponent implements OnInit {
   typeaheadOptionField: string;
 
   constructor(public remoteAutocompletionService: RemoteAutocompletionService,
-    public jsonStoreService: JsonStoreService) { }
+    public jsonStoreService: JsonStoreService,
+    public appGlobalsService: AppGlobalsService) { }
 
   ngOnInit() {
     // if url option set then use remote autocompletion service
     if (this.autocompletionConfig.url) {
       this.typeaheadOptionField = 'text';
       this.dataSource = Observable.create((observer: any) => {
-        // Runs on every
         if (this.value && this.value.length > 0) {
           observer.next(this.value);
         }
@@ -70,6 +70,10 @@ export class AutocompleteInputComponent implements OnInit {
       this.dataSource = this.autocompletionConfig.source;
     }
 
+  }
+
+  get customItemTemplate(): TemplateRef<any> {
+    return this.appGlobalsService.templates[this.autocompletionConfig.itemTemplateName];
   }
 
   onModelChange(value: string) {

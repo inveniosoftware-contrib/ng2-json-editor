@@ -30,4 +30,12 @@ export interface AutocompletionConfig {
    * Maximum number of items to be displayed as autocompletion result in dropdown.
    */
   size: number;
+
+  /**
+   * Template name for each autocompletion result.
+   *
+   * - `@Input() templates` for `<json-editor>` must have an entry where key is this and value is a `TemplateRef`
+   * - template parameter: `item`: [[AutocompletionResult]]
+   */
+  itemTemplateName?: string;
 }

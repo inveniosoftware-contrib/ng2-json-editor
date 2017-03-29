@@ -20,7 +20,7 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Injectable } from '@angular/core';
+import { Injectable, TemplateRef } from '@angular/core';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { SchemaValidationErrors } from '../interfaces';
 
@@ -29,7 +29,8 @@ export class AppGlobalsService {
   private _globalErrorsSubject: ReplaySubject<SchemaValidationErrors> = new ReplaySubject<any>(1);
   public adminMode = false;
   public activeTabName = 'Main';
-  public tabNameToFirstTopLevelElement: {[tabName: string]: string} = {};
+  public tabNameToFirstTopLevelElement: { [tabName: string]: string } = {};
+  public templates: { [templateName: string]: TemplateRef<any> };
 
   set globalErrors(errors: SchemaValidationErrors) {
     this._globalErrorsSubject.next(errors);
@@ -42,4 +43,6 @@ export class AppGlobalsService {
   get firstElementPathForCurrentTab() {
     return this.tabNameToFirstTopLevelElement[this.activeTabName];
   }
+
+
 }

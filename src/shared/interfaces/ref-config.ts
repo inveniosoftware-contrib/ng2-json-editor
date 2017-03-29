@@ -2,15 +2,12 @@ import { HttpHeader } from './http-header';
 
 export interface RefConfig {
   /**
-   * Html template where you can access json that is pointed by $ref by using `context`
+   * Name of the template where you can access the data which is fetched from `$ref` url.
    *
-   * Example: '<div>aValue: {{(context | async)?.aValue}}<div>'
-   *
-   * - Async pipe must be used since the Observable passed as context.
-   * - Other angular2 common pipes can be used such as lowercase, json etc.
-   * - The error during http request can be accessed, via `context.error`
+   * - `@Input() templates` for `<json-editor>` must have an entry where key is this and value is a `TemplateRef`
+   * - template parameter: `response: Object` is json body, `response.error` is used to propagate http error during fetchin `$ref`
    */
-  template: string;
+  templateName: string;
 
   /**
    * Flag to indicate if template should be rendered on request or on page load, a preview button is inserted if set true.
