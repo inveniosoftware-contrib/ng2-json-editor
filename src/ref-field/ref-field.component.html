@@ -1,8 +1,12 @@
-<div [id]="pathString" [ngSwitch]="shouldDisplayWithTemplate" >
-  <div *ngSwitchCase="true">
-    <button class="btn-preview-template" *ngIf="isLazy && !isPreviewButtonHidden" (click)="onPreviewClick($event)">👁</button>
+<div [id]="pathString">
+  <div *ngIf="refConfig">
+    <button class="btn-preview-template" *ngIf="!shouldDisplayTemplate" (click)="onPreviewClick($event)"><i class="fa fa-eye"></i></button>
+    <div *ngIf="shouldDisplayTemplate">
+      <template *ngIf="refData" [ngTemplateOutlet]="customTemplate" [ngOutletContext]="{response: refData}"></template>
+      <i *ngIf="!refData" class="fa fa-spinner fa-spin align-center"></i>
+    </div>
   </div>
-  <div *ngSwitchDefault>
-    <a target="_blank" [href]="value.get('$ref')">{{value.get('$ref')}}</a>
+  <div *ngIf="!refConfig">
+    <a target="_blank" [href]="ref">{{ref}}</a>
   </div>
 </div>

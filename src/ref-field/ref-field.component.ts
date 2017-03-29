@@ -23,18 +23,18 @@
 import {
   Component,
   Input,
-  ViewContainerRef,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   OnChanges,
   SimpleChanges,
-  ComponentRef
+  TemplateRef
 } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 
-import { DynamicTemplateLoaderService, PathUtilService } from '../shared/services';
+import { AppGlobalsService, PathUtilService } from '../shared/services';
 import { RefConfig } from '../shared/interfaces';
 
 @Component({
@@ -48,103 +48,83 @@ import { RefConfig } from '../shared/interfaces';
 export class RefFieldComponent implements OnChanges {
 
   @Input() schema: Object;
-  @Input() value: Map<string, any>;
+  @Input() value: Map<string, string>;
   @Input() path: Array<any>;
 
-  // shorthand variables to each schema config properties
-  isLazy: boolean;
-  customTemplate: string;
+  refData: Object;
   requestOptions: RequestOptions;
 
-  refData$: Observable<Object>;
-  shouldDisplayWithTemplate = false;
   isPreviewButtonHidden = false;
-  dynamicTemplateComponentRef: ComponentRef<any>;
 
-  constructor(private viewContainer: ViewContainerRef,
-    private http: Http,
-    private dynamicTemplateLoaderService: DynamicTemplateLoaderService,
+  constructor(private http: Http,
+    private changeDetectorRef: ChangeDetectorRef,
+    private appGlobalsService: AppGlobalsService,
     private pathUtilService: PathUtilService) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    let valueChange = changes['value'];
-    // ngOnInit but needs to run before loading dynamic template
-    if (valueChange && valueChange.isFirstChange()) {
-      let config: RefConfig = this.schema['refConfig'];
-      if (config) {
-        this.isLazy = config['lazy'];
-        this.customTemplate = config['template'];
-        this.requestOptions = new RequestOptions({
-          headers: this.createHeadersWithConfig(config)
-        });
+    if (this.refConfig) {
+      let valueChange = changes['value'];
+      let schemaChange = changes['schema'];
+
+      // instead of ngOnInit because requestOptions has to be set before fetching
+      if (schemaChange && schemaChange.isFirstChange()) {
+        this.requestOptions = this.createRequestOptionsWithConfig();
       }
-    }
 
-    // load template if necessary
-    this.shouldDisplayWithTemplate = Boolean(this.customTemplate && this.value.get('$ref'));
-    if (valueChange && valueChange.currentValue !== valueChange.previousValue && this.shouldDisplayWithTemplate) {
-      this.loadTemplateWithRef(false);
-    }
-
-    // clear the dynamic template when new $ref is empty or undefined
-    if (!this.shouldDisplayWithTemplate && this.dynamicTemplateComponentRef) {
-      this.dynamicTemplateComponentRef.instance.context = undefined;
+      if (valueChange) {
+        if (this.refConfig.lazy) {
+          this.isPreviewButtonHidden = false;
+        } else {
+          this.fetchRef();
+        }
+      }
     }
   }
 
   onPreviewClick() {
-    this.loadTemplateWithRef(true);
     this.isPreviewButtonHidden = true;
+    this.fetchRef();
   }
 
   get pathString() {
     return this.pathUtilService.toPathString(this.path);
   }
 
-  /**
-   * Displays the template
-   *
-   * if the template hasn't loaded, loads the template asyncw with current $ref in this.value
-   * then assigns the loaded to this.dynamicTemplateComponentRef
-   *
-   * if the template has already loaded, refreshes its context value with the data that
-   * is fetched from current $ref in this.value
-   *
-   * Note: if called by onPreviewClick, hides the preview button.
-   *
-   *
-   * @param {boolean} force - should be set to load the template when it is lazy.
-   */
-  private loadTemplateWithRef(force: boolean) {
-    let ref = this.value.get('$ref');
-    this.refData$ = this.http
-      .get(ref, this.requestOptions)
-      .map(res => res.json())
-      .catch(error => {
-        console.warn(error);
-        return Observable.of({ error });
-      });
-    if (!this.isLazy || force) {
-      if (!this.dynamicTemplateComponentRef) {
-        this.dynamicTemplateLoaderService.loadTemplate(this.customTemplate, this.refData$, this.viewContainer)
-          .then(componentRef => {
-            this.dynamicTemplateComponentRef = componentRef;
-          });
-      } else {
-        this.dynamicTemplateComponentRef.instance.context = this.refData$;
-      }
-    } else {
-      this.isPreviewButtonHidden = false;
-      if (this.dynamicTemplateComponentRef) {
-        this.dynamicTemplateComponentRef.instance.context = undefined;
-      }
-    }
+  get customTemplate(): TemplateRef<any> {
+    return this.appGlobalsService.templates[this.refConfig.templateName];
   }
 
-  private createHeadersWithConfig(config: RefConfig): Headers {
+  get refConfig(): RefConfig {
+    return this.schema['refFieldConfig'];
+  }
+
+  get ref(): string {
+    return this.value.get('$ref');
+  }
+
+  get shouldDisplayTemplate(): boolean {
+    return this.isPreviewButtonHidden || !this.refConfig.lazy;
+  }
+
+  private fetchRef() {
+    this.refData = undefined;
+    this.http
+      .get(this.ref, this.requestOptions)
+      .map(res => res.json())
+      .catch(error => {
+        return Observable.of({ error });
+      }).subscribe(data => {
+        this.refData = data;
+        this.changeDetectorRef.markForCheck();
+      });
+  }
+
+  private createRequestOptionsWithConfig(): RequestOptions {
     let headers = new Headers();
-    config.headers
-      .forEach(header => headers.append(header.name, header.value));
-    return headers;
+    if (this.refConfig.headers) {
+      this.refConfig.headers
+        .forEach(header => headers.append(header.name, header.value));
+    }
+    return new RequestOptions({ headers });
   }
 }
