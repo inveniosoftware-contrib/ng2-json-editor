@@ -85,6 +85,35 @@ npm start
 gulp watch
 ```
 
+### Working with npm link
+
+```bash
+# in ng2-json-editor
+
+# do initial build into dist
+npm run build
+
+# copy package.json to dist
+npm run copy
+
+# go to dist folder and link it
+cd dist
+npm link
+
+# remove node_modules inside dist which might cause weird errors
+rm -rf node_modules/
+
+# in another terminal session
+# watch changes on src, so that all will be available on the linked module
+gulp watch
+```
+
+```bash
+# in another module
+
+npm link ng2-json-editor
+```
+
 ### Useful commands
 
 ```bash
