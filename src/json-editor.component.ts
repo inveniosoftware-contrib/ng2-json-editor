@@ -156,15 +156,21 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
           } else if (previewConfig.getUrl) {
             url = previewConfig.getUrl(this.record);
           } else if (previewConfig.urlPath) {
-            url = this.jsonUtilService.getValueInPath(this.record, previewConfig.urlPath);
+            try {
+              url = this.jsonUtilService.getValueInPath(this.record, previewConfig.urlPath);
+            } catch (error) {
+              console.warn(`Path ${previewConfig.urlPath} in preview config is not present in the input record`);
+            }
           } else {
             throw new Error('Either url, urlPath or getUrl should be set for a preview');
           }
-          this.previews.push({
-            name: previewConfig.name,
-            type: previewConfig.type,
-            url: url
-          });
+          if (url) {
+            this.previews.push({
+              name: previewConfig.name,
+              type: previewConfig.type,
+              url: url
+            });
+          }
         });
     }
   }
