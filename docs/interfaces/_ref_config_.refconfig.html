@@ -28,7 +28,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_ref_config_.refconfig.html#headers" class="tsd-kind-icon">headers</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_ref_config_.refconfig.html#lazy" class="tsd-kind-icon">lazy</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_ref_config_.refconfig.html#template" class="tsd-kind-icon">template</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_ref_config_.refconfig.html#templatename" class="tsd-kind-icon">template<wbr>Name</a></li>
 							</ul>
 						</section>
 					</div>
@@ -61,20 +61,18 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="template" class="tsd-anchor"></a>
-					<h3>template</h3>
-					<div class="tsd-signature tsd-kind-icon">template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="templatename" class="tsd-anchor"></a>
+					<h3>template<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">template<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Html template where you can access json that is pointed by $ref by using <code>context</code></p>
+							<p>Name of the template where you can access the data which is fetched from <code>$ref</code> url.</p>
 						</div>
-						<p>Example: &#39;<div>aValue: {{(context | async)?.aValue}}<div>&#39;</p>
 						<ul>
-							<li>Async pipe must be used since the Observable passed as context.</li>
-							<li>Other angular2 common pipes can be used such as lowercase, json etc.</li>
-							<li>The error during http request can be accessed, via <code>context.error</code></li>
+							<li><code>@Input() templates</code> for <code>&lt;json-editor&gt;</code> must have an entry where key is this and value is a <code>TemplateRef</code></li>
+							<li>template parameter: <code>response: Object</code> is json body, <code>response.error</code> is used to propagate http error during fetchin <code>$ref</code></li>
 						</ul>
 					</div>
 				</section>
@@ -95,7 +93,7 @@
 								<a href="_ref_config_.refconfig.html#lazy" class="tsd-kind-icon">lazy</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="_ref_config_.refconfig.html#template" class="tsd-kind-icon">template</a>
+								<a href="_ref_config_.refconfig.html#templatename" class="tsd-kind-icon">template<wbr>Name</a>
 							</li>
 						</ul>
 					</li>

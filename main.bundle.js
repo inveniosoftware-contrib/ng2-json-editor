@@ -5,45 +5,42 @@ webpackJsonp([0,3],{
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_globals_service__ = __webpack_require__(1013);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__remote_autocompletion_service__ = __webpack_require__(1018);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__remote_autocompletion_service__ = __webpack_require__(1017);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__component_type_service__ = __webpack_require__(578);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dom_util_service__ = __webpack_require__(579);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__dynamic_template_loader_service__ = __webpack_require__(1014);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__empty_value_service__ = __webpack_require__(272);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__find_replace_all_service__ = __webpack_require__(1015);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__json_store_service__ = __webpack_require__(581);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__json_util_service__ = __webpack_require__(582);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__json_schema_service__ = __webpack_require__(580);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__path_util_service__ = __webpack_require__(170);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__modal_service__ = __webpack_require__(1016);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__record_fixer_service__ = __webpack_require__(1017);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__schema_fixer_service__ = __webpack_require__(1019);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__schema_validation_service__ = __webpack_require__(1020);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__shortcut_action_service__ = __webpack_require__(583);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__shortcut_service__ = __webpack_require__(1021);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__window_href_service__ = __webpack_require__(1023);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__tabs_util_service__ = __webpack_require__(1022);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__empty_value_service__ = __webpack_require__(272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__find_replace_all_service__ = __webpack_require__(1014);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__json_store_service__ = __webpack_require__(581);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__json_util_service__ = __webpack_require__(582);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__json_schema_service__ = __webpack_require__(580);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__path_util_service__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__modal_service__ = __webpack_require__(1015);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__record_fixer_service__ = __webpack_require__(1016);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__schema_fixer_service__ = __webpack_require__(1018);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__schema_validation_service__ = __webpack_require__(1019);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__shortcut_action_service__ = __webpack_require__(583);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__shortcut_service__ = __webpack_require__(1020);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__window_href_service__ = __webpack_require__(1022);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__tabs_util_service__ = __webpack_require__(1021);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__app_globals_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return __WEBPACK_IMPORTED_MODULE_1__remote_autocompletion_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return __WEBPACK_IMPORTED_MODULE_2__component_type_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return __WEBPACK_IMPORTED_MODULE_1__remote_autocompletion_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return __WEBPACK_IMPORTED_MODULE_2__component_type_service__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return __WEBPACK_IMPORTED_MODULE_3__dom_util_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return __WEBPACK_IMPORTED_MODULE_4__dynamic_template_loader_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_5__empty_value_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return __WEBPACK_IMPORTED_MODULE_6__find_replace_all_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_7__json_store_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_8__json_util_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_9__json_schema_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_10__path_util_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return __WEBPACK_IMPORTED_MODULE_11__modal_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return __WEBPACK_IMPORTED_MODULE_12__record_fixer_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return __WEBPACK_IMPORTED_MODULE_13__schema_fixer_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return __WEBPACK_IMPORTED_MODULE_14__schema_validation_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_4__empty_value_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return __WEBPACK_IMPORTED_MODULE_5__find_replace_all_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_6__json_store_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_7__json_util_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_8__json_schema_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_9__path_util_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return __WEBPACK_IMPORTED_MODULE_10__modal_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return __WEBPACK_IMPORTED_MODULE_11__record_fixer_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return __WEBPACK_IMPORTED_MODULE_12__schema_fixer_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return __WEBPACK_IMPORTED_MODULE_13__schema_validation_service__["a"]; });
 /* unused harmony reexport ShortcutActionService */
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return __WEBPACK_IMPORTED_MODULE_16__shortcut_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return __WEBPACK_IMPORTED_MODULE_17__window_href_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return __WEBPACK_IMPORTED_MODULE_18__tabs_util_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return __WEBPACK_IMPORTED_MODULE_15__shortcut_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return __WEBPACK_IMPORTED_MODULE_16__window_href_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return __WEBPACK_IMPORTED_MODULE_17__tabs_util_service__["a"]; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return SHARED_SERVICES; });
-
 
 
 
@@ -68,21 +65,20 @@ var SHARED_SERVICES = [
     __WEBPACK_IMPORTED_MODULE_1__remote_autocompletion_service__["a" /* RemoteAutocompletionService */],
     __WEBPACK_IMPORTED_MODULE_2__component_type_service__["a" /* ComponentTypeService */],
     __WEBPACK_IMPORTED_MODULE_3__dom_util_service__["a" /* DomUtilService */],
-    __WEBPACK_IMPORTED_MODULE_4__dynamic_template_loader_service__["a" /* DynamicTemplateLoaderService */],
-    __WEBPACK_IMPORTED_MODULE_5__empty_value_service__["a" /* EmptyValueService */],
-    __WEBPACK_IMPORTED_MODULE_6__find_replace_all_service__["a" /* FindReplaceAllService */],
-    __WEBPACK_IMPORTED_MODULE_7__json_store_service__["a" /* JsonStoreService */],
-    __WEBPACK_IMPORTED_MODULE_8__json_util_service__["a" /* JsonUtilService */],
-    __WEBPACK_IMPORTED_MODULE_9__json_schema_service__["a" /* JsonSchemaService */],
-    __WEBPACK_IMPORTED_MODULE_10__path_util_service__["a" /* PathUtilService */],
-    __WEBPACK_IMPORTED_MODULE_11__modal_service__["a" /* ModalService */],
-    __WEBPACK_IMPORTED_MODULE_12__record_fixer_service__["a" /* RecordFixerService */],
-    __WEBPACK_IMPORTED_MODULE_13__schema_fixer_service__["a" /* SchemaFixerService */],
-    __WEBPACK_IMPORTED_MODULE_14__schema_validation_service__["a" /* SchemaValidationService */],
-    __WEBPACK_IMPORTED_MODULE_15__shortcut_action_service__["a" /* ShortcutActionService */],
-    __WEBPACK_IMPORTED_MODULE_16__shortcut_service__["a" /* ShortcutService */],
-    __WEBPACK_IMPORTED_MODULE_17__window_href_service__["a" /* WindowHrefService */],
-    __WEBPACK_IMPORTED_MODULE_18__tabs_util_service__["a" /* TabsUtilService */]
+    __WEBPACK_IMPORTED_MODULE_4__empty_value_service__["a" /* EmptyValueService */],
+    __WEBPACK_IMPORTED_MODULE_5__find_replace_all_service__["a" /* FindReplaceAllService */],
+    __WEBPACK_IMPORTED_MODULE_6__json_store_service__["a" /* JsonStoreService */],
+    __WEBPACK_IMPORTED_MODULE_7__json_util_service__["a" /* JsonUtilService */],
+    __WEBPACK_IMPORTED_MODULE_8__json_schema_service__["a" /* JsonSchemaService */],
+    __WEBPACK_IMPORTED_MODULE_9__path_util_service__["a" /* PathUtilService */],
+    __WEBPACK_IMPORTED_MODULE_10__modal_service__["a" /* ModalService */],
+    __WEBPACK_IMPORTED_MODULE_11__record_fixer_service__["a" /* RecordFixerService */],
+    __WEBPACK_IMPORTED_MODULE_12__schema_fixer_service__["a" /* SchemaFixerService */],
+    __WEBPACK_IMPORTED_MODULE_13__schema_validation_service__["a" /* SchemaValidationService */],
+    __WEBPACK_IMPORTED_MODULE_14__shortcut_action_service__["a" /* ShortcutActionService */],
+    __WEBPACK_IMPORTED_MODULE_15__shortcut_service__["a" /* ShortcutService */],
+    __WEBPACK_IMPORTED_MODULE_16__window_href_service__["a" /* WindowHrefService */],
+    __WEBPACK_IMPORTED_MODULE_17__tabs_util_service__["a" /* TabsUtilService */]
 ];
 
 
@@ -155,16 +151,16 @@ var ShortcutsDirective = (function () {
         this.mousetrap.unbind(Object.keys(this.shortcuts));
     };
     ShortcutsDirective.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Directive */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["v" /* Directive */], args: [{
                     selector: '[shortcuts]'
                 },] },
     ];
     /** @nocollapse */
     ShortcutsDirective.ctorParameters = function () { return [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */], },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* ElementRef */], },
     ]; };
     ShortcutsDirective.propDecorators = {
-        'shortcuts': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
+        'shortcuts': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
     };
     return ShortcutsDirective;
 }());
@@ -794,92 +790,6 @@ var AppGlobalsService = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(18);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DynamicTemplateLoaderService; });
-
-
-var DynamicTemplateLoaderService = (function () {
-    function DynamicTemplateLoaderService(compiler) {
-        this.compiler = compiler;
-        // cache for component factories for templates
-        this.cache = new Map();
-    }
-    /**
-     * Creates a dummy component with given template and context
-     * and inserts it in given view container.
-     *
-     * @param {string} template - html template string
-     * @param {any} context - context data which is referenced in `template` as `context`
-     * @param {ViewContainerRef} viewContainer - view container where the template will inserted
-     */
-    DynamicTemplateLoaderService.prototype.loadTemplate = function (template, context, viewContainer) {
-        var _this = this;
-        // check if factory for dummy component is created before for the template
-        if (this.cache.has(template)) {
-            return new Promise(function (resolve) {
-                var component = viewContainer.createComponent(_this.cache.get(template));
-                component.instance.context = context;
-                resolve(component);
-            });
-        }
-        // dummy component with given template
-        var DynamicTemplateComponent = (function () {
-            function DynamicTemplateComponent() {
-            }
-            DynamicTemplateComponent.decorators = [
-                { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */], args: [{ template: template },] },
-            ];
-            /** @nocollapse */
-            DynamicTemplateComponent.ctorParameters = function () { return []; };
-            DynamicTemplateComponent.propDecorators = {
-                'context': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-            };
-            return DynamicTemplateComponent;
-        }());
-        // dummy module that wraps dummy component and CommonModule (for core pipes such as async)
-        var DynamicTemplateModule = (function () {
-            function DynamicTemplateModule() {
-            }
-            DynamicTemplateModule.decorators = [
-                { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["b" /* NgModule */], args: [{
-                            declarations: [DynamicTemplateComponent],
-                            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_common__["a" /* CommonModule */]]
-                        },] },
-            ];
-            /** @nocollapse */
-            DynamicTemplateModule.ctorParameters = function () { return []; };
-            return DynamicTemplateModule;
-        }());
-        // compile the module in runtime which will create the factory for dummy component
-        return this.compiler.compileModuleAndAllComponentsAsync(DynamicTemplateModule)
-            .then(function (module) { return module.componentFactories
-            .find(function (factory) { return factory.componentType === DynamicTemplateComponent; }); })
-            .then(function (factory) {
-            _this.cache.set(template, factory);
-            var component = viewContainer.createComponent(factory);
-            component.instance.context = context;
-            component.changeDetectorRef.markForCheck();
-            return component;
-        });
-    };
-    DynamicTemplateLoaderService.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */] },
-    ];
-    /** @nocollapse */
-    DynamicTemplateLoaderService.ctorParameters = function () { return [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["g" /* Compiler */], },
-    ]; };
-    return DynamicTemplateLoaderService;
-}());
-
-
-/***/ }),
-
-/***/ 1015:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FindReplaceAllService; });
@@ -952,7 +862,7 @@ var FindReplaceAllService = (function () {
 
 /***/ }),
 
-/***/ 1016:
+/***/ 1015:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1006,7 +916,7 @@ var ModalService = (function () {
 
 /***/ }),
 
-/***/ 1017:
+/***/ 1016:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1142,7 +1052,7 @@ var RecordFixerService = (function () {
 
 /***/ }),
 
-/***/ 1018:
+/***/ 1017:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1207,7 +1117,7 @@ var RemoteAutocompletionService = (function () {
 
 /***/ }),
 
-/***/ 1019:
+/***/ 1018:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1446,7 +1356,7 @@ var SchemaFixerService = (function () {
 
 /***/ }),
 
-/***/ 1020:
+/***/ 1019:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1548,7 +1458,7 @@ var SchemaValidationService = (function () {
 
 /***/ }),
 
-/***/ 1021:
+/***/ 1020:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1652,7 +1562,7 @@ var ShortcutService = (function () {
 
 /***/ }),
 
-/***/ 1022:
+/***/ 1021:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1757,7 +1667,7 @@ var TabsUtilService = (function () {
 
 /***/ }),
 
-/***/ 1023:
+/***/ 1022:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1819,18 +1729,18 @@ var WindowHrefService = (function () {
 
 /***/ }),
 
-/***/ 1024:
+/***/ 1023:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sub_record_component__ = __webpack_require__(1025);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sub_record_component__ = __webpack_require__(1024);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__sub_record_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 1025:
+/***/ 1024:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1922,11 +1832,11 @@ var SubRecordComponent = (function () {
         return this.schema['properties'][field]['toggleColor'] !== undefined;
     };
     SubRecordComponent.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Component */], args: [{
                     selector: 'sub-record',
                     styles: ["div.admin-mode { padding-top: 8px; width: 100%; } label.admin-mode { color: #e0dfdf; font-size: 13px; font-weight: normal; width: 90%; padding-left: 4px; } .record-fields-container { height: 100%; overflow: auto; padding-right: 0px; padding-left: 0px; padding-bottom: 41px; } .row { height: 100%; } tr.align-right td:first-child { width: 100%; } tr.align-right td:first-child slide-toggle { float: right; } "],
                     template: "<div class=\"row\"> <div class=\"left menu-container\" [ngClass]=\"leftContainerColMdClass\"> <tree-menu [record]=\"value\" [schema]=\"schema\"></tree-menu> <add-field-dropdown [fields]=\"allKeys\" [pathString]=\"''\" (onFieldAdd)=\"onFieldAdd($event)\" [schema]=\"schema.properties\">Add field</add-field-dropdown> <div *ngIf=\"enableAdminModeSwitch\" class=\"admin-mode\" tooltip=\"Allows editing all fields (use with care)\"> <input id=\"admin-mode-checkbox\" type=\"checkbox\" [(ngModel)]=\"appGlobalsService.adminMode\" /> <label class=\"admin-mode\" for=\"admin-mode-checkbox\">Enable Admin Mode</label> </div> </div> <div class=\"right record-fields-container\" [ngClass]=\"rightContainerColMdClass\"> <table id=\"editor\" class=\"table\"> <div class=\"field-wrapper\"> <tr *ngIf=\"keysByType.toggles\" class=\"align-right\"> <td *ngFor=\"let key of keysByType.toggles | addAlwaysShowToggles:schema| filterAndSortBySchema:schema; trackBy:trackByElement\"> <slide-toggle [value]=\"value.get(key) | selfOrEmpty:schema.properties[key]\" (valueChange)=\"onToggleValueChange(key, $event)\" [onText]=\"key\" [offText]=\"key\" [onColor]=\"schema.properties[key].toggleColor\"></slide-toggle> </td> </tr> </div> <div class=\"field-wrapper\" *ngFor=\"let key of keysByType.others | addAlwaysShowFields:schema | filterAndSortBySchema:schema | setFirstElementPath:tabName; trackBy:trackByElement\"> <tr> <td class=\"label-holder\"> <title-dropdown [title]=\"key | underscoreToSpace\" [isDisabled]=\"schema.properties[key].disabled\"> <li *ngIf=\"schema.properties[key].type === 'array'\" class=\"title-dropdown-item\"> <add-new-element-button [path]=\"getPathForField(key)\" [schema]=\"schema.properties[key]\"></add-new-element-button> </li> <li class=\"title-dropdown-item\"> <button type=\"button\" class=\"editor-btn-delete editor-btn-delete-text\" (click)=\"deleteField(key)\">Delete</button> </li> <li class=\"divider\"></li> <li class=\"title-dropdown-item\"> <find-replace [path]=\"getPathForField(key)\" [schema]=\"schema.properties[key]\"></find-replace> </li> </title-dropdown> </td> </tr> <tr> <td> <any-type-field [value]=\"value.get(key) | selfOrEmpty:schema.properties[key]\" [schema]=\"schema.properties[key]\" [path]=\"getPathForField(key)\"></any-type-field> </td> </tr> </div> </table> </div> </div>",
-                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* ChangeDetectionStrategy */].OnPush
+                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* ChangeDetectionStrategy */].OnPush
                 },] },
     ];
     /** @nocollapse */
@@ -1935,12 +1845,12 @@ var SubRecordComponent = (function () {
         { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["a" /* AppGlobalsService */], },
     ]; };
     SubRecordComponent.propDecorators = {
-        'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'enableAdminModeSwitch': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'isPreviewerHidden': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'isPreviewerDisabled': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'tabName': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
+        'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'enableAdminModeSwitch': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'isPreviewerHidden': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'isPreviewerDisabled': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'tabName': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
     };
     return SubRecordComponent;
 }());
@@ -1948,18 +1858,18 @@ var SubRecordComponent = (function () {
 
 /***/ }),
 
-/***/ 1026:
+/***/ 1025:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__table_item_field_component__ = __webpack_require__(1027);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__table_item_field_component__ = __webpack_require__(1026);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__table_item_field_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 1027:
+/***/ 1026:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2012,13 +1922,13 @@ var TableItemFieldComponent = (function (_super) {
         return this.pathCache[name];
     };
     TableItemFieldComponent.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Component */], args: [{
                     // Defined as attribute selector not to break table > tr > td html structure
                     // tslint:disable-next-line
                     selector: '[table-item-field]',
                     styles: ["td { padding: 0 !important; vertical-align: top !important; } "],
                     template: "<td *ngFor=\"let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema; trackBy:trackByElement\" [style.width]=\"schema.properties[key].columnWidth + '%'\"> <any-type-field [value]=\"value.get(key) | selfOrEmpty:schema.properties[key]\" [schema]=\"schema.properties[key]\" [path]=\"getFieldPath(key)\"> </any-type-field> <add-new-element-button *ngIf=\"schema.properties[key].type === 'array'\" [path]=\"getFieldPath(key)\" [schema]=\"schema.properties[key]\"> </add-new-element-button> </td> <!-- td element with list-action-group (up/down and delete buttons) --> <ng-content></ng-content>",
-                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* ChangeDetectionStrategy */].OnPush
+                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* ChangeDetectionStrategy */].OnPush
                 },] },
     ];
     /** @nocollapse */
@@ -2028,10 +1938,10 @@ var TableItemFieldComponent = (function (_super) {
         { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["b" /* PathUtilService */], },
     ]; };
     TableItemFieldComponent.propDecorators = {
-        'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'keys': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
+        'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'keys': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
     };
     return TableItemFieldComponent;
 }(__WEBPACK_IMPORTED_MODULE_1__abstract_field__["a" /* AbstractFieldComponent */]));
@@ -2039,18 +1949,18 @@ var TableItemFieldComponent = (function (_super) {
 
 /***/ }),
 
-/***/ 1028:
+/***/ 1027:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__table_list_field_component__ = __webpack_require__(1029);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__table_list_field_component__ = __webpack_require__(1028);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__table_list_field_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 1029:
+/***/ 1028:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2109,11 +2019,11 @@ var TableListFieldComponent = (function (_super) {
         this.keys = this.keys.add(field);
     };
     TableListFieldComponent.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Component */], args: [{
                     selector: 'table-list-field',
                     styles: ["table.editable-inner-table { border: none; } table.editable-inner-table thead > tr > th { vertical-align: middle; border: none; color: #c1c1c1; } "],
                     template: "<div [id]=\"pathString\"> <div> <table class=\"table editable-inner-table\"> <thead class=\"thead-inverse\"> <tr> <th *ngFor=\"let key of keys | addAlwaysShowFields:schema.items | filterAndSortBySchema:schema.items; trackBy:trackByElement\" [style.width]=\"schema.items.properties[key].columnWidth + '%'\"> {{key | underscoreToSpace}} </th> <th class=\"button-holder\"> <add-field-dropdown *ngIf=\"values.size > 0\" [fields]=\"keys\" [pathString]=\"getElementPathString(0)\" (onFieldAdd)=\"onFieldAdd($event)\" [schema]=\"schema.items.properties\">+</add-field-dropdown> </th> </tr> </thead> <tr *ngFor=\"let value of values; let i = index; trackBy:trackByIndex\" table-item-field [id]=\"getElementPathString(i)\" [value]=\"value\" [schema]=\"schema.items\" [path]=\"getElementPath(i)\" [keys]=\"keys\"> <td *ngIf=\"values.size > 0\" class=\"button-holder\"> <list-action-group (onMove)=\"moveElement(i, $event)\" (onDelete)=\"deleteElement(i)\"></list-action-group> </td> </tr> </table> </div> </div>",
-                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* ChangeDetectionStrategy */].OnPush
+                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* ChangeDetectionStrategy */].OnPush
                 },] },
     ];
     /** @nocollapse */
@@ -2123,9 +2033,9 @@ var TableListFieldComponent = (function (_super) {
         { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["b" /* PathUtilService */], },
     ]; };
     TableListFieldComponent.propDecorators = {
-        'values': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
+        'values': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
     };
     return TableListFieldComponent;
 }(__WEBPACK_IMPORTED_MODULE_2__abstract_list_field__["a" /* AbstractListFieldComponent */]));
@@ -2133,18 +2043,18 @@ var TableListFieldComponent = (function (_super) {
 
 /***/ }),
 
-/***/ 1030:
+/***/ 1029:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__title_dropdown_component__ = __webpack_require__(1031);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__title_dropdown_component__ = __webpack_require__(1030);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__title_dropdown_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 1031:
+/***/ 1030:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2176,18 +2086,18 @@ var TitleDropdownComponent = (function () {
     function TitleDropdownComponent() {
     }
     TitleDropdownComponent.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Component */], args: [{
                     selector: 'title-dropdown',
                     styles: [".title-dropdown-toggle { font-size: 13px; background: transparent; border: none; padding: 0px 3px 0px 3px; color: #c1c1c1; font-weight: bold; } .title-dropdown-toggle:focus { outline: 0; } .title-dropdown-toggle:hover { color: #6b6b6b; } .dropdown-menu { min-width: 120px; } "],
                     template: "<div dropdown> <button class=\"btn title-dropdown-toggle\" [isDisabled]=\"isDisabled\" dropdownToggle> {{title}} <span class=\"caret\"></span> </button> <ul class=\"dropdown-menu\" dropdownMenu> <ng-content></ng-content> </ul> </div>",
-                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* ChangeDetectionStrategy */].OnPush
+                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* ChangeDetectionStrategy */].OnPush
                 },] },
     ];
     /** @nocollapse */
     TitleDropdownComponent.ctorParameters = function () { return []; };
     TitleDropdownComponent.propDecorators = {
-        'title': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'isDisabled': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
+        'title': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'isDisabled': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
     };
     return TitleDropdownComponent;
 }());
@@ -2195,12 +2105,12 @@ var TitleDropdownComponent = (function () {
 
 /***/ }),
 
-/***/ 1032:
+/***/ 1031:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__tree_menu_component__ = __webpack_require__(1034);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tree_menu_item_component__ = __webpack_require__(1033);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__tree_menu_component__ = __webpack_require__(1033);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tree_menu_item_component__ = __webpack_require__(1032);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__tree_menu_component__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__tree_menu_item_component__["a"]; });
 
@@ -2210,7 +2120,7 @@ var TitleDropdownComponent = (function () {
 
 /***/ }),
 
-/***/ 1033:
+/***/ 1032:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2288,11 +2198,11 @@ var TreeMenuItemComponent = (function (_super) {
         return "" + this.path + this.pathUtilService.separator + indexOrKey;
     };
     TreeMenuItemComponent.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Component */], args: [{
                     selector: 'tree-menu-item',
                     styles: ["a { color: #e0dfdf; } "],
                     template: "<div> <a [href]=\"href\" (click)=\"toggle($event)\">{{label}}</a> <a *ngIf=\"isCollapsable\" [hidden]=\"isCollapsed\" (click)=\"collapse()\"> [x]</a> <div [ngSwitch]=\"schema.type\" [hidden]=\"isCollapsed\"> <ul> <div *ngSwitchCase=\"'object'\"> <li *ngFor=\"let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema; trackBy:trackByElement\"> <tree-menu-item [label]=\"key\" [value]=\"value.get(key)\" [schema]=\"schema.properties[key]\" [path]=\"getChildPath(key)\"></tree-menu-item> </li> </div> <div *ngSwitchCase=\"'array'\"> <li *ngFor=\"let element of value; let i = index; trackBy:trackByElement\"> <tree-menu-item [label]=\"i\" [value]=\"element\" [schema]=\"schema.items\" [path]=\"getChildPath(i)\"></tree-menu-item> </li> </div> </ul> </div> </div>",
-                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* ChangeDetectionStrategy */].OnPush
+                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* ChangeDetectionStrategy */].OnPush
                 },] },
     ];
     /** @nocollapse */
@@ -2302,10 +2212,10 @@ var TreeMenuItemComponent = (function (_super) {
         { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["b" /* PathUtilService */], },
     ]; };
     TreeMenuItemComponent.propDecorators = {
-        'label': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
+        'label': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
     };
     return TreeMenuItemComponent;
 }(__WEBPACK_IMPORTED_MODULE_1__abstract_tracker__["a" /* AbstractTrackerComponent */]));
@@ -2313,7 +2223,7 @@ var TreeMenuItemComponent = (function (_super) {
 
 /***/ }),
 
-/***/ 1034:
+/***/ 1033:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2380,11 +2290,11 @@ var TreeMenuComponent = (function (_super) {
         return "" + this.pathUtilService.separator + key;
     };
     TreeMenuComponent.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Component */], args: [{
                     selector: 'tree-menu',
                     styles: ["div.tree-menu-container { padding: 8px 0; overflow-x: hidden; overflow-y: auto; text-align: center; } input.wide { width: 100%; padding: 2px; text-align: center; } ul.menu-item-container { list-style: none; text-align: left; padding-top: 8px; } "],
                     template: "<div> <div class=\"tree-menu-container\"> <input class=\"wide\" type=\"text\" [(ngModel)]=\"prefixOrPath\" (keypress)=\"onKeypress($event.key)\" placeholder=\"Search or go\"> <ul class=\"menu-item-container\"> <li *ngFor=\"let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema; trackBy:trackByElement\" [hidden]=\"!filter(key)\"> <tree-menu-item [label]=\"key\" [value]=\"record.get(key)\" [schema]=\"schema.properties[key]\" [path]=\"getChildPath(key)\"></tree-menu-item> </li> </ul> </div> </div> ",
-                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* ChangeDetectionStrategy */].OnPush
+                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* ChangeDetectionStrategy */].OnPush
                 },] },
     ];
     /** @nocollapse */
@@ -2394,8 +2304,8 @@ var TreeMenuComponent = (function (_super) {
         { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["b" /* PathUtilService */], },
     ]; };
     TreeMenuComponent.propDecorators = {
-        'record': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
+        'record': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
     };
     return TreeMenuComponent;
 }(__WEBPACK_IMPORTED_MODULE_1__abstract_tracker__["a" /* AbstractTrackerComponent */]));
@@ -2403,18 +2313,18 @@ var TreeMenuComponent = (function (_super) {
 
 /***/ }),
 
-/***/ 1035:
+/***/ 1034:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__value_change_watcher_component__ = __webpack_require__(1036);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__value_change_watcher_component__ = __webpack_require__(1035);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__value_change_watcher_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 1036:
+/***/ 1035:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2472,22 +2382,22 @@ var ValueChangeWatcherComponent = (function () {
         }
     };
     ValueChangeWatcherComponent.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Component */], args: [{
                     selector: 'value-change-watcher',
-                    encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Q" /* ViewEncapsulation */].None,
+                    encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["O" /* ViewEncapsulation */].None,
                     template: "<any-type-field [value]=\"value\" [schema]=\"schema\" [path]=\"path\"></any-type-field>",
-                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* ChangeDetectionStrategy */].OnPush
+                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* ChangeDetectionStrategy */].OnPush
                 },] },
     ];
     /** @nocollapse */
     ValueChangeWatcherComponent.ctorParameters = function () { return [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["l" /* ChangeDetectorRef */], },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ChangeDetectorRef */], },
         { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["e" /* JsonStoreService */], },
     ]; };
     ValueChangeWatcherComponent.propDecorators = {
-        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
+        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
     };
     return ValueChangeWatcherComponent;
 }());
@@ -2495,7 +2405,7 @@ var ValueChangeWatcherComponent = (function () {
 
 /***/ }),
 
-/***/ 1046:
+/***/ 1045:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(584);
@@ -3646,9 +3556,10 @@ var AppComponent = (function () {
         this.record = record;
     };
     AppComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */])({
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Component */])({
+            // tslint:disable-next-line
             selector: 'app',
-            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Q" /* ViewEncapsulation */].None,
+            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["O" /* ViewEncapsulation */].None,
             styles: [__webpack_require__(923)],
             template: "\n    <json-editor *ngIf=\"record && schema\" \n      [config]=\"config.jsonEditorConfig\"\n      [record]=\"record\"\n      (onRecordChange)=\"onRecordChange($event)\"\n      [schema]=\"schema\">\n    </json-editor>\n  "
         }), 
@@ -3796,7 +3707,7 @@ var environment = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_core_js_es6_reflect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13_core_js_es6_reflect__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_core_js_es7_reflect__ = __webpack_require__(739);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_core_js_es7_reflect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14_core_js_es7_reflect__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone__ = __webpack_require__(1045);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone__ = __webpack_require__(1044);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone__);
 
 
@@ -4329,7 +4240,7 @@ var AddFieldDropdownComponent = (function () {
         this.domUtilService = domUtilService;
         this.emptyValueService = emptyValueService;
         this.pathUtilService = pathUtilService;
-        this.onFieldAdd = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
+        this.onFieldAdd = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* EventEmitter */]();
         this.expression = '';
     }
     Object.defineProperty(AddFieldDropdownComponent.prototype, "disabled", {
@@ -4352,7 +4263,7 @@ var AddFieldDropdownComponent = (function () {
         setTimeout(function () { return _this.domUtilService.focusAndSelectFirstInputChildById(newFieldPathString); });
     };
     AddFieldDropdownComponent.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Component */], args: [{
                     selector: 'add-field-dropdown',
                     styles: [".btn-add-field-dropdown { padding: 0 5px 0 0; font-size: 21px; opacity: 0.4; border: 0; background: transparent; font-weight: bold; line-height: 1; text-shadow: 0 1px 0 #fff; color: darkslategray; margin-bottom: 2px; float: right; } .btn-add-field-dropdown:hover { color: blue; opacity: 0.6; } .dropdown-filter-container { padding-left: 3px; padding-right: 3px; } .dropdown-filter-container input { width: 100%; } .add-field-dropdown-container { width: 100%; } "],
                     template: "<div *ngIf=\"!disabled\" class=\"btn-group add-field-dropdown-container\" dropdown keyboardNav=\"true\" (onToggle)=\"focusElementIfOpen($event, expressionInput)\"> <button id=\"simple-btn-keyboard-nav\" type=\"button\" class=\"btn-add-field-dropdown\" dropdownToggle><ng-content></ng-content> <span class=\"caret\"></span></button> <ul class=\"dropdown-menu\" dropdownMenu aria-labelledby=\"simple-btn-keyboard-nav\"> <li class=\"dropdown-filter-container\"> <input #expressionInput [(ngModel)]=\"expression\" placeholder=\"filter\"> </li> <li class=\"divider dropdown-divider\"></li> <li *ngFor=\"let key of schema | differentKeys:fields | filterByExpression:expression\"> <a class=\"dropdown-item\" href=\"javascript:void(0)\" (click)=\"onFieldSelect(key)\">{{key}}</a> </li> </ul> </div>"
@@ -4365,10 +4276,10 @@ var AddFieldDropdownComponent = (function () {
         { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["b" /* PathUtilService */], },
     ]; };
     AddFieldDropdownComponent.propDecorators = {
-        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'fields': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'pathString': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'onFieldAdd': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Output */] },],
+        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'fields': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'pathString': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'onFieldAdd': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Q" /* Output */] },],
     };
     return AddFieldDropdownComponent;
 }());
@@ -4420,11 +4331,11 @@ var AddNewElementButtonComponent = (function () {
         });
     };
     AddNewElementButtonComponent.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Component */], args: [{
                     selector: 'add-new-element-button',
                     styles: ["div.button-container { display: inline-block; } .btn-new-field { font-size: 13px; font-weight: bold; text-shadow: 0 1px 0 #fff; opacity: 0.5; background: transparent; border: 0; bottom: -5px; left: -5px; padding: 0px; } .btn-new-field:hover { color: green; opacity: 0.6; } "],
                     template: "<div class=\"button-container\"> <button type=\"button\" class=\"btn-new-field\" (click)=\"addNewElement()\">Add new</button> </div>",
-                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* ChangeDetectionStrategy */].OnPush
+                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* ChangeDetectionStrategy */].OnPush
                 },] },
     ];
     /** @nocollapse */
@@ -4435,8 +4346,8 @@ var AddNewElementButtonComponent = (function () {
         { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["b" /* PathUtilService */], },
     ]; };
     AddNewElementButtonComponent.propDecorators = {
-        'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
+        'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
     };
     return AddNewElementButtonComponent;
 }());
@@ -4515,22 +4426,22 @@ var AnyTypeFieldComponent = (function () {
         configurable: true
     });
     AnyTypeFieldComponent.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Component */], args: [{
                     selector: 'any-type-field',
                     styles: [""],
                     template: "<div [ngClass]=\"{disableCursorClass: isDisabled}\"> <div [ngSwitch]=\"componentType\" [ngClass]=\"{disableEventsClass: isDisabled}\"> <div *ngSwitchCase=\"'table-list'\"> <table-list-field [values]=\"value\" [schema]=\"schema\" [path]=\"path\"></table-list-field> </div> <div *ngSwitchCase=\"'complex-list'\"> <complex-list-field [values]=\"value\" [schema]=\"schema\" [path]=\"path\"></complex-list-field> </div> <div *ngSwitchCase=\"'primitive-list'\"> <primitive-list-field [values]=\"value\" [schema]=\"schema\" [path]=\"path\"></primitive-list-field> </div> <div *ngSwitchCase=\"'object'\"> <object-field [value]=\"value\" [schema]=\"schema\" [path]=\"path\"></object-field> </div> <div *ngSwitchCase=\"'ref'\"> <ref-field [value]=\"value\" [schema]=\"schema\" [path]=\"path\"></ref-field> </div> <div *ngSwitchCase=\"'value-change-watcher'\"> <value-change-watcher [value]=\"value\" [schema]=\"schema\" [path]=\"path\"></value-change-watcher> </div> <div *ngSwitchDefault> <primitive-field [value]=\"value\" [schema]=\"schema\" [path]=\"path\"></primitive-field> </div> </div> </div>",
-                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* ChangeDetectionStrategy */].OnPush
+                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* ChangeDetectionStrategy */].OnPush
                 },] },
     ];
     /** @nocollapse */
     AnyTypeFieldComponent.ctorParameters = function () { return [
-        { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["p" /* ComponentTypeService */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["o" /* ComponentTypeService */], },
         { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["a" /* AppGlobalsService */], },
     ]; };
     AnyTypeFieldComponent.propDecorators = {
-        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
+        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
     };
     return AnyTypeFieldComponent;
 }());
@@ -4586,12 +4497,13 @@ var AnyTypeFieldComponent = (function () {
 
 
 var AutocompleteInputComponent = (function () {
-    function AutocompleteInputComponent(remoteAutocompletionService, jsonStoreService) {
+    function AutocompleteInputComponent(remoteAutocompletionService, jsonStoreService, appGlobalsService) {
         this.remoteAutocompletionService = remoteAutocompletionService;
         this.jsonStoreService = jsonStoreService;
-        this.onValueChange = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
-        this.onKeypress = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
-        this.onBlur = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
+        this.appGlobalsService = appGlobalsService;
+        this.onValueChange = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* EventEmitter */]();
+        this.onKeypress = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* EventEmitter */]();
+        this.onBlur = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* EventEmitter */]();
     }
     AutocompleteInputComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -4599,7 +4511,6 @@ var AutocompleteInputComponent = (function () {
         if (this.autocompletionConfig.url) {
             this.typeaheadOptionField = 'text';
             this.dataSource = __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"].create(function (observer) {
-                // Runs on every
                 if (_this.value && _this.value.length > 0) {
                     observer.next(_this.value);
                 }
@@ -4611,6 +4522,13 @@ var AutocompleteInputComponent = (function () {
             this.dataSource = this.autocompletionConfig.source;
         }
     };
+    Object.defineProperty(AutocompleteInputComponent.prototype, "customItemTemplate", {
+        get: function () {
+            return this.appGlobalsService.templates[this.autocompletionConfig.itemTemplateName];
+        },
+        enumerable: true,
+        configurable: true
+    });
     AutocompleteInputComponent.prototype.onModelChange = function (value) {
         this.value = value;
         this.onValueChange.emit(value);
@@ -4624,28 +4542,29 @@ var AutocompleteInputComponent = (function () {
         }
     };
     AutocompleteInputComponent.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Component */], args: [{
                     selector: 'autocomplete-input',
                     styles: [""],
-                    template: "<div class=\"autocomplete-container\"> <input attr.data-path=\"{{pathString}}\" [ngModel]=\"value\" (ngModelChange)=\"onModelChange($event)\" (keypress)=\"onKeypress.emit($event)\" (blur)=\"onBlur.emit()\" [typeahead]=\"dataSource\" [typeaheadOptionsLimit]=\"autocompletionConfig.size\" [typeaheadOptionField]=\"typeaheadOptionField\" (typeaheadOnSelect)=\"onCompletionSelect($event.item)\" [typeaheadWaitMs]=\"200\" [tabindex]=\"tabIndex\" placeholder=\"{{placeholder}}\"> </div>",
-                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* ChangeDetectionStrategy */].OnPush
+                    template: "<div class=\"autocomplete-container\"> <input attr.data-path=\"{{pathString}}\" [ngModel]=\"value\" (ngModelChange)=\"onModelChange($event)\" (keypress)=\"onKeypress.emit($event)\" (blur)=\"onBlur.emit()\" [typeahead]=\"dataSource\" [typeaheadOptionsLimit]=\"autocompletionConfig.size\" [typeaheadOptionField]=\"typeaheadOptionField\" [typeaheadItemTemplate]=\"customItemTemplate\" (typeaheadOnSelect)=\"onCompletionSelect($event.item)\" [typeaheadWaitMs]=\"200\" [tabindex]=\"tabIndex\" placeholder=\"{{placeholder}}\"> </div>",
+                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* ChangeDetectionStrategy */].OnPush
                 },] },
     ];
     /** @nocollapse */
     AutocompleteInputComponent.ctorParameters = function () { return [
-        { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["s" /* RemoteAutocompletionService */], },
+        { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["r" /* RemoteAutocompletionService */], },
         { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["e" /* JsonStoreService */], },
+        { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["a" /* AppGlobalsService */], },
     ]; };
     AutocompleteInputComponent.propDecorators = {
-        'autocompletionConfig': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'pathString': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'tabIndex': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'placeholder': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'onValueChange': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Output */] },],
-        'onKeypress': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Output */] },],
-        'onBlur': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Output */] },],
+        'autocompletionConfig': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'pathString': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'tabIndex': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'placeholder': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'onValueChange': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Q" /* Output */] },],
+        'onKeypress': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Q" /* Output */] },],
+        'onBlur': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Q" /* Output */] },],
     };
     return AutocompleteInputComponent;
 }());
@@ -4811,11 +4730,11 @@ var ComplexListFieldComponent = (function (_super) {
         return Math.floor((index / this.navigator.itemsPerPage) + 1);
     };
     ComplexListFieldComponent.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Component */], args: [{
                     selector: 'complex-list-field',
                     styles: [".complex-list-field-wrapper { margin: 5px 15px 15px 15px; padding: 5px; box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.25); } .navigator-container { width: 100%; } .navigator-item-right { float: right; padding-right: 13px !important; } .navigator-item-right label { position: relative; top: -19px; } .navigator-item-left { padding-left: 13px !important; } .transparent { background: transparent; } .borderless { border: none; } .find-button { color: darkslategray; opacity: 0.83; } .find-button .fa-search { opacity: 0.83; } "],
                     template: "<div [id]=\"pathString\"> <!-- Navigator --> <table *ngIf=\"navigator\" class=\"navigator-container\"> <tr> <td class=\"form-group navigator-item-left\"> <div class=\"input-group input-group-sm\"> <span class=\"input-group-btn\"> <button type=\"button\" class=\"btn btn-default find-button\" (click)=\"onFindClick()\"> <i class=\"fa fa-search\" aria-hidden=\"true\"></i> </button> </span> <input type=\"search\" class=\"form-control\" [(ngModel)]=\"findExpression\" (keypress)=\"onFindInputKeypress($event.key)\" placeholder=\"Find\" /> <span class=\"input-group-btn\" *ngIf=\"shouldDisplayFoundNavigation\"> <button type=\"button\" class=\"btn btn-default\" [disabled]=\"currentFound <= 0\" (click)=\"onFoundNavigate(-1)\">❮</button> </span> <span class=\"input-group-btn\" *ngIf=\"shouldDisplayFoundNavigation\"> <button type=\"button\" class=\"btn btn-default\" [disabled]=\"currentFound >= foundIndices.length - 1\" (click)=\"onFoundNavigate(1)\">❯</button> </span> <span *ngIf=\"foundIndices\" [ngSwitch]=\"foundIndices.length\" class=\"input-group-addon transparent borderless\"> <span *ngSwitchCase=\"0\"> Nothing found </span> <span *ngSwitchDefault> {{currentFound + 1}} of {{foundIndices.length}} </span> </span> </div> </td> <td class=\"navigator-item-right\"> <label> {{paginatedIndices[0] + 1}}-{{paginatedIndices[paginatedIndices.length - 1] + 1}} of {{values.size}} {{path[path.length - 1]}} </label> <br> <pagination [totalItems]=\"values.size\" [ngModel]=\"currentPage\" [maxSize]=\"navigator.maxVisiblePageCount\" [itemsPerPage]=\"navigator.itemsPerPage\" class=\"pagination-sm pagination-top\" [boundaryLinks]=\"true\" [rotate]=\"false\" [firstText]=\"'❮❮'\" [previousText]=\"'❮'\" [nextText]=\"'❯'\" [lastText]=\"'❯❯'\" (pageChanged)=\"onPageChange($event.page)\"></pagination> </td> </tr> </table> <!-- Elements --> <div *ngFor=\"let pIndex of paginatedIndices; let i = index; trackBy:trackByIndex\"> <div class=\"complex-list-field-wrapper\"> <object-field [value]=\"values.get(pIndex)\" [schema]=\"schema.items\" [path]=\"getElementPath(pIndex)\"> <list-action-group (onMove)=\"moveElement(i, $event)\" (onDelete)=\"deleteElement(i)\"></list-action-group> </object-field> </div> </div> </div>",
-                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* ChangeDetectionStrategy */].OnPush
+                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* ChangeDetectionStrategy */].OnPush
                 },] },
     ];
     /** @nocollapse */
@@ -4826,9 +4745,9 @@ var ComplexListFieldComponent = (function (_super) {
         { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["b" /* PathUtilService */], },
     ]; };
     ComplexListFieldComponent.propDecorators = {
-        'values': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
+        'values': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
     };
     return ComplexListFieldComponent;
 }(__WEBPACK_IMPORTED_MODULE_1__abstract_list_field__["a" /* AbstractListFieldComponent */]));
@@ -4891,17 +4810,17 @@ var EditorPreviewerComponent = (function (_super) {
         window.open(url);
     };
     EditorPreviewerComponent.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Component */], args: [{
                     selector: 'editor-previewer',
                     styles: ["div.preview-container { width: 100%; overflow-y: auto; height: 90vh; } span.preview-link { color: #337ab7; cursor: pointer; } span.preview-link:hover { color: cornflowerblue; } "],
                     template: "<div> <tabset> <tab *ngFor=\"let preview of previews trackBy:trackByElement\" [heading]=\"preview.name\"> <div [ngSwitch]=\"preview.type\"> <div *ngSwitchCase=\"'html'\" class=\"preview-container\"> <template tabHeading> <span class=\"preview-link\" (click)=\"openUrlInNewTab(preview.url)\"> <i class=\"fa fa-external-link\"></i> </span> </template> <html-view [url]=\"preview.url\"></html-view> </div> </div> </tab> </tabset> </div>",
-                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* ChangeDetectionStrategy */].OnPush
+                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* ChangeDetectionStrategy */].OnPush
                 },] },
     ];
     /** @nocollapse */
     EditorPreviewerComponent.ctorParameters = function () { return []; };
     EditorPreviewerComponent.propDecorators = {
-        'previews': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
+        'previews': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
     };
     return EditorPreviewerComponent;
 }(__WEBPACK_IMPORTED_MODULE_1__abstract_tracker__["a" /* AbstractTrackerComponent */]));
@@ -4979,23 +4898,23 @@ var FindReplaceComponent = (function () {
         }
     };
     FindReplaceComponent.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Component */], args: [{
                     selector: 'find-replace',
                     styles: [".find-replace-container { margin: 4px 3px 3px 2px; } .find-replace-container input { font-size: 13px; } .top-container-item { margin-bottom: 3px; } label { font-size: 12px; font-weight: 400; } .horizontal-padding, .find-replace-container div { padding-right: 20px; padding-left: 20px; } .match-whole-container input[type=checkbox] { width: 100%; } "],
                     template: "<div class=\"find-replace-container\"> <div class=\"top-container-item\"> <input placeholder=\"Find\" [(ngModel)]=\"find\" (keypress)=\"onKeypress($event.key)\" /> </div> <div> <input placeholder=\"Replace\" [(ngModel)]=\"replace\" (keypress)=\"onKeypress($event.key)\" /> </div> <div class=\"match-whole-container\"> <input type=\"checkbox\" [(ngModel)]=\"matchWhole\" (keypress)=\"onKeypress($event.key)\" tooltip=\"Match Whole\"/> </div> </div>",
-                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* ChangeDetectionStrategy */].OnPush
+                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* ChangeDetectionStrategy */].OnPush
                 },] },
     ];
     /** @nocollapse */
     FindReplaceComponent.ctorParameters = function () { return [
         { type: __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["c" /* DomSanitizer */], },
-        { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["r" /* FindReplaceAllService */], },
+        { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["q" /* FindReplaceAllService */], },
         { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["e" /* JsonStoreService */], },
-        { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["q" /* ModalService */], },
+        { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["p" /* ModalService */], },
     ]; };
     FindReplaceComponent.propDecorators = {
-        'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
+        'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
     };
     return FindReplaceComponent;
 }());
@@ -5046,17 +4965,17 @@ var HtmlViewComponent = (function () {
     function HtmlViewComponent() {
     }
     HtmlViewComponent.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Component */], args: [{
                     selector: 'html-view',
                     styles: ["iframe { height: 100%; width: 100%; } "],
                     template: "<iframe [src]=\"url | sanitizeUrl\"></iframe>",
-                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* ChangeDetectionStrategy */].OnPush
+                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* ChangeDetectionStrategy */].OnPush
                 },] },
     ];
     /** @nocollapse */
     HtmlViewComponent.ctorParameters = function () { return []; };
     HtmlViewComponent.propDecorators = {
-        'url': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
+        'url': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
     };
     return HtmlViewComponent;
 }());
@@ -5156,7 +5075,8 @@ var JsonEditorComponent = (function (_super) {
         this.shortcutsService = shortcutsService;
         this.tabsUtilService = tabsUtilService;
         this.errorMap = {};
-        this.onRecordChange = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
+        this.templates = {};
+        this.onRecordChange = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* EventEmitter */]();
         this.pathCache = {};
     }
     JsonEditorComponent.prototype.ngOnInit = function () {
@@ -5173,6 +5093,7 @@ var JsonEditorComponent = (function (_super) {
         this.extractPreviews();
         // set errors that is used by other components
         this.appGlobalsService.globalErrors = this.errorMap;
+        this.appGlobalsService.templates = this.templates;
         // use fromJS to convert input to immutable then pass it to the store
         this._record = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_immutable__["fromJS"])(this.record);
         this.jsonStoreService.setJson(this._record);
@@ -5215,16 +5136,23 @@ var JsonEditorComponent = (function (_super) {
                     url = previewConfig.getUrl(_this.record);
                 }
                 else if (previewConfig.urlPath) {
-                    url = _this.jsonUtilService.getValueInPath(_this.record, previewConfig.urlPath);
+                    try {
+                        url = _this.jsonUtilService.getValueInPath(_this.record, previewConfig.urlPath);
+                    }
+                    catch (error) {
+                        console.warn("Path " + previewConfig.urlPath + " in preview config is not present in the input record");
+                    }
                 }
                 else {
                     throw new Error('Either url, urlPath or getUrl should be set for a preview');
                 }
-                _this.previews.push({
-                    name: previewConfig.name,
-                    type: previewConfig.type,
-                    url: url
-                });
+                if (url) {
+                    _this.previews.push({
+                        name: previewConfig.name,
+                        type: previewConfig.type,
+                        url: url
+                    });
+                }
             });
         }
     };
@@ -5269,12 +5197,12 @@ var JsonEditorComponent = (function (_super) {
         configurable: true
     });
     JsonEditorComponent.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Component */], args: [{
                     selector: 'json-editor',
-                    encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Q" /* ViewEncapsulation */].None,
+                    encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["O" /* ViewEncapsulation */].None,
                     styles: ["body, html { height: 100%; } .editor-container { height: 100%; margin-right: 0px; margin-left: 0px; } .editor-container .row { margin-left: 0px; margin-right: 0px; } table { margin-bottom: 0px !important; } .main-container { height: 100%; overflow: auto; } .left.main-container { padding: 0px; overflow: hidden; } .left.main-container .tab-content, .left.main-container .tab-pane { height: 100%; } .left.main-container .nav-tabs { float: right; padding-left: 1px; } .menu-container { background-color: #1D2D3D; height: 100%; overflow: auto; } .menu-container div.dropdown { width: 100%; } .menu-container ul.dropdown-menu { right: 0px; } .menu-container button.btn-add-field-dropdown { background: white; padding: 5px; opacity: 0.9; line-height: normal; font-size: 16px; width: 100%; } .menu-container button.btn-add-field-dropdown:hover { opacity: 1; color: black; } #editor { font-size: 13px; border: 2px solid #a5adb5; } #editor .field-wrapper { border-bottom: 2px solid #a5adb5; } #editor td { background-color: #f9f9f9; border: none; padding: 0; } #editor td > * { vertical-align: middle; } #editor th { font-weight: 400; padding: 1px 0px 1px 3px; } #editor td.label-holder { width: 1%; white-space: nowrap; padding-right: 5px; } #editor td.error { background-color: #f2968d !important; } #editor tbody { border: none; } .editor-btn-delete { font-size: 16px; font-weight: bold; line-height: 1; text-shadow: 0 1px 0 #fff; opacity: 0.2; background: transparent; border: 0; padding: 0 0 3px 3px; } .editor-btn-delete:hover { color: red; opacity: 0.6; } .editor-btn-delete.editor-btn-delete-text { font-size: 13px; opacity: 0.5; padding: 0px; } .editor-btn-move-down { padding-bottom: 0; } .editor-btn-move-up, .editor-btn-move-down { padding: 0; font-size: 11px; border: 0; background: transparent; opacity: 0.2; } .editor-btn-move-up:hover, .editor-btn-move-down:hover { opacity: 0.6; } ul.pagination-top { margin: -16px 0px 0px 0px; } td.button-holder, th.button-holder { width: 46px; } div.error { background: #f2968d; } label { color: #c1c1c1; } .flash { border: 2px solid yellow; } table.editable-inner-table { table-layout: fixed; } table.editable-inner-table label { display: inline; font-weight: initial; padding-left: 5px; } table.editable-inner-table .dropdown-menu { left: inherit; right: 0px; min-width: 100px; } .disableCursorClass { cursor: not-allowed; } .disableEventsClass { pointer-events: none; } .disableEventsClass input, .disableEventsClass button, .disableEventsClass div[contenteditable=true], .disableEventsClass a, .disableEventsClass i, .disableEventsClass span { opacity: .5; } .title-dropdown-item button { width: 100%; text-align: left; padding-left: 20px !important; padding-right: 20px !important; } .title-dropdown-item:hover { background: #f5f5f5; } .match-whole-container .tooltip.top .tooltip-arrow { border-top-color: transparent; } .match-whole-container .tooltip { width: 90%; } .value-container { background-color: #edf6fd !important; } button.btn-toggle { float: right; margin-top: 5px; margin-right: 5px; } .autocomplete-container .dropdown { position: relative !important; top: 0px !important; left: 0px !important; } .col-md-override-2-2 { width: 18.181818% !important; } .col-md-override-9-8 { width: 81.81818% !important; } .nav-tabs-col-md-9-8 .nav-tabs { width: 81.81818%; } .nav-tabs-col-md-9 .nav-tabs { width: 75%; } .nav-tabs-col-md-10 .nav-tabs { width: 83.33333%; } .list-action-group-container { text-align: right; } .list-action-group-container button { font-size: 21px !important; } .list-action-group-container i { font-size: 15px !important; } .max-height-90-vh { max-height: 90vh; } .max-height-70-vh { max-height: 70vh; } "],
                     template: "<div class=\"row editor-container\"> <div id=\"left-main-container\" class=\"left main-container\" [ngClass]=\"leftContainerColMdClass\" [shortcuts]=\"shortcuts\"> <tabset *ngIf=\"config.tabsConfig\"> <tab *ngFor=\"let tabName of tabNames; trackBy:trackByElement\" [heading]=\"tabName\" (select)=\"activeTabName = tabName\"> <sub-record [value]=\"tabNameToSubRecordMap.get(tabName)\" [tabName]=\"tabName\" [schema]=\"tabNameToSubSchema[tabName]\" [enableAdminModeSwitch]=\"config.enableAdminModeSwitch\" [isPreviewerHidden]=\"isPreviewerHidden\" [isPreviewerDisabled]=\"isPreviewerDisabled\"></sub-record> </tab> </tabset> <sub-record *ngIf=\"!config.tabsConfig\" [value]=\"_record\" [schema]=\"schema\" [enableAdminModeSwitch]=\"config.enableAdminModeSwitch\" [isPreviewerHidden]=\"isPreviewerHidden\" [isPreviewerDisabled]=\"isPreviewerDisabled\"></sub-record> </div> <div id=\"right-main-container\" *ngIf=\"!isPreviewerDisabled\" [ngClass]=\"rightContainerColMdClass\" class=\"right main-container\"> <button id=\"btn-preview-toggle\" type=\"button\" class=\"btn btn-default btn-toggle\" (click)=\"isPreviewerHidden = !isPreviewerHidden\">{{isPreviewerHidden ? \"Show Preview\" : \"Hide Preview\"}}</button> <editor-previewer [hidden]=\"isPreviewerHidden\" [previews]=\"previews\"> </editor-previewer> </div> </div> <!-- Modal View controlled by ModalService --> <modal-view> </modal-view>",
-                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* ChangeDetectionStrategy */].OnPush
+                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* ChangeDetectionStrategy */].OnPush
                 },] },
     ];
     /** @nocollapse */
@@ -5290,11 +5218,12 @@ var JsonEditorComponent = (function (_super) {
         { type: __WEBPACK_IMPORTED_MODULE_5__shared_services__["k" /* TabsUtilService */], },
     ]; };
     JsonEditorComponent.propDecorators = {
-        'config': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'record': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'errorMap': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'onRecordChange': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Output */] },],
+        'config': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'record': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'errorMap': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'templates': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'onRecordChange': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Q" /* Output */] },],
     };
     return JsonEditorComponent;
 }(__WEBPACK_IMPORTED_MODULE_4__abstract_tracker__["a" /* AbstractTrackerComponent */]));
@@ -5318,20 +5247,20 @@ var JsonEditorComponent = (function (_super) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__autocomplete_input__ = __webpack_require__(973);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__complex_list_field__ = __webpack_require__(975);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__editor_previewer__ = __webpack_require__(977);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__sub_record__ = __webpack_require__(1024);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__sub_record__ = __webpack_require__(1023);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__find_replace__ = __webpack_require__(979);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__html_view__ = __webpack_require__(981);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__json_editor_component__ = __webpack_require__(983);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__modal_view__ = __webpack_require__(987);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__object_field__ = __webpack_require__(989);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__value_change_watcher__ = __webpack_require__(1035);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__value_change_watcher__ = __webpack_require__(1034);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__primitive_list_field__ = __webpack_require__(993);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__primitive_field__ = __webpack_require__(991);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__ref_field__ = __webpack_require__(995);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__table_list_field__ = __webpack_require__(1028);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__table_item_field__ = __webpack_require__(1026);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__title_dropdown__ = __webpack_require__(1030);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__tree_menu__ = __webpack_require__(1032);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__table_list_field__ = __webpack_require__(1027);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__table_item_field__ = __webpack_require__(1025);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__title_dropdown__ = __webpack_require__(1029);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__tree_menu__ = __webpack_require__(1031);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__searchable_dropdown__ = __webpack_require__(997);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__list_action_group__ = __webpack_require__(985);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__shared__ = __webpack_require__(1002);
@@ -5443,7 +5372,7 @@ var JsonEditorModule = (function () {
                     imports: [
                         __WEBPACK_IMPORTED_MODULE_4_ng2_bootstrap__["Ng2BootstrapModule"].forRoot(),
                         __WEBPACK_IMPORTED_MODULE_5_ng2_slide_toggle__["a" /* SlideToggleModule */],
-                        __WEBPACK_IMPORTED_MODULE_1__angular_common__["a" /* CommonModule */],
+                        __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
                         __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
                         __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* HttpModule */]
                     ],
@@ -5500,23 +5429,23 @@ var JsonEditorModule = (function () {
 
 var ListActionGroupComponent = (function () {
     function ListActionGroupComponent() {
-        this.onDelete = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
-        this.onMove = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
+        this.onDelete = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* EventEmitter */]();
+        this.onMove = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* EventEmitter */]();
     }
     ListActionGroupComponent.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Component */], args: [{
                     selector: 'list-action-group',
-                    encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Q" /* ViewEncapsulation */].None,
+                    encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["O" /* ViewEncapsulation */].None,
                     styles: [""],
                     template: "<div> <button type=\"button\" class=\"editor-btn-delete\" (click)=\"onDelete.emit()\"> &times; </button> <button type=\"button\" class=\"editor-btn-move-up\" (click)=\"onMove.emit(-1)\"> <i class=\"fa fa-chevron-up\"></i> </button> <button type=\"button\" class=\"editor-btn-move-down\" (click)=\"onMove.emit(1)\"> <i class=\"fa fa-chevron-down\"></i> </button> </div>",
-                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* ChangeDetectionStrategy */].OnPush
+                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* ChangeDetectionStrategy */].OnPush
                 },] },
     ];
     /** @nocollapse */
     ListActionGroupComponent.ctorParameters = function () { return []; };
     ListActionGroupComponent.propDecorators = {
-        'onDelete': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Output */] },],
-        'onMove': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Output */] },],
+        'onDelete': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Q" /* Output */] },],
+        'onMove': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Q" /* Output */] },],
     };
     return ListActionGroupComponent;
 }());
@@ -5587,20 +5516,20 @@ var ModalViewComponent = (function () {
         }
     };
     ModalViewComponent.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Component */], args: [{
                     selector: 'modal-view',
                     styles: [""],
                     template: "<div class=\"modal fade\" (onShown)=\"onShow()\" bsModal #modal=\"bs-modal\" tabindex=\"-1\" role=\"dialog\" [config]=\"{ backdrop: false }\"> <div class=\"modal-dialog modal-lg\"> <div *ngIf=\"options\" class=\"modal-content max-height-90-vh\"> <div class=\"modal-header\"> <button type=\"button\" class=\"close\" (click)=\"modal.hide()\">&times;</button> <h4 class=\"modal-title\">{{options.title}}</h4> </div> <div class=\"modal-body\"> <div [innerHTML]=\"options.bodyHtml\"></div> <div [ngSwitch]=\"options.type\"> <div *ngSwitchCase=\"'confirm'\"> <button class=\"btn btn-default\" (click)=\"options.onConfirm();\"> Confirm <i class=\"fa fa-check\"></i> </button> </div> </div> </div> </div> </div> </div>",
-                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* ChangeDetectionStrategy */].OnPush
+                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* ChangeDetectionStrategy */].OnPush
                 },] },
     ];
     /** @nocollapse */
     ModalViewComponent.ctorParameters = function () { return [
-        { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["q" /* ModalService */], },
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["l" /* ChangeDetectorRef */], },
+        { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["p" /* ModalService */], },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ChangeDetectorRef */], },
     ]; };
     ModalViewComponent.propDecorators = {
-        'modal': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ViewChild */], args: ['modal',] },],
+        'modal': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* ViewChild */], args: ['modal',] },],
     };
     return ModalViewComponent;
 }());
@@ -5689,11 +5618,11 @@ var ObjectFieldComponent = (function (_super) {
         this.keys = this.keys.add(field);
     };
     ObjectFieldComponent.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Component */], args: [{
                     selector: 'object-field',
                     styles: ["table.table { background-color: #f9f9f9; } "],
                     template: "<table [id]=\"pathString\" class=\"table\"> <tr *ngFor=\"let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema; trackBy:trackByElement\"> <!-- SUB FIELD TITLE MENU --> <td class=\"label-holder\"> <div> <title-dropdown [title]=\"key | underscoreToSpace\" [isDisabled]=\"schema.properties[key].disabled\"> <li *ngIf=\"schema.properties[key].type === 'array'\" class=\"title-dropdown-item\"> <add-new-element-button [path]=\"getFieldPath(key)\" [schema]=\"schema.properties[key]\"></add-new-element-button> </li> <li class=\"title-dropdown-item\"> <button type=\"button\" class=\"editor-btn-delete editor-btn-delete-text\" (click)=\"deleteField(key)\">Delete</button> </li> </title-dropdown> </div> </td> <!-- SUB FIELD COMPONENT --> <td> <any-type-field [value]=\"value.get(key) | selfOrEmpty:schema.properties[key]\" [schema]=schema.properties[key] [path]=\"getFieldPath(key)\"></any-type-field> </td> </tr> <!-- ADD SUB FIELD FROM SCHEMA DROPDOWN --> <tr> <td class=\"button-holder\"> <add-field-dropdown [fields]=\"keys\" [pathString]=\"pathString\" (onFieldAdd)=\"onFieldAdd($event)\" [schema]=\"schema.properties\">+</add-field-dropdown> </td> <td class=\"button-holder list-action-group-container\"> <!-- list-action-group (up/down and delete buttons), Set only if it's an element of an list (complex-list) --> <ng-content></ng-content> </td> </tr> </table>",
-                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* ChangeDetectionStrategy */].OnPush
+                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* ChangeDetectionStrategy */].OnPush
                 },] },
     ];
     /** @nocollapse */
@@ -5703,9 +5632,9 @@ var ObjectFieldComponent = (function (_super) {
         { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["b" /* PathUtilService */], },
     ]; };
     ObjectFieldComponent.propDecorators = {
-        'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
+        'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
     };
     return ObjectFieldComponent;
 }(__WEBPACK_IMPORTED_MODULE_1__abstract_field__["a" /* AbstractFieldComponent */]));
@@ -5822,26 +5751,26 @@ var PrimitiveFieldComponent = (function (_super) {
         configurable: true
     });
     PrimitiveFieldComponent.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Component */], args: [{
                     selector: 'primitive-field',
-                    encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Q" /* ViewEncapsulation */].None,
+                    encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["O" /* ViewEncapsulation */].None,
                     styles: ["td.value-container div[contenteditable=true], td.value-container input { vertical-align: middle; width: 50%; padding: 0 0 0 3px; transition: all 0.5s ease; resize: none; border: none; background-color: transparent; display: inline-block; width: 100%; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; } table.primitive-field-container { width: 100%; } td.link-button-container { width: 22px; } td.value-container { width: 100%; } td.value-container:hover { background-color: #ffa !important; } a.no-decoration { text-decoration: none; } [contenteditable=true] { min-height: 18px; word-break: break-word; } [contenteditable=true]:empty:before { content: attr(placeholder); color: darkgray; display: block; /* For Firefox */ } .tooltip-left-align { margin-left: 12px; padding: 0px; } "],
                     template: "<div [ngSwitch]=\"valueType\" [id]=\"pathString\"> <table class=\"primitive-field-container\"> <tr> <template #errorsTooltipTemplate> <ul class=\"tooltip-left-align\"> <li *ngFor=\"let error of errors\" > {{error.message}} </li> </ul> </template> <td class=\"value-container\" [ngClass]=\"errorNgClass\" [tooltip]=\"errorsTooltipTemplate\" [isDisabled]=\"!isErrorTooltipEnabled\" placement=\"{{tooltipPosition}}\" container=\"body\"> <div *ngSwitchCase=\"'string'\"> <div contenteditable=\"true\" attr.data-path=\"{{pathString}}\" [tabindex]=\"tabIndex\" [(contentModel)]=\"value\" (blur)=\"commitValueChange()\" (keypress)=\"onKeypress($event)\" attr.placeholder=\"{{schema.title}}\"></div> </div> <div *ngSwitchCase=\"'enum'\"> <searchable-dropdown [pathString]=\"pathString\" [value]=\"value\" [placeholder]=\"schema.title\" [items]=\"schema.enum\" [shortcutMap]=\"schema.enumShorcutMap\" (onSelect)=\"onSearchableDropdownSelect($event)\" [tabIndex]=\"tabIndex\"></searchable-dropdown> </div> <div *ngSwitchCase=\"'autocomplete'\"> <autocomplete-input [pathString]=\"pathString\" [value]=\"value\" [path]=\"path\" [autocompletionConfig]=\"schema.autocompletionConfig\" (onBlur)=\"commitValueChange()\" (onKeypress)=\"onKeypress($event)\" (onValueChange)=\"onAutocompleteInputValueChange($event)\" [placeholder]=\"schema.title\" [tabIndex]=\"tabIndex\"></autocomplete-input> </div> <div *ngSwitchCase=\"'integer'\"> <input type=\"number\" [(ngModel)]=\"value\" [tabindex]=\"tabIndex\" attr.data-path=\"{{pathString}}\" (blur)=\"commitValueChange()\" (keypress)=\"onKeypress($event)\" placeholder=\"{{schema.title}}\"> </div> <div *ngSwitchCase=\"'boolean'\"> <input type=\"checkbox\" [(ngModel)]=\"value\" (ngModelChange)=\"commitValueChange()\" placeholder=\"{{schema.title}}\"> </div> <div *ngSwitchDefault> ## Not recognized type: {{valueType}} </div> </td> <td class=\"link-button-container\"> <a *ngIf=\"schema.linkBuilder\" class=\"no-decoration\" target=\"_blank\" [href]=\"schema.linkBuilder(value)\"> <i class=\"fa fa-link\" aria-hidden=\"true\"></i> </a> <a *ngIf=\"!schema.linkBuilder && schema.format === 'url'\" class=\"no-decoration\" target=\"_blank\" [href]=\"value\"> <i class=\"fa fa-link\" aria-hidden=\"true\"></i> </a> </td> </tr> </table> </div>",
-                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* ChangeDetectionStrategy */].OnPush
+                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* ChangeDetectionStrategy */].OnPush
                 },] },
     ];
     /** @nocollapse */
     PrimitiveFieldComponent.ctorParameters = function () { return [
-        { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["o" /* SchemaValidationService */], },
-        { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["p" /* ComponentTypeService */], },
+        { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["n" /* SchemaValidationService */], },
+        { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["o" /* ComponentTypeService */], },
         { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["a" /* AppGlobalsService */], },
         { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["e" /* JsonStoreService */], },
         { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["b" /* PathUtilService */], },
     ]; };
     PrimitiveFieldComponent.propDecorators = {
-        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
+        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
     };
     return PrimitiveFieldComponent;
 }(__WEBPACK_IMPORTED_MODULE_1__abstract_field__["a" /* AbstractFieldComponent */]));
@@ -5906,11 +5835,11 @@ var PrimitiveListFieldComponent = (function (_super) {
         this.pathUtilService = pathUtilService;
     }
     PrimitiveListFieldComponent.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Component */], args: [{
                     selector: 'primitive-list-field',
                     styles: ["td { padding: 0px !important; } "],
                     template: "<div [id]=\"pathString\"> <div class=\"wide\"> <table class=\"table\"> <tr *ngFor=\"let value of values | selfOrEmpty:schema; let i = index; trackBy:trackByElement\"> <td> <primitive-field [value]=\"value\" [schema]=\"schema.items\" [path]=\"getElementPath(i)\"></primitive-field> </td> <td *ngIf=\"values.size > 0\" class=\"button-holder\"> <list-action-group (onMove)=\"moveElement(i, $event)\" (onDelete)=\"deleteElement(i)\"></list-action-group> </td> </tr> </table> </div> </div> ",
-                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* ChangeDetectionStrategy */].OnPush
+                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* ChangeDetectionStrategy */].OnPush
                 },] },
     ];
     /** @nocollapse */
@@ -5920,9 +5849,9 @@ var PrimitiveListFieldComponent = (function (_super) {
         { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["b" /* PathUtilService */], },
     ]; };
     PrimitiveListFieldComponent.propDecorators = {
-        'values': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
+        'values': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
     };
     return PrimitiveListFieldComponent;
 }(__WEBPACK_IMPORTED_MODULE_1__abstract_list_field__["a" /* AbstractListFieldComponent */]));
@@ -5980,40 +5909,34 @@ var PrimitiveListFieldComponent = (function (_super) {
 
 
 var RefFieldComponent = (function () {
-    function RefFieldComponent(viewContainer, http, dynamicTemplateLoaderService, pathUtilService) {
-        this.viewContainer = viewContainer;
+    function RefFieldComponent(http, changeDetectorRef, appGlobalsService, pathUtilService) {
         this.http = http;
-        this.dynamicTemplateLoaderService = dynamicTemplateLoaderService;
+        this.changeDetectorRef = changeDetectorRef;
+        this.appGlobalsService = appGlobalsService;
         this.pathUtilService = pathUtilService;
-        this.shouldDisplayWithTemplate = false;
         this.isPreviewButtonHidden = false;
     }
     RefFieldComponent.prototype.ngOnChanges = function (changes) {
-        var valueChange = changes['value'];
-        // ngOnInit but needs to run before loading dynamic template
-        if (valueChange && valueChange.isFirstChange()) {
-            var config = this.schema['refConfig'];
-            if (config) {
-                this.isLazy = config['lazy'];
-                this.customTemplate = config['template'];
-                this.requestOptions = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* RequestOptions */]({
-                    headers: this.createHeadersWithConfig(config)
-                });
+        if (this.refConfig) {
+            var valueChange = changes['value'];
+            var schemaChange = changes['schema'];
+            // instead of ngOnInit because requestOptions has to be set before fetching
+            if (schemaChange && schemaChange.isFirstChange()) {
+                this.requestOptions = this.createRequestOptionsWithConfig();
             }
-        }
-        // load template if necessary
-        this.shouldDisplayWithTemplate = Boolean(this.customTemplate && this.value.get('$ref'));
-        if (valueChange && valueChange.currentValue !== valueChange.previousValue && this.shouldDisplayWithTemplate) {
-            this.loadTemplateWithRef(false);
-        }
-        // clear the dynamic template when new $ref is empty or undefined
-        if (!this.shouldDisplayWithTemplate && this.dynamicTemplateComponentRef) {
-            this.dynamicTemplateComponentRef.instance.context = undefined;
+            if (valueChange) {
+                if (this.refConfig.lazy) {
+                    this.isPreviewButtonHidden = false;
+                }
+                else {
+                    this.fetchRef();
+                }
+            }
         }
     };
     RefFieldComponent.prototype.onPreviewClick = function () {
-        this.loadTemplateWithRef(true);
         this.isPreviewButtonHidden = true;
+        this.fetchRef();
     };
     Object.defineProperty(RefFieldComponent.prototype, "pathString", {
         get: function () {
@@ -6022,73 +5945,74 @@ var RefFieldComponent = (function () {
         enumerable: true,
         configurable: true
     });
-    /**
-     * Displays the template
-     *
-     * if the template hasn't loaded, loads the template asyncw with current $ref in this.value
-     * then assigns the loaded to this.dynamicTemplateComponentRef
-     *
-     * if the template has already loaded, refreshes its context value with the data that
-     * is fetched from current $ref in this.value
-     *
-     * Note: if called by onPreviewClick, hides the preview button.
-     *
-     *
-     * @param {boolean} force - should be set to load the template when it is lazy.
-     */
-    RefFieldComponent.prototype.loadTemplateWithRef = function (force) {
+    Object.defineProperty(RefFieldComponent.prototype, "customTemplate", {
+        get: function () {
+            return this.appGlobalsService.templates[this.refConfig.templateName];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(RefFieldComponent.prototype, "refConfig", {
+        get: function () {
+            return this.schema['refFieldConfig'];
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(RefFieldComponent.prototype, "ref", {
+        get: function () {
+            return this.value.get('$ref');
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(RefFieldComponent.prototype, "shouldDisplayTemplate", {
+        get: function () {
+            return this.isPreviewButtonHidden || !this.refConfig.lazy;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    RefFieldComponent.prototype.fetchRef = function () {
         var _this = this;
-        var ref = this.value.get('$ref');
-        this.refData$ = this.http
-            .get(ref, this.requestOptions)
+        this.refData = undefined;
+        this.http
+            .get(this.ref, this.requestOptions)
             .map(function (res) { return res.json(); })
             .catch(function (error) {
-            console.warn(error);
             return __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].of({ error: error });
+        }).subscribe(function (data) {
+            _this.refData = data;
+            _this.changeDetectorRef.markForCheck();
         });
-        if (!this.isLazy || force) {
-            if (!this.dynamicTemplateComponentRef) {
-                this.dynamicTemplateLoaderService.loadTemplate(this.customTemplate, this.refData$, this.viewContainer)
-                    .then(function (componentRef) {
-                    _this.dynamicTemplateComponentRef = componentRef;
-                });
-            }
-            else {
-                this.dynamicTemplateComponentRef.instance.context = this.refData$;
-            }
-        }
-        else {
-            this.isPreviewButtonHidden = false;
-            if (this.dynamicTemplateComponentRef) {
-                this.dynamicTemplateComponentRef.instance.context = undefined;
-            }
-        }
     };
-    RefFieldComponent.prototype.createHeadersWithConfig = function (config) {
-        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* Headers */]();
-        config.headers
-            .forEach(function (header) { return headers.append(header.name, header.value); });
-        return headers;
+    RefFieldComponent.prototype.createRequestOptionsWithConfig = function () {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* Headers */]();
+        if (this.refConfig.headers) {
+            this.refConfig.headers
+                .forEach(function (header) { return headers.append(header.name, header.value); });
+        }
+        return new __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* RequestOptions */]({ headers: headers });
     };
     RefFieldComponent.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Component */], args: [{
                     selector: 'ref-field',
-                    styles: ["button.btn-preview-template { background: transparent; border: 0; width: 100%; height: 100%; } "],
-                    template: "<div [id]=\"pathString\" [ngSwitch]=\"shouldDisplayWithTemplate\" > <div *ngSwitchCase=\"true\"> <button class=\"btn-preview-template\" *ngIf=\"isLazy && !isPreviewButtonHidden\" (click)=\"onPreviewClick($event)\">👁</button> </div> <div *ngSwitchDefault> <a target=\"_blank\" [href]=\"value.get('$ref')\">{{value.get('$ref')}}</a> </div> </div>",
-                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* ChangeDetectionStrategy */].OnPush
+                    styles: ["button.btn-preview-template { background: transparent; border: 0; width: 100%; height: 100%; } .align-center { width: 100%; text-align: center; } "],
+                    template: "<div [id]=\"pathString\"> <div *ngIf=\"refConfig\"> <button class=\"btn-preview-template\" *ngIf=\"!shouldDisplayTemplate\" (click)=\"onPreviewClick($event)\"><i class=\"fa fa-eye\"></i></button> <div *ngIf=\"shouldDisplayTemplate\"> <template *ngIf=\"refData\" [ngTemplateOutlet]=\"customTemplate\" [ngOutletContext]=\"{response: refData}\"></template> <i *ngIf=\"!refData\" class=\"fa fa-spinner fa-spin align-center\"></i> </div> </div> <div *ngIf=\"!refConfig\"> <a target=\"_blank\" [href]=\"ref\">{{ref}}</a> </div> </div>",
+                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* ChangeDetectionStrategy */].OnPush
                 },] },
     ];
     /** @nocollapse */
     RefFieldComponent.ctorParameters = function () { return [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["q" /* ViewContainerRef */], },
         { type: __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */], },
-        { type: __WEBPACK_IMPORTED_MODULE_4__shared_services__["n" /* DynamicTemplateLoaderService */], },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ChangeDetectorRef */], },
+        { type: __WEBPACK_IMPORTED_MODULE_4__shared_services__["a" /* AppGlobalsService */], },
         { type: __WEBPACK_IMPORTED_MODULE_4__shared_services__["b" /* PathUtilService */], },
     ]; };
     RefFieldComponent.propDecorators = {
-        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
+        'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
     };
     return RefFieldComponent;
 }());
@@ -6139,7 +6063,7 @@ var SearchableDropdownComponent = (function () {
     function SearchableDropdownComponent() {
         this.expression = '';
         this.status = { isOpen: false };
-        this.onSelect = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
+        this.onSelect = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* EventEmitter */]();
     }
     SearchableDropdownComponent.prototype.ngOnInit = function () {
         this.placeholder = this.value || this.placeholder || '';
@@ -6182,23 +6106,23 @@ var SearchableDropdownComponent = (function () {
         }
     };
     SearchableDropdownComponent.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Component */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Component */], args: [{
                     selector: 'searchable-dropdown',
                     styles: ["div.btn-group { width: 100%; } .dropdown-menu { left: 0px !important; } .toggle-container { width: 100%; } .toggle-container input { width: 93%; } .toggle-container i { width: 5%; height: 100%; text-align: right; } .dropdown-toggle { box-shadow: none !important; } "],
                     template: "<div class=\"btn-group\" dropdown keyboardNav=\"true\" [(isOpen)]=\"status.isOpen\"> <div class=\"toggle-container\"> <input #inputToggle attr.data-path=\"{{pathString}}\" [placeholder]=\"placeholder\" [(ngModel)]=\"expressionOrValue\" (keypress)=\"onKeypress($event.key)\" [tabindex]=\"tabIndex\" (focus)=\"onFocus($event)\" dropdownToggle> <i class=\"fa fa-caret-down\" (click)=\"inputToggle.focus()\" dropdownToggle></i> </div> <ul class=\"dropdown-menu\" dropdownMenu role=\"menu\"> <li *ngFor=\"let item of items | filterByExpression:expression\" role=\"menuitem\"> <!-- href is needed for keyboard navigation --> <a class=\"dropdown-item\" href=\"javascript:void(0)\" (click)=\"onItemClick(item)\">{{item}}</a> </li> </ul> </div>",
-                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* ChangeDetectionStrategy */].OnPush
+                    changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* ChangeDetectionStrategy */].OnPush
                 },] },
     ];
     /** @nocollapse */
     SearchableDropdownComponent.ctorParameters = function () { return []; };
     SearchableDropdownComponent.propDecorators = {
-        'items': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'shortcutMap': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'pathString': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'tabIndex': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'placeholder': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'onSelect': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Output */] },],
+        'items': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'shortcutMap': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'pathString': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'tabIndex': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'placeholder': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'onSelect': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Q" /* Output */] },],
     };
     return SearchableDropdownComponent;
 }());
@@ -6216,7 +6140,7 @@ var SearchableDropdownComponent = (function () {
 var ContentModelDirective = (function () {
     function ContentModelDirective(elementRef) {
         this.elementRef = elementRef;
-        this.contentModelChange = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
+        this.contentModelChange = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* EventEmitter */]();
     }
     ContentModelDirective.prototype.ngOnChanges = function (changes) {
         if (changes['contentModel']) {
@@ -6239,19 +6163,19 @@ var ContentModelDirective = (function () {
         this.elementRef.nativeElement.innerText = this.contentModel;
     };
     ContentModelDirective.decorators = [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Directive */], args: [{
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["v" /* Directive */], args: [{
                     selector: '[contentModel]'
                 },] },
     ];
     /** @nocollapse */
     ContentModelDirective.ctorParameters = function () { return [
-        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */], },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* ElementRef */], },
     ]; };
     ContentModelDirective.propDecorators = {
-        'contentModel': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Input */] },],
-        'contentModelChange': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["S" /* Output */] },],
-        'onBlur': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* HostListener */], args: ['blur',] },],
-        'onKeypress': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* HostListener */], args: ['keypress', ['$event'],] },],
+        'contentModel': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Input */] },],
+        'contentModelChange': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Q" /* Output */] },],
+        'onBlur': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* HostListener */], args: ['blur',] },],
+        'onKeypress': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* HostListener */], args: ['keypress', ['$event'],] },],
     };
     return ContentModelDirective;
 }());
@@ -6259,5 +6183,5 @@ var ContentModelDirective = (function () {
 
 /***/ })
 
-},[1046]);
+},[1045]);
 //# sourceMappingURL=main.bundle.map
