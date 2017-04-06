@@ -84,7 +84,7 @@ describe('AddFieldToObjectDropdownComponent', () => {
     showDropdownButton = nativeEl.querySelector('button') as HTMLButtonElement;
   });
 
-  it('should show different keys of schema', () => {
+  xit('should show different keys of schema', () => {
     showDropdownButton.dispatchEvent(new Event('click'));
     let items: Set<string> = Set(
       Array.prototype
@@ -94,7 +94,7 @@ describe('AddFieldToObjectDropdownComponent', () => {
     expect(items).toEqual(mockDifferentKeys);
   });
 
-  it('should add field with empty value when dropdown item clicked', () => {
+  xit('should add field with empty value when dropdown item clicked', () => {
     showDropdownButton.dispatchEvent(new Event('click'));
     let anchor = nativeEl.querySelector('li a') as HTMLAnchorElement;
     expect(component.fields.has(anchor.textContent)).toBeFalsy();

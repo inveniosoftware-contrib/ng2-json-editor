@@ -25,12 +25,12 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class DomUtilService {
 
-  private inputSelector = '.value-container input, div[contenteditable=true]';
+  private editableSelector = '.value-container input, div[contenteditable=true]';
 
-  focusAndSelectFirstInputChildById(id: string) {
+  focusAndSelectFirstEditableChildById(id: string) {
     let el = document.getElementById(id);
     if (el) {
-      let firstInput = el.querySelector(this.inputSelector) as HTMLElement;
+      let firstInput = el.querySelector(this.editableSelector) as HTMLElement;
       if (firstInput) {
         firstInput.focus();
         this.selectAllContent(firstInput);
@@ -44,6 +44,13 @@ export class DomUtilService {
           }
         }
       }
+    }
+  }
+
+  focusFirstInputChildByElement(el: HTMLElement) {
+    let firstInput = el.querySelector('input') as HTMLElement;
+    if (firstInput) {
+      firstInput.focus();
     }
   }
 
@@ -78,9 +85,9 @@ export class DomUtilService {
     }
   }
 
-  blurFirstInputChildById(id: string) {
+  blurFirstEditableChildById(id: string) {
     let el = document.getElementById(id);
-    let firstInput = el.querySelector(this.inputSelector) as HTMLElement;
+    let firstInput = el.querySelector(this.editableSelector) as HTMLElement;
     if (firstInput) {
       firstInput.blur();
     }

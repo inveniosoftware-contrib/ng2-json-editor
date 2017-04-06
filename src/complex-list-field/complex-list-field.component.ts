@@ -146,7 +146,7 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
     this.currentPage = this.getPageForIndex(index);
     let itemPath = this.path.concat(index);
     let itemId = this.pathUtilService.toPathString(itemPath);
-    setTimeout(() => this.domUtilService.focusAndSelectFirstInputChildById(itemId));
+    setTimeout(() => this.domUtilService.focusAndSelectFirstEditableChildById(itemId));
   }
 
   onPageChange(page: number) {

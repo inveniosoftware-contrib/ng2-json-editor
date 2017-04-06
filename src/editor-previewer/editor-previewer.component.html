@@ -3,11 +3,11 @@
     <tab *ngFor="let preview of previews trackBy:trackByElement" [heading]="preview.name">
       <div [ngSwitch]="preview.type">
         <div *ngSwitchCase="'html'" class="preview-container">
-          <template tabHeading>
+          <ng-template tabHeading>
             <span class="preview-link" (click)="openUrlInNewTab(preview.url)">
               <i class="fa fa-external-link"></i>
             </span>
-          </template>
+          </ng-template>
           <html-view [url]="preview.url"></html-view>
         </div>
       </div>

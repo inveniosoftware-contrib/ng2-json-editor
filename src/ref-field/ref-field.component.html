@@ -2,7 +2,7 @@
   <div *ngIf="refConfig">
     <button class="btn-preview-template" *ngIf="!shouldDisplayTemplate" (click)="onPreviewClick($event)"><i class="fa fa-eye"></i></button>
     <div *ngIf="shouldDisplayTemplate">
-      <template *ngIf="refData" [ngTemplateOutlet]="customTemplate" [ngOutletContext]="{response: refData}"></template>
+      <ng-template *ngIf="refData" [ngTemplateOutlet]="customTemplate" [ngTemplateOutletContext]="{response: refData}"></ng-template>
       <i *ngIf="!refData" class="fa fa-spinner fa-spin align-center"></i>
     </div>
   </div>

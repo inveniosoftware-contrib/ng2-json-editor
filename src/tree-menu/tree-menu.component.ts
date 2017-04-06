@@ -66,7 +66,7 @@ export class TreeMenuComponent extends AbstractTrackerComponent implements OnCha
   onKeypress(key: string) {
     if (key === 'Enter') {
       this.windowHrefService.appendHash(this.prefixOrPath);
-      this.domUtilService.focusAndSelectFirstInputChildById(this.prefixOrPath);
+      this.domUtilService.focusAndSelectFirstEditableChildById(this.prefixOrPath);
       this.domUtilService.flashElementById(this.prefixOrPath);
     }
   }
