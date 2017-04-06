@@ -78,7 +78,7 @@ export class ShortcutActionService {
    * @param {number} direction - Movement direction. -1 for UP, +1 for DOWN
    */
   private move(path: Array<any>, direction: number): void {
-    this.domUtilService.blurFirstInputChildById(this.pathUtilService.toPathString(path));
+    this.domUtilService.blurFirstEditableChildById(this.pathUtilService.toPathString(path));
     let index = this.pathUtilService.getElementIndexInForwardOrReversePath(path, false);
     path[path.length - 2] = this.moveElement(index, direction, this.pathUtilService.getNearestOrRootArrayParentInPath(path, false));
     let pathString = this.pathUtilService.toPathString(path);
@@ -106,7 +106,7 @@ export class ShortcutActionService {
 
   deleteAction(path: Array<any>) {
     // blur element before delete for ensuring that `commitValueChange` will not show again the deleted value
-    this.domUtilService.blurFirstInputChildById(this.pathUtilService.toPathString(path));
+    this.domUtilService.blurFirstEditableChildById(this.pathUtilService.toPathString(path));
     this.deleteElement(this.pathUtilService.getNearestOrRootArrayParentInPath(path, false),
       this.pathUtilService.getElementIndexInForwardOrReversePath(path, false));
   }
@@ -142,7 +142,7 @@ export class ShortcutActionService {
         path[path.length - 2] = values.size - Math.abs((elemIndexInPath + direction));
       }
       let pathString = this.pathUtilService.toPathString(path);
-      this.domUtilService.focusAndSelectFirstInputChildById(pathString);
+      this.domUtilService.focusAndSelectFirstEditableChildById(pathString);
     }
   }
 
@@ -206,7 +206,7 @@ export class ShortcutActionService {
 
   private focusElementInPath(path: string) {
     this.domUtilService.flashElementById(path);
-    this.domUtilService.focusAndSelectFirstInputChildById(path);
+    this.domUtilService.focusAndSelectFirstEditableChildById(path);
   }
 
   generateShortcutAction(action: string) {

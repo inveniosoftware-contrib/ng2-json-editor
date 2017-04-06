@@ -32,7 +32,7 @@ export class AddNewElementButtonComponent {
     let newElementPath = this.path.concat(values.size);
     let newElementPathString = this.pathUtilService.toPathString(newElementPath);
     setTimeout(() => {
-      this.domUtilService.focusAndSelectFirstInputChildById(newElementPathString);
+      this.domUtilService.focusAndSelectFirstEditableChildById(newElementPathString);
     });
   }
 

@@ -24,7 +24,8 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class WindowHrefService {
-  private static hrefWithoutHash: string;
+  // initial value is set to avoid ngc error.
+  private static hrefWithoutHash = '';
 
   getHrefWithoutHash(): string {
     // check if it is already cached

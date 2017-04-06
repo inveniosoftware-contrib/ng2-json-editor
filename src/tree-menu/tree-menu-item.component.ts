@@ -72,7 +72,7 @@ export class TreeMenuItemComponent extends AbstractTrackerComponent implements O
     event.preventDefault();
 
     this.isCollapsed = !this.isCollapsed;
-    this.domUtilService.focusAndSelectFirstInputChildById(this.path);
+    this.domUtilService.focusAndSelectFirstEditableChildById(this.path);
     this.domUtilService.flashElementById(this.path);
   }
 

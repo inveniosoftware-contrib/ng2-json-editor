@@ -20,7 +20,7 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef } from '@angular/core';
 
 import { Set } from 'immutable';
 
@@ -44,26 +44,25 @@ export class AddFieldDropdownComponent {
 
   expression = '';
 
-  constructor(private domUtilService: DomUtilService,
-    private emptyValueService: EmptyValueService,
-    private pathUtilService: PathUtilService) { }
+  constructor(public elementRef: ElementRef,
+    public domUtilService: DomUtilService,
+    public emptyValueService: EmptyValueService,
+    public pathUtilService: PathUtilService) { }
 
   get disabled(): boolean {
     return Object.keys(this.schema).length === this.fields.size;
   }
 
-  focusElementIfOpen(isDropdownOpen: boolean, el: HTMLElement) {
-    if (isDropdownOpen) {
-      // focus doesn't work without setTimeout, since dropdown is closed when this is called.
-      setTimeout(() => el.focus());
-    }
+  onDropdownShown() {
+    setTimeout(() =>
+      this.domUtilService.focusFirstInputChildByElement(this.elementRef.nativeElement));
   }
 
   onFieldSelect(field: string) {
     this.onFieldAdd.emit(field);
 
     let newFieldPathString = `${this.pathString}${this.pathUtilService.separator}${field}`;
-    setTimeout(() => this.domUtilService.focusAndSelectFirstInputChildById(newFieldPathString));
+    setTimeout(() => this.domUtilService.focusAndSelectFirstEditableChildById(newFieldPathString));
   }
 
 }

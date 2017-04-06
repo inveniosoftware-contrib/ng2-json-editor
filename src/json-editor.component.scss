@@ -73,6 +73,11 @@ table {
   }
 }
 
+// fixes ng2-bootstrap dropdown position
+bs-dropdown-container {
+  position: inherit !important;
+}
+
 #editor {
   font-size: 13px;
   border: 2px solid #a5adb5;
