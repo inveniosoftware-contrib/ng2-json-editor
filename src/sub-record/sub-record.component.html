@@ -28,7 +28,7 @@
                 <button type="button" class="editor-btn-delete editor-btn-delete-text" (click)="deleteField(key)">Delete</button>
               </li>
               <li class="divider"></li>
-              <li class="title-dropdown-item">
+              <li class="title-dropdown-item" (click)="$event.stopPropagation()">
                 <find-replace [path]="getPathForField(key)" [schema]="schema.properties[key]"></find-replace>
               </li>
             </title-dropdown>
