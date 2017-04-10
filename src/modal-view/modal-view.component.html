@@ -9,7 +9,7 @@
         <div [innerHTML]="options.bodyHtml"></div>
         <div [ngSwitch]="options.type">
           <div *ngSwitchCase="'confirm'">
-            <button class="btn btn-default" (click)="options.onConfirm();">
+            <button class="btn btn-success" (click)="options.onConfirm();">
               Confirm <i class="fa fa-check"></i>
             </button>
           </div>
