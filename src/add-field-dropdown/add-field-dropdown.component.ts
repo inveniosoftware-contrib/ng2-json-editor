@@ -63,6 +63,8 @@ export class AddFieldDropdownComponent {
 
     let newFieldPathString = `${this.pathString}${this.pathUtilService.separator}${field}`;
     setTimeout(() => this.domUtilService.focusAndSelectFirstEditableChildById(newFieldPathString));
+
+    this.expression = '';
   }
 
 }
