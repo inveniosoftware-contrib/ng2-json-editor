@@ -16,7 +16,7 @@ export class FindReplaceAllService {
    * @param {boolean} matchWhole - looks for whole match to a string property of immutable
    * @param {Array<any> | Object} diffHtml - TODO: describe
    */
-  findReplaceInImmutable(immutable: any, schema: Object, find: string, replace: string, matchWhole = false, diffHtml?: Array<any> | Object):
+  findReplaceInImmutable(immutable: any, schema: Object, find: string, replace: string, exact = false, diffHtml?: Array<any> | Object):
     { replaced: any, diffHtml: Array<any> | Object } {
     let immutableAsMutable = immutable.asMutable();
     let isList = List.isList(immutable);
@@ -33,7 +33,7 @@ export class FindReplaceAllService {
         let diff = value;
         // create html diff for each possible change
         let singleDiffHtml = `<strong style='color: green;'>${replace}</strong><del><em style='color: red;'>${find}</em></del>`;
-        if (!matchWhole) {
+        if (!exact) {
           let regExp = new RegExp(find, 'g');
           let replaced = value.replace(regExp, replace);
           immutableAsMutable.set(key, replaced);
@@ -48,7 +48,7 @@ export class FindReplaceAllService {
       } else if (List.isList(value) || Map.isMap(value)) {
         // create empty array or object for the value in diffHtml
         let result = this.
-          findReplaceInImmutable(immutableAsMutable.get(key), innerSchema, find, replace, matchWhole, diffHtml[key]);
+          findReplaceInImmutable(immutableAsMutable.get(key), innerSchema, find, replace, exact, diffHtml[key]);
         diffHtml[key] = result.diffHtml;
         immutableAsMutable.set(key, result.replaced);
       }

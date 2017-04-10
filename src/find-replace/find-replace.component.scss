@@ -9,9 +9,19 @@
   margin-bottom: 3px;
 }
 
+.bottom-container-item {
+  margin-top: 5px;
+  i {
+    font-size: 20px;
+    float: right;
+    padding-right: 2px;
+  }
+}
+
 label {
   font-size: 12px;
   font-weight: 400;
+  color: #7e7e7e;
 }
 
 $padding: 20px;
@@ -23,11 +33,5 @@ $padding: 20px;
 .find-replace-container {
   div {
     @extend .horizontal-padding;
-  }
-}
-
-.match-whole-container {
-  input[type=checkbox] {
-    width: 100%;
   }
 }

@@ -20,7 +20,7 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { List, Map } from 'immutable';
@@ -44,29 +44,42 @@ export class FindReplaceComponent {
 
   private find: string;
   private replace: string;
-  private matchWhole: boolean;
+  private exactPhrase: boolean;
 
-  constructor(public domSanitizer: DomSanitizer,
+  constructor(public changeDetectionRef: ChangeDetectorRef,
+    public domSanitizer: DomSanitizer,
     public findReplaceAllService: FindReplaceAllService,
     public jsonStoreService: JsonStoreService,
     public modalService: ModalService) { }
 
   onKeypress(key: string) {
     if (key === 'Enter') {
-      let value = this.jsonStoreService.getIn(this.path);
-      let result = this.findReplaceAllService
-        .findReplaceInImmutable(value, this.schema, this.find, this.replace, this.matchWhole);
-      this.replaced = result.replaced;
-      let stringyfiedDiffHtml = JSON.stringify(result.diffHtml, undefined, 2);
-      this.modalService.displayModal({
-        title: 'After Replace',
-        bodyHtml: this.domSanitizer.bypassSecurityTrustHtml(`<pre class="max-height-70-vh"><code>${stringyfiedDiffHtml}</code></pre>`),
-        type: 'confirm',
-        onConfirm: () => {
-          this.modalService.closeCurrentModal();
-          this.jsonStoreService.setIn(this.path, this.replaced);
-        }
-      });
+      this.findAndReplace();
     }
+  }
+
+  findAndReplace() {
+    let value = this.jsonStoreService.getIn(this.path);
+    let result = this.findReplaceAllService
+      .findReplaceInImmutable(value, this.schema, this.find, this.replace, this.exactPhrase);
+    this.replaced = result.replaced;
+    let stringyfiedDiffHtml = JSON.stringify(result.diffHtml, undefined, 2);
+    this.modalService.displayModal({
+      title: 'After Replace',
+      bodyHtml: this.domSanitizer.bypassSecurityTrustHtml(`<pre class="max-height-70-vh"><code>${stringyfiedDiffHtml}</code></pre>`),
+      type: 'confirm',
+      onConfirm: () => {
+        this.modalService.closeCurrentModal();
+        this.jsonStoreService.setIn(this.path, this.replaced);
+        this.cleanParameters();
+      }
+    });
+  }
+
+  private cleanParameters() {
+    this.find = '';
+    this.replace = '';
+    this.exactPhrase = false;
+    this.changeDetectionRef.markForCheck();
   }
 }
