@@ -1,15 +1,22 @@
 <div class="row editor-container">
-  <div id="left-main-container" class="left main-container" [ngClass]="leftContainerColMdClass" [shortcuts]="shortcuts">
+  <div class="col-md-2 menu-container">
+    <tree-menu [record]="_record" [schema]="schema"></tree-menu>
+    <add-field-dropdown [fields]="keys" [pathString]="''" (onFieldAdd)="onFieldAdd($event)" [schema]="schema.properties">Add field</add-field-dropdown>
+    <div *ngIf="config.enableAdminModeSwitch" class="admin-mode" tooltip="Allows editing all fields (use with care)">
+      <input id="admin-mode-checkbox" type="checkbox" [(ngModel)]="appGlobalsService.adminMode" />
+      <label class="admin-mode" for="admin-mode-checkbox">Enable Admin Mode</label>
+    </div>
+  </div>
+  <div id="middle-main-container" class="middle main-container" [ngClass]="middleContainerColMdClass" [shortcuts]="shortcuts">
     <tabset *ngIf="config.tabsConfig">
-      <tab *ngFor="let tabName of tabNames; trackBy:trackByElement" [heading]="tabName" (select)="activeTabName = tabName">
-        <sub-record [value]="tabNameToSubRecordMap.get(tabName)" [tabName]="tabName" [schema]="tabNameToSubSchema[tabName]" [enableAdminModeSwitch]="config.enableAdminModeSwitch"
-          [isPreviewerHidden]="isPreviewerHidden" [isPreviewerDisabled]="isPreviewerDisabled"></sub-record>
+      <tab *ngFor="let tabName of tabNames; trackBy:trackByElement" [heading]="tabName" (select)="activeTabName = tabName" [active]="isActiveTab(tabName)">
+        <sub-record [value]="_record" [tabName]="tabName" [schema]="tabNameToSubSchema[tabName]" [keys]="tabNameToKeys[tabName]"
+                    (onDeleteKey)="onDeleteKey($event)"></sub-record>
       </tab>
     </tabset>
-    <sub-record *ngIf="!config.tabsConfig" [value]="_record" [schema]="schema" [enableAdminModeSwitch]="config.enableAdminModeSwitch"
-      [isPreviewerHidden]="isPreviewerHidden" [isPreviewerDisabled]="isPreviewerDisabled"></sub-record>
+    <sub-record *ngIf="!config.tabsConfig" [value]="_record" [schema]="schema" (onDeleteKey)="onDeleteKey($event)" [keys]="keys"></sub-record>
   </div>
-  <div id="right-main-container" *ngIf="!isPreviewerDisabled" [ngClass]="rightContainerColMdClass" class="right main-container">
+  <div id="right-main-container" *ngIf="!isPreviewerDisabled" [ngClass]="rightContainerColMdClass" class="main-container">
     <button id="btn-preview-toggle" type="button" class="btn btn-default btn-toggle" (click)="isPreviewerHidden = !isPreviewerHidden">{{isPreviewerHidden ? "Show Preview" : "Hide Preview"}}</button>
     <editor-previewer [hidden]="isPreviewerHidden" [previews]="previews"> </editor-previewer>
   </div>

@@ -30,7 +30,7 @@ import { Ng2BootstrapModule } from 'ng2-bootstrap';
 
 import { DifferentKeysPipe, FilterByExpressionPipe } from '../shared/pipes';
 
-import { DomUtilService, EmptyValueService, PathUtilService } from '../shared/services';
+import { DomUtilService, EmptyValueService, PathUtilService, TabsUtilService } from '../shared/services';
 
 const schemaProperties = {
   propA: {},
@@ -68,7 +68,8 @@ describe('AddFieldToObjectDropdownComponent', () => {
       providers: [
         { provide: EmptyValueService, useClass: MockEmptyValueService },
         DomUtilService,
-        PathUtilService
+        PathUtilService,
+        TabsUtilService
       ]
     }).compileComponents();
   }));

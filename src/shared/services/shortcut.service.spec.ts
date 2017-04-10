@@ -28,6 +28,7 @@ import {JsonStoreService} from './json-store.service';
 import {JsonSchemaService} from './json-schema.service';
 import {PathUtilService} from './path-util.service';
 import {DomUtilService} from './dom-util.service';
+import {TabsUtilService} from './tabs-util.service';
 
 describe('ShortcutService', () => {
 
@@ -40,7 +41,8 @@ describe('ShortcutService', () => {
         JsonStoreService,
         JsonSchemaService,
         PathUtilService,
-        DomUtilService
+        DomUtilService,
+        TabsUtilService
       ]
     });
   });

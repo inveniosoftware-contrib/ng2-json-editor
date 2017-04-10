@@ -32,7 +32,6 @@ import {
 } from '@angular/core';
 import { Http } from '@angular/http';
 
-import * as _ from 'lodash';
 import { fromJS, Map, Set } from 'immutable';
 import 'rxjs/add/operator/skipWhile';
 
@@ -75,13 +74,13 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   @Output() onRecordChange: EventEmitter<Object> = new EventEmitter<Object>();
 
   _record: Map<string, any>;
-  tabNameToSubRecordMap: Map<string, Map<string, any>>;
   tabNameToSubSchema: {};
   tabNames: Array<string>;
-  keyToTabName: { [key: string]: string };
+  schemaKeyToTabName: { [key: string]: string };
+  tabNameToKeys: { [tabName: string]: Set<string> };
   previews: Array<Preview>;
   isPreviewerHidden: boolean;
-  pathCache: PathCache = {};
+  keys: Set<string>;
 
   constructor(public http: Http,
     public appGlobalsService: AppGlobalsService,
@@ -109,7 +108,11 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
 
     this.schema = this.schemaFixerService.fixSchema(this.schema, this.config.schemaOptions);
     this.record = this.recordFixerService.fixRecord(this.record, this.schema);
+
     this.extractPreviews();
+
+    this.keys = Set.fromKeys(this.record);
+
     // set errors that is used by other components
     this.appGlobalsService.globalErrors = this.errorMap;
     this.appGlobalsService.templates = this.templates;
@@ -122,10 +125,6 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
       .skipWhile(json => json === this._record)
       .subscribe(json => {
         this._record = json;
-        if (this.config.tabsConfig) {
-          // update tab groups!
-          this.tabNameToSubRecordMap = this.tabsUtilService.getTabNameToSubRecordMap(json, this.keyToTabName);
-        }
         // emit the change as plain JS object
         this.onRecordChange.emit(json.toJS());
       });
@@ -133,10 +132,16 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
 
     // setup variables need for tab grouping.
     if (this.config.tabsConfig) {
-      this.keyToTabName = this.tabsUtilService.getKeyToTabName(this.config.tabsConfig, this.schema);
-      this.tabNameToSubRecordMap = this.tabsUtilService.getTabNameToSubRecordMap(this._record, this.keyToTabName);
-      this.tabNameToSubSchema = this.tabsUtilService.getTabNameToSubSchema(this.schema, this.keyToTabName);
-      this.tabNames = this.tabNameToSubRecordMap.keySeq().toArray();
+      this.schemaKeyToTabName = this.tabsUtilService.getSchemaKeyToTabName(this.config.tabsConfig, this.schema);
+      this.tabNameToKeys = this.keys
+        .groupBy(key => this.schemaKeyToTabName[key])
+        .toObject() as any;
+      this.tabNameToSubSchema = this.tabsUtilService.getTabNameToSubSchema(this.schema, this.schemaKeyToTabName);
+      this.tabNames = this.tabsUtilService.getTabNames(this.config.tabsConfig);
+      this.tabsUtilService.tabSelectionSubject.subscribe(tabName => {
+        this.activeTabName = tabName;
+      });
+      this.appGlobalsService.activeTabName = this.config.tabsConfig.defaultTabName;
     }
 
   }
@@ -175,6 +180,22 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     }
   }
 
+  onFieldAdd(field: string) {
+    this.keys = this.keys.add(field);
+    if (this.config.tabsConfig) {
+      let tabName = this.schemaKeyToTabName[field];
+      this.tabNameToKeys[tabName] = this.tabNameToKeys[tabName].add(field);
+    }
+  }
+
+  onDeleteKey(field) {
+    this.keys = this.keys.remove(field);
+    if (this.config.tabsConfig) {
+      let tabName = this.schemaKeyToTabName[field];
+      this.tabNameToKeys[tabName] = this.tabNameToKeys[tabName].remove(field);
+    }
+   }
+
   get shortcuts() {
     return this.shortcutsService.getShortcutsWithConfig(this.config.shortcuts);
   }
@@ -187,16 +208,18 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     return this.isPreviewerHidden ? 'col-md-1' : 'col-md-4';
   }
 
-  get leftContainerColMdClass(): string {
-    if (!this.isPreviewerDisabled) {
-      return this.isPreviewerHidden ? 'col-md-11 nav-tabs-col-md-9-8' : 'col-md-8 nav-tabs-col-md-9';
-    } else {
-      return 'col-md-12 nav-tabs-col-md-10';
+  get middleContainerColMdClass(): string {
+    if (this.isPreviewerDisabled) {
+      return 'col-md-10';
     }
+    return this.isPreviewerHidden ? 'col-md-9' : 'col-md-6';
   }
 
   set activeTabName(tabName: string) {
     this.appGlobalsService.activeTabName = tabName;
   }
 
+  isActiveTab(tabName) {
+    return this.appGlobalsService.activeTabName === tabName;
+  }
 }
