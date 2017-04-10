@@ -28,7 +28,7 @@ import { SchemaValidationErrors } from '../interfaces';
 export class AppGlobalsService {
   private _globalErrorsSubject: ReplaySubject<SchemaValidationErrors> = new ReplaySubject<any>(1);
   public adminMode = false;
-  public activeTabName = 'Main';
+  public activeTabName = '';
   public tabNameToFirstTopLevelElement: { [tabName: string]: string } = {};
   public templates: { [templateName: string]: TemplateRef<any> };
 

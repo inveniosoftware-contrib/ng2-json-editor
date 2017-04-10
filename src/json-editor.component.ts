@@ -141,6 +141,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
       this.tabsUtilService.tabSelectionSubject.subscribe(tabName => {
         this.activeTabName = tabName;
       });
+      this.appGlobalsService.activeTabName = this.config.tabsConfig.defaultTabName;
     }
 
   }
