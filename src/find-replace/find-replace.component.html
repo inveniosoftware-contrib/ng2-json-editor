@@ -5,7 +5,11 @@
   <div>
     <input placeholder="Replace" [(ngModel)]="replace" (keypress)="onKeypress($event.key)" />
   </div>
-  <div class="match-whole-container">
-    <input type="checkbox" [(ngModel)]="matchWhole" (keypress)="onKeypress($event.key)" tooltip="Match Whole"/>
+  <div class="bottom-container-item">
+    <label>
+      Exact phrase
+      <input type="checkbox" [(ngModel)]="matchWhole" (keypress)="onKeypress($event.key)"/>
+    </label>
+    <i class="fa fa-arrow-circle-right" (click)="findAndReplace()"></i>
   </div>
 </div>
