@@ -21,6 +21,7 @@
 */
 
 import { TabsUtilService } from './tabs-util.service';
+import { PathUtilService } from './path-util.service';
 
 import { Map, fromJS } from 'immutable';
 
@@ -29,43 +30,7 @@ describe('TabsUtilService', () => {
   let service: TabsUtilService;
 
   beforeEach(() => {
-    service = new TabsUtilService();
-  });
-
-  it('should return tabName to sub record map', () => {
-    let record = fromJS({
-      key1Tab1: {
-        foo: 'key1Tab1'
-      },
-      key2Tab1: {
-        foo: 'key2Tab1'
-      },
-      key1Tab2: {
-        foo: 'key1Tab2'
-      }
-    });
-    let keyToTabName = {
-      key1Tab1: 'Tab1',
-      key2Tab1: 'Tab1',
-      key1Tab2: 'Tab2'
-    };
-    let expected: Map<string, any> = fromJS({
-      Tab1: {
-        key1Tab1: {
-          foo: 'key1Tab1'
-        },
-        key2Tab1: {
-          foo: 'key2Tab1'
-        }
-      },
-      Tab2: {
-        key1Tab2: {
-          foo: 'key1Tab2'
-        }
-      }
-    });
-    let map = service.getTabNameToSubRecordMap(record, keyToTabName);
-    expect(expected.equals(map)).toBeTruthy();
+    service = new TabsUtilService(new PathUtilService());
   });
 
   it('should return tabName to sub schema', () => {
@@ -192,7 +157,7 @@ describe('TabsUtilService', () => {
       key1Default: 'Default',
       key2Default: 'Default'
     };
-    let result = service.getKeyToTabName(config, schema);
+    let result = service.getSchemaKeyToTabName(config, schema);
     expect(result).toEqual(expected);
   });
 

@@ -20,7 +20,7 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, OnInit, OnChanges, SimpleChanges, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 import { Map, Set } from 'immutable';
 
@@ -35,32 +35,39 @@ import { JsonStoreService, AppGlobalsService } from '../shared/services';
   templateUrl: './sub-record.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SubRecordComponent implements OnInit {
+export class SubRecordComponent implements OnInit, OnChanges {
   @Input() value: Map<string, any>;
   @Input() schema: Object;
-  @Input() enableAdminModeSwitch: boolean;
-  @Input() isPreviewerHidden: boolean;
-  @Input() isPreviewerDisabled: boolean;
   @Input() tabName = '';
+  @Input() keys: Set<string>;
+
+  @Output() onDeleteKey: EventEmitter<string> = new EventEmitter<string>();
 
   keysByType: { others: Set<string>, toggles: Set<string> };
-  allKeys: Set<string>;
   pathCache: PathCache = {};
 
   constructor(public jsonStoreService: JsonStoreService,
     public appGlobalsService: AppGlobalsService) { }
 
   ngOnInit() {
-    this.allKeys = this.value.keySeq().toSet();
-    this.keysByType = this.allKeys
+    this.keysByType = this.keys
       .groupBy(key => this.isToggle(key) ? 'toggles' : 'others')
       .toObject() as any;
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['keys']) {
+      this.keys = changes['keys'].currentValue;
+      this.keysByType = this.keys
+        .groupBy(key => this.isToggle(key) ? 'toggles' : 'others')
+        .toObject() as any;
+    }
+  }
+
   // delete only work for others, not toggles (UPDATE: config comment if this changes)
   deleteField(field: string) {
+    this.onDeleteKey.emit(field);
     this.jsonStoreService.removeIn(this.getPathForField(field));
-    this.keysByType.others = this.keysByType.others.remove(field);
   }
 
   getPathForField(field: string): Array<any> {
@@ -70,32 +77,10 @@ export class SubRecordComponent implements OnInit {
     return this.pathCache[field];
   }
 
-  onFieldAdd(field: string) {
-    if (this.isToggle(field)) {
-      this.keysByType.toggles = this.keysByType.toggles.add(field);
-    } else {
-      this.keysByType.others = this.keysByType.others.add(field);
-    }
-  }
-
   onToggleValueChange(field: string, value: boolean) {
     this.jsonStoreService.setIn(this.getPathForField(field), value);
   }
 
-  get rightContainerColMdClass(): string {
-    if (this.isPreviewerDisabled) {
-      return 'col-md-10';
-    } else {
-      return this.isPreviewerHidden ? 'col-md-9 col-md-override-9-8' : 'col-md-9';
-    }
-  }
-
-  get leftContainerColMdClass(): string {
-    if (this.isPreviewerDisabled) {
-      return 'col-md-2';
-    }
-    return this.isPreviewerHidden ? 'col-md-3 col-md-override-2-2' : 'col-md-3';
-  }
 
   private isToggle(field: string): boolean {
     return this.schema['properties'][field]['toggleColor'] !== undefined;

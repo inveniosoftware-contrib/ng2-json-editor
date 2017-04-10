@@ -65,6 +65,7 @@
     "@types/jasmine": "2.5.38",
     "@types/mousetrap": "^1.5.32",
     "@types/node": "~6.0.60",
+    "@types/lodash": "4.14.57",
     "bootstrap-sass": "^3.3.7",
     "codelyzer": "~2.0.0-beta.1",
     "copyfiles": "^1.2.0",

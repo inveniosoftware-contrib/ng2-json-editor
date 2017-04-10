@@ -21,22 +21,36 @@
 */
 
 import { Injectable } from '@angular/core';
-
-import { Map } from 'immutable';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 import * as _ from 'lodash';
 
 import { TabsConfig } from '../interfaces';
+import { PathUtilService } from './path-util.service';
 
 @Injectable()
 export class TabsUtilService {
 
-  // FIXME: return type
-  getTabNameToSubRecordMap(record: Map<string, any>, keyToTabName: { [key: string]: string }): any {
-    return record
-      .groupBy((value, key) => keyToTabName[key]);
+  private _schemaKeyToTabName: {[key: string]: string };
+  private _tabSelectionSubject: ReplaySubject<string> = new ReplaySubject<string>(1);
+
+  constructor(public pathUtilService: PathUtilService) { }
+
+  get tabSelectionSubject(): ReplaySubject<string> {
+    return this._tabSelectionSubject;
   }
 
-  getKeyToTabName(tabsConfig: TabsConfig, schema: Object): {} {
+  get schemaKeyToTabName(): {[key: string]: string } {
+    return this._schemaKeyToTabName;
+  }
+
+  getTabNames(tabsConfig: TabsConfig): Array<string> {
+    let tabNames = tabsConfig.tabs.map(tab => tab.name);
+    // insert default tab name at the beginning
+    return [tabsConfig.defaultTabName]
+      .concat(tabNames);
+  }
+
+  getSchemaKeyToTabName(tabsConfig: TabsConfig, schema: Object): {} {
     // set tab.name for configured keys
     let keyToTabName = tabsConfig.tabs
       .map(tab => {
@@ -52,10 +66,12 @@ export class TabsUtilService {
       .forEach(key => {
         keyToTabName[key] = tabsConfig.defaultTabName;
       });
+
+    this._schemaKeyToTabName = keyToTabName;
     return keyToTabName;
   }
 
-  // TODO: shouldn't acces this
+  // TODO: shouldn't access this
   getTabNameToSubSchema(schema: Object, keyToTabName: { [key: string]: string }): {} {
     let schemaProps = schema['properties'];
     let tabNameToSchemaProps = Object.keys(schemaProps)
@@ -90,5 +106,13 @@ export class TabsUtilService {
         };
       });
     return tabNameToSchemaPart;
+  }
+
+  // TODO: maybe this could be a decorator
+  selectTabIfNeeded(path: string) {
+    if (this.schemaKeyToTabName) {
+      let tabName = this.schemaKeyToTabName[this.pathUtilService.toPathArray(path)[0]];
+      this.tabSelectionSubject.next(tabName);
+    }
   }
 }

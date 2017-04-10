@@ -21,30 +21,36 @@
 */
 
 import { Injectable } from '@angular/core';
+import { TabsUtilService } from './tabs-util.service';
 
 @Injectable()
 export class DomUtilService {
 
   private editableSelector = '.value-container input, div[contenteditable=true]';
 
+  constructor(public tabsUtilService: TabsUtilService) { }
+
   focusAndSelectFirstEditableChildById(id: string) {
-    let el = document.getElementById(id);
-    if (el) {
-      let firstInput = el.querySelector(this.editableSelector) as HTMLElement;
-      if (firstInput) {
-        firstInput.focus();
-        this.selectAllContent(firstInput);
-      } else {
-        // if element doesn't have any input, open add-field-dropdown if it exists.
-        firstInput = el.querySelector('div.btn-group') as HTMLInputElement;
+    this.tabsUtilService.selectTabIfNeeded(id);
+    setTimeout(() => {
+      let el = document.getElementById(id);
+      if (el) {
+        let firstInput = el.querySelector(this.editableSelector) as HTMLElement;
         if (firstInput) {
-          let dropDownButton = el.querySelector('div.btn-group button') as HTMLButtonElement;
-          if (dropDownButton) {
-            dropDownButton.click();
+          firstInput.focus();
+          this.selectAllContent(firstInput);
+        } else {
+          // if element doesn't have any input, open add-field-dropdown if it exists.
+          firstInput = el.querySelector('div.btn-group') as HTMLInputElement;
+          if (firstInput) {
+            let dropDownButton = el.querySelector('div.btn-group button') as HTMLButtonElement;
+            if (dropDownButton) {
+              dropDownButton.click();
+            }
           }
         }
       }
-    }
+    });
   }
 
   focusFirstInputChildByElement(el: HTMLElement) {
@@ -75,14 +81,17 @@ export class DomUtilService {
   }
 
   flashElementById(id: string) {
-    let el = document.getElementById(id);
-    if (el) {
-      // .flash is defined json-editor.component.scss, {border: 2px solid yellow;}
-      el.classList.add('flash');
-      setTimeout(() => {
-        el.classList.remove('flash');
-      }, 500);
-    }
+    this.tabsUtilService.selectTabIfNeeded(id);
+    setTimeout(() => {
+      let el = document.getElementById(id);
+      if (el) {
+        // .flash is defined json-editor.component.scss, {border: 2px solid yellow;}
+        el.classList.add('flash');
+        setTimeout(() => {
+          el.classList.remove('flash');
+        }, 500);
+      }
+    });
   }
 
   blurFirstEditableChildById(id: string) {
@@ -105,4 +114,5 @@ export class DomUtilService {
       sel.addRange(range);
     }
   }
+
 }
