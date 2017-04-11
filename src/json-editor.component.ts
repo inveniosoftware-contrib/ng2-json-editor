@@ -66,7 +66,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
 
   @Input() config: JsonEditorConfig;
   @Input() record: Object;
-  @Input() schema: Object;
+  @Input() schema: any;
   @Input() errorMap: SchemaValidationErrors = {};
   @Input() templates: { [templateName: string]: TemplateRef<any> } = {};
 

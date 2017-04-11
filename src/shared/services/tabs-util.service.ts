@@ -24,7 +24,7 @@ import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import * as _ from 'lodash';
 
-import { TabsConfig } from '../interfaces';
+import { TabsConfig, JSONSchema } from '../interfaces';
 import { PathUtilService } from './path-util.service';
 
 @Injectable()
@@ -50,7 +50,7 @@ export class TabsUtilService {
       .concat(tabNames);
   }
 
-  getSchemaKeyToTabName(tabsConfig: TabsConfig, schema: Object): {} {
+  getSchemaKeyToTabName(tabsConfig: TabsConfig, schema: JSONSchema): {} {
     // set tab.name for configured keys
     let keyToTabName = tabsConfig.tabs
       .map(tab => {
@@ -61,7 +61,7 @@ export class TabsUtilService {
         return keysWithTabName;
       }).reduce((pre, cur) => Object.assign(pre, cur));
     // set defaultTabName for all other keys in the schema
-    Object.keys(schema['properties'])
+    Object.keys(schema.properties)
       .filter(key => !keyToTabName[key])
       .forEach(key => {
         keyToTabName[key] = tabsConfig.defaultTabName;
@@ -72,8 +72,8 @@ export class TabsUtilService {
   }
 
   // TODO: shouldn't access this
-  getTabNameToSubSchema(schema: Object, keyToTabName: { [key: string]: string }): {} {
-    let schemaProps = schema['properties'];
+  getTabNameToSubSchema(schema: JSONSchema, keyToTabName: { [key: string]: string }): {} {
+    let schemaProps = schema.properties;
     let tabNameToSchemaProps = Object.keys(schemaProps)
       .map(prop => {
         return {
@@ -84,7 +84,7 @@ export class TabsUtilService {
       }).reduce((pre, cur) => _.merge(pre, cur));
 
     let tabNameToAlwaysShow: { [tabName: string]: Array<string> } = {};
-    let alwaysShow: Array<string> = schema['alwaysShow'];
+    let alwaysShow = schema.alwaysShow;
     if (alwaysShow) {
       alwaysShow
         .forEach(key => {

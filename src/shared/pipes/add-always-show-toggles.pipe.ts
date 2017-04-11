@@ -24,15 +24,17 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 import { Set } from 'immutable';
 
+import { JSONSchema } from '../interfaces';
+
 @Pipe({
   name: 'addAlwaysShowToggles'
 })
 export class AddAlwaysShowTogglesPipe implements PipeTransform {
 
-  transform(fields: Set<string>, schema: Object): Set<string> {
-    let alwaysShowFields: Array<string> = schema['alwaysShow'] || [];
+  transform(fields: Set<string>, schema: JSONSchema): Set<string> {
+    let alwaysShowFields: Array<string> = schema.alwaysShow || [];
     let alwaysShowToggles = alwaysShowFields.filter(field => {
-      let isToggle = schema['properties'][field]['toggleColor'];
+      let isToggle = schema.properties[field].toggleColor;
       return isToggle;
     });
     return fields.union(alwaysShowToggles);

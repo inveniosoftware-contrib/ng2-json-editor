@@ -22,6 +22,8 @@
 
 import { Injectable } from '@angular/core';
 
+import { JSONSchema } from '../interfaces';
+
 @Injectable()
 export class ComponentTypeService {
 
@@ -37,40 +39,40 @@ export class ComponentTypeService {
    * @param {Object} schema
    * @return {string}
    */
-  getComponentType(schema: Object): string {
+  getComponentType(schema: JSONSchema): string {
     if (!schema) {
       throw new Error('schema is undefined');
     }
 
-    if (schema['onValueChange']) {
+    if (schema.onValueChange) {
       return 'value-change-watcher';
     }
 
-    let schemaType = schema['type'];
+    let schemaType = schema.type;
     if (!schemaType) {
       if (Object.keys(schema).length === 0) { // if shema === {} (empty object)
         return 'raw';
       }
     } else if (schemaType === 'string') {
-      if (schema['autocompletionConfig']) {
+      if (schema.autocompletionConfig) {
         return 'autocomplete';
-      } else if (schema['enum']) {
+      } else if (schema.enum) {
         return 'enum';
       }
     } else if (schemaType === 'object') {
-      if (schema['properties']['$ref']) {
+      if (schema.properties['$ref']) {
         return 'ref';
       }
     } else if (schemaType === 'array') {
-      let itemSchema = schema['items'];
-      if (itemSchema['type'] === 'object') {
+      let itemSchema = schema.items;
+      if (itemSchema.type === 'object') {
         // complex-array: if it's an object array
         // where at least one property of this object is also an object array.
         // so object array in an object array. Array<{property: Array<{...}>...}>
-        let isComplexArray = Object.keys(itemSchema['properties'])
+        let isComplexArray = Object.keys(itemSchema.properties)
           .some(prop => {
-            let propSchema = itemSchema['properties'][prop];
-            return propSchema['items'] && (propSchema['items']['type'] === 'object');
+            let propSchema = itemSchema.properties[prop];
+            return propSchema.items && (propSchema.items.type === 'object');
           });
         if (isComplexArray) {
           return 'complex-list';

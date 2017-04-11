@@ -27,6 +27,7 @@ import { List } from 'immutable';
 import { AbstractListFieldComponent } from '../abstract-list-field';
 
 import { AppGlobalsService, JsonStoreService, PathUtilService } from '../shared/services';
+import { JSONSchema } from '../shared/interfaces';
 
 @Component({
   selector: 'primitive-list-field',
@@ -38,7 +39,7 @@ import { AppGlobalsService, JsonStoreService, PathUtilService } from '../shared/
 })
 export class PrimitiveListFieldComponent extends AbstractListFieldComponent {
   @Input() values: List<any>;
-  @Input() schema: Object;
+  @Input() schema: JSONSchema;
   @Input() path: Array<any>;
 
   constructor(public appGlobalsService: AppGlobalsService,

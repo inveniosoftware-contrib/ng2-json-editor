@@ -24,7 +24,7 @@ import { Component, Input, Output, OnInit, OnChanges, SimpleChanges, EventEmitte
 
 import { Map, Set } from 'immutable';
 
-import { PathCache } from '../shared/interfaces';
+import { PathCache, JSONSchema } from '../shared/interfaces';
 import { JsonStoreService, AppGlobalsService } from '../shared/services';
 
 @Component({
@@ -37,7 +37,7 @@ import { JsonStoreService, AppGlobalsService } from '../shared/services';
 })
 export class SubRecordComponent implements OnInit, OnChanges {
   @Input() value: Map<string, any>;
-  @Input() schema: Object;
+  @Input() schema: JSONSchema;
   @Input() tabName = '';
   @Input() keys: Set<string>;
 
@@ -83,6 +83,6 @@ export class SubRecordComponent implements OnInit, OnChanges {
 
 
   private isToggle(field: string): boolean {
-    return this.schema['properties'][field]['toggleColor'] !== undefined;
+    return this.schema.properties[field].toggleColor !== undefined;
   }
 }

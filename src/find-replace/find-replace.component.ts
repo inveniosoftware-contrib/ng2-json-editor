@@ -26,6 +26,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { List, Map } from 'immutable';
 
 import { FindReplaceAllService, JsonStoreService, ModalService } from '../shared/services';
+import { JSONSchema } from '../shared/interfaces';
 
 @Component({
   selector: 'find-replace',
@@ -38,7 +39,7 @@ import { FindReplaceAllService, JsonStoreService, ModalService } from '../shared
 export class FindReplaceComponent {
 
   @Input() path: Array<any>;
-  @Input() schema: Object;
+  @Input() schema: JSONSchema;
 
   private replaced: List<any> | Map<string, any>;
 

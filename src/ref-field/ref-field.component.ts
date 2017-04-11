@@ -35,7 +35,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 
 import { AppGlobalsService, PathUtilService } from '../shared/services';
-import { RefConfig } from '../shared/interfaces';
+import { RefConfig, JSONSchema } from '../shared/interfaces';
 
 @Component({
   selector: 'ref-field',
@@ -47,7 +47,7 @@ import { RefConfig } from '../shared/interfaces';
 })
 export class RefFieldComponent implements OnChanges {
 
-  @Input() schema: Object;
+  @Input() schema: JSONSchema;
   @Input() value: Map<string, string>;
   @Input() path: Array<any>;
 
@@ -95,7 +95,7 @@ export class RefFieldComponent implements OnChanges {
   }
 
   get refConfig(): RefConfig {
-    return this.schema['refFieldConfig'];
+    return this.schema.refFieldConfig;
   }
 
   get ref(): string {

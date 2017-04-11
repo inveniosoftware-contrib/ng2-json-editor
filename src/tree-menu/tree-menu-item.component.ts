@@ -27,6 +27,7 @@ import { AbstractTrackerComponent } from '../abstract-tracker';
 import { Map, Set } from 'immutable';
 
 import { DomUtilService, WindowHrefService, PathUtilService } from '../shared/services';
+import { JSONSchema } from '../shared/interfaces';
 
 @Component({
   selector: 'tree-menu-item',
@@ -40,7 +41,7 @@ export class TreeMenuItemComponent extends AbstractTrackerComponent implements O
 
   @Input() label: string;
   @Input() value: any;
-  @Input() schema: Object;
+  @Input() schema: JSONSchema;
   @Input() path: string;
 
   // defined only if schmea.type equals to 'object'
@@ -61,7 +62,7 @@ export class TreeMenuItemComponent extends AbstractTrackerComponent implements O
 
   ngOnChanges(changes: SimpleChanges) {
     let valueChange = changes['value'];
-    if (valueChange && this.schema['type'] === 'object') {
+    if (valueChange && this.schema.type === 'object') {
       let currentValue: Map<string, any> = valueChange.currentValue;
       this.keys = currentValue.keySeq().toSet();
     }
@@ -81,7 +82,7 @@ export class TreeMenuItemComponent extends AbstractTrackerComponent implements O
   }
 
   get isCollapsable(): boolean {
-    let schemaType = this.schema['type'];
+    let schemaType = this.schema.type;
     return (schemaType === 'object' || schemaType === 'array');
   }
 

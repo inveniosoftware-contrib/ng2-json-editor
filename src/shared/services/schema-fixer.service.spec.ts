@@ -160,7 +160,8 @@ describe('SchemaFixerService', () => {
             source: [
               'partialEnumProp1',
               'partialEnumProp2'
-            ]
+            ],
+            size: 7
           }
         }
       }

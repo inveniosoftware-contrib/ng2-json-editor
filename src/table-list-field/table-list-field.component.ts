@@ -27,6 +27,7 @@ import { List, Map, Set } from 'immutable';
 import { AbstractListFieldComponent } from '../abstract-list-field';
 
 import { AppGlobalsService, JsonStoreService, PathUtilService } from '../shared/services';
+import { JSONSchema } from '../shared/interfaces';
 
 @Component({
   selector: 'table-list-field',
@@ -39,7 +40,7 @@ import { AppGlobalsService, JsonStoreService, PathUtilService } from '../shared/
 export class TableListFieldComponent extends AbstractListFieldComponent implements OnInit {
 
   @Input() values: List<Map<string, any>>;
-  @Input() schema: Object;
+  @Input() schema: JSONSchema;
   @Input() path: Array<any>;
 
   keys: Set<string>;

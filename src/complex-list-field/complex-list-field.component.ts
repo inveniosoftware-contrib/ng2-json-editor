@@ -35,7 +35,7 @@ import { AbstractListFieldComponent } from '../abstract-list-field';
 
 import { AppGlobalsService, JsonStoreService, DomUtilService, PathUtilService } from '../shared/services';
 
-import { LongListNavigatorConfig } from '../shared/interfaces';
+import { LongListNavigatorConfig, JSONSchema } from '../shared/interfaces';
 
 @Component({
   selector: 'complex-list-field',
@@ -48,7 +48,7 @@ import { LongListNavigatorConfig } from '../shared/interfaces';
 export class ComplexListFieldComponent extends AbstractListFieldComponent implements OnChanges, OnInit {
 
   @Input() values: List<Map<string, any>>;
-  @Input() schema: Object;
+  @Input() schema: JSONSchema;
   @Input() path: Array<any>;
 
   paginatedIndices: Array<number>;
@@ -68,7 +68,7 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
   }
 
   ngOnInit() {
-    this.navigator = this.schema['longListNavigatorConfig'];
+    this.navigator = this.schema.longListNavigatorConfig;
     if (this.navigator) {
       this.paginatedIndices = this.getIndicesForPage(this.currentPage);
     } else {

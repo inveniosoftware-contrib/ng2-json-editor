@@ -29,21 +29,24 @@ import { AddFieldDropdownComponent } from './add-field-dropdown.component';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 
 import { DifferentKeysPipe, FilterByExpressionPipe } from '../shared/pipes';
-
 import { DomUtilService, EmptyValueService, PathUtilService, TabsUtilService } from '../shared/services';
+import { JSONSchema } from '../shared/interfaces';
 
-const schemaProperties = {
-  propA: {},
-  propB: {},
-  propNotInValueA: {},
-  propNotInValueB: {}
+const testSchema: JSONSchema = {
+  type: 'object',
+  properties: {
+    propA: { type: 'string' },
+    propB: { type: 'string' },
+    propNotInValueA: { type: 'string' },
+    propNotInValueB: { type: 'string' }
+  }
 };
 const fields = Set(['propA', 'propB']);
 const mockDifferentKeys = Set(['propNotInValueB', 'propNotInValueA']);
 const emptyValue = 'empty-value';
 
 class MockEmptyValueService extends EmptyValueService {
-  generateEmptyValue(schema: Object): any {
+  generateEmptyValue(schema: JSONSchema): any {
     return emptyValue;
   }
 }
@@ -78,7 +81,7 @@ describe('AddFieldToObjectDropdownComponent', () => {
     fixture = TestBed.createComponent(AddFieldDropdownComponent);
     component = fixture.componentInstance;
     component.fields = fields;
-    component.schema = schemaProperties;
+    component.schema = testSchema;
     fixture.detectChanges();
 
     nativeEl = fixture.nativeElement;

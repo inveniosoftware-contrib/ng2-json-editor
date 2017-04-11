@@ -38,7 +38,7 @@ import {
   JsonStoreService,
   PathUtilService
 } from '../shared/services';
-import { PathCache } from '../shared/interfaces';
+import { PathCache, JSONSchema } from '../shared/interfaces';
 
 @Component({
   // Defined as attribute selector not to break table > tr > td html structure
@@ -53,7 +53,7 @@ import { PathCache } from '../shared/interfaces';
 export class TableItemFieldComponent extends AbstractFieldComponent {
 
   @Input() value: Map<string, any>;
-  @Input() schema: Object;
+  @Input() schema: JSONSchema;
   @Input() path: Array<any>;
   @Input() keys: Set<string>;
   pathCache: PathCache = {};

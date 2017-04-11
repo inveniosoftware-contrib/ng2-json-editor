@@ -32,6 +32,7 @@ describe('JsonSchemaService', () => {
   it('should return the correct schema for array element', () => {
 
     let schema = {
+      type: 'object',
       properties: {
         abstracts: {
           items: {
@@ -71,6 +72,7 @@ describe('JsonSchemaService', () => {
   it('should return the correct schema for property of array element', () => {
 
     let schema = {
+      type: 'object',
       properties: {
         abstracts: {
           items: {
@@ -99,6 +101,7 @@ describe('JsonSchemaService', () => {
   it('should return the correct schema for property of an object', () => {
 
     let schema = {
+      type: 'objcet',
       properties: {
         authors: {
           description: 'List with all the authors',
@@ -133,6 +136,7 @@ describe('JsonSchemaService', () => {
   it('should return the correct schema for element of an array which is property of an object', () => {
 
     let schema = {
+      type: 'object',
       properties: {
         authors: {
           description: 'List with all the authors',

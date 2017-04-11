@@ -4,6 +4,7 @@ import { List } from 'immutable';
 
 
 import { DomUtilService, EmptyValueService, JsonStoreService, PathUtilService } from '../shared/services';
+import { JSONSchema } from '../shared/interfaces';
 
 @Component({
   selector: 'add-new-element-button',
@@ -16,7 +17,7 @@ import { DomUtilService, EmptyValueService, JsonStoreService, PathUtilService } 
 export class AddNewElementButtonComponent {
 
   @Input() path: Array<any>;
-  @Input() schema: Object;
+  @Input() schema: JSONSchema;
 
   constructor(public domUtilService: DomUtilService,
     public emptyValueService: EmptyValueService,
@@ -24,7 +25,7 @@ export class AddNewElementButtonComponent {
     public pathUtilService: PathUtilService) { }
 
   addNewElement() {
-    let itemSchema = this.schema['items'];
+    let itemSchema = this.schema.items;
     let emptyValue = this.emptyValueService.generateEmptyValue(itemSchema);
     let values: List<any> = this.jsonStoreService.getIn(this.path) || List();
     this.jsonStoreService.setIn(this.path, values.push(emptyValue));

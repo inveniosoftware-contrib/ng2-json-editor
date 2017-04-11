@@ -8,7 +8,7 @@
           </th>
           <th class="button-holder">
             <add-field-dropdown *ngIf="values.size > 0" [fields]="keys" [pathString]="getElementPathString(0)" (onFieldAdd)="onFieldAdd($event)"
-              [schema]="schema.items.properties">+</add-field-dropdown>
+              [schema]="schema.items">+</add-field-dropdown>
           </th>
         </tr>
       </thead>

@@ -24,6 +24,8 @@ import { Injectable } from '@angular/core';
 
 import { fromJS } from 'immutable';
 
+import { JSONSchema } from '../interfaces';
+
 @Injectable()
 export class EmptyValueService {
 
@@ -32,7 +34,7 @@ export class EmptyValueService {
     'boolean': false
   };
 
-  generateEmptyValue(schema: Object): any {
+  generateEmptyValue(schema: JSONSchema): any {
     let emptyValue = this.generateEmptyValueRecursively(schema);
     if (typeof emptyValue === 'object') {
       return fromJS(emptyValue);
@@ -41,26 +43,26 @@ export class EmptyValueService {
     }
   }
 
-  private generateEmptyValueRecursively(schema: Object): any {
-    if (schema['type'] === 'object') {
+  private generateEmptyValueRecursively(schema: JSONSchema): any {
+    if (schema.type === 'object') {
       let emptyObject = {};
-      Object.keys(schema['properties'])
+      Object.keys(schema.properties)
         .filter(prop => {
-          let required: Array<string> = schema['required'] || [];
+          let required = schema.required || [];
           return required.indexOf(prop) > -1;
         }).forEach(prop => {
-          let propSchema = schema['properties'][prop];
+          let propSchema = schema.properties[prop];
           emptyObject[prop] = this.generateEmptyValueRecursively(propSchema);
         });
       return emptyObject;
     }
-    if (schema['type'] === 'array') {
+    if (schema.type === 'array') {
       let emptyArray = [];
-      let arrayElementSchema = schema['items'];
+      let arrayElementSchema = schema.items;
       emptyArray.push(this.generateEmptyValueRecursively(arrayElementSchema));
       return emptyArray;
     }
-    return EmptyValueService.defaultValueLookup[schema['type']];
+    return EmptyValueService.defaultValueLookup[schema.type];
   }
 
 }

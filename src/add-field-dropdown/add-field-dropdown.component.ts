@@ -25,6 +25,7 @@ import { Component, Input, Output, EventEmitter, ElementRef } from '@angular/cor
 import { Set } from 'immutable';
 
 import { DomUtilService, EmptyValueService, PathUtilService } from '../shared/services';
+import { JSONSchema } from '../shared/interfaces';
 
 @Component({
   selector: 'add-field-dropdown',
@@ -35,8 +36,7 @@ import { DomUtilService, EmptyValueService, PathUtilService } from '../shared/se
 })
 export class AddFieldDropdownComponent {
 
-  // 'propeties' of an object schema
-  @Input() schema: Object;
+  @Input() schema: JSONSchema;
   @Input() fields: Set<string>;
   @Input() pathString: string;
 
@@ -50,7 +50,7 @@ export class AddFieldDropdownComponent {
     public pathUtilService: PathUtilService) { }
 
   get disabled(): boolean {
-    return Object.keys(this.schema).length === this.fields.size;
+    return Object.keys(this.schema.properties).length === this.fields.size;
   }
 
   onDropdownShown() {

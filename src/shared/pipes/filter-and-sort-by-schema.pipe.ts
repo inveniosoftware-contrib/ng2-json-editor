@@ -22,9 +22,10 @@
 
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { AppGlobalsService } from '../services';
-
 import { Set, OrderedSet } from 'immutable';
+
+import { AppGlobalsService } from '../services';
+import { JSONSchema } from '../interfaces';
 
 @Pipe({
   name: 'filterAndSortBySchema',
@@ -36,23 +37,23 @@ export class FilterAndSortBySchemaPipe implements PipeTransform {
   /**
    * It filters out `hidden` fields and sorts keys by `priority`
    *
-   * @param {Set<string>} keys
-   * @param {Object} schema - the `schema` that has object schema which contains each key in `keys`
-   * @return {OrderedSet<string>} - filtered and sorted keys
+   * @param keys
+   * @param schema - the `schema` that has object schema which contains each key in `keys`
+   * @return - filtered and sorted keys
    */
-  transform(keys: Set<string>, schema: Object): OrderedSet<string> {
-    let schemaProps = schema['properties'];
+  transform(keys: Set<string>, schema: JSONSchema): OrderedSet<string> {
+    let schemaProps = schema.properties;
     if (!keys) { return undefined; }
     return keys
       .filter(key => {
         if (!schemaProps[key]) {
           throw new Error(`"${key}" is not specified as property in \n${JSON.stringify(schemaProps, undefined, 2)}`);
         }
-        return !schemaProps[key]['hidden'] || this.appGlobalsService.adminMode;
+        return !schemaProps[key].hidden || this.appGlobalsService.adminMode;
       }).sort((a, b) => {
         // Sort by priority, larger is the first.
-        let pa = schemaProps[a]['priority'] || 0;
-        let pb = schemaProps[b]['priority'] || 0;
+        let pa = schemaProps[a].priority || 0;
+        let pb = schemaProps[b].priority || 0;
 
         if (pa > pb) { return -1; }
         if (pa < pb) { return 1; }
