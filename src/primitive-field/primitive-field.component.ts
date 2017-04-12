@@ -107,4 +107,12 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     return tooltipPlacement;
   }
 
+  get disabled(): boolean {
+    return this.schema['disabled'] && !this.appGlobalsService.adminMode;
+  }
+
+  get disabledClass(): string {
+    return this.disabled ? 'disabled' : '';
+  }
+
 }
