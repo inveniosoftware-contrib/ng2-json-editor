@@ -98,7 +98,7 @@ bs-dropdown-container {
     padding-right: 5px;
   }
 
-  td.error {
+  tr.error td, td.error {
     background-color: $error-color !important;
   }
 
@@ -180,17 +180,6 @@ table.editable-inner-table {
   }
 
   table-layout: fixed;
-}
-
-.disableCursorClass {
-  cursor: not-allowed;
-}
-
-.disableEventsClass {
-  pointer-events: none;
-  input, button, div[contenteditable=true], a, i, span {
-    opacity: .5;
-  }
 }
 
 .title-dropdown-item {
