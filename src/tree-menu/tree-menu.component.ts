@@ -26,7 +26,7 @@ import { Map, Set } from 'immutable';
 
 import { AbstractTrackerComponent } from '../abstract-tracker';
 
-import { DomUtilService, WindowHrefService, PathUtilService } from '../shared/services';
+import { DomUtilService, PathUtilService } from '../shared/services';
 
 @Component({
   selector: 'tree-menu',
@@ -45,8 +45,7 @@ export class TreeMenuComponent extends AbstractTrackerComponent implements OnCha
 
   private prefixOrPath = '';
 
-  constructor(private windowHrefService: WindowHrefService,
-    private domUtilService: DomUtilService,
+  constructor(private domUtilService: DomUtilService,
     private pathUtilService: PathUtilService) {
     super();
   }
@@ -56,18 +55,6 @@ export class TreeMenuComponent extends AbstractTrackerComponent implements OnCha
     if (recordChange) {
       let currentRecord: Map<string, any> = recordChange.currentValue;
       this.keys = currentRecord.keySeq().toSet();
-    }
-  }
-
-  filter(key: string): boolean {
-    return key.startsWith(this.prefixOrPath);
-  }
-
-  onKeypress(key: string) {
-    if (key === 'Enter') {
-      this.windowHrefService.appendHash(this.prefixOrPath);
-      this.domUtilService.focusAndSelectFirstEditableChildById(this.prefixOrPath);
-      this.domUtilService.flashElementById(this.prefixOrPath);
     }
   }
 
