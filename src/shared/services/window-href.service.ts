@@ -43,8 +43,4 @@ export class WindowHrefService {
     // return cached value
     return WindowHrefService.hrefWithoutHash;
   }
-
-  appendHash(hash: string) {
-    window.location.href = `${this.getHrefWithoutHash()}#${hash}`;
-  }
 }
