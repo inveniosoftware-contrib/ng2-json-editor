@@ -161,8 +161,8 @@ label {
    color: $label-color;
 }
 
-.flash {
-  border: 2px solid yellow;
+.highlight {
+  border: 2px solid yellow !important;
 }
 
 // FIXME: only used in table-list and table-list it's own version?

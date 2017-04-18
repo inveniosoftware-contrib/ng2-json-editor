@@ -27,27 +27,28 @@ import { TabsUtilService } from './tabs-util.service';
 export class DomUtilService {
 
   private editableSelector = '.value-container input, div[contenteditable=true]';
+  // highlight class is defined in json-editor.component.scss
+  private highlightClass = 'highlight';
+  private highlightedElement: HTMLElement;
 
   constructor(public tabsUtilService: TabsUtilService) { }
 
-  focusAndSelectFirstEditableChildById(id: string) {
+  focusAndSelectFirstEditableChildById(id: string, highlight = false) {
     this.tabsUtilService.selectTabIfNeeded(id);
     setTimeout(() => {
       let el = document.getElementById(id);
       if (el) {
-        let firstInput = el.querySelector(this.editableSelector) as HTMLElement;
-        if (firstInput) {
-          firstInput.focus();
-          this.selectAllContent(firstInput);
+        let firstEditable = el.querySelector(this.editableSelector) as HTMLElement;
+        if (firstEditable) {
+          firstEditable.focus();
+          this.selectAllContent(firstEditable);
+          if (highlight) {
+            firstEditable.classList.add(this.highlightClass);
+            this.highlightedElement = firstEditable;
+          }
         } else {
           // if element doesn't have any input, open add-field-dropdown if it exists.
-          firstInput = el.querySelector('div.btn-group') as HTMLInputElement;
-          if (firstInput) {
-            let dropDownButton = el.querySelector('div.btn-group button') as HTMLButtonElement;
-            if (dropDownButton) {
-              dropDownButton.click();
-            }
-          }
+          this.openDropdown(el);
         }
       }
     });
@@ -80,25 +81,18 @@ export class DomUtilService {
     }
   }
 
-  flashElementById(id: string) {
-    this.tabsUtilService.selectTabIfNeeded(id);
-    setTimeout(() => {
-      let el = document.getElementById(id);
-      if (el) {
-        // .flash is defined json-editor.component.scss, {border: 2px solid yellow;}
-        el.classList.add('flash');
-        setTimeout(() => {
-          el.classList.remove('flash');
-        }, 500);
-      }
-    });
-  }
-
   blurFirstEditableChildById(id: string) {
     let el = document.getElementById(id);
-    let firstInput = el.querySelector(this.editableSelector) as HTMLElement;
-    if (firstInput) {
-      firstInput.blur();
+    let firstEditable = el.querySelector(this.editableSelector) as HTMLElement;
+    if (firstEditable) {
+      firstEditable.blur();
+    }
+  }
+
+  clearHighlight() {
+    if (this.highlightedElement) {
+      this.highlightedElement.classList.remove(this.highlightClass);
+      this.highlightedElement = undefined;
     }
   }
 
@@ -112,6 +106,16 @@ export class DomUtilService {
       let sel = window.getSelection();
       sel.removeAllRanges();
       sel.addRange(range);
+    }
+  }
+
+  private openDropdown(el: HTMLElement) {
+    let dropdown = el.querySelector('div.btn-group');
+    if (dropdown) {
+      let dropDownButton = dropdown.querySelector('button') as HTMLButtonElement;
+      if (dropDownButton) {
+        dropDownButton.click();
+      }
     }
   }
 
