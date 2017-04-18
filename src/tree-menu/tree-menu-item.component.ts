@@ -26,7 +26,7 @@ import { AbstractTrackerComponent } from '../abstract-tracker';
 
 import { Map, Set } from 'immutable';
 
-import { DomUtilService, WindowHrefService, PathUtilService } from '../shared/services';
+import { DomUtilService, WindowHrefService, PathUtilService, AppGlobalsService } from '../shared/services';
 import { JSONSchema } from '../shared/interfaces';
 
 @Component({
@@ -43,6 +43,7 @@ export class TreeMenuItemComponent extends AbstractTrackerComponent implements O
   @Input() value: any;
   @Input() schema: JSONSchema;
   @Input() path: string;
+  @Input() depth: number;
 
   // defined only if schmea.type equals to 'object'
   keys: Set<string>;
@@ -52,7 +53,8 @@ export class TreeMenuItemComponent extends AbstractTrackerComponent implements O
 
   constructor(private windowHrefService: WindowHrefService,
     private domUtilService: DomUtilService,
-    private pathUtilService: PathUtilService) {
+    private pathUtilService: PathUtilService,
+    private appGlobalsService: AppGlobalsService) {
     super();
   }
 
@@ -83,7 +85,15 @@ export class TreeMenuItemComponent extends AbstractTrackerComponent implements O
 
   get isCollapsable(): boolean {
     let schemaType = this.schema.type;
-    return (schemaType === 'object' || schemaType === 'array');
+    return this.isNotLeaf && (schemaType === 'object' || schemaType === 'array');
+  }
+
+  get maxDepth(): number {
+    return this.appGlobalsService.config.menuMaxDepth;
+  }
+
+  get isNotLeaf(): boolean {
+    return this.maxDepth === undefined || this.depth < this.maxDepth;
   }
 
   getChildPath(indexOrKey: number | string) {

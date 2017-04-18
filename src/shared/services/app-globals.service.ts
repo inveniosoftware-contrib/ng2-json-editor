@@ -22,7 +22,7 @@
 
 import { Injectable, TemplateRef } from '@angular/core';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { SchemaValidationErrors } from '../interfaces';
+import { SchemaValidationErrors, JsonEditorConfig } from '../interfaces';
 
 @Injectable()
 export class AppGlobalsService {
@@ -31,6 +31,7 @@ export class AppGlobalsService {
   public activeTabName = '';
   public tabNameToFirstTopLevelElement: { [tabName: string]: string } = {};
   public templates: { [templateName: string]: TemplateRef<any> };
+  public config: JsonEditorConfig;
 
   set globalErrors(errors: SchemaValidationErrors) {
     this._globalErrorsSubject.next(errors);
