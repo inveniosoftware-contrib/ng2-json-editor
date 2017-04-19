@@ -12,6 +12,14 @@ export interface JsonEditorConfig {
   enableAdminModeSwitch?: boolean;
 
   /**
+   * Max depth for tree menu
+   *
+   * - It is `infinity` by default
+   * - Must be set to 1 or greater.
+   */
+  menuMaxDepth?: number;
+
+  /**
    * Configurations for properties defined in the schema.
    *
    * Example:

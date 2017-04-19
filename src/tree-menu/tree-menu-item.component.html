@@ -1,16 +1,16 @@
 <div>
   <a [href]="href" (click)="toggle($event)">{{label}}</a>
   <a *ngIf="isCollapsable" [hidden]="isCollapsed" (click)="collapse()"> [x]</a>
-  <div [ngSwitch]="schema.type" [hidden]="isCollapsed">
+  <div *ngIf="isNotLeaf" [ngSwitch]="schema.type" [hidden]="isCollapsed">
     <ul>
       <div *ngSwitchCase="'object'">
         <li *ngFor="let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema; trackBy:trackByElement">
-          <tree-menu-item [label]="key" [value]="value.get(key)" [schema]="schema.properties[key]" [path]="getChildPath(key)"></tree-menu-item>
+          <tree-menu-item [label]="key" [value]="value.get(key)" [schema]="schema.properties[key]" [path]="getChildPath(key)" [depth]="depth + 1"></tree-menu-item>
         </li>
       </div>
       <div *ngSwitchCase="'array'">
         <li *ngFor="let element of value; let i = index; trackBy:trackByElement">
-          <tree-menu-item [label]="i" [value]="element" [schema]="schema.items" [path]="getChildPath(i)"></tree-menu-item>
+          <tree-menu-item [label]="i" [value]="element" [schema]="schema.items" [path]="getChildPath(i)" [depth]="depth + 1"></tree-menu-item>
         </li>
       </div>
     </ul>

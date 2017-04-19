@@ -59,6 +59,7 @@ export class AppConfig {
       }
     },
     enableAdminModeSwitch: true,
+    menuMaxDepth: 1,
     tabsConfig: {
       defaultTabName: 'Main',
       tabs: [
