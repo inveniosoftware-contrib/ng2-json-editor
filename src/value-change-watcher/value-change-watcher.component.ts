@@ -33,7 +33,7 @@ import {
 
 import { JsonStoreService } from '../shared/services';
 
-import { OnValueChangeFunction } from '../shared/interfaces';
+import { OnValueChangeFunction, JSONSchema } from '../shared/interfaces';
 /**
  * This component has dummy html but a logic to change the value of another part
  * in top level json when its value changed. It's inserted in component tree
@@ -48,7 +48,7 @@ import { OnValueChangeFunction } from '../shared/interfaces';
 })
 export class ValueChangeWatcherComponent implements OnInit, OnChanges {
 
-  @Input() schema: Object;
+  @Input() schema: JSONSchema;
   @Input() path: Array<any>;
   @Input() value: any;
 
@@ -58,11 +58,11 @@ export class ValueChangeWatcherComponent implements OnInit, OnChanges {
     public jsonStoreService: JsonStoreService) { }
 
   ngOnInit() {
-    this.onValueChange = this.schema['onValueChange'];
+    this.onValueChange = this.schema.onValueChange;
     // remove this config so that it will not be detected as value-change-watcher again
     // by ComponentTypeService, but its actual type
     this.schema = Object.assign({}, this.schema);
-    delete this.schema['onValueChange'];
+    delete this.schema.onValueChange;
   }
 
   ngOnChanges(changes: SimpleChanges) {

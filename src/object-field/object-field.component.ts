@@ -27,7 +27,7 @@ import { Map, Set } from 'immutable';
 import { AbstractFieldComponent } from '../abstract-field';
 
 import { AppGlobalsService, JsonStoreService, PathUtilService } from '../shared/services';
-import { PathCache } from '../shared/interfaces';
+import { PathCache, JSONSchema } from '../shared/interfaces';
 
 @Component({
   selector: 'object-field',
@@ -40,7 +40,7 @@ import { PathCache } from '../shared/interfaces';
 export class ObjectFieldComponent extends AbstractFieldComponent implements OnChanges {
 
   @Input() value: Map<string, any>;
-  @Input() schema: Object;
+  @Input() schema: JSONSchema;
   @Input() path: Array<any>;
 
   keys: Set<string>;

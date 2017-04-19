@@ -27,6 +27,7 @@ import { Map, Set } from 'immutable';
 import { AbstractTrackerComponent } from '../abstract-tracker';
 
 import { DomUtilService, PathUtilService } from '../shared/services';
+import { JSONSchema } from '../shared/interfaces';
 
 @Component({
   selector: 'tree-menu',
@@ -39,7 +40,7 @@ import { DomUtilService, PathUtilService } from '../shared/services';
 export class TreeMenuComponent extends AbstractTrackerComponent implements OnChanges {
 
   @Input() record: Map<string, any>;
-  @Input() schema: Object;
+  @Input() schema: JSONSchema;
 
   keys: Set<string>;
 

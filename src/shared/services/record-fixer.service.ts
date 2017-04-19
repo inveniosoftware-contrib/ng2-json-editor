@@ -24,6 +24,7 @@ import { Injectable } from '@angular/core';
 
 import { EmptyValueService } from './empty-value.service';
 import { ComponentTypeService } from './component-type.service';
+import { JSONSchema } from '../interfaces';
 
 @Injectable()
 export class RecordFixerService {
@@ -39,15 +40,15 @@ export class RecordFixerService {
    * @param {Object} schema - extended schema of rawRecord
    * @return {Object} - fixed record
    */
-  fixRecord(rawRecord: Object, schema: Object): Object {
+  fixRecord(rawRecord: Object, schema: JSONSchema): Object {
     let record = Object.assign({}, rawRecord);
     Object.keys(record).forEach(field => {
-      if (!schema['properties'][field]) {
+      if (!schema.properties[field]) {
         // Delete if field is not in schema!
         this.deleteField(record, field);
       } else {
         // Fix the field and all children.
-        this.fix(field, record, schema['properties'][field]);
+        this.fix(field, record, schema.properties[field]);
       }
     });
     return record;
@@ -63,12 +64,12 @@ export class RecordFixerService {
    * TODO: add special case for arrays because fixes are the same for
    * all elements.
    *
-   * @param key {string | number} - field name or element index
-   * @param parent {Object | Array<any>} - parent of the field/element
+   * @param key - field name or element index
+   * @param parent - parent of the field/element
    * @param schema - schema of visited field/element
    */
-  private fix(key: string | number, parent: Object | Array<any>, schema: Object) {
-    if (schema['hidden']) {
+  private fix(key: string | number, parent: Object | Array<any>, schema: JSONSchema) {
+    if (schema.hidden) {
       return;
     }
 
@@ -76,29 +77,29 @@ export class RecordFixerService {
     let value = parent[key];
 
     // Recursive calls
-    if (schema['type'] === 'object') {
-      if (!schema['properties']) {
+    if (schema.type === 'object') {
+      if (!schema.properties) {
         throw new Error(`"${key}"'s schema has "type": "object" but doesn't specify "properties"`);
       } else if (!(value instanceof Object)) {
         throw new Error(`"${key}" in ${JSON.stringify(value, null, 2)} is specified as "object" by schema but it is not an object in json`);
       }
       // Looping over record to filter out fields that are not in schema.
       Object.keys(value).forEach(prop => {
-        if (!schema['properties'][prop]) {
+        if (!schema.properties[prop]) {
           // we don't like fields without schema!
           this.deleteField(value, prop);
         } else {
-          this.fix(prop, value, schema['properties'][prop]);
+          this.fix(prop, value, schema.properties[prop]);
         }
       });
-    } else if (schema['type'] === 'array') {
-      if (!schema['items']) {
+    } else if (schema.type === 'array') {
+      if (!schema.items) {
         throw new Error(`"${key}"'s schema has "type": "array" but doesn't specify "items"`);
       } else if (!Array.isArray(value)) {
         throw new Error(`"${key}" in ${JSON.stringify(value, null, 2)} is specified as "array" by schema but it is not an array in json`);
       }
       value.forEach((element, index) => {
-        this.fix(index, value, schema['items']);
+        this.fix(index, value, schema.items);
       });
     }
   }

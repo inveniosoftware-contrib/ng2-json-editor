@@ -23,10 +23,12 @@
 import { Injectable } from '@angular/core';
 import * as Ajv from 'ajv';
 
+import { JSONSchema } from '../interfaces';
+
 @Injectable()
 export class SchemaValidationService {
 
-  private ajv = new Ajv({allErrors: true});
+  private ajv = new Ajv({ allErrors: true });
   // https://gist.github.com/dperini/729294
   private reWebUrl = new RegExp(
     '^' +
@@ -78,7 +80,7 @@ export class SchemaValidationService {
    * Uses: ajv package for json-schema validation
    *
    */
-  validateValue(value: any, schema: Object): Array<{message: string}> {
+  validateValue(value: any, schema: JSONSchema): Array<{ message: string }> {
     let schemaValidationErrors = [];
     if (!this.ajv.validate(schema, value)) {
       this.ajv.errors.forEach(error => {

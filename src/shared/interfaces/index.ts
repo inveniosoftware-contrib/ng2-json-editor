@@ -16,3 +16,4 @@ export { SchemaValidationErrors } from './schema-validation-errors';
 export { PathCache } from './path-cache';
 export { TabsConfig } from './tabs-config';
 export { Tab } from './tab';
+export { JSONSchema } from './json-schema';

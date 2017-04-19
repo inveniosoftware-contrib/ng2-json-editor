@@ -27,6 +27,7 @@ import {
 } from '@angular/core';
 
 import { AppGlobalsService, ComponentTypeService } from '../shared/services';
+import { JSONSchema } from '../shared/interfaces';
 
 /**
  * AnyFieldComponent
@@ -48,7 +49,7 @@ import { AppGlobalsService, ComponentTypeService } from '../shared/services';
 })
 export class AnyTypeFieldComponent {
 
-  @Input() schema: Object;
+  @Input() schema: JSONSchema;
   @Input() path: Array<any>;
   @Input() value: any;
 
@@ -60,6 +61,6 @@ export class AnyTypeFieldComponent {
   }
 
   get isDisabled(): boolean {
-    return this.schema && this.schema['disabled'] && !this.appGlobalsService.adminMode;
+    return this.schema && this.schema.disabled && !this.appGlobalsService.adminMode;
   }
 }

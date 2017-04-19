@@ -22,8 +22,10 @@
 
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { EmptyValueService } from '../services';
 import { List } from 'immutable';
+
+import { EmptyValueService } from '../services';
+import { JSONSchema } from '../interfaces';
 
 @Pipe({
   name: 'selfOrEmpty',
@@ -37,11 +39,9 @@ export class SelfOrEmptyPipe implements PipeTransform {
    * Transforms a value to empty value if it is undefined,
    * returns self if it is already defined
    *
-   * @param {any} value
-   * @param {Object} schema
-   * @return {any} - empty value if given value is undefined or value itself.
+   * @return - empty value if given value is undefined or value itself.
    */
-  transform(value: any, schema: Object): any {
+  transform(value: any, schema: JSONSchema): any {
     if (value) {
       if (List.isList(value) && value.size === 0) {
         return this.emptyValueService.generateEmptyValue(schema);

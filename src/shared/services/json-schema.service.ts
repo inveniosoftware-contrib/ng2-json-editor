@@ -22,12 +22,14 @@
 
 import { Injectable } from '@angular/core';
 
+import { JSONSchema } from '../interfaces';
+
 @Injectable()
 export class JsonSchemaService {
 
-  private schema: Object;
+  private schema: JSONSchema;
 
-  setSchema(schema: Object) {
+  setSchema(schema: JSONSchema) {
     this.schema = schema;
   }
 
@@ -36,24 +38,18 @@ export class JsonSchemaService {
    * @param {Array<any>} path - Path of an element
    * @returns {Object} - Returns the schema extracted from this path
    */
-  getSchemaFromPath(path: Array<any>): Object {
-    let schema = this.schema['properties'];
-    let _path = path.filter(value => {
-      return isNaN(value);
-    });
-    let pathSize = _path.length;
-    for (let i = 0; i <= pathSize - 1; i++) {
-      schema = schema[_path[i]];
-      if (schema['type']) {
-        if (schema['type'] === 'array' && !(i === (pathSize - 1))) {
-          schema = schema['items']['properties'] || schema['items'];
+  getSchemaFromPath(path: Array<any>): JSONSchema {
+    return path
+      .reduce<JSONSchema>((schema, pathEl, index) => {
+        if (isNaN(pathEl)) {
+          return schema.properties[pathEl];
+        } else {
+          if (index === path.length - 1) {
+            return schema;
+          } else {
+            return schema.items;
+          }
         }
-        if (schema['type'] === 'object' && !(i === (pathSize - 1))) {
-          schema =  schema['properties'];
-        }
-      }
-    }
-    return schema;
+      }, this.schema);
   }
 }
-

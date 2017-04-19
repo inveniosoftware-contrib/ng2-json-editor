@@ -25,7 +25,7 @@ import { List } from 'immutable';
 import { AbstractFieldComponent } from '../abstract-field';
 
 import { JsonStoreService, AppGlobalsService, PathUtilService } from '../shared/services';
-import { PathCache } from '../shared/interfaces';
+import { PathCache, JSONSchema } from '../shared/interfaces';
 
 /**
  * Abstract component to share code of common operations of all array fields
@@ -36,7 +36,7 @@ import { PathCache } from '../shared/interfaces';
 export abstract class AbstractListFieldComponent extends AbstractFieldComponent {
 
   values: List<any>;
-  schema: Object;
+  schema: JSONSchema;
   path: Array<any>;
   pathCache: PathCache = {};
 

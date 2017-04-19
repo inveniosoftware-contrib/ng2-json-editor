@@ -36,6 +36,7 @@ import {
   SchemaValidationService,
   PathUtilService
 } from '../shared/services';
+import { JSONSchema } from '../shared/interfaces';
 
 
 @Component({
@@ -49,7 +50,7 @@ import {
 })
 export class PrimitiveFieldComponent extends AbstractFieldComponent implements OnInit {
 
-  @Input() schema: Object;
+  @Input() schema: JSONSchema;
   @Input() path: Array<any>;
   @Input() value: string | number | boolean;
 
@@ -67,7 +68,6 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
 
   ngOnInit() {
     super.ngOnInit();
-    this.schema = this.schema || {};
   }
 
   commitValueChange() {
@@ -96,10 +96,10 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   }
 
   get tabIndex(): number {
-    return this.schema['disabled'] ? -1 : 1;
+    return this.schema.disabled ? -1 : 1;
   }
 
-  get tooltipPosition() {
+  get tooltipPosition(): string {
     let tooltipPlacement = 'top';
     if (this.pathString.startsWith(this.appGlobalsService.firstElementPathForCurrentTab)) {
       tooltipPlacement = 'bottom';
@@ -108,7 +108,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   }
 
   get disabled(): boolean {
-    return this.schema['disabled'] && !this.appGlobalsService.adminMode;
+    return this.schema.disabled && !this.appGlobalsService.adminMode;
   }
 
   get disabledClass(): string {

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { List, Map } from 'immutable';
 
+import { JSONSchema } from '../interfaces';
+
 @Injectable()
 export class FindReplaceAllService {
 
@@ -16,18 +18,18 @@ export class FindReplaceAllService {
    * @param {boolean} matchWhole - looks for whole match to a string property of immutable
    * @param {Array<any> | Object} diffHtml - TODO: describe
    */
-  findReplaceInImmutable(immutable: any, schema: Object, find: string, replace: string, exact = false, diffHtml?: Array<any> | Object):
+  findReplaceInImmutable(immutable: any, schema: JSONSchema, find: string, replace: string, exact = false, diffHtml?: Array<any> | Object):
     { replaced: any, diffHtml: Array<any> | Object } {
     let immutableAsMutable = immutable.asMutable();
     let isList = List.isList(immutable);
     // create empty array or object for the immutable to store diff
     diffHtml = isList ? [] : {};
     immutableAsMutable.forEach((value, key) => {
-      let innerSchema = isList ? schema['items'] : schema['properties'][key];
+      let innerSchema = isList ? schema.items : schema.properties[key];
       // ignore disabled and ref fields
-      if (innerSchema['disabled'] || innerSchema['hidden'] || key === '$ref') {
+      if (innerSchema.disabled || innerSchema.hidden || key === '$ref') {
         return;
-        // TODO: is `schema['type'] === 'string'` better?
+        // TODO: is `schema.type === 'string'` better?
       } else if (typeof value === 'string') {
         // assign value to diff as initial, if nothing has changed it will remain same
         let diff = value;
@@ -44,7 +46,7 @@ export class FindReplaceAllService {
           diff = singleDiffHtml;
         }
         diffHtml[key] = diff;
-      // TODO: is `schema['type'] === 'object' || schema['type'] === 'array'` better?
+      // TODO: is `schema.type === 'object' || schema.type === 'array'` better?
       } else if (List.isList(value) || Map.isMap(value)) {
         // create empty array or object for the value in diffHtml
         let result = this.

@@ -26,6 +26,7 @@ import { JsonStoreService } from './json-store.service';
 import { JsonSchemaService } from './json-schema.service';
 import { DomUtilService } from './dom-util.service';
 import { PathUtilService } from './path-util.service';
+import { JSONSchema } from '../interfaces';
 import { List } from 'immutable';
 
 @Injectable()
@@ -51,11 +52,11 @@ export class ShortcutActionService {
   }
 
   /**
-   * @param {Array<any>} path - Path of the array parent that the element is about to be inserted
-   * @param {Object} schema - Schema of the element that is about to be inserted
+   * @param path - Path of the array parent that the element is about to be inserted
+   * @param schema - Schema of the element that is about to be inserted
    */
-  private addNewElementInArray(path: Array<any>, schema: Object) {
-    let itemSchema = schema['items'];
+  private addNewElementInArray(path: Array<any>, schema: JSONSchema) {
+    let itemSchema = schema.items;
     let emptyValue = this.emptyValueService.generateEmptyValue(itemSchema);
     let values = this.jsonStoreService.getIn(path) || List();
     this.jsonStoreService.setIn(path, values.push(emptyValue));
