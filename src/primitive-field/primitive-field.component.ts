@@ -72,11 +72,13 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
 
   commitValueChange() {
     // Validation
-    let errors = this.schemaValidationService.validateValue(this.value, this.schema);
-    if (!errors.length) {
-      this.jsonStoreService.setIn(this.path, this.value);
+    if (this.value !== '') {
+      let errors = this.schemaValidationService.validateValue(this.value, this.schema);
+      if (!errors.length) {
+        this.jsonStoreService.setIn(this.path, this.value);
+      }
+      this.errors = errors;
     }
-    this.errors = errors;
   }
 
   onKeypress(event: KeyboardEvent) {
