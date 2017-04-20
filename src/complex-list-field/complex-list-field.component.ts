@@ -27,13 +27,14 @@ import {
   OnInit,
   ChangeDetectionStrategy,
   SimpleChanges,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  TemplateRef
 } from '@angular/core';
 import { List, Map, Set } from 'immutable';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
 import { AppGlobalsService, JsonStoreService, DomUtilService, PathUtilService } from '../shared/services';
-import { LongListNavigatorConfig, JSONSchema } from '../shared/interfaces';
+import { LongListNavigatorConfig, JSONSchema, PaginatedItem } from '../shared/interfaces';
 
 @Component({
   selector: 'complex-list-field',
@@ -49,7 +50,7 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
   @Input() schema: JSONSchema;
   @Input() path: Array<any>;
 
-  paginatedIndices: Array<number>;
+  paginatedItems: Array<PaginatedItem>;
 
   foundIndices: Array<number>;
   currentFound = 0;
@@ -68,12 +69,7 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
 
   ngOnInit() {
     this.navigator = this.schema.longListNavigatorConfig;
-    if (this.navigator) {
-      this.paginatedIndices = this.getIndicesForPage(this.currentPage);
-    } else {
-      // set all indices as paginated indices if pagination is not enabled.
-      this.paginatedIndices = this.values.keySeq().toArray();
-    }
+    this.paginatedItems = this.getItemsForPage(this.currentPage);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -88,14 +84,10 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
           // change the page if a new element is added and it's not on the last page
           if (curSize > preSize && this.currentPage !== lastPage) {
             this.currentPage = lastPage;
-          } else {
-            this.paginatedIndices = this.getIndicesForPage(this.currentPage);
           }
-        } else {
-          this.paginatedIndices = this.values.keySeq().toArray();
         }
+        this.paginatedItems = this.getItemsForPage(this.currentPage);
       }
-
     }
   }
 
@@ -150,23 +142,46 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
 
   onPageChange(page: number) {
     this.currentPage = page;
-    this.paginatedIndices = this.getIndicesForPage(page);
+    this.paginatedItems = this.getItemsForPage(page);
   }
 
-  getIndicesForPage(page: number): Array<number> {
-    let start = (page - 1) * this.navigator.itemsPerPage;
-    let indices: Array<number> = Array.apply(0, Array(this.navigator.itemsPerPage))
-      .map((el, index) => start + index);
-    // check if the indices includes some numbers that are out of values index range.
-    let lastIndexDiff = indices[indices.length - 1] - (this.values.size - 1);
-    if (lastIndexDiff > 0) {
-      indices.splice(indices.length - lastIndexDiff);
-    }
-    return indices;
-  }
+  getItemsForPage(page: number): Array<PaginatedItem> {
+    let indices = this.getIndicesToDisplay(page);
 
+    return indices.map((index) => {
+      let showEditForm = this.schema.viewTemplateConfig ? this.schema.viewTemplateConfig.showEditForm : undefined;
+      let isEditFormVisible = !showEditForm || showEditForm(this.values.get(index));
+      return {index, isEditFormVisible};
+    });
+  }
 
   getPageForIndex(index: number): number {
     return Math.floor((index / this.navigator.itemsPerPage) + 1);
+  }
+
+  get customTemplate(): TemplateRef<any> {
+    return this.appGlobalsService.templates[this.schema.viewTemplateConfig.itemTemplateName];
+  }
+
+  get shouldDisplayTemplate(): boolean {
+    return this.schema.viewTemplateConfig !== undefined;
+  }
+
+  private getIndicesToDisplay(page: number): Array<number> {
+    let indices: Array<number>;
+    if (this.navigator) {
+      let start = (page - 1) * this.navigator.itemsPerPage;
+      indices = Array.apply(0, Array(this.navigator.itemsPerPage))
+        .map((el, index) => start + index);
+      // check if the indices includes some numbers that are out of values index range.
+      let lastIndexDiff = indices[indices.length - 1] - (this.values.size - 1);
+      if (lastIndexDiff > 0) {
+        indices.splice(indices.length - lastIndexDiff);
+      }
+    } else {
+      indices = this.values.keySeq().toArray();
+    }
+
+    return indices;
   }
 }

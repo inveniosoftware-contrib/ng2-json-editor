@@ -1,5 +1,6 @@
 import { AutocompletionConfig } from './autocompletion-config';
 import { LongListNavigatorConfig } from './long-list-navigator-config';
+import { ViewTemplateConfig } from './view-template-config';
 import { RefConfig } from './ref-config';
 import { OnValueChangeFunction } from './on-value-change-function';
 
@@ -89,4 +90,9 @@ export interface SchemaOption {
    * - It is `false` by default.
    */
   sortable?: boolean;
+
+  /**
+   * Configuration for custom templates in complex list fields.
+   */
+  viewTemplateConfig?: ViewTemplateConfig;
 }

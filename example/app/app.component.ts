@@ -33,14 +33,7 @@ import { AppConfig } from './app.config';
   styleUrls: [
     'app.component.scss'
   ],
-  template: `
-    <json-editor *ngIf="record && schema" 
-      [config]="config.jsonEditorConfig"
-      [record]="record"
-      (onRecordChange)="onRecordChange($event)"
-      [schema]="schema">
-    </json-editor>
-  `
+  templateUrl: 'app.component.html'
 })
 export class AppComponent {
   record: Object;
