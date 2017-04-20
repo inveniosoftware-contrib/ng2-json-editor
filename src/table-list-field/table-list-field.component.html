@@ -3,19 +3,22 @@
     <table class="table editable-inner-table">
       <thead class="thead-inverse">
         <tr>
-          <th *ngFor="let key of keys | addAlwaysShowFields:schema.items | filterAndSortBySchema:schema.items; trackBy:trackByElement" [style.width]="schema.items.properties[key].columnWidth + '%'">
+          <th *ngFor="let key of keys | addAlwaysShowFields:schema.items | filterAndSortBySchema:schema.items; trackBy:trackByElement"
+            [style.width]="schema.items.properties[key].columnWidth + '%'">
             {{key | underscoreToSpace}}
           </th>
-          <th class="button-holder">
+          <th class="button-holder" [ngClass]="sortableClass">
             <add-field-dropdown *ngIf="values.size > 0" [fields]="keys" [pathString]="getElementPathString(0)" (onFieldAdd)="onFieldAdd($event)"
-              [schema]="schema.items">+</add-field-dropdown>
+              [schema]="schema.items">
+              <i class="fa fa-plus"></i>
+            </add-field-dropdown>
           </th>
         </tr>
       </thead>
       <tr *ngFor="let value of values; let i = index; trackBy:trackByIndex" table-item-field [id]="getElementPathString(i)" [value]="value"
         [schema]="schema.items" [path]="getElementPath(i)" [keys]="keys">
-        <td *ngIf="values.size > 0" class="button-holder">
-          <list-action-group (onMove)="moveElement(i, $event)" (onDelete)="deleteElement(i)"></list-action-group>
+        <td *ngIf="values.size > 0" class="button-holder" [ngClass]="sortableClass">
+          <list-action-group (onMove)="moveElement(i, $event)" (onDelete)="deleteElement(i)" [canMove]="schema.sortable"></list-action-group>
         </td>
       </tr>
     </table>

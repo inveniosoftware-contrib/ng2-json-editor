@@ -21,7 +21,9 @@
   <!-- ADD SUB FIELD FROM SCHEMA DROPDOWN -->
   <tr>
     <td class="button-holder">
-      <add-field-dropdown [fields]="keys" [pathString]="pathString" (onFieldAdd)="onFieldAdd($event)" [schema]="schema">+</add-field-dropdown>
+      <add-field-dropdown [fields]="keys" [pathString]="pathString" (onFieldAdd)="onFieldAdd($event)" [schema]="schema">
+        <i class="fa fa-plus"></i>
+      </add-field-dropdown>
     </td>
     <td class="button-holder list-action-group-container">
       <!-- list-action-group (up/down and delete buttons), Set only if it's an element of an list (complex-list) -->

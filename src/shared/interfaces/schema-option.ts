@@ -82,4 +82,11 @@ export interface SchemaOption {
    * - Toggle cannot be deleted once it is added.
    */
   toggleColor?: string;
+
+  /**
+   * Flag to enable up/down buttons for elements of array.
+   *
+   * - It is `false` by default.
+   */
+  sortable?: boolean;
 }

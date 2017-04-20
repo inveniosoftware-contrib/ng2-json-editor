@@ -1,5 +1,4 @@
 $text-button-font-size: 13px;
-$button-font-size: 16px;
 $table-editable-rows-background: #edf6fd;
 $label-color: #c1c1c1;
 $error-color: #f2968d;
@@ -108,7 +107,6 @@ bs-dropdown-container {
 }
 
 .editor-btn-delete {
-  font-size: $button-font-size;
   font-weight: bold;
   line-height: 1;
   text-shadow: 0 1px 0 #fff;
@@ -150,7 +148,11 @@ ul.pagination-top {
 }
 
 td.button-holder, th.button-holder {
-  width: 46px;
+  width: 26.33px;
+
+  &.sortable {
+    width: 46px;
+  }
 }
 
 div.error {
@@ -227,13 +229,6 @@ button.btn-toggle {
 
 .list-action-group-container {
 	text-align: right;
-	button {
-		font-size: 21px !important;
-	}
-
-	i {
-		font-size: 15px !important;
-	}
 }
 
 .max-height-90-vh {

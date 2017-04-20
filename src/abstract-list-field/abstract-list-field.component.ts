@@ -83,4 +83,8 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
     return this.pathCache[valuePathString];
   }
 
+  get sortableClass() {
+    return this.schema.sortable ? 'sortable' : '';
+  }
+
 }

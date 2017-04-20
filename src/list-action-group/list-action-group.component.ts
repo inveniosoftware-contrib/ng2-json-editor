@@ -22,6 +22,7 @@
 
 import {
   Component,
+  Input,
   Output,
   EventEmitter,
   OnInit,
@@ -41,6 +42,7 @@ import {
 })
 export class ListActionGroupComponent {
 
+  @Input() canMove: boolean;
   @Output() onDelete = new EventEmitter<void>();
   @Output() onMove = new EventEmitter<number>();
 
