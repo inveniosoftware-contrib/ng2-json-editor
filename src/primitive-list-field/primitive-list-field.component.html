@@ -5,8 +5,8 @@
         <td>
           <primitive-field [value]="value" [schema]="schema.items" [path]="getElementPath(i)"></primitive-field>
         </td>
-        <td *ngIf="values.size > 0" class="button-holder">
-          <list-action-group (onMove)="moveElement(i, $event)" (onDelete)="deleteElement(i)"></list-action-group>
+        <td *ngIf="values.size > 0" class="button-holder" [ngClass]="sortableClass">
+          <list-action-group (onMove)="moveElement(i, $event)" (onDelete)="deleteElement(i)" [canMove]="schema.sortable"></list-action-group>
         </td>
       </tr>
     </table>

@@ -30,6 +30,7 @@ export class AppConfig {
         disabled: true
       },
       '/references': {
+        sortable: true,
         longListNavigatorConfig: {
           findSingle: (value, expression) => {
             return value.getIn(['reference', 'number']) === parseInt(expression, 10);
