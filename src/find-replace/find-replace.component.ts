@@ -60,6 +60,9 @@ export class FindReplaceComponent {
   }
 
   findAndReplace() {
+    if (!(this.find && this.replace)) {
+      return;
+    }
     let value = this.jsonStoreService.getIn(this.path);
     let result = this.findReplaceAllService
       .findReplaceInImmutable(value, this.schema, this.find, this.replace, this.exactPhrase);
