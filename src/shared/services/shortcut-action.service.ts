@@ -206,8 +206,7 @@ export class ShortcutActionService {
   }
 
   private focusElementInPath(path: string) {
-    this.domUtilService.flashElementById(path);
-    this.domUtilService.focusAndSelectFirstEditableChildById(path);
+    this.domUtilService.focusAndSelectFirstEditableChildById(path, true);
   }
 
   generateShortcutAction(action: string) {

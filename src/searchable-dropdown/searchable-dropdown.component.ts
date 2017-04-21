@@ -42,6 +42,8 @@ export class SearchableDropdownComponent implements OnInit {
   status: { isOpen: boolean } = { isOpen: false };
 
   @Output() onSelect = new EventEmitter<string>();
+  @Output() onBlur = new EventEmitter<void>();
+
 
   ngOnInit() {
     this.placeholder = this.value || this.placeholder || '';

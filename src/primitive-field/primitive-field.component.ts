@@ -34,7 +34,8 @@ import {
   ComponentTypeService,
   JsonStoreService,
   SchemaValidationService,
-  PathUtilService
+  PathUtilService,
+  DomUtilService
 } from '../shared/services';
 import { JSONSchema } from '../shared/interfaces';
 
@@ -58,7 +59,9 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     public componentTypeService: ComponentTypeService,
     public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
-    public pathUtilService: PathUtilService) {
+    public pathUtilService: PathUtilService,
+    public domUtilService: DomUtilService
+  ) {
     super(appGlobalsService, pathUtilService);
   }
 
@@ -71,7 +74,8 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   }
 
   commitValueChange() {
-    // Validation
+    this.domUtilService.clearHighlight();
+
     let errors = this.schemaValidationService.validateValue(this.value, this.schema);
     if (!errors.length) {
       this.jsonStoreService.setIn(this.path, this.value);

@@ -3,19 +3,20 @@
     <tr [ngClass]="errorNgClass">
       <ng-template #errorsTooltipTemplate>
         <ul class="tooltip-left-align">
-          <li *ngFor="let error of errors" >
+          <li *ngFor="let error of errors">
             {{error.message}}
           </li>
         </ul>
       </ng-template>
-      <td class="value-container" [ngClass]="disabledClass" [tooltip]="errorsTooltipTemplate" [isDisabled]="!isErrorTooltipEnabled" placement="{{tooltipPosition}}" container="body">
+      <td class="value-container" [ngClass]="disabledClass" [tooltip]="errorsTooltipTemplate" [isDisabled]="!isErrorTooltipEnabled"
+        placement="{{tooltipPosition}}" container="body">
         <div *ngSwitchCase="'string'">
           <div [attr.contenteditable]="!disabled" attr.data-path="{{pathString}}" [tabindex]="tabIndex" [(contentModel)]="value" (blur)="commitValueChange()"
             (keypress)="onKeypress($event)" attr.placeholder="{{schema.title}}"></div>
         </div>
         <div *ngSwitchCase="'enum'">
           <searchable-dropdown [pathString]="pathString" [value]="value" [placeholder]="schema.title" [items]="schema.enum" [shortcutMap]="schema.enumShorcutMap"
-            (onSelect)="onSearchableDropdownSelect($event)" [tabIndex]="tabIndex"></searchable-dropdown>
+            (onSelect)="onSearchableDropdownSelect($event)" [tabIndex]="tabIndex" (onBlur)="domUtilService.clearHighlight()"></searchable-dropdown>
         </div>
         <div *ngSwitchCase="'autocomplete'">
           <autocomplete-input [pathString]="pathString" [value]="value" [path]="path" [autocompletionConfig]="schema.autocompletionConfig"

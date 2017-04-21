@@ -39,7 +39,9 @@ import {
   ComponentTypeService,
   SchemaValidationService,
   JsonStoreService,
-  PathUtilService
+  PathUtilService,
+  DomUtilService,
+  TabsUtilService
 } from '../shared/services';
 import { ContentModelDirective } from '../shared/directives';
 
@@ -91,6 +93,8 @@ describe('PrimitiveFieldComponent', () => {
         ComponentTypeService,
         SchemaValidationService,
         PathUtilService,
+        DomUtilService,
+        TabsUtilService,
         { provide: JsonStoreService, useClass: MockJsonStoreService }
       ]
     }).compileComponents();
