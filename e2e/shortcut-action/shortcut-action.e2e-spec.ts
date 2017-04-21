@@ -60,7 +60,7 @@ describe('ShortcutAction', function () {
   it(`should move row up using 'mod+shift+up' shortcut`, () => {
     let currentFirstRowPromise = page.getValuesOfChildrenById('/keywords/0');
     let currentSecondRowPromise = page.getValuesOfChildrenById('/keywords/1');
-    let currentElem = page.getChildOfElementByCss(page.getElementById('/keywords/1/keyword'), 'div[contenteditable=true]');
+    let currentElem = page.getChildOfElementByCss(page.getElementById('/keywords/1/value'), 'div[contenteditable=true]');
     currentElem.sendKeys(protractor.Key.chord(mod, protractor.Key.SHIFT, protractor.Key.UP));
     let targetFirstRowPromise = page.getValuesOfChildrenById('/keywords/0');
     let targetSecondRowPromise = page.getValuesOfChildrenById('/keywords/1');
@@ -73,9 +73,9 @@ describe('ShortcutAction', function () {
 
   it(`should move row down using 'mod+shift+down' shortcut`, () => {
     let currentRowPromise = page.getValuesOfChildrenById('/keywords/0');
-    let currentElem = page.getChildOfElementByCss(page.getElementById('/keywords/0/keyword'), 'div[contenteditable=true]');
+    let currentElem = page.getChildOfElementByCss(page.getElementById('/keywords/0/value'), 'div[contenteditable=true]');
     currentElem.sendKeys(protractor.Key.chord(mod, protractor.Key.SHIFT, protractor.Key.DOWN));
-    currentElem = page.getChildOfElementByCss(page.getElementById('/keywords/1/keyword'), 'div[contenteditable=true]');
+    currentElem = page.getChildOfElementByCss(page.getElementById('/keywords/1/value'), 'div[contenteditable=true]');
     // Trigger move down shortcut two time in a row to test issue of not updating tabindexes correctly on sequential
     // trigger of the shortcut. As a result the shortcut was not working properly.
     currentElem.sendKeys(protractor.Key.chord(mod, protractor.Key.SHIFT, protractor.Key.DOWN));
@@ -84,24 +84,24 @@ describe('ShortcutAction', function () {
   });
 
   it(`should delete the current row in table  using 'mod+backspace' shortcut`, () => {
-    let elem = page.getChildOfElementByCss(page.getElementById('/keywords/0/keyword'), 'div[contenteditable=true]');
+    let elem = page.getChildOfElementByCss(page.getElementById('/keywords/0/value'), 'div[contenteditable=true]');
     let elemBeforeDeletionThatWillBeShifted = page
-      .getChildOfElementByCss(page.getElementById('/keywords/1/keyword'), 'div[contenteditable=true]')
+      .getChildOfElementByCss(page.getElementById('/keywords/1/value'), 'div[contenteditable=true]')
       .getText();
     let elemValuePromise = elem.getText();
     elem.sendKeys(protractor.Key.chord(mod, protractor.Key.BACK_SPACE));
     let elemAfterDeletionAndThatWasShifted = page
-      .getChildOfElementByCss(page.getElementById('/keywords/0/keyword'), 'div[contenteditable=true]');
+      .getChildOfElementByCss(page.getElementById('/keywords/0/value'), 'div[contenteditable=true]');
     expect(elemAfterDeletionAndThatWasShifted.getText()).not.toEqual(elemValuePromise);
     expect(elemAfterDeletionAndThatWasShifted.getText()).toEqual(elemBeforeDeletionThatWillBeShifted);
   });
 
-  it(`should copy new row under keywords.0 table using 'alt+c' shortcut. 
+  it(`should copy new row under abstracts.0 table using 'alt+c' shortcut. 
     The copied cell under the focused one must be empty and the remaining cells must be exactly copied.`, () => {
-      let currentRowPromise = page.getValuesOfChildrenById('/keywords/0');
-      let inputElem = page.getChildOfElementByCss(page.getElementById('/keywords/0/classification_scheme'), 'div[contenteditable=true]');
+      let currentRowPromise = page.getValuesOfChildrenById('/abstracts/0');
+      let inputElem = page.getChildOfElementByCss(page.getElementById('/abstracts/0/source'), 'div[contenteditable=true]');
       inputElem.sendKeys(protractor.Key.chord(protractor.Key.ALT, 'c'));
-      let targetRowPromise = page.getValuesOfChildrenById('/keywords/1');
+      let targetRowPromise = page.getValuesOfChildrenById('/abstracts/1');
       protractor.promise.all([currentRowPromise, targetRowPromise])
         .then(data => {
           let currentRow = data[0];
@@ -113,11 +113,11 @@ describe('ShortcutAction', function () {
 
   it(`should copy new row under references table using 'mod+alt+r' shortcut.
     It must copy the exact value of the root element eg Copy the whole element under the focused one.`, () => {
-      let inputElem = page.getChildOfElementByCss(page.getElementById('/keywords/0/keyword'), 'div[contenteditable=true]');
+      let inputElem = page.getChildOfElementByCss(page.getElementById('/keywords/0/value'), 'div[contenteditable=true]');
       let numberOfContentEditableElementsBeforeCopyPromise = page.getNumberOfContentEditableElementsById('/keywords/0');
       let numberOfInputElementsBeforeCopyPromise = page.getNumberOfInputElementsById('/keywords/0');
       inputElem.sendKeys(protractor.Key.chord(mod, protractor.Key.ALT, 'r'));
-      let afterCopyInputElemValue = page.getChildOfElementByCss(page.getElementById('/keywords/1/keyword'), 'div[contenteditable=true]')
+      let afterCopyInputElemValue = page.getChildOfElementByCss(page.getElementById('/keywords/1/value'), 'div[contenteditable=true]')
         .getText();
       expect(inputElem.getText()).toEqual(afterCopyInputElemValue);
       let numberOfContentEditableElementsAfterCopyPromise = page.getNumberOfContentEditableElementsById('/keywords/1');
