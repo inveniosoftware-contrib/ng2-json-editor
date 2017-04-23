@@ -20,7 +20,14 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, EventEmitter, Input, Output, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  OnInit,
+  ChangeDetectionStrategy
+} from '@angular/core';
 
 @Component({
   selector: 'searchable-dropdown',

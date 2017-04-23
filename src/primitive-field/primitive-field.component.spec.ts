@@ -25,15 +25,12 @@ import {
   ComponentFixture,
   TestBed
 } from '@angular/core/testing';
-
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 
 import { SearchableDropdownComponent } from '../searchable-dropdown';
 import { AutocompleteInputComponent } from '../autocomplete-input';
 import { PrimitiveFieldComponent } from './primitive-field.component';
-
 import { FilterByExpressionPipe } from '../shared/pipes';
-
 import {
   AppGlobalsService,
   ComponentTypeService,

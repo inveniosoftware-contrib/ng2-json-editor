@@ -21,7 +21,6 @@
 */
 
 import { Injectable } from '@angular/core';
-
 import { fromJS } from 'immutable';
 
 import { JSONSchema } from '../interfaces';

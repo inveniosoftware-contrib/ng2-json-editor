@@ -21,6 +21,7 @@
 */
 
 import { Injectable } from '@angular/core';
+
 import { TabsUtilService } from './tabs-util.service';
 
 @Injectable()

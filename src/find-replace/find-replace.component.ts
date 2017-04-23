@@ -22,7 +22,6 @@
 
 import { Component, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-
 import { List, Map } from 'immutable';
 
 import { FindReplaceAllService, JsonStoreService, ModalService } from '../shared/services';

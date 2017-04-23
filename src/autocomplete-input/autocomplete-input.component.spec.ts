@@ -28,13 +28,10 @@ import {
 } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
-
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 
 import { AutocompleteInputComponent } from '../autocomplete-input';
-
 import { RemoteAutocompletionService, JsonStoreService, PathUtilService, AppGlobalsService, ErrorMapUtilService } from '../shared/services';
-
 import { AutocompletionResult, AutocompletionConfig } from '../shared/interfaces';
 
 const autocompletionServiceResults = [

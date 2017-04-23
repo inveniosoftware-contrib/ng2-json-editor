@@ -20,9 +20,9 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { JsonStoreService } from './json-store.service';
-
 import { fromJS } from 'immutable';
+
+import { JsonStoreService } from './json-store.service';
 
 describe('JsonStoreService', () => {
 

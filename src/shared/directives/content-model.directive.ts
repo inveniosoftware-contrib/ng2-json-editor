@@ -1,4 +1,13 @@
-import { Directive, ElementRef, Input, Output, EventEmitter, HostListener, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  Input,
+  Output,
+  EventEmitter,
+  HostListener,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
 
 @Directive({
   selector: '[contentModel]'

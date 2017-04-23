@@ -19,13 +19,13 @@
  * waive the privileges and immunities granted to it by virtue of its status
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
+
 import { OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 
 import { AbstractTrackerComponent } from '../abstract-tracker';
-
 import { AppGlobalsService, PathUtilService } from '../shared/services';
 import { ValidationError} from '../shared/interfaces';
-import { Subscription } from 'rxjs/Subscription';
 
 /**
  * This is the base class for fields

@@ -21,6 +21,7 @@
  */
 
 import { TestBed, inject } from '@angular/core/testing';
+
 import {ShortcutService} from './shortcut.service';
 import {ShortcutActionService} from './shortcut-action.service';
 import {EmptyValueService} from './empty-value.service';

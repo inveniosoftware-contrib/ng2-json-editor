@@ -20,12 +20,11 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 
+import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Map, Set } from 'immutable';
 
 import { AbstractFieldComponent } from '../abstract-field';
-
 import { AppGlobalsService, JsonStoreService, PathUtilService } from '../shared/services';
 import { PathCache, JSONSchema } from '../shared/interfaces';
 

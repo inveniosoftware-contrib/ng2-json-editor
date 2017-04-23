@@ -20,10 +20,10 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
+import { Map, fromJS } from 'immutable';
+
 import { TabsUtilService } from './tabs-util.service';
 import { PathUtilService } from './path-util.service';
-
-import { Map, fromJS } from 'immutable';
 
 describe('TabsUtilService', () => {
 

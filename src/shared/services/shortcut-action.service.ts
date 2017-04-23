@@ -21,13 +21,14 @@
  */
 
 import { Injectable } from '@angular/core';
+import { List } from 'immutable';
+
 import { EmptyValueService } from './empty-value.service';
 import { JsonStoreService } from './json-store.service';
 import { JsonSchemaService } from './json-schema.service';
 import { DomUtilService } from './dom-util.service';
 import { PathUtilService } from './path-util.service';
 import { JSONSchema } from '../interfaces';
-import { List } from 'immutable';
 
 @Injectable()
 export class ShortcutActionService {

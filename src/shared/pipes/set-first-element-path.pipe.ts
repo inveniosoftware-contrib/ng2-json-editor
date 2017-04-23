@@ -21,8 +21,8 @@
  */
 
 import { Pipe, PipeTransform } from '@angular/core';
-
 import { Set } from 'immutable';
+
 import { AppGlobalsService, PathUtilService } from '../services';
 
 @Pipe({

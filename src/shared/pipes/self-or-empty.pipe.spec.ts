@@ -20,9 +20,10 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
  */
 
+import { Map, List } from 'immutable';
+
 import { EmptyValueService } from '../services/empty-value.service';
 import { SelfOrEmptyPipe } from './self-or-empty.pipe';
-import { Map, List } from 'immutable';
 
 describe('SelfOrEmptyPipe', () => {
   let pipe: SelfOrEmptyPipe;

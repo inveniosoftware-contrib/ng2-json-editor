@@ -21,7 +21,6 @@
 */
 
 import { DifferentKeysPipe } from './different-keys.pipe';
-
 import { Set } from 'immutable';
 
 describe('DifferentKeysPipe', () => {

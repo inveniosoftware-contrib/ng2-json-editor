@@ -29,11 +29,9 @@ import {
   ChangeDetectorRef,
   SimpleChanges
 } from '@angular/core';
-
 import { List, Set } from 'immutable';
 
 import { AbstractFieldComponent } from '../abstract-field';
-
 import {
   AppGlobalsService,
   JsonStoreService,

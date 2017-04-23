@@ -21,7 +21,6 @@
 */
 
 import { Pipe, PipeTransform } from '@angular/core';
-
 import { Set } from 'immutable';
 
 import { JSONSchema } from '../interfaces';

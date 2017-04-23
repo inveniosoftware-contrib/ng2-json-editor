@@ -20,7 +20,6 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-
 import { SchemaFixerService } from './schema-fixer.service';
 import { JsonUtilService } from './json-util.service';
 import { PathUtilService } from './path-util.service';
