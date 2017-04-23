@@ -1,7 +1,7 @@
 <div class="row editor-container" [ngClass]="shorterEditorContainerClass">
   <div class="col-md-2 menu-container">
     <tree-menu [record]="_record" [schema]="schema"></tree-menu>
-    <add-field-dropdown [fields]="keys" [pathString]="''" (onFieldAdd)="onFieldAdd($event)" [schema]="schema">Add field</add-field-dropdown>
+    <add-field-dropdown [fields]="keys" [pathString]="''" (fieldAdd)="onFieldAdd($event)" [schema]="schema">Add field</add-field-dropdown>
     <div *ngIf="config.enableAdminModeSwitch" class="admin-mode" tooltip="Allows editing all fields (use with care)">
       <input id="admin-mode-checkbox" type="checkbox" [(ngModel)]="appGlobalsService.adminMode" />
       <label class="admin-mode" for="admin-mode-checkbox">Enable Admin Mode</label>
@@ -12,10 +12,10 @@
     <tabset *ngIf="config.tabsConfig">
       <tab *ngFor="let tabName of tabNames; trackBy:trackByElement" [heading]="tabName" (select)="activeTabName = tabName" [active]="isActiveTab(tabName)">
         <sub-record [value]="_record" [tabName]="tabName" [schema]="tabNameToSubSchema[tabName]" [keys]="tabNameToKeys[tabName]"
-                    (onDeleteKey)="onDeleteKey($event)" (onOpenPanelClick)="openPanel($event)"></sub-record>
+                    (deleteKey)="onDeleteKey($event)"></sub-record>
       </tab>
     </tabset>
-    <sub-record *ngIf="!config.tabsConfig" [value]="_record" [schema]="schema" (onDeleteKey)="onDeleteKey($event)" [keys]="keys"></sub-record>
+    <sub-record *ngIf="!config.tabsConfig" [value]="_record" [schema]="schema" (deleteKey)="onDeleteKey($event)" [keys]="keys"></sub-record>
   </div>
   <div id="right-main-container" *ngIf="!isPreviewerDisabled" [ngClass]="rightContainerColMdClass" class="main-container">
     <button id="btn-preview-toggle" type="button" class="btn btn-default btn-toggle" (click)="isPreviewerHidden = !isPreviewerHidden">{{isPreviewerHidden ? "Show Preview" : "Hide Preview"}}</button>

@@ -99,8 +99,8 @@ describe('AddFieldToObjectDropdownComponent', () => {
     showDropdownButton.dispatchEvent(new Event('click'));
     let anchor = nativeEl.querySelector('li a') as HTMLAnchorElement;
     expect(component.fields.has(anchor.textContent)).toBeFalsy();
-    spyOn(component.onFieldAdd, 'emit');
+    spyOn(component.fieldAdd, 'emit');
     anchor.dispatchEvent(new Event('click'));
-    expect(component.onFieldAdd.emit).toHaveBeenCalledWith(anchor.textContent);
+    expect(component.fieldAdd.emit).toHaveBeenCalledWith(anchor.textContent);
   });
 });

@@ -48,9 +48,8 @@ export class SearchableDropdownComponent implements OnInit {
   expression = '';
   status: { isOpen: boolean } = { isOpen: false };
 
-  @Output() onSelect = new EventEmitter<string>();
+  @Output() select = new EventEmitter<string>();
   @Output() onBlur = new EventEmitter<void>();
-
 
   ngOnInit() {
     this.placeholder = this.value || this.placeholder || '';
@@ -70,7 +69,7 @@ export class SearchableDropdownComponent implements OnInit {
 
   onItemClick(item: string) {
     this.value = item;
-    this.onSelect.emit(item);
+    this.select.emit(item);
   }
 
   onKeypress(key: string) {

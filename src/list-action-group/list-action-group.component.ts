@@ -43,7 +43,7 @@ import {
 export class ListActionGroupComponent {
 
   @Input() canMove: boolean;
-  @Output() onDelete = new EventEmitter<void>();
-  @Output() onMove = new EventEmitter<number>();
+  @Output() delete = new EventEmitter<void>();
+  @Output() move = new EventEmitter<number>();
 
 }

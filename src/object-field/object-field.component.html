@@ -21,7 +21,7 @@
   <!-- ADD SUB FIELD FROM SCHEMA DROPDOWN -->
   <tr>
     <td class="button-holder">
-      <add-field-dropdown [fields]="keys" [pathString]="pathString" (onFieldAdd)="onFieldAdd($event)" [schema]="schema">
+      <add-field-dropdown [fields]="keys" [pathString]="pathString" (fieldAdd)="onFieldAdd($event)" [schema]="schema">
         <i class="fa fa-plus"></i>
       </add-field-dropdown>
     </td>

@@ -39,7 +39,7 @@ export class AddFieldDropdownComponent {
   @Input() fields: Set<string>;
   @Input() pathString: string;
 
-  @Output() onFieldAdd: EventEmitter<string> = new EventEmitter<string>();
+  @Output() fieldAdd: EventEmitter<string> = new EventEmitter<string>();
 
   expression = '';
 
@@ -58,7 +58,7 @@ export class AddFieldDropdownComponent {
   }
 
   onFieldSelect(field: string) {
-    this.onFieldAdd.emit(field);
+    this.fieldAdd.emit(field);
 
     let newFieldPathString = `${this.pathString}${this.pathUtilService.separator}${field}`;
     this.domUtilService.focusAndSelectFirstEditableChildById(newFieldPathString);
