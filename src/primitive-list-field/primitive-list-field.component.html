@@ -3,7 +3,7 @@
     <table class="table">
       <tr *ngFor="let value of values | selfOrEmpty:schema; let i = index; trackBy:trackByElement">
         <td>
-          <primitive-field [value]="value" [schema]="schema.items" [path]="getElementPath(i)"></primitive-field>
+          <primitive-field [value]="value" [schema]="schema.items" [path]="getPathForChild(i)"></primitive-field>
         </td>
         <td *ngIf="values.size > 0" class="button-holder" [ngClass]="sortableClass">
           <list-action-group (onMove)="moveElement(i, $event)" (onDelete)="deleteElement(i)" [canMove]="schema.sortable"></list-action-group>

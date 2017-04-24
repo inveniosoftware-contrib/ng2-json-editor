@@ -26,7 +26,7 @@ import { Map, Set } from 'immutable';
 
 import { AbstractFieldComponent } from '../abstract-field';
 import { AppGlobalsService, JsonStoreService, PathUtilService } from '../shared/services';
-import { PathCache, JSONSchema } from '../shared/interfaces';
+import { JSONSchema } from '../shared/interfaces';
 
 @Component({
   selector: 'object-field',
@@ -43,7 +43,6 @@ export class ObjectFieldComponent extends AbstractFieldComponent implements OnCh
   @Input() path: Array<any>;
 
   keys: Set<string>;
-  pathCache: PathCache = {};
 
   constructor(public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
@@ -66,13 +65,6 @@ export class ObjectFieldComponent extends AbstractFieldComponent implements OnCh
     this.jsonStoreService.setIn(this.path, this.value);
     // remove the key too, so that it will not be displayed as empty
     this.keys = this.keys.remove(name);
-  }
-
-  getFieldPath(name: string): Array<any> {
-    if (!this.pathCache[name]) {
-      this.pathCache[name] = this.path.concat(name);
-    }
-    return this.pathCache[name];
   }
 
   onFieldAdd(field: string) {

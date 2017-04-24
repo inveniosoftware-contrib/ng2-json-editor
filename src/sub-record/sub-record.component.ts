@@ -76,20 +76,19 @@ export class SubRecordComponent implements OnInit, OnChanges {
   // delete only work for others, not toggles (UPDATE: config comment if this changes)
   deleteField(field: string) {
     this.onDeleteKey.emit(field);
-    this.jsonStoreService.removeIn(this.getPathForField(field));
+    this.jsonStoreService.removeIn(this.getPathForChild(field));
   }
 
-  getPathForField(field: string): Array<any> {
-    if (!this.pathCache[field]) {
-      this.pathCache[field] = [field];
+  getPathForChild(key: string): Array<any> {
+    if (!this.pathCache[key]) {
+      this.pathCache[key] = [key];
     }
-    return this.pathCache[field];
+    return this.pathCache[key];
   }
 
   onToggleValueChange(field: string, value: boolean) {
-    this.jsonStoreService.setIn(this.getPathForField(field), value);
+    this.jsonStoreService.setIn(this.getPathForChild(field), value);
   }
-
 
   private isToggle(field: string): boolean {
     return this.schema.properties[field].toggleColor !== undefined;
