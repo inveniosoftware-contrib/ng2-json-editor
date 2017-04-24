@@ -29,7 +29,7 @@
       </td>
       <td class="navigator-item-right">
         <label>
-          {{paginatedIndices[0] + 1}}-{{paginatedIndices[paginatedIndices.length - 1] + 1}} of {{values.size}} {{path[path.length - 1]}}
+          {{paginatedItems[0].index + 1}}-{{paginatedItems[paginatedItems.length - 1].index + 1}} of {{values.size}} {{path[path.length - 1]}}
         </label>
         <br>
         <pagination [totalItems]="values.size" [ngModel]="currentPage" [maxSize]="navigator.maxVisiblePageCount" [itemsPerPage]="navigator.itemsPerPage"
@@ -39,11 +39,19 @@
     </tr>
   </table>
   <!-- Elements -->
-  <div *ngFor="let pIndex of paginatedIndices; let i = index; trackBy:trackByIndex">
+  <div *ngFor="let item of paginatedItems; trackBy:trackByIndex">
     <div class="complex-list-field-wrapper">
-      <object-field [value]="values.get(pIndex)" [schema]="schema.items" [path]="getElementPath(pIndex)">
-        <list-action-group (onMove)="moveElement(i, $event)" (onDelete)="deleteElement(i)" [canMove]="schema.sortable"></list-action-group>
-      </object-field>
+      <span *ngIf="shouldDisplayTemplate && values.get(item.index).keySeq().size != 0">
+        <ng-template [ngTemplateOutlet]="customTemplate" [ngTemplateOutletContext]="{item: values.get(item.index)}"></ng-template>
+        <a href="javascript:void(0)" (click)="item.isEditFormVisible = !item.isEditFormVisible">
+          {{item.isEditFormVisible ? 'Hide Fields' : 'Show Fields'}}
+        </a>
+      </span>
+      <span *ngIf="item.isEditFormVisible">
+        <object-field [value]="values.get(item.index)" [schema]="schema.items" [path]="getElementPath(item.index)">
+          <list-action-group (onMove)="moveElement(item.index, $event)" (onDelete)="deleteElement(item.index)" [canMove]="schema.sortable"></list-action-group>
+        </object-field>
+      </span>
     </div>
   </div>
 </div>
