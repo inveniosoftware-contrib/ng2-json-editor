@@ -20,7 +20,6 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-
 import { ComponentTypeService } from './component-type.service';
 
 describe('ComponentTypeService', () => {

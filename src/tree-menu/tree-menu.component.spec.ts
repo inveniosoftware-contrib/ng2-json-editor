@@ -25,14 +25,11 @@ import {
   ComponentFixture,
   TestBed
 } from '@angular/core/testing';
-
 import { Component } from '@angular/core';
-
 import { fromJS, Map } from 'immutable';
 
 import { TreeMenuItemComponent } from './tree-menu-item.component';
 import { TreeMenuComponent } from './tree-menu.component';
-
 import {
   DomUtilService,
   PathUtilService,
@@ -40,7 +37,6 @@ import {
   AppGlobalsService,
   TabsUtilService
 } from '../shared/services';
-
 import {
   AddAlwaysShowFieldsPipe,
   FilterAndSortBySchemaPipe

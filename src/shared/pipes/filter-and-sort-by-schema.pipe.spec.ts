@@ -20,10 +20,10 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
+import { Set, OrderedSet } from 'immutable';
+
 import { FilterAndSortBySchemaPipe } from './filter-and-sort-by-schema.pipe';
 import { AppGlobalsService } from '../services';
-
-import { Set, OrderedSet } from 'immutable';
 
 describe('FilterAndSortBySchemaPipe', () => {
   let pipe: FilterAndSortBySchemaPipe;

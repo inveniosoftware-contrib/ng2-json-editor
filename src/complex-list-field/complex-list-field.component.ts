@@ -29,13 +29,10 @@ import {
   SimpleChanges,
   ChangeDetectorRef
 } from '@angular/core';
-
 import { List, Map, Set } from 'immutable';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
-
 import { AppGlobalsService, JsonStoreService, DomUtilService, PathUtilService } from '../shared/services';
-
 import { LongListNavigatorConfig, JSONSchema } from '../shared/interfaces';
 
 @Component({

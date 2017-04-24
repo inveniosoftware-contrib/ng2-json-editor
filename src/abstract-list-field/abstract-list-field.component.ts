@@ -23,7 +23,6 @@ import { ChangeDetectorRef } from '@angular/core';
 import { List } from 'immutable';
 
 import { AbstractFieldComponent } from '../abstract-field';
-
 import { JsonStoreService, AppGlobalsService, PathUtilService } from '../shared/services';
 import { PathCache, JSONSchema } from '../shared/interfaces';
 

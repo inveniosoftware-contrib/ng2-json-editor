@@ -32,7 +32,6 @@ import {
 } from '@angular/core';
 
 import { JsonStoreService } from '../shared/services';
-
 import { OnValueChangeFunction, JSONSchema } from '../shared/interfaces';
 /**
  * This component has dummy html but a logic to change the value of another part

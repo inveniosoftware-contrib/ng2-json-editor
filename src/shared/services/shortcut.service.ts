@@ -22,8 +22,8 @@
 
 
 import { Injectable } from '@angular/core';
-import { ShortcutActionService } from './shortcut-action.service';
 
+import { ShortcutActionService } from './shortcut-action.service';
 import { CustomShortcuts } from '../interfaces/custom-shortcuts';
 
 @Injectable()

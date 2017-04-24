@@ -20,12 +20,17 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input, OnInit, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
-
-import { AbstractTrackerComponent } from '../abstract-tracker';
-
+import {
+  Component,
+  Input,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+  ChangeDetectionStrategy
+} from '@angular/core';
 import { Map, Set } from 'immutable';
 
+import { AbstractTrackerComponent } from '../abstract-tracker';
 import { DomUtilService, WindowHrefService, PathUtilService, AppGlobalsService } from '../shared/services';
 import { JSONSchema } from '../shared/interfaces';
 

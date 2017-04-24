@@ -22,6 +22,7 @@
 
 import { Injectable, TemplateRef } from '@angular/core';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+
 import { CategorizedValidationErrors, SchemaValidationErrors, ValidationError, JsonEditorConfig } from '../interfaces';
 import { ErrorMapUtilService } from './error-map-util.service';
 

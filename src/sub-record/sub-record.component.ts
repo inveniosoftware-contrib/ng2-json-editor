@@ -20,7 +20,16 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input, Output, OnInit, OnChanges, SimpleChanges, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+  EventEmitter,
+  ChangeDetectionStrategy
+} from '@angular/core';
 
 import { Map, Set } from 'immutable';
 

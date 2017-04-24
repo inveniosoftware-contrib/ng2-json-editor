@@ -25,10 +25,9 @@ import {
   ComponentFixture,
   TestBed,
 } from '@angular/core/testing';
+import { Ng2BootstrapModule } from 'ng2-bootstrap';
 
 import { SearchableDropdownComponent } from './searchable-dropdown.component';
-
-import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { FilterByExpressionPipe } from '../shared/pipes';
 
 describe('SearchableDropdownComponent', () => {

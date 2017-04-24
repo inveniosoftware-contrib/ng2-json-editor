@@ -21,7 +21,6 @@
 */
 
 import { Pipe, PipeTransform } from '@angular/core';
-
 import { List } from 'immutable';
 
 import { EmptyValueService } from '../services';

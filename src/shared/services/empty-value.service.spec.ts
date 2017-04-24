@@ -20,9 +20,9 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { EmptyValueService } from './empty-value.service';
-
 import { Map } from 'immutable';
+
+import { EmptyValueService } from './empty-value.service';
 
 describe('EmptyValueService', () => {
   let service: EmptyValueService;

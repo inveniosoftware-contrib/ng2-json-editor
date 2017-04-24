@@ -21,11 +21,9 @@
 */
 
 import { Component, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-
 import { List } from 'immutable';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
-
 import { AppGlobalsService, JsonStoreService, PathUtilService } from '../shared/services';
 import { JSONSchema } from '../shared/interfaces';
 

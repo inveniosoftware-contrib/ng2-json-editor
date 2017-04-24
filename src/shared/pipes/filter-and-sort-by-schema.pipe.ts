@@ -21,7 +21,6 @@
 */
 
 import { Pipe, PipeTransform } from '@angular/core';
-
 import { Set, OrderedSet } from 'immutable';
 
 import { AppGlobalsService } from '../services';

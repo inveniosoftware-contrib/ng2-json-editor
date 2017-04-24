@@ -21,13 +21,10 @@
 */
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { Set } from 'immutable';
-
-import { AddFieldDropdownComponent } from './add-field-dropdown.component';
-
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 
+import { AddFieldDropdownComponent } from './add-field-dropdown.component';
 import { DifferentKeysPipe, FilterByExpressionPipe } from '../shared/pipes';
 import { DomUtilService, EmptyValueService, PathUtilService, TabsUtilService } from '../shared/services';
 import { JSONSchema } from '../shared/interfaces';
