@@ -1,5 +1,5 @@
+import { ValidationError } from './validation-error';
+
 export interface SchemaValidationErrors {
-  [jsonPointer: string]: Array<{
-    message: string;
-  }>;
+  [jsonPointer: string]: Array<ValidationError>;
 }

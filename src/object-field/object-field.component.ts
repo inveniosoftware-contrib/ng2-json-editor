@@ -20,7 +20,7 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 
 import { Map, Set } from 'immutable';
 
@@ -48,8 +48,9 @@ export class ObjectFieldComponent extends AbstractFieldComponent implements OnCh
 
   constructor(public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
-    public pathUtilService: PathUtilService) {
-    super(appGlobalsService, pathUtilService);
+    public pathUtilService: PathUtilService,
+    public changeDetectorRef: ChangeDetectorRef) {
+    super(appGlobalsService, pathUtilService, changeDetectorRef);
   }
 
   ngOnChanges(changes: SimpleChanges) {

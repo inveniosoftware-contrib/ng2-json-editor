@@ -20,7 +20,7 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 
 import { List, Map, Set } from 'immutable';
 
@@ -47,8 +47,9 @@ export class TableListFieldComponent extends AbstractListFieldComponent implemen
 
   constructor(public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
-    public pathUtilService: PathUtilService) {
-    super(appGlobalsService, jsonStoreService, pathUtilService);
+    public pathUtilService: PathUtilService,
+    public changeDetectorRef: ChangeDetectorRef) {
+    super(appGlobalsService, jsonStoreService, pathUtilService, changeDetectorRef);
   }
 
   ngOnInit() {

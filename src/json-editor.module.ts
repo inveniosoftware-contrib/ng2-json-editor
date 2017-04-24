@@ -36,6 +36,7 @@ import { AutocompleteInputComponent } from './autocomplete-input';
 import { ComplexListFieldComponent } from './complex-list-field';
 import { EditorPreviewerComponent } from './editor-previewer';
 import { SubRecordComponent } from './sub-record';
+import { ValidationBadgesComponent } from './validation-badges';
 import { FindReplaceComponent } from './find-replace';
 import { HtmlViewComponent } from './html-view';
 import { JsonEditorComponent } from './json-editor.component';
@@ -55,6 +56,7 @@ import {
 import { SearchableDropdownComponent } from './searchable-dropdown';
 import { ListActionGroupComponent } from './list-action-group';
 import { SHARED_PIPES, SHARED_SERVICES, SHARED_DIRECTIVES } from './shared';
+import { ErrorPanelComponent, ErrorPanelItemComponent } from './error-panel';
 
 @NgModule({
   declarations: [
@@ -82,7 +84,10 @@ import { SHARED_PIPES, SHARED_SERVICES, SHARED_DIRECTIVES } from './shared';
     TreeMenuComponent,
     JsonEditorComponent,
     SubRecordComponent,
-    HtmlViewComponent
+    HtmlViewComponent,
+    ValidationBadgesComponent,
+    ErrorPanelComponent,
+    ErrorPanelItemComponent
   ],
   exports: [JsonEditorComponent],
   imports: [
@@ -105,6 +110,7 @@ export {
   ObjectFieldComponent,
   ValueChangeWatcherComponent,
   EditorPreviewerComponent,
+  ErrorPanelComponent,
   FindReplaceComponent,
   ModalViewComponent,
   PrimitiveListFieldComponent,
@@ -119,5 +125,6 @@ export {
   TreeMenuComponent,
   JsonEditorComponent,
   SubRecordComponent,
-  HtmlViewComponent
+  HtmlViewComponent,
+  ValidationBadgesComponent
 }

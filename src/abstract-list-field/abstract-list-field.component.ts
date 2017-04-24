@@ -19,7 +19,7 @@
  * waive the privileges and immunities granted to it by virtue of its status
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
-
+import { ChangeDetectorRef } from '@angular/core';
 import { List } from 'immutable';
 
 import { AbstractFieldComponent } from '../abstract-field';
@@ -42,8 +42,9 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
 
   constructor(public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
-    public pathUtilService: PathUtilService) {
-    super(appGlobalsService, pathUtilService);
+    public pathUtilService: PathUtilService,
+    public changeDetectorRef: ChangeDetectorRef) {
+    super(appGlobalsService, pathUtilService, changeDetectorRef);
   }
   /**
    * @param {number} index - Index of the element that is moved

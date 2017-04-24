@@ -19,13 +19,13 @@
  * waive the privileges and immunities granted to it by virtue of its status
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
-import { OnInit, OnDestroy } from '@angular/core';
-
-import { Subscription } from 'rxjs/Subscription';
+import { OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 
 import { AbstractTrackerComponent } from '../abstract-tracker';
 
 import { AppGlobalsService, PathUtilService } from '../shared/services';
+import { ValidationError} from '../shared/interfaces';
+import { Subscription } from 'rxjs/Subscription';
 
 /**
  * This is the base class for fields
@@ -40,39 +40,37 @@ export abstract class AbstractFieldComponent
   implements OnInit, OnDestroy {
 
   path: Array<any>;
-  errors: Array<Object> = [];
-  errorsSubscription: Subscription;
+  externalErrors: Array<ValidationError> = [];
+  internalErrors: Array<ValidationError> = [];
+  externalCategorizedErrorSubscription: Subscription;
 
   constructor(public appGlobalsService: AppGlobalsService,
-    public pathUtilService: PathUtilService) {
+    public pathUtilService: PathUtilService,
+    public changeDetectorRef: ChangeDetectorRef) {
     super();
   }
 
   ngOnInit() {
-    this.errorsSubscription = this.appGlobalsService
-      .globalErrorsSubject
-      .subscribe((globalErrors) => {
-        this.errors = globalErrors[this.pathString] || [];
+    this.externalCategorizedErrorSubscription = this.appGlobalsService.externalCategorizedErrorsSubject
+      .subscribe(externalCategorizedErrorMap => {
+        this.externalErrors = externalCategorizedErrorMap.Errors[this.pathString] || [];
+        this.changeDetectorRef.markForCheck();
       });
   }
 
   ngOnDestroy() {
-    if (this.errorsSubscription) {
-      this.errorsSubscription.unsubscribe();
-    }
-  }
-
-  get errorNgClass(): Object {
-    return {
-      error: this.errors.length > 0
-    };
+    this.externalCategorizedErrorSubscription.unsubscribe();
   }
 
   get isErrorTooltipEnabled(): boolean {
-    return this.errors && this.errors.length > 0;
+    return this.hasErrors;
   }
 
   get pathString(): string {
     return this.pathUtilService.toPathString(this.path);
+  }
+
+  get hasErrors() {
+    return this.externalErrors.length > 0 || this.internalErrors.length > 0;
   }
 }

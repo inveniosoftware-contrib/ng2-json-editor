@@ -26,6 +26,7 @@ import {
   OnChanges,
   OnInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   SimpleChanges
 } from '@angular/core';
 
@@ -60,8 +61,9 @@ export class TableItemFieldComponent extends AbstractFieldComponent {
 
   constructor(public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
-    public pathUtilService: PathUtilService) {
-    super(appGlobalsService, pathUtilService);
+    public pathUtilService: PathUtilService,
+    public changeDetectorRef: ChangeDetectorRef) {
+    super(appGlobalsService, pathUtilService, changeDetectorRef);
   }
 
 

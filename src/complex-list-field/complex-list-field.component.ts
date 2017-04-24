@@ -26,7 +26,8 @@ import {
   OnChanges,
   OnInit,
   ChangeDetectionStrategy,
-  SimpleChanges
+  SimpleChanges,
+  ChangeDetectorRef
 } from '@angular/core';
 
 import { List, Map, Set } from 'immutable';
@@ -63,8 +64,9 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
   constructor(public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
     public domUtilService: DomUtilService,
-    public pathUtilService: PathUtilService) {
-    super(appGlobalsService, jsonStoreService, pathUtilService);
+    public pathUtilService: PathUtilService,
+    public changeDetectorRef: ChangeDetectorRef) {
+    super(appGlobalsService, jsonStoreService, pathUtilService, changeDetectorRef);
   }
 
   ngOnInit() {

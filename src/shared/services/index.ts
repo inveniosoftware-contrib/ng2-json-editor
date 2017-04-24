@@ -16,6 +16,8 @@ import { ShortcutActionService } from './shortcut-action.service';
 import { ShortcutService } from './shortcut.service';
 import { WindowHrefService } from './window-href.service';
 import { TabsUtilService } from './tabs-util.service';
+import { ErrorMapUtilService } from './error-map-util.service';
+
 
 export {
   AppGlobalsService,
@@ -35,7 +37,8 @@ export {
   ShortcutActionService,
   ShortcutService,
   WindowHrefService,
-  TabsUtilService
+  TabsUtilService,
+  ErrorMapUtilService
 };
 
 export const SHARED_SERVICES = [
@@ -56,5 +59,6 @@ export const SHARED_SERVICES = [
   ShortcutActionService,
   ShortcutService,
   WindowHrefService,
-  TabsUtilService
+  TabsUtilService,
+  ErrorMapUtilService
 ];

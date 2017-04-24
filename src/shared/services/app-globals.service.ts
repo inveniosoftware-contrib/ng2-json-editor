@@ -22,28 +22,67 @@
 
 import { Injectable, TemplateRef } from '@angular/core';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
-import { SchemaValidationErrors, JsonEditorConfig } from '../interfaces';
+import { CategorizedValidationErrors, SchemaValidationErrors, ValidationError, JsonEditorConfig } from '../interfaces';
+import { ErrorMapUtilService } from './error-map-util.service';
 
 @Injectable()
 export class AppGlobalsService {
-  private _globalErrorsSubject: ReplaySubject<SchemaValidationErrors> = new ReplaySubject<any>(1);
+  private _externalCategorizedErrorsSubject = new ReplaySubject<CategorizedValidationErrors>(1);
+  private _internalCategorizedErrorsSubject = new ReplaySubject<CategorizedValidationErrors>(1);
+  private _externalErrorCountersSubject = new ReplaySubject<{errors: number, warnings: number}>(1);
+  private _internalErrorCountersSubject = new ReplaySubject<{errors: number, warnings: number}>(1);
+  private internalErrorMap: SchemaValidationErrors = {};
   public adminMode = false;
   public activeTabName = '';
   public tabNameToFirstTopLevelElement: { [tabName: string]: string } = {};
   public templates: { [templateName: string]: TemplateRef<any> };
   public config: JsonEditorConfig;
+  public internalCategorizedErrorMap: CategorizedValidationErrors = { Errors: {}, Warnings: {} };
+  public externalCategorizedErrorMap: CategorizedValidationErrors = { Errors: {}, Warnings: {} };
 
-  set globalErrors(errors: SchemaValidationErrors) {
-    this._globalErrorsSubject.next(errors);
+  constructor(public errorMapUtilService: ErrorMapUtilService) { }
+
+  get externalCategorizedErrorsSubject(): ReplaySubject<CategorizedValidationErrors> {
+    return this._externalCategorizedErrorsSubject;
   }
 
-  get globalErrorsSubject(): ReplaySubject<SchemaValidationErrors> {
-    return this._globalErrorsSubject;
+  get externalErrorCountersSubject(): ReplaySubject<{errors: number, warnings: number}> {
+    return this._externalErrorCountersSubject;
+  }
+
+  get internalCategorizedErrorsSubject(): ReplaySubject<CategorizedValidationErrors> {
+    return this._internalCategorizedErrorsSubject;
+  }
+
+  get internalErrorCountersSubject(): ReplaySubject<{errors: number, warnings: number}> {
+    return this._internalErrorCountersSubject;
+  }
+
+  set externalErrors(errors: SchemaValidationErrors) {
+    let {categorizedErrorMap, errorCounter, warningCounter} = this.errorMapUtilService.categorizeErrorMap(errors);
+    this.externalCategorizedErrorMap = categorizedErrorMap;
+
+    this.externalCategorizedErrorsSubject.next(this.externalCategorizedErrorMap);
+    this.externalErrorCountersSubject.next({
+      errors: errorCounter,
+      warnings: warningCounter
+    });
+  }
+
+  extendInternalErrors(path: string, errors: Array<ValidationError>) {
+    this.internalErrorMap[path] = errors;
+    let {categorizedErrorMap, errorCounter, warningCounter} = this.errorMapUtilService.categorizeErrorMap(this.internalErrorMap);
+    this.internalCategorizedErrorMap = categorizedErrorMap;
+
+    this.internalCategorizedErrorsSubject.next(this.internalCategorizedErrorMap);
+    this.internalErrorCountersSubject.next({
+      errors: errorCounter,
+      warnings: warningCounter
+    });
   }
 
   get firstElementPathForCurrentTab() {
     return this.tabNameToFirstTopLevelElement[this.activeTabName];
   }
-
 
 }
