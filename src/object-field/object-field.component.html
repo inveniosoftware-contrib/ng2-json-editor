@@ -5,7 +5,7 @@
       <div>
         <title-dropdown [title]="key | underscoreToSpace" [isDisabled]="schema.properties[key].disabled">
           <li *ngIf="schema.properties[key].type === 'array'" class="title-dropdown-item">
-            <add-new-element-button [path]="getFieldPath(key)" [schema]="schema.properties[key]"></add-new-element-button>
+            <add-new-element-button [path]="getPathForChild(key)" [schema]="schema.properties[key]"></add-new-element-button>
           </li>
           <li class="title-dropdown-item">
             <button type="button" class="editor-btn-delete editor-btn-delete-text" (click)="deleteField(key)">Delete</button>
@@ -15,7 +15,7 @@
     </td>
     <!-- SUB FIELD COMPONENT -->
     <td>
-      <any-type-field [value]="value.get(key) | selfOrEmpty:schema.properties[key]" [schema]=schema.properties[key] [path]="getFieldPath(key)"></any-type-field>
+      <any-type-field [value]="value.get(key) | selfOrEmpty:schema.properties[key]" [schema]=schema.properties[key] [path]="getPathForChild(key)"></any-type-field>
     </td>
   </tr>
   <!-- ADD SUB FIELD FROM SCHEMA DROPDOWN -->

@@ -13,21 +13,21 @@
         <td class="label-holder">
           <title-dropdown [title]="key | underscoreToSpace" [isDisabled]="schema.properties[key].disabled">
             <li *ngIf="schema.properties[key].type === 'array'" class="title-dropdown-item">
-              <add-new-element-button [path]="getPathForField(key)" [schema]="schema.properties[key]"></add-new-element-button>
+              <add-new-element-button [path]="getPathForChild(key)" [schema]="schema.properties[key]"></add-new-element-button>
             </li>
             <li class="title-dropdown-item">
               <button type="button" class="editor-btn-delete editor-btn-delete-text" (click)="deleteField(key)">Delete</button>
             </li>
             <li class="divider"></li>
             <li class="title-dropdown-item" (click)="$event.stopPropagation()">
-              <find-replace [path]="getPathForField(key)" [schema]="schema.properties[key]"></find-replace>
+              <find-replace [path]="getPathForChild(key)" [schema]="schema.properties[key]"></find-replace>
             </li>
           </title-dropdown>
         </td>
       </tr>
       <tr>
         <td>
-          <any-type-field [value]="value.get(key) | selfOrEmpty:schema.properties[key]" [schema]="schema.properties[key]" [path]="getPathForField(key)"></any-type-field>
+          <any-type-field [value]="value.get(key) | selfOrEmpty:schema.properties[key]" [schema]="schema.properties[key]" [path]="getPathForChild(key)"></any-type-field>
         </td>
       </tr>
     </div>

@@ -25,7 +25,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { AbstractTrackerComponent } from '../abstract-tracker';
 import { AppGlobalsService, PathUtilService } from '../shared/services';
-import { ValidationError} from '../shared/interfaces';
+import { ValidationError, PathCache} from '../shared/interfaces';
 
 /**
  * This is the base class for fields
@@ -40,6 +40,7 @@ export abstract class AbstractFieldComponent
   implements OnInit, OnDestroy {
 
   path: Array<any>;
+  pathCache: PathCache = {};
   externalErrors: Array<ValidationError> = [];
   internalErrors: Array<ValidationError> = [];
   externalCategorizedErrorSubscription: Subscription;
@@ -60,6 +61,19 @@ export abstract class AbstractFieldComponent
 
   ngOnDestroy() {
     this.externalCategorizedErrorSubscription.unsubscribe();
+  }
+
+  /**
+   * Gets path for child, returns from `pathCache` if it is a hit
+   * in order not to re-render child component due to reference change its path.
+   *
+   * @param key - index or field name for child
+   */
+  getPathForChild(key: any): Array<any> {
+    if (!this.pathCache[key] || this.pathCache[key][this.path.length - 1] !== this.path[this.path.length - 1]) {
+      this.pathCache[key] = this.path.concat(key);
+    }
+    return this.pathCache[key];
   }
 
   get isErrorTooltipEnabled(): boolean {

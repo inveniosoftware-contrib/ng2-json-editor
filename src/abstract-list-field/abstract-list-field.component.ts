@@ -24,7 +24,7 @@ import { List } from 'immutable';
 
 import { AbstractFieldComponent } from '../abstract-field';
 import { JsonStoreService, AppGlobalsService, PathUtilService } from '../shared/services';
-import { PathCache, JSONSchema } from '../shared/interfaces';
+import { JSONSchema } from '../shared/interfaces';
 
 /**
  * Abstract component to share code of common operations of all array fields
@@ -37,7 +37,6 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
   values: List<any>;
   schema: JSONSchema;
   path: Array<any>;
-  pathCache: PathCache = {};
 
   constructor(public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
@@ -68,19 +67,11 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
   deleteElement(index: number) {
     this.jsonStoreService.setIn(this.path, this.values.remove(index));
     this.values = this.jsonStoreService.getIn(this.path);
-    let elementPathString = this.getElementPathString(index);
+    let elementPathString = this.getPathForChildString(index);
   }
 
-  getElementPathString(index: number): string {
+  getPathForChildString(index: number): string {
     return `${this.pathString}${this.pathUtilService.separator}${index}`;
-  }
-
-  getElementPath(index: number): Array<any> {
-    let valuePathString = this.getElementPathString(index);
-    if (!this.pathCache[valuePathString]) {
-      this.pathCache[valuePathString] = this.path.concat(index);
-    }
-    return this.pathCache[valuePathString];
   }
 
   get sortableClass() {

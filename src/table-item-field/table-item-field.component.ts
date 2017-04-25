@@ -37,7 +37,7 @@ import {
   JsonStoreService,
   PathUtilService
 } from '../shared/services';
-import { PathCache, JSONSchema } from '../shared/interfaces';
+import { JSONSchema } from '../shared/interfaces';
 
 @Component({
   // Defined as attribute selector not to break table > tr > td html structure
@@ -55,7 +55,6 @@ export class TableItemFieldComponent extends AbstractFieldComponent {
   @Input() schema: JSONSchema;
   @Input() path: Array<any>;
   @Input() keys: Set<string>;
-  pathCache: PathCache = {};
 
   constructor(public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
@@ -63,13 +62,4 @@ export class TableItemFieldComponent extends AbstractFieldComponent {
     public changeDetectorRef: ChangeDetectorRef) {
     super(appGlobalsService, pathUtilService, changeDetectorRef);
   }
-
-
-  getFieldPath(name: string): Array<any> {
-    if (!this.pathCache[name]) {
-      this.pathCache[name] = this.path.concat(name);
-    }
-    return this.pathCache[name];
-  }
-
 }
