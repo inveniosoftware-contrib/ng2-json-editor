@@ -8,7 +8,7 @@
             {{key | underscoreToSpace}}
           </th>
           <th class="button-holder" [ngClass]="sortableClass">
-            <add-field-dropdown *ngIf="values.size > 0" [fields]="keys" [pathString]="getElementPathString(0)" (onFieldAdd)="onFieldAdd($event)"
+            <add-field-dropdown *ngIf="values.size > 0" [fields]="keys" [pathString]="getElementPathString(0)" (fieldAdd)="onFieldAdd($event)"
               [schema]="schema.items">
               <i class="fa fa-plus"></i>
             </add-field-dropdown>
@@ -18,7 +18,7 @@
       <tr *ngFor="let value of values; let i = index; trackBy:trackByIndex" table-item-field [id]="getElementPathString(i)" [value]="value"
         [schema]="schema.items" [path]="getElementPath(i)" [keys]="keys">
         <td *ngIf="values.size > 0" class="button-holder" [ngClass]="sortableClass">
-          <list-action-group (onMove)="moveElement(i, $event)" (onDelete)="deleteElement(i)" [canMove]="schema.sortable"></list-action-group>
+          <list-action-group (move)="moveElement(i, $event)" (delete)="deleteElement(i)" [canMove]="schema.sortable"></list-action-group>
         </td>
       </tr>
     </table>

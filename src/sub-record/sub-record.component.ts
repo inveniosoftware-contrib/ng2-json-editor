@@ -50,7 +50,7 @@ export class SubRecordComponent implements OnInit, OnChanges {
   @Input() tabName = '';
   @Input() keys: Set<string>;
 
-  @Output() onDeleteKey: EventEmitter<string> = new EventEmitter<string>();
+  @Output() deleteKey: EventEmitter<string> = new EventEmitter<string>();
 
   keysByType: { others: Set<string>, toggles: Set<string> };
   pathCache: PathCache = {};
@@ -75,7 +75,7 @@ export class SubRecordComponent implements OnInit, OnChanges {
 
   // delete only work for others, not toggles (UPDATE: config comment if this changes)
   deleteField(field: string) {
-    this.onDeleteKey.emit(field);
+    this.deleteKey.emit(field);
     this.jsonStoreService.removeIn(this.getPathForField(field));
   }
 

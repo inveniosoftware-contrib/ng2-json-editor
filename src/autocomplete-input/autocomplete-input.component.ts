@@ -45,9 +45,9 @@ export class AutocompleteInputComponent implements OnInit {
   @Input() tabIndex: number;
   @Input() placeholder: string;
 
-  @Output() onValueChange: EventEmitter<string> = new EventEmitter<any>();
-  @Output() onKeypress: EventEmitter<KeyboardEvent> = new EventEmitter<any>();
-  @Output() onBlur: EventEmitter<any> = new EventEmitter<any>();
+  @Output() valueChange: EventEmitter<string> = new EventEmitter<any>();
+  @Output() keypress: EventEmitter<KeyboardEvent> = new EventEmitter<any>();
+  @Output() blur: EventEmitter<any> = new EventEmitter<any>();
 
   dataSource: Observable<string> | Array<string>;
   typeaheadOptionField: string;
@@ -78,7 +78,7 @@ export class AutocompleteInputComponent implements OnInit {
 
   onModelChange(value: string) {
     this.value = value;
-    this.onValueChange.emit(value);
+    this.valueChange.emit(value);
   }
 
   onCompletionSelect(completionItem: AutocompletionResult) {

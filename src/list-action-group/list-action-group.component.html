@@ -1,11 +1,11 @@
 <div>
-  <button type="button" class="editor-btn-delete" (click)="onDelete.emit()">
+  <button type="button" class="editor-btn-delete" (click)="delete.emit()">
     <i class="fa fa-times"></i>
   </button>
-  <button *ngIf="canMove" type="button" class="editor-btn-move-up" (click)="onMove.emit(-1)">
+  <button *ngIf="canMove" type="button" class="editor-btn-move-up" (click)="move.emit(-1)">
     <i class="fa fa-chevron-up"></i>
   </button>
-  <button *ngIf="canMove" type="button" class="editor-btn-move-down" (click)="onMove.emit(1)">
+  <button *ngIf="canMove" type="button" class="editor-btn-move-down" (click)="move.emit(1)">
     <i class="fa fa-chevron-down"></i>
   </button>
 </div>

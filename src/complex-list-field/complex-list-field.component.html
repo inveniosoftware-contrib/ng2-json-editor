@@ -49,7 +49,7 @@
       </span>
       <span *ngIf="item.isEditFormVisible">
         <object-field [value]="values.get(item.index)" [schema]="schema.items" [path]="getElementPath(item.index)">
-          <list-action-group (onMove)="moveElement(item.index, $event)" (onDelete)="deleteElement(item.index)" [canMove]="schema.sortable"></list-action-group>
+          <list-action-group (move)="moveElement(item.index, $event)" (delete)="deleteElement(item.index)" [canMove]="schema.sortable"></list-action-group>
         </object-field>
       </span>
     </div>

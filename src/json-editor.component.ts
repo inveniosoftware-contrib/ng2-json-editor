@@ -77,7 +77,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
 
   @Input() templates: { [templateName: string]: TemplateRef<any> } = {};
 
-  @Output() onRecordChange: EventEmitter<Object> = new EventEmitter<Object>();
+  @Output() recordChange: EventEmitter<Object> = new EventEmitter<Object>();
 
   private _errorMap: SchemaValidationErrors = {};
   _record: Map<string, any>;
@@ -135,7 +135,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
       .subscribe(json => {
         this._record = json;
         // emit the change as plain JS object
-        this.onRecordChange.emit(json.toJS());
+        this.recordChange.emit(json.toJS());
       });
     this.jsonSchemaService.setSchema(this.schema);
 

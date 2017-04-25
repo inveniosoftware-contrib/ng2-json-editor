@@ -19,11 +19,11 @@
         </div>
         <div *ngSwitchCase="'enum'">
           <searchable-dropdown [pathString]="pathString" [value]="value" [placeholder]="schema.title" [items]="schema.enum" [shortcutMap]="schema.enumShorcutMap"
-            (onSelect)="onSearchableDropdownSelect($event)" [tabIndex]="tabIndex" (onBlur)="domUtilService.clearHighlight()"></searchable-dropdown>
+            (select)="onSearchableDropdownSelect($event)" [tabIndex]="tabIndex" (onBlur)="domUtilService.clearHighlight()"></searchable-dropdown>
         </div>
         <div *ngSwitchCase="'autocomplete'">
           <autocomplete-input [pathString]="pathString" [value]="value" [path]="path" [autocompletionConfig]="schema.autocompletionConfig"
-            (onBlur)="commitValueChange()" (onKeypress)="onKeypress($event)" (onValueChange)="onAutocompleteInputValueChange($event)"
+            (blur)="commitValueChange()" (keypress)="onKeypress($event)" (valueChange)="onAutocompleteInputValueChange($event)"
             [placeholder]="schema.title" [tabIndex]="tabIndex"></autocomplete-input>
         </div>
         <div *ngSwitchCase="'integer'">
