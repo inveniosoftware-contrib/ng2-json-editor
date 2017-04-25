@@ -20,11 +20,7 @@ export class AppConfig {
       },
       '/authors/items': {
         order: ['full_name', 'affiliations'],
-        alwaysShow: ['contributor_roles']
-      },
-      '/authors/items/properties/contributor_roles/items': {
-        order: ['value', 'schema'],
-        alwaysShow: ['value', 'schema']
+        alwaysShow: ['credit_roles']
       },
       '/authors/items/properties/ids': {
         disabled: true
