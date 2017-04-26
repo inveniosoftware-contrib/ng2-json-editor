@@ -97,6 +97,10 @@ table {
       color: black;
     }
   }
+
+  .add-field-dropdown-container {
+    width: 100%;
+  }
 }
 
 // fixes ng2-bootstrap dropdown position
@@ -184,10 +188,21 @@ ul.pagination-top {
 }
 
 td.button-holder, th.button-holder {
-  width: 26.33px;
+  width: 27.33px;
 
   &.sortable {
     width: 46px;
+  }
+}
+
+// make all th of table-list with add-field-dropdown clickable
+th.button-holder {
+  .add-field-dropdown-container {
+    width: 100%;
+  }
+
+  .btn-add-field-dropdown {
+    width: 100%;
   }
 }
 
@@ -283,4 +298,3 @@ label.admin-mode {
   width: 90%;
   padding-left: 4px;
 }
-
