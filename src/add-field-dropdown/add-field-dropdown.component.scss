@@ -1,5 +1,5 @@
 .btn-add-field-dropdown {
-  padding: 0 5px 0 0;
+  padding: 0 3px;
   font-size: 11px;
   opacity: 0.4;
   border: 0;
@@ -17,16 +17,10 @@
   }
 }
 
-$filter-padding: 3px;
 .dropdown-filter-container {
-  padding-left: $filter-padding;
-  padding-right: $filter-padding;
+  padding: 0 3px;
   
   input {
     width: 100%;
   }
-}
-
-.add-field-dropdown-container {
-  width: 100%;
 }
