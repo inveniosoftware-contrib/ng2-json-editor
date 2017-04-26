@@ -42,9 +42,9 @@ export class FindReplaceComponent {
 
   private replaced: List<any> | Map<string, any>;
 
-  private find: string;
-  private replace: string;
-  private exactPhrase: boolean;
+  find: string;
+  replace: string;
+  exactPhrase: boolean;
 
   constructor(public changeDetectionRef: ChangeDetectorRef,
     public domSanitizer: DomSanitizer,

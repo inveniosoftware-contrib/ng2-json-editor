@@ -126,5 +126,6 @@ export {
   JsonEditorComponent,
   SubRecordComponent,
   HtmlViewComponent,
-  ValidationBadgesComponent
+  ValidationBadgesComponent,
+  ErrorPanelItemComponent
 }
