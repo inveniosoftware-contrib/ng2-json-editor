@@ -33,6 +33,7 @@ import {
 
 import { Map, Set } from 'immutable';
 
+import { AbstractTrackerComponent } from '../abstract-tracker';
 import { PathCache, JSONSchema } from '../shared/interfaces';
 import { JsonStoreService, AppGlobalsService } from '../shared/services';
 
@@ -44,7 +45,7 @@ import { JsonStoreService, AppGlobalsService } from '../shared/services';
   templateUrl: './sub-record.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SubRecordComponent implements OnInit, OnChanges {
+export class SubRecordComponent extends AbstractTrackerComponent implements OnInit, OnChanges {
   @Input() value: Map<string, any>;
   @Input() schema: JSONSchema;
   @Input() tabName = '';
@@ -56,7 +57,9 @@ export class SubRecordComponent implements OnInit, OnChanges {
   pathCache: PathCache = {};
 
   constructor(public jsonStoreService: JsonStoreService,
-    public appGlobalsService: AppGlobalsService) { }
+    public appGlobalsService: AppGlobalsService) {
+      super();
+    }
 
   ngOnInit() {
     this.keysByType = this.keys

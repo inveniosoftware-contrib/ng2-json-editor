@@ -53,8 +53,8 @@ export class TreeMenuItemComponent extends AbstractTrackerComponent implements O
   // defined only if schmea.type equals to 'object'
   keys: Set<string>;
 
-  private isCollapsed = true;
-  private href: string;
+  isCollapsed = true;
+  href: string;
 
   constructor(private windowHrefService: WindowHrefService,
     private domUtilService: DomUtilService,

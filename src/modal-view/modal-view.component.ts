@@ -37,12 +37,12 @@ import { ModalOptions } from '../shared/interfaces';
 export class ModalViewComponent {
 
   @ViewChild('modal') modal: ModalDirective;
-  private options: ModalOptions;
+  options: ModalOptions;
 
   // TODO: unsubcribe on destroy
   constructor(
     private modalService: ModalService,
-    private cd: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef
   ) {
     this.modalService
       .display$.subscribe(display => {
@@ -51,7 +51,7 @@ export class ModalViewComponent {
     this.modalService
       .options$.subscribe(options => {
         this.options = options;
-        this.cd.markForCheck();
+        this.changeDetectorRef.markForCheck();
       });
   }
 
