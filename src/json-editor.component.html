@@ -1,11 +1,13 @@
-<div class="row editor-container" [ngClass]="shorterEditorContainerClass">
+<div id="ng2-json-editor" class="row editor-container" [ngClass]="shorterEditorContainerClass">
   <div class="col-md-2 menu-container">
     <tree-menu [record]="_record" [schema]="schema"></tree-menu>
     <add-field-dropdown [fields]="keys" [pathString]="''" (onFieldAdd)="onFieldAdd($event)" [schema]="schema">Add field</add-field-dropdown>
+    <hr>
     <div *ngIf="config.enableAdminModeSwitch" class="admin-mode" tooltip="Allows editing all fields (use with care)">
       <input id="admin-mode-checkbox" type="checkbox" [(ngModel)]="appGlobalsService.adminMode" />
       <label class="admin-mode" for="admin-mode-checkbox">Enable Admin Mode</label>
     </div>
+    <hr>
     <validation-badges (onBadgeClick)="openPanel($event)"></validation-badges>
   </div>
   <div id="middle-main-container" class="middle main-container" [ngClass]="middleContainerColMdClass" [shortcuts]="shortcuts">

@@ -27,7 +27,7 @@ import { TabsUtilService } from './tabs-util.service';
 @Injectable()
 export class DomUtilService {
 
-  private editableSelector = '.value-container input, div[contenteditable=true]';
+  private editableSelector = '.value-container input, div[contenteditable=true], .switch-input';
   // highlight class is defined in json-editor.component.scss
   private highlightClass = 'highlight';
   private highlightedElement: HTMLElement;
