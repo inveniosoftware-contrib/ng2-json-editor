@@ -8,28 +8,30 @@
         </td>
       </tr>
     </div>
-    <div class="field-wrapper" *ngFor="let key of keysByType.others | addAlwaysShowFields:schema | filterAndSortBySchema:schema | setFirstElementPath:tabName; trackBy:trackByElement">
-      <tr>
-        <td class="label-holder">
-          <title-dropdown [title]="key | underscoreToSpace" [isDisabled]="schema.properties[key].disabled">
-            <li *ngIf="schema.properties[key].type === 'array'" class="title-dropdown-item">
-              <add-new-element-button [path]="getPathForChild(key)" [schema]="schema.properties[key]"></add-new-element-button>
-            </li>
-            <li class="title-dropdown-item">
-              <button type="button" class="editor-btn-delete editor-btn-delete-text" (click)="deleteField(key)">Delete</button>
-            </li>
-            <li class="divider"></li>
-            <li class="title-dropdown-item" (click)="$event.stopPropagation()">
-              <find-replace [path]="getPathForChild(key)" [schema]="schema.properties[key]"></find-replace>
-            </li>
-          </title-dropdown>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <any-type-field [value]="value.get(key) | selfOrEmpty:schema.properties[key]" [schema]="schema.properties[key]" [path]="getPathForChild(key)"></any-type-field>
-        </td>
-      </tr>
+    <div *ngIf="keysByType.others">
+      <div class="field-wrapper" *ngFor="let key of keysByType.others | addAlwaysShowFields:schema | filterAndSortBySchema:schema | setFirstElementPath:tabName; trackBy:trackByElement">
+        <tr>
+          <td class="label-holder">
+            <title-dropdown [title]="key | underscoreToSpace" [isDisabled]="schema.properties[key].disabled">
+              <li *ngIf="schema.properties[key].type === 'array'" class="title-dropdown-item">
+                <add-new-element-button [path]="getPathForChild(key)" [schema]="schema.properties[key]"></add-new-element-button>
+              </li>
+              <li class="title-dropdown-item">
+                <button type="button" class="editor-btn-delete editor-btn-delete-text" (click)="deleteField(key)">Delete</button>
+              </li>
+              <li class="divider"></li>
+              <li class="title-dropdown-item" (click)="$event.stopPropagation()">
+                <find-replace [path]="getPathForChild(key)" [schema]="schema.properties[key]"></find-replace>
+              </li>
+            </title-dropdown>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <any-type-field [value]="value.get(key) | selfOrEmpty:schema.properties[key]" [schema]="schema.properties[key]" [path]="getPathForChild(key)"></any-type-field>
+          </td>
+        </tr>
+      </div>
     </div>
   </table>
 </div>

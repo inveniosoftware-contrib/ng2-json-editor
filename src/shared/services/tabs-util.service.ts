@@ -23,6 +23,7 @@
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import * as _ from 'lodash';
+import { Set } from 'immutable';
 
 import { TabsConfig, JSONSchema } from '../interfaces';
 import { PathUtilService } from './path-util.service';
@@ -68,6 +69,15 @@ export class TabsUtilService {
       });
     this._schemaKeyToTabName = keyToTabName;
     return keyToTabName;
+  }
+
+  getTabNameToKeys(keys: Set<string>, schemaKeyToTabName: { [key: string]: string }, tabNames: Array<string>):
+  { [tabName: string]: Set<string> } {
+    let tabNameToKeys = keys.groupBy(key => schemaKeyToTabName[key]).toObject() as any;
+    tabNames
+      .filter(tabName => !(tabName in tabNameToKeys))
+      .forEach(tabName => tabNameToKeys[tabName] = Set());
+    return tabNameToKeys;
   }
 
   // TODO: shouldn't access this

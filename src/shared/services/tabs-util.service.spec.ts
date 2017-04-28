@@ -20,7 +20,7 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Map, fromJS } from 'immutable';
+import { Map, Set, fromJS } from 'immutable';
 
 import { TabsUtilService } from './tabs-util.service';
 import { PathUtilService } from './path-util.service';
@@ -158,6 +158,42 @@ describe('TabsUtilService', () => {
       key2Default: 'Default'
     };
     let result = service.getSchemaKeyToTabName(config, schema);
+    expect(result).toEqual(expected);
+  });
+
+  it('should return tabName to keys', () => {
+    let keys = Set(['authors', 'references', 'imprints', 'keywords']);
+    let schemaKeyToTabName = {
+      authors: 'Authors',
+      references: 'References',
+      imprints: 'Main',
+      keywords: 'Main'
+    };
+    let tabNames = ['Main', 'References', 'Authors'];
+    let expected = {
+      Main: Set(['imprints', 'keywords']),
+      Authors: Set(['authors']),
+      References: Set(['references'])
+    };
+    let result = service.getTabNameToKeys(keys, schemaKeyToTabName, tabNames);
+    expect(result).toEqual(expected);
+  });
+
+  it('should return tabName to keys adding empty sets', () => {
+    let keys = Set(['authors', 'imprints', 'keywords']);
+    let schemaKeyToTabName = {
+      authors: 'Authors',
+      references: 'References',
+      imprints: 'Main',
+      keywords: 'Main'
+    };
+    let tabNames = ['Main', 'References', 'Authors'];
+    let expected = {
+      Main: Set(['imprints', 'keywords']),
+      Authors: Set(['authors']),
+      References: Set()
+    };
+    let result = service.getTabNameToKeys(keys, schemaKeyToTabName, tabNames);
     expect(result).toEqual(expected);
   });
 

@@ -142,11 +142,9 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     // setup variables need for tab grouping.
     if (this.config.tabsConfig) {
       this.schemaKeyToTabName = this.tabsUtilService.getSchemaKeyToTabName(this.config.tabsConfig, this.schema);
-      this.tabNameToKeys = this.keys
-        .groupBy(key => this.schemaKeyToTabName[key])
-        .toObject() as any;
-      this.tabNameToSubSchema = this.tabsUtilService.getTabNameToSubSchema(this.schema, this.schemaKeyToTabName);
       this.tabNames = this.tabsUtilService.getTabNames(this.config.tabsConfig);
+      this.tabNameToKeys = this.tabsUtilService.getTabNameToKeys(this.keys, this.schemaKeyToTabName, this.tabNames);
+      this.tabNameToSubSchema = this.tabsUtilService.getTabNameToSubSchema(this.schema, this.schemaKeyToTabName);
       this.tabsUtilService.tabSelectionSubject.subscribe(tabName => {
         this.activeTabName = tabName;
       });
