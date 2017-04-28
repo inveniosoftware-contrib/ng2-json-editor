@@ -16,7 +16,7 @@ webpackJsonp([0,3],{
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EmptyValueService; });
 /*
@@ -539,7 +539,7 @@ ComponentTypeService.ctorParameters = function () { return []; };
 var DomUtilService = (function () {
     function DomUtilService(tabsUtilService) {
         this.tabsUtilService = tabsUtilService;
-        this.editableSelector = '.value-container input, div[contenteditable=true]';
+        this.editableSelector = '.value-container input, div[contenteditable=true], .switch-input';
         // highlight class is defined in json-editor.component.scss
         this.highlightClass = 'highlight';
     }
@@ -777,7 +777,7 @@ JsonSchemaService.ctorParameters = function () { return []; };
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__);
@@ -913,7 +913,7 @@ JsonUtilService.ctorParameters = function () { return [
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__empty_value_service__ = __webpack_require__(131);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__json_store_service__ = __webpack_require__(388);
@@ -1147,7 +1147,9 @@ ShortcutActionService.ctorParameters = function () { return [
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash__ = __webpack_require__(186);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__path_util_service__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_immutable__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_immutable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__path_util_service__ = __webpack_require__(66);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsUtilService; });
 /*
  * This file is part of ng2-json-editor.
@@ -1170,6 +1172,7 @@ ShortcutActionService.ctorParameters = function () { return [
  * waive the privileges and immunities granted to it by virtue of its status
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
+
 
 
 
@@ -1217,6 +1220,13 @@ var TabsUtilService = (function () {
         });
         this._schemaKeyToTabName = keyToTabName;
         return keyToTabName;
+    };
+    TabsUtilService.prototype.getTabNameToKeys = function (keys, schemaKeyToTabName, tabNames) {
+        var tabNameToKeys = keys.groupBy(function (key) { return schemaKeyToTabName[key]; }).toObject();
+        tabNames
+            .filter(function (tabName) { return !(tabName in tabNameToKeys); })
+            .forEach(function (tabName) { return tabNameToKeys[tabName] = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_immutable__["Set"])(); });
+        return tabNameToKeys;
     };
     // TODO: shouldn't access this
     TabsUtilService.prototype.getTabNameToSubSchema = function (schema, keyToTabName) {
@@ -1268,7 +1278,7 @@ TabsUtilService.decorators = [
 ];
 /** @nocollapse */
 TabsUtilService.ctorParameters = function () { return [
-    { type: __WEBPACK_IMPORTED_MODULE_3__path_util_service__["a" /* PathUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_4__path_util_service__["a" /* PathUtilService */], },
 ]; };
 
 
@@ -1302,7 +1312,7 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dyna
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_zip__ = __webpack_require__(633);
@@ -1385,9 +1395,9 @@ var _a, _b;
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__dist__ = __webpack_require__(671);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(398);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_config__ = __webpack_require__(135);
@@ -1551,7 +1561,7 @@ webpackEmptyContext.id = 405;
 
 /***/ }),
 
-/***/ 53:
+/***/ 43:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2053,7 +2063,7 @@ PathUtilService.ctorParameters = function () { return []; };
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_tracker__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_tracker__ = __webpack_require__(43);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AbstractFieldComponent; });
 /*
  * This file is part of ng2-json-editor.
@@ -2338,7 +2348,7 @@ var AddFieldDropdownComponent = (function () {
 AddFieldDropdownComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
                 selector: 'add-field-dropdown',
-                styles: [".btn-add-field-dropdown { padding: 0 5px 0 0; font-size: 11px; opacity: 0.4; border: 0; background: transparent; font-weight: bold; line-height: 1; text-shadow: 0 1px 0 #fff; color: darkslategray; margin-bottom: 2px; float: right; } .btn-add-field-dropdown:hover { color: blue; opacity: 0.6; } .dropdown-filter-container { padding-left: 3px; padding-right: 3px; } .dropdown-filter-container input { width: 100%; } .add-field-dropdown-container { width: 100%; } "],
+                styles: [".btn-add-field-dropdown { padding: 0 3px; font-size: 11px; opacity: 0.4; border: 0; background: transparent; font-weight: bold; line-height: 1; text-shadow: 0 1px 0 #fff; color: darkslategray; margin-bottom: 2px; float: left; } .btn-add-field-dropdown:hover { color: blue; opacity: 0.6; } .dropdown-filter-container { padding: 0 3px; } .dropdown-filter-container input { width: 100%; } "],
                 template: "<div *ngIf=\"!disabled\" class=\"btn-group add-field-dropdown-container\" dropdown keyboardNav=\"true\" (onShown)=\"onDropdownShown()\"> <button type=\"button\" class=\"btn-add-field-dropdown\" dropdownToggle> <ng-content></ng-content> <i class=\"fa fa-caret-down\"></i> </button> <ul class=\"dropdown-menu\" *dropdownMenu> <li class=\"dropdown-filter-container\"> <input [(ngModel)]=\"expression\" placeholder=\"filter\" (click)=\"$event.stopPropagation()\"> </li> <li class=\"divider dropdown-divider\"></li> <li *ngFor=\"let key of schema.properties | differentKeys:fields | filterByExpression:expression\"> <a class=\"dropdown-item\" href=\"javascript:void(0)\" (click)=\"onFieldSelect(key)\">{{key}}</a> </li> </ul> </div>"
             },] },
 ];
@@ -2375,7 +2385,7 @@ AddFieldDropdownComponent.propDecorators = {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(6);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddNewElementButtonComponent; });
@@ -2875,7 +2885,7 @@ ComplexListFieldComponent.propDecorators = {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_tracker__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_tracker__ = __webpack_require__(43);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditorPreviewerComponent; });
 /*
  * This file is part of ng2-json-editor.
@@ -2924,7 +2934,7 @@ var EditorPreviewerComponent = (function (_super) {
 EditorPreviewerComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
                 selector: 'editor-previewer',
-                styles: ["div.preview-container { width: 100%; overflow-y: auto; height: 90vh; } span.preview-link { color: #337ab7; cursor: pointer; } span.preview-link:hover { color: cornflowerblue; } "],
+                styles: ["div.preview-container { width: 100%; height: 95vh; overflow-y: auto; } span.preview-link { color: #337ab7; cursor: pointer; } span.preview-link:hover { color: cornflowerblue; } "],
                 template: "<div> <tabset> <tab *ngFor=\"let preview of previews trackBy:trackByElement\" [heading]=\"preview.name\"> <div [ngSwitch]=\"preview.type\"> <div *ngSwitchCase=\"'html'\" class=\"preview-container\"> <ng-template tabHeading> <span class=\"preview-link\" (click)=\"openUrlInNewTab(preview.url)\"> <i class=\"fa fa-external-link\"></i> </span> </ng-template> <html-view [url]=\"preview.url\"></html-view> </div> </div> </tab> </tabset> </div>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
             },] },
@@ -3034,7 +3044,7 @@ ErrorPanelItemComponent.propDecorators = {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_tracker__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_tracker__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(6);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ErrorPanelComponent; });
 /*
@@ -3197,7 +3207,7 @@ ErrorPanelComponent.propDecorators = {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(6);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FindReplaceComponent; });
 /*
@@ -3271,7 +3281,7 @@ FindReplaceComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
                 selector: 'find-replace',
                 styles: [".find-replace-container { margin: 4px 3px 3px 2px; } .find-replace-container input { font-size: 13px; } .top-container-item { margin-bottom: 3px; } .bottom-container-item { margin-top: 5px; } .bottom-container-item i { font-size: 20px; float: right; padding-right: 2px; } label { font-size: 12px; font-weight: 400; color: #7e7e7e; } .horizontal-padding, .find-replace-container div { padding-right: 20px; padding-left: 20px; } "],
-                template: "<div class=\"find-replace-container\"> <div class=\"top-container-item\"> <input placeholder=\"Find\" [(ngModel)]=\"find\" (keypress)=\"onKeypress($event.key)\" /> </div> <div> <input placeholder=\"Replace\" [(ngModel)]=\"replace\" (keypress)=\"onKeypress($event.key)\" /> </div> <div class=\"bottom-container-item\"> <label> Exact phrase <input type=\"checkbox\" [(ngModel)]=\"matchWhole\" (keypress)=\"onKeypress($event.key)\"/> </label> <i class=\"fa fa-arrow-circle-right\" (click)=\"findAndReplace()\"></i> </div> </div>",
+                template: "<div class=\"find-replace-container\"> <div class=\"top-container-item\"> <input placeholder=\"Find\" [(ngModel)]=\"find\" (keypress)=\"onKeypress($event.key)\" /> </div> <div> <input placeholder=\"Replace\" [(ngModel)]=\"replace\" (keypress)=\"onKeypress($event.key)\" /> </div> <div class=\"bottom-container-item\"> <label> Exact phrase <input type=\"checkbox\" [(ngModel)]=\"exactPhrase\" (keypress)=\"onKeypress($event.key)\"/> </label> <i class=\"fa fa-arrow-circle-right\" (click)=\"findAndReplace()\"></i> </div> </div>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
@@ -3387,12 +3397,12 @@ HtmlViewComponent.propDecorators = {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_immutable__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_immutable__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_immutable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_skipWhile__ = __webpack_require__(639);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_skipWhile___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_skipWhile__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__abstract_tracker__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__abstract_tracker__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_services__ = __webpack_require__(6);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JsonEditorComponent; });
 /*
@@ -3494,18 +3504,16 @@ var JsonEditorComponent = (function (_super) {
         // setup variables need for tab grouping.
         if (this.config.tabsConfig) {
             this.schemaKeyToTabName = this.tabsUtilService.getSchemaKeyToTabName(this.config.tabsConfig, this.schema);
-            this.tabNameToKeys = this.keys
-                .groupBy(function (key) { return _this.schemaKeyToTabName[key]; })
-                .toObject();
-            this.tabNameToSubSchema = this.tabsUtilService.getTabNameToSubSchema(this.schema, this.schemaKeyToTabName);
             this.tabNames = this.tabsUtilService.getTabNames(this.config.tabsConfig);
+            this.tabNameToKeys = this.tabsUtilService.getTabNameToKeys(this.keys, this.schemaKeyToTabName, this.tabNames);
+            this.tabNameToSubSchema = this.tabsUtilService.getTabNameToSubSchema(this.schema, this.schemaKeyToTabName);
             this.tabsUtilService.tabSelectionSubject.subscribe(function (tabName) {
                 _this.activeTabName = tabName;
             });
             this.appGlobalsService.activeTabName = this.config.tabsConfig.defaultTabName;
-            // set config to make it globally accessible all over the app
-            this.appGlobalsService.config = this.config;
         }
+        // set config to make it globally accessible all over the app
+        this.appGlobalsService.config = this.config;
     };
     /**
      * Converts PreviewConfig instances to Preview instances and appends to `previews` array.
@@ -3618,8 +3626,8 @@ JsonEditorComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
                 selector: 'json-editor',
                 encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["p" /* ViewEncapsulation */].None,
-                styles: ["body, html { height: 100%; } .editor-container { height: 100%; margin-right: 0px; margin-left: 0px; } .editor-container .row { margin-left: 0px; margin-right: 0px; } .shorter-editor-container { height: 75%; } .error-panel-container { height: 25%; overflow: hidden; } .error-panel-container .tab-content { height: 90%; overflow: auto; } .error-panel-container .nav-tabs > .tab-align-right { float: right; } .error-link { color: #D14024; } .error-link .badge { background-color: #a94442; } .warning-link { color: #FFDD00; } .warning-link .badge { background-color: #8a6d3b; } table { margin-bottom: 0px !important; } .main-container { height: 100%; overflow: hidden; } .main-container .tab-content, .main-container .tab-pane { height: 100%; } .middle.main-container { padding: 0px; } .menu-container { background-color: #1D2D3D; height: 100%; overflow: auto; } .menu-container div.dropdown { width: 100%; } .menu-container ul.dropdown-menu { right: 0px; } .menu-container button.btn-add-field-dropdown { background: white; padding: 5px; opacity: 0.9; line-height: normal; font-size: 16px; width: 100%; } .menu-container button.btn-add-field-dropdown:hover { opacity: 1; color: black; } bs-dropdown-container { position: inherit !important; } #editor { font-size: 13px; border: 2px solid #a5adb5; } #editor .field-wrapper { border-bottom: 2px solid #a5adb5; } #editor td { background-color: #f9f9f9; border: none; padding: 0; } #editor td > * { vertical-align: middle; } #editor th { font-weight: 400; padding: 1px 0px 1px 3px; } #editor td.label-holder { width: 1%; white-space: nowrap; padding-right: 5px; } #editor tr.error td, #editor td.error { background-color: #f2968d !important; } #editor tbody { border: none; } .editor-btn-delete { font-weight: bold; line-height: 1; text-shadow: 0 1px 0 #fff; opacity: 0.2; background: transparent; border: 0; padding: 0 0 3px 3px; } .editor-btn-delete:hover { color: red; opacity: 0.6; } .editor-btn-delete.editor-btn-delete-text { font-size: 13px; opacity: 0.5; padding: 0px; } .editor-btn-move-down { padding-bottom: 0; } .editor-btn-move-up, .editor-btn-move-down { padding: 0; font-size: 11px; border: 0; background: transparent; opacity: 0.2; } .editor-btn-move-up:hover, .editor-btn-move-down:hover { opacity: 0.6; } ul.pagination-top { margin: -16px 0px 0px 0px; } td.button-holder, th.button-holder { width: 26.33px; } td.button-holder.sortable, th.button-holder.sortable { width: 46px; } label { color: #c1c1c1; } .highlight { border: 2px solid yellow !important; } table.editable-inner-table { table-layout: fixed; } table.editable-inner-table label { display: inline; font-weight: initial; padding-left: 5px; } table.editable-inner-table .dropdown-menu { left: inherit; right: 0px; min-width: 100px; } .title-dropdown-item button { width: 100%; text-align: left; padding-left: 20px !important; padding-right: 20px !important; } .title-dropdown-item:hover { background: #f5f5f5; } .match-whole-container .tooltip.top .tooltip-arrow { border-top-color: transparent; } .match-whole-container .tooltip { width: 90%; } .value-container { background-color: #edf6fd !important; } button.btn-toggle { float: right; margin-top: 5px; margin-right: 5px; } .autocomplete-container .dropdown { position: relative !important; top: 0px !important; left: 0px !important; } .list-action-group-container { text-align: right; } .max-height-90-vh { max-height: 90vh; } .max-height-70-vh { max-height: 70vh; } div.admin-mode { padding-top: 8px; width: 100%; } label.admin-mode { color: #e0dfdf; font-size: 13px; font-weight: normal; width: 90%; padding-left: 4px; } "],
-                template: "<div class=\"row editor-container\" [ngClass]=\"shorterEditorContainerClass\"> <div class=\"col-md-2 menu-container\"> <tree-menu [record]=\"_record\" [schema]=\"schema\"></tree-menu> <add-field-dropdown [fields]=\"keys\" [pathString]=\"''\" (onFieldAdd)=\"onFieldAdd($event)\" [schema]=\"schema\">Add field</add-field-dropdown> <div *ngIf=\"config.enableAdminModeSwitch\" class=\"admin-mode\" tooltip=\"Allows editing all fields (use with care)\"> <input id=\"admin-mode-checkbox\" type=\"checkbox\" [(ngModel)]=\"appGlobalsService.adminMode\" /> <label class=\"admin-mode\" for=\"admin-mode-checkbox\">Enable Admin Mode</label> </div> <validation-badges (onBadgeClick)=\"openPanel($event)\"></validation-badges> </div> <div id=\"middle-main-container\" class=\"middle main-container\" [ngClass]=\"middleContainerColMdClass\" [shortcuts]=\"shortcuts\"> <tabset *ngIf=\"config.tabsConfig\"> <tab *ngFor=\"let tabName of tabNames; trackBy:trackByElement\" [heading]=\"tabName\" (select)=\"activeTabName = tabName\" [active]=\"isActiveTab(tabName)\"> <sub-record [value]=\"_record\" [tabName]=\"tabName\" [schema]=\"tabNameToSubSchema[tabName]\" [keys]=\"tabNameToKeys[tabName]\" (onDeleteKey)=\"onDeleteKey($event)\" (onOpenPanelClick)=\"openPanel($event)\"></sub-record> </tab> </tabset> <sub-record *ngIf=\"!config.tabsConfig\" [value]=\"_record\" [schema]=\"schema\" (onDeleteKey)=\"onDeleteKey($event)\" [keys]=\"keys\"></sub-record> </div> <div id=\"right-main-container\" *ngIf=\"!isPreviewerDisabled\" [ngClass]=\"rightContainerColMdClass\" class=\"main-container\"> <button id=\"btn-preview-toggle\" type=\"button\" class=\"btn btn-default btn-toggle\" (click)=\"isPreviewerHidden = !isPreviewerHidden\">{{isPreviewerHidden ? \"Show Preview\" : \"Hide Preview\"}}</button> <editor-previewer [hidden]=\"isPreviewerHidden\" [previews]=\"previews\"> </editor-previewer> </div> </div> <error-panel [activeTab]=\"errorPanelActiveTab\" [isOpen]=\"isErrorPanelOpen\" (onCollapse)=\"isErrorPanelOpen = $event\"></error-panel> <!-- Modal View controlled by ModalService --> <modal-view> </modal-view>",
+                styles: ["body, html { height: 100%; background-color: #ecf0f1; } .editor-container { height: 100%; margin-right: 0px; margin-left: 0px; } .editor-container .row { margin-left: 0px; margin-right: 0px; } .shorter-editor-container { height: 75%; } #ng2-json-editor { /* Styles for tabset */ } #ng2-json-editor .field-wrapper { border-bottom: 2px solid #a5adb5; } #ng2-json-editor td { background-color: #f9f9f9; border: none; padding: 0; } #ng2-json-editor td > * { vertical-align: middle; } #ng2-json-editor th { font-weight: 400; padding: 1px 0px 1px 3px; } #ng2-json-editor td.label-holder { width: 1%; white-space: nowrap; padding-right: 5px; } #ng2-json-editor tr.error td, #ng2-json-editor td.error { color: white; background-color: #e74c3c !important; transition: all .4s; } #ng2-json-editor tbody { border: none; } #ng2-json-editor .error-panel-container { height: 25%; overflow: hidden; } #ng2-json-editor .error-panel-container .tab-content { height: 90%; overflow: auto; } #ng2-json-editor .error-panel-container .nav-tabs > .tab-align-right { float: right; } #ng2-json-editor .error-link { color: #D14024; } #ng2-json-editor .error-link .badge { background-color: #a94442; } #ng2-json-editor ::-webkit-validation-bubble-heading .warning-link { color: #FFDD00; } #ng2-json-editor ::-webkit-validation-bubble-heading .warning-link .badge { background-color: #8a6d3b; } #ng2-json-editor table { margin-bottom: 0px !important; } #ng2-json-editor .main-container { font-size: 13px; border-right: 2px solid #a5adb5; border-left: 2px solid #a5adb5; height: 100%; overflow: auto; } #ng2-json-editor .main-container .tab-container > .nav-tabs { font-size: 14px; } #ng2-json-editor .add-field-dropdown-container { width: 100%; } #ng2-json-editor .middle.main-container { padding: 0px; } #ng2-json-editor .menu-container { background-color: #1D2D3D; height: 100%; overflow: auto; } #ng2-json-editor .menu-container div.dropdown { width: 100%; } #ng2-json-editor .menu-container ul.dropdown-menu { right: 0px; } #ng2-json-editor .menu-container button.btn-add-field-dropdown { background: white; padding: 5px; opacity: 0.9; line-height: normal; font-size: 16px; width: 100%; } #ng2-json-editor .menu-container button.btn-add-field-dropdown:hover { opacity: 1; color: black; } #ng2-json-editor bs-dropdown-container { position: inherit !important; } #ng2-json-editor .editor-btn-delete { font-weight: bold; line-height: 1; text-shadow: 0 1px 0 #fff; opacity: 0.2; background: transparent; border: 0; padding: 0 0 3px 3px; } #ng2-json-editor .editor-btn-delete:hover { color: red; opacity: 0.6; } #ng2-json-editor .editor-btn-delete.editor-btn-delete-text { font-size: 13px; opacity: 0.5; padding: 0px; } #ng2-json-editor .editor-btn-move-down { padding-bottom: 0; } #ng2-json-editor .editor-btn-move-up, #ng2-json-editor .editor-btn-move-down { padding: 0; font-size: 11px; border: 0; background: transparent; opacity: 0.2; } #ng2-json-editor .editor-btn-move-up:hover, #ng2-json-editor .editor-btn-move-down:hover { opacity: 0.6; } #ng2-json-editor ul.pagination-top { margin: -16px 0px 0px 0px; } #ng2-json-editor td.button-holder, #ng2-json-editor th.button-holder { width: 27.33px; } #ng2-json-editor td.button-holder.sortable, #ng2-json-editor th.button-holder.sortable { width: 46px; } #ng2-json-editor th.button-holder .add-field-dropdown-container { width: 100%; } #ng2-json-editor th.button-holder .btn-add-field-dropdown { width: 100%; } #ng2-json-editor label { color: #c1c1c1; } #ng2-json-editor .highlight { border: 2px solid yellow !important; } #ng2-json-editor table.editable-inner-table { table-layout: fixed; } #ng2-json-editor table.editable-inner-table label { display: inline; font-weight: initial; padding-left: 5px; } #ng2-json-editor table.editable-inner-table .dropdown-menu { left: inherit; right: 0px; min-width: 100px; } #ng2-json-editor .title-dropdown-item button { width: 100%; text-align: left; padding-left: 20px !important; padding-right: 20px !important; } #ng2-json-editor .title-dropdown-item:hover { background: #f5f5f5; } #ng2-json-editor .tooltip.top .tooltip-arrow { border-top-color: transparent; } #ng2-json-editor .tooltip { width: 90%; } #ng2-json-editor .value-container { background-color: #edf6fd; } #ng2-json-editor button.btn-toggle { float: right; margin-top: 5px; margin-right: 5px; } #ng2-json-editor .autocomplete-container .dropdown { position: relative !important; top: 0px !important; left: 0px !important; } #ng2-json-editor .list-action-group-container { text-align: right; } #ng2-json-editor .max-height-90-vh { max-height: 90vh; } #ng2-json-editor .max-height-70-vh { max-height: 70vh; } #ng2-json-editor div.admin-mode { padding-top: 8px; width: 100%; } #ng2-json-editor label.admin-mode { color: #e0dfdf; font-size: 13px; font-weight: normal; width: 90%; padding-left: 4px; } #ng2-json-editor hr { margin-top: 5px; margin-bottom: 5px; border-top: 1px solid #757575; } #ng2-json-editor .btn { border-radius: 0; } #ng2-json-editor .btn.btn-success { background-color: #16a085; border-color: #16a085; color: white; } #ng2-json-editor .btn.btn-success:hover, #ng2-json-editor .btn.btn-success:active, #ng2-json-editor .btn.btn-success:focus { background-color: #19b698 !important; color: white; } #ng2-json-editor .btn .fa { margin-right: 5px; } #ng2-json-editor .nav { margin-bottom: 3px; } #ng2-json-editor .nav-tabs > li.active > a, #ng2-json-editor .nav-tabs > li.active > a:hover, #ng2-json-editor .nav-tabs > li.active > a:focus { border-top: 1px solid #2c3e50; background-color: white; } #ng2-json-editor .nav-tabs > li > a:hover { border-top: 1px solid #2c3e50; border-bottom: 1px solid transparent; border-left: 1px solid transparent; border-right: 1px solid transparent; transition: all .4s; } #ng2-json-editor .nav.nav-tabs { border-bottom: 5px solid white; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.24); } #ng2-json-editor .nav-tabs > li > a { margin-right: 0px; border-radius: 0px; border-right: 1px solid #e0e2e2; } "],
+                template: "<div id=\"ng2-json-editor\" class=\"row editor-container\" [ngClass]=\"shorterEditorContainerClass\"> <div class=\"col-md-2 menu-container\"> <tree-menu [record]=\"_record\" [schema]=\"schema\"></tree-menu> <add-field-dropdown [fields]=\"keys\" [pathString]=\"''\" (onFieldAdd)=\"onFieldAdd($event)\" [schema]=\"schema\">Add field</add-field-dropdown> <hr> <div *ngIf=\"config.enableAdminModeSwitch\" class=\"admin-mode\" tooltip=\"Allows editing all fields (use with care)\"> <input id=\"admin-mode-checkbox\" type=\"checkbox\" [(ngModel)]=\"appGlobalsService.adminMode\" /> <label class=\"admin-mode\" for=\"admin-mode-checkbox\">Enable Admin Mode</label> </div> <hr> <validation-badges (onBadgeClick)=\"openPanel($event)\"></validation-badges> </div> <div id=\"middle-main-container\" class=\"middle main-container\" [ngClass]=\"middleContainerColMdClass\" [shortcuts]=\"shortcuts\"> <tabset *ngIf=\"config.tabsConfig\"> <tab *ngFor=\"let tabName of tabNames; trackBy:trackByElement\" [heading]=\"tabName\" (select)=\"activeTabName = tabName\" [active]=\"isActiveTab(tabName)\"> <sub-record [value]=\"_record\" [tabName]=\"tabName\" [schema]=\"tabNameToSubSchema[tabName]\" [keys]=\"tabNameToKeys[tabName]\" (onDeleteKey)=\"onDeleteKey($event)\" (onOpenPanelClick)=\"openPanel($event)\"></sub-record> </tab> </tabset> <sub-record *ngIf=\"!config.tabsConfig\" [value]=\"_record\" [schema]=\"schema\" (onDeleteKey)=\"onDeleteKey($event)\" [keys]=\"keys\"></sub-record> </div> <div id=\"right-main-container\" *ngIf=\"!isPreviewerDisabled\" [ngClass]=\"rightContainerColMdClass\" class=\"main-container\"> <button id=\"btn-preview-toggle\" type=\"button\" class=\"btn btn-default btn-toggle\" (click)=\"isPreviewerHidden = !isPreviewerHidden\">{{isPreviewerHidden ? \"Show Preview\" : \"Hide Preview\"}}</button> <editor-previewer [hidden]=\"isPreviewerHidden\" [previews]=\"previews\"> </editor-previewer> </div> </div> <error-panel [activeTab]=\"errorPanelActiveTab\" [isOpen]=\"isErrorPanelOpen\" (onCollapse)=\"isErrorPanelOpen = $event\"></error-panel> <!-- Modal View controlled by ModalService --> <modal-view> </modal-view>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
@@ -3654,7 +3662,7 @@ JsonEditorComponent.propDecorators = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_bootstrap__ = __webpack_require__(605);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_slide_toggle__ = __webpack_require__(619);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__add_field_dropdown__ = __webpack_require__(676);
@@ -3707,6 +3715,7 @@ JsonEditorComponent.propDecorators = {
 /* unused harmony reexport SubRecordComponent */
 /* unused harmony reexport HtmlViewComponent */
 /* unused harmony reexport ValidationBadgesComponent */
+/* unused harmony reexport ErrorPanelItemComponent */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JsonEditorModule; });
 /*
  * This file is part of ng2-json-editor.
@@ -3925,10 +3934,10 @@ ListActionGroupComponent.propDecorators = {
 
 var ModalViewComponent = (function () {
     // TODO: unsubcribe on destroy
-    function ModalViewComponent(modalService, cd) {
+    function ModalViewComponent(modalService, changeDetectorRef) {
         var _this = this;
         this.modalService = modalService;
-        this.cd = cd;
+        this.changeDetectorRef = changeDetectorRef;
         this.modalService
             .display$.subscribe(function (display) {
             display ? _this.modal.show() : _this.modal.hide();
@@ -3936,7 +3945,7 @@ var ModalViewComponent = (function () {
         this.modalService
             .options$.subscribe(function (options) {
             _this.options = options;
-            _this.cd.markForCheck();
+            _this.changeDetectorRef.markForCheck();
         });
     }
     ModalViewComponent.prototype.onShow = function () {
@@ -3951,7 +3960,7 @@ ModalViewComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
                 selector: 'modal-view',
                 styles: [""],
-                template: "<div class=\"modal fade\" (onShown)=\"onShow()\" bsModal #modal=\"bs-modal\" tabindex=\"-1\" role=\"dialog\" [config]=\"{ backdrop: false }\"> <div class=\"modal-dialog modal-lg\"> <div *ngIf=\"options\" class=\"modal-content max-height-90-vh\"> <div class=\"modal-header\"> <button type=\"button\" class=\"close\" (click)=\"modal.hide()\">&times;</button> <h4 class=\"modal-title\">{{options.title}}</h4> </div> <div class=\"modal-body\"> <div [innerHTML]=\"options.bodyHtml\"></div> <div [ngSwitch]=\"options.type\"> <div *ngSwitchCase=\"'confirm'\"> <button class=\"btn btn-success\" (click)=\"options.onConfirm();\"> Confirm <i class=\"fa fa-check\"></i> </button> </div> </div> </div> </div> </div> </div>",
+                template: "<div class=\"modal fade\" (onShown)=\"onShow()\" bsModal #modal=\"bs-modal\" tabindex=\"-1\" role=\"dialog\" [config]=\"{ backdrop: false }\"> <div class=\"modal-dialog modal-lg\"> <div *ngIf=\"options\" class=\"modal-content max-height-90-vh\"> <div class=\"modal-header\"> <button type=\"button\" class=\"close\" (click)=\"modal.hide()\">&times;</button> <h4 class=\"modal-title\">{{options.title}}</h4> </div> <div class=\"modal-body\"> <div [innerHTML]=\"options.bodyHtml\"></div> <div [ngSwitch]=\"options.type\"> <div *ngSwitchCase=\"'confirm'\"> <button class=\"btn btn-success\" (click)=\"options.onConfirm();\"> <i class=\"fa fa-check\"></i> Confirm </button> </div> </div> </div> </div> </div> </div>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
@@ -4339,7 +4348,7 @@ PrimitiveListFieldComponent.propDecorators = {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch__ = __webpack_require__(634);
@@ -4464,8 +4473,8 @@ var RefFieldComponent = (function () {
 RefFieldComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
                 selector: 'ref-field',
-                styles: ["button.btn-preview-template { background: transparent; border: 0; width: 100%; height: 100%; } .align-center { width: 100%; text-align: center; } "],
-                template: "<div [id]=\"pathString\"> <div *ngIf=\"refConfig\"> <button class=\"btn-preview-template\" *ngIf=\"!shouldDisplayTemplate\" (click)=\"onPreviewClick($event)\"><i class=\"fa fa-eye\"></i></button> <div *ngIf=\"shouldDisplayTemplate\"> <ng-template *ngIf=\"refData\" [ngTemplateOutlet]=\"customTemplate\" [ngTemplateOutletContext]=\"{response: refData}\"></ng-template> <i *ngIf=\"!refData\" class=\"fa fa-spinner fa-spin align-center\"></i> </div> </div> <div *ngIf=\"!refConfig\"> <a target=\"_blank\" [href]=\"ref\">{{ref}}</a> </div> </div>",
+                styles: ["button.btn-preview-template { background: transparent; border: 0; width: 100%; height: 100%; } .align-center { width: 100%; text-align: center; } .break-word { word-break: break-word; } "],
+                template: "<div [id]=\"pathString\"> <div *ngIf=\"refConfig\"> <button class=\"btn-preview-template\" *ngIf=\"!shouldDisplayTemplate\" (click)=\"onPreviewClick($event)\"><i class=\"fa fa-eye\"></i></button> <div *ngIf=\"shouldDisplayTemplate\"> <ng-template *ngIf=\"refData\" [ngTemplateOutlet]=\"customTemplate\" [ngTemplateOutletContext]=\"{response: refData}\"></ng-template> <i *ngIf=\"!refData\" class=\"fa fa-spinner fa-spin align-center\"></i> </div> </div> <div *ngIf=\"!refConfig\"> <a target=\"_blank\" class=\"break-word\" [href]=\"ref\">{{ref}}</a> </div> </div>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
@@ -4866,7 +4875,7 @@ AddAlwaysShowTogglesPipe.ctorParameters = function () { return []; };
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DifferentKeysPipe; });
 /*
@@ -5058,7 +5067,7 @@ FilterByExpressionPipe.ctorParameters = function () { return []; };
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(45);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SanitizeUrlPipe; });
 /*
  * This file is part of ng2-json-editor.
@@ -5117,7 +5126,7 @@ SanitizeUrlPipe.ctorParameters = function () { return [
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(6);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SelfOrEmptyPipe; });
@@ -5289,7 +5298,7 @@ UnderscoreToSpacePipe.ctorParameters = function () { return []; };
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FindReplaceAllService; });
 
@@ -5561,7 +5570,7 @@ RecordFixerService.ctorParameters = function () { return [
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__path_util_service__ = __webpack_require__(66);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RemoteAutocompletionService; });
 /*
@@ -6156,7 +6165,8 @@ WindowHrefService.ctorParameters = function () { return []; };
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_tracker__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(6);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SubRecordComponent; });
 /*
  * This file is part of ng2-json-editor.
@@ -6179,15 +6189,29 @@ WindowHrefService.ctorParameters = function () { return []; };
  * waive the privileges and immunities granted to it by virtue of its status
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 
 
-var SubRecordComponent = (function () {
+
+var SubRecordComponent = (function (_super) {
+    __extends(SubRecordComponent, _super);
     function SubRecordComponent(jsonStoreService, appGlobalsService) {
-        this.jsonStoreService = jsonStoreService;
-        this.appGlobalsService = appGlobalsService;
-        this.tabName = '';
-        this.onDeleteKey = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* EventEmitter */]();
-        this.pathCache = {};
+        var _this = _super.call(this) || this;
+        _this.jsonStoreService = jsonStoreService;
+        _this.appGlobalsService = appGlobalsService;
+        _this.tabName = '';
+        _this.onDeleteKey = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* EventEmitter */]();
+        _this.pathCache = {};
+        return _this;
     }
     SubRecordComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -6222,20 +6246,20 @@ var SubRecordComponent = (function () {
         return this.schema.properties[field].toggleColor !== undefined;
     };
     return SubRecordComponent;
-}());
+}(__WEBPACK_IMPORTED_MODULE_1__abstract_tracker__["a" /* AbstractTrackerComponent */]));
 
 SubRecordComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
                 selector: 'sub-record',
-                styles: [".record-fields-container { height: 100%; overflow: auto; padding-right: 0px; padding-left: 0px; padding-bottom: 41px; } tr.align-right td:first-child { width: 100%; } tr.align-right td:first-child slide-toggle { float: right; } "],
-                template: "<div class=\"record-fields-container\"> <table id=\"editor\" class=\"table\"> <div class=\"field-wrapper\"> <tr *ngIf=\"keysByType.toggles\" class=\"align-right\"> <td class=\"value-container\" *ngFor=\"let key of keysByType.toggles | addAlwaysShowToggles:schema| filterAndSortBySchema:schema; trackBy:trackByElement\"> <slide-toggle [id]=\"'/' + key\" [value]=\"value.get(key) | selfOrEmpty:schema.properties[key]\" (valueChange)=\"onToggleValueChange(key, $event)\" [onText]=\"key\" [offText]=\"key\" [onColor]=\"schema.properties[key].toggleColor\"></slide-toggle> </td> </tr> </div> <div class=\"field-wrapper\" *ngFor=\"let key of keysByType.others | addAlwaysShowFields:schema | filterAndSortBySchema:schema | setFirstElementPath:tabName; trackBy:trackByElement\"> <tr> <td class=\"label-holder\"> <title-dropdown [title]=\"key | underscoreToSpace\" [isDisabled]=\"schema.properties[key].disabled\"> <li *ngIf=\"schema.properties[key].type === 'array'\" class=\"title-dropdown-item\"> <add-new-element-button [path]=\"getPathForChild(key)\" [schema]=\"schema.properties[key]\"></add-new-element-button> </li> <li class=\"title-dropdown-item\"> <button type=\"button\" class=\"editor-btn-delete editor-btn-delete-text\" (click)=\"deleteField(key)\">Delete</button> </li> <li class=\"divider\"></li> <li class=\"title-dropdown-item\" (click)=\"$event.stopPropagation()\"> <find-replace [path]=\"getPathForChild(key)\" [schema]=\"schema.properties[key]\"></find-replace> </li> </title-dropdown> </td> </tr> <tr> <td> <any-type-field [value]=\"value.get(key) | selfOrEmpty:schema.properties[key]\" [schema]=\"schema.properties[key]\" [path]=\"getPathForChild(key)\"></any-type-field> </td> </tr> </div> </table> </div> ",
+                styles: ["tr.align-right td:first-child { width: 100%; } tr.align-right td:first-child slide-toggle { float: right; } "],
+                template: "<div class=\"record-fields-container\"> <table class=\"table\"> <div class=\"field-wrapper\"> <tr *ngIf=\"keysByType.toggles\" class=\"align-right\"> <td *ngFor=\"let key of keysByType.toggles | addAlwaysShowToggles:schema| filterAndSortBySchema:schema; trackBy:trackByElement\"> <slide-toggle [id]=\"'/' + key\" [value]=\"value.get(key) | selfOrEmpty:schema.properties[key]\" (valueChange)=\"onToggleValueChange(key, $event)\" [onText]=\"key\" [offText]=\"key\" [onColor]=\"schema.properties[key].toggleColor\"></slide-toggle> </td> </tr> </div> <div *ngIf=\"keysByType.others\"> <div class=\"field-wrapper\" *ngFor=\"let key of keysByType.others | addAlwaysShowFields:schema | filterAndSortBySchema:schema | setFirstElementPath:tabName; trackBy:trackByElement\"> <tr> <td class=\"label-holder\"> <title-dropdown [title]=\"key | underscoreToSpace\" [isDisabled]=\"schema.properties[key].disabled\"> <li *ngIf=\"schema.properties[key].type === 'array'\" class=\"title-dropdown-item\"> <add-new-element-button [path]=\"getPathForChild(key)\" [schema]=\"schema.properties[key]\"></add-new-element-button> </li> <li class=\"title-dropdown-item\"> <button type=\"button\" class=\"editor-btn-delete editor-btn-delete-text\" (click)=\"deleteField(key)\">Delete</button> </li> <li class=\"divider\"></li> <li class=\"title-dropdown-item\" (click)=\"$event.stopPropagation()\"> <find-replace [path]=\"getPathForChild(key)\" [schema]=\"schema.properties[key]\"></find-replace> </li> </title-dropdown> </td> </tr> <tr> <td> <any-type-field [value]=\"value.get(key) | selfOrEmpty:schema.properties[key]\" [schema]=\"schema.properties[key]\" [path]=\"getPathForChild(key)\"></any-type-field> </td> </tr> </div> </div> </table> </div> ",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
 /** @nocollapse */
 SubRecordComponent.ctorParameters = function () { return [
-    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["f" /* JsonStoreService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["a" /* AppGlobalsService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["f" /* JsonStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["a" /* AppGlobalsService */], },
 ]; };
 SubRecordComponent.propDecorators = {
     'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
@@ -6357,7 +6381,7 @@ TableItemFieldComponent.propDecorators = {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__abstract_list_field__ = __webpack_require__(130);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_services__ = __webpack_require__(6);
@@ -6527,7 +6551,7 @@ TitleDropdownComponent.propDecorators = {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_tracker__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_tracker__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(6);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreeMenuItemComponent; });
 /*
@@ -6653,7 +6677,7 @@ TreeMenuItemComponent.propDecorators = {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_tracker__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_tracker__ = __webpack_require__(43);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(6);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreeMenuComponent; });
 /*
@@ -6715,7 +6739,7 @@ var TreeMenuComponent = (function (_super) {
 TreeMenuComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
                 selector: 'tree-menu',
-                styles: ["div.tree-menu-container { padding: 8px 0; overflow-x: hidden; overflow-y: auto; text-align: center; } ul.menu-item-container { list-style: none; text-align: left; padding-top: 8px; } "],
+                styles: ["div.tree-menu-container { padding: 8px 0; overflow-x: hidden; overflow-y: auto; text-align: center; } ul.menu-item-container { list-style: none; text-align: left; padding-top: 8px; } ul.menu-item-container li { margin-bottom: 2px; } "],
                 template: "<div class=\"tree-menu-container\"> <ul class=\"menu-item-container\"> <li *ngFor=\"let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema; trackBy:trackByElement\"> <tree-menu-item [label]=\"key\" [value]=\"record.get(key)\" [schema]=\"schema.properties[key]\" [path]=\"getChildPath(key)\" [depth]=\"1\"></tree-menu-item> </li> </ul> </div>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
             },] },
