@@ -151,10 +151,10 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
         this.activeTabName = tabName;
       });
       this.appGlobalsService.activeTabName = this.config.tabsConfig.defaultTabName;
-
-      // set config to make it globally accessible all over the app
-      this.appGlobalsService.config = this.config;
     }
+
+    // set config to make it globally accessible all over the app
+    this.appGlobalsService.config = this.config;
 
   }
 

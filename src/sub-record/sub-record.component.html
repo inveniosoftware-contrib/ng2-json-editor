@@ -1,8 +1,8 @@
 <div class="record-fields-container">
-  <table id="editor" class="table">
+  <table class="table">
     <div class="field-wrapper">
       <tr *ngIf="keysByType.toggles" class="align-right">
-        <td class="value-container" *ngFor="let key of keysByType.toggles | addAlwaysShowToggles:schema| filterAndSortBySchema:schema; trackBy:trackByElement">
+        <td *ngFor="let key of keysByType.toggles | addAlwaysShowToggles:schema| filterAndSortBySchema:schema; trackBy:trackByElement">
           <slide-toggle [id]="'/' + key" [value]="value.get(key) | selfOrEmpty:schema.properties[key]" (valueChange)="onToggleValueChange(key, $event)"
             [onText]="key" [offText]="key" [onColor]="schema.properties[key].toggleColor"></slide-toggle>
         </td>
