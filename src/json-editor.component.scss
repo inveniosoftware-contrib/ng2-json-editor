@@ -220,6 +220,17 @@ body, html {
     }
   }
 
+  // make all th of table-list with add-field-dropdown clickable
+  th.button-holder {
+    .add-field-dropdown-container {
+      width: 100%;
+    }
+
+    .btn-add-field-dropdown {
+      width: 100%;
+    }
+  }
+
   label {
     color: $label-color;
   }
