@@ -20,11 +20,13 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { List, Map, Set } from 'immutable';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
+
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
-import { AppGlobalsService, JsonStoreService, PathUtilService } from '../shared/services';
+import { AppGlobalsService, JsonStoreService, PathUtilService, KeysStoreService } from '../shared/services';
 import { JSONSchema } from '../shared/interfaces';
 
 @Component({
@@ -35,30 +37,22 @@ import { JSONSchema } from '../shared/interfaces';
   templateUrl: './table-list-field.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TableListFieldComponent extends AbstractListFieldComponent implements OnInit {
+export class TableListFieldComponent extends AbstractListFieldComponent {
 
   @Input() values: List<Map<string, any>>;
   @Input() schema: JSONSchema;
   @Input() path: Array<any>;
 
-  keys: Set<string>;
-
   constructor(public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
     public pathUtilService: PathUtilService,
+    public keysStoreService: KeysStoreService,
     public changeDetectorRef: ChangeDetectorRef) {
     super(appGlobalsService, jsonStoreService, pathUtilService, changeDetectorRef);
   }
 
-  ngOnInit() {
-    super.ngOnInit();
-    // all unique keys that are present in at least single element
-    this.keys = Set(this.values
-      .map(object => object.keySeq().toArray())
-      .reduce((pre, cur) => pre.concat(cur), []));
+  get keys$(): ReplaySubject<Set<string>> {
+    return this.keysStoreService.forPath(this.pathString);
   }
 
-  onFieldAdd(field: string) {
-    this.keys = this.keys.add(field);
-  }
 }

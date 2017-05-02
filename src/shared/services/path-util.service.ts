@@ -62,7 +62,7 @@ export class PathUtilService {
    * @returns {number} - Returns found index in path or -1 if not found
    */
   findIndexFromPath(path: Array<any>, directPathSearch: boolean): number {
-    path = directPathSearch ?  path : path.reverse();
+    path = directPathSearch ? path : path.reverse();
     for (let index in path) {
       if (!isNaN(path[index])) {
         return path[index];
@@ -87,6 +87,15 @@ export class PathUtilService {
     return pathString.split(this.separator)
       .slice(1) // remove the empty
       .map((key) => isNaN(parseInt(key, 10)) ? key : parseInt(key, 10));
+  }
+
+  /**
+   * Appends value to path string handles by using separator.
+   * Handles the case when pathString belongs to root.
+   */
+  appendToPathString(pathString: string, value: string): string {
+    let isRoot = pathString === this.separator;
+    return isRoot ? `${pathString}${value}` : `${pathString}${this.separator}${value}`;
   }
 }
 

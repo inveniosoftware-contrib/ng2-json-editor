@@ -33,6 +33,7 @@ import {
 import { Http } from '@angular/http';
 import { fromJS, Map, Set } from 'immutable';
 import 'rxjs/add/operator/skipWhile';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 
 import { AbstractTrackerComponent } from './abstract-tracker';
@@ -42,6 +43,8 @@ import {
   JsonStoreService,
   JsonUtilService,
   JsonSchemaService,
+  KeysStoreService,
+  PathUtilService,
   RecordFixerService,
   SchemaFixerService,
   ShortcutService,
@@ -81,13 +84,9 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
 
   private _errorMap: SchemaValidationErrors = {};
   _record: Map<string, any>;
-  tabNameToSubSchema: {};
   tabNames: Array<string>;
-  schemaKeyToTabName: { [key: string]: string };
-  tabNameToKeys: { [tabName: string]: Set<string> };
   previews: Array<Preview>;
   isPreviewerHidden: boolean;
-  keys: Set<string>;
   isErrorPanelOpen = false;
   errorPanelActiveTab = '';
 
@@ -96,10 +95,12 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     public jsonStoreService: JsonStoreService,
     public jsonUtilService: JsonUtilService,
     public jsonSchemaService: JsonSchemaService,
+    public keysStoreService: KeysStoreService,
     public recordFixerService: RecordFixerService,
     public schemaFixerService: SchemaFixerService,
     public shortcutsService: ShortcutService,
-    public tabsUtilService: TabsUtilService) {
+    public tabsUtilService: TabsUtilService,
+    public pathUtilService: PathUtilService) {
     super();
   }
 
@@ -120,8 +121,8 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
 
     this.extractPreviews();
 
-    this.keys = Set.fromKeys(this.record);
-
+    // set config to make it globally accessible all over the app
+    this.appGlobalsService.config = this.config;
     // set errors that is used by other components
     this.appGlobalsService.externalErrors = this.errorMap;
     this.appGlobalsService.templates = this.templates;
@@ -138,22 +139,15 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
         this.onRecordChange.emit(json.toJS());
       });
     this.jsonSchemaService.setSchema(this.schema);
+    // construct enhanced sorted filtered keys map for objects in the record
+    this.keysStoreService.buildKeysMap(this._record, this.schema);
 
     // setup variables need for tab grouping.
     if (this.config.tabsConfig) {
-      this.schemaKeyToTabName = this.tabsUtilService.getSchemaKeyToTabName(this.config.tabsConfig, this.schema);
       this.tabNames = this.tabsUtilService.getTabNames(this.config.tabsConfig);
-      this.tabNameToKeys = this.tabsUtilService.getTabNameToKeys(this.keys, this.schemaKeyToTabName, this.tabNames);
-      this.tabNameToSubSchema = this.tabsUtilService.getTabNameToSubSchema(this.schema, this.schemaKeyToTabName);
-      this.tabsUtilService.tabSelectionSubject.subscribe(tabName => {
-        this.activeTabName = tabName;
-      });
+      this.tabsUtilService.activeTabName$.subscribe(tabName => { this.appGlobalsService.activeTabName = tabName; });
       this.appGlobalsService.activeTabName = this.config.tabsConfig.defaultTabName;
     }
-
-    // set config to make it globally accessible all over the app
-    this.appGlobalsService.config = this.config;
-
   }
 
   /**
@@ -190,21 +184,9 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     }
   }
 
-  onFieldAdd(field: string) {
-    this.keys = this.keys.add(field);
-    if (this.config.tabsConfig) {
-      let tabName = this.schemaKeyToTabName[field];
-      this.tabNameToKeys[tabName] = this.tabNameToKeys[tabName].add(field);
-    }
+  get keys$(): ReplaySubject<Set<string>> {
+    return this.keysStoreService.forPath(this.pathString);
   }
-
-  onDeleteKey(field) {
-    this.keys = this.keys.remove(field);
-    if (this.config.tabsConfig) {
-      let tabName = this.schemaKeyToTabName[field];
-      this.tabNameToKeys[tabName] = this.tabNameToKeys[tabName].remove(field);
-    }
-   }
 
   get shortcuts() {
     return this.shortcutsService.getShortcutsWithConfig(this.config.shortcuts);
@@ -229,6 +211,10 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     this.appGlobalsService.activeTabName = tabName;
   }
 
+  get pathString(): string {
+    return this.pathUtilService.separator;
+  }
+
   isActiveTab(tabName) {
     return this.appGlobalsService.activeTabName === tabName;
   }
@@ -237,9 +223,9 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     return this.isErrorPanelOpen ? 'shorter-editor-container' : '';
   }
 
-  openPanel(event) {
+  openErrorPanel(errorPanelTabName: string) {
     this.isErrorPanelOpen = true;
-    this.errorPanelActiveTab = event;
+    this.errorPanelActiveTab = errorPanelTabName;
   }
 
 }

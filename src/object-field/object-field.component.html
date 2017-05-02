@@ -1,5 +1,5 @@
 <table [id]="pathString" class="table">
-  <tr *ngFor="let key of keys | addAlwaysShowFields:schema | filterAndSortBySchema:schema; trackBy:trackByElement">
+  <tr *ngFor="let key of keys$ | async; trackBy:trackByElement">
     <!-- SUB FIELD TITLE MENU -->
     <td class="label-holder">
       <div>
@@ -21,7 +21,7 @@
   <!-- ADD SUB FIELD FROM SCHEMA DROPDOWN -->
   <tr>
     <td class="button-holder">
-      <add-field-dropdown [fields]="keys" [pathString]="pathString" (onFieldAdd)="onFieldAdd($event)" [schema]="schema">
+      <add-field-dropdown [fields]="keys$ | async" [pathString]="pathString" [schema]="schema">
         <i class="fa fa-plus"></i>
       </add-field-dropdown>
     </td>

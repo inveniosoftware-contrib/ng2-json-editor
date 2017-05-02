@@ -1,23 +1,22 @@
 <div id="ng2-json-editor" class="row editor-container" [ngClass]="shorterEditorContainerClass">
   <div class="col-md-2 menu-container">
     <tree-menu [record]="_record" [schema]="schema"></tree-menu>
-    <add-field-dropdown [fields]="keys" [pathString]="''" (onFieldAdd)="onFieldAdd($event)" [schema]="schema">Add field</add-field-dropdown>
+    <add-field-dropdown [fields]="keys$ | async" [pathString]="pathString" [schema]="schema">Add field</add-field-dropdown>
     <hr>
     <div *ngIf="config.enableAdminModeSwitch" class="admin-mode" tooltip="Allows editing all fields (use with care)">
       <input id="admin-mode-checkbox" type="checkbox" [(ngModel)]="appGlobalsService.adminMode" />
       <label class="admin-mode" for="admin-mode-checkbox">Enable Admin Mode</label>
     </div>
     <hr>
-    <validation-badges (onBadgeClick)="openPanel($event)"></validation-badges>
+    <validation-badges (onBadgeClick)="openErrorPanel($event)"></validation-badges>
   </div>
   <div id="middle-main-container" class="middle main-container" [ngClass]="middleContainerColMdClass" [shortcuts]="shortcuts">
     <tabset *ngIf="config.tabsConfig">
       <tab *ngFor="let tabName of tabNames; trackBy:trackByElement" [heading]="tabName" (select)="activeTabName = tabName" [active]="isActiveTab(tabName)">
-        <sub-record [value]="_record" [tabName]="tabName" [schema]="tabNameToSubSchema[tabName]" [keys]="tabNameToKeys[tabName]"
-                    (onDeleteKey)="onDeleteKey($event)" (onOpenPanelClick)="openPanel($event)"></sub-record>
+        <sub-record [value]="_record" [tabName]="tabName" [schema]="schema" [keys]="keys$ | async" [pathString]="pathString"></sub-record>
       </tab>
     </tabset>
-    <sub-record *ngIf="!config.tabsConfig" [value]="_record" [schema]="schema" (onDeleteKey)="onDeleteKey($event)" [keys]="keys"></sub-record>
+    <sub-record *ngIf="!config.tabsConfig" [value]="_record" [schema]="schema" [keys]="keys$ | async" [pathString]="pathString"></sub-record>
   </div>
   <div id="right-main-container" *ngIf="!isPreviewerDisabled" [ngClass]="rightContainerColMdClass" class="main-container">
     <button id="btn-preview-toggle" type="button" class="btn btn-default btn-toggle" (click)="isPreviewerHidden = !isPreviewerHidden">{{isPreviewerHidden ? "Show Preview" : "Hide Preview"}}</button>

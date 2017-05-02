@@ -7,6 +7,7 @@ import { FindReplaceAllService } from './find-replace-all.service';
 import { JsonStoreService } from './json-store.service';
 import { JsonUtilService } from './json-util.service';
 import { JsonSchemaService } from './json-schema.service';
+import { KeysStoreService } from './keys-store.service';
 import { PathUtilService } from './path-util.service';
 import { ModalService } from './modal.service';
 import { RecordFixerService } from './record-fixer.service';
@@ -29,6 +30,7 @@ export {
   JsonStoreService,
   JsonUtilService,
   JsonSchemaService,
+  KeysStoreService,
   PathUtilService,
   ModalService,
   RecordFixerService,
@@ -50,6 +52,7 @@ export const SHARED_SERVICES = [
   FindReplaceAllService,
   JsonStoreService,
   JsonUtilService,
+  KeysStoreService,
   JsonSchemaService,
   PathUtilService,
   ModalService,
