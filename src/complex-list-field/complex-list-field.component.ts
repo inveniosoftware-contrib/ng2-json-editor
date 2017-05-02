@@ -68,6 +68,7 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
   }
 
   ngOnInit() {
+    super.ngOnInit();
     this.navigator = this.schema.longListNavigatorConfig;
     this.paginatedItems = this.getItemsForPage(this.currentPage);
   }

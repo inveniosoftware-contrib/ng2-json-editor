@@ -23,7 +23,6 @@
 import {
   Component,
   Input,
-  OnInit,
   ViewEncapsulation,
   ChangeDetectionStrategy,
   ChangeDetectorRef
@@ -49,7 +48,7 @@ import { JSONSchema } from '../shared/interfaces';
   templateUrl: './primitive-field.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PrimitiveFieldComponent extends AbstractFieldComponent implements OnInit {
+export class PrimitiveFieldComponent extends AbstractFieldComponent {
 
   @Input() schema: JSONSchema;
   @Input() path: Array<any>;
@@ -67,10 +66,6 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
 
   get valueType(): string {
     return this.componentTypeService.getComponentType(this.schema);
-  }
-
-  ngOnInit() {
-    super.ngOnInit();
   }
 
   commitValueChange() {
