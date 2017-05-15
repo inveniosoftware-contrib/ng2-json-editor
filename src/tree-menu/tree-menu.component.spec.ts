@@ -39,7 +39,8 @@ import {
 } from '../shared/services';
 import {
   AddAlwaysShowFieldsPipe,
-  FilterAndSortBySchemaPipe
+  FilterHiddenFieldsPipe,
+  SortAlphabeticallyPipe
 } from '../shared/pipes';
 
 
@@ -86,7 +87,7 @@ describe('TreeMenuComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
   let component: TestHostComponent;
   let nativeEl: HTMLElement;
-  let appGlobalsService = new AppGlobalsService();
+  let appGlobalsService = new AppGlobalsService(undefined);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -95,7 +96,8 @@ describe('TreeMenuComponent', () => {
         TreeMenuComponent,
         TreeMenuItemComponent,
         AddAlwaysShowFieldsPipe,
-        FilterAndSortBySchemaPipe
+        FilterHiddenFieldsPipe,
+        SortAlphabeticallyPipe
       ],
       imports: [
 

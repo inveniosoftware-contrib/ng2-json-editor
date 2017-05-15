@@ -10,16 +10,17 @@ export class KeysStoreService {
   private keys$Map: { [path: string]: ReplaySubject<OrderedSet<string>> };
   private keysMap: { [path: string]: OrderedSet<string> };
 
-  constructor(private pathUtilService: PathUtilService) {
-
-  }
+  constructor(private pathUtilService: PathUtilService) { }
 
   forPath(path: string): ReplaySubject<OrderedSet<string>> {
     return this.keys$Map[path];
   }
 
   addKey(path: string, key: string, schema: JSONSchema): string {
-    this.keysMap[path] = this.keysMap[path].add(key);
+    // FIXME: could do O(logn) insert instead of O(nlogn) since the set is already sorted.
+    this.keysMap[path] = this.keysMap[path]
+      .add(key)
+      .sort((a, b) => this.compareByPriority(a, b, schema)) as OrderedSet<string>;
     this.keys$Map[path].next(this.keysMap[path]);
     let newKeyPath = this.pathUtilService.appendToPathString(path, key);
 
@@ -74,7 +75,8 @@ export class KeysStoreService {
     }
   }
 
-  private buildKeysForTableList(path: string, list: List<Map<string, any>>, schema: JSONSchema) {
+  // default value for `list`, if this is called for alwaysShow in which case `list` would be undefined
+  private buildKeysForTableList(path: string, list = List<Map<string, any>>(), schema: JSONSchema) {
     // get present unique keys in all items of table-list
     let keys = Seq.Set(list
       .map(object => object.keySeq().toArray())
@@ -84,7 +86,8 @@ export class KeysStoreService {
     this.setKeys(path, finalKeys);
   }
 
-  private buildkeysForObject(path: string, map: Map<string, any>, schema: JSONSchema): OrderedSet<string> {
+  // default value for `map`, if this is called for alwaysShow in which case `map` would be undefined
+  private buildkeysForObject(path: string, map = Map<string, any>(), schema: JSONSchema): OrderedSet<string> {
     let finalKeys = this.schemafy(map.keySeq(), schema);
 
     // put only seperator for the root
@@ -99,13 +102,13 @@ export class KeysStoreService {
    */
   private schemafy(keys: Seq<number, string>, schema: JSONSchema): OrderedSet<string> {
     return keys
-      .filter(key => this.filterBySchema(key, schema))
+      .filter(key => this.isNotHidden(key, schema))
       .concat(schema.alwaysShow || [])
-      .sort((a, b) => this.sortBySchema(a, b, schema))
+      .sort((a, b) => this.compareByPriority(a, b, schema))
       .toOrderedSet();
   }
 
-  private sortBySchema(a: string, b: string, schema: JSONSchema): number {
+  private compareByPriority(a: string, b: string, schema: JSONSchema): number {
     // Sort by priority, larger is the first.
     let pa = schema.properties[a].priority || 0;
     let pb = schema.properties[b].priority || 0;
@@ -119,7 +122,7 @@ export class KeysStoreService {
     return 0;
   }
 
-  private filterBySchema(key: string, schema: JSONSchema): boolean {
+  private isNotHidden(key: string, schema: JSONSchema): boolean {
     if (!schema.properties[key]) {
       throw new Error(`"${key}" is not specified as property in \n${JSON.stringify(schema.properties, undefined, 2)}`);
     }

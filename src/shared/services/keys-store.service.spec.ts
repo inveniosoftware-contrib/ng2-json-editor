@@ -268,6 +268,30 @@ describe('KeysStoreService', () => {
     expect(newKeyPath).toEqual(expectNewKeyPath);
   });
 
+  it('should add key in the right place to maintain the order', () => {
+    let schema = {
+      type: 'object',
+      properties: {
+        key1: {
+          type: 'string',
+          priority: 1
+        },
+        key2: {
+          type: 'string',
+          priority: 2
+        }
+      }
+    };
+    let json = fromJS({
+      key1: 'value'
+    });
+    service.buildKeysMap(json, schema);
+    service.addKey('/', 'key2', schema);
+    let expected = OrderedSet(['key2', 'key1']);
+    service.forPath('/')
+      .subscribe(keys => expect(keys.toArray()).toEqual(expected.toArray()));
+  });
+
   it('should add object key then build keys for it', () => {
     let schema = {
       type: 'object',

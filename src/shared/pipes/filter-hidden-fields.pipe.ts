@@ -21,26 +21,26 @@
 */
 
 import { Pipe, PipeTransform } from '@angular/core';
-import { Set, OrderedSet } from 'immutable';
+import { Set } from 'immutable';
 
 import { AppGlobalsService } from '../services';
 import { JSONSchema } from '../interfaces';
 
 @Pipe({
-  name: 'filterAndSortBySchema',
+  name: 'filterHiddenFields',
 })
-export class FilterAndSortBySchemaPipe implements PipeTransform {
+export class FilterHiddenFieldsPipe implements PipeTransform {
 
   constructor(public appGlobalsService: AppGlobalsService) { }
 
   /**
-   * It filters out `hidden` fields and sorts keys by `priority`
+   * It filters out `hidden` fields
    *
    * @param keys
    * @param schema - the `schema` that has object schema which contains each key in `keys`
-   * @return - filtered and sorted keys
+   * @return - filtered keys
    */
-  transform(keys: Set<string>, schema: JSONSchema): OrderedSet<string> {
+  transform(keys: Set<string>, schema: JSONSchema): Set<string> {
     let schemaProps = schema.properties;
     if (!keys) { return undefined; }
     return keys
@@ -49,18 +49,6 @@ export class FilterAndSortBySchemaPipe implements PipeTransform {
           throw new Error(`"${key}" is not specified as property in \n${JSON.stringify(schemaProps, undefined, 2)}`);
         }
         return !schemaProps[key].hidden || this.appGlobalsService.adminMode;
-      }).sort((a, b) => {
-        // Sort by priority, larger is the first.
-        let pa = schemaProps[a].priority || 0;
-        let pb = schemaProps[b].priority || 0;
-
-        if (pa > pb) { return -1; }
-        if (pa < pb) { return 1; }
-
-        // Sort alphabetically.
-        if (a < b) { return -1; }
-        if (a > b) { return 1; }
-        return 0;
-      }) as OrderedSet<string>;
+      }) as Set<string>;
   }
 }
