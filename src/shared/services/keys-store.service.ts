@@ -4,15 +4,13 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import { JSONSchema } from '../interfaces';
 import { PathUtilService } from './path-util.service';
-import { ComponentTypeService } from './component-type.service';
 
 @Injectable()
 export class KeysStoreService {
   private keys$Map: { [path: string]: ReplaySubject<OrderedSet<string>> };
   private keysMap: { [path: string]: OrderedSet<string> };
 
-  constructor(private pathUtilService: PathUtilService,
-    private componentTypeService: ComponentTypeService) {
+  constructor(private pathUtilService: PathUtilService) {
 
   }
 
@@ -25,8 +23,9 @@ export class KeysStoreService {
     this.keys$Map[path].next(this.keysMap[path]);
     let newKeyPath = this.pathUtilService.appendToPathString(path, key);
 
-    if (schema.properties[key].type === 'object' || this.componentTypeService.getComponentType(schema.properties[key]) === 'table-list') {
-      this.buildKeysMapRecursively(Map<string, any>(), schema.properties[key], newKeyPath);
+    let keySchema = schema.properties[key];
+    if (keySchema.type === 'object' || keySchema.componentType === 'table-list') {
+      this.buildKeysMapRecursively(Map<string, any>(), keySchema, newKeyPath);
     }
 
     return newKeyPath;
@@ -58,7 +57,7 @@ export class KeysStoreService {
           let nextPath = `${path}${this.pathUtilService.separator}${key}`;
           this.buildKeysMapRecursively(map.get(key), schema.properties[key], nextPath);
         });
-    } else if (this.componentTypeService.getComponentType(schema) === 'table-list') {
+    } else if (schema.componentType === 'table-list') {
       let list = mapOrList as List<Map<string, any>>;
       this.buildKeysForTableList(path, list, schema);
       // there is no recursive call for table list items because they aren't expected to have object or object list as property.

@@ -24,12 +24,14 @@ import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 
 import { JsonUtilService } from './json-util.service';
+import { ComponentTypeService } from './component-type.service';
 import { JSONSchema } from '../interfaces';
 
 @Injectable()
 export class SchemaFixerService {
 
-  constructor(private jsonUtilService: JsonUtilService) { }
+  constructor(private jsonUtilService: JsonUtilService,
+    private componentTypeService: ComponentTypeService) { }
 
   /**
    * Fixes schema to be in a format that expected by json-editor
@@ -98,6 +100,9 @@ export class SchemaFixerService {
     } else if (schema.items) {
       schema.items = this.fixRecursively(schema.items);
     }
+    // fixes that needs above fixes to be done deeply for the current schema
+    schema.componentType = this.componentTypeService.getComponentType(schema);
+
     return schema;
   }
 

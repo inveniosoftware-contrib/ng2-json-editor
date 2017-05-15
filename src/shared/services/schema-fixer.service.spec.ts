@@ -23,13 +23,21 @@
 import { SchemaFixerService } from './schema-fixer.service';
 import { JsonUtilService } from './json-util.service';
 import { PathUtilService } from './path-util.service';
+import { ComponentTypeService } from './component-type.service';
+
+const MOCK_TYPE = 'mock';
+class MockComponentTypeService extends ComponentTypeService {
+  getComponentType(param: any): string {
+    return MOCK_TYPE;
+  }
+}
 
 describe('SchemaFixerService', () => {
 
   let service: SchemaFixerService;
 
   beforeEach(() => {
-    service = new SchemaFixerService(new JsonUtilService(new PathUtilService()));
+    service = new SchemaFixerService(new JsonUtilService(new PathUtilService()), new MockComponentTypeService());
   });
 
   it('should fix anyOf with multiple enum properties', () => {
@@ -77,8 +85,10 @@ describe('SchemaFixerService', () => {
     };
     let expected = {
       type: 'object',
+      componentType: MOCK_TYPE,
       properties: {
         enumProp1: {
+          componentType: MOCK_TYPE,
           type: 'string',
           enum: [
             'enumProp11',
@@ -88,6 +98,7 @@ describe('SchemaFixerService', () => {
           ]
         },
         enumProp2: {
+          componentType: MOCK_TYPE,
           type: 'string',
           enum: [
             'enumProp21',
@@ -143,9 +154,11 @@ describe('SchemaFixerService', () => {
     };
     let expected = {
       type: 'object',
+      componentType: MOCK_TYPE,
       properties: {
         enumProp: {
           type: 'string',
+          componentType: MOCK_TYPE,
           enum: [
             'enumProp1',
             'enumProp2',
@@ -155,6 +168,7 @@ describe('SchemaFixerService', () => {
         },
         partialEnumProp: {
           type: 'string',
+          componentType: MOCK_TYPE,
           autocompletionConfig: {
             source: [
               'partialEnumProp1',
@@ -204,15 +218,19 @@ describe('SchemaFixerService', () => {
     };
     let expected = {
       type: 'object',
+      componentType: MOCK_TYPE,
       properties: {
         strProp: {
-          type: 'string'
+          type: 'string',
+          componentType: MOCK_TYPE,
         },
         intProp: {
-          type: 'integer'
+          type: 'integer',
+          componentType: MOCK_TYPE,
         },
         enumProp: {
           type: 'string',
+          componentType: MOCK_TYPE,
           enum: [
             'enumValue1',
             'enumValue2'
@@ -251,18 +269,23 @@ describe('SchemaFixerService', () => {
     };
     let expected = {
       type: 'object',
+      componentType: MOCK_TYPE,
       properties: {
         parent: {
           type: 'array',
+          componentType: MOCK_TYPE,
           items: {
             type: 'object',
+            componentType: MOCK_TYPE,
             properties: {
               prop1: {
                 type: 'string',
+                componentType: MOCK_TYPE,
                 priority: 1
               },
               prop2: {
                 type: 'string',
+                componentType: MOCK_TYPE,
                 priority: 2
               }
             },
@@ -303,18 +326,23 @@ describe('SchemaFixerService', () => {
       };
       let expected = {
         type: 'object',
+        componentType: MOCK_TYPE,
         properties: {
           parent: {
             type: 'array',
+            componentType: MOCK_TYPE,
             items: {
               type: 'object',
+              componentType: MOCK_TYPE,
               properties: {
                 prop1: {
                   type: 'string',
+                  componentType: MOCK_TYPE,
                   disabled: true
                 },
                 prop2: {
                   type: 'string',
+                  componentType: MOCK_TYPE,
                   disabled: true
                 }
               },
@@ -381,12 +409,15 @@ describe('SchemaFixerService', () => {
     };
     let expected = {
       type: 'object',
+      componentType: MOCK_TYPE,
       properties: {
         parent: {
           type: 'object',
+          componentType: MOCK_TYPE,
           properties: {
             prop: {
               type: 'string',
+              componentType: MOCK_TYPE,
               configTrue: true,
               configFalse: false
             }
@@ -439,15 +470,80 @@ describe('SchemaFixerService', () => {
     };
     let expected = {
       type: 'object',
+      componentType: MOCK_TYPE,
       configTrue: true,
       configFalse: false,
       properties: {
         foo: {
+          componentType: MOCK_TYPE,
           type: 'string'
         }
       }
     };
     let fixed = service.fixSchema(schema, config);
     expect(fixed).toEqual(expected);
+  });
+
+  it('should set componentType when schema has deeper anyOf', () => {
+    let schema = {
+      type: 'object',
+      properties: {
+        aList: {
+          type: 'array',
+          items: {
+            anyOf: [
+              {
+                type: 'object',
+                properties: {
+                  enumProp: {
+                    type: 'string',
+                    enum: ['enum1']
+                  },
+                  prop: {
+                    type: 'string'
+                  }
+                }
+              },
+              {
+                type: 'object',
+                properties: {
+                  enumProp: {
+                    type: 'string',
+                    enum: ['enum2']
+                  },
+                  prop: {
+                    type: 'string'
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    };
+    let expected = {
+      type: 'object',
+      componentType: MOCK_TYPE,
+      properties: {
+        aList: {
+          type: 'array',
+          componentType: MOCK_TYPE,
+          items: {
+            type: 'object',
+            properties: {
+              enumProp: {
+                type: 'string',
+                componentType: MOCK_TYPE,
+                enum: ['enum1', 'enum2']
+              },
+              prop: {
+                type: 'string',
+                componentType: MOCK_TYPE
+              }
+            }
+          }
+        }
+      }
+    };
   });
 });

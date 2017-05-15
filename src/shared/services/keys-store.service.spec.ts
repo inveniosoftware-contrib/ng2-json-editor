@@ -24,7 +24,6 @@ import { fromJS, Map, OrderedSet } from 'immutable';
 
 import { KeysStoreService } from './keys-store.service';
 import { PathUtilService } from './path-util.service';
-import { ComponentTypeService } from './component-type.service';
 
 describe('KeysStoreService', () => {
   let service: KeysStoreService;
@@ -38,7 +37,7 @@ describe('KeysStoreService', () => {
   };
 
   beforeEach(() => {
-    service = new KeysStoreService(new PathUtilService(), new ComponentTypeService());
+    service = new KeysStoreService(new PathUtilService());
   });
 
   it('should build keys map for simple json', () => {
@@ -132,6 +131,7 @@ describe('KeysStoreService', () => {
                 type: 'string'
               },
               innerArray: {
+                componentType: 'table-list',
                 type: 'array',
                 items: {
                   type: 'object',

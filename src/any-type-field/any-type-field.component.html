@@ -1,4 +1,4 @@
-<div [ngSwitch]="componentType">
+<div [ngSwitch]="schema.componentType">
   <div *ngSwitchCase="'table-list'">
     <table-list-field [values]="value" [schema]="schema" [path]="path"></table-list-field>
   </div>
