@@ -88,14 +88,5 @@ export class PathUtilService {
       .slice(1) // remove the empty
       .map((key) => isNaN(parseInt(key, 10)) ? key : parseInt(key, 10));
   }
-
-  /**
-   * Appends value to path string handles by using separator.
-   * Handles the case when pathString belongs to root.
-   */
-  appendToPathString(pathString: string, value: string): string {
-    let isRoot = pathString === this.separator;
-    return isRoot ? `${pathString}${value}` : `${pathString}${this.separator}${value}`;
-  }
 }
 

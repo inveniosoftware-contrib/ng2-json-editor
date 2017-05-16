@@ -78,7 +78,7 @@ describe('KeysStoreService', () => {
       }
     };
     let expectedKeysMap = Map({
-      '/': OrderedSet(['aString', 'aStringArray', 'anObject']),
+      '': OrderedSet(['aString', 'aStringArray', 'anObject']),
       '/anObject': OrderedSet(['prop1', 'prop2'])
     });
 
@@ -151,7 +151,7 @@ describe('KeysStoreService', () => {
       }
     };
     let expectedKeysMap = Map({
-      '/': OrderedSet(['anArray']),
+      '': OrderedSet(['anArray']),
       '/anArray/0': OrderedSet(['aString', 'anObject', 'innerArray']),
       '/anArray/1': OrderedSet(['anObject']),
       '/anArray/0/anObject': OrderedSet(['prop1', 'prop2']),
@@ -195,7 +195,7 @@ describe('KeysStoreService', () => {
     });
     let expected = OrderedSet(['key4', 'key3', 'key5', 'key2', 'key1']);
     service.buildKeysMap(json, schema);
-    service.forPath('/')
+    service.forPath('')
       .subscribe(keys => expect(keys).toEqual(expected));
   });
 
@@ -218,7 +218,7 @@ describe('KeysStoreService', () => {
     });
     let expected = OrderedSet(['key2']);
     service.buildKeysMap(json, schema);
-    service.forPath('/')
+    service.forPath('')
       .subscribe(keys => expect(keys).toEqual(expected));
   });
 
@@ -240,7 +240,7 @@ describe('KeysStoreService', () => {
     });
     let expected = OrderedSet(['key1', 'key2']);
     service.buildKeysMap(json, schema);
-    service.forPath('/')
+    service.forPath('')
       .subscribe(keys => expect(keys).toEqual(expected));
   });
 
@@ -260,10 +260,10 @@ describe('KeysStoreService', () => {
       key1: 'value'
     });
     service.buildKeysMap(json, schema);
-    let newKeyPath = service.addKey('/', 'key2', schema);
+    let newKeyPath = service.addKey('', 'key2', schema);
     let expected = OrderedSet(['key1', 'key2']);
     let expectNewKeyPath = '/key2';
-    service.forPath('/')
+    service.forPath('')
       .subscribe(keys => expect(keys.toArray()).toEqual(expected.toArray()));
     expect(newKeyPath).toEqual(expectNewKeyPath);
   });
@@ -286,9 +286,9 @@ describe('KeysStoreService', () => {
       key1: 'value'
     });
     service.buildKeysMap(json, schema);
-    service.addKey('/', 'key2', schema);
+    service.addKey('', 'key2', schema);
     let expected = OrderedSet(['key2', 'key1']);
-    service.forPath('/')
+    service.forPath('')
       .subscribe(keys => expect(keys.toArray()).toEqual(expected.toArray()));
   });
 
@@ -313,9 +313,9 @@ describe('KeysStoreService', () => {
       key1: 'value'
     });
     service.buildKeysMap(json, schema);
-    service.addKey('/', 'key2', schema);
+    service.addKey('', 'key2', schema);
     let expected = OrderedSet(['key1', 'key2']);
-    service.forPath('/')
+    service.forPath('')
       .subscribe(keys => expect(keys.toArray()).toEqual(expected.toArray()));
     service.forPath('/key2')
       .subscribe(keys => expect(keys).toEqual(OrderedSet()));
@@ -345,9 +345,9 @@ describe('KeysStoreService', () => {
       }
     });
     service.buildKeysMap(json, schema);
-    service.deleteKey('/', 'key2');
+    service.deleteKey('', 'key2');
     let expected = OrderedSet(['key1']);
-    service.forPath('/')
+    service.forPath('')
       .subscribe(keys => expect(keys.toArray()).toEqual(expected.toArray()));
     expect(service.forPath('/key2')).toBeUndefined();
   });

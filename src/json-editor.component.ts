@@ -212,7 +212,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   }
 
   get pathString(): string {
-    return this.pathUtilService.separator;
+    return '';
   }
 
   isActiveTab(tabName) {

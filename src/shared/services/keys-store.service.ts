@@ -1,3 +1,25 @@
+/*
+ * This file is part of ng2-json-editor.
+ * Copyright (C) 2016 CERN.
+ *
+ * ng2-json-editor is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * ng2-json-editor is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ * In applying this license, CERN does not
+ * waive the privileges and immunities granted to it by virtue of its status
+ * as an Intergovernmental Organization or submit itself to any jurisdiction.
+*/
+
 import { Injectable } from '@angular/core';
 import { Map, List, OrderedSet, Iterable, Set, Seq } from 'immutable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
@@ -22,7 +44,7 @@ export class KeysStoreService {
       .add(key)
       .sort((a, b) => this.compareByPriority(a, b, schema)) as OrderedSet<string>;
     this.keys$Map[path].next(this.keysMap[path]);
-    let newKeyPath = this.pathUtilService.appendToPathString(path, key);
+    let newKeyPath = `${path}${this.pathUtilService.separator}${key}`;
 
     let keySchema = schema.properties[key];
     if (keySchema.type === 'object' || keySchema.componentType === 'table-list') {
@@ -35,7 +57,7 @@ export class KeysStoreService {
   deleteKey(path: string, key: string) {
     this.keysMap[path] = this.keysMap[path].delete(key);
     this.keys$Map[path].next(this.keysMap[path]);
-    let deletedKeyPath = this.pathUtilService.appendToPathString(path, key);
+    let deletedKeyPath = `${path}${this.pathUtilService.separator}${key}`;
     delete this.keysMap[deletedKeyPath];
     delete this.keys$Map[deletedKeyPath];
   }
@@ -43,10 +65,10 @@ export class KeysStoreService {
   buildKeysMap(json: Map<string, any>, schema: JSONSchema) {
     this.keys$Map = {};
     this.keysMap = {};
-    this.buildKeysMapRecursively(json, schema);
+    this.buildKeysMapRecursively(json, schema, '');
   }
 
-  private buildKeysMapRecursively(mapOrList: Iterable<string | number, any>, schema: JSONSchema, path = '') {
+  private buildKeysMapRecursively(mapOrList: Iterable<string | number, any>, schema: JSONSchema, path: string) {
     if (schema.type === 'object') {
       let map = mapOrList as Map<string, any>;
       let finalKeys = this.buildkeysForObject(path, map, schema);
@@ -89,11 +111,7 @@ export class KeysStoreService {
   // default value for `map`, if this is called for alwaysShow in which case `map` would be undefined
   private buildkeysForObject(path: string, map = Map<string, any>(), schema: JSONSchema): OrderedSet<string> {
     let finalKeys = this.schemafy(map.keySeq(), schema);
-
-    // put only seperator for the root
-    let pathOrRoot = path || this.pathUtilService.separator;
-    this.setKeys(pathOrRoot, finalKeys);
-
+    this.setKeys(path, finalKeys);
     return finalKeys;
   }
 
