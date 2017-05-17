@@ -7,6 +7,7 @@ export { NestedStore } from './nested-store';
 export { PreviewConfig } from './preview-config';
 export { Preview } from './preview';
 export { RefConfig } from './ref-config';
+export { RefAnchorAttributes } from './ref-anchor-attributes';
 export { SchemaOption } from './schema-option';
 export { HttpHeader } from './http-header';
 export { OnValueChangeFunction } from './on-value-change-function';

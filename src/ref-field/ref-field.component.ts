@@ -35,7 +35,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 
 import { AppGlobalsService, PathUtilService } from '../shared/services';
-import { RefConfig, JSONSchema } from '../shared/interfaces';
+import { RefConfig, JSONSchema, RefAnchorAttributes } from '../shared/interfaces';
 
 @Component({
   selector: 'ref-field',
@@ -56,6 +56,8 @@ export class RefFieldComponent implements OnChanges {
 
   isPreviewButtonHidden = false;
 
+  private anchorAttributes: RefAnchorAttributes;
+
   constructor(private http: Http,
     private changeDetectorRef: ChangeDetectorRef,
     private appGlobalsService: AppGlobalsService,
@@ -66,12 +68,16 @@ export class RefFieldComponent implements OnChanges {
       let valueChange = changes['value'];
       let schemaChange = changes['schema'];
 
+      if (valueChange && this.refConfig && this.refConfig.anchorBuilder && this.ref) {
+        this.anchorAttributes = this.refConfig.anchorBuilder(this.ref);
+      }
+
       // instead of ngOnInit because requestOptions has to be set before fetching
       if (schemaChange && schemaChange.isFirstChange()) {
         this.requestOptions = this.createRequestOptionsWithConfig();
       }
 
-      if (valueChange) {
+      if (valueChange && this.isTemplateEnabled) {
         if (this.refConfig.lazy) {
           this.isPreviewButtonHidden = false;
         } else {
@@ -102,6 +108,18 @@ export class RefFieldComponent implements OnChanges {
     return this.value.get('$ref');
   }
 
+  get anchorHref(): string {
+    return this.anchorAttributes ? this.anchorAttributes.href : this.ref;
+  }
+
+  get anchorDisplay(): string {
+    return this.anchorAttributes ? this.anchorAttributes.display : this.ref;
+  }
+
+  get isTemplateEnabled(): boolean {
+    return this.refConfig !== undefined && this.refConfig.templateName !== undefined;
+  }
+
   get shouldDisplayTemplate(): boolean {
     return this.isPreviewButtonHidden || !this.refConfig.lazy;
   }
@@ -112,7 +130,7 @@ export class RefFieldComponent implements OnChanges {
       .get(this.ref, this.requestOptions)
       .map(res => res.json())
       .catch(error => {
-        return Observable.of({ error });
+        return Observable.of({ $error: error });
       }).subscribe(data => {
         this.refData = data;
         this.changeDetectorRef.markForCheck();

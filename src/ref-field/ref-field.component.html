@@ -1,12 +1,14 @@
 <div [id]="pathString">
-  <div *ngIf="refConfig">
-    <button class="btn-preview-template" *ngIf="!shouldDisplayTemplate" (click)="onPreviewClick($event)"><i class="fa fa-eye"></i></button>
-    <div *ngIf="shouldDisplayTemplate">
-      <ng-template *ngIf="refData" [ngTemplateOutlet]="customTemplate" [ngTemplateOutletContext]="{response: refData}"></ng-template>
-      <i *ngIf="!refData" class="fa fa-spinner fa-spin align-center"></i>
+  <div *ngIf="ref">
+    <div *ngIf="isTemplateEnabled">
+      <button class="btn-preview-template" *ngIf="!shouldDisplayTemplate" (click)="onPreviewClick($event)"><i class="fa fa-eye"></i></button>
+      <div *ngIf="shouldDisplayTemplate">
+        <ng-template *ngIf="refData" [ngTemplateOutlet]="customTemplate" [ngTemplateOutletContext]="{response: refData}"></ng-template>
+        <i *ngIf="!refData" class="fa fa-spinner fa-spin align-center"></i>
+      </div>
     </div>
-  </div>
-  <div *ngIf="!refConfig">
-    <a target="_blank" class="break-word" [href]="ref">{{ref}}</a>
+    <div *ngIf="!isTemplateEnabled">
+      <a target="_blank" class="break-word" [href]="anchorHref">{{anchorDisplay}}</a>
+    </div>
   </div>
 </div>
