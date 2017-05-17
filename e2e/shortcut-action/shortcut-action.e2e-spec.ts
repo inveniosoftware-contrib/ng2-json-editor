@@ -57,6 +57,17 @@ describe('ShortcutAction', function () {
       });
   });
 
+  it(`should add a new row under table using 'mod+shift+b' shortcut`, () => {
+    let currentRowPromise = page.getValuesOfChildrenById('/keywords/1');
+    let inputElem = page.getChildOfElementByCss(page.getElementById('/keywords/0/value'), 'div[contenteditable=true]');
+    inputElem.sendKeys(protractor.Key.chord(mod, protractor.Key.SHIFT, 'b'));
+    currentRowPromise
+    .then(currentRow => {
+      let targetRow = page.getValuesOfChildrenById('/keywords/1');
+      expect(targetRow).not.toEqual(currentRow);
+    });
+  });
+
   it(`should move row up using 'mod+shift+up' shortcut`, () => {
     let currentFirstRowPromise = page.getValuesOfChildrenById('/keywords/0');
     let currentSecondRowPromise = page.getValuesOfChildrenById('/keywords/1');

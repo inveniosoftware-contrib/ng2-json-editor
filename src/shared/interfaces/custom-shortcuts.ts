@@ -16,6 +16,13 @@ export interface CustomShortcuts {
   addToRoot?: ShortcutConfig;
 
   /**
+   * Adds a new empty field to the root parent list under the current field.
+   *
+   * Default value: `mod+shift+b`
+   */
+  addBelowToRoot?: ShortcutConfig;
+
+  /**
    * Deletes the table row of the focused field.
    *
    * Default value: `mod+backspace`
