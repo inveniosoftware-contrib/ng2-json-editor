@@ -20,18 +20,51 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Pipe, PipeTransform } from '@angular/core';
 import { Set } from 'immutable';
 
-import { JSONSchema } from '../interfaces';
+import { FilterHiddenFieldsPipe } from './filter-hidden-fields.pipe';
+import { AppGlobalsService } from '../services';
 
-@Pipe({
-  name: 'addAlwaysShowFields'
-})
-export class AddAlwaysShowFieldsPipe implements PipeTransform {
+describe('FilterHiddenFieldsPipe', () => {
+  let pipe: FilterHiddenFieldsPipe;
 
-  transform(fields: Set<string>, schema: JSONSchema): Set<string> {
-    let alwaysShowFields = schema.alwaysShow || [];
-    return fields.union(alwaysShowFields);
-  }
-}
+  beforeEach(() => {
+    pipe = new FilterHiddenFieldsPipe(new AppGlobalsService({} as any));
+  });
+
+  it('should not return hidden keys', () => {
+    let schema = {
+      properties: {
+        key1: {
+          hidden: true
+        },
+        key2: {
+        }
+      }
+    };
+    let keys = Set(['key1', 'key2']);
+
+    let expected = Set(['key2']);
+
+    expect(pipe.transform(keys, schema)).toEqual(expected);
+  });
+
+  it('should return hidden keys if adminMode is set', () => {
+    pipe.appGlobalsService.adminMode = true;
+    let schema = {
+      properties: {
+        key1: {
+          hidden: true
+        },
+        key2: {
+        }
+      }
+    };
+    let keys = Set(['key1', 'key2']);
+
+    let expected = Set(['key1', 'key2']);
+
+    expect(pipe.transform(keys, schema)).toEqual(expected);
+  });
+
+});

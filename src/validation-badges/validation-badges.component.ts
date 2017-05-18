@@ -34,7 +34,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class ValidationBadgesComponent  implements OnInit, OnDestroy {
 
-  @Output() onBadgeClick: EventEmitter<string> = new EventEmitter<{}>();
+  @Output() onBadgeClick = new EventEmitter<string>();
 
   globalErrorCount = 0;
   internalErrorCount = 0;

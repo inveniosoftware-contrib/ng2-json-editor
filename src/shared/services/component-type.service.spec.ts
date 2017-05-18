@@ -61,6 +61,26 @@ describe('ComponentTypeService', () => {
     expect(service.getComponentType(schema)).toEqual('table-list');
   });
 
+  it('should return table-list with an ref-field element property', () => {
+    let schema = {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          prop: {
+            type: 'object',
+            properties: {
+              $ref: {
+                type: 'string'
+              }
+            }
+          }
+        }
+      }
+    };
+    expect(service.getComponentType(schema)).toEqual('table-list');
+  });
+
   it('should return complex-list', () => {
     let schema = {
       type: 'array',
@@ -73,6 +93,22 @@ describe('ComponentTypeService', () => {
               type: 'object',
               properties: {}
             }
+          }
+        }
+      }
+    };
+    expect(service.getComponentType(schema)).toEqual('complex-list');
+  });
+
+  it('should return complex-list if an element property is an object', () => {
+    let schema = {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          prop: {
+            type: 'object',
+            properties: {}
           }
         }
       }
@@ -107,7 +143,9 @@ describe('ComponentTypeService', () => {
 
   it('should return autocomplete', () => {
     let schema = {
-      autocompletionConfig: {},
+      autocompletionConfig: {
+        size: 1
+      },
       type: 'string'
     };
     expect(service.getComponentType(schema)).toEqual('autocomplete');
@@ -115,7 +153,7 @@ describe('ComponentTypeService', () => {
 
   it('should return enum', () => {
     let schema = {
-      enum: {},
+      enum: [],
       type: 'string'
     };
     expect(service.getComponentType(schema)).toEqual('enum');

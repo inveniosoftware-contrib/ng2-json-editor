@@ -23,7 +23,7 @@
 import { Component, Input, Output, EventEmitter, ElementRef } from '@angular/core';
 import { Set } from 'immutable';
 
-import { DomUtilService, EmptyValueService, PathUtilService } from '../shared/services';
+import { DomUtilService, EmptyValueService, PathUtilService, KeysStoreService } from '../shared/services';
 import { JSONSchema } from '../shared/interfaces';
 
 @Component({
@@ -39,14 +39,13 @@ export class AddFieldDropdownComponent {
   @Input() fields: Set<string>;
   @Input() pathString: string;
 
-  @Output() onFieldAdd: EventEmitter<string> = new EventEmitter<string>();
-
   expression = '';
 
   constructor(public elementRef: ElementRef,
     public domUtilService: DomUtilService,
     public emptyValueService: EmptyValueService,
-    public pathUtilService: PathUtilService) { }
+    public pathUtilService: PathUtilService,
+    public keysStoreService: KeysStoreService) { }
 
   get disabled(): boolean {
     return Object.keys(this.schema.properties).length === this.fields.size;
@@ -58,9 +57,7 @@ export class AddFieldDropdownComponent {
   }
 
   onFieldSelect(field: string) {
-    this.onFieldAdd.emit(field);
-
-    let newFieldPathString = `${this.pathString}${this.pathUtilService.separator}${field}`;
+    let newFieldPathString = this.keysStoreService.addKey(this.pathString, field, this.schema);
     this.domUtilService.focusAndSelectFirstEditableChildById(newFieldPathString);
     this.expression = '';
   }

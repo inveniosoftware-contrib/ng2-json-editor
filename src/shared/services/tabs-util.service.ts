@@ -31,17 +31,13 @@ import { PathUtilService } from './path-util.service';
 @Injectable()
 export class TabsUtilService {
 
-  private _schemaKeyToTabName: {[key: string]: string };
-  private _tabSelectionSubject: ReplaySubject<string> = new ReplaySubject<string>(1);
+  private schemaKeyToTabName: { [key: string]: string };
+  private _activeTabName$: ReplaySubject<string> = new ReplaySubject<string>(1);
 
   constructor(public pathUtilService: PathUtilService) { }
 
-  get tabSelectionSubject(): ReplaySubject<string> {
-    return this._tabSelectionSubject;
-  }
-
-  get schemaKeyToTabName(): {[key: string]: string } {
-    return this._schemaKeyToTabName;
+  get activeTabName$(): ReplaySubject<string> {
+    return this._activeTabName$;
   }
 
   getTabNames(tabsConfig: TabsConfig): Array<string> {
@@ -51,77 +47,33 @@ export class TabsUtilService {
       .concat(tabNames);
   }
 
-  getSchemaKeyToTabName(tabsConfig: TabsConfig, schema: JSONSchema): {} {
-    // set tab.name for configured keys
-    let keyToTabName = tabsConfig.tabs
-      .map(tab => {
-        let keysWithTabName = {};
-        tab.properties.forEach(key => {
-          keysWithTabName[key] = tab.name;
-        });
-        return keysWithTabName;
-      }).reduce((pre, cur) => Object.assign(pre, cur));
-    // set defaultTabName for all other keys in the schema
-    Object.keys(schema.properties)
-      .filter(key => !keyToTabName[key])
-      .forEach(key => {
-        keyToTabName[key] = tabsConfig.defaultTabName;
-      });
-    this._schemaKeyToTabName = keyToTabName;
-    return keyToTabName;
-  }
-
-  getTabNameToKeys(keys: Set<string>, schemaKeyToTabName: { [key: string]: string }, tabNames: Array<string>):
-  { [tabName: string]: Set<string> } {
-    let tabNameToKeys = keys.groupBy(key => schemaKeyToTabName[key]).toObject() as any;
-    tabNames
-      .filter(tabName => !(tabName in tabNameToKeys))
-      .forEach(tabName => tabNameToKeys[tabName] = Set());
-    return tabNameToKeys;
-  }
-
-  // TODO: shouldn't access this
-  getTabNameToSubSchema(schema: JSONSchema, keyToTabName: { [key: string]: string }): {} {
-    let schemaProps = schema.properties;
-    let tabNameToSchemaProps = Object.keys(schemaProps)
-      .map(prop => {
-        return {
-          [keyToTabName[prop]]: {
-            [prop]: schemaProps[prop]
-          }
-        };
-      }).reduce((pre, cur) => _.merge(pre, cur));
-
-    let tabNameToAlwaysShow: { [tabName: string]: Array<string> } = {};
-    let alwaysShow = schema.alwaysShow;
-    if (alwaysShow) {
-      alwaysShow
+  getSchemaKeyToTabName(tabsConfig: TabsConfig, schema: JSONSchema): { [key: string]: string } {
+    if (!this.schemaKeyToTabName) {
+      // set tab.name for configured keys
+      let keyToTabName = tabsConfig.tabs
+        .map(tab => {
+          let keysWithTabName = {};
+          tab.properties.forEach(key => {
+            keysWithTabName[key] = tab.name;
+          });
+          return keysWithTabName;
+        }).reduce((pre, cur) => Object.assign(pre, cur));
+      // set defaultTabName for all other keys in the schema
+      Object.keys(schema.properties)
+        .filter(key => !keyToTabName[key])
         .forEach(key => {
-          let tabName = keyToTabName[key];
-          if (!tabNameToAlwaysShow[tabName]) {
-            tabNameToAlwaysShow[tabName] = [];
-          }
-          tabNameToAlwaysShow[tabName].push(key);
+          keyToTabName[key] = tabsConfig.defaultTabName;
         });
+      this.schemaKeyToTabName = keyToTabName;
     }
-
-    let tabNameToSchemaPart = {};
-    Object.keys(tabNameToSchemaProps)
-      .forEach(tabName => {
-        tabNameToSchemaPart[tabName] = {
-          type: 'object',
-          alwaysShow: tabNameToAlwaysShow[tabName],
-          properties: tabNameToSchemaProps[tabName]
-        };
-      });
-    return tabNameToSchemaPart;
+    return this.schemaKeyToTabName;
   }
 
   // TODO: maybe this could be a decorator
   selectTabIfNeeded(path: string) {
     if (this.schemaKeyToTabName) {
       let tabName = this.schemaKeyToTabName[this.pathUtilService.toPathArray(path)[0]];
-      this.tabSelectionSubject.next(tabName);
+      this.activeTabName$.next(tabName);
     }
   }
 }

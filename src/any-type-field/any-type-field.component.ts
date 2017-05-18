@@ -54,13 +54,7 @@ export class AnyTypeFieldComponent {
   @Input() path: Array<any>;
   @Input() value: any;
 
-  constructor(public componentTypeService: ComponentTypeService,
-    public  appGlobalsService: AppGlobalsService,
-    public pathUtilService: PathUtilService) { }
-
-  get componentType(): string {
-    return this.componentTypeService.getComponentType(this.schema);
-  }
+  constructor(public appGlobalsService: AppGlobalsService) { }
 
   get isDisabled(): boolean {
     return this.schema && this.schema.disabled && !this.appGlobalsService.adminMode;

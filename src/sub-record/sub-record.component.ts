@@ -24,7 +24,6 @@ import {
   Component,
   Input,
   Output,
-  OnInit,
   OnChanges,
   SimpleChanges,
   EventEmitter,
@@ -35,7 +34,7 @@ import { Map, Set } from 'immutable';
 
 import { AbstractTrackerComponent } from '../abstract-tracker';
 import { PathCache, JSONSchema } from '../shared/interfaces';
-import { JsonStoreService, AppGlobalsService } from '../shared/services';
+import { JsonStoreService, AppGlobalsService, TabsUtilService, KeysStoreService } from '../shared/services';
 
 @Component({
   selector: 'sub-record',
@@ -45,32 +44,34 @@ import { JsonStoreService, AppGlobalsService } from '../shared/services';
   templateUrl: './sub-record.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SubRecordComponent extends AbstractTrackerComponent implements OnInit, OnChanges {
+export class SubRecordComponent extends AbstractTrackerComponent implements OnChanges {
   @Input() value: Map<string, any>;
   @Input() schema: JSONSchema;
-  @Input() tabName = '';
+  @Input() tabName: string;
   @Input() keys: Set<string>;
-
-  @Output() onDeleteKey: EventEmitter<string> = new EventEmitter<string>();
+  @Input() pathString: string;
 
   keysByType: { others: Set<string>, toggles: Set<string> };
   pathCache: PathCache = {};
 
   constructor(public jsonStoreService: JsonStoreService,
-    public appGlobalsService: AppGlobalsService) {
-      super();
-    }
-
-  ngOnInit() {
-    this.keysByType = this.keys
-      .groupBy(key => this.isToggle(key) ? 'toggles' : 'others')
-      .toObject() as any;
+    public appGlobalsService: AppGlobalsService,
+    public tabsUtilService: TabsUtilService,
+    public keysStoreService: KeysStoreService) {
+    super();
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['keys']) {
-      this.keys = changes['keys'].currentValue;
-      this.keysByType = this.keys
+      let keys;
+      if (this.tabName) {
+        let keyToTabName = this.tabsUtilService.getSchemaKeyToTabName(this.appGlobalsService.config.tabsConfig, this.schema);
+        keys = this.keys
+          .filter(key => keyToTabName[key] === this.tabName);
+      } else {
+        keys = this.keys;
+      }
+      this.keysByType = keys
         .groupBy(key => this.isToggle(key) ? 'toggles' : 'others')
         .toObject() as any;
     }
@@ -78,8 +79,9 @@ export class SubRecordComponent extends AbstractTrackerComponent implements OnIn
 
   // delete only work for others, not toggles (UPDATE: config comment if this changes)
   deleteField(field: string) {
-    this.onDeleteKey.emit(field);
     this.jsonStoreService.removeIn(this.getPathForChild(field));
+
+    this.keysStoreService.deleteKey(this.pathString, field);
   }
 
   getPathForChild(key: string): Array<any> {

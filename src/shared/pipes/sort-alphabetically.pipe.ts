@@ -21,21 +21,20 @@
 */
 
 import { Pipe, PipeTransform } from '@angular/core';
-import { Set } from 'immutable';
+import { Set, OrderedSet } from 'immutable';
 
 import { JSONSchema } from '../interfaces';
 
 @Pipe({
-  name: 'addAlwaysShowToggles'
+  name: 'sortAlphabetically',
 })
-export class AddAlwaysShowTogglesPipe implements PipeTransform {
+export class SortAlphabeticallyPipe implements PipeTransform {
 
-  transform(fields: Set<string>, schema: JSONSchema): Set<string> {
-    let alwaysShowFields: Array<string> = schema.alwaysShow || [];
-    let alwaysShowToggles = alwaysShowFields.filter(field => {
-      let isToggle = schema.properties[field].toggleColor;
-      return isToggle;
-    });
-    return fields.union(alwaysShowToggles);
+  transform(set: Set<string>): OrderedSet<string> {
+    return set.sort((a, b) => {
+      if (a < b) { return -1; }
+      if (a > b) { return 1; }
+      return 0;
+    }) as OrderedSet<string>;
   }
 }

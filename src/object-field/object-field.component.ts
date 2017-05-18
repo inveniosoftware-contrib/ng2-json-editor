@@ -23,9 +23,10 @@
 
 import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Map, Set } from 'immutable';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import { AbstractFieldComponent } from '../abstract-field';
-import { AppGlobalsService, JsonStoreService, PathUtilService } from '../shared/services';
+import { AppGlobalsService, JsonStoreService, PathUtilService, KeysStoreService } from '../shared/services';
 import { JSONSchema } from '../shared/interfaces';
 
 @Component({
@@ -36,39 +37,28 @@ import { JSONSchema } from '../shared/interfaces';
   templateUrl: './object-field.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ObjectFieldComponent extends AbstractFieldComponent implements OnChanges {
+export class ObjectFieldComponent extends AbstractFieldComponent {
 
   @Input() value: Map<string, any>;
   @Input() schema: JSONSchema;
   @Input() path: Array<any>;
 
-  keys: Set<string>;
-
   constructor(public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
     public pathUtilService: PathUtilService,
-    public changeDetectorRef: ChangeDetectorRef) {
+    public changeDetectorRef: ChangeDetectorRef,
+    public keysStoreService: KeysStoreService) {
     super(appGlobalsService, pathUtilService, changeDetectorRef);
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    let valueChange = changes['value'];
-    if (valueChange) {
-      // should be cached somewhere like keysByPath if this causes performance issues.
-      this.keys = this.value.keySeq().toSet();
-    }
+  get keys$(): ReplaySubject<Set<string>> {
+    return this.keysStoreService.forPath(this.pathString);
   }
 
   deleteField(name: string) {
-    // remove it from the record
-    this.value = this.value.remove(name);
-    this.jsonStoreService.setIn(this.path, this.value);
-    // remove the key too, so that it will not be displayed as empty
-    this.keys = this.keys.remove(name);
-  }
+    this.jsonStoreService.removeIn(this.path);
 
-  onFieldAdd(field: string) {
-    this.keys = this.keys.add(field);
+    this.keysStoreService.deleteKey(this.pathString, name);
   }
 
 }

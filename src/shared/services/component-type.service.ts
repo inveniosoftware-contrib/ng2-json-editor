@@ -67,12 +67,13 @@ export class ComponentTypeService {
       let itemSchema = schema.items;
       if (itemSchema.type === 'object') {
         // complex-array: if it's an object array
-        // where at least one property of this object is also an object array.
-        // so object array in an object array. Array<{property: Array<{...}>...}>
+        // if its elements have at least a property with object (not ref-field)
+        // or a non-primitive array.
         let isComplexArray = Object.keys(itemSchema.properties)
           .some(prop => {
             let propSchema = itemSchema.properties[prop];
-            return propSchema.items && (propSchema.items.type === 'object');
+            return (propSchema.type === 'object' && !propSchema.properties['$ref']) ||
+              (propSchema.type === 'array' && (propSchema.items.type === 'object' || propSchema.items.type === 'array'));
           });
         if (isComplexArray) {
           return 'complex-list';

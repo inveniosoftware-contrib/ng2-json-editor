@@ -62,7 +62,7 @@ export class PathUtilService {
    * @returns {number} - Returns found index in path or -1 if not found
    */
   findIndexFromPath(path: Array<any>, directPathSearch: boolean): number {
-    path = directPathSearch ?  path : path.reverse();
+    path = directPathSearch ? path : path.reverse();
     for (let index in path) {
       if (!isNaN(path[index])) {
         return path[index];

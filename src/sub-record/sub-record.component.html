@@ -2,14 +2,14 @@
   <table class="table">
     <div class="field-wrapper">
       <tr *ngIf="keysByType.toggles" class="align-right">
-        <td *ngFor="let key of keysByType.toggles | addAlwaysShowToggles:schema| filterAndSortBySchema:schema; trackBy:trackByElement">
+        <td *ngFor="let key of keysByType.toggles; trackBy:trackByElement">
           <slide-toggle [id]="'/' + key" [value]="value.get(key) | selfOrEmpty:schema.properties[key]" (valueChange)="onToggleValueChange(key, $event)"
             [onText]="key" [offText]="key" [onColor]="schema.properties[key].toggleColor"></slide-toggle>
         </td>
       </tr>
     </div>
     <div *ngIf="keysByType.others">
-      <div class="field-wrapper" *ngFor="let key of keysByType.others | addAlwaysShowFields:schema | filterAndSortBySchema:schema | setFirstElementPath:tabName; trackBy:trackByElement">
+      <div class="field-wrapper" *ngFor="let key of keysByType.others | setFirstElementPath:tabName; trackBy:trackByElement">
         <tr>
           <td class="label-holder">
             <title-dropdown [title]="key | underscoreToSpace" [isDisabled]="schema.properties[key].disabled">
