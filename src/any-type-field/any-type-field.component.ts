@@ -26,9 +26,7 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 
-import { AppGlobalsService, ComponentTypeService, PathUtilService } from '../shared/services';
 import { JSONSchema } from '../shared/interfaces';
-
 
 /**
  * AnyFieldComponent
@@ -49,14 +47,7 @@ import { JSONSchema } from '../shared/interfaces';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AnyTypeFieldComponent {
-
   @Input() schema: JSONSchema;
   @Input() path: Array<any>;
   @Input() value: any;
-
-  constructor(public appGlobalsService: AppGlobalsService) { }
-
-  get isDisabled(): boolean {
-    return this.schema && this.schema.disabled && !this.appGlobalsService.adminMode;
-  }
 }

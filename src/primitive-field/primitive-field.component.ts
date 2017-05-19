@@ -54,6 +54,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent {
   @Input() path: Array<any>;
   @Input() value: string | number | boolean;
 
+
   constructor(public schemaValidationService: SchemaValidationService,
     public componentTypeService: ComponentTypeService,
     public appGlobalsService: AppGlobalsService,
@@ -62,6 +63,9 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent {
     public domUtilService: DomUtilService,
     public changeDetectorRef: ChangeDetectorRef) {
     super(appGlobalsService, pathUtilService, changeDetectorRef);
+    this.appGlobalsService.adminMode$.subscribe(adminMode => {
+      this.changeDetectorRef.markForCheck();
+    });
   }
 
   get valueType(): string {

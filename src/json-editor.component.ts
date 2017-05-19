@@ -126,7 +126,9 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     // set errors that is used by other components
     this.appGlobalsService.externalErrors = this.errorMap;
     this.appGlobalsService.templates = this.templates;
-
+    this.appGlobalsService.adminMode$.subscribe(adminMode => {
+      this.keysStoreService.buildKeysMap(this._record, this.schema);
+    });
     // use fromJS to convert input to immutable then pass it to the store
     this._record = fromJS(this.record);
     this.jsonStoreService.setJson(this._record);
