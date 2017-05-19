@@ -67,6 +67,19 @@ export class ShortcutActionService {
     });
   }
 
+  addBelowToRootAction(path: Array<any>): void {
+    let rootPath = this.pathUtilService.getNearestOrRootArrayParentInPath(path, true);
+    let schema = this.jsonSchemaService.getSchemaFromPath(rootPath);
+    let itemSchema = schema.items;
+    let emptyValue = this.emptyValueService.generateEmptyValue(itemSchema);
+    let values = this.jsonStoreService.getIn(rootPath) || List();
+    this.jsonStoreService.setIn(rootPath, values.insert(path[1] + 1, emptyValue));
+    rootPath.push(path[1] + 1);
+    setTimeout(() => {
+      this.focusElementInPath(this.pathUtilService.toPathString(rootPath));
+    });
+  }
+
   moveUpAction(path: Array<any>): void {
     this.move(path, -1);
   }

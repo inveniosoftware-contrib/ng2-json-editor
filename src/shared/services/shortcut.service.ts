@@ -38,6 +38,10 @@ export class ShortcutService {
       key: 'mod+shift+a',
       action: this.shortcutActionService.generateShortcutAction('addToRootAction')
     },
+    addBelowToRoot: {
+      key: 'mod+shift+b',
+      action: this.shortcutActionService.generateShortcutAction('addBelowToRootAction')
+    },
     moveUp: {
       key: 'mod+shift+up',
       action: this.shortcutActionService.generateShortcutAction('moveUpAction')

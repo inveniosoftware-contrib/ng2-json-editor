@@ -81,9 +81,11 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
 
       if (curSize !== preSize) {
         if (this.navigator) {
+          // check if element added in the end by comparing the last elements
+          let elementAddedToEnd = valuesChange.previousValue.equals(valuesChange.currentValue.pop());
           let lastPage = this.getPageForIndex(curSize - 1);
-          // change the page if a new element is added and it's not on the last page
-          if (curSize > preSize && this.currentPage !== lastPage) {
+          // change the page if a new element is added in the end and it's not on the last page
+          if (curSize > preSize && this.currentPage !== lastPage && elementAddedToEnd) {
             this.currentPage = lastPage;
           }
         }
