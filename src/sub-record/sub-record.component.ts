@@ -26,7 +26,7 @@ import {
   Output,
   OnChanges,
   SimpleChanges,
-  EventEmitter,
+  ChangeDetectorRef,
   ChangeDetectionStrategy
 } from '@angular/core';
 
@@ -57,8 +57,12 @@ export class SubRecordComponent extends AbstractTrackerComponent implements OnCh
   constructor(public jsonStoreService: JsonStoreService,
     public appGlobalsService: AppGlobalsService,
     public tabsUtilService: TabsUtilService,
+    public changeDetectorRef: ChangeDetectorRef,
     public keysStoreService: KeysStoreService) {
     super();
+    this.appGlobalsService.adminModeSubject.subscribe(adminMode => {
+      this.changeDetectorRef.markForCheck();
+    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -97,5 +101,9 @@ export class SubRecordComponent extends AbstractTrackerComponent implements OnCh
 
   private isToggle(field: string): boolean {
     return this.schema.properties[field].toggleColor !== undefined;
+  }
+
+  isDisabled(key): boolean {
+    return this.schema.properties[key].disabled && !this.appGlobalsService.adminMode ;
   }
 }

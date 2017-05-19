@@ -24,6 +24,7 @@ import {
   Component,
   Input,
   ChangeDetectionStrategy,
+  ChangeDetectorRef
 } from '@angular/core';
 
 import { AppGlobalsService, ComponentTypeService, PathUtilService } from '../shared/services';
@@ -54,7 +55,13 @@ export class AnyTypeFieldComponent {
   @Input() path: Array<any>;
   @Input() value: any;
 
-  constructor(public appGlobalsService: AppGlobalsService) { }
+
+  constructor(public changeDetectorRef: ChangeDetectorRef,
+    public appGlobalsService: AppGlobalsService) {
+    this.appGlobalsService.adminModeSubject.subscribe(adminMode => {
+      this.changeDetectorRef.markForCheck();
+    });
+  }
 
   get isDisabled(): boolean {
     return this.schema && this.schema.disabled && !this.appGlobalsService.adminMode;
