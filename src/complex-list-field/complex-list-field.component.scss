@@ -39,3 +39,15 @@ $navigator-item-padding: 13px;
     opacity: 0.83;
   }
 }
+
+.element-button-container {
+  padding-top: 8px;
+
+  .left, .right {
+    padding: 0px;
+  }
+  
+  .right {
+    text-align: right;
+  }
+}

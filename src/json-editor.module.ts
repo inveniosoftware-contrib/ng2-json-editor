@@ -29,7 +29,10 @@ import { HttpModule } from '@angular/http';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { SlideToggleModule } from 'ng2-slide-toggle';
 
-import { AddFieldDropdownComponent } from './add-field-dropdown';
+import {
+  AddFieldDropdownComponent,
+  AddNestedFieldDropdownComponent
+} from './add-field-dropdown';
 import { AddNewElementButtonComponent } from './add-new-element-button';
 import { AnyTypeFieldComponent } from './any-type-field';
 import { AutocompleteInputComponent } from './autocomplete-input';
@@ -63,6 +66,7 @@ import { ErrorPanelComponent, ErrorPanelItemComponent } from './error-panel';
     ...SHARED_PIPES,
     ...SHARED_DIRECTIVES,
     AddFieldDropdownComponent,
+    AddNestedFieldDropdownComponent,
     AddNewElementButtonComponent,
     AnyTypeFieldComponent,
     AutocompleteInputComponent,
@@ -103,6 +107,7 @@ export class JsonEditorModule { }
 
 export {
   AddFieldDropdownComponent,
+  AddNestedFieldDropdownComponent,
   AddNewElementButtonComponent,
   AnyTypeFieldComponent,
   AutocompleteInputComponent,

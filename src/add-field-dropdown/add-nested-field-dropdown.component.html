@@ -1,0 +1,16 @@
+<div class="btn-group add-field-dropdown-container" dropdown keyboardNav="true">
+  <button type="button" class="btn-add-field-dropdown" dropdownToggle>
+    <i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i>
+  </button>
+  <ul class="dropdown-menu" *dropdownMenu>
+    <div *ngFor="let path of nestedKeysMap | keys; first as isFirst">
+      <div *ngIf="addableKeysForPath(path); let addableKeys">
+        <li *ngIf="!isFirst" class="divider dropdown-divider"></li>
+        <li *ngIf="!isFirst" class="dropdown-header title">{{path | lastPathElement}}</li>
+        <li *ngFor="let key of addableKeys">
+          <a class="dropdown-item" href="javascript:void(0)" (click)="onFieldSelect(path, key)">{{key}}</a>
+        </li>
+      </div>
+    </div>
+  </ul>
+</div>

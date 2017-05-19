@@ -7,6 +7,8 @@ import { SelfOrEmptyPipe } from './self-or-empty.pipe';
 import { UnderscoreToSpacePipe } from './underscore-to-space.pipe';
 import { SetFirstElementPathPipe } from './set-first-element-path.pipe';
 import { SortAlphabeticallyPipe } from './sort-alphabetically.pipe';
+import { KeysPipe } from './keys-pipe';
+import { LastPathElementPipe } from './last-path-element.pipe';
 
 export {
   AddAlwaysShowFieldsPipe,
@@ -17,7 +19,9 @@ export {
   SelfOrEmptyPipe,
   UnderscoreToSpacePipe,
   SetFirstElementPathPipe,
-  SortAlphabeticallyPipe
+  SortAlphabeticallyPipe,
+  KeysPipe,
+  LastPathElementPipe
 };
 
 export const SHARED_PIPES = [
@@ -29,5 +33,7 @@ export const SHARED_PIPES = [
   SelfOrEmptyPipe,
   UnderscoreToSpacePipe,
   SetFirstElementPathPipe,
-  SortAlphabeticallyPipe
+  SortAlphabeticallyPipe,
+  KeysPipe,
+  LastPathElementPipe
 ];

@@ -49,7 +49,7 @@ export class ShortcutActionService {
 
   private add(path: Array<any>, root: boolean): void {
     let _path = this.pathUtilService.getNearestOrRootArrayParentInPath(path, root);
-    this.addNewElementInArray(_path, this.jsonSchemaService.getSchemaFromPath(_path));
+    this.addNewElementInArray(_path, this.jsonSchemaService.forPathArray(_path));
   }
 
   /**
@@ -69,7 +69,7 @@ export class ShortcutActionService {
 
   addBelowToRootAction(path: Array<any>): void {
     let rootPath = this.pathUtilService.getNearestOrRootArrayParentInPath(path, true);
-    let schema = this.jsonSchemaService.getSchemaFromPath(rootPath);
+    let schema = this.jsonSchemaService.forPathArray(rootPath);
     let itemSchema = schema.items;
     let emptyValue = this.emptyValueService.generateEmptyValue(itemSchema);
     let values = this.jsonStoreService.getIn(rootPath) || List();
@@ -202,7 +202,7 @@ export class ShortcutActionService {
    */
   private copyRowOrSchemaBelow(originalPath: Array<any>, root: boolean) {
     let arrayParentPath = this.pathUtilService.getNearestOrRootArrayParentInPath(originalPath, root);
-    if (this.jsonSchemaService.getSchemaFromPath(arrayParentPath)['items'].hasOwnProperty('properties')) {
+    if (this.jsonSchemaService.forPathArray(arrayParentPath)['items'].hasOwnProperty('properties')) {
       let elemIndex = this.pathUtilService.getElementIndexInForwardOrReversePath(originalPath, root);
       let valuesList = this.jsonStoreService.getIn(arrayParentPath) || List();
       let newValue = valuesList.get(elemIndex);

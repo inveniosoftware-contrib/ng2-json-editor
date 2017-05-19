@@ -18,44 +18,24 @@
  * In applying this license, CERN does not
  * waive the privileges and immunities granted to it by virtue of its status
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
+*/
+
+import { Pipe, PipeTransform } from '@angular/core';
+import { PathUtilService } from '../services';
+
+/**
+ * Returs last part of json-pointer string
+ * Example: for '/foo/bar/0/thing', returs 'thing'
  */
-
-import { Injectable } from '@angular/core';
-
-import { JSONSchema } from '../interfaces';
-import { PathUtilService } from './path-util.service';
-
-@Injectable()
-export class JsonSchemaService {
-
-  private schema: JSONSchema;
+@Pipe({
+  name: 'lastPathElement'
+})
+export class LastPathElementPipe implements PipeTransform {
 
   constructor(private pathUtilService: PathUtilService) { }
 
-  setSchema(schema: JSONSchema) {
-    this.schema = schema;
+  transform(path: string): string {
+    let elements = path.split(this.pathUtilService.separator);
+    return elements[elements.length - 1];
   }
-
-  /**
-   * Returns the schema extracted from this path
-   */
-  forPathArray(path: Array<any>): JSONSchema {
-    return path
-      .reduce<JSONSchema>((schema, pathEl) => {
-        if (isNaN(pathEl)) {
-          return schema.properties[pathEl];
-        } else {
-          return schema.items;
-        }
-      }, this.schema);
-  }
-
-  /**
-   * Returns the schema extracted from the json-pointer string
-   */
-  forPathString(path: string): JSONSchema {
-    let pathArray = this.pathUtilService.toPathArray(path);
-    return this.forPathArray(pathArray);
-  }
-
 }

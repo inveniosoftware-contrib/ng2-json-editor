@@ -30,7 +30,8 @@ import { PathUtilService } from './path-util.service';
 @Injectable()
 export class KeysStoreService {
   private keys$Map: { [path: string]: ReplaySubject<OrderedSet<string>> };
-  private keysMap: { [path: string]: OrderedSet<string> };
+  public keysMap: { [path: string]: OrderedSet<string> };
+  public onKeysChange = new ReplaySubject<{ path: string, keys: OrderedSet<string>}>(1);
 
   constructor(private pathUtilService: PathUtilService) { }
 
@@ -38,12 +39,19 @@ export class KeysStoreService {
     return this.keys$Map[path];
   }
 
+  /**
+   * Adds a key to the specified path.
+   * @param path json-pointer to add the key to
+   * @param key key to be added
+   * @param schema OBJECT schema that belongs to path (schema.items for table-list)
+   */
   addKey(path: string, key: string, schema: JSONSchema): string {
     // FIXME: could do O(logn) insert instead of O(nlogn) since the set is already sorted.
     this.keysMap[path] = this.keysMap[path]
       .add(key)
       .sort((a, b) => this.compareByPriority(a, b, schema)) as OrderedSet<string>;
     this.keys$Map[path].next(this.keysMap[path]);
+    this.onKeysChange.next({ path, keys: this.keysMap[path] });
     let newKeyPath = `${path}${this.pathUtilService.separator}${key}`;
 
     let keySchema = schema.properties[key];
@@ -57,6 +65,7 @@ export class KeysStoreService {
   deleteKey(path: string, key: string) {
     this.keysMap[path] = this.keysMap[path].delete(key);
     this.keys$Map[path].next(this.keysMap[path]);
+    this.onKeysChange.next({ path, keys: this.keysMap[path] });
     let deletedKeyPath = `${path}${this.pathUtilService.separator}${key}`;
     delete this.keysMap[deletedKeyPath];
     delete this.keys$Map[deletedKeyPath];
