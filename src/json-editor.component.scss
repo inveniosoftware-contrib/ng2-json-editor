@@ -1,4 +1,5 @@
 // Material UI colors
+// from https://flatuicolors.com/
 $turquoise: #1abc9c;
 $green-sea: #16a085;
 $pete-river: #3498db;
@@ -21,9 +22,13 @@ $concrete: #95a5a6;
 $asbestos: #7f8c8d;
 
 $text-button-font-size: 13px;
+
+// Extra colors
 $table-editable-rows-background: #edf6fd;
 $label-color: #c1c1c1;
 $error-color: $alizarin;
+$label-holder-background-color: #dae8ef;
+$label-holder-button-color: #595959;
 
 body, html {
   height:100%;
@@ -47,8 +52,16 @@ body, html {
 
 #ng2-json-editor {
 
-  .field-wrapper {
-    border-bottom: 2px solid #a5adb5;
+  th {
+    font-weight: 400;
+    padding: 1px 0px 1px 6px;
+    background-color: #ecf0f1;
+    color: #8e8e8e;
+    font-weight: bold;
+
+    .dropdown-filter-container {
+      font-weight: initial;
+    }
   }
 
   td {
@@ -60,16 +73,18 @@ body, html {
   td > * {
     vertical-align : middle;
   }
-
-  th {
-    font-weight: 400;
-    padding: 1px 0px 1px 3px;
-  }
   
   td.label-holder {
     width: 1%;
     white-space: nowrap;
-    padding-right: 5px;
+    padding: 3px;
+    background-color: $label-holder-background-color;
+    border-top: 1px solid $silver;
+
+    button {
+      color: $label-holder-button-color;
+    }
+
   }
 
   tr.error td, td.error {
@@ -119,8 +134,7 @@ body, html {
 
   .main-container {
     font-size: 13px;
-    border-right: 2px solid #a5adb5;
-    border-left: 2px solid #a5adb5;
+    border-left: 1px solid #a5adb5;
     height: 100%;
     overflow: auto;
 
@@ -214,7 +228,9 @@ body, html {
   }
 
   td.button-holder, th.button-holder {
-    width: 27.33px;
+    width: 40.33px;
+    text-align: center;
+    vertical-align: middle;
 
     &.sortable {
       width: 46px;
@@ -242,6 +258,15 @@ body, html {
 
   // FIXME: only used in table-list and table-list it's own version?
   table.editable-inner-table {
+
+    > tbody > tr {
+      border-bottom: 1px solid white !important;
+    }
+
+    add-new-element-button .button-container {
+      padding-left: 6px;
+    }
+
     label {
       display: inline;
       font-weight: initial;
@@ -279,10 +304,6 @@ body, html {
     width: 90%;
   }
 
-  .value-container {
-    background-color: $table-editable-rows-background;
-  }
-
   button.btn-toggle {
     float: right;
     margin-top: 5px;
@@ -299,7 +320,7 @@ body, html {
   }
 
   .list-action-group-container {
-    text-align: right;
+    text-align: right !important;
   }
 
   .max-height-90-vh {

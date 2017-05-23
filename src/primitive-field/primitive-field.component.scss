@@ -1,19 +1,11 @@
 td.value-container div[contenteditable=true],
 td.value-container input {
   vertical-align: middle;
-  width: 50%;
-  padding: 0 0 0 3px;
   transition: all 0.5s ease;
-  resize: none;
   border: none;
   background-color: transparent;
   display: inline-block;
-
-  // Fill parent's width 
   width:100%;
-  box-sizing: border-box;         // For IE and modern versions of Chrome
-  -moz-box-sizing: border-box;    // For Firefox   
-  -webkit-box-sizing: border-box; // For Safari
 }
 
 table.primitive-field-container {
@@ -26,6 +18,7 @@ td.link-button-container {
 
 td.value-container {
   width: 100%;
+  padding: 3px 3px 3px 6px !important;
   
   &:hover {
     background-color: #ffa !important;
