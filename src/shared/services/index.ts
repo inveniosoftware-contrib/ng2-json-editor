@@ -18,6 +18,7 @@ import { ShortcutService } from './shortcut.service';
 import { WindowHrefService } from './window-href.service';
 import { TabsUtilService } from './tabs-util.service';
 import { ErrorMapUtilService } from './error-map-util.service';
+import { KatexService } from './katex.service';
 
 
 export {
@@ -40,7 +41,8 @@ export {
   ShortcutService,
   WindowHrefService,
   TabsUtilService,
-  ErrorMapUtilService
+  ErrorMapUtilService,
+  KatexService
 };
 
 export const SHARED_SERVICES = [
@@ -63,5 +65,6 @@ export const SHARED_SERVICES = [
   ShortcutService,
   WindowHrefService,
   TabsUtilService,
-  ErrorMapUtilService
+  ErrorMapUtilService,
+  KatexService
 ];

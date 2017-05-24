@@ -52,6 +52,10 @@ body, html {
 
 #ng2-json-editor {
 
+  .hidden {
+    display: none;
+  }
+
   th {
     font-weight: 400;
     padding: 1px 0px 1px 6px;

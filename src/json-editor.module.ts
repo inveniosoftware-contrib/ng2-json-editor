@@ -52,6 +52,7 @@ import { RefFieldComponent } from './ref-field';
 import { TableListFieldComponent } from './table-list-field';
 import { TableItemFieldComponent } from './table-item-field';
 import { TitleDropdownComponent } from './title-dropdown';
+import { StringInputComponent } from './string-input';
 import {
   TreeMenuComponent,
   TreeMenuItemComponent
@@ -91,7 +92,8 @@ import { ErrorPanelComponent, ErrorPanelItemComponent } from './error-panel';
     HtmlViewComponent,
     ValidationBadgesComponent,
     ErrorPanelComponent,
-    ErrorPanelItemComponent
+    ErrorPanelItemComponent,
+    StringInputComponent
   ],
   exports: [JsonEditorComponent],
   imports: [
@@ -132,5 +134,6 @@ export {
   SubRecordComponent,
   HtmlViewComponent,
   ValidationBadgesComponent,
-  ErrorPanelItemComponent
+  ErrorPanelItemComponent,
+  StringInputComponent
 }

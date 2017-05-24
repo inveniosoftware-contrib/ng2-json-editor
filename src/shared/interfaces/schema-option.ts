@@ -95,4 +95,9 @@ export interface SchemaOption {
    * Configuration for custom templates in complex list fields.
    */
   viewTemplateConfig?: ViewTemplateConfig;
+
+  /**
+   * Flag to enable LaTeX preview in a field.
+   */
+  latexPreviewEnabled?: boolean;
 }

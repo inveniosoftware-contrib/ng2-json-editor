@@ -46,6 +46,7 @@
   "dependencies": {
     "ajv": "^4.11.3",
     "immutable": "^3.8.1",
+    "katex": "^0.7.1",
     "lodash": "4.17.2",
     "mousetrap": "^1.6.0",
     "ng2-bootstrap": "2.0.0-beta.0",
@@ -63,6 +64,7 @@
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
     "@types/jasmine": "2.5.38",
+    "@types/katex": "^0.5.0",    
     "@types/mousetrap": "^1.5.32",
     "@types/node": "~6.0.60",
     "@types/lodash": "4.14.57",

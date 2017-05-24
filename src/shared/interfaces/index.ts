@@ -21,3 +21,4 @@ export { JSONSchema } from './json-schema';
 export { CategorizedValidationErrors } from './categorized-validation-errors';
 export { ValidationError } from './validation-error';
 export { PaginatedItem } from './paginated-item';
+export { KatexData } from './katex-data';
