@@ -95,4 +95,6 @@ export interface SchemaOption {
    * Configuration for custom templates in complex list fields.
    */
   viewTemplateConfig?: ViewTemplateConfig;
+
+  latexPreview?: boolean;
 }

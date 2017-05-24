@@ -51,6 +51,12 @@ export class AppConfig {
       },
       '/abstracts/items/properties/source': {
         columnWidth: 20
+      },
+      '/titles/items/properties/title': {
+        latexPreview: true
+      },
+      '/abstracts/items/properties/value': {
+        latexPreview: true
       }
     },
     shortcuts: {
