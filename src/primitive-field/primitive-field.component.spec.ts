@@ -108,7 +108,8 @@ describe('PrimitiveFieldComponent', () => {
     component.value = 'defaultStringValue';
     component.path = ['default', 'path'];
     component.schema = {
-      type: 'string'
+      type: 'string',
+      componentType: 'string'
     };
     fixture.detectChanges();
 

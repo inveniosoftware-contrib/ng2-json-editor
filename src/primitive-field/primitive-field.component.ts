@@ -64,10 +64,6 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent {
     super(appGlobalsService, pathUtilService, changeDetectorRef);
   }
 
-  get valueType(): string {
-    return this.componentTypeService.getComponentType(this.schema);
-  }
-
   commitValueChange() {
     this.domUtilService.clearHighlight();
     let errors = this.schemaValidationService.validateValue(this.value, this.schema);
