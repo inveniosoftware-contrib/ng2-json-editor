@@ -14,8 +14,9 @@
       <td class="value-container" [ngClass]="disabledClass" [tooltip]="errorsTooltipTemplate" [isDisabled]="!isErrorTooltipEnabled"
         placement="{{tooltipPosition}}" container="body">
         <div *ngSwitchCase="'string'">
-          <div [attr.contenteditable]="!disabled" attr.data-path="{{pathString}}" [tabindex]="tabIndex" [(contentModel)]="value" (blur)="commitValueChange()"
+          <div *ngIf="!latexPreviewShown" [attr.contenteditable]="!disabled" attr.data-path="{{pathString}}" [tabindex]="tabIndex" [(contentModel)]="value" (blur)="commitValueChange()"
             (keypress)="onKeypress($event)" attr.placeholder="{{schema.title}}"></div>
+          <div (focus)="hidePreview()" (click)="hidePreview()" [id]="pathString + '-latex'" [innerHTML]="latexPreview" *ngIf="schema.latexPreview && latexPreviewShown"></div>
         </div>
         <div *ngSwitchCase="'enum'">
           <searchable-dropdown [pathString]="pathString" [value]="value" [placeholder]="schema.title" [items]="schema.enum" [shortcutMap]="schema.enumShorcutMap"

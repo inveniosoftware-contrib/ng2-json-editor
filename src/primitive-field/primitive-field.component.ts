@@ -21,12 +21,14 @@
 */
 
 import {
+  OnInit,
   Component,
   Input,
   ViewEncapsulation,
   ChangeDetectionStrategy,
   ChangeDetectorRef
 } from '@angular/core';
+import { renderToString } from 'katex';
 
 import { AbstractFieldComponent } from '../abstract-field';
 import {
@@ -35,7 +37,8 @@ import {
   JsonStoreService,
   SchemaValidationService,
   PathUtilService,
-  DomUtilService
+  DomUtilService,
+  KatexService
 } from '../shared/services';
 import { JSONSchema } from '../shared/interfaces';
 
@@ -48,11 +51,14 @@ import { JSONSchema } from '../shared/interfaces';
   templateUrl: './primitive-field.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PrimitiveFieldComponent extends AbstractFieldComponent {
+export class PrimitiveFieldComponent extends AbstractFieldComponent implements OnInit {
 
   @Input() schema: JSONSchema;
   @Input() path: Array<any>;
   @Input() value: string | number | boolean;
+
+  latexPreview = '';
+  latexPreviewShown = false;
 
   constructor(public schemaValidationService: SchemaValidationService,
     public componentTypeService: ComponentTypeService,
@@ -60,11 +66,38 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent {
     public jsonStoreService: JsonStoreService,
     public pathUtilService: PathUtilService,
     public domUtilService: DomUtilService,
-    public changeDetectorRef: ChangeDetectorRef) {
+    public changeDetectorRef: ChangeDetectorRef,
+    public katexService: KatexService
+  ) {
     super(appGlobalsService, pathUtilService, changeDetectorRef);
   }
 
+  ngOnInit() {
+    if (this.schema.latexPreview) {
+      this.latexPreviewShown = true;
+      this.latexPreview = this.value.toString();
+      setTimeout(() => {
+        let el = document.getElementById(this.pathString + '-latex');
+        this.katexService.renderMathInElement(el);
+      });
+    } else {
+      this.latexPreviewShown = false;
+    }
+  }
+
+  hidePreview() {
+    this.latexPreviewShown = false;
+  }
+
   commitValueChange() {
+    if (this.schema.latexPreview) {
+      this.latexPreview = this.value.toString();
+      this.latexPreviewShown = true;
+      setTimeout(() => {
+        let el = document.getElementById(this.pathString + '-latex');
+        this.katexService.renderMathInElement(el);
+      });
+    }
     this.domUtilService.clearHighlight();
     let errors = this.schemaValidationService.validateValue(this.value, this.schema);
     this.jsonStoreService.setIn(this.path, this.value);
