@@ -1,4 +1,4 @@
-<div [ngSwitch]="valueType" [id]="pathString">
+<div [ngSwitch]="schema.componentType" [id]="pathString">
   <table class="primitive-field-container">
     <tr [ngClass]="{error: hasErrors}">
       <ng-template #errorsTooltipTemplate>
