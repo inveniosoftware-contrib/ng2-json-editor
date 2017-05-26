@@ -3,7 +3,7 @@
     <!-- SUB FIELD TITLE MENU -->
     <td class="label-holder">
       <div>
-        <title-dropdown [title]="key | underscoreToSpace" [isDisabled]="schema.properties[key].disabled">
+        <title-dropdown [title]="key | underscoreToSpace" [isDisabled]="isDisabled(key)">
           <li *ngIf="schema.properties[key].type === 'array'" class="title-dropdown-item">
             <add-new-element-button [path]="getPathForChild(key)" [schema]="schema.properties[key]"></add-new-element-button>
           </li>

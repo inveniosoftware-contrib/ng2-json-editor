@@ -9,6 +9,9 @@ export class AppConfig {
       '': {
         alwaysShow: ['deleted']
       },
+      '/$schema': {
+        hidden: true
+      },
       '/deleted': {
         toggleColor: '#e74c3c'
       },

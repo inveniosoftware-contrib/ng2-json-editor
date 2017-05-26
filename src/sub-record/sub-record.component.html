@@ -12,7 +12,7 @@
       <div class="field-wrapper" *ngFor="let key of keysByType.others | setFirstElementPath:tabName; trackBy:trackByElement">
         <tr>
           <td class="label-holder">
-            <title-dropdown [title]="key | underscoreToSpace" [isDisabled]="schema.properties[key].disabled">
+            <title-dropdown [title]="key | underscoreToSpace" [isDisabled]="isDisabled(key)">
               <li *ngIf="schema.properties[key].type === 'array'" class="title-dropdown-item">
                 <add-new-element-button [path]="getPathForChild(key)" [schema]="schema.properties[key]"></add-new-element-button>
               </li>

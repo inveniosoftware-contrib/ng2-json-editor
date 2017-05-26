@@ -26,13 +26,15 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import { JSONSchema } from '../interfaces';
 import { PathUtilService } from './path-util.service';
+import { AppGlobalsService } from './app-globals.service';
 
 @Injectable()
 export class KeysStoreService {
   private keys$Map: { [path: string]: ReplaySubject<OrderedSet<string>> };
   private keysMap: { [path: string]: OrderedSet<string> };
 
-  constructor(private pathUtilService: PathUtilService) { }
+  constructor(private appGlobalsService: AppGlobalsService,
+    private pathUtilService: PathUtilService) { }
 
   forPath(path: string): ReplaySubject<OrderedSet<string>> {
     return this.keys$Map[path];
@@ -120,7 +122,7 @@ export class KeysStoreService {
    */
   private schemafy(keys: Seq<number, string>, schema: JSONSchema): OrderedSet<string> {
     return keys
-      .filter(key => this.isNotHidden(key, schema))
+      .filter(key => this.isNotHidden(key, schema) || this.appGlobalsService.adminMode)
       .concat(schema.alwaysShow || [])
       .sort((a, b) => this.compareByPriority(a, b, schema))
       .toOrderedSet();

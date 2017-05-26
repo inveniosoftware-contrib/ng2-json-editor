@@ -49,6 +49,9 @@ export class ObjectFieldComponent extends AbstractFieldComponent {
     public changeDetectorRef: ChangeDetectorRef,
     public keysStoreService: KeysStoreService) {
     super(appGlobalsService, pathUtilService, changeDetectorRef);
+    this.appGlobalsService.adminModeSubject.subscribe(adminMode => {
+      this.changeDetectorRef.markForCheck();
+    });
   }
 
   get keys$(): ReplaySubject<Set<string>> {
@@ -61,4 +64,7 @@ export class ObjectFieldComponent extends AbstractFieldComponent {
     this.keysStoreService.deleteKey(this.pathString, name);
   }
 
+  isDisabled(key): boolean {
+    return this.schema.properties[key].disabled && !this.appGlobalsService.adminMode ;
+  }
 }

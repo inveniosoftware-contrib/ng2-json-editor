@@ -24,6 +24,8 @@ import { fromJS, Map, OrderedSet } from 'immutable';
 
 import { KeysStoreService } from './keys-store.service';
 import { PathUtilService } from './path-util.service';
+import { AppGlobalsService } from './app-globals.service';
+import { ErrorMapUtilService } from './error-map-util.service';
 
 describe('KeysStoreService', () => {
   let service: KeysStoreService;
@@ -37,7 +39,7 @@ describe('KeysStoreService', () => {
   };
 
   beforeEach(() => {
-    service = new KeysStoreService(new PathUtilService());
+    service = new KeysStoreService(new AppGlobalsService(new ErrorMapUtilService()), new PathUtilService());
   });
 
   it('should build keys map for simple json', () => {

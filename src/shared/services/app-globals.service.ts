@@ -33,7 +33,8 @@ export class AppGlobalsService {
   private _externalErrorCountersSubject = new ReplaySubject<{errors: number, warnings: number}>(1);
   private _internalErrorCountersSubject = new ReplaySubject<{errors: number, warnings: number}>(1);
   private internalErrorMap: SchemaValidationErrors = {};
-  public adminMode = false;
+  public _adminMode = false;
+  public _adminModeSubject = new ReplaySubject<boolean>(1);
   public activeTabName = '';
   public tabNameToFirstTopLevelElement: { [tabName: string]: string } = {};
   public templates: { [templateName: string]: TemplateRef<any> };
@@ -42,6 +43,19 @@ export class AppGlobalsService {
   public externalCategorizedErrorMap: CategorizedValidationErrors = { Errors: {}, Warnings: {} };
 
   constructor(public errorMapUtilService: ErrorMapUtilService) { }
+
+  get adminModeSubject(): ReplaySubject<boolean> {
+    return this._adminModeSubject;
+  }
+
+  set adminMode(adminMode: boolean) {
+    this._adminMode = adminMode;
+    this._adminModeSubject.next(this._adminMode);
+  }
+
+  get adminMode() {
+    return this._adminMode;
+  }
 
   get externalCategorizedErrorsSubject(): ReplaySubject<CategorizedValidationErrors> {
     return this._externalCategorizedErrorsSubject;
