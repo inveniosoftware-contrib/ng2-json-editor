@@ -51,6 +51,17 @@ export class AppConfig {
       },
       '/abstracts/items/properties/source': {
         columnWidth: 20
+      },
+      '/publication_info/items/properties/conference_record': {
+        refFieldConfig: {
+          anchorBuilder: (url) => {
+            let parts = url.split('/');
+            let type = parts[parts.length - 2].slice(0, -1);
+            let display = `View ${type}`;
+            let href = url.replace(/\/api\//, '/');
+            return { href, display };
+          }
+        }
       }
     },
     shortcuts: {
