@@ -1,6 +1,6 @@
 {
   "name": "ng2-json-editor",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "Angular2 component for editing large json documents",
   "keywords": [
     "angular2",
@@ -64,7 +64,7 @@
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
     "@types/jasmine": "2.5.38",
-    "@types/katex": "^0.5.0",    
+    "@types/katex": "^0.5.0",
     "@types/mousetrap": "^1.5.32",
     "@types/node": "~6.0.60",
     "@types/lodash": "4.14.57",
