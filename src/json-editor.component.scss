@@ -319,10 +319,6 @@ body, html {
     }
   }
 
-  .list-action-group-container {
-    text-align: right !important;
-  }
-
   .max-height-90-vh {
     max-height: 90vh;
   }
@@ -397,5 +393,12 @@ body, html {
     margin-right: 0px;
     border-radius: 0px;
     border-right: 1px solid #e0e2e2;
+  }
+}
+
+// Hide all add-field-dropdown in complex-list-field in favor of single add-nested-field-dropdown
+complex-list-field {
+  add-field-dropdown {
+    display: none;
   }
 }
