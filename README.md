@@ -23,6 +23,7 @@ npm install --save ng2-json-editor
 
 - [Bootstrap](http://getbootstrap.com/)
 - [Font Awesone](http://fontawesome.io/)
+- [KaTeX](https://github.com/Khan/KaTeX) (Needed when using `latexPreviewEnabled` config)
 
 Styles above must be available globally in your application, if you are using [Angular CLI](https://cli.angular.io/) you can have a look at example-app's [angular-cli.json](./angular-cli.json) to
 see how to include those styles in your application. 

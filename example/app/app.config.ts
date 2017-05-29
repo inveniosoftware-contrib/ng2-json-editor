@@ -65,6 +65,12 @@ export class AppConfig {
             return { href, display };
           }
         }
+      },
+      '/titles/items/properties/title': {
+        latexPreviewEnabled: true
+      },
+      '/abstracts/items/properties/value': {
+        latexPreviewEnabled: true
       }
     },
     shortcuts: {

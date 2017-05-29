@@ -30,12 +30,14 @@ import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { SearchableDropdownComponent } from '../searchable-dropdown';
 import { AutocompleteInputComponent } from '../autocomplete-input';
 import { PrimitiveFieldComponent } from './primitive-field.component';
+import { StringInputComponent } from '../string-input';
 import { FilterByExpressionPipe } from '../shared/pipes';
 import {
   AppGlobalsService,
   ComponentTypeService,
   SchemaValidationService,
   JsonStoreService,
+  KatexService,
   PathUtilService,
   DomUtilService,
   TabsUtilService,
@@ -55,13 +57,9 @@ import { ContentModelDirective } from '../shared/directives';
  * @param {HTMLElement} el - <div contenteditable=true> or <input> html element
  * @param {string} value - new value to be set to el.value
  */
-function changeInputElementValue(el: HTMLElement, value: string) {
-  if (el instanceof HTMLInputElement) {
-    el.value = value;
-  } else {
-    el.innerText = value;
-  }
-  el.dispatchEvent(new Event('blur'));
+function changeInputElementValue(el: HTMLInputElement, value: string) {
+  el.value = value;
+  el.dispatchEvent(new Event('input'));
 }
 
 class MockJsonStoreService extends JsonStoreService {
@@ -73,7 +71,7 @@ describe('PrimitiveFieldComponent', () => {
   let fixture: ComponentFixture<PrimitiveFieldComponent>;
   let component: PrimitiveFieldComponent;
   let nativeEl: HTMLElement;
-  let inputEl: HTMLElement;
+  let inputEl: HTMLInputElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -81,6 +79,7 @@ describe('PrimitiveFieldComponent', () => {
         FilterByExpressionPipe,
         AutocompleteInputComponent,
         SearchableDropdownComponent,
+        StringInputComponent,
         PrimitiveFieldComponent,
         ContentModelDirective
       ],
@@ -95,6 +94,7 @@ describe('PrimitiveFieldComponent', () => {
         DomUtilService,
         TabsUtilService,
         ErrorMapUtilService,
+        KatexService,
         { provide: JsonStoreService, useClass: MockJsonStoreService }
       ]
     }).compileComponents();
@@ -105,18 +105,18 @@ describe('PrimitiveFieldComponent', () => {
     component = fixture.componentInstance;
 
     // force component to render completely by setting @Input() manually
-    component.value = 'defaultStringValue';
+    component.value = 1;
     component.path = ['default', 'path'];
     component.schema = {
-      type: 'string',
-      componentType: 'string'
+      type: 'integer',
+      componentType: 'integer'
     };
     fixture.detectChanges();
 
     // get useful elements to use in tests
     nativeEl = fixture.nativeElement;
     inputEl = nativeEl
-      .querySelector('input, div[contenteditable=true]') as HTMLElement;
+      .querySelector('input') as HTMLInputElement;
   });
 
   it('should be binded to view', () => {
@@ -128,28 +128,27 @@ describe('PrimitiveFieldComponent', () => {
     expect(inputEl.value).toEqual(modelValue);
     */
 
-    let inputValue = 'inputValue';
+    let inputValue = '2';
     changeInputElementValue(inputEl, inputValue);
     fixture.detectChanges();
-    expect(component.value).toEqual(inputValue);
+    expect(component.value).toEqual(Number(inputValue));
   });
 
   it('should call jsonStore for change on blur', () => {
     spyOn(component.jsonStoreService, 'setIn');
     // change the value
-    let newValue = 'newValue';
+    let newValue = '2';
     changeInputElementValue(inputEl, newValue);
     fixture.detectChanges();
     // blur
     inputEl.dispatchEvent(new Event('blur'));
-
-    expect(component.jsonStoreService.setIn).toHaveBeenCalledWith(component.path, newValue);
+    expect(component.jsonStoreService.setIn).toHaveBeenCalledWith(component.path, Number(newValue));
   });
 
   it('should call jsonStore for change on enter pressed', () => {
     spyOn(component.jsonStoreService, 'setIn');
     // change the value
-    let newValue = 'newValue';
+    let newValue = '2';
     changeInputElementValue(inputEl, newValue);
     fixture.detectChanges();
     // press enter
@@ -157,6 +156,6 @@ describe('PrimitiveFieldComponent', () => {
     enterPressedEvent['key'] = 'Enter';
     inputEl.dispatchEvent(enterPressedEvent);
 
-    expect(component.jsonStoreService.setIn).toHaveBeenCalledWith(component.path, newValue);
+    expect(component.jsonStoreService.setIn).toHaveBeenCalledWith(component.path, Number(newValue));
   });
 });
