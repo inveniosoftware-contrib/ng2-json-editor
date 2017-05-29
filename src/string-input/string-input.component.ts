@@ -53,9 +53,10 @@ export class StringInputComponent implements AfterViewInit, OnInit {
 
   @Output() blur = new EventEmitter<void>();
   @Output() keypress = new EventEmitter<void>();
+  @Output() valueChange = new EventEmitter<string>();
 
   latexPreviewShown: boolean;
-  valuePreviewed = '';
+  valuePreviewed: string;
 
   constructor(public domUtilService: DomUtilService, public katexService: KatexService) {}
 
@@ -77,12 +78,8 @@ export class StringInputComponent implements AfterViewInit, OnInit {
     this.blur.emit();
   }
 
-  valueChanged() {
-    return this.value !== this.valuePreviewed;
-  }
-
   renderLatex() {
-    if (this.valueChanged()) {
+    if (this.value !== this.valuePreviewed) {
       // Save value previewed to avoid re-rendering later on
       this.valuePreviewed = this.value;
       this.latexPreviewEl.nativeElement.innerHTML = this.value;
@@ -93,5 +90,10 @@ export class StringInputComponent implements AfterViewInit, OnInit {
   hideLatexPreview(contentEditableDiv: HTMLElement) {
     this.latexPreviewShown = false;
     setTimeout(() => contentEditableDiv.focus());
+  }
+
+  contentModelChange(value: string) {
+    this.value = value;
+    this.valueChange.emit(value);
   }
 }

@@ -14,7 +14,7 @@
       <td class="value-container" [ngClass]="disabledClass" [tooltip]="errorsTooltipTemplate" [isDisabled]="!isErrorTooltipEnabled"
         placement="{{tooltipPosition}}" container="body">
         <div *ngSwitchCase="'string'">
-          <string-input [pathString]="pathString" [value]="value" [tabIndex]="tabIndex" [latexPreviewEnabled]="schema.latexPreviewEnabled" [placeholder]="schema.title" (blur)="commitValueChange()" (keypress)="onKeypress($event)">
+          <string-input [pathString]="pathString" [value]="value" (valueChange)="onValueChange($event)" [tabIndex]="tabIndex" [latexPreviewEnabled]="schema.latexPreviewEnabled" [placeholder]="schema.title" (blur)="commitValueChange()" (keypress)="onKeypress($event)">
           </string-input>
         </div>
         <div *ngSwitchCase="'enum'">
@@ -23,7 +23,7 @@
         </div>
         <div *ngSwitchCase="'autocomplete'">
           <autocomplete-input [pathString]="pathString" [value]="value" [path]="path" [autocompletionConfig]="schema.autocompletionConfig"
-            (onBlur)="commitValueChange()" (onKeypress)="onKeypress($event)" (onValueChange)="onAutocompleteInputValueChange($event)"
+            (onBlur)="commitValueChange()" (onKeypress)="onKeypress($event)" (onValueChange)="onValueChange($event)"
             [placeholder]="schema.title" [tabIndex]="tabIndex"></autocomplete-input>
         </div>
         <div *ngSwitchCase="'integer'">
