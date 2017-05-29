@@ -46,6 +46,7 @@ export class StringInputComponent implements AfterViewInit, OnInit {
   @ViewChild('latexPreview') latexPreviewEl: ElementRef;
 
   @Input() value: string;
+  @Input() disabled: boolean;
   @Input() pathString: string;
   @Input() placeholder: string;
   @Input() tabIndex: number;
