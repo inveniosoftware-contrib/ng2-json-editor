@@ -29,7 +29,9 @@ import {
   OnInit,
   AfterViewInit,
   ChangeDetectionStrategy,
-  ViewChild
+  ViewChild,
+  OnChanges,
+  SimpleChanges
 } from '@angular/core';
 
 import { DomUtilService, KatexService } from '../shared/services';
@@ -42,7 +44,7 @@ import { DomUtilService, KatexService } from '../shared/services';
   templateUrl: './string-input.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StringInputComponent implements AfterViewInit, OnInit {
+export class StringInputComponent implements AfterViewInit, OnInit, OnChanges {
   @ViewChild('latexPreview') latexPreviewEl: ElementRef;
 
   @Input() value: string;
@@ -57,9 +59,19 @@ export class StringInputComponent implements AfterViewInit, OnInit {
   @Output() valueChange = new EventEmitter<string>();
 
   latexPreviewShown: boolean;
-  valuePreviewed: string;
+  contentModel: string;
 
-  constructor(public domUtilService: DomUtilService, public katexService: KatexService) {}
+  constructor(public domUtilService: DomUtilService, public katexService: KatexService) { }
+
+  ngOnChanges(changes: SimpleChanges) {
+    let valueChange = changes['value'];
+    if (valueChange) {
+      this.contentModel = this.value;
+      if (this.latexPreviewEnabled && !valueChange.firstChange) {
+        this.renderLatex();
+      }
+    }
+  }
 
   ngOnInit() {
     this.latexPreviewShown = this.latexPreviewEnabled;
@@ -74,18 +86,14 @@ export class StringInputComponent implements AfterViewInit, OnInit {
   onBlur() {
     if (this.latexPreviewEnabled) {
       this.latexPreviewShown = true;
-      this.renderLatex();
+      this.value = this.contentModel;
     }
     this.blur.emit();
   }
 
   renderLatex() {
-    if (this.value !== this.valuePreviewed) {
-      // Save value previewed to avoid re-rendering later on
-      this.valuePreviewed = this.value;
-      this.latexPreviewEl.nativeElement.innerHTML = this.value;
-      this.katexService.renderMathInText(this.value, this.latexPreviewEl.nativeElement);
-    }
+    this.latexPreviewEl.nativeElement.innerHTML = this.contentModel;
+    this.katexService.renderMathInText(this.value, this.latexPreviewEl.nativeElement);
   }
 
   hideLatexPreview(contentEditableDiv: HTMLElement) {
@@ -94,7 +102,7 @@ export class StringInputComponent implements AfterViewInit, OnInit {
   }
 
   contentModelChange(value: string) {
-    this.value = value;
+    this.contentModel = value;
     this.valueChange.emit(value);
   }
 }
