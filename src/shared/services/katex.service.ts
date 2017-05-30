@@ -14,18 +14,18 @@ export class KatexService {
     { left: '\\(', right: '\\)', display: false },
   ];
 
-   /**
-   *
-   * Receives text that can contain LaTeX formulas. The formulas will be
-   * identified using `this.delimiters` and rendered inside the passed
-   * HTMLElement
-   *
-   * NOTE: The HTMLElement is expected to have a single child and this
-   * will be replaced by the HTML with formatted LaTeX
-   *
-   * @param {string} text - text to be formatted with LaTeX
-   * @param {HTMLElement} el - the HTMLElement where the LaTeX should be rendered
-   */
+  /**
+  *
+  * Receives text that can contain LaTeX formulas. The formulas will be
+  * identified using `this.delimiters` and rendered inside the passed
+  * HTMLElement
+  *
+  * NOTE: The HTMLElement is expected to have a single child and this
+  * will be replaced by the HTML with formatted LaTeX
+  *
+  * @param {string} text - text to be formatted with LaTeX
+  * @param {HTMLElement} el - the HTMLElement where the LaTeX should be rendered
+  */
   renderMathInText(text: string, el: HTMLElement) {
     const data: Array<KatexData> = this.splitWithDelimiters(text, this.delimiters);
 
@@ -54,9 +54,9 @@ export class KatexService {
         fragment.appendChild(span);
       }
     }
-
-    el.replaceChild(fragment, el.childNodes[0]);
-
+    // clear
+    el.innerHTML = '';
+    el.appendChild(fragment);
   }
 
   private findEndOfMath(delimiter: string, text: string, startIndex: number): number {

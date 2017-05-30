@@ -47,6 +47,7 @@ import { DomUtilService, KatexService } from '../shared/services';
 export class StringInputComponent implements AfterViewInit, OnInit, OnChanges {
   @ViewChild('latexPreview') latexPreviewEl: ElementRef;
 
+  // value update triggers re-rendering of latex preview if it's enabled
   @Input() value: string;
   @Input() disabled: boolean;
   @Input() pathString: string;
@@ -59,6 +60,7 @@ export class StringInputComponent implements AfterViewInit, OnInit, OnChanges {
   @Output() valueChange = new EventEmitter<string>();
 
   latexPreviewShown: boolean;
+  // updated as typed in contenteditable div, doesn't trigger latex re-rendering.
   contentModel: string;
 
   constructor(public domUtilService: DomUtilService, public katexService: KatexService) { }
@@ -74,17 +76,20 @@ export class StringInputComponent implements AfterViewInit, OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.latexPreviewShown = this.latexPreviewEnabled;
+    if (this.shouldShowLatexPreview) {
+      this.latexPreviewShown = true;
+    }
   }
 
   ngAfterViewInit() {
-    if (this.latexPreviewEnabled) {
+    // render latex preview on init, if it's enabled and value is not empty
+    if (this.shouldShowLatexPreview) {
       this.renderLatex();
     }
   }
 
   onBlur() {
-    if (this.latexPreviewEnabled) {
+    if (this.shouldShowLatexPreview) {
       this.latexPreviewShown = true;
       this.value = this.contentModel;
     }
@@ -92,7 +97,6 @@ export class StringInputComponent implements AfterViewInit, OnInit, OnChanges {
   }
 
   renderLatex() {
-    this.latexPreviewEl.nativeElement.innerHTML = this.contentModel;
     this.katexService.renderMathInText(this.value, this.latexPreviewEl.nativeElement);
   }
 
@@ -104,5 +108,9 @@ export class StringInputComponent implements AfterViewInit, OnInit, OnChanges {
   contentModelChange(value: string) {
     this.contentModel = value;
     this.valueChange.emit(value);
+  }
+
+  get shouldShowLatexPreview(): boolean {
+    return this.latexPreviewEnabled && Boolean(this.value);
   }
 }
