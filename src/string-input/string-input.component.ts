@@ -29,7 +29,9 @@ import {
   OnInit,
   AfterViewInit,
   ChangeDetectionStrategy,
-  ViewChild
+  ViewChild,
+  OnChanges,
+  SimpleChanges
 } from '@angular/core';
 
 import { DomUtilService, KatexService } from '../shared/services';
@@ -42,10 +44,12 @@ import { DomUtilService, KatexService } from '../shared/services';
   templateUrl: './string-input.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StringInputComponent implements AfterViewInit, OnInit {
+export class StringInputComponent implements AfterViewInit, OnInit, OnChanges {
   @ViewChild('latexPreview') latexPreviewEl: ElementRef;
 
+  // value update triggers re-rendering of latex preview if it's enabled
   @Input() value: string;
+  @Input() disabled: boolean;
   @Input() pathString: string;
   @Input() placeholder: string;
   @Input() tabIndex: number;
@@ -53,45 +57,60 @@ export class StringInputComponent implements AfterViewInit, OnInit {
 
   @Output() blur = new EventEmitter<void>();
   @Output() keypress = new EventEmitter<void>();
+  @Output() valueChange = new EventEmitter<string>();
 
   latexPreviewShown: boolean;
-  valuePreviewed = '';
+  // updated as typed in contenteditable div, doesn't trigger latex re-rendering.
+  contentModel: string;
 
-  constructor(public domUtilService: DomUtilService, public katexService: KatexService) {}
+  constructor(public domUtilService: DomUtilService, public katexService: KatexService) { }
+
+  ngOnChanges(changes: SimpleChanges) {
+    let valueChange = changes['value'];
+    if (valueChange) {
+      this.contentModel = this.value;
+      if (this.latexPreviewEnabled && !valueChange.firstChange) {
+        this.renderLatex();
+      }
+    }
+  }
 
   ngOnInit() {
-    this.latexPreviewShown = this.latexPreviewEnabled;
+    if (this.shouldShowLatexPreview) {
+      this.latexPreviewShown = true;
+    }
   }
 
   ngAfterViewInit() {
-    if (this.latexPreviewEnabled) {
+    // render latex preview on init, if it's enabled and value is not empty
+    if (this.shouldShowLatexPreview) {
       this.renderLatex();
     }
   }
 
   onBlur() {
-    if (this.latexPreviewEnabled) {
+    if (this.shouldShowLatexPreview) {
       this.latexPreviewShown = true;
-      this.renderLatex();
+      this.value = this.contentModel;
     }
     this.blur.emit();
   }
 
-  valueChanged() {
-    return this.value !== this.valuePreviewed;
-  }
-
   renderLatex() {
-    if (this.valueChanged()) {
-      // Save value previewed to avoid re-rendering later on
-      this.valuePreviewed = this.value;
-      this.latexPreviewEl.nativeElement.innerHTML = this.value;
-      this.katexService.renderMathInText(this.value, this.latexPreviewEl.nativeElement);
-    }
+    this.katexService.renderMathInText(this.value, this.latexPreviewEl.nativeElement);
   }
 
   hideLatexPreview(contentEditableDiv: HTMLElement) {
     this.latexPreviewShown = false;
     setTimeout(() => contentEditableDiv.focus());
+  }
+
+  contentModelChange(value: string) {
+    this.contentModel = value;
+    this.valueChange.emit(value);
+  }
+
+  get shouldShowLatexPreview(): boolean {
+    return this.latexPreviewEnabled && Boolean(this.value);
   }
 }

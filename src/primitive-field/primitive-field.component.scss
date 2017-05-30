@@ -49,7 +49,7 @@ a.no-decoration {
   cursor: not-allowed;
   div {
     pointer-events: none;
-    input, button, div[contenteditable=false], a, i, span {
+    input, button, a, i, string-input > div {
         opacity: .5;
       }
   }

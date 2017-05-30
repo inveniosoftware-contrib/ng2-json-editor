@@ -83,7 +83,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent {
     }
   }
 
-  onAutocompleteInputValueChange(value: string) {
+  onValueChange(value: string) {
     this.value = value;
   }
 
