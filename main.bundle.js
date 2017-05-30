@@ -4282,7 +4282,7 @@ var PrimitiveFieldComponent = (function (_super) {
             event.preventDefault();
         }
     };
-    PrimitiveFieldComponent.prototype.onAutocompleteInputValueChange = function (value) {
+    PrimitiveFieldComponent.prototype.onValueChange = function (value) {
         this.value = value;
     };
     PrimitiveFieldComponent.prototype.onSearchableDropdownSelect = function (value) {
@@ -4328,8 +4328,8 @@ PrimitiveFieldComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
                 selector: 'primitive-field',
                 encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["p" /* ViewEncapsulation */].None,
-                styles: ["td.value-container div[contenteditable=true], td.value-container input { vertical-align: middle; transition: all 0.5s ease; border: none; background-color: transparent; display: inline-block; width: 100%; } table.primitive-field-container { width: 100%; } td.link-button-container { width: 22px; } td.value-container { width: 100%; padding: 3px 3px 3px 6px !important; } td.value-container:hover { background-color: #ffa !important; } a.no-decoration { text-decoration: none; } [contenteditable=true] { min-height: 18px; word-break: break-word; } [contenteditable=true]:empty:before { content: attr(placeholder); color: darkgray; display: block; /* For Firefox */ } .tooltip-left-align { margin-left: 12px; padding: 0px; } .disabled { cursor: not-allowed; } .disabled div { pointer-events: none; } .disabled div input, .disabled div button, .disabled div div[contenteditable=false], .disabled div a, .disabled div i, .disabled div span { opacity: .5; } "],
-                template: "<div [ngSwitch]=\"schema.componentType\" [id]=\"pathString\"> <table class=\"primitive-field-container\"> <tr [ngClass]=\"{error: hasErrors}\"> <ng-template #errorsTooltipTemplate> <ul class=\"tooltip-left-align\"> <li *ngFor=\"let error of internalErrors\" > {{error.message}} </li> <li *ngFor=\"let error of externalErrors\" > {{error.message}} </li> </ul> </ng-template> <td class=\"value-container\" [ngClass]=\"disabledClass\" [tooltip]=\"errorsTooltipTemplate\" [isDisabled]=\"!isErrorTooltipEnabled\" placement=\"{{tooltipPosition}}\" container=\"body\"> <div *ngSwitchCase=\"'string'\"> <string-input [pathString]=\"pathString\" [value]=\"value\" [tabIndex]=\"tabIndex\" [latexPreviewEnabled]=\"schema.latexPreviewEnabled\" [placeholder]=\"schema.title\" (blur)=\"commitValueChange()\" (keypress)=\"onKeypress($event)\"> </string-input> </div> <div *ngSwitchCase=\"'enum'\"> <searchable-dropdown [pathString]=\"pathString\" [value]=\"value\" [placeholder]=\"schema.title\" [items]=\"schema.enum\" [shortcutMap]=\"schema.enumShorcutMap\" (onSelect)=\"onSearchableDropdownSelect($event)\" [tabIndex]=\"tabIndex\" (onBlur)=\"domUtilService.clearHighlight()\"></searchable-dropdown> </div> <div *ngSwitchCase=\"'autocomplete'\"> <autocomplete-input [pathString]=\"pathString\" [value]=\"value\" [path]=\"path\" [autocompletionConfig]=\"schema.autocompletionConfig\" (onBlur)=\"commitValueChange()\" (onKeypress)=\"onKeypress($event)\" (onValueChange)=\"onAutocompleteInputValueChange($event)\" [placeholder]=\"schema.title\" [tabIndex]=\"tabIndex\"></autocomplete-input> </div> <div *ngSwitchCase=\"'integer'\"> <input type=\"number\" [(ngModel)]=\"value\" [tabindex]=\"tabIndex\" attr.data-path=\"{{pathString}}\" (blur)=\"commitValueChange()\" (keypress)=\"onKeypress($event)\" placeholder=\"{{schema.title}}\"> </div> <div *ngSwitchCase=\"'boolean'\"> <input type=\"checkbox\" [(ngModel)]=\"value\" (ngModelChange)=\"commitValueChange()\" placeholder=\"{{schema.title}}\"> </div> <div *ngSwitchDefault> ## Not recognized type: {{valueType}} </div> </td> <td class=\"link-button-container\"> <a *ngIf=\"schema.linkBuilder\" class=\"no-decoration\" target=\"_blank\" [href]=\"schema.linkBuilder(value)\"> <i class=\"fa fa-link\" aria-hidden=\"true\"></i> </a> <a *ngIf=\"!schema.linkBuilder && schema.format === 'url'\" class=\"no-decoration\" target=\"_blank\" [href]=\"value\"> <i class=\"fa fa-link\" aria-hidden=\"true\"></i> </a> </td> </tr> </table> </div>",
+                styles: ["td.value-container div[contenteditable=true], td.value-container input { vertical-align: middle; transition: all 0.5s ease; border: none; background-color: transparent; display: inline-block; width: 100%; } table.primitive-field-container { width: 100%; } td.link-button-container { width: 22px; } td.value-container { width: 100%; padding: 3px 3px 3px 6px !important; } td.value-container:hover { background-color: #ffa !important; } a.no-decoration { text-decoration: none; } [contenteditable=true] { min-height: 18px; word-break: break-word; } [contenteditable=true]:empty:before { content: attr(placeholder); color: darkgray; display: block; /* For Firefox */ } .tooltip-left-align { margin-left: 12px; padding: 0px; } .disabled { cursor: not-allowed; } .disabled div { pointer-events: none; } .disabled div input, .disabled div button, .disabled div a, .disabled div i, .disabled div string-input > div { opacity: .5; } "],
+                template: "<div [ngSwitch]=\"schema.componentType\" [id]=\"pathString\"> <table class=\"primitive-field-container\"> <tr [ngClass]=\"{error: hasErrors}\"> <ng-template #errorsTooltipTemplate> <ul class=\"tooltip-left-align\"> <li *ngFor=\"let error of internalErrors\" > {{error.message}} </li> <li *ngFor=\"let error of externalErrors\" > {{error.message}} </li> </ul> </ng-template> <td class=\"value-container\" [ngClass]=\"disabledClass\" [tooltip]=\"errorsTooltipTemplate\" [isDisabled]=\"!isErrorTooltipEnabled\" placement=\"{{tooltipPosition}}\" container=\"body\"> <div *ngSwitchCase=\"'string'\"> <string-input [pathString]=\"pathString\" [value]=\"value\" (valueChange)=\"onValueChange($event)\" [disabled]=\"disabled\" [tabIndex]=\"tabIndex\" [latexPreviewEnabled]=\"schema.latexPreviewEnabled\" [placeholder]=\"schema.title\" (blur)=\"commitValueChange()\" (keypress)=\"onKeypress($event)\"> </string-input> </div> <div *ngSwitchCase=\"'enum'\"> <searchable-dropdown [pathString]=\"pathString\" [value]=\"value\" [placeholder]=\"schema.title\" [items]=\"schema.enum\" [shortcutMap]=\"schema.enumShorcutMap\" (onSelect)=\"onSearchableDropdownSelect($event)\" [tabIndex]=\"tabIndex\" (onBlur)=\"domUtilService.clearHighlight()\"></searchable-dropdown> </div> <div *ngSwitchCase=\"'autocomplete'\"> <autocomplete-input [pathString]=\"pathString\" [value]=\"value\" [path]=\"path\" [autocompletionConfig]=\"schema.autocompletionConfig\" (onBlur)=\"commitValueChange()\" (onKeypress)=\"onKeypress($event)\" (onValueChange)=\"onValueChange($event)\" [placeholder]=\"schema.title\" [tabIndex]=\"tabIndex\"></autocomplete-input> </div> <div *ngSwitchCase=\"'integer'\"> <input type=\"number\" [(ngModel)]=\"value\" [tabindex]=\"tabIndex\" attr.data-path=\"{{pathString}}\" (blur)=\"commitValueChange()\" (keypress)=\"onKeypress($event)\" placeholder=\"{{schema.title}}\"> </div> <div *ngSwitchCase=\"'boolean'\"> <input type=\"checkbox\" [(ngModel)]=\"value\" (ngModelChange)=\"commitValueChange()\" placeholder=\"{{schema.title}}\"> </div> <div *ngSwitchDefault> ## Not recognized type: {{valueType}} </div> </td> <td class=\"link-button-container\"> <a *ngIf=\"schema.linkBuilder\" class=\"no-decoration\" target=\"_blank\" [href]=\"schema.linkBuilder(value)\"> <i class=\"fa fa-link\" aria-hidden=\"true\"></i> </a> <a *ngIf=\"!schema.linkBuilder && schema.format === 'url'\" class=\"no-decoration\" target=\"_blank\" [href]=\"value\"> <i class=\"fa fa-link\" aria-hidden=\"true\"></i> </a> </td> </tr> </table> </div>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
@@ -5656,7 +5656,9 @@ var KatexService = (function () {
                 fragment.appendChild(span);
             }
         }
-        el.replaceChild(fragment, el.childNodes[0]);
+        // clear
+        el.innerHTML = '';
+        el.appendChild(fragment);
     };
     KatexService.prototype.findEndOfMath = function (delimiter, text, startIndex) {
         // Adapted from
@@ -6782,38 +6784,53 @@ var StringInputComponent = (function () {
         this.katexService = katexService;
         this.blur = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* EventEmitter */]();
         this.keypress = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* EventEmitter */]();
-        this.valuePreviewed = '';
+        this.valueChange = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* EventEmitter */]();
     }
+    StringInputComponent.prototype.ngOnChanges = function (changes) {
+        var valueChange = changes['value'];
+        if (valueChange) {
+            this.contentModel = this.value;
+            if (this.latexPreviewEnabled && !valueChange.firstChange) {
+                this.renderLatex();
+            }
+        }
+    };
     StringInputComponent.prototype.ngOnInit = function () {
-        this.latexPreviewShown = this.latexPreviewEnabled;
+        if (this.shouldShowLatexPreview) {
+            this.latexPreviewShown = true;
+        }
     };
     StringInputComponent.prototype.ngAfterViewInit = function () {
-        if (this.latexPreviewEnabled) {
+        // render latex preview on init, if it's enabled and value is not empty
+        if (this.shouldShowLatexPreview) {
             this.renderLatex();
         }
     };
     StringInputComponent.prototype.onBlur = function () {
-        if (this.latexPreviewEnabled) {
+        if (this.shouldShowLatexPreview) {
             this.latexPreviewShown = true;
-            this.renderLatex();
+            this.value = this.contentModel;
         }
         this.blur.emit();
     };
-    StringInputComponent.prototype.valueChanged = function () {
-        return this.value !== this.valuePreviewed;
-    };
     StringInputComponent.prototype.renderLatex = function () {
-        if (this.valueChanged()) {
-            // Save value previewed to avoid re-rendering later on
-            this.valuePreviewed = this.value;
-            this.latexPreviewEl.nativeElement.innerHTML = this.value;
-            this.katexService.renderMathInText(this.value, this.latexPreviewEl.nativeElement);
-        }
+        this.katexService.renderMathInText(this.value, this.latexPreviewEl.nativeElement);
     };
     StringInputComponent.prototype.hideLatexPreview = function (contentEditableDiv) {
         this.latexPreviewShown = false;
         setTimeout(function () { return contentEditableDiv.focus(); });
     };
+    StringInputComponent.prototype.contentModelChange = function (value) {
+        this.contentModel = value;
+        this.valueChange.emit(value);
+    };
+    Object.defineProperty(StringInputComponent.prototype, "shouldShowLatexPreview", {
+        get: function () {
+            return this.latexPreviewEnabled && Boolean(this.value);
+        },
+        enumerable: true,
+        configurable: true
+    });
     return StringInputComponent;
 }());
 
@@ -6821,7 +6838,7 @@ StringInputComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
                 selector: 'string-input',
                 styles: [""],
-                template: "<div [class.hidden]=\"latexPreviewShown\" [attr.contenteditable]=\"!disabled\" attr.data-path=\"{{pathString}}\" [tabindex]=\"tabIndex\" [(contentModel)]=\"value\" (blur)=\"onBlur()\" (keypress)=\"keypress.emit($event)\" attr.placeholder=\"{{placeholder || '⁣\u2063'}}\" #contentEditable></div> <div [class.hidden]=\"!latexPreviewEnabled || !latexPreviewShown\" (click)=\"hideLatexPreview(contentEditable)\" (blur)=\"hideLatexPreview(contentEditable)\" #latexPreview></div>",
+                template: "<div [class.hidden]=\"latexPreviewShown\" [attr.contenteditable]=\"!disabled\" attr.data-path=\"{{pathString}}\" [tabindex]=\"tabIndex\" [contentModel]=\"contentModel\" (contentModelChange)=\"contentModelChange($event)\" (blur)=\"onBlur()\" (keypress)=\"keypress.emit($event)\" attr.placeholder=\"{{placeholder || '⁣\u2063'}}\" #contentEditable></div> <div [class.hidden]=\"!latexPreviewEnabled || !latexPreviewShown\" (click)=\"hideLatexPreview(contentEditable)\" (blur)=\"hideLatexPreview(contentEditable)\" #latexPreview></div>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
@@ -6833,12 +6850,14 @@ StringInputComponent.ctorParameters = function () { return [
 StringInputComponent.propDecorators = {
     'latexPreviewEl': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */], args: ['latexPreview',] },],
     'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
+    'disabled': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
     'pathString': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
     'placeholder': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
     'tabIndex': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
     'latexPreviewEnabled': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
     'blur': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Y" /* Output */] },],
     'keypress': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Y" /* Output */] },],
+    'valueChange': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Y" /* Output */] },],
 };
 
 
