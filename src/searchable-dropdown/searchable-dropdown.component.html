@@ -1,7 +1,8 @@
 <div class="btn-group" dropdown keyboardNav="true" [isOpen]="status.isOpen" (onShown)="status.isOpen = true" (onHidden)="status.isOpen = false">
-  <div class="toggle-container" dropdownToggle>
+  <!-- there is no dropdownToggle since it is handled manually see: onInputFocus and onInputBlur in ts -->
+  <div class="toggle-container">
     <input #inputToggle attr.data-path="{{pathString}}" [placeholder]="placeholder" [(ngModel)]="expressionOrValue" (keypress)="onKeypress($event.key)"
-      [tabindex]="tabIndex" (focus)="onFocus($event)" (blur)="onBlur.emit()">
+      [tabindex]="tabIndex" (blur)="onInputBlur($event)" (focus)="onInputFocus($event)">
     <i class="fa fa-caret-down" (click)="inputToggle.focus()"></i>
   </div>
   <ul class="dropdown-menu" *dropdownMenu role="menu">
