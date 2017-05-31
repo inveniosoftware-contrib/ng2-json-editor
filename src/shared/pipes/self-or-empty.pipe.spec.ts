@@ -48,21 +48,7 @@ describe('SelfOrEmptyPipe', () => {
   expect(pipeResult).toEqual(expectedResult);
   });
 
-  it('should return empty value if given value is immutable List and is empty', () => {
-    let schema = {
-      type: 'array',
-      items: {
-        type: 'string'
-      }
-    };
-
-    let value = List();
-    let expectedResult = List<string>(['']);
-    let pipeResult = pipe.transform(value, schema);
-    expect(pipeResult).toEqual(expectedResult);
-  });
-
-  it('should return empty value if given value is immutable List and is empty given array of objects', () => {
+  it('should return list with single empty element if given list is undefined', () => {
     let schema = {
       type: 'array',
       items: {
@@ -75,7 +61,7 @@ describe('SelfOrEmptyPipe', () => {
       }
     };
 
-    let value = List();
+    let value = undefined;
     let expectedResult = List([Map()]);
     let pipeResult = pipe.transform(value, schema);
     expect(pipeResult).toEqual(expectedResult);

@@ -41,12 +41,6 @@ export class SelfOrEmptyPipe implements PipeTransform {
    * @return - empty value if given value is undefined or value itself.
    */
   transform(value: any, schema: JSONSchema): any {
-    if (value) {
-      if (List.isList(value) && value.size === 0) {
-        return this.emptyValueService.generateEmptyValue(schema);
-      }
-      return value;
-    }
-    return this.emptyValueService.generateEmptyValue(schema);
+    return value ? value : this.emptyValueService.generateEmptyValue(schema);
   }
 }
