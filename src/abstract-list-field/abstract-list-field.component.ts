@@ -67,7 +67,6 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
   deleteElement(index: number) {
     this.jsonStoreService.setIn(this.path, this.values.remove(index));
     this.values = this.jsonStoreService.getIn(this.path);
-    let elementPathString = this.getPathForChildString(index);
   }
 
   getPathForChildString(index: number): string {
