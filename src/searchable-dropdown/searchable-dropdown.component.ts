@@ -82,14 +82,17 @@ export class SearchableDropdownComponent implements OnInit {
     }
   }
 
-  onFocus(event: FocusEvent) {
-    /**
-     * Open dropdown manually only if it was focused by `TAB`.
-     * Setting it manually all the time breaks auto-toggle by click.
-     * event.relatedTarget is set when the FocusEvent caused by `TAB`.
-     */
-    if (event.relatedTarget) {
-      this.status.isOpen = true;
+  onInputFocus(event: FocusEvent) {
+    this.status.isOpen = true;
+  }
+
+  onInputBlur(event: FocusEvent) {
+    // this avoids closing dropdown when an item is selected
+    // so that onItemClick() can be executed properly before closing.
+    let relatedTarget = event.relatedTarget as HTMLElement;
+    if (relatedTarget && relatedTarget.className !== 'dropdown-item') {
+      this.status.isOpen = false;
     }
+    this.onBlur.emit();
   }
 }
