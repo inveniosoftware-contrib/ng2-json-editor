@@ -24,13 +24,16 @@ import {
   Component,
   Input,
   OnChanges,
+  OnInit,
   SimpleChanges,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
 } from '@angular/core';
 import { Map, Set } from 'immutable';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import { AbstractTrackerComponent } from '../abstract-tracker';
-import { DomUtilService, PathUtilService } from '../shared/services';
+import { DomUtilService, PathUtilService, AppGlobalsService } from '../shared/services';
 import { JSONSchema } from '../shared/interfaces';
 
 @Component({
@@ -51,19 +54,22 @@ export class TreeMenuComponent extends AbstractTrackerComponent implements OnCha
   private prefixOrPath = '';
 
   constructor(private domUtilService: DomUtilService,
-    private pathUtilService: PathUtilService) {
+    private pathUtilService: PathUtilService,
+    private appGlobalsService: AppGlobalsService) {
     super();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    let recordChange = changes['record'];
-    if (recordChange) {
-      let currentRecord: Map<string, any> = recordChange.currentValue;
-      this.keys = currentRecord.keySeq().toSet();
+    if (changes['record']) {
+      this.keys = this.record.keySeq().toSet();
     }
   }
 
   getChildPath(key: string) {
     return `${this.pathUtilService.separator}${key}`;
+  }
+
+  get adminMode$(): ReplaySubject<boolean> {
+    return this.appGlobalsService.adminMode$;
   }
 }

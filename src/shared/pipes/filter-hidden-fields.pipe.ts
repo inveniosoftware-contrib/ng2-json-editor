@@ -23,15 +23,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Set } from 'immutable';
 
-import { AppGlobalsService } from '../services';
 import { JSONSchema } from '../interfaces';
 
 @Pipe({
   name: 'filterHiddenFields',
 })
 export class FilterHiddenFieldsPipe implements PipeTransform {
-
-  constructor(public appGlobalsService: AppGlobalsService) { }
 
   /**
    * It filters out `hidden` fields
@@ -40,7 +37,7 @@ export class FilterHiddenFieldsPipe implements PipeTransform {
    * @param schema - the `schema` that has object schema which contains each key in `keys`
    * @return - filtered keys
    */
-  transform(keys: Set<string>, schema: JSONSchema): Set<string> {
+  transform(keys: Set<string>, schema: JSONSchema, adminMode: boolean): Set<string> {
     let schemaProps = schema.properties;
     if (!keys) { return undefined; }
     return keys
@@ -48,7 +45,7 @@ export class FilterHiddenFieldsPipe implements PipeTransform {
         if (!schemaProps[key]) {
           throw new Error(`"${key}" is not specified as property in \n${JSON.stringify(schemaProps, undefined, 2)}`);
         }
-        return !schemaProps[key].hidden || this.appGlobalsService.adminMode;
+        return !schemaProps[key].hidden || adminMode;
       }) as Set<string>;
   }
 }

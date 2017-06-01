@@ -23,13 +23,12 @@
 import { Set } from 'immutable';
 
 import { FilterHiddenFieldsPipe } from './filter-hidden-fields.pipe';
-import { AppGlobalsService } from '../services';
 
 describe('FilterHiddenFieldsPipe', () => {
   let pipe: FilterHiddenFieldsPipe;
 
   beforeEach(() => {
-    pipe = new FilterHiddenFieldsPipe(new AppGlobalsService({} as any));
+    pipe = new FilterHiddenFieldsPipe();
   });
 
   it('should not return hidden keys', () => {
@@ -46,11 +45,10 @@ describe('FilterHiddenFieldsPipe', () => {
 
     let expected = Set(['key2']);
 
-    expect(pipe.transform(keys, schema)).toEqual(expected);
+    expect(pipe.transform(keys, schema, false)).toEqual(expected);
   });
 
   it('should return hidden keys if adminMode is set', () => {
-    pipe.appGlobalsService.adminMode = true;
     let schema = {
       properties: {
         key1: {
@@ -64,7 +62,7 @@ describe('FilterHiddenFieldsPipe', () => {
 
     let expected = Set(['key1', 'key2']);
 
-    expect(pipe.transform(keys, schema)).toEqual(expected);
+    expect(pipe.transform(keys, schema, true)).toEqual(expected);
   });
 
 });
