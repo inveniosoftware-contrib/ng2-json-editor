@@ -4,7 +4,7 @@
   <div *ngIf="isNotLeaf" [ngSwitch]="schema.type" [hidden]="isCollapsed">
     <ul>
       <div *ngSwitchCase="'object'">
-        <li *ngFor="let key of keys | filterHiddenFields:schema | addAlwaysShowFields:schema | sortAlphabetically; trackBy:trackByElement">
+        <li *ngFor="let key of keys | filterHiddenFields:schema:(adminMode$ | async) | addAlwaysShowFields:schema | sortAlphabetically; trackBy:trackByElement">
           <tree-menu-item [label]="key" [value]="value.get(key)" [schema]="schema.properties[key]" [path]="getChildPath(key)" [depth]="depth + 1"></tree-menu-item>
         </li>
       </div>

@@ -1,6 +1,6 @@
 <div class="tree-menu-container">
   <ul class="menu-item-container">
-    <li *ngFor="let key of keys | filterHiddenFields:schema | addAlwaysShowFields:schema | sortAlphabetically; trackBy:trackByElement">
+    <li *ngFor="let key of keys | filterHiddenFields:schema:(adminMode$ | async) | addAlwaysShowFields:schema | sortAlphabetically; trackBy:trackByElement">
       <tree-menu-item [label]="key" [value]="record.get(key)" [schema]="schema.properties[key]" [path]="getChildPath(key)" [depth]="1"></tree-menu-item>
     </li>
   </ul>

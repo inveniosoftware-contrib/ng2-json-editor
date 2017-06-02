@@ -26,9 +26,11 @@ import {
   OnInit,
   OnChanges,
   SimpleChanges,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
 } from '@angular/core';
 import { Map, Set } from 'immutable';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import { AbstractTrackerComponent } from '../abstract-tracker';
 import { DomUtilService, WindowHrefService, PathUtilService, AppGlobalsService } from '../shared/services';
@@ -68,10 +70,8 @@ export class TreeMenuItemComponent extends AbstractTrackerComponent implements O
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    let valueChange = changes['value'];
-    if (valueChange && this.schema.type === 'object') {
-      let currentValue: Map<string, any> = valueChange.currentValue;
-      this.keys = currentValue.keySeq().toSet();
+    if (changes['value'] && this.schema.type === 'object') {
+      this.keys = this.value.keySeq().toSet();
     }
   }
 
@@ -98,6 +98,10 @@ export class TreeMenuItemComponent extends AbstractTrackerComponent implements O
 
   get isNotLeaf(): boolean {
     return this.maxDepth === undefined || this.depth < this.maxDepth;
+  }
+
+  get adminMode$(): ReplaySubject<boolean> {
+    return this.appGlobalsService.adminMode$;
   }
 
   getChildPath(indexOrKey: number | string) {
