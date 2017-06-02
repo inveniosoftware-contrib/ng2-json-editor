@@ -71,6 +71,9 @@ export class SearchableDropdownComponent implements OnInit {
   onItemClick(item: string) {
     this.value = item;
     this.onSelect.emit(item);
+    // only necessary to force closing when selected is item equals to value
+    // in which case dropdown doesn't close automatically for some reason
+    this.status.isOpen = false;
   }
 
   onKeypress(key: string) {
@@ -90,7 +93,7 @@ export class SearchableDropdownComponent implements OnInit {
     // this avoids closing dropdown when an item is selected
     // so that onItemClick() can be executed properly before closing.
     let relatedTarget = event.relatedTarget as HTMLElement;
-    if (relatedTarget && relatedTarget.className !== 'dropdown-item') {
+    if (!relatedTarget || relatedTarget.className !== 'dropdown-item') {
       this.status.isOpen = false;
     }
     this.onBlur.emit();
