@@ -157,4 +157,15 @@ describe('JsonStoreService', () => {
 
     service.rollbackJsonFromHistory();
   });
+
+  it('should removeIn if setIn value is empty string', () => {
+    let json = fromJS({
+      foo: 'bar'
+    });
+    let path = ['foo'];
+    service.setJson(json);
+    spyOn(service, 'removeIn');
+    service.setIn(path, '');
+    expect(service.removeIn).toHaveBeenCalledWith(path);
+  });
 });

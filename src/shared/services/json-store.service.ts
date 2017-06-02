@@ -14,6 +14,12 @@ export class JsonStoreService implements NestedStore {
 
 
   setIn(path: Array<any>, value: any) {
+    // if value is undefined or empty string
+    if (!value) {
+      this.removeIn(path);
+      return;
+    }
+
     // immutablejs setIn creates Map for keys that don't exist in path
     // therefore List() should be set manually for some of those keys.
     for (let i = 0; i < path.length - 1; i++) {
