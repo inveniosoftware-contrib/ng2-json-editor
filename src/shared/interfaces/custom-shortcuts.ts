@@ -84,4 +84,11 @@ export interface CustomShortcuts {
    * Default value: `mod+alt+r`
    */
   copyFromRoot?: ShortcutConfig;
+
+  /**
+   * Undo an important change such as deleting a field
+   *
+   * Default value: `mod+alt+z`
+   */
+  undo?: ShortcutConfig;
 }

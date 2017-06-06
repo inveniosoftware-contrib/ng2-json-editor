@@ -58,7 +58,7 @@ export class KeysStoreService {
 
     let keySchema = schema.properties[key];
     if (keySchema.type === 'object' || keySchema.componentType === 'table-list') {
-      this.buildKeysMapRecursively(Map<string, any>(), keySchema, newKeyPath);
+      this.buildKeysMapRecursivelyForPath(Map<string, any>(), keySchema, newKeyPath);
     }
 
     return newKeyPath;
@@ -76,10 +76,10 @@ export class KeysStoreService {
   buildKeysMap(json: Map<string, any>, schema: JSONSchema) {
     this.keys$Map = {};
     this.keysMap = {};
-    this.buildKeysMapRecursively(json, schema, '');
+    this.buildKeysMapRecursivelyForPath(json, schema, '');
   }
 
-  private buildKeysMapRecursively(mapOrList: Iterable<string | number, any>, schema: JSONSchema, path: string) {
+  buildKeysMapRecursivelyForPath(mapOrList: Iterable<string | number, any>, schema: JSONSchema, path: string) {
     if (schema.type === 'object') {
       let map = mapOrList as Map<string, any>;
       let finalKeys = this.buildkeysForObject(path, map, schema);
@@ -89,7 +89,7 @@ export class KeysStoreService {
         .filter(key => this.isObjectOrArray(schema.properties[key]))
         .forEach(key => {
           let nextPath = `${path}${this.pathUtilService.separator}${key}`;
-          this.buildKeysMapRecursively(map.get(key), schema.properties[key], nextPath);
+          this.buildKeysMapRecursivelyForPath(map.get(key), schema.properties[key], nextPath);
         });
     } else if (schema.componentType === 'table-list') {
       let list = mapOrList as List<Map<string, any>>;
@@ -102,7 +102,7 @@ export class KeysStoreService {
         // recursive call
         list.forEach((element, index) => {
           let elementPath = `${path}${this.pathUtilService.separator}${index}`;
-          this.buildKeysMapRecursively(element, schema.items, elementPath);
+          this.buildKeysMapRecursivelyForPath(element, schema.items, elementPath);
         });
       }
     }
