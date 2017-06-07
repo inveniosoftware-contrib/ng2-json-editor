@@ -65,7 +65,8 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
    * @param {number} index - Index of the element to be deleted
    */
   deleteElement(index: number) {
-    this.jsonStoreService.setIn(this.path, this.values.remove(index));
+    let elementPath = this.path.concat(index);
+    this.jsonStoreService.removeIn(elementPath);
     this.values = this.jsonStoreService.getIn(this.path);
   }
 

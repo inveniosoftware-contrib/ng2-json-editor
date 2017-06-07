@@ -70,10 +70,15 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent {
 
   commitValueChange() {
     this.domUtilService.clearHighlight();
-    let errors = this.schemaValidationService.validateValue(this.value, this.schema);
+
+    // don't validate if value is empty
+    if (this.value) {
+      let errors = this.schemaValidationService.validateValue(this.value, this.schema);
+      this.internalErrors = errors;
+      this.appGlobalsService.extendInternalErrors(this.pathString, errors);
+    }
+
     this.jsonStoreService.setIn(this.path, this.value);
-    this.internalErrors = errors;
-    this.appGlobalsService.extendInternalErrors(this.pathString, errors);
   }
 
   onKeypress(event: KeyboardEvent) {
