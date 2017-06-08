@@ -23,6 +23,7 @@
 import { fromJS } from 'immutable';
 
 import { JsonStoreService } from './json-store.service';
+import { PathUtilService } from './path-util.service';
 
 describe('JsonStoreService', () => {
 
@@ -30,7 +31,7 @@ describe('JsonStoreService', () => {
   let historyLimit;
 
   beforeEach(() => {
-    service = new JsonStoreService();
+    service = new JsonStoreService(new PathUtilService());
     historyLimit = service['historyLimit'];
   });
 
@@ -88,74 +89,51 @@ describe('JsonStoreService', () => {
     service.setIn(path, value);
   });
 
-  it('should shift the first element if the new pushed element exceeds the maximum history length', () => {
-    let initialJson = fromJS({
+
+  it('should insert a new element if addIn path is to an array index', () => {
+    let json = fromJS({
       aMap: {
-        anotherMap: {
-          innerMap: {
-            innerProperty: 'value'
-          }
-        }
+        aList: ['val1', 'val2', 'val3']
       }
     });
-    service.setJson(initialJson);
-    service.addJsonToHistory();
+    service.setJson(json);
 
-    let anotherJson = fromJS({
-      anotherMap: {
-        anotherAnotherMap: {
-          anotherInnerMap: {
-            anotherInnerProperty: 'anotherValue'
-          }
-        }
+    let path = ['aMap', 'aList', 1];
+    let value = 'toBeInsertedAt1';
+    let expected = fromJS({
+      aMap: {
+        aList: ['val1', 'toBeInsertedAt1', 'val2', 'val3']
       }
     });
-    service.setJson(anotherJson);
-
-    for (let i = 0; i < historyLimit; i++) {
-      service.addJsonToHistory();
-    }
-    for (let i = 0; i < historyLimit - 1; i++) {
-      service.rollbackJsonFromHistory();
-    }
 
     service.jsonChange.subscribe(changedJson => {
-      expect(initialJson.equals(changedJson)).toBeFalsy();
+      expect(changedJson.equals(expected)).toBeTruthy();
     });
 
-    service.rollbackJsonFromHistory();
+    service.addIn(path, value);
   });
 
-  it('should get the right history item on history rollback', () => {
-    let initialJson = fromJS({
+  it('should append a new element if addIn path is to the -', () => {
+    let json = fromJS({
       aMap: {
-        anotherMap: {
-          innerMap: {
-            innerProperty: 'value'
-          }
-        }
+        aList: ['val1', 'val2', 'val3']
       }
     });
-    service.setJson(initialJson);
-    service.addJsonToHistory();
+    service.setJson(json);
 
-    let anotherJson = fromJS({
-      anotherMap: {
-        anotherAnotherMap: {
-          anotherInnerMap: {
-            anotherInnerProperty: 'anotherValue'
-          }
-        }
+    let path = ['aMap', 'aList', '-'];
+    let value = 'toBeAppended';
+    let expected = fromJS({
+      aMap: {
+        aList: ['val1', 'val2', 'val3', 'toBeAppended']
       }
     });
-    service.setJson(anotherJson);
-    service.addJsonToHistory();
 
     service.jsonChange.subscribe(changedJson => {
-      expect(anotherJson.equals(changedJson)).toBeTruthy();
+      expect(changedJson.equals(expected)).toBeTruthy();
     });
 
-    service.rollbackJsonFromHistory();
+    service.addIn(path, value);
   });
 
   it('should removeIn if setIn value is empty string', () => {
@@ -167,5 +145,25 @@ describe('JsonStoreService', () => {
     spyOn(service, 'removeIn');
     service.setIn(path, '');
     expect(service.removeIn).toHaveBeenCalledWith(path);
+  });
+
+  it('should add new field if addIn path is to an object property', () => {
+    let json = fromJS({
+      aMap: {}
+    });
+    service.setJson(json);
+    let value = 'value';
+    let path = ['aMap', 'aProp'];
+    let expected = fromJS({
+      aMap: {
+        aProp: 'value'
+      }
+    });
+
+    service.jsonChange.subscribe(changedJson => {
+      expect(changedJson.equals(expected)).toBeTruthy();
+    });
+
+    service.addIn(path, value);
   });
 });

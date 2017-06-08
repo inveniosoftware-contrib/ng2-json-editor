@@ -22,14 +22,17 @@
 
 import { TestBed, inject } from '@angular/core/testing';
 
-import {ShortcutService} from './shortcut.service';
-import {ShortcutActionService} from './shortcut-action.service';
-import {EmptyValueService} from './empty-value.service';
-import {JsonStoreService} from './json-store.service';
-import {JsonSchemaService} from './json-schema.service';
-import {PathUtilService} from './path-util.service';
-import {DomUtilService} from './dom-util.service';
-import {TabsUtilService} from './tabs-util.service';
+import { ShortcutService } from './shortcut.service';
+import { ShortcutActionService } from './shortcut-action.service';
+import { AppGlobalsService } from './app-globals.service';
+import { EmptyValueService } from './empty-value.service';
+import { JsonStoreService } from './json-store.service';
+import { JsonSchemaService } from './json-schema.service';
+import { PathUtilService } from './path-util.service';
+import { DomUtilService } from './dom-util.service';
+import { KeysStoreService } from './keys-store.service';
+import { TabsUtilService } from './tabs-util.service';
+import { ErrorMapUtilService } from './error-map-util.service';
 
 describe('ShortcutService', () => {
 
@@ -43,7 +46,10 @@ describe('ShortcutService', () => {
         JsonSchemaService,
         PathUtilService,
         DomUtilService,
-        TabsUtilService
+        TabsUtilService,
+        KeysStoreService,
+        AppGlobalsService,
+        ErrorMapUtilService
       ]
     });
   });

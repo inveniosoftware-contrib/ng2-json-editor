@@ -77,6 +77,10 @@ export class ShortcutService {
     copyFromRoot: {
       key: 'mod+alt+r',
       action: this.shortcutActionService.generateShortcutAction('copyFromRootAction')
+    },
+    undo: {
+      key: 'mod+alt+z',
+      action: this.shortcutActionService.generateShortcutAction('undoAction')
     }
   };
 

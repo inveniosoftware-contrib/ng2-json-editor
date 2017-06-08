@@ -2,16 +2,19 @@ import { Injectable } from '@angular/core';
 import { Map, List } from 'immutable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
-import { NestedStore } from '../interfaces';
+import { PathUtilService } from './path-util.service';
+import { NestedStore, JsonPatch } from '../interfaces';
+import { SizedStack } from '../classes';
 
 @Injectable()
 export class JsonStoreService implements NestedStore {
 
   private json: Map<string, any>;
-  private _jsonChange: ReplaySubject<Map<string, any>> = new ReplaySubject<any>(1);
-  private historyLimit = 5;
-  private history = Array<Map<string, any>>();
+  private _jsonChange = new ReplaySubject<Map<string, any>>(1);
+  // list of reverse patches for important changes
+  private history = new SizedStack<JsonPatch>(5);
 
+  constructor(private pathUtilService: PathUtilService) { }
 
   setIn(path: Array<any>, value: any) {
     // if value is undefined or empty string
@@ -38,26 +41,57 @@ export class JsonStoreService implements NestedStore {
   }
 
   removeIn(path: Array<any>): any {
+    this.history.push({
+      path: this.pathUtilService.toPathString(path),
+      op: 'add',
+      value: this.json.getIn(path)
+    });
+
     this.json = this.json.removeIn(path);
     this._jsonChange.next(this.json);
+  }
+
+  addIn(path: Array<any>, value: any) {
+    let lastPathElement = path[path.length - 1];
+    let isInsert = typeof lastPathElement === 'number' || lastPathElement === '-';
+    if (isInsert) {
+      let pathWithoutIndex = path.slice(0, path.length - 1);
+      let list = this.getIn(pathWithoutIndex) as List<any>;
+      list = lastPathElement === '-' ? list.push(value) : list.insert(lastPathElement, value);
+      this.setIn(pathWithoutIndex, list);
+    } else {
+      this.setIn(path, value);
+    }
   }
 
   setJson(json: Map<string, any>) {
     this.json = json;
   }
 
-  addJsonToHistory() {
-    this.history.push(this.json);
-    if (this.history.length > this.historyLimit) {
-      this.history.shift();
+  applyPatch(patch: JsonPatch) {
+    let path = this.pathUtilService.toPathArray(patch.path);
+    switch (patch.op) {
+      case 'replace':
+        this.setIn(path, patch.value);
+        break;
+      case 'remove':
+        this.removeIn(path);
+        break;
+      case 'add':
+        this.addIn(path, patch.value);
+        break;
+      default:
+        console.warn(`${patch.op} is not supported!`);
     }
   }
 
-  rollbackJsonFromHistory() {
-    let rollbackJson = this.history.pop();
-    if (rollbackJson) {
-      this.json = rollbackJson;
-      this.jsonChange.next(this.json);
+  rollbackLastChange(): string {
+    let lastChangeReversePatch = this.history.pop();
+    if (lastChangeReversePatch) {
+      this.applyPatch(lastChangeReversePatch);
+      return lastChangeReversePatch.path;
+    } else {
+      return undefined;
     }
   }
 

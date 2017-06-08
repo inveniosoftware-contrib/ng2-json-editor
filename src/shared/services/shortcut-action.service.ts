@@ -28,16 +28,18 @@ import { JsonStoreService } from './json-store.service';
 import { JsonSchemaService } from './json-schema.service';
 import { DomUtilService } from './dom-util.service';
 import { PathUtilService } from './path-util.service';
+import { KeysStoreService } from './keys-store.service';
 import { JSONSchema } from '../interfaces';
 
 @Injectable()
 export class ShortcutActionService {
 
   constructor(public emptyValueService: EmptyValueService,
-              public domUtilService: DomUtilService,
-              public jsonStoreService: JsonStoreService,
-              public jsonSchemaService: JsonSchemaService,
-              public pathUtilService: PathUtilService) { }
+    public domUtilService: DomUtilService,
+    public jsonStoreService: JsonStoreService,
+    public jsonSchemaService: JsonSchemaService,
+    public pathUtilService: PathUtilService,
+    public keysStoreService: KeysStoreService) { }
 
   addToRootAction(path: Array<any>): void {
     this.add(path, true);
@@ -108,9 +110,9 @@ export class ShortcutActionService {
    * @returns {number} - Returns the new index of the moved element
    */
   private moveElement(index: number, direction: number, path: Array<any>): number {
-    let values =  this.jsonStoreService.getIn(path);
+    let values = this.jsonStoreService.getIn(path);
     let newIndex = ((index + direction) < values.size &&
-                    (index + direction) >= 0) ? index + direction : values.size - Math.abs((index + direction));
+      (index + direction) >= 0) ? index + direction : values.size - Math.abs((index + direction));
     let temp = values.get(index);
     values = values
       .set(index, values.get(newIndex))
@@ -219,6 +221,14 @@ export class ShortcutActionService {
     }
   }
 
+  undoAction() {
+    let rolledBackPath = this.jsonStoreService.rollbackLastChange();
+    if (rolledBackPath) {
+      let parentPath = this.pathUtilService.toPathArray(rolledBackPath).slice(0, -1);
+      this.keysStoreService.buildKeysMap(this.jsonStoreService.getIn(parentPath), this.jsonSchemaService.forPathArray(parentPath));
+    }
+  }
+
   private focusElementInPath(path: string) {
     this.domUtilService.focusAndSelectFirstEditableChildById(path, true);
   }
@@ -228,7 +238,10 @@ export class ShortcutActionService {
     return (event: KeyboardEvent) => {
       event.preventDefault();
       let eventTarget = event.target as HTMLInputElement;
-      this[action](this.pathUtilService.toPathArray(eventTarget.getAttribute('data-path')));
+      let pathString = eventTarget.getAttribute('data-path');
+      if (pathString) {
+        this[action](this.pathUtilService.toPathArray(pathString));
+      }
       return false;
     };
   }
