@@ -25,7 +25,9 @@ import {
   Input,
   ViewEncapsulation,
   ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  OnDestroy,
+  OnInit
 } from '@angular/core';
 
 import { AbstractFieldComponent } from '../abstract-field';
@@ -38,6 +40,8 @@ import {
   DomUtilService
 } from '../shared/services';
 import { JSONSchema } from '../shared/interfaces';
+import { Subscription } from 'rxjs/Subscription';
+import { ValidationError } from '../shared/interfaces';
 
 @Component({
   selector: 'primitive-field',
@@ -48,12 +52,14 @@ import { JSONSchema } from '../shared/interfaces';
   templateUrl: './primitive-field.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PrimitiveFieldComponent extends AbstractFieldComponent {
+export class PrimitiveFieldComponent extends AbstractFieldComponent implements OnInit, OnDestroy {
 
   @Input() schema: JSONSchema;
   @Input() path: Array<any>;
   @Input() value: string | number | boolean;
 
+  internalErrors: Array<ValidationError> = [];
+  internalCategorizedErrorSubscription: Subscription;
 
   constructor(public schemaValidationService: SchemaValidationService,
     public componentTypeService: ComponentTypeService,
@@ -68,16 +74,17 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent {
     });
   }
 
+  ngOnInit() {
+    this.internalCategorizedErrorSubscription = this.appGlobalsService.internalCategorizedErrorsSubject
+    .subscribe(internalCategorizedErrorMap => {
+      this.internalErrors = internalCategorizedErrorMap.Errors[this.pathString] || [];
+    });
+    this.validate();
+  }
+
   commitValueChange() {
     this.domUtilService.clearHighlight();
-
-    // don't validate if value is empty
-    if (this.value) {
-      let errors = this.schemaValidationService.validateValue(this.value, this.schema);
-      this.internalErrors = errors;
-      this.appGlobalsService.extendInternalErrors(this.pathString, errors);
-    }
-
+    this.validate();
     this.jsonStoreService.setIn(this.path, this.value);
   }
 
@@ -115,6 +122,25 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent {
 
   get disabledClass(): string {
     return this.disabled ? 'disabled' : '';
+  }
+
+  hasErrors(): boolean {
+    return super.hasErrors() || this.internalErrors.length > 0;
+  }
+
+  ngOnDestroy() {
+    if (this.internalErrors.length > 0) {
+       this.appGlobalsService.extendInternalErrors(this.pathString, []);
+    }
+    this.internalCategorizedErrorSubscription.unsubscribe();
+  }
+
+  private validate() {
+    // don't validate if value is empty
+    if (this.value) {
+      this.internalErrors = this.schemaValidationService.validateValue(this.value, this.schema);
+      this.appGlobalsService.extendInternalErrors(this.pathString, this.internalErrors);
+    }
   }
 
 }

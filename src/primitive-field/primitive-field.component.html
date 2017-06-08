@@ -1,6 +1,6 @@
 <div [ngSwitch]="schema.componentType" [id]="pathString">
   <table class="primitive-field-container">
-    <tr [ngClass]="{error: hasErrors}">
+    <tr [ngClass]="{error: hasErrors()}">
       <ng-template #errorsTooltipTemplate>
         <ul class="tooltip-left-align">
           <li *ngFor="let error of internalErrors" >
@@ -11,7 +11,7 @@
           </li>
         </ul>
       </ng-template>
-      <td class="value-container" [ngClass]="disabledClass" [tooltip]="errorsTooltipTemplate" [isDisabled]="!isErrorTooltipEnabled"
+      <td class="value-container" [ngClass]="disabledClass" [tooltip]="errorsTooltipTemplate" [isDisabled]="!hasErrors()"
         placement="{{tooltipPosition}}" container="body">
         <div *ngSwitchCase="'string'">
           <string-input [pathString]="pathString" [value]="value" (valueChange)="onValueChange($event)" [disabled]="disabled" [tabIndex]="tabIndex" [latexPreviewEnabled]="schema.latexPreviewEnabled" [placeholder]="schema.title" (blur)="commitValueChange()" (keypress)="onKeypress($event)">

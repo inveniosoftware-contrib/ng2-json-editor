@@ -36,14 +36,13 @@ import { ValidationError, PathCache} from '../shared/interfaces';
  * It provides trackByFunction from AbstractTrackerComponent, and handles errors for the component.
  */
 export abstract class AbstractFieldComponent
-  extends AbstractTrackerComponent
-  implements OnInit, OnDestroy {
+  extends AbstractTrackerComponent implements OnInit, OnDestroy {
 
   path: Array<any>;
   pathCache: PathCache = {};
-  externalErrors: Array<ValidationError> = [];
-  internalErrors: Array<ValidationError> = [];
   externalCategorizedErrorSubscription: Subscription;
+  externalErrors: Array<ValidationError> = [];
+
 
   constructor(public appGlobalsService: AppGlobalsService,
     public pathUtilService: PathUtilService,
@@ -53,16 +52,11 @@ export abstract class AbstractFieldComponent
 
   ngOnInit() {
     this.externalCategorizedErrorSubscription = this.appGlobalsService.externalCategorizedErrorsSubject
-      .subscribe(externalCategorizedErrorMap => {
-        this.externalErrors = externalCategorizedErrorMap.Errors[this.pathString] || [];
-        this.changeDetectorRef.markForCheck();
-      });
+    .subscribe(externalCategorizedErrorMap => {
+      this.externalErrors = externalCategorizedErrorMap.Errors[this.pathString] || [];
+      this.changeDetectorRef.markForCheck();
+    });
   }
-
-  ngOnDestroy() {
-    this.externalCategorizedErrorSubscription.unsubscribe();
-  }
-
   /**
    * Gets path for child, returns from `pathCache` if it is a hit
    * in order not to re-render child component due to reference change its path.
@@ -76,15 +70,16 @@ export abstract class AbstractFieldComponent
     return this.pathCache[key];
   }
 
-  get isErrorTooltipEnabled(): boolean {
-    return this.hasErrors;
-  }
-
   get pathString(): string {
     return this.pathUtilService.toPathString(this.path);
   }
 
-  get hasErrors() {
-    return this.externalErrors.length > 0 || this.internalErrors.length > 0;
+  hasErrors(): boolean {
+    return this.externalErrors.length > 0;
   }
+
+  ngOnDestroy() {
+    this.externalCategorizedErrorSubscription.unsubscribe();
+  }
+
 }
