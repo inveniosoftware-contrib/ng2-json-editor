@@ -4,7 +4,7 @@ webpackJsonp([0,3],{
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_list_field_component__ = __webpack_require__(716);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_list_field_component__ = __webpack_require__(718);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__abstract_list_field_component__["a"]; });
 
 
@@ -18,7 +18,7 @@ webpackJsonp([0,3],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__error_map_util_service__ = __webpack_require__(411);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__error_map_util_service__ = __webpack_require__(412);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppGlobalsService; });
 /*
  * This file is part of ng2-json-editor.
@@ -263,7 +263,7 @@ ComponentTypeService.ctorParameters = function () { return []; };
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EmptyValueService; });
 /*
@@ -498,21 +498,136 @@ webpackEmptyContext.id = 146;
 
 /***/ }),
 
+/***/ 39:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PathUtilService; });
+/*
+ * This file is part of ng2-json-editor.
+ * Copyright (C) 2016 CERN.
+ *
+ * ng2-json-editor is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * ng2-json-editor is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ * In applying this license, CERN does not
+ * waive the privileges and immunities granted to it by virtue of its status
+ * as an Intergovernmental Organization or submit itself to any jurisdiction.
+ */
+
+var PathUtilService = (function () {
+    function PathUtilService() {
+    }
+    Object.defineProperty(PathUtilService.prototype, "separator", {
+        get: function () {
+            return '/';
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     *
+     * @param {Array<any>} path - Element's path
+     * @param {boolean} root - Find nearest or root parent array. True for root and false for nearest array parent
+     * @returns {Array<any>} - Returns the path to the array parent
+     */
+    PathUtilService.prototype.getNearestOrRootArrayParentInPath = function (path, root) {
+        var _path = [];
+        var pathLength = path.length;
+        for (var index = 0; index < pathLength; index++) {
+            _path = root ? path.slice(0, index + 1) : path.slice(0, path.length - index);
+            if (typeof _path[_path.length - 1] === 'number') {
+                // transform ['arrayParent',0] => ['arrayParent']
+                _path.pop();
+                break;
+            }
+        }
+        return _path;
+    };
+    PathUtilService.prototype.getElementIndexInForwardOrReversePath = function (path, directPathSearch) {
+        return this.findIndexFromPath(path.slice(), directPathSearch);
+    };
+    /**
+     *
+     * @param {Array<any>} path - The path of an element
+     * @param {boolean} directPathSearch - Flag for define direct or reverse searching in path. Set to true for searching in direct
+     * or false for searching in reverse path
+     * @returns {number} - Returns found index in path or -1 if not found
+     */
+    PathUtilService.prototype.findIndexFromPath = function (path, directPathSearch) {
+        path = directPathSearch ? path : path.reverse();
+        for (var index in path) {
+            if (!isNaN(path[index])) {
+                return path[index];
+            }
+        }
+        return -1;
+    };
+    /**
+     * Converts path array `/` separated path string.
+     * Example: from ['foo', 'bar', 0] to '/foo/bar/0'
+     */
+    PathUtilService.prototype.toPathString = function (path) {
+        return "" + this.separator + path.join(this.separator);
+    };
+    /**
+     * Converts `/` separated path string to path array.
+     * Example from '/foo/bar/0' to ['foo', 'bar', 0]
+     */
+    PathUtilService.prototype.toPathArray = function (pathString) {
+        return pathString.split(this.separator)
+            .slice(1) // remove the empty
+            .map(function (key) { return isNaN(parseInt(key, 10)) ? key : parseInt(key, 10); });
+    };
+    return PathUtilService;
+}());
+
+PathUtilService.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */] },
+];
+/** @nocollapse */
+PathUtilService.ctorParameters = function () { return []; };
+
+
+/***/ }),
+
 /***/ 409:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__add_always_show_fields_pipe__ = __webpack_require__(760);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__different_keys_pipe__ = __webpack_require__(761);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__filter_by_expression_pipe__ = __webpack_require__(762);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__filter_hidden_fields_pipe__ = __webpack_require__(763);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__sanitize_url_pipe__ = __webpack_require__(766);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__self_or_empty_pipe__ = __webpack_require__(767);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__underscore_to_space_pipe__ = __webpack_require__(770);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__set_first_element_path_pipe__ = __webpack_require__(768);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__sort_alphabetically_pipe__ = __webpack_require__(769);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__keys_pipe__ = __webpack_require__(764);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__last_path_element_pipe__ = __webpack_require__(765);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sized_stack__ = __webpack_require__(758);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__sized_stack__["a"]; });
+
+
+
+/***/ }),
+
+/***/ 410:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__add_always_show_fields_pipe__ = __webpack_require__(763);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__different_keys_pipe__ = __webpack_require__(764);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__filter_by_expression_pipe__ = __webpack_require__(765);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__filter_hidden_fields_pipe__ = __webpack_require__(766);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__sanitize_url_pipe__ = __webpack_require__(769);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__self_or_empty_pipe__ = __webpack_require__(770);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__underscore_to_space_pipe__ = __webpack_require__(773);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__set_first_element_path_pipe__ = __webpack_require__(771);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__sort_alphabetically_pipe__ = __webpack_require__(772);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__keys_pipe__ = __webpack_require__(767);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__last_path_element_pipe__ = __webpack_require__(768);
 /* unused harmony reexport AddAlwaysShowFieldsPipe */
 /* unused harmony reexport DifferentKeysPipe */
 /* unused harmony reexport FilterByExpressionPipe */
@@ -554,12 +669,12 @@ var SHARED_PIPES = [
 
 /***/ }),
 
-/***/ 410:
+/***/ 411:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tabs_util_service__ = __webpack_require__(416);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tabs_util_service__ = __webpack_require__(418);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DomUtilService; });
 /*
  * This file is part of ng2-json-editor.
@@ -688,7 +803,7 @@ DomUtilService.ctorParameters = function () { return [
 
 /***/ }),
 
-/***/ 411:
+/***/ 412:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -753,12 +868,12 @@ ErrorMapUtilService.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 412:
+/***/ 413:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__path_util_service__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__path_util_service__ = __webpack_require__(39);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JsonSchemaService; });
 /*
  * This file is part of ng2-json-editor.
@@ -825,26 +940,36 @@ JsonSchemaService.ctorParameters = function () { return [
 
 /***/ }),
 
-/***/ 413:
+/***/ 414:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__path_util_service__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__classes__ = __webpack_require__(409);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JsonStoreService; });
 
 
 
+
+
 var JsonStoreService = (function () {
-    function JsonStoreService() {
+    function JsonStoreService(pathUtilService) {
+        this.pathUtilService = pathUtilService;
         this._jsonChange = new __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__["ReplaySubject"](1);
-        this.historyLimit = 5;
-        this.history = Array();
+        // list of reverse patches for important changes
+        this.history = new __WEBPACK_IMPORTED_MODULE_4__classes__["a" /* SizedStack */](5);
     }
     JsonStoreService.prototype.setIn = function (path, value) {
+        // if value is undefined or empty string
+        if (!value) {
+            this.removeIn(path);
+            return;
+        }
         // immutablejs setIn creates Map for keys that don't exist in path
         // therefore List() should be set manually for some of those keys.
         for (var i = 0; i < path.length - 1; i++) {
@@ -861,23 +986,54 @@ var JsonStoreService = (function () {
         return this.json.getIn(path);
     };
     JsonStoreService.prototype.removeIn = function (path) {
+        this.history.push({
+            path: this.pathUtilService.toPathString(path),
+            op: 'add',
+            value: this.json.getIn(path)
+        });
         this.json = this.json.removeIn(path);
         this._jsonChange.next(this.json);
+    };
+    JsonStoreService.prototype.addIn = function (path, value) {
+        var lastPathElement = path[path.length - 1];
+        var isInsert = typeof lastPathElement === 'number' || lastPathElement === '-';
+        if (isInsert) {
+            var pathWithoutIndex = path.slice(0, path.length - 1);
+            var list = this.getIn(pathWithoutIndex);
+            list = lastPathElement === '-' ? list.push(value) : list.insert(lastPathElement, value);
+            this.setIn(pathWithoutIndex, list);
+        }
+        else {
+            this.setIn(path, value);
+        }
     };
     JsonStoreService.prototype.setJson = function (json) {
         this.json = json;
     };
-    JsonStoreService.prototype.addJsonToHistory = function () {
-        this.history.push(this.json);
-        if (this.history.length > this.historyLimit) {
-            this.history.shift();
+    JsonStoreService.prototype.applyPatch = function (patch) {
+        var path = this.pathUtilService.toPathArray(patch.path);
+        switch (patch.op) {
+            case 'replace':
+                this.setIn(path, patch.value);
+                break;
+            case 'remove':
+                this.removeIn(path);
+                break;
+            case 'add':
+                this.addIn(path, patch.value);
+                break;
+            default:
+                console.warn(patch.op + " is not supported!");
         }
     };
-    JsonStoreService.prototype.rollbackJsonFromHistory = function () {
-        var rollbackJson = this.history.pop();
-        if (rollbackJson) {
-            this.json = rollbackJson;
-            this.jsonChange.next(this.json);
+    JsonStoreService.prototype.rollbackLastChange = function () {
+        var lastChangeReversePatch = this.history.pop();
+        if (lastChangeReversePatch) {
+            this.applyPatch(lastChangeReversePatch);
+            return lastChangeReversePatch.path;
+        }
+        else {
+            return undefined;
         }
     };
     Object.defineProperty(JsonStoreService.prototype, "jsonChange", {
@@ -894,17 +1050,19 @@ JsonStoreService.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */] },
 ];
 /** @nocollapse */
-JsonStoreService.ctorParameters = function () { return []; };
+JsonStoreService.ctorParameters = function () { return [
+    { type: __WEBPACK_IMPORTED_MODULE_3__path_util_service__["a" /* PathUtilService */], },
+]; };
 
 
 /***/ }),
 
-/***/ 414:
+/***/ 415:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__path_util_service__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__path_util_service__ = __webpack_require__(39);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JsonUtilService; });
 /*
  * This file is part of ng2-json-editor.
@@ -961,18 +1119,209 @@ JsonUtilService.ctorParameters = function () { return [
 
 /***/ }),
 
-/***/ 415:
+/***/ 416:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__path_util_service__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_globals_service__ = __webpack_require__(140);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return KeysStoreService; });
+/*
+ * This file is part of ng2-json-editor.
+ * Copyright (C) 2016 CERN.
+ *
+ * ng2-json-editor is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * ng2-json-editor is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ * In applying this license, CERN does not
+ * waive the privileges and immunities granted to it by virtue of its status
+ * as an Intergovernmental Organization or submit itself to any jurisdiction.
+*/
+
+
+
+
+
+var KeysStoreService = (function () {
+    function KeysStoreService(appGlobalsService, pathUtilService) {
+        this.appGlobalsService = appGlobalsService;
+        this.pathUtilService = pathUtilService;
+        this.onKeysChange = new __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__["ReplaySubject"](1);
+    }
+    KeysStoreService.prototype.forPath = function (path) {
+        return this.keys$Map[path];
+    };
+    /**
+     * Adds a key to the specified path.
+     * @param path json-pointer to add the key to
+     * @param key key to be added
+     * @param schema OBJECT schema that belongs to path (schema.items for table-list)
+     */
+    KeysStoreService.prototype.addKey = function (path, key, schema) {
+        var _this = this;
+        // FIXME: could do O(logn) insert instead of O(nlogn) since the set is already sorted.
+        this.keysMap[path] = this.keysMap[path]
+            .add(key)
+            .sort(function (a, b) { return _this.compareByPriority(a, b, schema); });
+        this.keys$Map[path].next(this.keysMap[path]);
+        this.onKeysChange.next({ path: path, keys: this.keysMap[path] });
+        var newKeyPath = "" + path + this.pathUtilService.separator + key;
+        var keySchema = schema.properties[key];
+        if (keySchema.type === 'object' || keySchema.componentType === 'table-list') {
+            this.buildKeysMapRecursivelyForPath(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_immutable__["Map"])(), keySchema, newKeyPath);
+        }
+        return newKeyPath;
+    };
+    KeysStoreService.prototype.deleteKey = function (path, key) {
+        this.keysMap[path] = this.keysMap[path].delete(key);
+        this.keys$Map[path].next(this.keysMap[path]);
+        this.onKeysChange.next({ path: path, keys: this.keysMap[path] });
+        var deletedKeyPath = "" + path + this.pathUtilService.separator + key;
+        delete this.keysMap[deletedKeyPath];
+        delete this.keys$Map[deletedKeyPath];
+    };
+    KeysStoreService.prototype.buildKeysMap = function (json, schema) {
+        this.keys$Map = {};
+        this.keysMap = {};
+        this.buildKeysMapRecursivelyForPath(json, schema, '');
+    };
+    KeysStoreService.prototype.buildKeysMapRecursivelyForPath = function (mapOrList, schema, path) {
+        var _this = this;
+        if (schema.type === 'object') {
+            var map_1 = mapOrList;
+            var finalKeys = this.buildkeysForObject(path, map_1, schema);
+            // recursive call
+            finalKeys
+                .filter(function (key) { return _this.isObjectOrArray(schema.properties[key]); })
+                .forEach(function (key) {
+                var nextPath = "" + path + _this.pathUtilService.separator + key;
+                _this.buildKeysMapRecursivelyForPath(map_1.get(key), schema.properties[key], nextPath);
+            });
+        }
+        else if (schema.componentType === 'table-list') {
+            var list = mapOrList;
+            this.buildKeysForTableList(path, list, schema);
+            // there is no recursive call for table list items because they aren't expected to have object or object list as property.
+        }
+        else {
+            // recursive calls for each item of list if it's not a table-list
+            var list = mapOrList;
+            if (this.isObjectOrArray(schema.items)) {
+                // recursive call
+                list.forEach(function (element, index) {
+                    var elementPath = "" + path + _this.pathUtilService.separator + index;
+                    _this.buildKeysMapRecursivelyForPath(element, schema.items, elementPath);
+                });
+            }
+        }
+    };
+    // default value for `list`, if this is called for alwaysShow in which case `list` would be undefined
+    KeysStoreService.prototype.buildKeysForTableList = function (path, list, schema) {
+        if (list === void 0) { list = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_immutable__["List"])(); }
+        // get present unique keys in all items of table-list
+        var keys = __WEBPACK_IMPORTED_MODULE_1_immutable__["Seq"].Set(list
+            .map(function (object) { return object.keySeq().toArray(); })
+            .reduce(function (pre, cur) { return pre.concat(cur); }, []));
+        var itemSchema = schema.items;
+        var finalKeys = this.schemafy(keys, itemSchema);
+        this.setKeys(path, finalKeys);
+    };
+    // default value for `map`, if this is called for alwaysShow in which case `map` would be undefined
+    KeysStoreService.prototype.buildkeysForObject = function (path, map, schema) {
+        if (map === void 0) { map = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_immutable__["Map"])(); }
+        var finalKeys = this.schemafy(map.keySeq(), schema);
+        this.setKeys(path, finalKeys);
+        return finalKeys;
+    };
+    /**
+     * Filters keys, add alwaysShow fields and sorts by schema.
+     */
+    KeysStoreService.prototype.schemafy = function (keys, schema) {
+        var _this = this;
+        return keys
+            .filter(function (key) { return _this.isNotHidden(key, schema) || _this.appGlobalsService.adminMode; })
+            .concat(schema.alwaysShow || [])
+            .sort(function (a, b) { return _this.compareByPriority(a, b, schema); })
+            .toOrderedSet();
+    };
+    KeysStoreService.prototype.compareByPriority = function (a, b, schema) {
+        // Sort by priority, larger is the first.
+        var pa = schema.properties[a].priority || 0;
+        var pb = schema.properties[b].priority || 0;
+        if (pa > pb) {
+            return -1;
+        }
+        if (pa < pb) {
+            return 1;
+        }
+        // Sort alphabetically.
+        if (a < b) {
+            return -1;
+        }
+        if (a > b) {
+            return 1;
+        }
+        return 0;
+    };
+    KeysStoreService.prototype.isNotHidden = function (key, schema) {
+        if (!schema.properties[key]) {
+            throw new Error("\"" + key + "\" is not specified as property in \n" + JSON.stringify(schema.properties, undefined, 2));
+        }
+        return !schema.properties[key].hidden;
+    };
+    KeysStoreService.prototype.isObjectOrArray = function (schema) {
+        return schema.type === 'object' || schema.type === 'array';
+    };
+    KeysStoreService.prototype.setKeys = function (path, keys) {
+        this.keysMap[path] = keys;
+        if (!this.keys$Map[path]) {
+            this.keys$Map[path] = new __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__["ReplaySubject"](1);
+        }
+        this.keys$Map[path].next(keys);
+    };
+    return KeysStoreService;
+}());
+
+KeysStoreService.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */] },
+];
+/** @nocollapse */
+KeysStoreService.ctorParameters = function () { return [
+    { type: __WEBPACK_IMPORTED_MODULE_4__app_globals_service__["a" /* AppGlobalsService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_3__path_util_service__["a" /* PathUtilService */], },
+]; };
+
+
+/***/ }),
+
+/***/ 417:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__empty_value_service__ = __webpack_require__(142);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__json_store_service__ = __webpack_require__(413);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__json_schema_service__ = __webpack_require__(412);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__dom_util_service__ = __webpack_require__(410);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__path_util_service__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__json_store_service__ = __webpack_require__(414);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__json_schema_service__ = __webpack_require__(413);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__dom_util_service__ = __webpack_require__(411);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__path_util_service__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__keys_store_service__ = __webpack_require__(416);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ShortcutActionService; });
 /*
  * This file is part of ng2-json-editor.
@@ -1002,13 +1351,15 @@ JsonUtilService.ctorParameters = function () { return [
 
 
 
+
 var ShortcutActionService = (function () {
-    function ShortcutActionService(emptyValueService, domUtilService, jsonStoreService, jsonSchemaService, pathUtilService) {
+    function ShortcutActionService(emptyValueService, domUtilService, jsonStoreService, jsonSchemaService, pathUtilService, keysStoreService) {
         this.emptyValueService = emptyValueService;
         this.domUtilService = domUtilService;
         this.jsonStoreService = jsonStoreService;
         this.jsonSchemaService = jsonSchemaService;
         this.pathUtilService = pathUtilService;
+        this.keysStoreService = keysStoreService;
     }
     ShortcutActionService.prototype.addToRootAction = function (path) {
         this.add(path, true);
@@ -1174,6 +1525,13 @@ var ShortcutActionService = (function () {
             });
         }
     };
+    ShortcutActionService.prototype.undoAction = function () {
+        var rolledBackPath = this.jsonStoreService.rollbackLastChange();
+        if (rolledBackPath) {
+            var parentPath = this.pathUtilService.toPathArray(rolledBackPath).slice(0, -1);
+            this.keysStoreService.buildKeysMap(this.jsonStoreService.getIn(parentPath), this.jsonSchemaService.forPathArray(parentPath));
+        }
+    };
     ShortcutActionService.prototype.focusElementInPath = function (path) {
         this.domUtilService.focusAndSelectFirstEditableChildById(path, true);
     };
@@ -1182,7 +1540,10 @@ var ShortcutActionService = (function () {
         return function (event) {
             event.preventDefault();
             var eventTarget = event.target;
-            _this[action](_this.pathUtilService.toPathArray(eventTarget.getAttribute('data-path')));
+            var pathString = eventTarget.getAttribute('data-path');
+            if (pathString) {
+                _this[action](_this.pathUtilService.toPathArray(pathString));
+            }
             return false;
         };
     };
@@ -1199,19 +1560,20 @@ ShortcutActionService.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_3__json_store_service__["a" /* JsonStoreService */], },
     { type: __WEBPACK_IMPORTED_MODULE_4__json_schema_service__["a" /* JsonSchemaService */], },
     { type: __WEBPACK_IMPORTED_MODULE_6__path_util_service__["a" /* PathUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_7__keys_store_service__["a" /* KeysStoreService */], },
 ]; };
 
 
 /***/ }),
 
-/***/ 416:
+/***/ 418:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__path_util_service__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__path_util_service__ = __webpack_require__(39);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsUtilService; });
 /*
  * This file is part of ng2-json-editor.
@@ -1297,16 +1659,16 @@ TabsUtilService.ctorParameters = function () { return [
 
 /***/ }),
 
-/***/ 417:
+/***/ 419:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__polyfills_ts__ = __webpack_require__(428);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(423);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__polyfills_ts__ = __webpack_require__(430);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(425);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(427);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app__ = __webpack_require__(426);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(429);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app__ = __webpack_require__(428);
 
 
 
@@ -1320,7 +1682,7 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dyna
 
 /***/ }),
 
-/***/ 424:
+/***/ 426:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1328,7 +1690,7 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dyna
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_zip__ = __webpack_require__(676);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_zip__ = __webpack_require__(678);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_zip___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_zip__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_config__ = __webpack_require__(145);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
@@ -1392,8 +1754,8 @@ AppComponent = __decorate([
         // tslint:disable-next-line
         selector: 'app',
         encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["p" /* ViewEncapsulation */].None,
-        styles: [__webpack_require__(612)],
-        template: __webpack_require__(670)
+        styles: [__webpack_require__(614)],
+        template: __webpack_require__(672)
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__app_config__["a" /* AppConfig */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__app_config__["a" /* AppConfig */]) === "function" && _b || Object])
 ], AppComponent);
@@ -1403,7 +1765,7 @@ var _a, _b;
 
 /***/ }),
 
-/***/ 425:
+/***/ 427:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1411,8 +1773,8 @@ var _a, _b;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__dist__ = __webpack_require__(714);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(424);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__dist__ = __webpack_require__(716);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(426);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_config__ = __webpack_require__(145);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /*
@@ -1474,18 +1836,18 @@ AppModule = __decorate([
 
 /***/ }),
 
-/***/ 426:
+/***/ 428:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_module__ = __webpack_require__(425);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_module__ = __webpack_require__(427);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__app_module__["a"]; });
 
 //# sourceMappingURL=/home/travis/build/inveniosoftware-contrib/ng2-json-editor/example/index.js.map
 
 /***/ }),
 
-/***/ 427:
+/***/ 429:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1502,41 +1864,41 @@ var environment = {
 
 /***/ }),
 
-/***/ 428:
+/***/ 430:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_core_js_es6_symbol__ = __webpack_require__(471);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_core_js_es6_symbol__ = __webpack_require__(473);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_core_js_es6_symbol___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_core_js_es6_symbol__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_core_js_es6_object__ = __webpack_require__(464);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_core_js_es6_object__ = __webpack_require__(466);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_core_js_es6_object___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_core_js_es6_object__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_core_js_es6_function__ = __webpack_require__(460);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_core_js_es6_function__ = __webpack_require__(462);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_core_js_es6_function___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_core_js_es6_function__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_core_js_es6_parse_int__ = __webpack_require__(466);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_core_js_es6_parse_int__ = __webpack_require__(468);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_core_js_es6_parse_int___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_core_js_es6_parse_int__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_core_js_es6_parse_float__ = __webpack_require__(465);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_core_js_es6_parse_float__ = __webpack_require__(467);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_core_js_es6_parse_float___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_core_js_es6_parse_float__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_core_js_es6_number__ = __webpack_require__(463);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_core_js_es6_number__ = __webpack_require__(465);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_core_js_es6_number___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_core_js_es6_number__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_core_js_es6_math__ = __webpack_require__(462);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_core_js_es6_math__ = __webpack_require__(464);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_core_js_es6_math___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_core_js_es6_math__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_core_js_es6_string__ = __webpack_require__(470);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_core_js_es6_string__ = __webpack_require__(472);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_core_js_es6_string___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_core_js_es6_string__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_core_js_es6_date__ = __webpack_require__(459);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_core_js_es6_date__ = __webpack_require__(461);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_core_js_es6_date___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_core_js_es6_date__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_core_js_es6_array__ = __webpack_require__(458);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_core_js_es6_array__ = __webpack_require__(460);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_core_js_es6_array___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_core_js_es6_array__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_core_js_es6_regexp__ = __webpack_require__(468);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_core_js_es6_regexp__ = __webpack_require__(470);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_core_js_es6_regexp___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_core_js_es6_regexp__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_core_js_es6_map__ = __webpack_require__(461);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_core_js_es6_map__ = __webpack_require__(463);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_core_js_es6_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_core_js_es6_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_core_js_es6_set__ = __webpack_require__(469);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_core_js_es6_set__ = __webpack_require__(471);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_core_js_es6_set___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12_core_js_es6_set__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_core_js_es6_reflect__ = __webpack_require__(467);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_core_js_es6_reflect__ = __webpack_require__(469);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_core_js_es6_reflect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13_core_js_es6_reflect__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_core_js_es7_reflect__ = __webpack_require__(472);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_core_js_es7_reflect__ = __webpack_require__(474);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_core_js_es7_reflect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14_core_js_es7_reflect__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone__ = __webpack_require__(854);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone__ = __webpack_require__(856);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone__);
 // This file includes polyfills needed by Angular 2 and is loaded before
 // the app. You can add your own extra polyfills to this file.
@@ -1560,7 +1922,7 @@ var environment = {
 
 /***/ }),
 
-/***/ 431:
+/***/ 433:
 /***/ (function(module, exports) {
 
 function webpackEmptyContext(req) {
@@ -1569,18 +1931,7 @@ function webpackEmptyContext(req) {
 webpackEmptyContext.keys = function() { return []; };
 webpackEmptyContext.resolve = webpackEmptyContext;
 module.exports = webpackEmptyContext;
-webpackEmptyContext.id = 431;
-
-
-/***/ }),
-
-/***/ 45:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_tracker_component__ = __webpack_require__(717);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__abstract_tracker_component__["a"]; });
-
+webpackEmptyContext.id = 433;
 
 
 /***/ }),
@@ -1589,102 +1940,9 @@ webpackEmptyContext.id = 431;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PathUtilService; });
-/*
- * This file is part of ng2-json-editor.
- * Copyright (C) 2016 CERN.
- *
- * ng2-json-editor is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of the
- * License, or (at your option) any later version.
- *
- * ng2-json-editor is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
- * In applying this license, CERN does not
- * waive the privileges and immunities granted to it by virtue of its status
- * as an Intergovernmental Organization or submit itself to any jurisdiction.
- */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_tracker_component__ = __webpack_require__(719);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__abstract_tracker_component__["a"]; });
 
-var PathUtilService = (function () {
-    function PathUtilService() {
-    }
-    Object.defineProperty(PathUtilService.prototype, "separator", {
-        get: function () {
-            return '/';
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     *
-     * @param {Array<any>} path - Element's path
-     * @param {boolean} root - Find nearest or root parent array. True for root and false for nearest array parent
-     * @returns {Array<any>} - Returns the path to the array parent
-     */
-    PathUtilService.prototype.getNearestOrRootArrayParentInPath = function (path, root) {
-        var _path = [];
-        var pathLength = path.length;
-        for (var index = 0; index < pathLength; index++) {
-            _path = root ? path.slice(0, index + 1) : path.slice(0, path.length - index);
-            if (typeof _path[_path.length - 1] === 'number') {
-                // transform ['arrayParent',0] => ['arrayParent']
-                _path.pop();
-                break;
-            }
-        }
-        return _path;
-    };
-    PathUtilService.prototype.getElementIndexInForwardOrReversePath = function (path, directPathSearch) {
-        return this.findIndexFromPath(path.slice(), directPathSearch);
-    };
-    /**
-     *
-     * @param {Array<any>} path - The path of an element
-     * @param {boolean} directPathSearch - Flag for define direct or reverse searching in path. Set to true for searching in direct
-     * or false for searching in reverse path
-     * @returns {number} - Returns found index in path or -1 if not found
-     */
-    PathUtilService.prototype.findIndexFromPath = function (path, directPathSearch) {
-        path = directPathSearch ? path : path.reverse();
-        for (var index in path) {
-            if (!isNaN(path[index])) {
-                return path[index];
-            }
-        }
-        return -1;
-    };
-    /**
-     * Converts path array `/` separated path string.
-     * Example: from ['foo', 'bar', 0] to '/foo/bar/0'
-     */
-    PathUtilService.prototype.toPathString = function (path) {
-        return "" + this.separator + path.join(this.separator);
-    };
-    /**
-     * Converts `/` separated path string to path array.
-     * Example from '/foo/bar/0' to ['foo', 'bar', 0]
-     */
-    PathUtilService.prototype.toPathArray = function (pathString) {
-        return pathString.split(this.separator)
-            .slice(1) // remove the empty
-            .map(function (key) { return isNaN(parseInt(key, 10)) ? key : parseInt(key, 10); });
-    };
-    return PathUtilService;
-}());
-
-PathUtilService.decorators = [
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */] },
-];
-/** @nocollapse */
-PathUtilService.ctorParameters = function () { return []; };
 
 
 /***/ }),
@@ -1694,26 +1952,26 @@ PathUtilService.ctorParameters = function () { return []; };
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_globals_service__ = __webpack_require__(140);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__remote_autocompletion_service__ = __webpack_require__(776);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__remote_autocompletion_service__ = __webpack_require__(778);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__component_type_service__ = __webpack_require__(141);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dom_util_service__ = __webpack_require__(410);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dom_util_service__ = __webpack_require__(411);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__empty_value_service__ = __webpack_require__(142);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__find_replace_all_service__ = __webpack_require__(771);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__json_store_service__ = __webpack_require__(413);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__json_util_service__ = __webpack_require__(414);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__json_schema_service__ = __webpack_require__(412);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__keys_store_service__ = __webpack_require__(773);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__path_util_service__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__modal_service__ = __webpack_require__(774);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__record_fixer_service__ = __webpack_require__(775);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__schema_fixer_service__ = __webpack_require__(777);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__schema_validation_service__ = __webpack_require__(778);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__shortcut_action_service__ = __webpack_require__(415);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__shortcut_service__ = __webpack_require__(779);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__window_href_service__ = __webpack_require__(780);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__tabs_util_service__ = __webpack_require__(416);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__error_map_util_service__ = __webpack_require__(411);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__katex_service__ = __webpack_require__(772);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__find_replace_all_service__ = __webpack_require__(774);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__json_store_service__ = __webpack_require__(414);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__json_util_service__ = __webpack_require__(415);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__json_schema_service__ = __webpack_require__(413);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__keys_store_service__ = __webpack_require__(416);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__path_util_service__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__modal_service__ = __webpack_require__(776);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__record_fixer_service__ = __webpack_require__(777);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__schema_fixer_service__ = __webpack_require__(779);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__schema_validation_service__ = __webpack_require__(780);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__shortcut_action_service__ = __webpack_require__(417);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__shortcut_service__ = __webpack_require__(781);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__window_href_service__ = __webpack_require__(782);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__tabs_util_service__ = __webpack_require__(418);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__error_map_util_service__ = __webpack_require__(412);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__katex_service__ = __webpack_require__(775);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__app_globals_service__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return __WEBPACK_IMPORTED_MODULE_1__remote_autocompletion_service__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return __WEBPACK_IMPORTED_MODULE_2__component_type_service__["a"]; });
@@ -1785,7 +2043,7 @@ var SHARED_SERVICES = [
 
 /***/ }),
 
-/***/ 612:
+/***/ 614:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(53)();
@@ -1803,7 +2061,7 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 638:
+/***/ 640:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -2052,23 +2310,23 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 638;
+webpackContext.id = 640;
 
 
 /***/ }),
 
-/***/ 670:
+/***/ 672:
 /***/ (function(module, exports) {
 
 module.exports = "<ng-template let-item=\"item\" #referenceTemplate>\n  <div class=\"reference-template-container\" [ngSwitch]=\"item.hasIn(['record', '$ref'])\">\n    <span *ngSwitchCase=\"true\">\n      <i class=\"fa fa-check-circle success\" aria-hidden=\"true\"></i>\n      <a href=\"{{item.getIn(['record', '$ref'])}}\" target=\"_blank\">{{item.getIn(['reference', 'misc', 0])}}</a>\n    </span>\n    <span *ngSwitchDefault>\n      <i class=\"fa fa-exclamation-triangle warning\" aria-hidden=\"true\"></i>\n      {{item.getIn(['reference', 'misc', 0])}}\n    </span>\n  </div>\n</ng-template>\n<json-editor *ngIf=\"record && schema\"\n  [config]=\"config.jsonEditorConfig\"\n  [record]=\"record\"\n  (onRecordChange)=\"onRecordChange($event)\"\n  [schema]=\"schema\"\n  [templates]=\"{referenceTemplate: referenceTemplate}\">\n</json-editor>"
 
 /***/ }),
 
-/***/ 714:
+/***/ 716:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_index__ = __webpack_require__(739);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_index__ = __webpack_require__(741);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__src_index__["a"]; });
 /**
  * @module
@@ -2080,11 +2338,11 @@ module.exports = "<ng-template let-item=\"item\" #referenceTemplate>\n  <div cla
 
 /***/ }),
 
-/***/ 715:
+/***/ 717:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_tracker__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_tracker__ = __webpack_require__(46);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AbstractFieldComponent; });
 /*
  * This file is part of ng2-json-editor.
@@ -2135,7 +2393,6 @@ var AbstractFieldComponent = (function (_super) {
         _this.changeDetectorRef = changeDetectorRef;
         _this.pathCache = {};
         _this.externalErrors = [];
-        _this.internalErrors = [];
         return _this;
     }
     AbstractFieldComponent.prototype.ngOnInit = function () {
@@ -2145,9 +2402,6 @@ var AbstractFieldComponent = (function (_super) {
             _this.externalErrors = externalCategorizedErrorMap.Errors[_this.pathString] || [];
             _this.changeDetectorRef.markForCheck();
         });
-    };
-    AbstractFieldComponent.prototype.ngOnDestroy = function () {
-        this.externalCategorizedErrorSubscription.unsubscribe();
     };
     /**
      * Gets path for child, returns from `pathCache` if it is a hit
@@ -2161,13 +2415,6 @@ var AbstractFieldComponent = (function (_super) {
         }
         return this.pathCache[key];
     };
-    Object.defineProperty(AbstractFieldComponent.prototype, "isErrorTooltipEnabled", {
-        get: function () {
-            return this.hasErrors;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(AbstractFieldComponent.prototype, "pathString", {
         get: function () {
             return this.pathUtilService.toPathString(this.path);
@@ -2175,13 +2422,12 @@ var AbstractFieldComponent = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(AbstractFieldComponent.prototype, "hasErrors", {
-        get: function () {
-            return this.externalErrors.length > 0 || this.internalErrors.length > 0;
-        },
-        enumerable: true,
-        configurable: true
-    });
+    AbstractFieldComponent.prototype.hasErrors = function () {
+        return this.externalErrors.length > 0;
+    };
+    AbstractFieldComponent.prototype.ngOnDestroy = function () {
+        this.externalCategorizedErrorSubscription.unsubscribe();
+    };
     return AbstractFieldComponent;
 }(__WEBPACK_IMPORTED_MODULE_0__abstract_tracker__["a" /* AbstractTrackerComponent */]));
 
@@ -2189,7 +2435,7 @@ var AbstractFieldComponent = (function (_super) {
 
 /***/ }),
 
-/***/ 716:
+/***/ 718:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2242,9 +2488,9 @@ var AbstractListFieldComponent = (function (_super) {
      * @param {number} index - Index of the element to be deleted
      */
     AbstractListFieldComponent.prototype.deleteElement = function (index) {
-        this.jsonStoreService.setIn(this.path, this.values.remove(index));
+        var elementPath = this.path.concat(index);
+        this.jsonStoreService.removeIn(elementPath);
         this.values = this.jsonStoreService.getIn(this.path);
-        var elementPathString = this.getPathForChildString(index);
     };
     AbstractListFieldComponent.prototype.getPathForChildString = function (index) {
         return "" + this.pathString + this.pathUtilService.separator + index;
@@ -2263,7 +2509,7 @@ var AbstractListFieldComponent = (function (_super) {
 
 /***/ }),
 
-/***/ 717:
+/***/ 719:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2305,7 +2551,7 @@ var AbstractTrackerComponent = (function () {
 
 /***/ }),
 
-/***/ 718:
+/***/ 720:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2389,12 +2635,12 @@ AddFieldDropdownComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 719:
+/***/ 721:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddNestedFieldDropdownComponent; });
@@ -2495,13 +2741,13 @@ AddNestedFieldDropdownComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 720:
+/***/ 722:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__add_field_dropdown_component__ = __webpack_require__(718);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__add_field_dropdown_component__ = __webpack_require__(720);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__add_field_dropdown_component__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__add_nested_field_dropdown_component__ = __webpack_require__(719);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__add_nested_field_dropdown_component__ = __webpack_require__(721);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__add_nested_field_dropdown_component__["a"]; });
 
 
@@ -2509,12 +2755,12 @@ AddNestedFieldDropdownComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 721:
+/***/ 723:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddNewElementButtonComponent; });
@@ -2567,18 +2813,18 @@ AddNewElementButtonComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 722:
+/***/ 724:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__add_new_element_button_component__ = __webpack_require__(721);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__add_new_element_button_component__ = __webpack_require__(723);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__add_new_element_button_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 723:
+/***/ 725:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2641,25 +2887,25 @@ AnyTypeFieldComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 724:
+/***/ 726:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__any_type_field_component__ = __webpack_require__(723);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__any_type_field_component__ = __webpack_require__(725);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__any_type_field_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 725:
+/***/ 727:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_observable_of__ = __webpack_require__(675);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_observable_of__ = __webpack_require__(677);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_observable_of___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_observable_of__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AutocompleteInputComponent; });
@@ -2765,18 +3011,18 @@ AutocompleteInputComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 726:
+/***/ 728:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__autocomplete_input_component__ = __webpack_require__(725);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__autocomplete_input_component__ = __webpack_require__(727);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__autocomplete_input_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 727:
+/***/ 729:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2978,23 +3224,23 @@ ComplexListFieldComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 728:
+/***/ 730:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__complex_list_field_component__ = __webpack_require__(727);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__complex_list_field_component__ = __webpack_require__(729);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__complex_list_field_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 729:
+/***/ 731:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_tracker__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_tracker__ = __webpack_require__(46);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditorPreviewerComponent; });
 /*
  * This file is part of ng2-json-editor.
@@ -3057,18 +3303,18 @@ EditorPreviewerComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 730:
+/***/ 732:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__editor_previewer_component__ = __webpack_require__(729);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__editor_previewer_component__ = __webpack_require__(731);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__editor_previewer_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 731:
+/***/ 733:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3137,23 +3383,23 @@ ErrorPanelItemComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 732:
+/***/ 734:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__error_panel_item_component__ = __webpack_require__(731);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__error_panel_item_component__ = __webpack_require__(733);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__error_panel_item_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 733:
+/***/ 735:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_tracker__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_tracker__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ErrorPanelComponent; });
 /*
@@ -3297,13 +3543,13 @@ ErrorPanelComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 734:
+/***/ 736:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__error_panel_component__ = __webpack_require__(733);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__error_panel_component__ = __webpack_require__(735);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__error_panel_component__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__error_panel_item__ = __webpack_require__(732);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__error_panel_item__ = __webpack_require__(734);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__error_panel_item__["a"]; });
 
 
@@ -3311,7 +3557,7 @@ ErrorPanelComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 735:
+/***/ 737:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3410,18 +3656,18 @@ FindReplaceComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 736:
+/***/ 738:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__find_replace_component__ = __webpack_require__(735);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__find_replace_component__ = __webpack_require__(737);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__find_replace_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 737:
+/***/ 739:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3472,26 +3718,28 @@ HtmlViewComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 738:
+/***/ 740:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__html_view_component__ = __webpack_require__(737);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__html_view_component__ = __webpack_require__(739);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__html_view_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 739:
+/***/ 741:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__json_editor_module__ = __webpack_require__(741);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__json_editor_module__ = __webpack_require__(743);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__json_editor_module__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services__ = __webpack_require__(5);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_pipes__ = __webpack_require__(409);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_pipes__ = __webpack_require__(410);
+/* unused harmony namespace reexport */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_classes__ = __webpack_require__(409);
 /* unused harmony namespace reexport */
 // export everything in order to be AoT compatible
 
@@ -3499,19 +3747,20 @@ HtmlViewComponent.propDecorators = {
 
 
 
+
 /***/ }),
 
-/***/ 740:
+/***/ 742:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_immutable__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_immutable__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_immutable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_skipWhile__ = __webpack_require__(682);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_skipWhile__ = __webpack_require__(684);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_skipWhile___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_skipWhile__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__abstract_tracker__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__abstract_tracker__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JsonEditorComponent; });
 /*
@@ -3767,7 +4016,7 @@ JsonEditorComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 741:
+/***/ 743:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3775,34 +4024,34 @@ JsonEditorComponent.propDecorators = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_bootstrap__ = __webpack_require__(648);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_slide_toggle__ = __webpack_require__(662);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__add_field_dropdown__ = __webpack_require__(720);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__add_new_element_button__ = __webpack_require__(722);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__any_type_field__ = __webpack_require__(724);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__autocomplete_input__ = __webpack_require__(726);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__complex_list_field__ = __webpack_require__(728);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__editor_previewer__ = __webpack_require__(730);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__sub_record__ = __webpack_require__(783);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__validation_badges__ = __webpack_require__(794);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__find_replace__ = __webpack_require__(736);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__html_view__ = __webpack_require__(738);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__json_editor_component__ = __webpack_require__(740);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__modal_view__ = __webpack_require__(744);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__object_field__ = __webpack_require__(746);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__value_change_watcher__ = __webpack_require__(796);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__primitive_list_field__ = __webpack_require__(750);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__primitive_field__ = __webpack_require__(748);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__ref_field__ = __webpack_require__(752);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__table_list_field__ = __webpack_require__(787);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__table_item_field__ = __webpack_require__(785);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__title_dropdown__ = __webpack_require__(789);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__string_input__ = __webpack_require__(781);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__tree_menu__ = __webpack_require__(791);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__searchable_dropdown__ = __webpack_require__(754);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__list_action_group__ = __webpack_require__(742);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__shared__ = __webpack_require__(759);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__error_panel__ = __webpack_require__(734);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_bootstrap__ = __webpack_require__(650);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_slide_toggle__ = __webpack_require__(664);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__add_field_dropdown__ = __webpack_require__(722);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__add_new_element_button__ = __webpack_require__(724);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__any_type_field__ = __webpack_require__(726);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__autocomplete_input__ = __webpack_require__(728);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__complex_list_field__ = __webpack_require__(730);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__editor_previewer__ = __webpack_require__(732);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__sub_record__ = __webpack_require__(785);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__validation_badges__ = __webpack_require__(796);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__find_replace__ = __webpack_require__(738);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__html_view__ = __webpack_require__(740);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__json_editor_component__ = __webpack_require__(742);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__modal_view__ = __webpack_require__(746);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__object_field__ = __webpack_require__(748);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__value_change_watcher__ = __webpack_require__(798);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__primitive_list_field__ = __webpack_require__(752);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__primitive_field__ = __webpack_require__(750);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__ref_field__ = __webpack_require__(754);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__table_list_field__ = __webpack_require__(789);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__table_item_field__ = __webpack_require__(787);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__title_dropdown__ = __webpack_require__(791);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__string_input__ = __webpack_require__(783);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__tree_menu__ = __webpack_require__(793);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__searchable_dropdown__ = __webpack_require__(756);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__list_action_group__ = __webpack_require__(744);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__shared__ = __webpack_require__(762);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__error_panel__ = __webpack_require__(736);
 /* unused harmony reexport AddFieldDropdownComponent */
 /* unused harmony reexport AddNestedFieldDropdownComponent */
 /* unused harmony reexport AddNewElementButtonComponent */
@@ -3942,18 +4191,18 @@ JsonEditorModule.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 742:
+/***/ 744:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__list_action_group_component__ = __webpack_require__(743);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__list_action_group_component__ = __webpack_require__(745);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__list_action_group_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 743:
+/***/ 745:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4009,18 +4258,18 @@ ListActionGroupComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 744:
+/***/ 746:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modal_view_component__ = __webpack_require__(745);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modal_view_component__ = __webpack_require__(747);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__modal_view_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 745:
+/***/ 747:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4094,18 +4343,18 @@ ModalViewComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 746:
+/***/ 748:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__object_field_component__ = __webpack_require__(747);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__object_field_component__ = __webpack_require__(749);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__object_field_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 747:
+/***/ 749:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4166,7 +4415,8 @@ var ObjectFieldComponent = (function (_super) {
         configurable: true
     });
     ObjectFieldComponent.prototype.deleteField = function (name) {
-        this.jsonStoreService.removeIn(this.path);
+        var fieldPath = this.path.concat(name);
+        this.jsonStoreService.removeIn(fieldPath);
         this.keysStoreService.deleteKey(this.pathString, name);
     };
     ObjectFieldComponent.prototype.isDisabled = function (key) {
@@ -4200,18 +4450,18 @@ ObjectFieldComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 748:
+/***/ 750:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__primitive_field_component__ = __webpack_require__(749);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__primitive_field_component__ = __webpack_require__(751);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__primitive_field_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 749:
+/***/ 751:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4264,17 +4514,24 @@ var PrimitiveFieldComponent = (function (_super) {
         _this.pathUtilService = pathUtilService;
         _this.domUtilService = domUtilService;
         _this.changeDetectorRef = changeDetectorRef;
+        _this.internalErrors = [];
         _this.appGlobalsService.adminMode$.subscribe(function (adminMode) {
             _this.changeDetectorRef.markForCheck();
         });
         return _this;
     }
+    PrimitiveFieldComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.internalCategorizedErrorSubscription = this.appGlobalsService.internalCategorizedErrorsSubject
+            .subscribe(function (internalCategorizedErrorMap) {
+            _this.internalErrors = internalCategorizedErrorMap.Errors[_this.pathString] || [];
+        });
+        this.validate();
+    };
     PrimitiveFieldComponent.prototype.commitValueChange = function () {
         this.domUtilService.clearHighlight();
-        var errors = this.schemaValidationService.validateValue(this.value, this.schema);
+        this.validate();
         this.jsonStoreService.setIn(this.path, this.value);
-        this.internalErrors = errors;
-        this.appGlobalsService.extendInternalErrors(this.pathString, errors);
     };
     PrimitiveFieldComponent.prototype.onKeypress = function (event) {
         if (event.key === 'Enter' && !event.shiftKey) {
@@ -4321,6 +4578,22 @@ var PrimitiveFieldComponent = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    PrimitiveFieldComponent.prototype.hasErrors = function () {
+        return _super.prototype.hasErrors.call(this) || this.internalErrors.length > 0;
+    };
+    PrimitiveFieldComponent.prototype.ngOnDestroy = function () {
+        if (this.internalErrors.length > 0) {
+            this.appGlobalsService.extendInternalErrors(this.pathString, []);
+        }
+        this.internalCategorizedErrorSubscription.unsubscribe();
+    };
+    PrimitiveFieldComponent.prototype.validate = function () {
+        // don't validate if value is empty
+        if (this.value) {
+            this.internalErrors = this.schemaValidationService.validateValue(this.value, this.schema);
+            this.appGlobalsService.extendInternalErrors(this.pathString, this.internalErrors);
+        }
+    };
     return PrimitiveFieldComponent;
 }(__WEBPACK_IMPORTED_MODULE_1__abstract_field__["a" /* AbstractFieldComponent */]));
 
@@ -4329,7 +4602,7 @@ PrimitiveFieldComponent.decorators = [
                 selector: 'primitive-field',
                 encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["p" /* ViewEncapsulation */].None,
                 styles: ["td.value-container div[contenteditable=true], td.value-container input { vertical-align: middle; transition: all 0.5s ease; border: none; background-color: transparent; display: inline-block; width: 100%; } table.primitive-field-container { width: 100%; } td.link-button-container { width: 22px; } td.value-container { width: 100%; padding: 3px 3px 3px 6px !important; } td.value-container:hover { background-color: #ffa !important; } a.no-decoration { text-decoration: none; } [contenteditable=true] { min-height: 18px; word-break: break-word; } [contenteditable=true]:empty:before { content: attr(placeholder); color: darkgray; display: block; /* For Firefox */ } .tooltip-left-align { margin-left: 12px; padding: 0px; } .disabled { cursor: not-allowed; } .disabled div { pointer-events: none; } .disabled div input, .disabled div button, .disabled div a, .disabled div i, .disabled div string-input > div { opacity: .5; } "],
-                template: "<div [ngSwitch]=\"schema.componentType\" [id]=\"pathString\"> <table class=\"primitive-field-container\"> <tr [ngClass]=\"{error: hasErrors}\"> <ng-template #errorsTooltipTemplate> <ul class=\"tooltip-left-align\"> <li *ngFor=\"let error of internalErrors\" > {{error.message}} </li> <li *ngFor=\"let error of externalErrors\" > {{error.message}} </li> </ul> </ng-template> <td class=\"value-container\" [ngClass]=\"disabledClass\" [tooltip]=\"errorsTooltipTemplate\" [isDisabled]=\"!isErrorTooltipEnabled\" placement=\"{{tooltipPosition}}\" container=\"body\"> <div *ngSwitchCase=\"'string'\"> <string-input [pathString]=\"pathString\" [value]=\"value\" (valueChange)=\"onValueChange($event)\" [disabled]=\"disabled\" [tabIndex]=\"tabIndex\" [latexPreviewEnabled]=\"schema.latexPreviewEnabled\" [placeholder]=\"schema.title\" (blur)=\"commitValueChange()\" (keypress)=\"onKeypress($event)\"> </string-input> </div> <div *ngSwitchCase=\"'enum'\"> <searchable-dropdown [pathString]=\"pathString\" [value]=\"value\" [placeholder]=\"schema.title\" [items]=\"schema.enum\" [shortcutMap]=\"schema.enumShorcutMap\" (onSelect)=\"onSearchableDropdownSelect($event)\" [tabIndex]=\"tabIndex\" (onBlur)=\"domUtilService.clearHighlight()\"></searchable-dropdown> </div> <div *ngSwitchCase=\"'autocomplete'\"> <autocomplete-input [pathString]=\"pathString\" [value]=\"value\" [path]=\"path\" [autocompletionConfig]=\"schema.autocompletionConfig\" (onBlur)=\"commitValueChange()\" (onKeypress)=\"onKeypress($event)\" (onValueChange)=\"onValueChange($event)\" [placeholder]=\"schema.title\" [tabIndex]=\"tabIndex\"></autocomplete-input> </div> <div *ngSwitchCase=\"'integer'\"> <input type=\"number\" [(ngModel)]=\"value\" [tabindex]=\"tabIndex\" attr.data-path=\"{{pathString}}\" (blur)=\"commitValueChange()\" (keypress)=\"onKeypress($event)\" placeholder=\"{{schema.title}}\"> </div> <div *ngSwitchCase=\"'boolean'\"> <input type=\"checkbox\" [(ngModel)]=\"value\" (ngModelChange)=\"commitValueChange()\" placeholder=\"{{schema.title}}\"> </div> <div *ngSwitchDefault> ## Not recognized type: {{valueType}} </div> </td> <td class=\"link-button-container\"> <a *ngIf=\"schema.linkBuilder\" class=\"no-decoration\" target=\"_blank\" [href]=\"schema.linkBuilder(value)\"> <i class=\"fa fa-link\" aria-hidden=\"true\"></i> </a> <a *ngIf=\"!schema.linkBuilder && schema.format === 'url'\" class=\"no-decoration\" target=\"_blank\" [href]=\"value\"> <i class=\"fa fa-link\" aria-hidden=\"true\"></i> </a> </td> </tr> </table> </div>",
+                template: "<div [ngSwitch]=\"schema.componentType\" [id]=\"pathString\"> <table class=\"primitive-field-container\"> <tr [ngClass]=\"{error: hasErrors()}\"> <ng-template #errorsTooltipTemplate> <ul class=\"tooltip-left-align\"> <li *ngFor=\"let error of internalErrors\" > {{error.message}} </li> <li *ngFor=\"let error of externalErrors\" > {{error.message}} </li> </ul> </ng-template> <td class=\"value-container\" [ngClass]=\"disabledClass\" [tooltip]=\"errorsTooltipTemplate\" [isDisabled]=\"!hasErrors()\" placement=\"{{tooltipPosition}}\" container=\"body\"> <div *ngSwitchCase=\"'string'\"> <string-input [pathString]=\"pathString\" [value]=\"value\" (valueChange)=\"onValueChange($event)\" [disabled]=\"disabled\" [tabIndex]=\"tabIndex\" [latexPreviewEnabled]=\"schema.latexPreviewEnabled\" [placeholder]=\"schema.title\" (blur)=\"commitValueChange()\" (keypress)=\"onKeypress($event)\"> </string-input> </div> <div *ngSwitchCase=\"'enum'\"> <searchable-dropdown [pathString]=\"pathString\" [value]=\"value\" [placeholder]=\"schema.title\" [items]=\"schema.enum\" [shortcutMap]=\"schema.enumShorcutMap\" (onSelect)=\"onSearchableDropdownSelect($event)\" [tabIndex]=\"tabIndex\" (onBlur)=\"domUtilService.clearHighlight()\"></searchable-dropdown> </div> <div *ngSwitchCase=\"'autocomplete'\"> <autocomplete-input [pathString]=\"pathString\" [value]=\"value\" [path]=\"path\" [autocompletionConfig]=\"schema.autocompletionConfig\" (onBlur)=\"commitValueChange()\" (onKeypress)=\"onKeypress($event)\" (onValueChange)=\"onValueChange($event)\" [placeholder]=\"schema.title\" [tabIndex]=\"tabIndex\"></autocomplete-input> </div> <div *ngSwitchCase=\"'integer'\"> <input type=\"number\" [(ngModel)]=\"value\" [tabindex]=\"tabIndex\" attr.data-path=\"{{pathString}}\" (blur)=\"commitValueChange()\" (keypress)=\"onKeypress($event)\" placeholder=\"{{schema.title}}\"> </div> <div *ngSwitchCase=\"'boolean'\"> <input type=\"checkbox\" [(ngModel)]=\"value\" (ngModelChange)=\"commitValueChange()\" placeholder=\"{{schema.title}}\"> </div> <div *ngSwitchDefault> ## Not recognized type: {{valueType}} </div> </td> <td class=\"link-button-container\"> <a *ngIf=\"schema.linkBuilder\" class=\"no-decoration\" target=\"_blank\" [href]=\"schema.linkBuilder(value)\"> <i class=\"fa fa-link\" aria-hidden=\"true\"></i> </a> <a *ngIf=\"!schema.linkBuilder && schema.format === 'url'\" class=\"no-decoration\" target=\"_blank\" [href]=\"value\"> <i class=\"fa fa-link\" aria-hidden=\"true\"></i> </a> </td> </tr> </table> </div>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
@@ -4352,18 +4625,18 @@ PrimitiveFieldComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 750:
+/***/ 752:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__primitive_list_field_component__ = __webpack_require__(751);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__primitive_list_field_component__ = __webpack_require__(753);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__primitive_list_field_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 751:
+/***/ 753:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4442,18 +4715,18 @@ PrimitiveListFieldComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 752:
+/***/ 754:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ref_field_component__ = __webpack_require__(753);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ref_field_component__ = __webpack_require__(755);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__ref_field_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 753:
+/***/ 755:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4461,7 +4734,7 @@ PrimitiveListFieldComponent.propDecorators = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch__ = __webpack_require__(677);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch__ = __webpack_require__(679);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RefFieldComponent; });
@@ -4628,18 +4901,18 @@ RefFieldComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 754:
+/***/ 756:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__searchable_dropdown_component__ = __webpack_require__(755);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__searchable_dropdown_component__ = __webpack_require__(757);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__searchable_dropdown_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 755:
+/***/ 757:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4695,6 +4968,9 @@ var SearchableDropdownComponent = (function () {
     SearchableDropdownComponent.prototype.onItemClick = function (item) {
         this.value = item;
         this.onSelect.emit(item);
+        // only necessary to force closing when selected is item equals to value
+        // in which case dropdown doesn't close automatically for some reason
+        this.status.isOpen = false;
     };
     SearchableDropdownComponent.prototype.onKeypress = function (key) {
         if (key === 'Enter') {
@@ -4704,15 +4980,17 @@ var SearchableDropdownComponent = (function () {
             this.status.isOpen = false;
         }
     };
-    SearchableDropdownComponent.prototype.onFocus = function (event) {
-        /**
-         * Open dropdown manually only if it was focused by `TAB`.
-         * Setting it manually all the time breaks auto-toggle by click.
-         * event.relatedTarget is set when the FocusEvent caused by `TAB`.
-         */
-        if (event.relatedTarget) {
-            this.status.isOpen = true;
+    SearchableDropdownComponent.prototype.onInputFocus = function (event) {
+        this.status.isOpen = true;
+    };
+    SearchableDropdownComponent.prototype.onInputBlur = function (event) {
+        // this avoids closing dropdown when an item is selected
+        // so that onItemClick() can be executed properly before closing.
+        var relatedTarget = event.relatedTarget;
+        if (!relatedTarget || relatedTarget.className !== 'dropdown-item') {
+            this.status.isOpen = false;
         }
+        this.onBlur.emit();
     };
     return SearchableDropdownComponent;
 }());
@@ -4721,7 +4999,7 @@ SearchableDropdownComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
                 selector: 'searchable-dropdown',
                 styles: ["div.btn-group { width: 100%; } .dropdown-menu { left: 0px !important; } .toggle-container { width: 100%; } .toggle-container input { width: 93%; } .toggle-container i { width: 5%; height: 100%; text-align: right; } .dropdown-toggle { box-shadow: none !important; } "],
-                template: "<div class=\"btn-group\" dropdown keyboardNav=\"true\" [isOpen]=\"status.isOpen\" (onShown)=\"status.isOpen = true\" (onHidden)=\"status.isOpen = false\"> <div class=\"toggle-container\" dropdownToggle> <input #inputToggle attr.data-path=\"{{pathString}}\" [placeholder]=\"placeholder\" [(ngModel)]=\"expressionOrValue\" (keypress)=\"onKeypress($event.key)\" [tabindex]=\"tabIndex\" (focus)=\"onFocus($event)\" (blur)=\"onBlur.emit()\"> <i class=\"fa fa-caret-down\" (click)=\"inputToggle.focus()\"></i> </div> <ul class=\"dropdown-menu\" *dropdownMenu role=\"menu\"> <li *ngFor=\"let item of items | filterByExpression:expression\" role=\"menuitem\"> <!-- href is needed for keyboard navigation --> <a class=\"dropdown-item\" href=\"javascript:void(0)\" (click)=\"onItemClick(item)\">{{item}}</a> </li> </ul> </div>",
+                template: "<div class=\"btn-group\" dropdown keyboardNav=\"true\" [isOpen]=\"status.isOpen\" (onShown)=\"status.isOpen = true\" (onHidden)=\"status.isOpen = false\"> <!-- there is no dropdownToggle since it is handled manually see: onInputFocus and onInputBlur in ts --> <div class=\"toggle-container\"> <input #inputToggle attr.data-path=\"{{pathString}}\" [placeholder]=\"placeholder\" [(ngModel)]=\"expressionOrValue\" (keypress)=\"onKeypress($event.key)\" [tabindex]=\"tabIndex\" (blur)=\"onInputBlur($event)\" (focus)=\"onInputFocus($event)\"> <i class=\"fa fa-caret-down\" (click)=\"inputToggle.focus()\"></i> </div> <ul class=\"dropdown-menu\" *dropdownMenu role=\"menu\"> <li *ngFor=\"let item of items | filterByExpression:expression\" role=\"menuitem\"> <!-- href is needed for keyboard navigation --> <a class=\"dropdown-item\" href=\"javascript:void(0)\" (click)=\"onItemClick(item)\">{{item}}</a> </li> </ul> </div>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
@@ -4741,7 +5019,54 @@ SearchableDropdownComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 756:
+/***/ 758:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SizedStack; });
+/*
+ * This file is part of ng2-json-editor.
+ * Copyright (C) 2016 CERN.
+ *
+ * ng2-json-editor is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * ng2-json-editor is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ * In applying this license, CERN does not
+ * waive the privileges and immunities granted to it by virtue of its status
+ * as an Intergovernmental Organization or submit itself to any jurisdiction.
+*/
+var SizedStack = (function () {
+    function SizedStack(size) {
+        this.values = new Array();
+        this.size = size;
+    }
+    SizedStack.prototype.push = function (value) {
+        this.values.push(value);
+        if (this.values.length > this.size) {
+            this.values.shift();
+        }
+    };
+    SizedStack.prototype.pop = function () {
+        return this.values.pop();
+    };
+    return SizedStack;
+}());
+
+
+
+/***/ }),
+
+/***/ 759:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4795,12 +5120,12 @@ ContentModelDirective.propDecorators = {
 
 /***/ }),
 
-/***/ 757:
+/***/ 760:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__shortcuts_directive__ = __webpack_require__(758);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__content_model_directive__ = __webpack_require__(756);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__shortcuts_directive__ = __webpack_require__(761);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__content_model_directive__ = __webpack_require__(759);
 /* unused harmony reexport ShortcutsDirective */
 /* unused harmony reexport ContentModelDirective */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SHARED_DIRECTIVES; });
@@ -4815,12 +5140,12 @@ var SHARED_DIRECTIVES = [
 
 /***/ }),
 
-/***/ 758:
+/***/ 761:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mousetrap__ = __webpack_require__(639);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mousetrap__ = __webpack_require__(641);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mousetrap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_mousetrap__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ShortcutsDirective; });
 /*
@@ -4880,13 +5205,13 @@ ShortcutsDirective.propDecorators = {
 
 /***/ }),
 
-/***/ 759:
+/***/ 762:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__pipes__ = __webpack_require__(409);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__pipes__ = __webpack_require__(410);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__directives__ = __webpack_require__(757);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__directives__ = __webpack_require__(760);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__pipes__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_1__services__["d"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_2__directives__["a"]; });
@@ -4898,7 +5223,7 @@ ShortcutsDirective.propDecorators = {
 
 /***/ }),
 
-/***/ 760:
+/***/ 763:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4947,12 +5272,12 @@ AddAlwaysShowFieldsPipe.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 761:
+/***/ 764:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DifferentKeysPipe; });
 /*
@@ -5001,7 +5326,7 @@ DifferentKeysPipe.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 762:
+/***/ 765:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5050,12 +5375,11 @@ FilterByExpressionPipe.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 763:
+/***/ 766:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FilterHiddenFieldsPipe; });
 /*
  * This file is part of ng2-json-editor.
@@ -5079,10 +5403,8 @@ FilterByExpressionPipe.ctorParameters = function () { return []; };
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-
 var FilterHiddenFieldsPipe = (function () {
-    function FilterHiddenFieldsPipe(appGlobalsService) {
-        this.appGlobalsService = appGlobalsService;
+    function FilterHiddenFieldsPipe() {
     }
     /**
      * It filters out `hidden` fields
@@ -5091,8 +5413,7 @@ var FilterHiddenFieldsPipe = (function () {
      * @param schema - the `schema` that has object schema which contains each key in `keys`
      * @return - filtered keys
      */
-    FilterHiddenFieldsPipe.prototype.transform = function (keys, schema) {
-        var _this = this;
+    FilterHiddenFieldsPipe.prototype.transform = function (keys, schema, adminMode) {
         var schemaProps = schema.properties;
         if (!keys) {
             return undefined;
@@ -5102,7 +5423,7 @@ var FilterHiddenFieldsPipe = (function () {
             if (!schemaProps[key]) {
                 throw new Error("\"" + key + "\" is not specified as property in \n" + JSON.stringify(schemaProps, undefined, 2));
             }
-            return !schemaProps[key].hidden || _this.appGlobalsService.adminMode;
+            return !schemaProps[key].hidden || adminMode;
         });
     };
     return FilterHiddenFieldsPipe;
@@ -5114,14 +5435,12 @@ FilterHiddenFieldsPipe.decorators = [
             },] },
 ];
 /** @nocollapse */
-FilterHiddenFieldsPipe.ctorParameters = function () { return [
-    { type: __WEBPACK_IMPORTED_MODULE_1__services__["b" /* AppGlobalsService */], },
-]; };
+FilterHiddenFieldsPipe.ctorParameters = function () { return []; };
 
 
 /***/ }),
 
-/***/ 764:
+/***/ 767:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5173,7 +5492,7 @@ KeysPipe.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 765:
+/***/ 768:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5231,7 +5550,7 @@ LastPathElementPipe.ctorParameters = function () { return [
 
 /***/ }),
 
-/***/ 766:
+/***/ 769:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5290,14 +5609,12 @@ SanitizeUrlPipe.ctorParameters = function () { return [
 
 /***/ }),
 
-/***/ 767:
+/***/ 770:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SelfOrEmptyPipe; });
 /*
  * This file is part of ng2-json-editor.
@@ -5322,7 +5639,6 @@ SanitizeUrlPipe.ctorParameters = function () { return [
 */
 
 
-
 var SelfOrEmptyPipe = (function () {
     function SelfOrEmptyPipe(emptyValueService) {
         this.emptyValueService = emptyValueService;
@@ -5334,13 +5650,7 @@ var SelfOrEmptyPipe = (function () {
      * @return - empty value if given value is undefined or value itself.
      */
     SelfOrEmptyPipe.prototype.transform = function (value, schema) {
-        if (value) {
-            if (__WEBPACK_IMPORTED_MODULE_1_immutable__["List"].isList(value) && value.size === 0) {
-                return this.emptyValueService.generateEmptyValue(schema);
-            }
-            return value;
-        }
-        return this.emptyValueService.generateEmptyValue(schema);
+        return value ? value : this.emptyValueService.generateEmptyValue(schema);
     };
     return SelfOrEmptyPipe;
 }());
@@ -5352,13 +5662,13 @@ SelfOrEmptyPipe.decorators = [
 ];
 /** @nocollapse */
 SelfOrEmptyPipe.ctorParameters = function () { return [
-    { type: __WEBPACK_IMPORTED_MODULE_2__services__["c" /* EmptyValueService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__services__["c" /* EmptyValueService */], },
 ]; };
 
 
 /***/ }),
 
-/***/ 768:
+/***/ 771:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5414,7 +5724,7 @@ SetFirstElementPathPipe.ctorParameters = function () { return [
 
 /***/ }),
 
-/***/ 769:
+/***/ 772:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5470,7 +5780,7 @@ SortAlphabeticallyPipe.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 770:
+/***/ 773:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5518,12 +5828,12 @@ UnderscoreToSpacePipe.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 771:
+/***/ 774:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FindReplaceAllService; });
 
@@ -5598,12 +5908,12 @@ FindReplaceAllService.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 772:
+/***/ 775:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_katex__ = __webpack_require__(622);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_katex__ = __webpack_require__(624);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_katex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_katex__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return KatexService; });
 
@@ -5761,197 +6071,7 @@ KatexService.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 773:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__path_util_service__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_globals_service__ = __webpack_require__(140);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return KeysStoreService; });
-/*
- * This file is part of ng2-json-editor.
- * Copyright (C) 2016 CERN.
- *
- * ng2-json-editor is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of the
- * License, or (at your option) any later version.
- *
- * ng2-json-editor is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
- * In applying this license, CERN does not
- * waive the privileges and immunities granted to it by virtue of its status
- * as an Intergovernmental Organization or submit itself to any jurisdiction.
-*/
-
-
-
-
-
-var KeysStoreService = (function () {
-    function KeysStoreService(appGlobalsService, pathUtilService) {
-        this.appGlobalsService = appGlobalsService;
-        this.pathUtilService = pathUtilService;
-        this.onKeysChange = new __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__["ReplaySubject"](1);
-    }
-    KeysStoreService.prototype.forPath = function (path) {
-        return this.keys$Map[path];
-    };
-    /**
-     * Adds a key to the specified path.
-     * @param path json-pointer to add the key to
-     * @param key key to be added
-     * @param schema OBJECT schema that belongs to path (schema.items for table-list)
-     */
-    KeysStoreService.prototype.addKey = function (path, key, schema) {
-        var _this = this;
-        // FIXME: could do O(logn) insert instead of O(nlogn) since the set is already sorted.
-        this.keysMap[path] = this.keysMap[path]
-            .add(key)
-            .sort(function (a, b) { return _this.compareByPriority(a, b, schema); });
-        this.keys$Map[path].next(this.keysMap[path]);
-        this.onKeysChange.next({ path: path, keys: this.keysMap[path] });
-        var newKeyPath = "" + path + this.pathUtilService.separator + key;
-        var keySchema = schema.properties[key];
-        if (keySchema.type === 'object' || keySchema.componentType === 'table-list') {
-            this.buildKeysMapRecursively(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_immutable__["Map"])(), keySchema, newKeyPath);
-        }
-        return newKeyPath;
-    };
-    KeysStoreService.prototype.deleteKey = function (path, key) {
-        this.keysMap[path] = this.keysMap[path].delete(key);
-        this.keys$Map[path].next(this.keysMap[path]);
-        this.onKeysChange.next({ path: path, keys: this.keysMap[path] });
-        var deletedKeyPath = "" + path + this.pathUtilService.separator + key;
-        delete this.keysMap[deletedKeyPath];
-        delete this.keys$Map[deletedKeyPath];
-    };
-    KeysStoreService.prototype.buildKeysMap = function (json, schema) {
-        this.keys$Map = {};
-        this.keysMap = {};
-        this.buildKeysMapRecursively(json, schema, '');
-    };
-    KeysStoreService.prototype.buildKeysMapRecursively = function (mapOrList, schema, path) {
-        var _this = this;
-        if (schema.type === 'object') {
-            var map_1 = mapOrList;
-            var finalKeys = this.buildkeysForObject(path, map_1, schema);
-            // recursive call
-            finalKeys
-                .filter(function (key) { return _this.isObjectOrArray(schema.properties[key]); })
-                .forEach(function (key) {
-                var nextPath = "" + path + _this.pathUtilService.separator + key;
-                _this.buildKeysMapRecursively(map_1.get(key), schema.properties[key], nextPath);
-            });
-        }
-        else if (schema.componentType === 'table-list') {
-            var list = mapOrList;
-            this.buildKeysForTableList(path, list, schema);
-            // there is no recursive call for table list items because they aren't expected to have object or object list as property.
-        }
-        else {
-            // recursive calls for each item of list if it's not a table-list
-            var list = mapOrList;
-            if (this.isObjectOrArray(schema.items)) {
-                // recursive call
-                list.forEach(function (element, index) {
-                    var elementPath = "" + path + _this.pathUtilService.separator + index;
-                    _this.buildKeysMapRecursively(element, schema.items, elementPath);
-                });
-            }
-        }
-    };
-    // default value for `list`, if this is called for alwaysShow in which case `list` would be undefined
-    KeysStoreService.prototype.buildKeysForTableList = function (path, list, schema) {
-        if (list === void 0) { list = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_immutable__["List"])(); }
-        // get present unique keys in all items of table-list
-        var keys = __WEBPACK_IMPORTED_MODULE_1_immutable__["Seq"].Set(list
-            .map(function (object) { return object.keySeq().toArray(); })
-            .reduce(function (pre, cur) { return pre.concat(cur); }, []));
-        var itemSchema = schema.items;
-        var finalKeys = this.schemafy(keys, itemSchema);
-        this.setKeys(path, finalKeys);
-    };
-    // default value for `map`, if this is called for alwaysShow in which case `map` would be undefined
-    KeysStoreService.prototype.buildkeysForObject = function (path, map, schema) {
-        if (map === void 0) { map = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_immutable__["Map"])(); }
-        var finalKeys = this.schemafy(map.keySeq(), schema);
-        this.setKeys(path, finalKeys);
-        return finalKeys;
-    };
-    /**
-     * Filters keys, add alwaysShow fields and sorts by schema.
-     */
-    KeysStoreService.prototype.schemafy = function (keys, schema) {
-        var _this = this;
-        return keys
-            .filter(function (key) { return _this.isNotHidden(key, schema) || _this.appGlobalsService.adminMode; })
-            .concat(schema.alwaysShow || [])
-            .sort(function (a, b) { return _this.compareByPriority(a, b, schema); })
-            .toOrderedSet();
-    };
-    KeysStoreService.prototype.compareByPriority = function (a, b, schema) {
-        // Sort by priority, larger is the first.
-        var pa = schema.properties[a].priority || 0;
-        var pb = schema.properties[b].priority || 0;
-        if (pa > pb) {
-            return -1;
-        }
-        if (pa < pb) {
-            return 1;
-        }
-        // Sort alphabetically.
-        if (a < b) {
-            return -1;
-        }
-        if (a > b) {
-            return 1;
-        }
-        return 0;
-    };
-    KeysStoreService.prototype.isNotHidden = function (key, schema) {
-        if (!schema.properties[key]) {
-            throw new Error("\"" + key + "\" is not specified as property in \n" + JSON.stringify(schema.properties, undefined, 2));
-        }
-        return !schema.properties[key].hidden;
-    };
-    KeysStoreService.prototype.isObjectOrArray = function (schema) {
-        return schema.type === 'object' || schema.type === 'array';
-    };
-    KeysStoreService.prototype.setKeys = function (path, keys) {
-        this.keysMap[path] = keys;
-        if (!this.keys$Map[path]) {
-            this.keys$Map[path] = new __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__["ReplaySubject"](1);
-        }
-        this.keys$Map[path].next(keys);
-    };
-    return KeysStoreService;
-}());
-
-KeysStoreService.decorators = [
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */] },
-];
-/** @nocollapse */
-KeysStoreService.ctorParameters = function () { return [
-    { type: __WEBPACK_IMPORTED_MODULE_4__app_globals_service__["a" /* AppGlobalsService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_3__path_util_service__["a" /* PathUtilService */], },
-]; };
-
-
-/***/ }),
-
-/***/ 774:
+/***/ 776:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6006,7 +6126,7 @@ ModalService.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 775:
+/***/ 777:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6143,13 +6263,13 @@ RecordFixerService.ctorParameters = function () { return [
 
 /***/ }),
 
-/***/ 776:
+/***/ 778:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__path_util_service__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__path_util_service__ = __webpack_require__(39);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RemoteAutocompletionService; });
 /*
  * This file is part of ng2-json-editor.
@@ -6209,14 +6329,14 @@ RemoteAutocompletionService.ctorParameters = function () { return [
 
 /***/ }),
 
-/***/ 777:
+/***/ 779:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__(636);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__(638);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__json_util_service__ = __webpack_require__(414);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__json_util_service__ = __webpack_require__(415);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__component_type_service__ = __webpack_require__(141);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SchemaFixerService; });
 /*
@@ -6457,12 +6577,12 @@ SchemaFixerService.ctorParameters = function () { return [
 
 /***/ }),
 
-/***/ 778:
+/***/ 780:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ajv__ = __webpack_require__(429);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ajv__ = __webpack_require__(431);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ajv___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_ajv__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_globals_service__ = __webpack_require__(140);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SchemaValidationService; });
@@ -6566,12 +6686,12 @@ SchemaValidationService.ctorParameters = function () { return [
 
 /***/ }),
 
-/***/ 779:
+/***/ 781:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shortcut_action_service__ = __webpack_require__(415);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shortcut_action_service__ = __webpack_require__(417);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ShortcutService; });
 /*
  * This file is part of ng2-json-editor.
@@ -6647,6 +6767,10 @@ var ShortcutService = (function () {
             copyFromRoot: {
                 key: 'mod+alt+r',
                 action: this.shortcutActionService.generateShortcutAction('copyFromRootAction')
+            },
+            undo: {
+                key: 'mod+alt+z',
+                action: this.shortcutActionService.generateShortcutAction('undoAction')
             }
         };
     }
@@ -6675,7 +6799,7 @@ ShortcutService.ctorParameters = function () { return [
 
 /***/ }),
 
-/***/ 780:
+/***/ 782:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6737,18 +6861,18 @@ WindowHrefService.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 781:
+/***/ 783:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__string_input_component__ = __webpack_require__(782);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__string_input_component__ = __webpack_require__(784);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__string_input_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 782:
+/***/ 784:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6863,23 +6987,23 @@ StringInputComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 783:
+/***/ 785:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sub_record_component__ = __webpack_require__(784);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sub_record_component__ = __webpack_require__(786);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__sub_record_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 784:
+/***/ 786:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_tracker__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_tracker__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SubRecordComponent; });
 /*
@@ -6993,18 +7117,18 @@ SubRecordComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 785:
+/***/ 787:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__table_item_field_component__ = __webpack_require__(786);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__table_item_field_component__ = __webpack_require__(788);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__table_item_field_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 786:
+/***/ 788:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7086,18 +7210,18 @@ TableItemFieldComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 787:
+/***/ 789:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__table_list_field_component__ = __webpack_require__(788);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__table_list_field_component__ = __webpack_require__(790);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__table_list_field_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 788:
+/***/ 790:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7185,18 +7309,18 @@ TableListFieldComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 789:
+/***/ 791:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__title_dropdown_component__ = __webpack_require__(790);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__title_dropdown_component__ = __webpack_require__(792);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__title_dropdown_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 790:
+/***/ 792:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7248,12 +7372,12 @@ TitleDropdownComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 791:
+/***/ 793:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__tree_menu_component__ = __webpack_require__(793);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tree_menu_item_component__ = __webpack_require__(792);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__tree_menu_component__ = __webpack_require__(795);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tree_menu_item_component__ = __webpack_require__(794);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__tree_menu_component__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__tree_menu_item_component__["a"]; });
 
@@ -7263,12 +7387,12 @@ TitleDropdownComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 792:
+/***/ 794:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_tracker__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_tracker__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreeMenuItemComponent; });
 /*
@@ -7320,10 +7444,8 @@ var TreeMenuItemComponent = (function (_super) {
         this.href = this.windowHrefService.getHrefWithoutHash() + "#" + this.path;
     };
     TreeMenuItemComponent.prototype.ngOnChanges = function (changes) {
-        var valueChange = changes['value'];
-        if (valueChange && this.schema.type === 'object') {
-            var currentValue = valueChange.currentValue;
-            this.keys = currentValue.keySeq().toSet();
+        if (changes['value'] && this.schema.type === 'object') {
+            this.keys = this.value.keySeq().toSet();
         }
     };
     TreeMenuItemComponent.prototype.toggle = function (event) {
@@ -7357,6 +7479,13 @@ var TreeMenuItemComponent = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(TreeMenuItemComponent.prototype, "adminMode$", {
+        get: function () {
+            return this.appGlobalsService.adminMode$;
+        },
+        enumerable: true,
+        configurable: true
+    });
     TreeMenuItemComponent.prototype.getChildPath = function (indexOrKey) {
         return "" + this.path + this.pathUtilService.separator + indexOrKey;
     };
@@ -7367,7 +7496,7 @@ TreeMenuItemComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
                 selector: 'tree-menu-item',
                 styles: ["a { color: #e0dfdf; } "],
-                template: "<div> <a [href]=\"href\" (click)=\"toggle($event)\">{{label}}</a> <a *ngIf=\"isCollapsable\" [hidden]=\"isCollapsed\" (click)=\"collapse()\"> [x]</a> <div *ngIf=\"isNotLeaf\" [ngSwitch]=\"schema.type\" [hidden]=\"isCollapsed\"> <ul> <div *ngSwitchCase=\"'object'\"> <li *ngFor=\"let key of keys | filterHiddenFields:schema | addAlwaysShowFields:schema | sortAlphabetically; trackBy:trackByElement\"> <tree-menu-item [label]=\"key\" [value]=\"value.get(key)\" [schema]=\"schema.properties[key]\" [path]=\"getChildPath(key)\" [depth]=\"depth + 1\"></tree-menu-item> </li> </div> <div *ngSwitchCase=\"'array'\"> <li *ngFor=\"let element of value; let i = index; trackBy:trackByElement\"> <tree-menu-item [label]=\"i\" [value]=\"element\" [schema]=\"schema.items\" [path]=\"getChildPath(i)\" [depth]=\"depth + 1\"></tree-menu-item> </li> </div> </ul> </div> </div>",
+                template: "<div> <a [href]=\"href\" (click)=\"toggle($event)\">{{label}}</a> <a *ngIf=\"isCollapsable\" [hidden]=\"isCollapsed\" (click)=\"collapse()\"> [x]</a> <div *ngIf=\"isNotLeaf\" [ngSwitch]=\"schema.type\" [hidden]=\"isCollapsed\"> <ul> <div *ngSwitchCase=\"'object'\"> <li *ngFor=\"let key of keys | filterHiddenFields:schema:(adminMode$ | async) | addAlwaysShowFields:schema | sortAlphabetically; trackBy:trackByElement\"> <tree-menu-item [label]=\"key\" [value]=\"value.get(key)\" [schema]=\"schema.properties[key]\" [path]=\"getChildPath(key)\" [depth]=\"depth + 1\"></tree-menu-item> </li> </div> <div *ngSwitchCase=\"'array'\"> <li *ngFor=\"let element of value; let i = index; trackBy:trackByElement\"> <tree-menu-item [label]=\"i\" [value]=\"element\" [schema]=\"schema.items\" [path]=\"getChildPath(i)\" [depth]=\"depth + 1\"></tree-menu-item> </li> </div> </ul> </div> </div>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
@@ -7389,12 +7518,12 @@ TreeMenuItemComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 793:
+/***/ 795:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_tracker__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_tracker__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreeMenuComponent; });
 /*
@@ -7433,23 +7562,29 @@ var __extends = (this && this.__extends) || (function () {
 
 var TreeMenuComponent = (function (_super) {
     __extends(TreeMenuComponent, _super);
-    function TreeMenuComponent(domUtilService, pathUtilService) {
+    function TreeMenuComponent(domUtilService, pathUtilService, appGlobalsService) {
         var _this = _super.call(this) || this;
         _this.domUtilService = domUtilService;
         _this.pathUtilService = pathUtilService;
+        _this.appGlobalsService = appGlobalsService;
         _this.prefixOrPath = '';
         return _this;
     }
     TreeMenuComponent.prototype.ngOnChanges = function (changes) {
-        var recordChange = changes['record'];
-        if (recordChange) {
-            var currentRecord = recordChange.currentValue;
-            this.keys = currentRecord.keySeq().toSet();
+        if (changes['record']) {
+            this.keys = this.record.keySeq().toSet();
         }
     };
     TreeMenuComponent.prototype.getChildPath = function (key) {
         return "" + this.pathUtilService.separator + key;
     };
+    Object.defineProperty(TreeMenuComponent.prototype, "adminMode$", {
+        get: function () {
+            return this.appGlobalsService.adminMode$;
+        },
+        enumerable: true,
+        configurable: true
+    });
     return TreeMenuComponent;
 }(__WEBPACK_IMPORTED_MODULE_1__abstract_tracker__["a" /* AbstractTrackerComponent */]));
 
@@ -7457,7 +7592,7 @@ TreeMenuComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
                 selector: 'tree-menu',
                 styles: ["div.tree-menu-container { padding: 8px 0; overflow-x: hidden; overflow-y: auto; text-align: center; } ul.menu-item-container { list-style: none; text-align: left; padding-top: 8px; } ul.menu-item-container li { margin-bottom: 2px; } "],
-                template: "<div class=\"tree-menu-container\"> <ul class=\"menu-item-container\"> <li *ngFor=\"let key of keys | filterHiddenFields:schema | addAlwaysShowFields:schema | sortAlphabetically; trackBy:trackByElement\"> <tree-menu-item [label]=\"key\" [value]=\"record.get(key)\" [schema]=\"schema.properties[key]\" [path]=\"getChildPath(key)\" [depth]=\"1\"></tree-menu-item> </li> </ul> </div>",
+                template: "<div class=\"tree-menu-container\"> <ul class=\"menu-item-container\"> <li *ngFor=\"let key of keys | filterHiddenFields:schema:(adminMode$ | async) | addAlwaysShowFields:schema | sortAlphabetically; trackBy:trackByElement\"> <tree-menu-item [label]=\"key\" [value]=\"record.get(key)\" [schema]=\"schema.properties[key]\" [path]=\"getChildPath(key)\" [depth]=\"1\"></tree-menu-item> </li> </ul> </div>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
@@ -7465,6 +7600,7 @@ TreeMenuComponent.decorators = [
 TreeMenuComponent.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["e" /* DomUtilService */], },
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["a" /* PathUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["b" /* AppGlobalsService */], },
 ]; };
 TreeMenuComponent.propDecorators = {
     'record': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
@@ -7474,18 +7610,18 @@ TreeMenuComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 794:
+/***/ 796:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__validation_badges_component__ = __webpack_require__(795);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__validation_badges_component__ = __webpack_require__(797);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__validation_badges_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 795:
+/***/ 797:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7570,18 +7706,18 @@ ValidationBadgesComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 796:
+/***/ 798:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__value_change_watcher_component__ = __webpack_require__(797);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__value_change_watcher_component__ = __webpack_require__(799);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__value_change_watcher_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 797:
+/***/ 799:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7663,10 +7799,10 @@ ValueChangeWatcherComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 855:
+/***/ 857:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(417);
+module.exports = __webpack_require__(419);
 
 
 /***/ }),
@@ -7675,12 +7811,12 @@ module.exports = __webpack_require__(417);
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_field_component__ = __webpack_require__(715);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_field_component__ = __webpack_require__(717);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__abstract_field_component__["a"]; });
 
 
 
 /***/ })
 
-},[855]);
+},[857]);
 //# sourceMappingURL=main.bundle.js.map
