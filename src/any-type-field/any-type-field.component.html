@@ -14,9 +14,6 @@
   <div *ngSwitchCase="'ref'">
     <ref-field [value]="value" [schema]="schema" [path]="path"></ref-field>
   </div>
-  <div *ngSwitchCase="'value-change-watcher'">
-    <value-change-watcher [value]="value" [schema]="schema" [path]="path"></value-change-watcher>
-  </div>
   <div *ngSwitchDefault>
     <primitive-field [value]="value" [schema]="schema" [path]="path"></primitive-field>
   </div>

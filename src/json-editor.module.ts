@@ -45,7 +45,6 @@ import { HtmlViewComponent } from './html-view';
 import { JsonEditorComponent } from './json-editor.component';
 import { ModalViewComponent } from './modal-view';
 import { ObjectFieldComponent } from './object-field';
-import { ValueChangeWatcherComponent } from './value-change-watcher';
 import { PrimitiveListFieldComponent } from './primitive-list-field';
 import { PrimitiveFieldComponent } from './primitive-field';
 import { RefFieldComponent } from './ref-field';
@@ -73,7 +72,6 @@ import { ErrorPanelComponent, ErrorPanelItemComponent } from './error-panel';
     AutocompleteInputComponent,
     ComplexListFieldComponent,
     ObjectFieldComponent,
-    ValueChangeWatcherComponent,
     EditorPreviewerComponent,
     FindReplaceComponent,
     ModalViewComponent,
@@ -115,7 +113,6 @@ export {
   AutocompleteInputComponent,
   ComplexListFieldComponent,
   ObjectFieldComponent,
-  ValueChangeWatcherComponent,
   EditorPreviewerComponent,
   ErrorPanelComponent,
   FindReplaceComponent,
