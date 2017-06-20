@@ -71,9 +71,27 @@ export class SchemaValidationService {
     '$', 'i'
   );
 
+  private validateDate(value) {
+    let dateFormats = [
+      '^\\d{4}$',
+      '^\\d{4}-\\d{2}$',
+      '^\\d{4}-\\d{2}-\\d{2}$',
+    ];
+    return dateFormats
+    .map(format => new RegExp(format))
+    .some(format => {
+      if (value.match(format)) {
+        return Date.parse(value) !== NaN;
+      }
+      return false;
+    });
+  }
+
   constructor(public appGlobalsService: AppGlobalsService) {
     //  ajv didn't support format:url, so was added using web url regex for validation
     this.ajv.addFormat('url', this.reWebUrl);
+    this.ajv.addFormat('date-time', this.validateDate);
+    this.ajv.addFormat('date', this.validateDate);
   }
 
   /**
