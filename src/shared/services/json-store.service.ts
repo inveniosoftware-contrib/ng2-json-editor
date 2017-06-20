@@ -3,11 +3,11 @@ import { Map, List } from 'immutable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import { PathUtilService } from './path-util.service';
-import { NestedStore, JsonPatch } from '../interfaces';
+import { JsonPatch } from '../interfaces';
 import { SizedStack } from '../classes';
 
 @Injectable()
-export class JsonStoreService implements NestedStore {
+export class JsonStoreService {
 
   private json: Map<string, any>;
   private _jsonChange = new ReplaySubject<Map<string, any>>(1);

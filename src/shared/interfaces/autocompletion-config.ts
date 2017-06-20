@@ -1,4 +1,4 @@
-import { NestedStore } from './nested-store';
+import { JsonStoreService, KeysStoreService } from '../services';
 import { AutocompletionResult } from './autocompletion-result';
 
 export interface AutocompletionConfig {
@@ -24,7 +24,7 @@ export interface AutocompletionConfig {
   /**
    * Function to be called when a completion results is selected.
    */
-  onCompletionSelect?: (path: Array<any>, result: AutocompletionResult, store: NestedStore) => void;
+  onCompletionSelect?: (path: Array<any>, result: AutocompletionResult, jsonStore: JsonStoreService, keysStore: KeysStoreService) => void;
 
   /**
    * Maximum number of items to be displayed as autocompletion result in dropdown.

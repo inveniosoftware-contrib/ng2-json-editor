@@ -35,6 +35,7 @@ import {
   AppGlobalsService,
   ComponentTypeService,
   JsonStoreService,
+  KeysStoreService,
   SchemaValidationService,
   PathUtilService,
   DomUtilService
@@ -66,6 +67,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     public componentTypeService: ComponentTypeService,
     public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
+    public keysStoreService: KeysStoreService,
     public pathUtilService: PathUtilService,
     public domUtilService: DomUtilService,
     public changeDetectorRef: ChangeDetectorRef) {
@@ -100,7 +102,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     this.jsonStoreService.setIn(this.path, this.value);
 
     if (this.schema.onValueChange) {
-      this.schema.onValueChange(this.path, this.value, this.jsonStoreService);
+      this.schema.onValueChange(this.path, this.value, this.jsonStoreService, this.keysStoreService);
     }
   }
 

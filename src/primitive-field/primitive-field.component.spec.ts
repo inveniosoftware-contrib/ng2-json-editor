@@ -37,6 +37,7 @@ import {
   ComponentTypeService,
   SchemaValidationService,
   JsonStoreService,
+  KeysStoreService,
   KatexService,
   PathUtilService,
   DomUtilService,
@@ -95,6 +96,7 @@ describe('PrimitiveFieldComponent', () => {
         TabsUtilService,
         ErrorMapUtilService,
         KatexService,
+        KeysStoreService,
         { provide: JsonStoreService, useClass: MockJsonStoreService }
       ]
     }).compileComponents();
@@ -117,6 +119,7 @@ describe('PrimitiveFieldComponent', () => {
     nativeEl = fixture.nativeElement;
     inputEl = nativeEl
       .querySelector('input') as HTMLInputElement;
+    inputEl.focus();
   });
 
   it('should be binded to view', () => {
