@@ -3,7 +3,6 @@ export { AutocompletionResult } from './autocompletion-result';
 export { JsonEditorConfig } from './json-editor-config';
 export { LongListNavigatorConfig } from './long-list-navigator-config';
 export { ModalOptions } from './modal-options';
-export { NestedStore } from './nested-store';
 export { PreviewConfig } from './preview-config';
 export { Preview } from './preview';
 export { RefConfig } from './ref-config';

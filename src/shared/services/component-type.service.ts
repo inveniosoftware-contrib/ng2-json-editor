@@ -44,10 +44,6 @@ export class ComponentTypeService {
       throw new Error('schema is undefined');
     }
 
-    if (schema.onValueChange) {
-      return 'value-change-watcher';
-    }
-
     let schemaType = schema.type;
     if (!schemaType) {
       if (Object.keys(schema).length === 0) { // if shema === {} (empty object)

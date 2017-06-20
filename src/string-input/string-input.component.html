@@ -1,5 +1,5 @@
-<div [class.hidden]="latexPreviewShown" [attr.contenteditable]="!disabled" attr.data-path="{{pathString}}" [tabindex]="tabIndex"
-  [contentModel]="contentModel" (contentModelChange)="contentModelChange($event)" (blur)="onBlur()" (keypress)="keypress.emit($event)"
+<div [class.hidden]="latexPreviewShown" [attr.contenteditable]="!disabled" [attr.data-path]="pathString" [tabindex]="tabIndex"
+  [contentModel]="contentModel" (contentModelChange)="contentModelChange($event)" (blur)="onBlur()" (keypress)="onKeypress.emit($event)"
   attr.placeholder="{{placeholder || '⁣\u2063'}}" #contentEditable></div>
 <div [class.hidden]="!latexPreviewEnabled || !latexPreviewShown" (click)="hideLatexPreview(contentEditable)" (blur)="hideLatexPreview(contentEditable)"
   #latexPreview></div>

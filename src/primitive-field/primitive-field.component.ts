@@ -35,6 +35,7 @@ import {
   AppGlobalsService,
   ComponentTypeService,
   JsonStoreService,
+  KeysStoreService,
   SchemaValidationService,
   PathUtilService,
   DomUtilService
@@ -60,11 +61,13 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
 
   internalErrors: Array<ValidationError> = [];
   internalCategorizedErrorSubscription: Subscription;
+  private lastCommitedValue: string | number | boolean;
 
   constructor(public schemaValidationService: SchemaValidationService,
     public componentTypeService: ComponentTypeService,
     public appGlobalsService: AppGlobalsService,
     public jsonStoreService: JsonStoreService,
+    public keysStoreService: KeysStoreService,
     public pathUtilService: PathUtilService,
     public domUtilService: DomUtilService,
     public changeDetectorRef: ChangeDetectorRef) {
@@ -75,23 +78,46 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   }
 
   ngOnInit() {
-    this.internalCategorizedErrorSubscription = this.appGlobalsService.internalCategorizedErrorsSubject
-    .subscribe(internalCategorizedErrorMap => {
-      this.internalErrors = internalCategorizedErrorMap.Errors[this.pathString] || [];
-    });
+    super.ngOnInit();
+    this.lastCommitedValue = this.value;
+    this.internalCategorizedErrorSubscription = this.appGlobalsService
+      .internalCategorizedErrorsSubject
+      .subscribe(internalCategorizedErrorMap => {
+        this.internalErrors = internalCategorizedErrorMap.Errors[this.pathString] || [];
+      });
     this.validate();
   }
 
+  ngOnDestroy() {
+    super.ngOnDestroy();
+    if (this.internalErrors.length > 0) {
+      this.appGlobalsService.extendInternalErrors(this.pathString, []);
+    }
+    this.internalCategorizedErrorSubscription.unsubscribe();
+  }
+
   commitValueChange() {
-    this.domUtilService.clearHighlight();
     this.validate();
+    this.lastCommitedValue = this.value;
     this.jsonStoreService.setIn(this.path, this.value);
+
+    if (this.schema.onValueChange) {
+      this.schema.onValueChange(this.path, this.value, this.jsonStoreService, this.keysStoreService);
+    }
+  }
+
+  onBlur() {
+    this.domUtilService.clearHighlight();
+
+    if (this.value !== this.lastCommitedValue) {
+      this.commitValueChange();
+    }
   }
 
   onKeypress(event: KeyboardEvent) {
     if (event.key === 'Enter' && !event.shiftKey) {
-      this.commitValueChange();
       event.preventDefault();
+      (document.activeElement as HTMLElement).blur();
     }
   }
 
@@ -126,13 +152,6 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
 
   hasErrors(): boolean {
     return super.hasErrors() || this.internalErrors.length > 0;
-  }
-
-  ngOnDestroy() {
-    if (this.internalErrors.length > 0) {
-       this.appGlobalsService.extendInternalErrors(this.pathString, []);
-    }
-    this.internalCategorizedErrorSubscription.unsubscribe();
   }
 
   private validate() {

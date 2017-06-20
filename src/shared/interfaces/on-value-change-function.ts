@@ -1,3 +1,3 @@
-import { NestedStore } from './nested-store';
+import { KeysStoreService, JsonStoreService } from '../services';
 
-export type OnValueChangeFunction = (path: Array<any>, value: any, store: NestedStore) => void;
+export type OnValueChangeFunction = (path: Array<any>, value: any, jsonStore: JsonStoreService, keysStore: KeysStoreService) => void;

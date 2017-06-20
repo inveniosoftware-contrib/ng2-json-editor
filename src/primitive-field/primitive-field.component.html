@@ -3,18 +3,19 @@
     <tr [ngClass]="{error: hasErrors()}">
       <ng-template #errorsTooltipTemplate>
         <ul class="tooltip-left-align">
-          <li *ngFor="let error of internalErrors" >
+          <li *ngFor="let error of internalErrors">
             {{error.message}}
           </li>
-          <li *ngFor="let error of externalErrors" >
+          <li *ngFor="let error of externalErrors">
             {{error.message}}
           </li>
         </ul>
       </ng-template>
-      <td class="value-container" [ngClass]="disabledClass" [tooltip]="errorsTooltipTemplate" [isDisabled]="!hasErrors()"
-        placement="{{tooltipPosition}}" container="body">
+      <td class="value-container" [ngClass]="disabledClass" [tooltip]="errorsTooltipTemplate" [isDisabled]="!hasErrors()" placement="{{tooltipPosition}}"
+        container="body">
         <div *ngSwitchCase="'string'">
-          <string-input [pathString]="pathString" [value]="value" (valueChange)="onValueChange($event)" [disabled]="disabled" [tabIndex]="tabIndex" [latexPreviewEnabled]="schema.latexPreviewEnabled" [placeholder]="schema.title" (blur)="commitValueChange()" (keypress)="onKeypress($event)">
+          <string-input [pathString]="pathString" [value]="value" (valueChange)="onValueChange($event)" [disabled]="disabled" [tabIndex]="tabIndex"
+            [latexPreviewEnabled]="schema.latexPreviewEnabled" [placeholder]="schema.title" (blur)="onBlur()" (onKeypress)="onKeypress($event)">
           </string-input>
         </div>
         <div *ngSwitchCase="'enum'">
@@ -23,15 +24,15 @@
         </div>
         <div *ngSwitchCase="'autocomplete'">
           <autocomplete-input [pathString]="pathString" [value]="value" [path]="path" [autocompletionConfig]="schema.autocompletionConfig"
-            (onBlur)="commitValueChange()" (onKeypress)="onKeypress($event)" (onValueChange)="onValueChange($event)"
-            [placeholder]="schema.title" [tabIndex]="tabIndex"></autocomplete-input>
+            (onBlur)="onBlur()" (onKeypress)="onKeypress($event)" (onValueChange)="onValueChange($event)" [placeholder]="schema.title"
+            [tabIndex]="tabIndex"></autocomplete-input>
         </div>
         <div *ngSwitchCase="'integer'">
-          <input type="number" [(ngModel)]="value" [tabindex]="tabIndex" attr.data-path="{{pathString}}" (blur)="commitValueChange()"
-            (keypress)="onKeypress($event)" placeholder="{{schema.title}}">
+          <input type="number" [(ngModel)]="value" [tabindex]="tabIndex" [attr.data-path]="pathString" (blur)="onBlur()" (keypress)="onKeypress($event)"
+            [placeholder]="schema.title">
         </div>
         <div *ngSwitchCase="'boolean'">
-          <input type="checkbox" [(ngModel)]="value" (ngModelChange)="commitValueChange()" placeholder="{{schema.title}}">
+          <input type="checkbox" [(ngModel)]="value" (ngModelChange)="onBlur()" [placeholder]="schema.title">
         </div>
         <div *ngSwitchDefault>
           ## Not recognized type: {{valueType}}

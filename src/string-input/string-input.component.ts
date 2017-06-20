@@ -56,7 +56,7 @@ export class StringInputComponent implements AfterViewInit, OnInit, OnChanges {
   @Input() latexPreviewEnabled: boolean;
 
   @Output() blur = new EventEmitter<void>();
-  @Output() keypress = new EventEmitter<void>();
+  @Output() onKeypress = new EventEmitter<void>();
   @Output() valueChange = new EventEmitter<string>();
 
   latexPreviewShown: boolean;

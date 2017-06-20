@@ -48,7 +48,9 @@ export interface SchemaOption {
   refFieldConfig?: RefConfig;
 
   /**
-   * Function that will be called when the value of configured property is changed.
+   * Function that will be called when the value of configured property is changed
+   *
+   * - Works only for primitive values
    */
   onValueChange?: OnValueChangeFunction;
 

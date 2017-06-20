@@ -25,7 +25,7 @@ import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/observable/of';
 
-import { JsonStoreService, RemoteAutocompletionService, AppGlobalsService } from '../shared/services';
+import { JsonStoreService, RemoteAutocompletionService, AppGlobalsService, KeysStoreService } from '../shared/services';
 import { AutocompletionConfig, AutocompletionResult } from '../shared/interfaces';
 
 @Component({
@@ -54,6 +54,7 @@ export class AutocompleteInputComponent implements OnInit {
 
   constructor(public remoteAutocompletionService: RemoteAutocompletionService,
     public jsonStoreService: JsonStoreService,
+    public keysStoreService: KeysStoreService,
     public appGlobalsService: AppGlobalsService) { }
 
   ngOnInit() {
@@ -86,7 +87,7 @@ export class AutocompleteInputComponent implements OnInit {
     // if callback set and it is remote autocompletion source
     if (onCompletionSelect && this.typeaheadOptionField) {
       // .slice() is used to pass by value instead of reference
-      onCompletionSelect(this.path.slice(), completionItem, this.jsonStoreService);
+      onCompletionSelect(this.path.slice(), completionItem, this.jsonStoreService, this.keysStoreService);
     }
   }
 }
