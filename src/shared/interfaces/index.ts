@@ -22,3 +22,4 @@ export { ValidationError } from './validation-error';
 export { PaginatedItem } from './paginated-item';
 export { KatexData } from './katex-data';
 export { JsonPatch } from './json-patch';
+export { CustomFormatValidation } from './custom-format-validation';
