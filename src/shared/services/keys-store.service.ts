@@ -26,16 +26,18 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import { JSONSchema } from '../interfaces';
 import { PathUtilService } from './path-util.service';
+import { JsonSchemaService } from './json-schema.service';
 import { AppGlobalsService } from './app-globals.service';
 
 @Injectable()
 export class KeysStoreService {
   private keys$Map: { [path: string]: ReplaySubject<OrderedSet<string>> };
   public keysMap: { [path: string]: OrderedSet<string> };
-  public onKeysChange = new ReplaySubject<{ path: string, keys: OrderedSet<string>}>(1);
+  public onKeysChange = new ReplaySubject<{ path: string, keys: OrderedSet<string> }>(1);
 
   constructor(private appGlobalsService: AppGlobalsService,
-    private pathUtilService: PathUtilService) { }
+    private pathUtilService: PathUtilService,
+    private jsonSchemaService: JsonSchemaService) { }
 
   forPath(path: string): ReplaySubject<OrderedSet<string>> {
     return this.keys$Map[path];
@@ -43,18 +45,28 @@ export class KeysStoreService {
 
   /**
    * Adds a key to the specified path.
-   * @param path json-pointer to add the key to
+   * @param path path to add the key to
    * @param key key to be added
    * @param schema OBJECT schema that belongs to path (schema.items for table-list)
    */
-  addKey(path: string, key: string, schema: JSONSchema): string {
+  addKey(path: string | Array<any>, key: string, schema?: JSONSchema): string {
+    // TODO: remove this workaround after #330 is fixed
+    let pathString = Array.isArray(path) ? this.pathUtilService.toPathString(path) : path;
+
+    if (!schema) {
+      schema = this.jsonSchemaService.forPathString(pathString);
+      if (schema.componentType === 'table-list') {
+        schema = schema.items;
+      }
+    }
+
     // FIXME: could do O(logn) insert instead of O(nlogn) since the set is already sorted.
-    this.keysMap[path] = this.keysMap[path]
+    this.keysMap[pathString] = this.keysMap[pathString]
       .add(key)
       .sort((a, b) => this.compareByPriority(a, b, schema)) as OrderedSet<string>;
-    this.keys$Map[path].next(this.keysMap[path]);
-    this.onKeysChange.next({ path, keys: this.keysMap[path] });
-    let newKeyPath = `${path}${this.pathUtilService.separator}${key}`;
+    this.keys$Map[pathString].next(this.keysMap[pathString]);
+    this.onKeysChange.next({ path: pathString, keys: this.keysMap[pathString] });
+    let newKeyPath = `${pathString}${this.pathUtilService.separator}${key}`;
 
     let keySchema = schema.properties[key];
     if (keySchema.type === 'object' || keySchema.componentType === 'table-list') {
@@ -63,6 +75,7 @@ export class KeysStoreService {
 
     return newKeyPath;
   }
+
 
   deleteKey(path: string, key: string) {
     this.keysMap[path] = this.keysMap[path].delete(key);
