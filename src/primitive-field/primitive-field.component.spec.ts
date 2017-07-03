@@ -42,7 +42,8 @@ import {
   PathUtilService,
   DomUtilService,
   TabsUtilService,
-  ErrorMapUtilService
+  ErrorMapUtilService,
+  JsonSchemaService
 } from '../shared/services';
 
 import { ContentModelDirective } from '../shared/directives';
@@ -97,6 +98,7 @@ describe('PrimitiveFieldComponent', () => {
         ErrorMapUtilService,
         KatexService,
         KeysStoreService,
+        JsonSchemaService,
         { provide: JsonStoreService, useClass: MockJsonStoreService }
       ]
     }).compileComponents();

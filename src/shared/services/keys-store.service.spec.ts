@@ -25,7 +25,18 @@ import { fromJS, Map, OrderedSet } from 'immutable';
 import { KeysStoreService } from './keys-store.service';
 import { PathUtilService } from './path-util.service';
 import { AppGlobalsService } from './app-globals.service';
+import { JsonSchemaService } from './json-schema.service';
 import { ErrorMapUtilService } from './error-map-util.service';
+
+import { JSONSchema } from '../interfaces';
+
+class MockJsonSchemaService extends JsonSchemaService {
+  static schemaToReturn: JSONSchema;
+
+  forPathString(path: string): JSONSchema {
+    return MockJsonSchemaService.schemaToReturn;
+  }
+}
 
 describe('KeysStoreService', () => {
   let service: KeysStoreService;
@@ -39,7 +50,11 @@ describe('KeysStoreService', () => {
   };
 
   beforeEach(() => {
-    service = new KeysStoreService(new AppGlobalsService(new ErrorMapUtilService()), new PathUtilService());
+    service = new KeysStoreService(
+      new AppGlobalsService(new ErrorMapUtilService()),
+      new PathUtilService(),
+      new MockJsonSchemaService(null)
+    );
   });
 
   it('should build keys map for simple json', () => {
@@ -263,6 +278,31 @@ describe('KeysStoreService', () => {
     });
     service.buildKeysMap(json, schema);
     let newKeyPath = service.addKey('', 'key2', schema);
+    let expected = OrderedSet(['key1', 'key2']);
+    let expectNewKeyPath = '/key2';
+    service.forPath('')
+      .subscribe(keys => expect(keys.toArray()).toEqual(expected.toArray()));
+    expect(newKeyPath).toEqual(expectNewKeyPath);
+  });
+
+  it('should add simple key and return the new key path without schema param', () => {
+    let schema = {
+      type: 'object',
+      properties: {
+        key1: {
+          type: 'string'
+        },
+        key2: {
+          type: 'string'
+        }
+      }
+    };
+    let json = fromJS({
+      key1: 'value'
+    });
+    service.buildKeysMap(json, schema);
+    MockJsonSchemaService.schemaToReturn = schema;
+    let newKeyPath = service.addKey('', 'key2');
     let expected = OrderedSet(['key1', 'key2']);
     let expectNewKeyPath = '/key2';
     service.forPath('')

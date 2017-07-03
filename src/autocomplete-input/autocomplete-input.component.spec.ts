@@ -37,7 +37,8 @@ import {
   PathUtilService,
   AppGlobalsService,
   ErrorMapUtilService,
-  KeysStoreService
+  KeysStoreService,
+  JsonSchemaService
 } from '../shared/services';
 import { AutocompletionResult, AutocompletionConfig } from '../shared/interfaces';
 
@@ -78,7 +79,8 @@ describe('AutocompleteInputComponent', () => {
         JsonStoreService,
         KeysStoreService,
         PathUtilService,
-        ErrorMapUtilService
+        ErrorMapUtilService,
+        JsonSchemaService
       ]
     }).compileComponents();
   }));
