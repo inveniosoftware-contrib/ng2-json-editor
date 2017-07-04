@@ -49,28 +49,19 @@ export class KeysStoreService {
    * @param key key to be added
    * @param schema OBJECT schema that belongs to path (schema.items for table-list)
    */
-  addKey(path: string | Array<any>, key: string, schema?: JSONSchema): string {
-    // TODO: remove this workaround after #330 is fixed
-    let pathString = Array.isArray(path) ? this.pathUtilService.toPathString(path) : path;
-
-    if (!schema) {
-      schema = this.jsonSchemaService.forPathString(pathString);
-      if (schema.componentType === 'table-list') {
-        schema = schema.items;
-      }
-    }
+  addKey(path: string, key: string, schema: JSONSchema): string {
 
     // FIXME: could do O(logn) insert instead of O(nlogn) since the set is already sorted.
-    this.keysMap[pathString] = this.keysMap[pathString]
+    this.keysMap[path] = this.keysMap[path]
       .add(key)
       .sort((a, b) => this.compareByPriority(a, b, schema)) as OrderedSet<string>;
-    this.keys$Map[pathString].next(this.keysMap[pathString]);
-    this.onKeysChange.next({ path: pathString, keys: this.keysMap[pathString] });
-    let newKeyPath = `${pathString}${this.pathUtilService.separator}${key}`;
+    this.keys$Map[path].next(this.keysMap[path]);
+    this.onKeysChange.next({ path, keys: this.keysMap[path] });
+    let newKeyPath = `${path}${this.pathUtilService.separator}${key}`;
 
     let keySchema = schema.properties[key];
     if (keySchema.type === 'object' || keySchema.componentType === 'table-list') {
-      this.buildKeysMapRecursivelyForPath(Map<string, any>(), keySchema, newKeyPath);
+      this.buildKeysMapRecursivelyForPath(Map<string, any>(), newKeyPath, keySchema);
     }
 
     return newKeyPath;
@@ -89,24 +80,31 @@ export class KeysStoreService {
   buildKeysMap(json: Map<string, any>, schema: JSONSchema) {
     this.keys$Map = {};
     this.keysMap = {};
-    this.buildKeysMapRecursivelyForPath(json, schema, '');
+    this.buildKeysMapRecursivelyForPath(json, '', schema);
   }
 
-  buildKeysMapRecursivelyForPath(mapOrList: Iterable<string | number, any>, schema: JSONSchema, path: string) {
+  buildKeysMapRecursivelyForPath(mapOrList: Iterable<string | number, any>, path: string | Array<any>, schema?: JSONSchema) {
+    // TODO: remove this and unify typing when #330 is fixed
+    let pathString = Array.isArray(path) ? this.pathUtilService.toPathString(path) : path;
+
+    if (!schema) {
+      schema = this.jsonSchemaService.forPathString(pathString);
+    }
+
     if (schema.type === 'object') {
       let map = mapOrList as Map<string, any>;
-      let finalKeys = this.buildkeysForObject(path, map, schema);
+      let finalKeys = this.buildkeysForObject(pathString, map, schema);
 
       // recursive call
       finalKeys
         .filter(key => this.isObjectOrArray(schema.properties[key]))
         .forEach(key => {
-          let nextPath = `${path}${this.pathUtilService.separator}${key}`;
-          this.buildKeysMapRecursivelyForPath(map.get(key), schema.properties[key], nextPath);
+          let nextPath = `${pathString}${this.pathUtilService.separator}${key}`;
+          this.buildKeysMapRecursivelyForPath(map.get(key), nextPath, schema.properties[key]);
         });
     } else if (schema.componentType === 'table-list') {
       let list = mapOrList as List<Map<string, any>>;
-      this.buildKeysForTableList(path, list, schema);
+      this.buildKeysForTableList(pathString, list, schema);
       // there is no recursive call for table list items because they aren't expected to have object or object list as property.
     } else {
       // recursive calls for each item of list if it's not a table-list
@@ -114,8 +112,8 @@ export class KeysStoreService {
       if (this.isObjectOrArray(schema.items)) {
         // recursive call
         list.forEach((element, index) => {
-          let elementPath = `${path}${this.pathUtilService.separator}${index}`;
-          this.buildKeysMapRecursivelyForPath(element, schema.items, elementPath);
+          let elementPath = `${pathString}${this.pathUtilService.separator}${index}`;
+          this.buildKeysMapRecursivelyForPath(element, elementPath, schema.items);
         });
       }
     }
