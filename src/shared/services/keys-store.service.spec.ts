@@ -285,31 +285,6 @@ describe('KeysStoreService', () => {
     expect(newKeyPath).toEqual(expectNewKeyPath);
   });
 
-  it('should add simple key and return the new key path without schema param', () => {
-    let schema = {
-      type: 'object',
-      properties: {
-        key1: {
-          type: 'string'
-        },
-        key2: {
-          type: 'string'
-        }
-      }
-    };
-    let json = fromJS({
-      key1: 'value'
-    });
-    service.buildKeysMap(json, schema);
-    MockJsonSchemaService.schemaToReturn = schema;
-    let newKeyPath = service.addKey('', 'key2');
-    let expected = OrderedSet(['key1', 'key2']);
-    let expectNewKeyPath = '/key2';
-    service.forPath('')
-      .subscribe(keys => expect(keys.toArray()).toEqual(expected.toArray()));
-    expect(newKeyPath).toEqual(expectNewKeyPath);
-  });
-
   it('should add key in the right place to maintain the order', () => {
     let schema = {
       type: 'object',
