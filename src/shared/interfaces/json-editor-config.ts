@@ -2,6 +2,7 @@ import { PreviewConfig } from './preview-config';
 import { SchemaOption } from './schema-option';
 import { CustomShortcuts } from './custom-shortcuts';
 import { TabsConfig } from './tabs-config';
+import { CustomFormatValidation } from './custom-format-validation';
 
 export interface JsonEditorConfig {
   /**
@@ -50,4 +51,8 @@ export interface JsonEditorConfig {
    */
   tabsConfig?: TabsConfig;
 
+  /**
+   * Configuration for custom formats schema validation.
+   */
+  customFormatValidation?: CustomFormatValidation;
 }
