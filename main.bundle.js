@@ -18,7 +18,7 @@ webpackJsonp([0,3],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__error_map_util_service__ = __webpack_require__(412);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__error_map_util_service__ = __webpack_require__(413);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppGlobalsService; });
 /*
  * This file is part of ng2-json-editor.
@@ -336,7 +336,79 @@ EmptyValueService.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 144:
+/***/ 143:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__path_util_service__ = __webpack_require__(39);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JsonSchemaService; });
+/*
+ * This file is part of ng2-json-editor.
+ * Copyright (C) 2016 CERN.
+ *
+ * ng2-json-editor is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * ng2-json-editor is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ * In applying this license, CERN does not
+ * waive the privileges and immunities granted to it by virtue of its status
+ * as an Intergovernmental Organization or submit itself to any jurisdiction.
+ */
+
+
+var JsonSchemaService = (function () {
+    function JsonSchemaService(pathUtilService) {
+        this.pathUtilService = pathUtilService;
+    }
+    JsonSchemaService.prototype.setSchema = function (schema) {
+        this.schema = schema;
+    };
+    /**
+     * Returns the schema extracted from this path
+     */
+    JsonSchemaService.prototype.forPathArray = function (path) {
+        return path
+            .reduce(function (schema, pathEl) {
+            if (isNaN(pathEl)) {
+                return schema.properties[pathEl];
+            }
+            else {
+                return schema.items;
+            }
+        }, this.schema);
+    };
+    /**
+     * Returns the schema extracted from the json-pointer string
+     */
+    JsonSchemaService.prototype.forPathString = function (path) {
+        var pathArray = this.pathUtilService.toPathArray(path);
+        return this.forPathArray(pathArray);
+    };
+    return JsonSchemaService;
+}());
+
+JsonSchemaService.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */] },
+];
+/** @nocollapse */
+JsonSchemaService.ctorParameters = function () { return [
+    { type: __WEBPACK_IMPORTED_MODULE_1__path_util_service__["a" /* PathUtilService */], },
+]; };
+
+
+/***/ }),
+
+/***/ 145:
 /***/ (function(module, exports) {
 
 function webpackEmptyContext(req) {
@@ -345,12 +417,12 @@ function webpackEmptyContext(req) {
 webpackEmptyContext.keys = function() { return []; };
 webpackEmptyContext.resolve = webpackEmptyContext;
 module.exports = webpackEmptyContext;
-webpackEmptyContext.id = 144;
+webpackEmptyContext.id = 145;
 
 
 /***/ }),
 
-/***/ 145:
+/***/ 146:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -442,6 +514,34 @@ var AppConfig = (function () {
                     key: 'mod+right'
                 }
             },
+            customFormatValidation: {
+                date: {
+                    formatChecker: function (value) {
+                        var formats = [
+                            /^\d{4}$/,
+                            /^\d{4}-\d{2}$/,
+                            /^\d{4}-\d{2}-\d{2}$/
+                        ];
+                        return formats
+                            .some(function (format) {
+                            if (value.match(format)) {
+                                return Date.parse(value) !== NaN;
+                            }
+                            return false;
+                        });
+                    }
+                },
+                'date-time': {
+                    formatChecker: function (value) {
+                        var regex = /^\d\d\d\d-[0-1]\d-[0-3]\d[t\s][0-2]\d:[0-5]\d:[0-5]\d(?:\.\d+)?(?:z|[+-]\d\d:\d\d)?$/i;
+                        if (value.match(regex)) {
+                            return true;
+                        }
+                        ;
+                        return false;
+                    }
+                }
+            },
             enableAdminModeSwitch: true,
             menuMaxDepth: 1,
             tabsConfig: {
@@ -481,7 +581,7 @@ AppConfig = __decorate([
 
 /***/ }),
 
-/***/ 146:
+/***/ 147:
 /***/ (function(module, exports) {
 
 function webpackEmptyContext(req) {
@@ -490,7 +590,7 @@ function webpackEmptyContext(req) {
 webpackEmptyContext.keys = function() { return []; };
 webpackEmptyContext.resolve = webpackEmptyContext;
 module.exports = webpackEmptyContext;
-webpackEmptyContext.id = 146;
+webpackEmptyContext.id = 147;
 
 
 /***/ }),
@@ -599,7 +699,7 @@ PathUtilService.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 409:
+/***/ 410:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -610,7 +710,7 @@ PathUtilService.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 410:
+/***/ 411:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -666,7 +766,7 @@ var SHARED_PIPES = [
 
 /***/ }),
 
-/***/ 411:
+/***/ 412:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -800,7 +900,7 @@ DomUtilService.ctorParameters = function () { return [
 
 /***/ }),
 
-/***/ 412:
+/***/ 413:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -865,78 +965,6 @@ ErrorMapUtilService.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 413:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__path_util_service__ = __webpack_require__(39);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JsonSchemaService; });
-/*
- * This file is part of ng2-json-editor.
- * Copyright (C) 2016 CERN.
- *
- * ng2-json-editor is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of the
- * License, or (at your option) any later version.
- *
- * ng2-json-editor is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
- * In applying this license, CERN does not
- * waive the privileges and immunities granted to it by virtue of its status
- * as an Intergovernmental Organization or submit itself to any jurisdiction.
- */
-
-
-var JsonSchemaService = (function () {
-    function JsonSchemaService(pathUtilService) {
-        this.pathUtilService = pathUtilService;
-    }
-    JsonSchemaService.prototype.setSchema = function (schema) {
-        this.schema = schema;
-    };
-    /**
-     * Returns the schema extracted from this path
-     */
-    JsonSchemaService.prototype.forPathArray = function (path) {
-        return path
-            .reduce(function (schema, pathEl) {
-            if (isNaN(pathEl)) {
-                return schema.properties[pathEl];
-            }
-            else {
-                return schema.items;
-            }
-        }, this.schema);
-    };
-    /**
-     * Returns the schema extracted from the json-pointer string
-     */
-    JsonSchemaService.prototype.forPathString = function (path) {
-        var pathArray = this.pathUtilService.toPathArray(path);
-        return this.forPathArray(pathArray);
-    };
-    return JsonSchemaService;
-}());
-
-JsonSchemaService.decorators = [
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */] },
-];
-/** @nocollapse */
-JsonSchemaService.ctorParameters = function () { return [
-    { type: __WEBPACK_IMPORTED_MODULE_1__path_util_service__["a" /* PathUtilService */], },
-]; };
-
-
-/***/ }),
-
 /***/ 414:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -947,7 +975,7 @@ JsonSchemaService.ctorParameters = function () { return [
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__path_util_service__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__classes__ = __webpack_require__(409);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__classes__ = __webpack_require__(410);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JsonStoreService; });
 
 
@@ -1126,7 +1154,8 @@ JsonUtilService.ctorParameters = function () { return [
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__path_util_service__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_globals_service__ = __webpack_require__(140);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__json_schema_service__ = __webpack_require__(143);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_globals_service__ = __webpack_require__(140);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return KeysStoreService; });
 /*
  * This file is part of ng2-json-editor.
@@ -1154,10 +1183,12 @@ JsonUtilService.ctorParameters = function () { return [
 
 
 
+
 var KeysStoreService = (function () {
-    function KeysStoreService(appGlobalsService, pathUtilService) {
+    function KeysStoreService(appGlobalsService, pathUtilService, jsonSchemaService) {
         this.appGlobalsService = appGlobalsService;
         this.pathUtilService = pathUtilService;
+        this.jsonSchemaService = jsonSchemaService;
         this.onKeysChange = new __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__["ReplaySubject"](1);
     }
     KeysStoreService.prototype.forPath = function (path) {
@@ -1165,7 +1196,7 @@ var KeysStoreService = (function () {
     };
     /**
      * Adds a key to the specified path.
-     * @param path json-pointer to add the key to
+     * @param path path to add the key to
      * @param key key to be added
      * @param schema OBJECT schema that belongs to path (schema.items for table-list)
      */
@@ -1180,7 +1211,7 @@ var KeysStoreService = (function () {
         var newKeyPath = "" + path + this.pathUtilService.separator + key;
         var keySchema = schema.properties[key];
         if (keySchema.type === 'object' || keySchema.componentType === 'table-list') {
-            this.buildKeysMapRecursivelyForPath(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_immutable__["Map"])(), keySchema, newKeyPath);
+            this.buildKeysMapRecursivelyForPath(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_immutable__["Map"])(), newKeyPath, keySchema);
         }
         return newKeyPath;
     };
@@ -1195,24 +1226,29 @@ var KeysStoreService = (function () {
     KeysStoreService.prototype.buildKeysMap = function (json, schema) {
         this.keys$Map = {};
         this.keysMap = {};
-        this.buildKeysMapRecursivelyForPath(json, schema, '');
+        this.buildKeysMapRecursivelyForPath(json, '', schema);
     };
-    KeysStoreService.prototype.buildKeysMapRecursivelyForPath = function (mapOrList, schema, path) {
+    KeysStoreService.prototype.buildKeysMapRecursivelyForPath = function (mapOrList, path, schema) {
         var _this = this;
+        // TODO: remove this and unify typing when #330 is fixed
+        var pathString = Array.isArray(path) ? this.pathUtilService.toPathString(path) : path;
+        if (!schema) {
+            schema = this.jsonSchemaService.forPathString(pathString);
+        }
         if (schema.type === 'object') {
             var map_1 = mapOrList;
-            var finalKeys = this.buildkeysForObject(path, map_1, schema);
+            var finalKeys = this.buildkeysForObject(pathString, map_1, schema);
             // recursive call
             finalKeys
                 .filter(function (key) { return _this.isObjectOrArray(schema.properties[key]); })
                 .forEach(function (key) {
-                var nextPath = "" + path + _this.pathUtilService.separator + key;
-                _this.buildKeysMapRecursivelyForPath(map_1.get(key), schema.properties[key], nextPath);
+                var nextPath = "" + pathString + _this.pathUtilService.separator + key;
+                _this.buildKeysMapRecursivelyForPath(map_1.get(key), nextPath, schema.properties[key]);
             });
         }
         else if (schema.componentType === 'table-list') {
             var list = mapOrList;
-            this.buildKeysForTableList(path, list, schema);
+            this.buildKeysForTableList(pathString, list, schema);
             // there is no recursive call for table list items because they aren't expected to have object or object list as property.
         }
         else {
@@ -1221,8 +1257,8 @@ var KeysStoreService = (function () {
             if (this.isObjectOrArray(schema.items)) {
                 // recursive call
                 list.forEach(function (element, index) {
-                    var elementPath = "" + path + _this.pathUtilService.separator + index;
-                    _this.buildKeysMapRecursivelyForPath(element, schema.items, elementPath);
+                    var elementPath = "" + pathString + _this.pathUtilService.separator + index;
+                    _this.buildKeysMapRecursivelyForPath(element, elementPath, schema.items);
                 });
             }
         }
@@ -1299,8 +1335,9 @@ KeysStoreService.decorators = [
 ];
 /** @nocollapse */
 KeysStoreService.ctorParameters = function () { return [
-    { type: __WEBPACK_IMPORTED_MODULE_4__app_globals_service__["a" /* AppGlobalsService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_5__app_globals_service__["a" /* AppGlobalsService */], },
     { type: __WEBPACK_IMPORTED_MODULE_3__path_util_service__["a" /* PathUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_4__json_schema_service__["a" /* JsonSchemaService */], },
 ]; };
 
 
@@ -1315,8 +1352,8 @@ KeysStoreService.ctorParameters = function () { return [
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__empty_value_service__ = __webpack_require__(142);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__json_store_service__ = __webpack_require__(414);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__json_schema_service__ = __webpack_require__(413);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__dom_util_service__ = __webpack_require__(411);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__json_schema_service__ = __webpack_require__(143);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__dom_util_service__ = __webpack_require__(412);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__path_util_service__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__keys_store_service__ = __webpack_require__(416);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ShortcutActionService; });
@@ -1689,7 +1726,7 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dyna
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_zip__ = __webpack_require__(678);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_zip___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_zip__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_config__ = __webpack_require__(145);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_config__ = __webpack_require__(146);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
 /*
  * This file is part of ng2-json-editor.
@@ -1772,7 +1809,7 @@ var _a, _b;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__dist__ = __webpack_require__(716);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(426);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_config__ = __webpack_require__(145);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_config__ = __webpack_require__(146);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /*
  * This file is part of ng2-json-editor.
@@ -1951,12 +1988,12 @@ webpackEmptyContext.id = 433;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_globals_service__ = __webpack_require__(140);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__remote_autocompletion_service__ = __webpack_require__(778);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__component_type_service__ = __webpack_require__(141);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dom_util_service__ = __webpack_require__(411);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dom_util_service__ = __webpack_require__(412);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__empty_value_service__ = __webpack_require__(142);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__find_replace_all_service__ = __webpack_require__(774);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__json_store_service__ = __webpack_require__(414);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__json_util_service__ = __webpack_require__(415);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__json_schema_service__ = __webpack_require__(413);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__json_schema_service__ = __webpack_require__(143);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__keys_store_service__ = __webpack_require__(416);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__path_util_service__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__modal_service__ = __webpack_require__(776);
@@ -1967,7 +2004,7 @@ webpackEmptyContext.id = 433;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__shortcut_service__ = __webpack_require__(781);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__window_href_service__ = __webpack_require__(782);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__tabs_util_service__ = __webpack_require__(418);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__error_map_util_service__ = __webpack_require__(412);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__error_map_util_service__ = __webpack_require__(413);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__katex_service__ = __webpack_require__(775);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__app_globals_service__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return __WEBPACK_IMPORTED_MODULE_1__remote_autocompletion_service__["a"]; });
@@ -2062,236 +2099,236 @@ module.exports = module.exports.toString();
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 214,
-	"./af.js": 214,
-	"./ar": 221,
-	"./ar-dz": 215,
-	"./ar-dz.js": 215,
-	"./ar-kw": 216,
-	"./ar-kw.js": 216,
-	"./ar-ly": 217,
-	"./ar-ly.js": 217,
-	"./ar-ma": 218,
-	"./ar-ma.js": 218,
-	"./ar-sa": 219,
-	"./ar-sa.js": 219,
-	"./ar-tn": 220,
-	"./ar-tn.js": 220,
-	"./ar.js": 221,
-	"./az": 222,
-	"./az.js": 222,
-	"./be": 223,
-	"./be.js": 223,
-	"./bg": 224,
-	"./bg.js": 224,
-	"./bn": 225,
-	"./bn.js": 225,
-	"./bo": 226,
-	"./bo.js": 226,
-	"./br": 227,
-	"./br.js": 227,
-	"./bs": 228,
-	"./bs.js": 228,
-	"./ca": 229,
-	"./ca.js": 229,
-	"./cs": 230,
-	"./cs.js": 230,
-	"./cv": 231,
-	"./cv.js": 231,
-	"./cy": 232,
-	"./cy.js": 232,
-	"./da": 233,
-	"./da.js": 233,
-	"./de": 236,
-	"./de-at": 234,
-	"./de-at.js": 234,
-	"./de-ch": 235,
-	"./de-ch.js": 235,
-	"./de.js": 236,
-	"./dv": 237,
-	"./dv.js": 237,
-	"./el": 238,
-	"./el.js": 238,
-	"./en-au": 239,
-	"./en-au.js": 239,
-	"./en-ca": 240,
-	"./en-ca.js": 240,
-	"./en-gb": 241,
-	"./en-gb.js": 241,
-	"./en-ie": 242,
-	"./en-ie.js": 242,
-	"./en-nz": 243,
-	"./en-nz.js": 243,
-	"./eo": 244,
-	"./eo.js": 244,
-	"./es": 246,
-	"./es-do": 245,
-	"./es-do.js": 245,
-	"./es.js": 246,
-	"./et": 247,
-	"./et.js": 247,
-	"./eu": 248,
-	"./eu.js": 248,
-	"./fa": 249,
-	"./fa.js": 249,
-	"./fi": 250,
-	"./fi.js": 250,
-	"./fo": 251,
-	"./fo.js": 251,
-	"./fr": 254,
-	"./fr-ca": 252,
-	"./fr-ca.js": 252,
-	"./fr-ch": 253,
-	"./fr-ch.js": 253,
-	"./fr.js": 254,
-	"./fy": 255,
-	"./fy.js": 255,
-	"./gd": 256,
-	"./gd.js": 256,
-	"./gl": 257,
-	"./gl.js": 257,
-	"./gom-latn": 258,
-	"./gom-latn.js": 258,
-	"./he": 259,
-	"./he.js": 259,
-	"./hi": 260,
-	"./hi.js": 260,
-	"./hr": 261,
-	"./hr.js": 261,
-	"./hu": 262,
-	"./hu.js": 262,
-	"./hy-am": 263,
-	"./hy-am.js": 263,
-	"./id": 264,
-	"./id.js": 264,
-	"./is": 265,
-	"./is.js": 265,
-	"./it": 266,
-	"./it.js": 266,
-	"./ja": 267,
-	"./ja.js": 267,
-	"./jv": 268,
-	"./jv.js": 268,
-	"./ka": 269,
-	"./ka.js": 269,
-	"./kk": 270,
-	"./kk.js": 270,
-	"./km": 271,
-	"./km.js": 271,
-	"./kn": 272,
-	"./kn.js": 272,
-	"./ko": 273,
-	"./ko.js": 273,
-	"./ky": 274,
-	"./ky.js": 274,
-	"./lb": 275,
-	"./lb.js": 275,
-	"./lo": 276,
-	"./lo.js": 276,
-	"./lt": 277,
-	"./lt.js": 277,
-	"./lv": 278,
-	"./lv.js": 278,
-	"./me": 279,
-	"./me.js": 279,
-	"./mi": 280,
-	"./mi.js": 280,
-	"./mk": 281,
-	"./mk.js": 281,
-	"./ml": 282,
-	"./ml.js": 282,
-	"./mr": 283,
-	"./mr.js": 283,
-	"./ms": 285,
-	"./ms-my": 284,
-	"./ms-my.js": 284,
-	"./ms.js": 285,
-	"./my": 286,
-	"./my.js": 286,
-	"./nb": 287,
-	"./nb.js": 287,
-	"./ne": 288,
-	"./ne.js": 288,
-	"./nl": 290,
-	"./nl-be": 289,
-	"./nl-be.js": 289,
-	"./nl.js": 290,
-	"./nn": 291,
-	"./nn.js": 291,
-	"./pa-in": 292,
-	"./pa-in.js": 292,
-	"./pl": 293,
-	"./pl.js": 293,
-	"./pt": 295,
-	"./pt-br": 294,
-	"./pt-br.js": 294,
-	"./pt.js": 295,
-	"./ro": 296,
-	"./ro.js": 296,
-	"./ru": 297,
-	"./ru.js": 297,
-	"./sd": 298,
-	"./sd.js": 298,
-	"./se": 299,
-	"./se.js": 299,
-	"./si": 300,
-	"./si.js": 300,
-	"./sk": 301,
-	"./sk.js": 301,
-	"./sl": 302,
-	"./sl.js": 302,
-	"./sq": 303,
-	"./sq.js": 303,
-	"./sr": 305,
-	"./sr-cyrl": 304,
-	"./sr-cyrl.js": 304,
-	"./sr.js": 305,
-	"./ss": 306,
-	"./ss.js": 306,
-	"./sv": 307,
-	"./sv.js": 307,
-	"./sw": 308,
-	"./sw.js": 308,
-	"./ta": 309,
-	"./ta.js": 309,
-	"./te": 310,
-	"./te.js": 310,
-	"./tet": 311,
-	"./tet.js": 311,
-	"./th": 312,
-	"./th.js": 312,
-	"./tl-ph": 313,
-	"./tl-ph.js": 313,
-	"./tlh": 314,
-	"./tlh.js": 314,
-	"./tr": 315,
-	"./tr.js": 315,
-	"./tzl": 316,
-	"./tzl.js": 316,
-	"./tzm": 318,
-	"./tzm-latn": 317,
-	"./tzm-latn.js": 317,
-	"./tzm.js": 318,
-	"./uk": 319,
-	"./uk.js": 319,
-	"./ur": 320,
-	"./ur.js": 320,
-	"./uz": 322,
-	"./uz-latn": 321,
-	"./uz-latn.js": 321,
-	"./uz.js": 322,
-	"./vi": 323,
-	"./vi.js": 323,
-	"./x-pseudo": 324,
-	"./x-pseudo.js": 324,
-	"./yo": 325,
-	"./yo.js": 325,
-	"./zh-cn": 326,
-	"./zh-cn.js": 326,
-	"./zh-hk": 327,
-	"./zh-hk.js": 327,
-	"./zh-tw": 328,
-	"./zh-tw.js": 328
+	"./af": 215,
+	"./af.js": 215,
+	"./ar": 222,
+	"./ar-dz": 216,
+	"./ar-dz.js": 216,
+	"./ar-kw": 217,
+	"./ar-kw.js": 217,
+	"./ar-ly": 218,
+	"./ar-ly.js": 218,
+	"./ar-ma": 219,
+	"./ar-ma.js": 219,
+	"./ar-sa": 220,
+	"./ar-sa.js": 220,
+	"./ar-tn": 221,
+	"./ar-tn.js": 221,
+	"./ar.js": 222,
+	"./az": 223,
+	"./az.js": 223,
+	"./be": 224,
+	"./be.js": 224,
+	"./bg": 225,
+	"./bg.js": 225,
+	"./bn": 226,
+	"./bn.js": 226,
+	"./bo": 227,
+	"./bo.js": 227,
+	"./br": 228,
+	"./br.js": 228,
+	"./bs": 229,
+	"./bs.js": 229,
+	"./ca": 230,
+	"./ca.js": 230,
+	"./cs": 231,
+	"./cs.js": 231,
+	"./cv": 232,
+	"./cv.js": 232,
+	"./cy": 233,
+	"./cy.js": 233,
+	"./da": 234,
+	"./da.js": 234,
+	"./de": 237,
+	"./de-at": 235,
+	"./de-at.js": 235,
+	"./de-ch": 236,
+	"./de-ch.js": 236,
+	"./de.js": 237,
+	"./dv": 238,
+	"./dv.js": 238,
+	"./el": 239,
+	"./el.js": 239,
+	"./en-au": 240,
+	"./en-au.js": 240,
+	"./en-ca": 241,
+	"./en-ca.js": 241,
+	"./en-gb": 242,
+	"./en-gb.js": 242,
+	"./en-ie": 243,
+	"./en-ie.js": 243,
+	"./en-nz": 244,
+	"./en-nz.js": 244,
+	"./eo": 245,
+	"./eo.js": 245,
+	"./es": 247,
+	"./es-do": 246,
+	"./es-do.js": 246,
+	"./es.js": 247,
+	"./et": 248,
+	"./et.js": 248,
+	"./eu": 249,
+	"./eu.js": 249,
+	"./fa": 250,
+	"./fa.js": 250,
+	"./fi": 251,
+	"./fi.js": 251,
+	"./fo": 252,
+	"./fo.js": 252,
+	"./fr": 255,
+	"./fr-ca": 253,
+	"./fr-ca.js": 253,
+	"./fr-ch": 254,
+	"./fr-ch.js": 254,
+	"./fr.js": 255,
+	"./fy": 256,
+	"./fy.js": 256,
+	"./gd": 257,
+	"./gd.js": 257,
+	"./gl": 258,
+	"./gl.js": 258,
+	"./gom-latn": 259,
+	"./gom-latn.js": 259,
+	"./he": 260,
+	"./he.js": 260,
+	"./hi": 261,
+	"./hi.js": 261,
+	"./hr": 262,
+	"./hr.js": 262,
+	"./hu": 263,
+	"./hu.js": 263,
+	"./hy-am": 264,
+	"./hy-am.js": 264,
+	"./id": 265,
+	"./id.js": 265,
+	"./is": 266,
+	"./is.js": 266,
+	"./it": 267,
+	"./it.js": 267,
+	"./ja": 268,
+	"./ja.js": 268,
+	"./jv": 269,
+	"./jv.js": 269,
+	"./ka": 270,
+	"./ka.js": 270,
+	"./kk": 271,
+	"./kk.js": 271,
+	"./km": 272,
+	"./km.js": 272,
+	"./kn": 273,
+	"./kn.js": 273,
+	"./ko": 274,
+	"./ko.js": 274,
+	"./ky": 275,
+	"./ky.js": 275,
+	"./lb": 276,
+	"./lb.js": 276,
+	"./lo": 277,
+	"./lo.js": 277,
+	"./lt": 278,
+	"./lt.js": 278,
+	"./lv": 279,
+	"./lv.js": 279,
+	"./me": 280,
+	"./me.js": 280,
+	"./mi": 281,
+	"./mi.js": 281,
+	"./mk": 282,
+	"./mk.js": 282,
+	"./ml": 283,
+	"./ml.js": 283,
+	"./mr": 284,
+	"./mr.js": 284,
+	"./ms": 286,
+	"./ms-my": 285,
+	"./ms-my.js": 285,
+	"./ms.js": 286,
+	"./my": 287,
+	"./my.js": 287,
+	"./nb": 288,
+	"./nb.js": 288,
+	"./ne": 289,
+	"./ne.js": 289,
+	"./nl": 291,
+	"./nl-be": 290,
+	"./nl-be.js": 290,
+	"./nl.js": 291,
+	"./nn": 292,
+	"./nn.js": 292,
+	"./pa-in": 293,
+	"./pa-in.js": 293,
+	"./pl": 294,
+	"./pl.js": 294,
+	"./pt": 296,
+	"./pt-br": 295,
+	"./pt-br.js": 295,
+	"./pt.js": 296,
+	"./ro": 297,
+	"./ro.js": 297,
+	"./ru": 298,
+	"./ru.js": 298,
+	"./sd": 299,
+	"./sd.js": 299,
+	"./se": 300,
+	"./se.js": 300,
+	"./si": 301,
+	"./si.js": 301,
+	"./sk": 302,
+	"./sk.js": 302,
+	"./sl": 303,
+	"./sl.js": 303,
+	"./sq": 304,
+	"./sq.js": 304,
+	"./sr": 306,
+	"./sr-cyrl": 305,
+	"./sr-cyrl.js": 305,
+	"./sr.js": 306,
+	"./ss": 307,
+	"./ss.js": 307,
+	"./sv": 308,
+	"./sv.js": 308,
+	"./sw": 309,
+	"./sw.js": 309,
+	"./ta": 310,
+	"./ta.js": 310,
+	"./te": 311,
+	"./te.js": 311,
+	"./tet": 312,
+	"./tet.js": 312,
+	"./th": 313,
+	"./th.js": 313,
+	"./tl-ph": 314,
+	"./tl-ph.js": 314,
+	"./tlh": 315,
+	"./tlh.js": 315,
+	"./tr": 316,
+	"./tr.js": 316,
+	"./tzl": 317,
+	"./tzl.js": 317,
+	"./tzm": 319,
+	"./tzm-latn": 318,
+	"./tzm-latn.js": 318,
+	"./tzm.js": 319,
+	"./uk": 320,
+	"./uk.js": 320,
+	"./ur": 321,
+	"./ur.js": 321,
+	"./uz": 323,
+	"./uz-latn": 322,
+	"./uz-latn.js": 322,
+	"./uz.js": 323,
+	"./vi": 324,
+	"./vi.js": 324,
+	"./x-pseudo": 325,
+	"./x-pseudo.js": 325,
+	"./yo": 326,
+	"./yo.js": 326,
+	"./zh-cn": 327,
+	"./zh-cn.js": 327,
+	"./zh-hk": 328,
+	"./zh-hk.js": 328,
+	"./zh-tw": 329,
+	"./zh-tw.js": 329
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -3736,9 +3773,9 @@ HtmlViewComponent.propDecorators = {
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__json_editor_module__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services__ = __webpack_require__(6);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_pipes__ = __webpack_require__(410);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_pipes__ = __webpack_require__(411);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_classes__ = __webpack_require__(409);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_classes__ = __webpack_require__(410);
 /* unused harmony namespace reexport */
 // export everything in order to be AoT compatible
 
@@ -5219,7 +5256,7 @@ ShortcutsDirective.propDecorators = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__pipes__ = __webpack_require__(410);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__pipes__ = __webpack_require__(411);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__directives__ = __webpack_require__(760);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__pipes__["a"]; });
@@ -6622,6 +6659,7 @@ SchemaFixerService.ctorParameters = function () { return [
 
 var SchemaValidationService = (function () {
     function SchemaValidationService(appGlobalsService) {
+        var _this = this;
         this.appGlobalsService = appGlobalsService;
         this.ajv = new __WEBPACK_IMPORTED_MODULE_1_ajv__({ allErrors: true });
         // https://gist.github.com/dperini/729294
@@ -6663,24 +6701,13 @@ var SchemaValidationService = (function () {
             '$', 'i');
         //  ajv didn't support format:url, so was added using web url regex for validation
         this.ajv.addFormat('url', this.reWebUrl);
-        this.ajv.addFormat('date-time', this.validateDate);
-        this.ajv.addFormat('date', this.validateDate);
+        if (this.appGlobalsService.config && this.appGlobalsService.config.customFormatValidation) {
+            var customFormats_1 = this.appGlobalsService.config.customFormatValidation;
+            Object.keys(customFormats_1).forEach(function (key) {
+                _this.ajv.addFormat(key, customFormats_1[key].formatChecker);
+            });
+        }
     }
-    SchemaValidationService.prototype.validateDate = function (value) {
-        var dateFormats = [
-            '^\\d{4}$',
-            '^\\d{4}-\\d{2}$',
-            '^\\d{4}-\\d{2}-\\d{2}$',
-        ];
-        return dateFormats
-            .map(function (format) { return new RegExp(format); })
-            .some(function (format) {
-            if (value.match(format)) {
-                return Date.parse(value) !== NaN;
-            }
-            return false;
-        });
-    };
     /**
      * Validates a specific value against schema
      *
