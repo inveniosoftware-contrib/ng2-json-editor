@@ -102,7 +102,10 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     this.jsonStoreService.setIn(this.path, this.value);
 
     if (this.schema.onValueChange) {
-      this.schema.onValueChange(this.path, this.value, this.jsonStoreService, this.keysStoreService);
+      // setTimeout to workaround the case when the value is changed back to previous value inside onValuChange callback
+      setTimeout(() =>
+        this.schema.onValueChange(this.path, this.value, this.jsonStoreService, this.keysStoreService)
+      );
     }
   }
 
