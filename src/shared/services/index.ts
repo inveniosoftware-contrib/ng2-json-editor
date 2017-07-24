@@ -19,7 +19,7 @@ import { WindowHrefService } from './window-href.service';
 import { TabsUtilService } from './tabs-util.service';
 import { ErrorMapUtilService } from './error-map-util.service';
 import { KatexService } from './katex.service';
-
+import { TextDiffService } from './text-diff.service';
 
 export {
   AppGlobalsService,
@@ -42,7 +42,8 @@ export {
   WindowHrefService,
   TabsUtilService,
   ErrorMapUtilService,
-  KatexService
+  KatexService,
+  TextDiffService
 };
 
 export const SHARED_SERVICES = [
@@ -66,5 +67,6 @@ export const SHARED_SERVICES = [
   WindowHrefService,
   TabsUtilService,
   ErrorMapUtilService,
-  KatexService
+  KatexService,
+  TextDiffService
 ];

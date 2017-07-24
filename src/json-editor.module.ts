@@ -60,6 +60,7 @@ import { SearchableDropdownComponent } from './searchable-dropdown';
 import { ListActionGroupComponent } from './list-action-group';
 import { SHARED_PIPES, SHARED_SERVICES, SHARED_DIRECTIVES } from './shared';
 import { ErrorPanelComponent, ErrorPanelItemComponent } from './error-panel';
+import { TextDiffComponent } from './text-diff';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import { ErrorPanelComponent, ErrorPanelItemComponent } from './error-panel';
     ValidationBadgesComponent,
     ErrorPanelComponent,
     ErrorPanelItemComponent,
-    StringInputComponent
+    StringInputComponent,
+    TextDiffComponent
   ],
   exports: [JsonEditorComponent],
   imports: [
@@ -132,5 +134,6 @@ export {
   HtmlViewComponent,
   ValidationBadgesComponent,
   ErrorPanelItemComponent,
-  StringInputComponent
+  StringInputComponent,
+  TextDiffComponent
 }
