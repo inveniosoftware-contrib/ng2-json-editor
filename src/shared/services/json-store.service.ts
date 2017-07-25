@@ -13,6 +13,7 @@ export class JsonStoreService {
   private _jsonChange = new ReplaySubject<Map<string, any>>(1);
   // list of reverse patches for important changes
   private history = new SizedStack<JsonPatch>(5);
+  private patchesByPath: { [path: string]: JsonPatch };
 
   constructor(private pathUtilService: PathUtilService) { }
 
@@ -69,6 +70,17 @@ export class JsonStoreService {
 
   setJson(json: Map<string, any>) {
     this.json = json;
+  }
+
+  setJsonPatches(patches: Array<JsonPatch>) {
+    this.patchesByPath = {};
+    patches.forEach(patch => {
+      this.patchesByPath[patch.path] = patch;
+    });
+  }
+
+  jsonPatchForPath(path: string) {
+    return this.patchesByPath[path];
   }
 
   applyPatch(patch: JsonPatch) {

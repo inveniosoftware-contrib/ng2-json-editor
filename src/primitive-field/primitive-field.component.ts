@@ -40,7 +40,7 @@ import {
   PathUtilService,
   DomUtilService
 } from '../shared/services';
-import { JSONSchema } from '../shared/interfaces';
+import { JSONSchema, JsonPatch } from '../shared/interfaces';
 import { Subscription } from 'rxjs/Subscription';
 import { ValidationError } from '../shared/interfaces';
 
@@ -59,6 +59,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   @Input() path: Array<any>;
   @Input() value: string | number | boolean;
 
+  jsonPatch: JsonPatch;
   internalErrors: Array<ValidationError> = [];
   internalCategorizedErrorSubscription: Subscription;
   private lastCommitedValue: string | number | boolean;
@@ -85,6 +86,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
       .subscribe(internalCategorizedErrorMap => {
         this.internalErrors = internalCategorizedErrorMap.Errors[this.pathString] || [];
       });
+    this.jsonPatch = this.jsonStoreService.jsonPatchForPath(this.pathString);
     this.validate();
   }
 
@@ -155,6 +157,10 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
 
   hasErrors(): boolean {
     return super.hasErrors() || this.internalErrors.length > 0;
+  }
+
+  get isPathToAnIndex(): boolean {
+    return typeof this.path[this.path.length - 1] === 'number';
   }
 
   private validate() {

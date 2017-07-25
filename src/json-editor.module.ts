@@ -61,6 +61,7 @@ import { ListActionGroupComponent } from './list-action-group';
 import { SHARED_PIPES, SHARED_SERVICES, SHARED_DIRECTIVES } from './shared';
 import { ErrorPanelComponent, ErrorPanelItemComponent } from './error-panel';
 import { TextDiffComponent } from './text-diff';
+import { PatchActionsComponent } from './patch-actions';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { TextDiffComponent } from './text-diff';
     ErrorPanelComponent,
     ErrorPanelItemComponent,
     StringInputComponent,
-    TextDiffComponent
+    TextDiffComponent,
+    PatchActionsComponent
   ],
   exports: [JsonEditorComponent],
   imports: [
@@ -135,5 +137,6 @@ export {
   ValidationBadgesComponent,
   ErrorPanelItemComponent,
   StringInputComponent,
-  TextDiffComponent
+  TextDiffComponent,
+  PatchActionsComponent
 }

@@ -1,5 +1,5 @@
 <div class="button-group-container">
-  <i class="fa fa-check-circle" (click)="onAccept.emit()"></i>
-  <i class="fa fa-times-circle" (click)="onReject.emit()"></i>
-  <i class="fa fa-plus-circle" (click)="onAddNew.emit()"></i>
+  <i class="fa fa-check-circle" (click)="onAcceptClick()"></i>
+  <i class="fa fa-times-circle" (click)="onRejectClick()"></i>
+  <i *ngIf="addActionEnabled" class="fa fa-plus-circle" (click)="onAddNewClick()"></i>
 </div>

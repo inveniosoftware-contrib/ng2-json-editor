@@ -13,6 +13,7 @@
 <json-editor *ngIf="record && schema"
   [config]="config.jsonEditorConfig"
   [record]="record"
+  [jsonPatches]="patches"
   (onRecordChange)="onRecordChange($event)"
   [schema]="schema"
   [templates]="{referenceTemplate: referenceTemplate}">

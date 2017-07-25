@@ -20,7 +20,10 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, EventEmitter, Output, Input, ChangeDetectionStrategy } from '@angular/core';
+
+import { JsonStoreService } from '../shared/services';
+import { JsonPatch } from '../shared/interfaces';
 
 @Component({
   selector: 'patch-actions',
@@ -31,7 +34,25 @@ import { Component, EventEmitter, Output, ChangeDetectionStrategy } from '@angul
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PatchActionsComponent {
-  @Output() onAccept = new EventEmitter<void>();
-  @Output() onReject = new EventEmitter<void>();
-  @Output() onAddNew = new EventEmitter<void>();
+  @Input() patch: JsonPatch;
+  @Input() addActionEnabled: boolean;
+
+  @Output() action = new EventEmitter<void>();
+
+  constructor(private jsonStoreService: JsonStoreService) { }
+
+  onAcceptClick() {
+    this.jsonStoreService.applyPatch(this.patch);
+    this.action.emit();
+  }
+
+  onRejectClick() {
+    this.action.emit();
+  }
+
+  onAddNewClick() {
+    this.patch.op = 'add';
+    this.jsonStoreService.applyPatch(this.patch);
+    this.action.emit();
+  }
 }
