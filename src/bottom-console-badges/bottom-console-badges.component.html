@@ -1,0 +1,9 @@
+<a *ngIf="internalErrorCount + globalErrorCount > 0" class="error" (click)="onBadgeClick($event, 'Errors')">
+    <span class="">Errors</span> <span class="badge">{{internalErrorCount + globalErrorCount}}</span>
+</a>
+<a *ngIf="internalWarningCount + globalWarningCount > 0" class="warning" (click)="onBadgeClick($event, 'Warnings')">
+    <span>Warnings</span> <span class="badge">{{internalWarningCount + globalWarningCount}}</span>
+</a>
+<a *ngIf="patchCount > 0" class="patch" (click)="onBadgeClick($event, 'Patches')">
+    <span>Conflicts</span> <span class="badge">{{patchCount}}</span>
+</a>

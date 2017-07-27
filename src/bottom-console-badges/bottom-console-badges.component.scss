@@ -1,0 +1,60 @@
+$error-color: #D14024;
+$light-error-color: lighten($error-color, 10%);
+$warning-color: #f1c40f;
+$light-warning-color: lighten($warning-color, 10%);
+$patch-color: #e67e22;
+$light-patch-color: lighten($patch-color, 10%);
+
+
+.error {
+  color: $error-color;
+  .badge {
+    background-color: $error-color;
+
+    &:hover {
+      background-color: $light-error-color
+    }
+  }
+
+  &:hover {
+    color: $light-error-color
+  }
+}
+
+.warning {
+  color: $warning-color;
+  .badge {
+    background-color: $warning-color;
+
+    &:hover {
+      background-color: $light-warning-color
+    }
+  }
+
+  &:hover {
+    color: $light-warning-color
+  }
+}
+
+.patch {
+  color: $patch-color;
+  .badge {
+    background-color: $patch-color;
+
+    &:hover {
+      background-color: $light-patch-color
+    }
+  }
+
+  &:hover {
+    color: $light-patch-color
+  }
+}
+
+a {
+  text-decoration: none;
+  &:hover {
+    cursor: pointer;
+  }
+  padding-right: 5px;
+}

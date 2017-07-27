@@ -20,54 +20,65 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
  */
 
-import { Component, Output, EventEmitter, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 
-import { AppGlobalsService } from '../shared/services';
+import { AppGlobalsService, JsonStoreService } from '../shared/services';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
-  selector: 'validation-badges',
+  selector: 'bottom-console-badges',
   styleUrls: [
-    './validation-badges.component.scss'
+    './bottom-console-badges.component.scss'
   ],
-  templateUrl: './validation-badges.component.html'
+  templateUrl: './bottom-console-badges.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ValidationBadgesComponent  implements OnInit, OnDestroy {
+export class BottomConsoleBadgesComponent implements OnInit, OnDestroy {
 
-  @Output() onBadgeClick = new EventEmitter<string>();
+  @Output() badgeClick = new EventEmitter<string>();
 
   globalErrorCount = 0;
   internalErrorCount = 0;
   globalWarningCount = 0;
   internalWarningCount = 0;
+  patchCount = 0;
   externalErrorCounterSubscription: Subscription;
   internalErrorCounterSubscription: Subscription;
+  patchCounterSubscription: Subscription;
 
-  constructor(public appGlobalsService: AppGlobalsService,
-              public changeDetectorRef: ChangeDetectorRef) { }
+  constructor(private appGlobalsService: AppGlobalsService,
+    private changeDetectorRef: ChangeDetectorRef,
+    private jsonStoreService: JsonStoreService) { }
 
   ngOnInit() {
     this.externalErrorCounterSubscription = this.appGlobalsService.externalErrorCountersSubject
-    .subscribe(errorCounters => {
-      this.globalErrorCount = errorCounters.errors;
-      this.globalWarningCount = errorCounters.warnings;
-      this.changeDetectorRef.markForCheck();
-    });
+      .subscribe(errorCounters => {
+        this.globalErrorCount = errorCounters.errors;
+        this.globalWarningCount = errorCounters.warnings;
+        this.changeDetectorRef.markForCheck();
+      });
     this.internalErrorCounterSubscription = this.appGlobalsService.internalErrorCountersSubject
-    .subscribe(errorCounters => {
-      this.internalErrorCount = errorCounters.errors;
-      this.internalWarningCount = errorCounters.warnings;
-      this.changeDetectorRef.markForCheck();
-    });
+      .subscribe(errorCounters => {
+        this.internalErrorCount = errorCounters.errors;
+        this.internalWarningCount = errorCounters.warnings;
+        this.changeDetectorRef.markForCheck();
+      });
+    this.patchCounterSubscription = this.jsonStoreService.patchesByPath$
+      .map(patchesByPath => Object.keys(patchesByPath).length)
+      .subscribe(patchCounter => {
+        this.patchCount = patchCounter;
+        this.changeDetectorRef.markForCheck();
+      });
   }
 
-  _onBadgeClick(event: Event, badgeName: string) {
+  onBadgeClick(event: Event, badgeName: string) {
     event.preventDefault();
-    this.onBadgeClick.emit(badgeName);
+    this.badgeClick.emit(badgeName);
   }
 
   ngOnDestroy() {
     this.externalErrorCounterSubscription.unsubscribe();
     this.internalErrorCounterSubscription.unsubscribe();
+    this.patchCounterSubscription.unsubscribe();
   }
 }

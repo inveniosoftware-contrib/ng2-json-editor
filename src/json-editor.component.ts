@@ -88,8 +88,8 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   tabNames: Array<string>;
   previews: Array<Preview>;
   isPreviewerHidden: boolean;
-  isErrorPanelOpen = false;
-  errorPanelActiveTab = '';
+  isBottomConsoleOpen = false;
+  bottomConsoleActiveTab = '';
 
   constructor(public http: Http,
     public appGlobalsService: AppGlobalsService,
@@ -224,12 +224,12 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   }
 
   get shorterEditorContainerClass(): string {
-    return this.isErrorPanelOpen ? 'shorter-editor-container' : '';
+    return this.isBottomConsoleOpen ? 'shorter-editor-container' : '';
   }
 
-  openErrorPanel(errorPanelTabName: string) {
-    this.isErrorPanelOpen = true;
-    this.errorPanelActiveTab = errorPanelTabName;
+  openBottomConsole(tabName: string) {
+    this.isBottomConsoleOpen = true;
+    this.bottomConsoleActiveTab = tabName;
   }
 
 }

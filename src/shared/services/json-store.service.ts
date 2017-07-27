@@ -9,11 +9,13 @@ import { SizedStack } from '../classes';
 @Injectable()
 export class JsonStoreService {
 
+  private _patchesByPath$ = new ReplaySubject<{ [path: string]: JsonPatch }>(1);
+  private patchesByPath: { [path: string]: JsonPatch };
+
   private json: Map<string, any>;
   private _jsonChange = new ReplaySubject<Map<string, any>>(1);
   // list of reverse patches for important changes
   private history = new SizedStack<JsonPatch>(5);
-  private patchesByPath: { [path: string]: JsonPatch };
 
   constructor(private pathUtilService: PathUtilService) { }
 
@@ -77,10 +79,7 @@ export class JsonStoreService {
     patches.forEach(patch => {
       this.patchesByPath[patch.path] = patch;
     });
-  }
-
-  jsonPatchForPath(path: string) {
-    return this.patchesByPath[path];
+    this.patchesByPath$.next(this.patchesByPath);
   }
 
   applyPatch(patch: JsonPatch) {
@@ -98,6 +97,16 @@ export class JsonStoreService {
       default:
         console.warn(`${patch.op} is not supported!`);
     }
+    this.removeJsonPatch(patch);
+  }
+
+  rejectPatch(patch: JsonPatch) {
+    this.removeJsonPatch(patch);
+  }
+
+  private removeJsonPatch(patch: JsonPatch) {
+    delete this.patchesByPath[patch.path];
+    this._patchesByPath$.next(this.patchesByPath);
   }
 
   rollbackLastChange(): string {
@@ -122,5 +131,9 @@ export class JsonStoreService {
       return fromJS(value);
     }
     return value;
+  }
+
+  get patchesByPath$(): ReplaySubject<{ [path: string]: JsonPatch }> {
+    return this._patchesByPath$;
   }
 }

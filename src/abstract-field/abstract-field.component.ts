@@ -53,7 +53,7 @@ export abstract class AbstractFieldComponent
   ngOnInit() {
     this.externalCategorizedErrorSubscription = this.appGlobalsService.externalCategorizedErrorsSubject
     .subscribe(externalCategorizedErrorMap => {
-      this.externalErrors = externalCategorizedErrorMap.Errors[this.pathString] || [];
+      this.externalErrors = externalCategorizedErrorMap.errors[this.pathString] || [];
       this.changeDetectorRef.markForCheck();
     });
   }

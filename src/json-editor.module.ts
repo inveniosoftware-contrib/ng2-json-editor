@@ -39,7 +39,7 @@ import { AutocompleteInputComponent } from './autocomplete-input';
 import { ComplexListFieldComponent } from './complex-list-field';
 import { EditorPreviewerComponent } from './editor-previewer';
 import { SubRecordComponent } from './sub-record';
-import { ValidationBadgesComponent } from './validation-badges';
+import { BottomConsoleBadgesComponent } from './bottom-console-badges';
 import { FindReplaceComponent } from './find-replace';
 import { HtmlViewComponent } from './html-view';
 import { JsonEditorComponent } from './json-editor.component';
@@ -59,7 +59,7 @@ import {
 import { SearchableDropdownComponent } from './searchable-dropdown';
 import { ListActionGroupComponent } from './list-action-group';
 import { SHARED_PIPES, SHARED_SERVICES, SHARED_DIRECTIVES } from './shared';
-import { ErrorPanelComponent, ErrorPanelItemComponent } from './error-panel';
+import { BottomConsoleComponent, PatchesConsoleTabComponent, ErrorsConsoleTabComponent } from './bottom-console';
 import { TextDiffComponent } from './text-diff';
 import { PatchActionsComponent } from './patch-actions';
 
@@ -90,12 +90,13 @@ import { PatchActionsComponent } from './patch-actions';
     JsonEditorComponent,
     SubRecordComponent,
     HtmlViewComponent,
-    ValidationBadgesComponent,
-    ErrorPanelComponent,
-    ErrorPanelItemComponent,
+    BottomConsoleBadgesComponent,
+    BottomConsoleComponent,
     StringInputComponent,
     TextDiffComponent,
-    PatchActionsComponent
+    PatchActionsComponent,
+    PatchesConsoleTabComponent,
+    ErrorsConsoleTabComponent
   ],
   exports: [JsonEditorComponent],
   imports: [
@@ -118,7 +119,7 @@ export {
   ComplexListFieldComponent,
   ObjectFieldComponent,
   EditorPreviewerComponent,
-  ErrorPanelComponent,
+  BottomConsoleComponent,
   FindReplaceComponent,
   ModalViewComponent,
   PrimitiveListFieldComponent,
@@ -134,9 +135,10 @@ export {
   JsonEditorComponent,
   SubRecordComponent,
   HtmlViewComponent,
-  ValidationBadgesComponent,
-  ErrorPanelItemComponent,
+  BottomConsoleBadgesComponent,
   StringInputComponent,
   TextDiffComponent,
-  PatchActionsComponent
+  PatchActionsComponent,
+  PatchesConsoleTabComponent,
+  ErrorsConsoleTabComponent
 }

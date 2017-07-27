@@ -21,40 +21,44 @@
  */
 
 import {
-  Component, Input, ChangeDetectionStrategy
+  Component,
+  ChangeDetectionStrategy,
+  OnInit,
+  ChangeDetectorRef
 } from '@angular/core';
 
-import { DomUtilService, PathUtilService } from '../../shared/services';
-import { SchemaValidationErrors } from '../../shared/interfaces';
+import { DomUtilService, PathUtilService, JsonStoreService } from '../../shared/services';
+import { JsonPatch } from '../../shared/interfaces';
 
 @Component({
-  selector: 'error-panel-item',
+  selector: 'patches-console-tab',
   styleUrls: [
-    './error-panel-item.component.scss'
+    '../abstract-console-tab/abstract-console-tab.component.scss',
+    './patches-console-tab.component.scss'
   ],
-  templateUrl: './error-panel-item.component.html',
+  templateUrl: './patches-console-tab.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ErrorPanelItemComponent {
+export class PatchesConsoleTabComponent implements OnInit {
 
-  @Input() errorMap: SchemaValidationErrors;
-  @Input() heading;
+  patches: Array<JsonPatch>;
 
+  constructor(private domUtilService: DomUtilService,
+    private pathUtilService: PathUtilService,
+    private jsonStoreService: JsonStoreService,
+    private changeDetectorRef: ChangeDetectorRef) { }
 
-  constructor(public domUtilService: DomUtilService,
-              public pathUtilService: PathUtilService) { }
-
-  isJsonPointerPath(key: string) {
-    return key.startsWith(this.pathUtilService.separator);
+  ngOnInit() {
+    this.jsonStoreService.patchesByPath$
+      .subscribe(patchesByPath => {
+        this.patches = Object.keys(patchesByPath)
+          .map(path => patchesByPath[path]);
+        this.changeDetectorRef.markForCheck();
+      });
   }
 
-  keys(errorMap: SchemaValidationErrors) {
-    return Object.keys(errorMap);
-  }
-
-  focusPath(event: Event, path: string) {
-    event.preventDefault();
-    this.domUtilService.focusAndSelectFirstEditableChildById(path, true);
+  toggleMergePopoverForPath(path: string) {
+    this.domUtilService.focusAndToggleMergePopoverById(path);
   }
 }
 

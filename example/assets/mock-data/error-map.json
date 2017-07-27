@@ -1,22 +1,21 @@
 {
   "/abstracts/0/source": [
     {
-      "message": "Mock-Error 1: /abstracts/0/source",
+      "message": "Mock-Error 1: /abstracts/0/value",
       "type": "Error"
     },
     {
-      "message": "Mock-Warning 1: /abstracts/0/source",
+      "message": "Mock-Warning 1: /abstracts/0/value",
       "type": "Warning"
     }
   ],
-  "/abstracts/0/value": [
+  "/titles/0/source": [
     {
-      "message": "Mock-Error 1: /abstracts/0/value"
-    }
-  ],
-  "/field_categories/0/scheme": [
+      "message": "Mock-Error 1: /titles/0/source",
+      "type": "Error"
+    },
     {
-      "message": "Mock-Error 1: /field_categories/0/term",
+      "message": "Mock-Error 2: /titles/0/source",
       "type": "Error"
     }
   ],

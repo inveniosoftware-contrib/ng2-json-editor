@@ -39,8 +39,8 @@ export class AppGlobalsService {
   public tabNameToFirstTopLevelElement: { [tabName: string]: string } = {};
   public templates: { [templateName: string]: TemplateRef<any> };
   public config: JsonEditorConfig;
-  public internalCategorizedErrorMap: CategorizedValidationErrors = { Errors: {}, Warnings: {} };
-  public externalCategorizedErrorMap: CategorizedValidationErrors = { Errors: {}, Warnings: {} };
+  public internalCategorizedErrorMap: CategorizedValidationErrors = { errors: {}, warnings: {} };
+  public externalCategorizedErrorMap: CategorizedValidationErrors = { errors: {}, warnings: {} };
 
   constructor(public errorMapUtilService: ErrorMapUtilService) { }
 

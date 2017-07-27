@@ -1,0 +1,18 @@
+<div *ngIf="isOpen" [ngClass]="{'bottom-console-container': isOpen}">
+  <tabset>
+    <tab [active]="isActive('Errors')">
+      <errors-console-tab [errorType]="'errors'"></errors-console-tab>
+    </tab>
+    <tab [active]="isActive('Warnings')">
+      <errors-console-tab [errorType]="'warnings'"></errors-console-tab>
+    </tab>
+    <tab [active]="isActive('Patches')">
+      <patches-console-tab></patches-console-tab>
+    </tab>
+    <tab (select)="closePanel()" [customClass]="'pull-right'">
+      <ng-template tabHeading>
+        <i class="fa fa-window-close"></i>
+      </ng-template>
+    </tab>
+  </tabset>
+</div>

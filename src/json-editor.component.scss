@@ -101,7 +101,7 @@ body, html {
     border: none;
   }
 
-  .error-panel-container {
+  .bottom-console-container {
     height: 25%;
     overflow: hidden;
 
@@ -114,22 +114,6 @@ body, html {
       float: right;
     }
 
-  }
-
-  .error-link {
-    color: #D14024;
-
-    .badge {
-      background-color: #a94442;
-    }
-  }::-webkit-validation-bubble-heading
-
-  .warning-link {
-    color: #FFDD00;
-
-    .badge {
-      background-color: #8a6d3b;
-    }
   }
 
   table {

@@ -1,0 +1,16 @@
+<ng-template tabHeading>
+  <i [ngClass]="iconClassName"></i> {{errorType | titlecase}} <span class="badge">{{internalErrorCount + externalErrorCount}}</span>
+</ng-template>
+
+<ul class="list-group">
+  <ng-container *ngFor="let key of internalErrorMap | keys">
+    <li *ngFor="let error of internalErrorMap[key]" class="list-group-item" (click)="focusAndSelectPath(key)">
+      <i [ngClass]="iconClassName"></i> {{ error.message }}
+    </li>
+  </ng-container>
+  <ng-container *ngFor="let key of externalErrorMap | keys">
+    <li *ngFor="let error of externalErrorMap[key]" class="list-group-item" (click)="focusAndSelectPath(key)">
+      <i [ngClass]="iconClassName"></i> {{ error.message }}
+    </li>
+  </ng-container>
+</ul>

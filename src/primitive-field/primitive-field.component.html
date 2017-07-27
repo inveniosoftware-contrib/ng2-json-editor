@@ -1,6 +1,6 @@
 <div [ngSwitch]="schema.componentType" [id]="pathString">
   <table class="primitive-field-container">
-    <tr [ngClass]="{error: hasErrors()}">
+    <tr [ngClass]="errorClass">
       <ng-template #errorsTooltipTemplate>
         <ul class="tooltip-left-align">
           <li *ngFor="let error of internalErrors">
@@ -51,12 +51,12 @@
 </div>
 
 <ng-template #patchTemplate>
-  <button class="btn btn-default" type="button" [popover]="mergePopover" popoverTitle="Merge" container="body">
-    {{value}} <i class="fa fa-exclamation-circle"></i>
+  <button class="btn btn-default btn-merge" type="button" [popover]="mergePopover" popoverTitle="Merge" container="body">
+    {{value}} <i class="fa fa-bolt"></i>
   </button>
 </ng-template>
 
 <ng-template #mergePopover>
   <text-diff [currentText]="value" [newText]="jsonPatch.value"></text-diff>
-  <patch-actions [patch]="jsonPatch" [addActionEnabled]="isPathToAnIndex" (action)="jsonPatch = undefined"></patch-actions>
+  <patch-actions [patch]="jsonPatch" [addActionEnabled]="isPathToAnIndex"></patch-actions>
 </ng-template>

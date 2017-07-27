@@ -61,7 +61,8 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
 
   jsonPatch: JsonPatch;
   internalErrors: Array<ValidationError> = [];
-  internalCategorizedErrorSubscription: Subscription;
+  private internalCategorizedErrorSubscription: Subscription;
+  private patchesByPathSubscription: Subscription;
   private lastCommitedValue: string | number | boolean;
 
   constructor(public schemaValidationService: SchemaValidationService,
@@ -84,9 +85,12 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     this.internalCategorizedErrorSubscription = this.appGlobalsService
       .internalCategorizedErrorsSubject
       .subscribe(internalCategorizedErrorMap => {
-        this.internalErrors = internalCategorizedErrorMap.Errors[this.pathString] || [];
+        this.internalErrors = internalCategorizedErrorMap.errors[this.pathString] || [];
       });
-    this.jsonPatch = this.jsonStoreService.jsonPatchForPath(this.pathString);
+    this.patchesByPathSubscription = this.jsonStoreService.patchesByPath$
+      .subscribe(patchesByPath => {
+        this.jsonPatch = patchesByPath[this.pathString];
+      });
     this.validate();
   }
 
@@ -96,6 +100,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
       this.appGlobalsService.extendInternalErrors(this.pathString, []);
     }
     this.internalCategorizedErrorSubscription.unsubscribe();
+    this.patchesByPathSubscription.unsubscribe();
   }
 
   commitValueChange() {
@@ -157,6 +162,10 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
 
   hasErrors(): boolean {
     return super.hasErrors() || this.internalErrors.length > 0;
+  }
+
+  get errorClass(): string {
+    return !this.jsonPatch && this.hasErrors() ? 'error' : '';
   }
 
   get isPathToAnIndex(): boolean {

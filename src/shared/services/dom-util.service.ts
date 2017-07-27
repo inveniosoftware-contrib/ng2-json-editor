@@ -97,6 +97,18 @@ export class DomUtilService {
     }
   }
 
+  focusAndToggleMergePopoverById(id: string) {
+    this.tabsUtilService.selectTabIfNeeded(id);
+    setTimeout(() => {
+      let el = document.getElementById(id);
+      let mergeButton = el.querySelector('.btn-merge') as HTMLButtonElement;
+      if (mergeButton) {
+        mergeButton.focus();
+        mergeButton.click();
+      }
+    });
+  }
+
   private selectAllContent(el: HTMLElement) {
     if (el instanceof HTMLInputElement) {
       el.select();

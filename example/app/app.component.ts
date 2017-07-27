@@ -39,23 +39,27 @@ export class AppComponent {
   record: Object;
   schema: Object;
   patches: Array<any>;
+  errorMap: Object;
 
   constructor(private http: Http, public config: AppConfig) {
     Observable.zip(
       this.http.get('./assets/mock-data/record.json'),
       this.http.get('./assets/mock-data/schema.json'),
       this.http.get('./assets/mock-data/patches.json'),
-      (recordRes, schemaRes, patchesRes) => {
+      this.http.get('./assets/mock-data/error-map.json'),
+      (recordRes, schemaRes, patchesRes, errorMapRes) => {
         return {
           record: recordRes.json(),
           schema: schemaRes.json(),
-          patches: patchesRes.json()
+          patches: patchesRes.json(),
+          errorMap: errorMapRes.json(),
         };
       }
     ).subscribe((data) => {
       this.record = data.record; // set ./assets/mock-data/record.json
       this.schema = data.schema; // set ./assets/mock-data/schema.json
       this.patches = data.patches; // set ./assets/mock-data/patches.json
+      this.errorMap = data.errorMap;
     });
 
   }

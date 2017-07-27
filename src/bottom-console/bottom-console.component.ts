@@ -1,6 +1,6 @@
 /*
  * This file is part of ng2-json-editor.
- * Copyright (C) 2016 CERN.
+ * Copyright (C) 2017 CERN.
  *
  * ng2-json-editor is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -18,37 +18,37 @@
  * In applying this license, CERN does not
  * waive the privileges and immunities granted to it by virtue of its status
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
-*/
+ */
 
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component, Input, ChangeDetectorRef, ChangeDetectionStrategy, OnInit, Output,
+  EventEmitter, OnDestroy
+} from '@angular/core';
 
-import { JsonStoreService } from '../shared/services';
-import { JsonPatch } from '../shared/interfaces';
+import { CategorizedValidationErrors } from '../shared/interfaces';
+import { AppGlobalsService } from '../shared/services';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
-  selector: 'patch-actions',
+  selector: 'bottom-console',
   styleUrls: [
-    './patch-actions.component.scss'
+    './bottom-console.component.scss'
   ],
-  templateUrl: './patch-actions.component.html',
+  templateUrl: './bottom-console.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PatchActionsComponent {
-  @Input() patch: JsonPatch;
-  @Input() addActionEnabled: boolean;
+export class BottomConsoleComponent {
 
-  constructor(private jsonStoreService: JsonStoreService) { }
+  @Input() isOpen = false;
+  @Input() activeTab = '';
 
-  onAcceptClick() {
-    this.jsonStoreService.applyPatch(this.patch);
+  @Output() onCollapse = new EventEmitter<boolean>();
+
+  closePanel() {
+    this.onCollapse.emit(false);
   }
 
-  onRejectClick() {
-    this.jsonStoreService.rejectPatch(this.patch);
-  }
-
-  onAddNewClick() {
-    this.patch.op = 'add';
-    this.jsonStoreService.applyPatch(this.patch);
+  isActive(tabName: string): boolean {
+    return tabName === this.activeTab;
   }
 }
