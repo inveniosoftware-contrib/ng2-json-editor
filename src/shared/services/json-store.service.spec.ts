@@ -166,4 +166,46 @@ describe('JsonStoreService', () => {
 
     service.addIn(path, value);
   });
+
+  it('should addIn an object', () => {
+    let json = fromJS({
+      aList: []
+    });
+    service.setJson(json);
+
+    let value = {
+      foo: 'bar'
+    };
+    let path = ['aList', '-'];
+    let expected = fromJS({
+      aList: [
+        { foo: 'bar' }
+      ]
+    });
+    service.jsonChange.subscribe(changedJson => {
+      expect(changedJson.equals(expected)).toBeTruthy();
+    });
+
+    service.addIn(path, value);
+  });
+
+  it('should setIn an array', () => {
+    let json = fromJS({
+      aMap: {}
+    });
+    service.setJson(json);
+
+    let value = [1];
+    let path = ['aMap', 'aList'];
+    let expected = fromJS({
+      aMap: {
+        aList: [1]
+      }
+    });
+    service.jsonChange.subscribe(changedJson => {
+      expect(changedJson.equals(expected)).toBeTruthy();
+    });
+
+    service.setIn(path, value);
+  });
 });
