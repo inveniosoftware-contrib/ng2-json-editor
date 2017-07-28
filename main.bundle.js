@@ -995,6 +995,7 @@ var JsonStoreService = (function () {
             this.removeIn(path);
             return;
         }
+        value = this.toImmutable(value);
         // immutablejs setIn creates Map for keys that don't exist in path
         // therefore List() should be set manually for some of those keys.
         for (var i = 0; i < path.length - 1; i++) {
@@ -1024,7 +1025,8 @@ var JsonStoreService = (function () {
         var isInsert = typeof lastPathElement === 'number' || lastPathElement === '-';
         if (isInsert) {
             var pathWithoutIndex = path.slice(0, path.length - 1);
-            var list = this.getIn(pathWithoutIndex);
+            var list = this.getIn(pathWithoutIndex) || __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_immutable__["List"])();
+            value = this.toImmutable(value);
             list = lastPathElement === '-' ? list.push(value) : list.insert(lastPathElement, value);
             this.setIn(pathWithoutIndex, list);
         }
@@ -1068,6 +1070,15 @@ var JsonStoreService = (function () {
         enumerable: true,
         configurable: true
     });
+    /**
+     * Converts the value to immutable if it is not an immutable.
+     */
+    JsonStoreService.prototype.toImmutable = function (value) {
+        if (typeof value === 'object' && !(__WEBPACK_IMPORTED_MODULE_1_immutable__["List"].isList(value) || __WEBPACK_IMPORTED_MODULE_1_immutable__["Map"].isMap(value))) {
+            return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_immutable__["fromJS"])(value);
+        }
+        return value;
+    };
     return JsonStoreService;
 }());
 
@@ -4572,11 +4583,15 @@ var PrimitiveFieldComponent = (function (_super) {
         this.internalCategorizedErrorSubscription.unsubscribe();
     };
     PrimitiveFieldComponent.prototype.commitValueChange = function () {
+        var _this = this;
         this.validate();
         this.lastCommitedValue = this.value;
         this.jsonStoreService.setIn(this.path, this.value);
         if (this.schema.onValueChange) {
-            this.schema.onValueChange(this.path, this.value, this.jsonStoreService, this.keysStoreService);
+            // setTimeout to workaround the case when the value is changed back to previous value inside onValuChange callback
+            setTimeout(function () {
+                return _this.schema.onValueChange(_this.path, _this.value, _this.jsonStoreService, _this.keysStoreService);
+            });
         }
     };
     PrimitiveFieldComponent.prototype.onBlur = function () {
