@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Map, List } from 'immutable';
+import { Map, List, fromJS } from 'immutable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import { PathUtilService } from './path-util.service';
@@ -22,6 +22,8 @@ export class JsonStoreService {
       this.removeIn(path);
       return;
     }
+
+    value = this.toImmutable(value);
 
     // immutablejs setIn creates Map for keys that don't exist in path
     // therefore List() should be set manually for some of those keys.
@@ -56,7 +58,8 @@ export class JsonStoreService {
     let isInsert = typeof lastPathElement === 'number' || lastPathElement === '-';
     if (isInsert) {
       let pathWithoutIndex = path.slice(0, path.length - 1);
-      let list = this.getIn(pathWithoutIndex) as List<any>;
+      let list = this.getIn(pathWithoutIndex) as List<any> || List();
+      value = this.toImmutable(value);
       list = lastPathElement === '-' ? list.push(value) : list.insert(lastPathElement, value);
       this.setIn(pathWithoutIndex, list);
     } else {
@@ -97,5 +100,15 @@ export class JsonStoreService {
 
   get jsonChange(): ReplaySubject<Map<string, any>> {
     return this._jsonChange;
+  }
+
+  /**
+   * Converts the value to immutable if it is not an immutable.
+   */
+  private toImmutable(value: any): any {
+    if (typeof value === 'object' && !(List.isList(value) || Map.isMap(value))) {
+      return fromJS(value);
+    }
+    return value;
   }
 }
