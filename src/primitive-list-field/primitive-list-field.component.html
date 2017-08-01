@@ -1,4 +1,4 @@
-<div [id]="pathString">
+<div [id]="pathString" [ngClass]="redLeftBorderClass">
   <div class="wide">
     <table class="table">
       <tr *ngFor="let value of values | selfOrEmpty:schema; let i = index; trackBy:trackByIndex">
@@ -8,6 +8,14 @@
         <td *ngIf="values.size > 0" class="button-holder" [ngClass]="sortableClass">
           <list-action-group (onMove)="moveElement(i, $event)" (onDelete)="deleteElement(i)" [canMove]="schema.sortable"></list-action-group>
         </td>
+      </tr>
+      <tr *ngIf="removeJsonPatch">
+        <patch-actions [patch]="removeJsonPatch"></patch-actions>
+      </tr>
+    </table>
+    <table class="table">
+      <tr *ngFor="let patch of addJsonPatches">
+        <patch-view [patch]="patch"></patch-view>
       </tr>
     </table>
   </div>

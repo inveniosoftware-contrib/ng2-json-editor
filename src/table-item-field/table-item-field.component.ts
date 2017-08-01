@@ -60,6 +60,6 @@ export class TableItemFieldComponent extends AbstractFieldComponent {
     public jsonStoreService: JsonStoreService,
     public pathUtilService: PathUtilService,
     public changeDetectorRef: ChangeDetectorRef) {
-    super(appGlobalsService, pathUtilService, changeDetectorRef);
+    super(appGlobalsService, pathUtilService, changeDetectorRef, jsonStoreService);
   }
 }

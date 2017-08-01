@@ -24,8 +24,8 @@ import { OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { AbstractTrackerComponent } from '../abstract-tracker';
-import { AppGlobalsService, PathUtilService } from '../shared/services';
-import { ValidationError, PathCache} from '../shared/interfaces';
+import { AppGlobalsService, PathUtilService, JsonStoreService } from '../shared/services';
+import { ValidationError, PathCache, JSONSchema, JsonPatch } from '../shared/interfaces';
 
 /**
  * This is the base class for fields
@@ -42,23 +42,35 @@ export abstract class AbstractFieldComponent
   pathCache: PathCache = {};
   externalCategorizedErrorSubscription: Subscription;
   externalErrors: Array<ValidationError> = [];
-
+  schema: JSONSchema;
+  jsonPatches: Array<JsonPatch>;
+  // used by some components to display remove patch in a different way.
+  removeJsonPatch: JsonPatch;
+  jsonPatchesSubscription: Subscription;
 
   constructor(public appGlobalsService: AppGlobalsService,
     public pathUtilService: PathUtilService,
-    public changeDetectorRef: ChangeDetectorRef) {
+    public changeDetectorRef: ChangeDetectorRef,
+    public jsonStoreService: JsonStoreService) {
     super();
   }
 
   ngOnInit() {
     this.externalCategorizedErrorSubscription = this.appGlobalsService.externalCategorizedErrorsSubject
-    .subscribe(externalCategorizedErrorMap => {
-      this.externalErrors = externalCategorizedErrorMap.errors[this.pathString] || [];
-      this.changeDetectorRef.markForCheck();
-    });
+      .subscribe(externalCategorizedErrorMap => {
+        this.externalErrors = externalCategorizedErrorMap.errors[this.pathString] || [];
+        this.changeDetectorRef.markForCheck();
+      });
+    this.jsonPatchesSubscription = this.jsonStoreService.patchesByPath$
+      .map(patchesByPath => patchesByPath[this.pathString])
+      .subscribe(patches => {
+        this.jsonPatches = patches || [];
+        this.removeJsonPatch = this.jsonPatches
+          .find(patch => patch.op === 'remove');
+      });
   }
   /**
-   * Gets path for child, returns from `pathCache` if it is a hit
+   * Gets path for child, returns from `pathCache` if it is a hit'''''''////////////////////,
    * in order not to re-render child component due to reference change its path.
    *
    * @param key - index or field name for child
@@ -80,6 +92,15 @@ export abstract class AbstractFieldComponent
 
   ngOnDestroy() {
     this.externalCategorizedErrorSubscription.unsubscribe();
+    this.jsonPatchesSubscription.unsubscribe();
+  }
+
+  get disabled() {
+    return this.schema.disabled && !this.appGlobalsService.adminMode;
+  }
+
+  get redLeftBorderClass(): string {
+    return this.removeJsonPatch ? 'red-left-border' : '';
   }
 
 }

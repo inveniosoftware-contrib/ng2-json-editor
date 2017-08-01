@@ -97,7 +97,7 @@ export class DomUtilService {
     }
   }
 
-  focusAndToggleMergePopoverById(id: string) {
+  focusPatchElementById(id: string) {
     this.tabsUtilService.selectTabIfNeeded(id);
     setTimeout(() => {
       let el = document.getElementById(id);
@@ -105,6 +105,11 @@ export class DomUtilService {
       if (mergeButton) {
         mergeButton.focus();
         mergeButton.click();
+      } else {
+        let patchActionsContainer = el.querySelector('.patch-actions-container') as HTMLElement;
+        if (patchActionsContainer) {
+          patchActionsContainer.focus();
+        }
       }
     });
   }

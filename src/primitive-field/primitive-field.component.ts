@@ -59,10 +59,8 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   @Input() path: Array<any>;
   @Input() value: string | number | boolean;
 
-  jsonPatch: JsonPatch;
   internalErrors: Array<ValidationError> = [];
   private internalCategorizedErrorSubscription: Subscription;
-  private patchesByPathSubscription: Subscription;
   private lastCommitedValue: string | number | boolean;
 
   constructor(public schemaValidationService: SchemaValidationService,
@@ -73,7 +71,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     public pathUtilService: PathUtilService,
     public domUtilService: DomUtilService,
     public changeDetectorRef: ChangeDetectorRef) {
-    super(appGlobalsService, pathUtilService, changeDetectorRef);
+    super(appGlobalsService, pathUtilService, changeDetectorRef, jsonStoreService);
     this.appGlobalsService.adminMode$.subscribe(adminMode => {
       this.changeDetectorRef.markForCheck();
     });
@@ -87,10 +85,6 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
       .subscribe(internalCategorizedErrorMap => {
         this.internalErrors = internalCategorizedErrorMap.errors[this.pathString] || [];
       });
-    this.patchesByPathSubscription = this.jsonStoreService.patchesByPath$
-      .subscribe(patchesByPath => {
-        this.jsonPatch = patchesByPath[this.pathString];
-      });
     this.validate();
   }
 
@@ -100,7 +94,6 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
       this.appGlobalsService.extendInternalErrors(this.pathString, []);
     }
     this.internalCategorizedErrorSubscription.unsubscribe();
-    this.patchesByPathSubscription.unsubscribe();
   }
 
   commitValueChange() {
@@ -141,7 +134,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   }
 
   get tabIndex(): number {
-    return this.schema.disabled ? -1 : 1;
+    return this.disabled ? -1 : 1;
   }
 
   get tooltipPosition(): string {
@@ -150,10 +143,6 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
       tooltipPlacement = 'bottom';
     }
     return tooltipPlacement;
-  }
-
-  get disabled(): boolean {
-    return this.schema.disabled && !this.appGlobalsService.adminMode;
   }
 
   get disabledClass(): string {
@@ -165,7 +154,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   }
 
   get errorClass(): string {
-    return !this.jsonPatch && this.hasErrors() ? 'error' : '';
+    return !this.jsonPatches[0] && this.hasErrors() ? 'error' : '';
   }
 
   get isPathToAnIndex(): boolean {

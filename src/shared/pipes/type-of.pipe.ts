@@ -1,6 +1,6 @@
 /*
  * This file is part of ng2-json-editor.
- * Copyright (C) 2016 CERN.
+ * Copyright (C) 2017 CERN.
  *
  * ng2-json-editor is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -18,44 +18,24 @@
  * In applying this license, CERN does not
  * waive the privileges and immunities granted to it by virtue of its status
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
- */
+*/
 
-import { Injectable } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 
-import { JSONSchema } from '../interfaces';
-import { PathUtilService } from './path-util.service';
+@Pipe({
+  name: 'typeOf',
+  pure: false
+})
 
-@Injectable()
-export class JsonSchemaService {
-
-  private schema: JSONSchema;
-
-  constructor(private pathUtilService: PathUtilService) { }
-
-  setSchema(schema: JSONSchema) {
-    this.schema = schema;
-  }
+export class TypeOfPipe implements PipeTransform {
 
   /**
-   * Returns the schema extracted from this path
+   * `typeof` with extra 'array'
    */
-  forPathArray(path: Array<any>): JSONSchema {
-    return path
-      .reduce<JSONSchema>((schema, pathEl) => {
-        if (isNaN(pathEl) && pathEl !== '-') {
-          return schema.properties[pathEl];
-        } else {
-          return schema.items;
-        }
-      }, this.schema);
+  transform(value: any): string {
+    if (Array.isArray(value)) {
+      return 'array';
+    }
+    return typeof value;
   }
-
-  /**
-   * Returns the schema extracted from the json-pointer string
-   */
-  forPathString(path: string): JSONSchema {
-    let pathArray = this.pathUtilService.toPathArray(path);
-    return this.forPathArray(pathArray);
-  }
-
 }

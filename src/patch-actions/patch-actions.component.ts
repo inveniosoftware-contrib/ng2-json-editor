@@ -48,7 +48,7 @@ export class PatchActionsComponent {
   }
 
   onAddNewClick() {
-    this.patch.op = 'add';
+    this.patch.op = 'add-as-new';
     this.jsonStoreService.applyPatch(this.patch);
   }
 }

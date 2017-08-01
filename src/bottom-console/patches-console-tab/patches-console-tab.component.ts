@@ -52,13 +52,14 @@ export class PatchesConsoleTabComponent implements OnInit {
     this.jsonStoreService.patchesByPath$
       .subscribe(patchesByPath => {
         this.patches = Object.keys(patchesByPath)
-          .map(path => patchesByPath[path]);
+          .map(path => patchesByPath[path])
+          .reduce((pre, cur) => pre.concat(cur));
         this.changeDetectorRef.markForCheck();
       });
   }
 
-  toggleMergePopoverForPath(path: string) {
-    this.domUtilService.focusAndToggleMergePopoverById(path);
+  focusPatchForPath(path: string) {
+    this.domUtilService.focusPatchElementById(path);
   }
 }
 

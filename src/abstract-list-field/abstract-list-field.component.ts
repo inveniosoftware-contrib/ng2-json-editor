@@ -24,7 +24,7 @@ import { List } from 'immutable';
 
 import { AbstractFieldComponent } from '../abstract-field';
 import { JsonStoreService, AppGlobalsService, PathUtilService } from '../shared/services';
-import { JSONSchema } from '../shared/interfaces';
+import { JSONSchema, JsonPatch } from '../shared/interfaces';
 
 /**
  * Abstract component to share code of common operations of all array fields
@@ -42,8 +42,9 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
     public jsonStoreService: JsonStoreService,
     public pathUtilService: PathUtilService,
     public changeDetectorRef: ChangeDetectorRef) {
-    super(appGlobalsService, pathUtilService, changeDetectorRef);
+    super(appGlobalsService, pathUtilService, changeDetectorRef, jsonStoreService);
   }
+
   /**
    * @param {number} index - Index of the element that is moved
    * @param {number} direction - Movement direction. -1 for UP, +1 for DOWN
@@ -76,6 +77,11 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
 
   get sortableClass() {
     return this.schema.sortable ? 'sortable' : '';
+  }
+
+  get addJsonPatches(): Array<JsonPatch> {
+    return this.jsonPatches
+      .filter(patch => patch.op === 'add');
   }
 
 }

@@ -48,7 +48,7 @@ export class ObjectFieldComponent extends AbstractFieldComponent {
     public pathUtilService: PathUtilService,
     public changeDetectorRef: ChangeDetectorRef,
     public keysStoreService: KeysStoreService) {
-    super(appGlobalsService, pathUtilService, changeDetectorRef);
+    super(appGlobalsService, pathUtilService, changeDetectorRef, jsonStoreService);
   }
 
   get keys$(): ReplaySubject<Set<string>> {
@@ -62,7 +62,7 @@ export class ObjectFieldComponent extends AbstractFieldComponent {
     this.keysStoreService.deleteKey(this.pathString, name);
   }
 
-  isDisabled(key): boolean {
-    return this.schema.properties[key].disabled && !this.appGlobalsService.adminMode ;
+  isPropertyDisabled(name: string): boolean {
+    return this.schema.properties[name].disabled && !this.appGlobalsService.adminMode ;
   }
 }

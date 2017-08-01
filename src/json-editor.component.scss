@@ -384,6 +384,10 @@ body, html {
   }
 }
 
+.red-left-border {
+  border-left: 9px solid #e74c3c !important;
+}
+
 // Hide all add-field-dropdown in complex-list-field in favor of single add-nested-field-dropdown
 complex-list-field {
   add-field-dropdown {

@@ -23,3 +23,4 @@ export { PaginatedItem } from './paginated-item';
 export { KatexData } from './katex-data';
 export { JsonPatch } from './json-patch';
 export { CustomFormatValidation } from './custom-format-validation';
+export { JsonPatchesByPath } from './json-patches-by-path';

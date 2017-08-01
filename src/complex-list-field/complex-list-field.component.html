@@ -1,4 +1,4 @@
-<div [id]="pathString">
+<div [id]="pathString" [ngClass]="redLeftBorderClass">
   <!-- Navigator -->
   <table *ngIf="navigator" class="navigator-container">
     <tr>
@@ -60,5 +60,12 @@
         </div>
       </span>
     </div>
+  </div>
+
+  <div *ngIf="removeJsonPatch">
+    <patch-actions [patch]="removeJsonPatch"></patch-actions>
+  </div>
+  <div *ngFor="let patch of addJsonPatches" class="complex-list-field-wrapper">
+    <patch-view [patch]="patch"></patch-view>
   </div>
 </div>
