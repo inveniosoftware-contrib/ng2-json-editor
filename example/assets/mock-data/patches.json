@@ -63,5 +63,9 @@
   {
     "op": "remove",
     "path": "/accelerator_experiments/1"
+  },
+  {
+    "op": "remove",
+    "path": "/references/0/reference/label"
   }
 ]

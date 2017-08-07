@@ -56,6 +56,7 @@ export class JsonStoreService {
 
     this.json = this.json.removeIn(path);
     this._jsonChange.next(this.json);
+    this.keysStoreService.deletePath(path);
   }
 
   addIn(path: Array<any>, value: any) {

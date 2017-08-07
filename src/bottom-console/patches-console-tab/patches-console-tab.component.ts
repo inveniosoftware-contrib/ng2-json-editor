@@ -50,10 +50,13 @@ export class PatchesConsoleTabComponent implements OnInit {
 
   ngOnInit() {
     this.jsonStoreService.patchesByPath$
-      .subscribe(patchesByPath => {
-        this.patches = Object.keys(patchesByPath)
+      .map(patchesByPath => {
+        return Object.keys(patchesByPath)
           .map(path => patchesByPath[path])
           .reduce((pre, cur) => pre.concat(cur));
+      })
+      .subscribe(patches => {
+        this.patches = patches;
         this.changeDetectorRef.markForCheck();
       });
   }

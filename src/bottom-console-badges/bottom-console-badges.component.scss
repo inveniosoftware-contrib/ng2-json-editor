@@ -56,5 +56,17 @@ a {
   &:hover {
     cursor: pointer;
   }
-  padding-right: 5px;
+  padding-right: 7px;
+  padding-top: 7px;
+}
+
+.badges-container {
+  display: flex;
+
+}
+
+@media screen and (max-width: 1440px) {
+  .badges-container {
+    flex-direction: column;
+  }
 }

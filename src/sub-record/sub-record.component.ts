@@ -79,8 +79,6 @@ export class SubRecordComponent extends AbstractTrackerComponent implements OnCh
   // delete only work for others, not toggles (UPDATE: config comment if this changes)
   deleteField(field: string) {
     this.jsonStoreService.removeIn(this.getPathForChild(field));
-
-    this.keysStoreService.deleteKey(this.pathString, field);
   }
 
   getPathForChild(key: string): Array<any> {

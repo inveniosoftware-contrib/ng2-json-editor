@@ -65,4 +65,11 @@ describe('PathUtilService', () => {
     let result = pathUtilService.toPathString(path);
     expect(result).toEqual(expected);
   });
+
+  it('should convert path array to path string (json-pointer) for empty path', () => {
+    let path = [];
+    let expected = '';
+    let result = pathUtilService.toPathString(path);
+    expect(result).toEqual(expected);
+  });
 });

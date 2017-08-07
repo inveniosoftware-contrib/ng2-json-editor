@@ -1,4 +1,4 @@
-<div *ngIf="isOpen" [ngClass]="{'bottom-console-container': isOpen}">
+<div *ngIf="isOpen" class="bottom-console-container">
   <tabset>
     <tab [active]="isActive('Errors')">
       <errors-console-tab [errorType]="'errors'"></errors-console-tab>

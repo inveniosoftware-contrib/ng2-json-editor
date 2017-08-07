@@ -25,14 +25,14 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { JsonPatch } from '../shared/interfaces';
 
 @Component({
-  selector: 'patch-view',
+  selector: 'add-patch-view',
   styleUrls: [
-    './patch-view.component.scss'
+    './add-patch-view.component.scss'
   ],
-  templateUrl: './patch-view.component.html',
+  templateUrl: './add-patch-view.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PatchViewComponent {
+export class AddPatchViewComponent {
 
   @Input() patch: JsonPatch;
 

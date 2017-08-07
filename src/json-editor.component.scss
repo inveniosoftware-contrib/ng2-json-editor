@@ -101,21 +101,6 @@ body, html {
     border: none;
   }
 
-  .bottom-console-container {
-    height: 25%;
-    overflow: hidden;
-
-    .tab-content {
-      height: 90%;
-      overflow: auto;
-    }
-
-    .nav-tabs > .tab-align-right {
-      float: right;
-    }
-
-  }
-
   table {
     margin-bottom: 0px !important;
   }
@@ -382,6 +367,17 @@ body, html {
     border-radius: 0px;
     border-right: 1px solid #e0e2e2;
   }
+}
+
+.bottom-console-container {
+  height: 25%;
+  overflow: hidden;
+
+  .tab-content {
+    height: 90%;
+    overflow: scroll;
+  }
+
 }
 
 .red-left-border {

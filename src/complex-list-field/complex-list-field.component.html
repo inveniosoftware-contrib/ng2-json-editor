@@ -62,10 +62,10 @@
     </div>
   </div>
 
+  <div *ngFor="let patch of addJsonPatches" class="complex-list-field-wrapper">
+    <add-patch-view [patch]="patch"></add-patch-view>
+  </div>
   <div *ngIf="removeJsonPatch">
     <patch-actions [patch]="removeJsonPatch"></patch-actions>
-  </div>
-  <div *ngFor="let patch of addJsonPatches" class="complex-list-field-wrapper">
-    <patch-view [patch]="patch"></patch-view>
   </div>
 </div>

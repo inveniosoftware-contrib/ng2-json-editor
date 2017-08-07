@@ -70,7 +70,7 @@ export abstract class AbstractFieldComponent
       });
   }
   /**
-   * Gets path for child, returns from `pathCache` if it is a hit'''''''////////////////////,
+   * Gets path for child, returns from `pathCache` if it is a hit
    * in order not to re-render child component due to reference change its path.
    *
    * @param key - index or field name for child

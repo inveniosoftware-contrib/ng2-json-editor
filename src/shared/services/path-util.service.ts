@@ -76,7 +76,12 @@ export class PathUtilService {
    * Example: from ['foo', 'bar', 0] to '/foo/bar/0'
    */
   toPathString(path: Array<any>): string {
-    return `${this.separator}${path.join(this.separator)}`;
+    if (path.length === 0) {
+      return '';
+    } else {
+      return `${this.separator}${path.join(this.separator)}`;
+    }
+
   }
 
   /**

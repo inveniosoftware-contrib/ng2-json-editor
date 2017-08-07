@@ -58,8 +58,6 @@ export class ObjectFieldComponent extends AbstractFieldComponent {
   deleteField(name: string) {
     let fieldPath = this.path.concat(name);
     this.jsonStoreService.removeIn(fieldPath);
-
-    this.keysStoreService.deleteKey(this.pathString, name);
   }
 
   isPropertyDisabled(name: string): boolean {

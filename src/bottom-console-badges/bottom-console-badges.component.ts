@@ -64,8 +64,11 @@ export class BottomConsoleBadgesComponent implements OnInit, OnDestroy {
         this.changeDetectorRef.markForCheck();
       });
     this.patchCounterSubscription = this.jsonStoreService.patchesByPath$
-      .map(patchesByPath => Object.keys(patchesByPath).length)
-      .subscribe(patchCounter => {
+      .map(patchesByPath => {
+        return Object.keys(patchesByPath)
+          .map(path => patchesByPath[path].length)
+          .reduce((sum, patchCountPerPath) => sum + patchCountPerPath);
+      }).subscribe(patchCounter => {
         this.patchCount = patchCounter;
         this.changeDetectorRef.markForCheck();
       });
