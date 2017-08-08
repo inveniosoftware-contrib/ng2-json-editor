@@ -24,5 +24,11 @@
       "message": "Mock-Error 1: /control_number",
       "type": "Error"
     }
+  ],
+  "/references/22": [
+    {
+      "message": "Mock-Error 1: /references/22",
+      "type": "Error"
+    }
   ]
 }

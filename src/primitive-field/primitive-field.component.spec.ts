@@ -71,6 +71,7 @@ function changeInputElementValue(el: HTMLInputElement, value: string) {
 
 class MockJsonStoreService extends JsonStoreService {
   setIn(path: Array<any>, value: any) { }
+
   get patchesByPath$(): any {
     return Observable.of({});
   }

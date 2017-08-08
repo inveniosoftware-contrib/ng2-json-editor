@@ -70,7 +70,7 @@ export class JsonStoreService {
         list = list.push(value);
         path[path.length - 1] = list.size - 1;
       } else {
-        list =  list.insert(lastPathElement, value);
+        list = list.insert(lastPathElement, value);
       }
       this.setIn(pathWithoutIndex, list);
       if (Map.isMap(value)) {
@@ -134,6 +134,10 @@ export class JsonStoreService {
     this.removeJsonPatch(patch);
   }
 
+  hasPatch(path: string) {
+    return this.patchesByPath[path] && this.patchesByPath[path].length > 0;
+  }
+
   private removeJsonPatch(patch: JsonPatch) {
     let path = this.getComponentPathForPatch(patch);
     let patchIndex = this.patchesByPath[path].indexOf(patch);
@@ -157,6 +161,10 @@ export class JsonStoreService {
     return this._jsonChange;
   }
 
+  get patchesByPath$(): ReplaySubject<JsonPatchesByPath> {
+    return this._patchesByPath$;
+  }
+
   /**
    * Converts the value to immutable if it is not an immutable.
    */
@@ -165,9 +173,5 @@ export class JsonStoreService {
       return fromJS(value);
     }
     return value;
-  }
-
-  get patchesByPath$(): ReplaySubject<JsonPatchesByPath> {
-    return this._patchesByPath$;
   }
 }

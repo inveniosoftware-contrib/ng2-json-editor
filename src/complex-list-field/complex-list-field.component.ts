@@ -102,6 +102,11 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
     }
   }
 
+  hasErrorOrPatch(index: number) {
+    let itemPath = this.getPathStringForChild(index);
+    return this.appGlobalsService.hasError(itemPath) || this.jsonStoreService.hasPatch(itemPath);
+  }
+
   onFindClick() {
     // clear for new search
     this.foundIndices = [];

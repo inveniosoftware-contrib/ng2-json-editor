@@ -96,6 +96,14 @@ export class AppGlobalsService {
     });
   }
 
+  hasError(path: string) {
+    let internalErrors = this.internalCategorizedErrorMap.errors[path];
+    let externalErrors = this.externalCategorizedErrorMap.errors[path];
+    let internalErrorCount = internalErrors ? internalErrors.length : 0;
+    let externalErrorCount = externalErrors ? externalErrors.length : 0;
+    return (internalErrorCount + externalErrorCount) > 0;
+  }
+
   get firstElementPathForCurrentTab() {
     return this.tabNameToFirstTopLevelElement[this.activeTabName];
   }
