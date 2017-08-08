@@ -20,6 +20,7 @@ import { TabsUtilService } from './tabs-util.service';
 import { ErrorMapUtilService } from './error-map-util.service';
 import { KatexService } from './katex.service';
 import { TextDiffService } from './text-diff.service';
+import { ListPageChangerService } from './list-page-changer.service';
 
 export {
   AppGlobalsService,
@@ -43,7 +44,8 @@ export {
   TabsUtilService,
   ErrorMapUtilService,
   KatexService,
-  TextDiffService
+  TextDiffService,
+  ListPageChangerService
 };
 
 export const SHARED_SERVICES = [
@@ -68,5 +70,6 @@ export const SHARED_SERVICES = [
   TabsUtilService,
   ErrorMapUtilService,
   KatexService,
-  TextDiffService
+  TextDiffService,
+  ListPageChangerService
 ];

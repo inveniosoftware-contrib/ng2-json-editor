@@ -20,27 +20,30 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
+import { fromJS, Map, OrderedSet } from 'immutable';
 
-import { SchemaValidationService } from './schema-validation.service';
-import { AppGlobalsService } from './app-globals.service';
+import { PathUtilService } from './path-util.service';
+import { ListPageChangerService } from './list-page-changer.service';
 
-describe('SchemaValidationService', () => {
+import { JSONSchema } from '../interfaces';
 
-  const schema = { 'type': 'string', 'pattern': '[0-9]' };
 
-  let service: SchemaValidationService;
+describe('ListPageChangerService', () => {
+  let service: ListPageChangerService;
 
   beforeEach(() => {
-    service = new SchemaValidationService(new AppGlobalsService(null));
+    // TODO: (optionally) PathUtilService could be mocked
+    service = new ListPageChangerService(new PathUtilService());
   });
 
-  it('should validate pattern correctly', () => {
-    let expectedInValid = [{
-      message: `should match pattern "[0-9]"`,
-      type: 'Error'
-    }];
-
-    expect(service.validateValue('1', schema)).toEqual([]);
-    expect(service.validateValue('a', schema)).toEqual(expectedInValid);
+  it('should change page', () => {
+    let listPath = '/list';
+    let itemPath = '/list/3';
+    let itemsPerPage = 3;
+    let expectedPage = 2;
+    service.registerPaginatedList(listPath, itemsPerPage)
+      .subscribe(page => {
+        expect(page).toEqual(expectedPage);
+      });
   });
 });

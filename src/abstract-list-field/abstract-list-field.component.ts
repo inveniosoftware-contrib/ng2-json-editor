@@ -71,7 +71,7 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
     this.values = this.jsonStoreService.getIn(this.path);
   }
 
-  getPathForChildString(index: number): string {
+  getPathStringForChild(index: number): string {
     return `${this.pathString}${this.pathUtilService.separator}${index}`;
   }
 

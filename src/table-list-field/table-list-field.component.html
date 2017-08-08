@@ -12,7 +12,7 @@
         </th>
       </tr>
     </thead>
-    <tr *ngFor="let value of values; let i = index; trackBy:trackByIndex" table-item-field [id]="getPathForChildString(i)" [value]="value"
+    <tr *ngFor="let value of values; let i = index; trackBy:trackByIndex" table-item-field [id]="getPathStringForChild(i)" [value]="value"
       [schema]="schema.items" [path]="getPathForChild(i)" [keys]="keys$ | async">
       <td *ngIf="values.size > 0" class="button-holder" [ngClass]="sortableClass">
         <list-action-group (onMove)="moveElement(i, $event)" (onDelete)="deleteElement(i)" [canMove]="schema.sortable"></list-action-group>

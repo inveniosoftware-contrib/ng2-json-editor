@@ -26,8 +26,11 @@ import {
   TestBed
 } from '@angular/core/testing';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
+import { Observable } from 'rxjs/Observable';
 
 import { SearchableDropdownComponent } from '../searchable-dropdown';
+import { TextDiffComponent } from '../text-diff';
+import { PatchActionsComponent } from '../patch-actions';
 import { AutocompleteInputComponent } from '../autocomplete-input';
 import { PrimitiveFieldComponent } from './primitive-field.component';
 import { StringInputComponent } from '../string-input';
@@ -43,7 +46,9 @@ import {
   DomUtilService,
   TabsUtilService,
   ErrorMapUtilService,
-  JsonSchemaService
+  JsonSchemaService,
+  TextDiffService,
+  ListPageChangerService
 } from '../shared/services';
 
 import { ContentModelDirective } from '../shared/directives';
@@ -66,6 +71,9 @@ function changeInputElementValue(el: HTMLInputElement, value: string) {
 
 class MockJsonStoreService extends JsonStoreService {
   setIn(path: Array<any>, value: any) { }
+  get patchesByPath$(): any {
+    return Observable.of({});
+  }
 }
 
 describe('PrimitiveFieldComponent', () => {
@@ -83,7 +91,9 @@ describe('PrimitiveFieldComponent', () => {
         SearchableDropdownComponent,
         StringInputComponent,
         PrimitiveFieldComponent,
-        ContentModelDirective
+        ContentModelDirective,
+        TextDiffComponent,
+        PatchActionsComponent
       ],
       imports: [
         Ng2BootstrapModule.forRoot()
@@ -99,6 +109,8 @@ describe('PrimitiveFieldComponent', () => {
         KatexService,
         KeysStoreService,
         JsonSchemaService,
+        TextDiffService,
+        ListPageChangerService,
         { provide: JsonStoreService, useClass: MockJsonStoreService }
       ]
     }).compileComponents();

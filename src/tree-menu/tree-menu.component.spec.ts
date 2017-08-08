@@ -35,7 +35,8 @@ import {
   PathUtilService,
   WindowHrefService,
   AppGlobalsService,
-  TabsUtilService
+  TabsUtilService,
+  ListPageChangerService
 } from '../shared/services';
 import {
   AddAlwaysShowFieldsPipe,
@@ -107,6 +108,7 @@ describe('TreeMenuComponent', () => {
         WindowHrefService,
         DomUtilService,
         TabsUtilService,
+        ListPageChangerService,
         { provide: AppGlobalsService, useValue: appGlobalsService }
       ]
     }).compileComponents();

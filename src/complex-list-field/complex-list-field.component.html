@@ -39,7 +39,7 @@
     </tr>
   </table>
   <!-- Elements -->
-  <div *ngFor="let item of paginatedItems; trackBy:trackByIndex">
+  <div *ngFor="let item of paginatedItems; trackBy:trackByElement">
     <div class="complex-list-field-wrapper">
       <span *ngIf="shouldDisplayTemplate && values.get(item.index).keySeq().size != 0">
         <ng-template [ngTemplateOutlet]="customTemplate" [ngTemplateOutletContext]="{item: values.get(item.index)}"></ng-template>

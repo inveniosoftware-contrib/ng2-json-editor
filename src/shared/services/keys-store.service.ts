@@ -71,7 +71,10 @@ export class KeysStoreService {
   deletePath(path: Array<any>) {
     let lastKey = path[path.length - 1];
     let parentPath = this.pathUtilService.toPathString(path.slice(0, -1));
-    this.deleteKey(parentPath, lastKey);
+    // don't invoke deleteKey if parentPath is primitive-list
+    if (this.keysMap[parentPath]) {
+      this.deleteKey(parentPath, lastKey);
+    }
   }
 
   deleteKey(parentPath: string, key: string) {
