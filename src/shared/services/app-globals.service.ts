@@ -39,8 +39,8 @@ export class AppGlobalsService {
   public tabNameToFirstTopLevelElement: { [tabName: string]: string } = {};
   public templates: { [templateName: string]: TemplateRef<any> };
   public config: JsonEditorConfig;
-  public internalCategorizedErrorMap: CategorizedValidationErrors = { Errors: {}, Warnings: {} };
-  public externalCategorizedErrorMap: CategorizedValidationErrors = { Errors: {}, Warnings: {} };
+  public internalCategorizedErrorMap: CategorizedValidationErrors = { errors: {}, warnings: {} };
+  public externalCategorizedErrorMap: CategorizedValidationErrors = { errors: {}, warnings: {} };
 
   constructor(public errorMapUtilService: ErrorMapUtilService) { }
 
@@ -94,6 +94,14 @@ export class AppGlobalsService {
       errors: errorCounter,
       warnings: warningCounter
     });
+  }
+
+  hasError(path: string) {
+    let internalErrors = this.internalCategorizedErrorMap.errors[path];
+    let externalErrors = this.externalCategorizedErrorMap.errors[path];
+    let internalErrorCount = internalErrors ? internalErrors.length : 0;
+    let externalErrorCount = externalErrors ? externalErrors.length : 0;
+    return (internalErrorCount + externalErrorCount) > 0;
   }
 
   get firstElementPathForCurrentTab() {

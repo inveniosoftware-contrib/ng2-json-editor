@@ -40,7 +40,7 @@ import {
   PathUtilService,
   DomUtilService
 } from '../shared/services';
-import { JSONSchema } from '../shared/interfaces';
+import { JSONSchema, JsonPatch } from '../shared/interfaces';
 import { Subscription } from 'rxjs/Subscription';
 import { ValidationError } from '../shared/interfaces';
 
@@ -60,7 +60,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   @Input() value: string | number | boolean;
 
   internalErrors: Array<ValidationError> = [];
-  internalCategorizedErrorSubscription: Subscription;
+  private internalCategorizedErrorSubscription: Subscription;
   private lastCommitedValue: string | number | boolean;
 
   constructor(public schemaValidationService: SchemaValidationService,
@@ -71,7 +71,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     public pathUtilService: PathUtilService,
     public domUtilService: DomUtilService,
     public changeDetectorRef: ChangeDetectorRef) {
-    super(appGlobalsService, pathUtilService, changeDetectorRef);
+    super(appGlobalsService, pathUtilService, changeDetectorRef, jsonStoreService);
     this.appGlobalsService.adminMode$.subscribe(adminMode => {
       this.changeDetectorRef.markForCheck();
     });
@@ -83,7 +83,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     this.internalCategorizedErrorSubscription = this.appGlobalsService
       .internalCategorizedErrorsSubject
       .subscribe(internalCategorizedErrorMap => {
-        this.internalErrors = internalCategorizedErrorMap.Errors[this.pathString] || [];
+        this.internalErrors = internalCategorizedErrorMap.errors[this.pathString] || [];
       });
     this.validate();
   }
@@ -134,7 +134,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   }
 
   get tabIndex(): number {
-    return this.schema.disabled ? -1 : 1;
+    return this.disabled ? -1 : 1;
   }
 
   get tooltipPosition(): string {
@@ -145,16 +145,20 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     return tooltipPlacement;
   }
 
-  get disabled(): boolean {
-    return this.schema.disabled && !this.appGlobalsService.adminMode;
-  }
-
   get disabledClass(): string {
     return this.disabled ? 'disabled' : '';
   }
 
   hasErrors(): boolean {
     return super.hasErrors() || this.internalErrors.length > 0;
+  }
+
+  get errorClass(): string {
+    return !this.jsonPatches[0] && this.hasErrors() ? 'error' : '';
+  }
+
+  get isPathToAnIndex(): boolean {
+    return typeof this.path[this.path.length - 1] === 'number';
   }
 
   private validate() {

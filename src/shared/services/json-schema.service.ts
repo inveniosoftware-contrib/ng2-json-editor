@@ -42,7 +42,7 @@ export class JsonSchemaService {
   forPathArray(path: Array<any>): JSONSchema {
     return path
       .reduce<JSONSchema>((schema, pathEl) => {
-        if (isNaN(pathEl)) {
+        if (isNaN(pathEl) && pathEl !== '-') {
           return schema.properties[pathEl];
         } else {
           return schema.items;

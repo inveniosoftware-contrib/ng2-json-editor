@@ -1,4 +1,4 @@
-<div [id]="pathString">
+<div [id]="pathString" [ngClass]="redLeftBorderClass">
   <!-- Navigator -->
   <table *ngIf="navigator" class="navigator-container">
     <tr>
@@ -39,7 +39,7 @@
     </tr>
   </table>
   <!-- Elements -->
-  <div *ngFor="let item of paginatedItems; trackBy:trackByIndex">
+  <div *ngFor="let item of paginatedItems; trackBy:trackByElement">
     <div class="complex-list-field-wrapper">
       <span *ngIf="shouldDisplayTemplate && values.get(item.index).keySeq().size != 0">
         <ng-template [ngTemplateOutlet]="customTemplate" [ngTemplateOutletContext]="{item: values.get(item.index)}"></ng-template>
@@ -47,7 +47,7 @@
           {{item.isEditFormVisible ? 'Hide Fields' : 'Show Fields'}}
         </a>
       </span>
-      <span *ngIf="item.isEditFormVisible">
+      <span *ngIf="item.isEditFormVisible || hasErrorOrPatch(item.index)">
         <object-field [value]="values.get(item.index)" [schema]="schema.items" [path]="getPathForChild(item.index)">
         </object-field>
         <div class="row element-button-container">
@@ -60,5 +60,12 @@
         </div>
       </span>
     </div>
+  </div>
+
+  <div *ngFor="let patch of addJsonPatches" class="complex-list-field-wrapper">
+    <add-patch-view [patch]="patch"></add-patch-view>
+  </div>
+  <div *ngIf="removeJsonPatch">
+    <patch-actions [patch]="removeJsonPatch"></patch-actions>
   </div>
 </div>

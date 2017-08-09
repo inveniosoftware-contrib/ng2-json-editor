@@ -1,0 +1,47 @@
+<div class="patch-container green-left-border" [id]="patch.path" tabindex="-1">
+  <div class="grow">
+    <ng-template [ngTemplateOutlet]="anyTypeTemplate" [ngTemplateOutletContext]="{value: patch.value}"></ng-template>
+  </div>
+  <patch-actions class="align-self-end" [patch]="patch"></patch-actions>
+</div>
+
+<ng-template #anyTypeTemplate let-value="value">
+  <ng-container [ngSwitch]="value | typeOf">
+    <ng-container *ngSwitchCase="'object'">
+      <ng-template [ngTemplateOutlet]="objectTemplate" [ngTemplateOutletContext]="{object: value}"></ng-template>
+    </ng-container>
+    <ng-container *ngSwitchCase="'array'">
+      <ng-template [ngTemplateOutlet]="arrayTemplate" [ngTemplateOutletContext]="{array: value}"></ng-template>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      <ng-template [ngTemplateOutlet]="primitiveTemplate" [ngTemplateOutletContext]="{primitive: value}"></ng-template>
+    </ng-container>
+  </ng-container>
+</ng-template>
+
+<ng-template #objectTemplate let-object="object">
+  <table>
+    <tr *ngFor="let key of object | keys">
+      <td>
+        <label>{{key}}</label>
+      </td>
+      <td>
+        <ng-template [ngTemplateOutlet]="anyTypeTemplate" [ngTemplateOutletContext]="{value: object[key]}"></ng-template>
+      </td>
+    </tr>
+  </table>
+</ng-template>
+
+<ng-template #arrayTemplate let-array="array">
+  <table>
+    <tr *ngFor="let item of array">
+      <td>
+        <ng-template [ngTemplateOutlet]="anyTypeTemplate" [ngTemplateOutletContext]="{value: item}"></ng-template>
+      </td>
+    </tr>
+  </table>
+</ng-template>
+
+<ng-template #primitiveTemplate let-primitive="primitive">
+  <span>{{primitive}}</span>
+</ng-template>

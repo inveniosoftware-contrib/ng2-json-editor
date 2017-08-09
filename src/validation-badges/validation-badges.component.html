@@ -1,6 +1,0 @@
-<a href='#' *ngIf="internalErrorCount + globalErrorCount > 0" [ngClass]="'error-link'" (click)="_onBadgeClick($event, 'Errors')">
-    Errors <span class="badge">{{internalErrorCount + globalErrorCount}}</span>
-</a>
-<a href='#' *ngIf="internalWarningCount + globalWarningCount > 0" [ngClass]="'warning-link'" (click)="_onBadgeClick($event, 'Warnings')">
-    Warnings <span class="badge">{{internalWarningCount + globalWarningCount}}</span>
-</a>

@@ -23,6 +23,7 @@
 import { Injectable } from '@angular/core';
 
 import { TabsUtilService } from './tabs-util.service';
+import { ListPageChangerService } from './list-page-changer.service';
 
 @Injectable()
 export class DomUtilService {
@@ -32,10 +33,12 @@ export class DomUtilService {
   private highlightClass = 'highlight';
   private highlightedElement: HTMLElement;
 
-  constructor(public tabsUtilService: TabsUtilService) { }
+  constructor(private tabsUtilService: TabsUtilService,
+    private listPageChangerService: ListPageChangerService) { }
 
   focusAndSelectFirstEditableChildById(id: string, highlight = false) {
     this.tabsUtilService.selectTabIfNeeded(id);
+    this.listPageChangerService.changePage(id);
     setTimeout(() => {
       let el = document.getElementById(id);
       if (el) {
@@ -95,6 +98,24 @@ export class DomUtilService {
       this.highlightedElement.classList.remove(this.highlightClass);
       this.highlightedElement = undefined;
     }
+  }
+
+  focusPatchElementById(id: string) {
+    this.tabsUtilService.selectTabIfNeeded(id);
+    this.listPageChangerService.changePage(id);
+    setTimeout(() => {
+      let el = document.getElementById(id);
+      let mergeButton = el.querySelector('.btn-merge') as HTMLButtonElement;
+      if (mergeButton) {
+        mergeButton.focus();
+        mergeButton.click();
+      } else {
+        let patchActionsContainer = el.querySelector('.patch-actions-container') as HTMLElement;
+        if (patchActionsContainer) {
+          patchActionsContainer.focus();
+        }
+      }
+    });
   }
 
   private selectAllContent(el: HTMLElement) {

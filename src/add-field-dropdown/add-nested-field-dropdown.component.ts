@@ -20,7 +20,7 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { Set } from 'immutable';
 
 import { DomUtilService, PathUtilService, KeysStoreService, JsonSchemaService } from '../shared/services';
@@ -32,31 +32,36 @@ import { JSONSchema } from '../shared/interfaces';
     './add-field-dropdown.component.scss',
     './add-nested-field-dropdown.component.scss'
   ],
-  templateUrl: './add-nested-field-dropdown.component.html'
+  templateUrl: './add-nested-field-dropdown.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AddNestedFieldDropdownComponent implements OnInit {
+export class AddNestedFieldDropdownComponent implements OnChanges {
 
   @Input() schema: JSONSchema;
   @Input() pathString: string;
 
-  nestedKeysMap: { [path: string]: Set<string> } = {};
+  nestedKeysMap: { [path: string]: Set<string> };
 
   constructor(public keysStoreService: KeysStoreService,
     public jsonSchemaService: JsonSchemaService,
     public pathUtilService: PathUtilService,
     public domUtilService: DomUtilService) { }
 
-  ngOnInit() {
-    this.nestedKeysMap[this.pathString] = this.keysStoreService.keysMap[this.pathString];
-    let nestedPathPrefix = this.pathString + this.pathUtilService.separator;
-    Object.keys(this.keysStoreService.keysMap)
-      .filter(path => path.startsWith(nestedPathPrefix))
-      .forEach(path => {
-        this.nestedKeysMap[path] = this.keysStoreService.keysMap[path];
-      });
-    this.keysStoreService.onKeysChange
-      .filter(change => change.path.startsWith(this.pathString))
-      .subscribe(change => { this.nestedKeysMap[change.path] = change.keys; });
+  ngOnChanges(changes: SimpleChanges) {
+    let pathStringChange = changes['pathString'];
+    if (pathStringChange) {
+      this.nestedKeysMap = {};
+      this.nestedKeysMap[this.pathString] = this.keysStoreService.keysMap[this.pathString];
+      let nestedPathPrefix = this.pathString + this.pathUtilService.separator;
+      Object.keys(this.keysStoreService.keysMap)
+        .filter(path => path.startsWith(nestedPathPrefix))
+        .forEach(path => {
+          this.nestedKeysMap[path] = this.keysStoreService.keysMap[path];
+        });
+      this.keysStoreService.onKeysChange
+        .filter(change => change.path.startsWith(this.pathString))
+        .subscribe(change => { this.nestedKeysMap[change.path] = change.keys; });
+    }
   }
 
   /**

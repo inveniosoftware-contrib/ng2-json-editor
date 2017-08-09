@@ -31,7 +31,7 @@ describe('SchemaValidationService', () => {
   let service: SchemaValidationService;
 
   beforeEach(() => {
-    service = new SchemaValidationService(new AppGlobalsService());
+    service = new SchemaValidationService(new AppGlobalsService(null));
   });
 
   it('should validate pattern correctly', () => {

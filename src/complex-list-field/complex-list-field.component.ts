@@ -33,7 +33,7 @@ import {
 import { List, Map, Set } from 'immutable';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
-import { AppGlobalsService, JsonStoreService, DomUtilService, PathUtilService } from '../shared/services';
+import { AppGlobalsService, JsonStoreService, DomUtilService, PathUtilService, ListPageChangerService } from '../shared/services';
 import { LongListNavigatorConfig, JSONSchema, PaginatedItem } from '../shared/interfaces';
 
 @Component({
@@ -63,7 +63,8 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
     public jsonStoreService: JsonStoreService,
     public domUtilService: DomUtilService,
     public pathUtilService: PathUtilService,
-    public changeDetectorRef: ChangeDetectorRef) {
+    public changeDetectorRef: ChangeDetectorRef,
+    public listPageChangerService: ListPageChangerService) {
     super(appGlobalsService, jsonStoreService, pathUtilService, changeDetectorRef);
   }
 
@@ -71,6 +72,13 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
     super.ngOnInit();
     this.navigator = this.schema.longListNavigatorConfig;
     this.paginatedItems = this.getItemsForPage(this.currentPage);
+
+    if (this.navigator) {
+      this.listPageChangerService
+        .registerPaginatedList(this.pathString, this.navigator.itemsPerPage)
+        .skipWhile(page => page === this.currentPage)
+        .subscribe(page => this.onPageChange(page));
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -92,6 +100,11 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
         this.paginatedItems = this.getItemsForPage(this.currentPage);
       }
     }
+  }
+
+  hasErrorOrPatch(index: number) {
+    let itemPath = this.getPathStringForChild(index);
+    return this.appGlobalsService.hasError(itemPath) || this.jsonStoreService.hasPatch(itemPath);
   }
 
   onFindClick() {
@@ -154,7 +167,7 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
     return indices.map((index) => {
       let showEditForm = this.schema.viewTemplateConfig ? this.schema.viewTemplateConfig.showEditForm : undefined;
       let isEditFormVisible = !showEditForm || showEditForm(this.values.get(index));
-      return {index, isEditFormVisible};
+      return { index, isEditFormVisible };
     });
   }
 

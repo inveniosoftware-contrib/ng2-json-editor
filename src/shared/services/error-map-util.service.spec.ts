@@ -55,7 +55,7 @@ describe('ComponentTypeService', () => {
 
     let categorizedErrorMap = {
       categorizedErrorMap: {
-        Errors: {
+        errors: {
           '/key/path/1': [{
             message: 'Error message.',
             type: 'Error'
@@ -65,7 +65,7 @@ describe('ComponentTypeService', () => {
             type: 'Error'
           }]
         },
-        Warnings: {
+        warnings: {
           '/key/path/1': [{
             message: 'Warning message.',
             type: 'Warning'

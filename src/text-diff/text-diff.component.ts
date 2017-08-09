@@ -18,43 +18,37 @@
  * In applying this license, CERN does not
  * waive the privileges and immunities granted to it by virtue of its status
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
- */
+*/
 
 import {
-  Component, Input, ChangeDetectionStrategy
+  Component,
+  Input,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
 } from '@angular/core';
 
-import { DomUtilService, PathUtilService } from '../../shared/services';
-import { SchemaValidationErrors } from '../../shared/interfaces';
+import { IDiffResult } from 'diff';
+
+import { TextDiffService } from '../shared/services';
 
 @Component({
-  selector: 'error-panel-item',
+  selector: 'text-diff',
+  templateUrl: './text-diff.component.html',
   styleUrls: [
-    './error-panel-item.component.scss'
+    './text-diff.component.scss'
   ],
-  templateUrl: './error-panel-item.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ErrorPanelItemComponent {
+export class TextDiffComponent {
 
-  @Input() errorMap: SchemaValidationErrors;
-  @Input() heading;
+  @Input() newText: string;
+  @Input() currentText: string;
 
+  constructor(public textDiffService: TextDiffService) { }
 
-  constructor(public domUtilService: DomUtilService,
-              public pathUtilService: PathUtilService) { }
-
-  isJsonPointerPath(key: string) {
-    return key.startsWith(this.pathUtilService.separator);
+  get diffs(): Array<IDiffResult> {
+    return this.textDiffService
+      .diffByWord(this.currentText, this.newText);
   }
 
-  keys(errorMap: SchemaValidationErrors) {
-    return Object.keys(errorMap);
-  }
-
-  focusPath(event: Event, path: string) {
-    event.preventDefault();
-    this.domUtilService.focusAndSelectFirstEditableChildById(path, true);
-  }
 }
-

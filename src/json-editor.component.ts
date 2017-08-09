@@ -51,7 +51,7 @@ import {
   TabsUtilService
 } from './shared/services';
 
-import { JsonEditorConfig, Preview, SchemaValidationErrors } from './shared/interfaces';
+import { JsonEditorConfig, Preview, SchemaValidationErrors, JsonPatch } from './shared/interfaces';
 
 
 @Component({
@@ -73,6 +73,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     this._errorMap = errors;
     this.appGlobalsService.externalErrors = this.errorMap;
   }
+  @Input() jsonPatches: Array<JsonPatch>;
 
   get errorMap(): SchemaValidationErrors {
     return this._errorMap;
@@ -87,8 +88,8 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   tabNames: Array<string>;
   previews: Array<Preview>;
   isPreviewerHidden: boolean;
-  isErrorPanelOpen = false;
-  errorPanelActiveTab = '';
+  isBottomConsoleOpen = false;
+  bottomConsoleActiveTab = '';
 
   constructor(public http: Http,
     public appGlobalsService: AppGlobalsService,
@@ -140,6 +141,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
         // emit the change as plain JS object
         this.onRecordChange.emit(json.toJS());
       });
+    this.jsonStoreService.setJsonPatches(this.jsonPatches);
     this.jsonSchemaService.setSchema(this.schema);
     // construct enhanced sorted filtered keys map for objects in the record
     this.keysStoreService.buildKeysMap(this._record, this.schema);
@@ -222,12 +224,12 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   }
 
   get shorterEditorContainerClass(): string {
-    return this.isErrorPanelOpen ? 'shorter-editor-container' : '';
+    return this.isBottomConsoleOpen ? 'shorter-editor-container' : '';
   }
 
-  openErrorPanel(errorPanelTabName: string) {
-    this.isErrorPanelOpen = true;
-    this.errorPanelActiveTab = errorPanelTabName;
+  openBottomConsole(tabName: string) {
+    this.isBottomConsoleOpen = true;
+    this.bottomConsoleActiveTab = tabName;
   }
 
 }

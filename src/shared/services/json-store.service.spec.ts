@@ -24,6 +24,11 @@ import { fromJS } from 'immutable';
 
 import { JsonStoreService } from './json-store.service';
 import { PathUtilService } from './path-util.service';
+import { KeysStoreService } from './keys-store.service';
+
+class MockKeysStoreService extends KeysStoreService {
+  buildKeysMapRecursivelyForPath(map: any, path: any) {}
+}
 
 describe('JsonStoreService', () => {
 
@@ -31,7 +36,7 @@ describe('JsonStoreService', () => {
   let historyLimit;
 
   beforeEach(() => {
-    service = new JsonStoreService(new PathUtilService());
+    service = new JsonStoreService(new PathUtilService(), new MockKeysStoreService(null, null, null));
     historyLimit = service['historyLimit'];
   });
 

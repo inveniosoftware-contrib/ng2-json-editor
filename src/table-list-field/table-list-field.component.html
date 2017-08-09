@@ -1,24 +1,28 @@
-<div [id]="pathString">
-  <div>
-    <table class="table editable-inner-table">
-      <thead class="thead-inverse">
-        <tr>
-          <th *ngFor="let key of keys$ | async; trackBy:trackByElement" [style.width]="schema.items.properties[key].columnWidth + '%'">
-            {{key | underscoreToSpace}}
-          </th>
-          <th class="button-holder" [ngClass]="sortableClass">
-            <add-field-dropdown *ngIf="values.size > 0" [fields]="keys$ | async" [pathString]="pathString" [schema]="schema.items">
-              <i class="fa fa-plus"></i>
-            </add-field-dropdown>
-          </th>
-        </tr>
-      </thead>
-      <tr *ngFor="let value of values; let i = index; trackBy:trackByIndex" table-item-field [id]="getPathForChildString(i)" [value]="value"
-        [schema]="schema.items" [path]="getPathForChild(i)" [keys]="keys$ | async">
-        <td *ngIf="values.size > 0" class="button-holder" [ngClass]="sortableClass">
-          <list-action-group (onMove)="moveElement(i, $event)" (onDelete)="deleteElement(i)" [canMove]="schema.sortable"></list-action-group>
-        </td>
+<div [id]="pathString" [ngClass]="redLeftBorderClass">
+  <table class="table editable-inner-table">
+    <thead class="thead-inverse">
+      <tr>
+        <th *ngFor="let key of keys$ | async; trackBy:trackByElement" [style.width]="schema.items.properties[key].columnWidth + '%'">
+          {{key | underscoreToSpace}}
+        </th>
+        <th class="button-holder" [ngClass]="sortableClass">
+          <add-field-dropdown *ngIf="values.size > 0" [fields]="keys$ | async" [pathString]="pathString" [schema]="schema.items">
+            <i class="fa fa-plus"></i>
+          </add-field-dropdown>
+        </th>
       </tr>
-    </table>
+    </thead>
+    <tr *ngFor="let value of values; let i = index; trackBy:trackByIndex" table-item-field [id]="getPathStringForChild(i)" [value]="value"
+      [schema]="schema.items" [path]="getPathForChild(i)" [keys]="keys$ | async">
+      <td *ngIf="values.size > 0" class="button-holder" [ngClass]="sortableClass">
+        <list-action-group (onMove)="moveElement(i, $event)" (onDelete)="deleteElement(i)" [canMove]="schema.sortable"></list-action-group>
+      </td>
+    </tr>
+    <tr *ngIf="removeJsonPatch">
+      <patch-actions [patch]="removeJsonPatch"></patch-actions>
+    </tr>
+  </table>
+  <div *ngFor="let patch of addJsonPatches">
+    <add-patch-view [patch]="patch"></add-patch-view>
   </div>
 </div>

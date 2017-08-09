@@ -8,7 +8,7 @@
       <label class="admin-mode" for="admin-mode-checkbox">Enable Admin Mode</label>
     </div>
     <hr>
-    <validation-badges (onBadgeClick)="openErrorPanel($event)"></validation-badges>
+    <bottom-console-badges (badgeClick)="openBottomConsole($event)"></bottom-console-badges>
   </div>
   <div id="middle-main-container" class="middle main-container" [ngClass]="middleContainerColMdClass" [shortcuts]="shortcuts">
     <tabset *ngIf="config.tabsConfig">
@@ -24,7 +24,7 @@
   </div>
 </div>
 
-<error-panel [activeTab]="errorPanelActiveTab" [isOpen]="isErrorPanelOpen" (onCollapse)="isErrorPanelOpen = $event"></error-panel>
+<bottom-console [activeTab]="bottomConsoleActiveTab" [isOpen]="isBottomConsoleOpen" (onCollapse)="isBottomConsoleOpen = $event"></bottom-console>
 <!-- Modal View controlled by ModalService -->
 <modal-view>
 </modal-view>

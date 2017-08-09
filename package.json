@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "ajv": "^4.11.3",
+    "diff": "^3.3.0",
     "immutable": "^3.8.1",
     "katex": "^0.7.1",
     "lodash": "4.17.2",

@@ -9,6 +9,7 @@ import { SetFirstElementPathPipe } from './set-first-element-path.pipe';
 import { SortAlphabeticallyPipe } from './sort-alphabetically.pipe';
 import { KeysPipe } from './keys-pipe';
 import { LastPathElementPipe } from './last-path-element.pipe';
+import { TypeOfPipe } from './type-of.pipe';
 
 export {
   AddAlwaysShowFieldsPipe,
@@ -21,7 +22,8 @@ export {
   SetFirstElementPathPipe,
   SortAlphabeticallyPipe,
   KeysPipe,
-  LastPathElementPipe
+  LastPathElementPipe,
+  TypeOfPipe
 };
 
 export const SHARED_PIPES = [
@@ -35,5 +37,6 @@ export const SHARED_PIPES = [
   SetFirstElementPathPipe,
   SortAlphabeticallyPipe,
   KeysPipe,
-  LastPathElementPipe
+  LastPathElementPipe,
+  TypeOfPipe
 ];

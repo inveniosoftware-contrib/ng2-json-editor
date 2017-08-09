@@ -3,18 +3,23 @@ import { Map, List, fromJS } from 'immutable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import { PathUtilService } from './path-util.service';
-import { JsonPatch } from '../interfaces';
+import { KeysStoreService } from './keys-store.service';
+import { JsonPatch, JsonPatchesByPath } from '../interfaces';
 import { SizedStack } from '../classes';
 
 @Injectable()
 export class JsonStoreService {
+
+  private _patchesByPath$ = new ReplaySubject<JsonPatchesByPath>(1);
+  private patchesByPath: JsonPatchesByPath;
 
   private json: Map<string, any>;
   private _jsonChange = new ReplaySubject<Map<string, any>>(1);
   // list of reverse patches for important changes
   private history = new SizedStack<JsonPatch>(5);
 
-  constructor(private pathUtilService: PathUtilService) { }
+  constructor(private pathUtilService: PathUtilService,
+    private keysStoreService: KeysStoreService) { }
 
   setIn(path: Array<any>, value: any) {
     // if value is undefined or empty string
@@ -51,6 +56,7 @@ export class JsonStoreService {
 
     this.json = this.json.removeIn(path);
     this._jsonChange.next(this.json);
+    this.keysStoreService.deletePath(path);
   }
 
   addIn(path: Array<any>, value: any) {
@@ -60,8 +66,16 @@ export class JsonStoreService {
       let pathWithoutIndex = path.slice(0, path.length - 1);
       let list = this.getIn(pathWithoutIndex) as List<any> || List();
       value = this.toImmutable(value);
-      list = lastPathElement === '-' ? list.push(value) : list.insert(lastPathElement, value);
+      if (lastPathElement === '-') {
+        list = list.push(value);
+        path[path.length - 1] = list.size - 1;
+      } else {
+        list = list.insert(lastPathElement, value);
+      }
       this.setIn(pathWithoutIndex, list);
+      if (Map.isMap(value)) {
+        this.keysStoreService.buildKeysMapRecursivelyForPath(value, path);
+      }
     } else {
       this.setIn(path, value);
     }
@@ -69,6 +83,31 @@ export class JsonStoreService {
 
   setJson(json: Map<string, any>) {
     this.json = json;
+  }
+
+  setJsonPatches(patches: Array<JsonPatch>) {
+    this.patchesByPath = {};
+    patches.forEach(patch => {
+      let path = this.getComponentPathForPatch(patch);
+
+      if (!this.patchesByPath[path]) {
+        this.patchesByPath[path] = [];
+      }
+      this.patchesByPath[path].push(patch);
+    });
+    this.patchesByPath$.next(this.patchesByPath);
+  }
+
+  private getComponentPathForPatch(patch: JsonPatch): string {
+    if (patch.op === 'add') {
+      let pathArray = this.pathUtilService.toPathArray(patch.path);
+      let lastPathElement = pathArray[pathArray.length - 1];
+      if (lastPathElement === '-' || !isNaN(Number(lastPathElement))) {
+        pathArray.pop();
+        return this.pathUtilService.toPathString(pathArray);
+      }
+    }
+    return patch.path;
   }
 
   applyPatch(patch: JsonPatch) {
@@ -81,10 +120,30 @@ export class JsonStoreService {
         this.removeIn(path);
         break;
       case 'add':
+      // custom type for adding a replace patch as new.
+      case 'add-as-new':
         this.addIn(path, patch.value);
         break;
       default:
         console.warn(`${patch.op} is not supported!`);
+    }
+    this.removeJsonPatch(patch);
+  }
+
+  rejectPatch(patch: JsonPatch) {
+    this.removeJsonPatch(patch);
+  }
+
+  hasPatch(path: string) {
+    return this.patchesByPath[path] && this.patchesByPath[path].length > 0;
+  }
+
+  private removeJsonPatch(patch: JsonPatch) {
+    let path = this.getComponentPathForPatch(patch);
+    let patchIndex = this.patchesByPath[path].indexOf(patch);
+    if (patchIndex > -1) {
+      this.patchesByPath[path].splice(patchIndex, 1);
+      this._patchesByPath$.next(this.patchesByPath);
     }
   }
 
@@ -100,6 +159,10 @@ export class JsonStoreService {
 
   get jsonChange(): ReplaySubject<Map<string, any>> {
     return this._jsonChange;
+  }
+
+  get patchesByPath$(): ReplaySubject<JsonPatchesByPath> {
+    return this._patchesByPath$;
   }
 
   /**

@@ -1,0 +1,26 @@
+.patch-actions-container {
+  display: inline-block;
+  padding-left: 2px;
+  & > button {
+    border: none;
+    background-color: transparent;
+    padding: 1px 3px 1.5px;
+
+    .fa {
+      font-size: 18px;
+    }
+
+    .fa-check-circle {
+      color: #27ae60;
+    }
+
+    .fa-times-circle {
+      color: #e74c3c;
+    }
+
+    .fa-plus-circle {
+      color: #f1c40f;
+    }
+  }
+  
+}

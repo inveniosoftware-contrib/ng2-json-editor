@@ -1,0 +1,21 @@
+td {
+  vertical-align: top;
+  padding-right: 10px !important;
+}
+
+.align-self-end {
+  align-self: flex-end;
+}
+
+.patch-container {
+  display: flex;
+  padding-left: 4px
+}
+
+.green-left-border {
+  border-left: 9px solid #2ecc71;
+}
+
+.grow {
+  flex-grow: 1;
+}

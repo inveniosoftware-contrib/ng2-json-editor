@@ -109,10 +109,10 @@ describe('ShortcutAction', function () {
 
   it(`should copy new row under abstracts.0 table using 'alt+c' shortcut. 
     The copied cell under the focused one must be empty and the remaining cells must be exactly copied.`, () => {
-      let currentRowPromise = page.getValuesOfChildrenById('/abstracts/0');
-      let inputElem = page.getChildOfElementByCss(page.getElementById('/abstracts/0/source'), 'div[contenteditable=true]');
+      let currentRowPromise = page.getValuesOfChildrenById('/imprints/0');
+      let inputElem = page.getChildOfElementByCss(page.getElementById('/imprints/0/date'), 'div[contenteditable=true]');
       inputElem.sendKeys(protractor.Key.chord(protractor.Key.ALT, 'c'));
-      let targetRowPromise = page.getValuesOfChildrenById('/abstracts/1');
+      let targetRowPromise = page.getValuesOfChildrenById('/imprints/1');
       protractor.promise.all([currentRowPromise, targetRowPromise])
         .then(data => {
           let currentRow = data[0];

@@ -30,7 +30,7 @@ export class ErrorMapUtilService {
   public categorizeErrorMap(errorMap: SchemaValidationErrors):  {categorizedErrorMap: CategorizedValidationErrors,
     errorCounter: number, warningCounter: number} {
 
-    let categorizedErrorMap = { Errors: {}, Warnings: {} };
+    let categorizedErrorMap = { errors: {}, warnings: {} };
     let errorCounter = 0;
     let warningCounter = 0;
 
@@ -39,12 +39,12 @@ export class ErrorMapUtilService {
         let validationErrors = errorMap[key];
         validationErrors.forEach(error => {
           if (error.type === 'Error') {
-            categorizedErrorMap.Errors[key] ? categorizedErrorMap.Errors[key].push(error)
-              : categorizedErrorMap.Errors[key] = [error];
+            categorizedErrorMap.errors[key] ? categorizedErrorMap.errors[key].push(error)
+              : categorizedErrorMap.errors[key] = [error];
             errorCounter++;
           } else {
-            categorizedErrorMap.Warnings[key] ? categorizedErrorMap.Warnings[key].push(error)
-              : categorizedErrorMap.Warnings[key] = [error];
+            categorizedErrorMap.warnings[key] ? categorizedErrorMap.warnings[key].push(error)
+              : categorizedErrorMap.warnings[key] = [error];
             warningCounter++;
           }
         });

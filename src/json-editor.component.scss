@@ -101,37 +101,6 @@ body, html {
     border: none;
   }
 
-  .error-panel-container {
-    height: 25%;
-    overflow: hidden;
-
-    .tab-content {
-      height: 90%;
-      overflow: auto;
-    }
-
-    .nav-tabs > .tab-align-right {
-      float: right;
-    }
-
-  }
-
-  .error-link {
-    color: #D14024;
-
-    .badge {
-      background-color: #a94442;
-    }
-  }::-webkit-validation-bubble-heading
-
-  .warning-link {
-    color: #FFDD00;
-
-    .badge {
-      background-color: #8a6d3b;
-    }
-  }
-
   table {
     margin-bottom: 0px !important;
   }
@@ -398,6 +367,21 @@ body, html {
     border-radius: 0px;
     border-right: 1px solid #e0e2e2;
   }
+}
+
+.bottom-console-container {
+  height: 25%;
+  overflow: hidden;
+
+  .tab-content {
+    height: 90%;
+    overflow: scroll;
+  }
+
+}
+
+.red-left-border {
+  border-left: 9px solid #e74c3c !important;
 }
 
 // Hide all add-field-dropdown in complex-list-field in favor of single add-nested-field-dropdown
