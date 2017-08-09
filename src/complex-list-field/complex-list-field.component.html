@@ -1,43 +1,41 @@
 <div [id]="pathString" [ngClass]="redLeftBorderClass">
   <!-- Navigator -->
-  <table *ngIf="navigator" class="navigator-container">
-    <tr>
-      <td class="form-group navigator-item-left">
-        <div class="input-group input-group-sm">
-          <span class="input-group-btn">
+  <div *ngIf="navigator" class="navigator-container">
+    <div>
+      <div class="input-group input-group-sm">
+        <span class="input-group-btn">
             <button type="button" class="btn btn-default find-button" (click)="onFindClick()">
               <i class="fa fa-search" aria-hidden="true"></i>
             </button>
-          </span>
-          <input type="search" class="form-control" [(ngModel)]="findExpression" (keypress)="onFindInputKeypress($event.key)" placeholder="Find"
-          />
-          <span class="input-group-btn" *ngIf="shouldDisplayFoundNavigation">
+        </span>
+        <input type="search" class="form-control" [(ngModel)]="findExpression" (keypress)="onFindInputKeypress($event.key)" placeholder="Find"
+        />
+        <span class="input-group-btn" *ngIf="shouldDisplayFoundNavigation">
             <button type="button" class="btn btn-default" [disabled]="currentFound <= 0" (click)="onFoundNavigate(-1)">❮</button>
-          </span>
-          <span class="input-group-btn" *ngIf="shouldDisplayFoundNavigation">
+        </span>
+        <span class="input-group-btn" *ngIf="shouldDisplayFoundNavigation">
             <button type="button" class="btn btn-default" [disabled]="currentFound >= foundIndices.length - 1" (click)="onFoundNavigate(1)">❯</button>
-          </span>
-          <span *ngIf="foundIndices" [ngSwitch]="foundIndices.length" class="input-group-addon transparent borderless">
-            <span *ngSwitchCase="0">
+        </span>
+        <span *ngIf="foundIndices" [ngSwitch]="foundIndices.length" class="input-group-addon transparent borderless">
+          <span *ngSwitchCase="0">
               Nothing found
-            </span>
+          </span>
           <span *ngSwitchDefault>
               {{currentFound + 1}} of {{foundIndices.length}}
-            </span>
           </span>
-        </div>
-      </td>
-      <td class="navigator-item-right">
-        <label>
+        </span>
+      </div>
+    </div>
+    <div>
+      <label class="item-count-label">
           {{paginatedItems[0].index + 1}}-{{paginatedItems[paginatedItems.length - 1].index + 1}} of {{values.size}} {{path[path.length - 1]}}
-        </label>
-        <br>
-        <pagination [totalItems]="values.size" [ngModel]="currentPage" [maxSize]="navigator.maxVisiblePageCount" [itemsPerPage]="navigator.itemsPerPage"
-          class="pagination-sm pagination-top" [boundaryLinks]="true" [rotate]="false" [firstText]="'❮❮'" [previousText]="'❮'"
-          [nextText]="'❯'" [lastText]="'❯❯'" (pageChanged)="onPageChange($event.page)"></pagination>
-      </td>
-    </tr>
-  </table>
+      </label>
+      <br>
+      <pagination [totalItems]="values.size" [ngModel]="currentPage" [maxSize]="navigator.maxVisiblePageCount" [itemsPerPage]="navigator.itemsPerPage"
+        class="pagination-sm pagination-top" [boundaryLinks]="true" [rotate]="false" [firstText]="'❮❮'" [previousText]="'❮'"
+        [nextText]="'❯'" [lastText]="'❯❯'" (pageChanged)="onPageChange($event.page)"></pagination>
+    </div>
+  </div>
   <!-- Elements -->
   <div *ngFor="let item of paginatedItems; trackBy:trackByElement">
     <div class="complex-list-field-wrapper">
