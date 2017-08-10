@@ -1,26 +1,25 @@
 .complex-list-field-wrapper {
-  margin: 5px 15px 15px 15px;
+  margin: 10px 15px 15px 10px;
   padding: 5px;
   box-shadow: 0 0 3px 1px rgba(0,0,0,0.25);
 }
 
 .navigator-container {
   width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  background-color: white; 
+  box-shadow: 0 0.5px 0 0 #ffffff inset, 0 1px 2px 0 #B3B3B3;
 }
 
-$navigator-item-padding: 13px;
-
-.navigator-item-right {
-  float: right;
-  padding-right: $navigator-item-padding !important;
-  label {
-    position: relative;
-    top: -19px;
-  }
-}
-
-.navigator-item-left {
-  padding-left: $navigator-item-padding !important;
+.item-count-label {
+  position: relative;
+  top: -19px;
 }
 
 .transparent {
@@ -33,7 +32,6 @@ $navigator-item-padding: 13px;
 
 .find-button {
   color: darkslategray;
-  opacity: 0.83;
   
   .fa-search {
     opacity: 0.83;
