@@ -37,8 +37,8 @@ export class EditorPreviewerComponent extends AbstractTrackerComponent {
 
   @Input() previews: Array<Preview>;
 
-  openUrlInNewTab(url: string) {
-    window.open(url);
+  openUrlInNewWindow(url: string) {
+    window.open(url, 'Preview', 'left=20,top=20,width=750,height=750');
   }
 
 }
