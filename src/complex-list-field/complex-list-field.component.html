@@ -26,6 +26,9 @@
         </span>
       </div>
     </div>
+    <div *ngIf="headerItemTemplate">
+      <ng-template [ngTemplateOutlet]="headerItemTemplate"></ng-template>
+    </div>
     <div>
       <label class="item-count-label">
           {{paginatedItems[0].index + 1}}-{{paginatedItems[paginatedItems.length - 1].index + 1}} of {{values.size}} {{path[path.length - 1]}}

@@ -18,8 +18,13 @@ export interface LongListNavigatorConfig {
    */
   itemsPerPage: number;
 
- /**
-  * Number of pages that are displayed in pagination view.
-  */
+  /**
+   * Number of pages that are displayed in pagination view.
+   */
   maxVisiblePageCount: number;
+
+  /**
+   * Template name to put extra element/components into empty place of navigator header.
+   */
+  headerItemTemplateName?: string;
 }
