@@ -26,7 +26,6 @@ import {
 } from '@angular/core';
 
 import { CategorizedValidationErrors } from '../shared/interfaces';
-import { AppGlobalsService } from '../shared/services';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({

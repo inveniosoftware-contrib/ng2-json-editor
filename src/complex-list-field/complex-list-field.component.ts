@@ -33,7 +33,14 @@ import {
 import { List, Map, Set } from 'immutable';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
-import { AppGlobalsService, JsonStoreService, DomUtilService, PathUtilService, ListPageChangerService } from '../shared/services';
+import {
+  AppGlobalsService,
+  JsonStoreService,
+  DomUtilService,
+  PathUtilService,
+  ListPageChangerService,
+  ErrorsService
+} from '../shared/services';
 import { LongListNavigatorConfig, JSONSchema, PaginatedItem } from '../shared/interfaces';
 
 @Component({
@@ -60,12 +67,13 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
   shouldDisplayFoundNavigation: boolean;
 
   constructor(public appGlobalsService: AppGlobalsService,
+    public errorsService: ErrorsService,
     public jsonStoreService: JsonStoreService,
     public domUtilService: DomUtilService,
     public pathUtilService: PathUtilService,
     public changeDetectorRef: ChangeDetectorRef,
     public listPageChangerService: ListPageChangerService) {
-    super(appGlobalsService, jsonStoreService, pathUtilService, changeDetectorRef);
+    super(appGlobalsService, errorsService, jsonStoreService, pathUtilService, changeDetectorRef);
   }
 
   ngOnInit() {
@@ -104,7 +112,7 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
 
   hasErrorOrPatch(index: number) {
     let itemPath = this.getPathStringForChild(index);
-    return this.appGlobalsService.hasError(itemPath) || this.jsonStoreService.hasPatch(itemPath);
+    return this.errorsService.hasError(itemPath) || this.jsonStoreService.hasPatch(itemPath);
   }
 
   onFindClick() {

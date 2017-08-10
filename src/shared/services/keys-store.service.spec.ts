@@ -26,7 +26,7 @@ import { KeysStoreService } from './keys-store.service';
 import { PathUtilService } from './path-util.service';
 import { AppGlobalsService } from './app-globals.service';
 import { JsonSchemaService } from './json-schema.service';
-import { ErrorMapUtilService } from './error-map-util.service';
+import { ErrorsService } from './errors.service';
 
 import { JSONSchema } from '../interfaces';
 
@@ -51,7 +51,7 @@ describe('KeysStoreService', () => {
 
   beforeEach(() => {
     service = new KeysStoreService(
-      new AppGlobalsService(new ErrorMapUtilService()),
+      new AppGlobalsService(),
       new PathUtilService(),
       new MockJsonSchemaService(null)
     );

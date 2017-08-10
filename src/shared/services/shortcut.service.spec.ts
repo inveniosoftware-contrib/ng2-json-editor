@@ -32,7 +32,7 @@ import { PathUtilService } from './path-util.service';
 import { DomUtilService } from './dom-util.service';
 import { KeysStoreService } from './keys-store.service';
 import { TabsUtilService } from './tabs-util.service';
-import { ErrorMapUtilService } from './error-map-util.service';
+import { ErrorsService } from './errors.service';
 import { ListPageChangerService } from './list-page-changer.service';
 
 describe('ShortcutService', () => {
@@ -50,7 +50,7 @@ describe('ShortcutService', () => {
         TabsUtilService,
         KeysStoreService,
         AppGlobalsService,
-        ErrorMapUtilService,
+        ErrorsService,
         ListPageChangerService
       ]
     });

@@ -48,7 +48,8 @@ import {
   RecordFixerService,
   SchemaFixerService,
   ShortcutService,
-  TabsUtilService
+  TabsUtilService,
+  ErrorsService
 } from './shared/services';
 
 import { JsonEditorConfig, Preview, SchemaValidationErrors, JsonPatch } from './shared/interfaces';
@@ -71,7 +72,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   @Input() schema: any;
   @Input() set errorMap(errors: SchemaValidationErrors) {
     this._errorMap = errors;
-    this.appGlobalsService.externalErrors = this.errorMap;
+    this.errorsService.externalErrors = this.errorMap;
   }
   @Input() jsonPatches: Array<JsonPatch>;
 
@@ -93,6 +94,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
 
   constructor(public http: Http,
     public appGlobalsService: AppGlobalsService,
+    public errorsService: ErrorsService,
     public jsonStoreService: JsonStoreService,
     public jsonUtilService: JsonUtilService,
     public jsonSchemaService: JsonSchemaService,
@@ -125,7 +127,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
     // set config to make it globally accessible all over the app
     this.appGlobalsService.config = this.config;
     // set errors that is used by other components
-    this.appGlobalsService.externalErrors = this.errorMap;
+    this.errorsService.externalErrors = this.errorMap;
     this.appGlobalsService.templates = this.templates;
     this.appGlobalsService.adminMode$.subscribe(adminMode => {
       this.keysStoreService.buildKeysMap(this._record, this.schema);
