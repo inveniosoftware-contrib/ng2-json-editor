@@ -107,6 +107,10 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
     return this.appGlobalsService.hasError(itemPath) || this.jsonStoreService.hasPatch(itemPath);
   }
 
+  get headerItemTemplate(): TemplateRef<any> {
+    return this.appGlobalsService.templates[this.navigator.headerItemTemplateName];
+  }
+
   onFindClick() {
     // clear for new search
     this.foundIndices = [];
