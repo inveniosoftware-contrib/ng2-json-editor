@@ -1,0 +1,71 @@
+[
+  {
+    "op": "replace",
+    "path": "/abstracts/0/source",
+    "value": "arXiv-PATCHED-Version"
+  },
+  {
+    "op": "replace",
+    "path": "/references/0/reference/misc/0",
+    "value": "A Misc Thing"
+  },
+  {
+    "op": "add",
+    "path": "/references/1/reference/misc/-",
+    "value": "Another misc"
+  },
+  {
+    "op": "add",
+    "path": "/collaborations/-",
+    "value": {
+      "value": "New Collaboration"
+    }
+  },
+  {
+    "op": "add",
+    "path": "/references/-",
+    "value": {
+      "reference": {
+        "authors": [
+          {
+            "full_name": "Patch"
+          }
+        ],
+        "label": "1",
+        "misc": [
+          "Patch 1",
+          "Patch 2"
+        ],
+        "urls": [
+          {
+            "value": "https://indico.cern.ch/Patch"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "op": "remove",
+    "path": "/references/20"
+  },
+  {
+    "op": "remove",
+    "path": "/references/7/reference/misc"
+  },
+  {
+    "op": "remove",
+    "path": "/references/0/reference/authors"
+  },
+  {
+    "op": "remove",
+    "path": "/authors"
+  },
+  {
+    "op": "remove",
+    "path": "/accelerator_experiments/1"
+  },
+  {
+    "op": "remove",
+    "path": "/references/0/reference/label"
+  }
+]

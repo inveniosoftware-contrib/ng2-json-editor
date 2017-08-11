@@ -4,7 +4,7 @@ webpackJsonp([0,3],{
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_list_field_component__ = __webpack_require__(718);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_list_field_component__ = __webpack_require__(719);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__abstract_list_field_component__["a"]; });
 
 
@@ -16,9 +16,8 @@ webpackJsonp([0,3],{
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__error_map_util_service__ = __webpack_require__(413);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppGlobalsService; });
 /*
  * This file is part of ng2-json-editor.
@@ -43,21 +42,12 @@ webpackJsonp([0,3],{
 */
 
 
-
 var AppGlobalsService = (function () {
-    function AppGlobalsService(errorMapUtilService) {
-        this.errorMapUtilService = errorMapUtilService;
-        this._externalCategorizedErrorsSubject = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
-        this._internalCategorizedErrorsSubject = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
-        this._externalErrorCountersSubject = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
-        this._internalErrorCountersSubject = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
-        this.internalErrorMap = {};
+    function AppGlobalsService() {
         this._adminMode = false;
         this._adminMode$ = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
         this.activeTabName = '';
         this.tabNameToFirstTopLevelElement = {};
-        this.internalCategorizedErrorMap = { Errors: {}, Warnings: {} };
-        this.externalCategorizedErrorMap = { Errors: {}, Warnings: {} };
     }
     Object.defineProperty(AppGlobalsService.prototype, "adminMode$", {
         get: function () {
@@ -77,57 +67,6 @@ var AppGlobalsService = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(AppGlobalsService.prototype, "externalCategorizedErrorsSubject", {
-        get: function () {
-            return this._externalCategorizedErrorsSubject;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AppGlobalsService.prototype, "externalErrorCountersSubject", {
-        get: function () {
-            return this._externalErrorCountersSubject;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AppGlobalsService.prototype, "internalCategorizedErrorsSubject", {
-        get: function () {
-            return this._internalCategorizedErrorsSubject;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AppGlobalsService.prototype, "internalErrorCountersSubject", {
-        get: function () {
-            return this._internalErrorCountersSubject;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(AppGlobalsService.prototype, "externalErrors", {
-        set: function (errors) {
-            var _a = this.errorMapUtilService.categorizeErrorMap(errors), categorizedErrorMap = _a.categorizedErrorMap, errorCounter = _a.errorCounter, warningCounter = _a.warningCounter;
-            this.externalCategorizedErrorMap = categorizedErrorMap;
-            this.externalCategorizedErrorsSubject.next(this.externalCategorizedErrorMap);
-            this.externalErrorCountersSubject.next({
-                errors: errorCounter,
-                warnings: warningCounter
-            });
-        },
-        enumerable: true,
-        configurable: true
-    });
-    AppGlobalsService.prototype.extendInternalErrors = function (path, errors) {
-        this.internalErrorMap[path] = errors;
-        var _a = this.errorMapUtilService.categorizeErrorMap(this.internalErrorMap), categorizedErrorMap = _a.categorizedErrorMap, errorCounter = _a.errorCounter, warningCounter = _a.warningCounter;
-        this.internalCategorizedErrorMap = categorizedErrorMap;
-        this.internalCategorizedErrorsSubject.next(this.internalCategorizedErrorMap);
-        this.internalErrorCountersSubject.next({
-            errors: errorCounter,
-            warnings: warningCounter
-        });
-    };
     Object.defineProperty(AppGlobalsService.prototype, "firstElementPathForCurrentTab", {
         get: function () {
             return this.tabNameToFirstTopLevelElement[this.activeTabName];
@@ -142,9 +81,7 @@ AppGlobalsService.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */] },
 ];
 /** @nocollapse */
-AppGlobalsService.ctorParameters = function () { return [
-    { type: __WEBPACK_IMPORTED_MODULE_2__error_map_util_service__["a" /* ErrorMapUtilService */], },
-]; };
+AppGlobalsService.ctorParameters = function () { return []; };
 
 
 /***/ }),
@@ -260,7 +197,7 @@ ComponentTypeService.ctorParameters = function () { return []; };
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EmptyValueService; });
 /*
@@ -341,7 +278,7 @@ EmptyValueService.ctorParameters = function () { return []; };
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__path_util_service__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__path_util_service__ = __webpack_require__(34);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JsonSchemaService; });
 /*
  * This file is part of ng2-json-editor.
@@ -379,7 +316,7 @@ var JsonSchemaService = (function () {
     JsonSchemaService.prototype.forPathArray = function (path) {
         return path
             .reduce(function (schema, pathEl) {
-            if (isNaN(pathEl)) {
+            if (isNaN(pathEl) && pathEl !== '-') {
                 return schema.properties[pathEl];
             }
             else {
@@ -408,7 +345,214 @@ JsonSchemaService.ctorParameters = function () { return [
 
 /***/ }),
 
-/***/ 145:
+/***/ 144:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__path_util_service__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__json_schema_service__ = __webpack_require__(143);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_globals_service__ = __webpack_require__(140);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return KeysStoreService; });
+/*
+ * This file is part of ng2-json-editor.
+ * Copyright (C) 2016 CERN.
+ *
+ * ng2-json-editor is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * ng2-json-editor is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ * In applying this license, CERN does not
+ * waive the privileges and immunities granted to it by virtue of its status
+ * as an Intergovernmental Organization or submit itself to any jurisdiction.
+*/
+
+
+
+
+
+
+var KeysStoreService = (function () {
+    function KeysStoreService(appGlobalsService, pathUtilService, jsonSchemaService) {
+        this.appGlobalsService = appGlobalsService;
+        this.pathUtilService = pathUtilService;
+        this.jsonSchemaService = jsonSchemaService;
+        this.onKeysChange = new __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__["ReplaySubject"](1);
+    }
+    KeysStoreService.prototype.forPath = function (path) {
+        return this.keys$Map[path];
+    };
+    /**
+     * Adds a key to the specified path.
+     * @param path path to add the key to
+     * @param key key to be added
+     * @param schema OBJECT schema that belongs to path (schema.items for table-list)
+     */
+    KeysStoreService.prototype.addKey = function (path, key, schema) {
+        var _this = this;
+        // FIXME: could do O(logn) insert instead of O(nlogn) since the set is already sorted.
+        this.keysMap[path] = this.keysMap[path]
+            .add(key)
+            .sort(function (a, b) { return _this.compareByPriority(a, b, schema); });
+        this.keys$Map[path].next(this.keysMap[path]);
+        this.onKeysChange.next({ path: path, keys: this.keysMap[path] });
+        var newKeyPath = "" + path + this.pathUtilService.separator + key;
+        var keySchema = schema.properties[key];
+        if (keySchema.type === 'object' || keySchema.componentType === 'table-list') {
+            this.buildKeysMapRecursivelyForPath(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_immutable__["Map"])(), newKeyPath, keySchema);
+        }
+        return newKeyPath;
+    };
+    KeysStoreService.prototype.deletePath = function (path) {
+        var lastKey = path[path.length - 1];
+        var parentPath = this.pathUtilService.toPathString(path.slice(0, -1));
+        // don't invoke deleteKey if parentPath is primitive-list
+        if (this.keysMap[parentPath]) {
+            this.deleteKey(parentPath, lastKey);
+        }
+    };
+    KeysStoreService.prototype.deleteKey = function (parentPath, key) {
+        this.keysMap[parentPath] = this.keysMap[parentPath].delete(key);
+        this.keys$Map[parentPath].next(this.keysMap[parentPath]);
+        this.onKeysChange.next({ path: parentPath, keys: this.keysMap[parentPath] });
+        var deletedKeyPath = "" + parentPath + this.pathUtilService.separator + key;
+        delete this.keysMap[deletedKeyPath];
+        delete this.keys$Map[deletedKeyPath];
+    };
+    KeysStoreService.prototype.buildKeysMap = function (json, schema) {
+        this.keys$Map = {};
+        this.keysMap = {};
+        this.buildKeysMapRecursivelyForPath(json, '', schema);
+    };
+    KeysStoreService.prototype.buildKeysMapRecursivelyForPath = function (mapOrList, path, schema) {
+        var _this = this;
+        // TODO: remove this and unify typing when #330 is fixed
+        var pathString = Array.isArray(path) ? this.pathUtilService.toPathString(path) : path;
+        if (!schema) {
+            schema = this.jsonSchemaService.forPathString(pathString);
+        }
+        if (schema.type === 'object') {
+            var map_1 = mapOrList;
+            var finalKeys = this.buildkeysForObject(pathString, map_1, schema);
+            // recursive call
+            finalKeys
+                .filter(function (key) { return _this.isObjectOrArray(schema.properties[key]); })
+                .forEach(function (key) {
+                var nextPath = "" + pathString + _this.pathUtilService.separator + key;
+                _this.buildKeysMapRecursivelyForPath(map_1.get(key), nextPath, schema.properties[key]);
+            });
+        }
+        else if (schema.componentType === 'table-list') {
+            var list = mapOrList;
+            this.buildKeysForTableList(pathString, list, schema);
+            // there is no recursive call for table list items because they aren't expected to have object or object list as property.
+        }
+        else {
+            // recursive calls for each item of list if it's not a table-list
+            var list = mapOrList;
+            if (this.isObjectOrArray(schema.items)) {
+                // recursive call
+                list.forEach(function (element, index) {
+                    var elementPath = "" + pathString + _this.pathUtilService.separator + index;
+                    _this.buildKeysMapRecursivelyForPath(element, elementPath, schema.items);
+                });
+            }
+        }
+    };
+    // default value for `list`, if this is called for alwaysShow in which case `list` would be undefined
+    KeysStoreService.prototype.buildKeysForTableList = function (path, list, schema) {
+        if (list === void 0) { list = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_immutable__["List"])(); }
+        // get present unique keys in all items of table-list
+        var keys = __WEBPACK_IMPORTED_MODULE_1_immutable__["Seq"].Set(list
+            .map(function (object) { return object.keySeq().toArray(); })
+            .reduce(function (pre, cur) { return pre.concat(cur); }, []));
+        var itemSchema = schema.items;
+        var finalKeys = this.schemafy(keys, itemSchema);
+        this.setKeys(path, finalKeys);
+    };
+    // default value for `map`, if this is called for alwaysShow in which case `map` would be undefined
+    KeysStoreService.prototype.buildkeysForObject = function (path, map, schema) {
+        if (map === void 0) { map = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_immutable__["Map"])(); }
+        var finalKeys = this.schemafy(map.keySeq(), schema);
+        this.setKeys(path, finalKeys);
+        return finalKeys;
+    };
+    /**
+     * Filters keys, add alwaysShow fields and sorts by schema.
+     */
+    KeysStoreService.prototype.schemafy = function (keys, schema) {
+        var _this = this;
+        return keys
+            .filter(function (key) { return _this.isNotHidden(key, schema) || _this.appGlobalsService.adminMode; })
+            .concat(schema.alwaysShow || [])
+            .sort(function (a, b) { return _this.compareByPriority(a, b, schema); })
+            .toOrderedSet();
+    };
+    KeysStoreService.prototype.compareByPriority = function (a, b, schema) {
+        // Sort by priority, larger is the first.
+        var pa = schema.properties[a].priority || 0;
+        var pb = schema.properties[b].priority || 0;
+        if (pa > pb) {
+            return -1;
+        }
+        if (pa < pb) {
+            return 1;
+        }
+        // Sort alphabetically.
+        if (a < b) {
+            return -1;
+        }
+        if (a > b) {
+            return 1;
+        }
+        return 0;
+    };
+    KeysStoreService.prototype.isNotHidden = function (key, schema) {
+        if (!schema.properties[key]) {
+            throw new Error("\"" + key + "\" is not specified as property in \n" + JSON.stringify(schema.properties, undefined, 2));
+        }
+        return !schema.properties[key].hidden;
+    };
+    KeysStoreService.prototype.isObjectOrArray = function (schema) {
+        return schema.type === 'object' || schema.type === 'array';
+    };
+    KeysStoreService.prototype.setKeys = function (path, keys) {
+        this.keysMap[path] = keys;
+        if (!this.keys$Map[path]) {
+            this.keys$Map[path] = new __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__["ReplaySubject"](1);
+        }
+        this.keys$Map[path].next(keys);
+    };
+    return KeysStoreService;
+}());
+
+KeysStoreService.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */] },
+];
+/** @nocollapse */
+KeysStoreService.ctorParameters = function () { return [
+    { type: __WEBPACK_IMPORTED_MODULE_5__app_globals_service__["a" /* AppGlobalsService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_3__path_util_service__["a" /* PathUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_4__json_schema_service__["a" /* JsonSchemaService */], },
+]; };
+
+
+/***/ }),
+
+/***/ 146:
 /***/ (function(module, exports) {
 
 function webpackEmptyContext(req) {
@@ -417,12 +561,12 @@ function webpackEmptyContext(req) {
 webpackEmptyContext.keys = function() { return []; };
 webpackEmptyContext.resolve = webpackEmptyContext;
 module.exports = webpackEmptyContext;
-webpackEmptyContext.id = 145;
+webpackEmptyContext.id = 146;
 
 
 /***/ }),
 
-/***/ 146:
+/***/ 147:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -581,7 +725,7 @@ AppConfig = __decorate([
 
 /***/ }),
 
-/***/ 147:
+/***/ 148:
 /***/ (function(module, exports) {
 
 function webpackEmptyContext(req) {
@@ -590,12 +734,12 @@ function webpackEmptyContext(req) {
 webpackEmptyContext.keys = function() { return []; };
 webpackEmptyContext.resolve = webpackEmptyContext;
 module.exports = webpackEmptyContext;
-webpackEmptyContext.id = 147;
+webpackEmptyContext.id = 148;
 
 
 /***/ }),
 
-/***/ 39:
+/***/ 34:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -676,7 +820,12 @@ var PathUtilService = (function () {
      * Example: from ['foo', 'bar', 0] to '/foo/bar/0'
      */
     PathUtilService.prototype.toPathString = function (path) {
-        return "" + this.separator + path.join(this.separator);
+        if (path.length === 0) {
+            return '';
+        }
+        else {
+            return "" + this.separator + path.join(this.separator);
+        }
     };
     /**
      * Converts `/` separated path string to path array.
@@ -699,32 +848,33 @@ PathUtilService.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 410:
+/***/ 411:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sized_stack__ = __webpack_require__(758);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sized_stack__ = __webpack_require__(767);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__sized_stack__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 411:
+/***/ 412:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__add_always_show_fields_pipe__ = __webpack_require__(763);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__different_keys_pipe__ = __webpack_require__(764);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__filter_by_expression_pipe__ = __webpack_require__(765);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__filter_hidden_fields_pipe__ = __webpack_require__(766);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__sanitize_url_pipe__ = __webpack_require__(769);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__self_or_empty_pipe__ = __webpack_require__(770);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__underscore_to_space_pipe__ = __webpack_require__(773);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__set_first_element_path_pipe__ = __webpack_require__(771);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__sort_alphabetically_pipe__ = __webpack_require__(772);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__keys_pipe__ = __webpack_require__(767);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__last_path_element_pipe__ = __webpack_require__(768);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__add_always_show_fields_pipe__ = __webpack_require__(772);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__different_keys_pipe__ = __webpack_require__(773);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__filter_by_expression_pipe__ = __webpack_require__(774);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__filter_hidden_fields_pipe__ = __webpack_require__(775);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__sanitize_url_pipe__ = __webpack_require__(778);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__self_or_empty_pipe__ = __webpack_require__(779);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__underscore_to_space_pipe__ = __webpack_require__(783);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__set_first_element_path_pipe__ = __webpack_require__(780);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__sort_alphabetically_pipe__ = __webpack_require__(781);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__keys_pipe__ = __webpack_require__(776);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__last_path_element_pipe__ = __webpack_require__(777);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__type_of_pipe__ = __webpack_require__(782);
 /* unused harmony reexport AddAlwaysShowFieldsPipe */
 /* unused harmony reexport DifferentKeysPipe */
 /* unused harmony reexport FilterByExpressionPipe */
@@ -736,7 +886,9 @@ PathUtilService.ctorParameters = function () { return []; };
 /* unused harmony reexport SortAlphabeticallyPipe */
 /* unused harmony reexport KeysPipe */
 /* unused harmony reexport LastPathElementPipe */
+/* unused harmony reexport TypeOfPipe */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SHARED_PIPES; });
+
 
 
 
@@ -760,18 +912,20 @@ var SHARED_PIPES = [
     __WEBPACK_IMPORTED_MODULE_7__set_first_element_path_pipe__["a" /* SetFirstElementPathPipe */],
     __WEBPACK_IMPORTED_MODULE_8__sort_alphabetically_pipe__["a" /* SortAlphabeticallyPipe */],
     __WEBPACK_IMPORTED_MODULE_9__keys_pipe__["a" /* KeysPipe */],
-    __WEBPACK_IMPORTED_MODULE_10__last_path_element_pipe__["a" /* LastPathElementPipe */]
+    __WEBPACK_IMPORTED_MODULE_10__last_path_element_pipe__["a" /* LastPathElementPipe */],
+    __WEBPACK_IMPORTED_MODULE_11__type_of_pipe__["a" /* TypeOfPipe */]
 ];
 
 
 /***/ }),
 
-/***/ 412:
+/***/ 413:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tabs_util_service__ = __webpack_require__(418);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__list_page_changer_service__ = __webpack_require__(416);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DomUtilService; });
 /*
  * This file is part of ng2-json-editor.
@@ -796,9 +950,11 @@ var SHARED_PIPES = [
 */
 
 
+
 var DomUtilService = (function () {
-    function DomUtilService(tabsUtilService) {
+    function DomUtilService(tabsUtilService, listPageChangerService) {
         this.tabsUtilService = tabsUtilService;
+        this.listPageChangerService = listPageChangerService;
         this.editableSelector = '.value-container input, div[contenteditable=true], .switch-input';
         // highlight class is defined in json-editor.component.scss
         this.highlightClass = 'highlight';
@@ -807,6 +963,7 @@ var DomUtilService = (function () {
         var _this = this;
         if (highlight === void 0) { highlight = false; }
         this.tabsUtilService.selectTabIfNeeded(id);
+        this.listPageChangerService.changePage(id);
         setTimeout(function () {
             var el = document.getElementById(id);
             if (el) {
@@ -864,6 +1021,24 @@ var DomUtilService = (function () {
             this.highlightedElement = undefined;
         }
     };
+    DomUtilService.prototype.focusPatchElementById = function (id) {
+        this.tabsUtilService.selectTabIfNeeded(id);
+        this.listPageChangerService.changePage(id);
+        setTimeout(function () {
+            var el = document.getElementById(id);
+            var mergeButton = el.querySelector('.btn-merge');
+            if (mergeButton) {
+                mergeButton.focus();
+                mergeButton.click();
+            }
+            else {
+                var patchActionsContainer = el.querySelector('.patch-actions-container');
+                if (patchActionsContainer) {
+                    patchActionsContainer.focus();
+                }
+            }
+        });
+    };
     DomUtilService.prototype.selectAllContent = function (el) {
         if (el instanceof HTMLInputElement) {
             el.select();
@@ -895,72 +1070,8 @@ DomUtilService.decorators = [
 /** @nocollapse */
 DomUtilService.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_1__tabs_util_service__["a" /* TabsUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__list_page_changer_service__["a" /* ListPageChangerService */], },
 ]; };
-
-
-/***/ }),
-
-/***/ 413:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ErrorMapUtilService; });
-/*
- * This file is part of ng2-json-editor.
- * Copyright (C) 2017 CERN.
- *
- * ng2-json-editor is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of the
- * License, or (at your option) any later version.
- *
- * ng2-json-editor is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
- * In applying this license, CERN does not
- * waive the privileges and immunities granted to it by virtue of its status
- * as an Intergovernmental Organization or submit itself to any jurisdiction.
- */
-
-var ErrorMapUtilService = (function () {
-    function ErrorMapUtilService() {
-    }
-    ErrorMapUtilService.prototype.categorizeErrorMap = function (errorMap) {
-        var categorizedErrorMap = { Errors: {}, Warnings: {} };
-        var errorCounter = 0;
-        var warningCounter = 0;
-        Object.keys(errorMap)
-            .forEach(function (key) {
-            var validationErrors = errorMap[key];
-            validationErrors.forEach(function (error) {
-                if (error.type === 'Error') {
-                    categorizedErrorMap.Errors[key] ? categorizedErrorMap.Errors[key].push(error)
-                        : categorizedErrorMap.Errors[key] = [error];
-                    errorCounter++;
-                }
-                else {
-                    categorizedErrorMap.Warnings[key] ? categorizedErrorMap.Warnings[key].push(error)
-                        : categorizedErrorMap.Warnings[key] = [error];
-                    warningCounter++;
-                }
-            });
-        });
-        return { categorizedErrorMap: categorizedErrorMap, errorCounter: errorCounter, warningCounter: warningCounter };
-    };
-    return ErrorMapUtilService;
-}());
-
-ErrorMapUtilService.decorators = [
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */] },
-];
-/** @nocollapse */
-ErrorMapUtilService.ctorParameters = function () { return []; };
 
 
 /***/ }),
@@ -970,24 +1081,28 @@ ErrorMapUtilService.ctorParameters = function () { return []; };
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__path_util_service__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__classes__ = __webpack_require__(410);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__path_util_service__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__keys_store_service__ = __webpack_require__(144);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__classes__ = __webpack_require__(411);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JsonStoreService; });
 
 
 
 
 
+
 var JsonStoreService = (function () {
-    function JsonStoreService(pathUtilService) {
+    function JsonStoreService(pathUtilService, keysStoreService) {
         this.pathUtilService = pathUtilService;
+        this.keysStoreService = keysStoreService;
+        this._patchesByPath$ = new __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__["ReplaySubject"](1);
         this._jsonChange = new __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__["ReplaySubject"](1);
         // list of reverse patches for important changes
-        this.history = new __WEBPACK_IMPORTED_MODULE_4__classes__["a" /* SizedStack */](5);
+        this.history = new __WEBPACK_IMPORTED_MODULE_5__classes__["a" /* SizedStack */](5);
     }
     JsonStoreService.prototype.setIn = function (path, value) {
         // if value is undefined or empty string
@@ -1019,6 +1134,7 @@ var JsonStoreService = (function () {
         });
         this.json = this.json.removeIn(path);
         this._jsonChange.next(this.json);
+        this.keysStoreService.deletePath(path);
     };
     JsonStoreService.prototype.addIn = function (path, value) {
         var lastPathElement = path[path.length - 1];
@@ -1027,8 +1143,17 @@ var JsonStoreService = (function () {
             var pathWithoutIndex = path.slice(0, path.length - 1);
             var list = this.getIn(pathWithoutIndex) || __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_immutable__["List"])();
             value = this.toImmutable(value);
-            list = lastPathElement === '-' ? list.push(value) : list.insert(lastPathElement, value);
+            if (lastPathElement === '-') {
+                list = list.push(value);
+                path[path.length - 1] = list.size - 1;
+            }
+            else {
+                list = list.insert(lastPathElement, value);
+            }
             this.setIn(pathWithoutIndex, list);
+            if (__WEBPACK_IMPORTED_MODULE_1_immutable__["Map"].isMap(value)) {
+                this.keysStoreService.buildKeysMapRecursivelyForPath(value, path);
+            }
         }
         else {
             this.setIn(path, value);
@@ -1036,6 +1161,29 @@ var JsonStoreService = (function () {
     };
     JsonStoreService.prototype.setJson = function (json) {
         this.json = json;
+    };
+    JsonStoreService.prototype.setJsonPatches = function (patches) {
+        var _this = this;
+        this.patchesByPath = {};
+        patches.forEach(function (patch) {
+            var path = _this.getComponentPathForPatch(patch);
+            if (!_this.patchesByPath[path]) {
+                _this.patchesByPath[path] = [];
+            }
+            _this.patchesByPath[path].push(patch);
+        });
+        this.patchesByPath$.next(this.patchesByPath);
+    };
+    JsonStoreService.prototype.getComponentPathForPatch = function (patch) {
+        if (patch.op === 'add') {
+            var pathArray = this.pathUtilService.toPathArray(patch.path);
+            var lastPathElement = pathArray[pathArray.length - 1];
+            if (lastPathElement === '-' || !isNaN(Number(lastPathElement))) {
+                pathArray.pop();
+                return this.pathUtilService.toPathString(pathArray);
+            }
+        }
+        return patch.path;
     };
     JsonStoreService.prototype.applyPatch = function (patch) {
         var path = this.pathUtilService.toPathArray(patch.path);
@@ -1047,10 +1195,27 @@ var JsonStoreService = (function () {
                 this.removeIn(path);
                 break;
             case 'add':
+            // custom type for adding a replace patch as new.
+            case 'add-as-new':
                 this.addIn(path, patch.value);
                 break;
             default:
                 console.warn(patch.op + " is not supported!");
+        }
+        this.removeJsonPatch(patch);
+    };
+    JsonStoreService.prototype.rejectPatch = function (patch) {
+        this.removeJsonPatch(patch);
+    };
+    JsonStoreService.prototype.hasPatch = function (path) {
+        return this.patchesByPath[path] && this.patchesByPath[path].length > 0;
+    };
+    JsonStoreService.prototype.removeJsonPatch = function (patch) {
+        var path = this.getComponentPathForPatch(patch);
+        var patchIndex = this.patchesByPath[path].indexOf(patch);
+        if (patchIndex > -1) {
+            this.patchesByPath[path].splice(patchIndex, 1);
+            this._patchesByPath$.next(this.patchesByPath);
         }
     };
     JsonStoreService.prototype.rollbackLastChange = function () {
@@ -1066,6 +1231,13 @@ var JsonStoreService = (function () {
     Object.defineProperty(JsonStoreService.prototype, "jsonChange", {
         get: function () {
             return this._jsonChange;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(JsonStoreService.prototype, "patchesByPath$", {
+        get: function () {
+            return this._patchesByPath$;
         },
         enumerable: true,
         configurable: true
@@ -1088,6 +1260,7 @@ JsonStoreService.decorators = [
 /** @nocollapse */
 JsonStoreService.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_3__path_util_service__["a" /* PathUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_4__keys_store_service__["a" /* KeysStoreService */], },
 ]; };
 
 
@@ -1098,7 +1271,7 @@ JsonStoreService.ctorParameters = function () { return [
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__path_util_service__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__path_util_service__ = __webpack_require__(34);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JsonUtilService; });
 /*
  * This file is part of ng2-json-editor.
@@ -1160,17 +1333,13 @@ JsonUtilService.ctorParameters = function () { return [
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__path_util_service__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__json_schema_service__ = __webpack_require__(143);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_globals_service__ = __webpack_require__(140);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return KeysStoreService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__path_util_service__ = __webpack_require__(34);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ListPageChangerService; });
 /*
  * This file is part of ng2-json-editor.
- * Copyright (C) 2016 CERN.
+ * Copyright (C) 2017 CERN.
  *
  * ng2-json-editor is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -1192,163 +1361,42 @@ JsonUtilService.ctorParameters = function () { return [
 
 
 
-
-
-
-var KeysStoreService = (function () {
-    function KeysStoreService(appGlobalsService, pathUtilService, jsonSchemaService) {
-        this.appGlobalsService = appGlobalsService;
+var ListPageChangerService = (function () {
+    function ListPageChangerService(pathUtilService) {
         this.pathUtilService = pathUtilService;
-        this.jsonSchemaService = jsonSchemaService;
-        this.onKeysChange = new __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__["ReplaySubject"](1);
+        this.pageChange$Map = {};
+        this.itemsPerPageMap = {};
     }
-    KeysStoreService.prototype.forPath = function (path) {
-        return this.keys$Map[path];
-    };
     /**
-     * Adds a key to the specified path.
-     * @param path path to add the key to
-     * @param key key to be added
-     * @param schema OBJECT schema that belongs to path (schema.items for table-list)
+     * Changes the page of the list so that requested item is visible on UI
+     * It doesn't do anything if given path's parent is not paginated list.
+     *
+     * @param itemPath path to a list item
      */
-    KeysStoreService.prototype.addKey = function (path, key, schema) {
-        var _this = this;
-        // FIXME: could do O(logn) insert instead of O(nlogn) since the set is already sorted.
-        this.keysMap[path] = this.keysMap[path]
-            .add(key)
-            .sort(function (a, b) { return _this.compareByPriority(a, b, schema); });
-        this.keys$Map[path].next(this.keysMap[path]);
-        this.onKeysChange.next({ path: path, keys: this.keysMap[path] });
-        var newKeyPath = "" + path + this.pathUtilService.separator + key;
-        var keySchema = schema.properties[key];
-        if (keySchema.type === 'object' || keySchema.componentType === 'table-list') {
-            this.buildKeysMapRecursivelyForPath(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_immutable__["Map"])(), newKeyPath, keySchema);
-        }
-        return newKeyPath;
-    };
-    KeysStoreService.prototype.deleteKey = function (path, key) {
-        this.keysMap[path] = this.keysMap[path].delete(key);
-        this.keys$Map[path].next(this.keysMap[path]);
-        this.onKeysChange.next({ path: path, keys: this.keysMap[path] });
-        var deletedKeyPath = "" + path + this.pathUtilService.separator + key;
-        delete this.keysMap[deletedKeyPath];
-        delete this.keys$Map[deletedKeyPath];
-    };
-    KeysStoreService.prototype.buildKeysMap = function (json, schema) {
-        this.keys$Map = {};
-        this.keysMap = {};
-        this.buildKeysMapRecursivelyForPath(json, '', schema);
-    };
-    KeysStoreService.prototype.buildKeysMapRecursivelyForPath = function (mapOrList, path, schema) {
-        var _this = this;
-        // TODO: remove this and unify typing when #330 is fixed
-        var pathString = Array.isArray(path) ? this.pathUtilService.toPathString(path) : path;
-        if (!schema) {
-            schema = this.jsonSchemaService.forPathString(pathString);
-        }
-        if (schema.type === 'object') {
-            var map_1 = mapOrList;
-            var finalKeys = this.buildkeysForObject(pathString, map_1, schema);
-            // recursive call
-            finalKeys
-                .filter(function (key) { return _this.isObjectOrArray(schema.properties[key]); })
-                .forEach(function (key) {
-                var nextPath = "" + pathString + _this.pathUtilService.separator + key;
-                _this.buildKeysMapRecursivelyForPath(map_1.get(key), nextPath, schema.properties[key]);
-            });
-        }
-        else if (schema.componentType === 'table-list') {
-            var list = mapOrList;
-            this.buildKeysForTableList(pathString, list, schema);
-            // there is no recursive call for table list items because they aren't expected to have object or object list as property.
-        }
-        else {
-            // recursive calls for each item of list if it's not a table-list
-            var list = mapOrList;
-            if (this.isObjectOrArray(schema.items)) {
-                // recursive call
-                list.forEach(function (element, index) {
-                    var elementPath = "" + pathString + _this.pathUtilService.separator + index;
-                    _this.buildKeysMapRecursivelyForPath(element, elementPath, schema.items);
-                });
-            }
+    ListPageChangerService.prototype.changePage = function (itemPath) {
+        var itemPathArray = this.pathUtilService.toPathArray(itemPath);
+        var itemIndex = itemPathArray[itemPathArray.length - 1];
+        var listPath = this.pathUtilService.toPathString(itemPathArray.slice(0, -1));
+        if (this.pageChange$Map[listPath]) {
+            var itemsPerPage = this.itemsPerPageMap[listPath];
+            var page = Math.floor((itemIndex / itemsPerPage) + 1);
+            this.pageChange$Map[listPath].next(page);
         }
     };
-    // default value for `list`, if this is called for alwaysShow in which case `list` would be undefined
-    KeysStoreService.prototype.buildKeysForTableList = function (path, list, schema) {
-        if (list === void 0) { list = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_immutable__["List"])(); }
-        // get present unique keys in all items of table-list
-        var keys = __WEBPACK_IMPORTED_MODULE_1_immutable__["Seq"].Set(list
-            .map(function (object) { return object.keySeq().toArray(); })
-            .reduce(function (pre, cur) { return pre.concat(cur); }, []));
-        var itemSchema = schema.items;
-        var finalKeys = this.schemafy(keys, itemSchema);
-        this.setKeys(path, finalKeys);
+    ListPageChangerService.prototype.registerPaginatedList = function (listPath, itemsPerPage) {
+        this.itemsPerPageMap[listPath] = itemsPerPage;
+        this.pageChange$Map[listPath] = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
+        return this.pageChange$Map[listPath];
     };
-    // default value for `map`, if this is called for alwaysShow in which case `map` would be undefined
-    KeysStoreService.prototype.buildkeysForObject = function (path, map, schema) {
-        if (map === void 0) { map = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_immutable__["Map"])(); }
-        var finalKeys = this.schemafy(map.keySeq(), schema);
-        this.setKeys(path, finalKeys);
-        return finalKeys;
-    };
-    /**
-     * Filters keys, add alwaysShow fields and sorts by schema.
-     */
-    KeysStoreService.prototype.schemafy = function (keys, schema) {
-        var _this = this;
-        return keys
-            .filter(function (key) { return _this.isNotHidden(key, schema) || _this.appGlobalsService.adminMode; })
-            .concat(schema.alwaysShow || [])
-            .sort(function (a, b) { return _this.compareByPriority(a, b, schema); })
-            .toOrderedSet();
-    };
-    KeysStoreService.prototype.compareByPriority = function (a, b, schema) {
-        // Sort by priority, larger is the first.
-        var pa = schema.properties[a].priority || 0;
-        var pb = schema.properties[b].priority || 0;
-        if (pa > pb) {
-            return -1;
-        }
-        if (pa < pb) {
-            return 1;
-        }
-        // Sort alphabetically.
-        if (a < b) {
-            return -1;
-        }
-        if (a > b) {
-            return 1;
-        }
-        return 0;
-    };
-    KeysStoreService.prototype.isNotHidden = function (key, schema) {
-        if (!schema.properties[key]) {
-            throw new Error("\"" + key + "\" is not specified as property in \n" + JSON.stringify(schema.properties, undefined, 2));
-        }
-        return !schema.properties[key].hidden;
-    };
-    KeysStoreService.prototype.isObjectOrArray = function (schema) {
-        return schema.type === 'object' || schema.type === 'array';
-    };
-    KeysStoreService.prototype.setKeys = function (path, keys) {
-        this.keysMap[path] = keys;
-        if (!this.keys$Map[path]) {
-            this.keys$Map[path] = new __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__["ReplaySubject"](1);
-        }
-        this.keys$Map[path].next(keys);
-    };
-    return KeysStoreService;
+    return ListPageChangerService;
 }());
 
-KeysStoreService.decorators = [
+ListPageChangerService.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */] },
 ];
 /** @nocollapse */
-KeysStoreService.ctorParameters = function () { return [
-    { type: __WEBPACK_IMPORTED_MODULE_5__app_globals_service__["a" /* AppGlobalsService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_3__path_util_service__["a" /* PathUtilService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_4__json_schema_service__["a" /* JsonSchemaService */], },
+ListPageChangerService.ctorParameters = function () { return [
+    { type: __WEBPACK_IMPORTED_MODULE_2__path_util_service__["a" /* PathUtilService */], },
 ]; };
 
 
@@ -1359,14 +1407,14 @@ KeysStoreService.ctorParameters = function () { return [
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__empty_value_service__ = __webpack_require__(142);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__json_store_service__ = __webpack_require__(414);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__json_schema_service__ = __webpack_require__(143);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__dom_util_service__ = __webpack_require__(412);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__path_util_service__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__keys_store_service__ = __webpack_require__(416);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__dom_util_service__ = __webpack_require__(413);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__path_util_service__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__keys_store_service__ = __webpack_require__(144);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ShortcutActionService; });
 /*
  * This file is part of ng2-json-editor.
@@ -1616,9 +1664,9 @@ ShortcutActionService.ctorParameters = function () { return [
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__path_util_service__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__path_util_service__ = __webpack_require__(34);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsUtilService; });
 /*
  * This file is part of ng2-json-editor.
@@ -1735,9 +1783,9 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dyna
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_zip__ = __webpack_require__(678);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_zip__ = __webpack_require__(679);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_zip___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_zip__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_config__ = __webpack_require__(146);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_config__ = __webpack_require__(147);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
 /*
  * This file is part of ng2-json-editor.
@@ -1779,14 +1827,18 @@ var AppComponent = (function () {
         var _this = this;
         this.http = http;
         this.config = config;
-        __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].zip(this.http.get('./assets/mock-data/record.json'), this.http.get('./assets/mock-data/schema.json'), function (recordRes, schemaRes) {
+        __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].zip(this.http.get('./assets/mock-data/record.json'), this.http.get('./assets/mock-data/schema.json'), this.http.get('./assets/mock-data/patches.json'), this.http.get('./assets/mock-data/error-map.json'), function (recordRes, schemaRes, patchesRes, errorMapRes) {
             return {
                 record: recordRes.json(),
-                schema: schemaRes.json()
+                schema: schemaRes.json(),
+                patches: patchesRes.json(),
+                errorMap: errorMapRes.json(),
             };
         }).subscribe(function (data) {
             _this.record = data.record; // set ./assets/mock-data/record.json
             _this.schema = data.schema; // set ./assets/mock-data/schema.json
+            _this.patches = data.patches; // set ./assets/mock-data/patches.json
+            _this.errorMap = data.errorMap;
         });
     }
     AppComponent.prototype.onRecordChange = function (record) {
@@ -1799,8 +1851,8 @@ AppComponent = __decorate([
         // tslint:disable-next-line
         selector: 'app',
         encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["p" /* ViewEncapsulation */].None,
-        styles: [__webpack_require__(614)],
-        template: __webpack_require__(672)
+        styles: [__webpack_require__(615)],
+        template: __webpack_require__(673)
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__app_config__["a" /* AppConfig */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__app_config__["a" /* AppConfig */]) === "function" && _b || Object])
 ], AppComponent);
@@ -1818,9 +1870,9 @@ var _a, _b;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__dist__ = __webpack_require__(716);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__dist__ = __webpack_require__(717);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(426);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_config__ = __webpack_require__(146);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_config__ = __webpack_require__(147);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /*
  * This file is part of ng2-json-editor.
@@ -1943,7 +1995,7 @@ var environment = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_core_js_es6_reflect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13_core_js_es6_reflect__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_core_js_es7_reflect__ = __webpack_require__(474);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_core_js_es7_reflect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14_core_js_es7_reflect__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone__ = __webpack_require__(854);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone__ = __webpack_require__(866);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone__);
 // This file includes polyfills needed by Angular 2 and is loaded before
 // the app. You can add your own extra polyfills to this file.
@@ -1981,64 +2033,59 @@ webpackEmptyContext.id = 433;
 
 /***/ }),
 
-/***/ 46:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_tracker_component__ = __webpack_require__(719);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__abstract_tracker_component__["a"]; });
-
-
-
-/***/ }),
-
-/***/ 6:
+/***/ 5:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_globals_service__ = __webpack_require__(140);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__remote_autocompletion_service__ = __webpack_require__(778);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__remote_autocompletion_service__ = __webpack_require__(789);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__component_type_service__ = __webpack_require__(141);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dom_util_service__ = __webpack_require__(412);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dom_util_service__ = __webpack_require__(413);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__empty_value_service__ = __webpack_require__(142);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__find_replace_all_service__ = __webpack_require__(774);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__find_replace_all_service__ = __webpack_require__(785);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__json_store_service__ = __webpack_require__(414);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__json_util_service__ = __webpack_require__(415);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__json_schema_service__ = __webpack_require__(143);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__keys_store_service__ = __webpack_require__(416);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__path_util_service__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__modal_service__ = __webpack_require__(776);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__record_fixer_service__ = __webpack_require__(777);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__schema_fixer_service__ = __webpack_require__(779);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__schema_validation_service__ = __webpack_require__(780);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__keys_store_service__ = __webpack_require__(144);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__path_util_service__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__modal_service__ = __webpack_require__(787);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__record_fixer_service__ = __webpack_require__(788);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__schema_fixer_service__ = __webpack_require__(790);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__schema_validation_service__ = __webpack_require__(791);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__shortcut_action_service__ = __webpack_require__(417);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__shortcut_service__ = __webpack_require__(781);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__window_href_service__ = __webpack_require__(782);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__shortcut_service__ = __webpack_require__(792);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__window_href_service__ = __webpack_require__(794);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__tabs_util_service__ = __webpack_require__(418);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__error_map_util_service__ = __webpack_require__(413);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__katex_service__ = __webpack_require__(775);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__errors_service__ = __webpack_require__(784);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__katex_service__ = __webpack_require__(786);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__text_diff_service__ = __webpack_require__(793);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__list_page_changer_service__ = __webpack_require__(416);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__app_globals_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return __WEBPACK_IMPORTED_MODULE_1__remote_autocompletion_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return __WEBPACK_IMPORTED_MODULE_2__component_type_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "w", function() { return __WEBPACK_IMPORTED_MODULE_1__remote_autocompletion_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return __WEBPACK_IMPORTED_MODULE_2__component_type_service__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_3__dom_util_service__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_4__empty_value_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return __WEBPACK_IMPORTED_MODULE_5__find_replace_all_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return __WEBPACK_IMPORTED_MODULE_5__find_replace_all_service__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_6__json_store_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return __WEBPACK_IMPORTED_MODULE_7__json_util_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return __WEBPACK_IMPORTED_MODULE_8__json_schema_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return __WEBPACK_IMPORTED_MODULE_9__keys_store_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return __WEBPACK_IMPORTED_MODULE_7__json_util_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return __WEBPACK_IMPORTED_MODULE_8__json_schema_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return __WEBPACK_IMPORTED_MODULE_9__keys_store_service__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_10__path_util_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return __WEBPACK_IMPORTED_MODULE_11__modal_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return __WEBPACK_IMPORTED_MODULE_12__record_fixer_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return __WEBPACK_IMPORTED_MODULE_13__schema_fixer_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return __WEBPACK_IMPORTED_MODULE_14__schema_validation_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return __WEBPACK_IMPORTED_MODULE_11__modal_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return __WEBPACK_IMPORTED_MODULE_12__record_fixer_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return __WEBPACK_IMPORTED_MODULE_13__schema_fixer_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return __WEBPACK_IMPORTED_MODULE_14__schema_validation_service__["a"]; });
 /* unused harmony reexport ShortcutActionService */
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return __WEBPACK_IMPORTED_MODULE_16__shortcut_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return __WEBPACK_IMPORTED_MODULE_17__window_href_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return __WEBPACK_IMPORTED_MODULE_18__tabs_util_service__["a"]; });
-/* unused harmony reexport ErrorMapUtilService */
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_20__katex_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return __WEBPACK_IMPORTED_MODULE_16__shortcut_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return __WEBPACK_IMPORTED_MODULE_17__window_href_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return __WEBPACK_IMPORTED_MODULE_18__tabs_util_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_19__errors_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return __WEBPACK_IMPORTED_MODULE_20__katex_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return __WEBPACK_IMPORTED_MODULE_21__text_diff_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return __WEBPACK_IMPORTED_MODULE_22__list_page_changer_service__["a"]; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return SHARED_SERVICES; });
+
+
 
 
 
@@ -2081,14 +2128,27 @@ var SHARED_SERVICES = [
     __WEBPACK_IMPORTED_MODULE_16__shortcut_service__["a" /* ShortcutService */],
     __WEBPACK_IMPORTED_MODULE_17__window_href_service__["a" /* WindowHrefService */],
     __WEBPACK_IMPORTED_MODULE_18__tabs_util_service__["a" /* TabsUtilService */],
-    __WEBPACK_IMPORTED_MODULE_19__error_map_util_service__["a" /* ErrorMapUtilService */],
-    __WEBPACK_IMPORTED_MODULE_20__katex_service__["a" /* KatexService */]
+    __WEBPACK_IMPORTED_MODULE_19__errors_service__["a" /* ErrorsService */],
+    __WEBPACK_IMPORTED_MODULE_20__katex_service__["a" /* KatexService */],
+    __WEBPACK_IMPORTED_MODULE_21__text_diff_service__["a" /* TextDiffService */],
+    __WEBPACK_IMPORTED_MODULE_22__list_page_changer_service__["a" /* ListPageChangerService */]
 ];
 
 
 /***/ }),
 
-/***/ 614:
+/***/ 58:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_tracker_component__ = __webpack_require__(720);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__abstract_tracker_component__["a"]; });
+
+
+
+/***/ }),
+
+/***/ 615:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(53)();
@@ -2106,240 +2166,240 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 640:
+/***/ 641:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 215,
-	"./af.js": 215,
-	"./ar": 222,
-	"./ar-dz": 216,
-	"./ar-dz.js": 216,
-	"./ar-kw": 217,
-	"./ar-kw.js": 217,
-	"./ar-ly": 218,
-	"./ar-ly.js": 218,
-	"./ar-ma": 219,
-	"./ar-ma.js": 219,
-	"./ar-sa": 220,
-	"./ar-sa.js": 220,
-	"./ar-tn": 221,
-	"./ar-tn.js": 221,
-	"./ar.js": 222,
-	"./az": 223,
-	"./az.js": 223,
-	"./be": 224,
-	"./be.js": 224,
-	"./bg": 225,
-	"./bg.js": 225,
-	"./bn": 226,
-	"./bn.js": 226,
-	"./bo": 227,
-	"./bo.js": 227,
-	"./br": 228,
-	"./br.js": 228,
-	"./bs": 229,
-	"./bs.js": 229,
-	"./ca": 230,
-	"./ca.js": 230,
-	"./cs": 231,
-	"./cs.js": 231,
-	"./cv": 232,
-	"./cv.js": 232,
-	"./cy": 233,
-	"./cy.js": 233,
-	"./da": 234,
-	"./da.js": 234,
-	"./de": 237,
-	"./de-at": 235,
-	"./de-at.js": 235,
-	"./de-ch": 236,
-	"./de-ch.js": 236,
-	"./de.js": 237,
-	"./dv": 238,
-	"./dv.js": 238,
-	"./el": 239,
-	"./el.js": 239,
-	"./en-au": 240,
-	"./en-au.js": 240,
-	"./en-ca": 241,
-	"./en-ca.js": 241,
-	"./en-gb": 242,
-	"./en-gb.js": 242,
-	"./en-ie": 243,
-	"./en-ie.js": 243,
-	"./en-nz": 244,
-	"./en-nz.js": 244,
-	"./eo": 245,
-	"./eo.js": 245,
-	"./es": 247,
-	"./es-do": 246,
-	"./es-do.js": 246,
-	"./es.js": 247,
-	"./et": 248,
-	"./et.js": 248,
-	"./eu": 249,
-	"./eu.js": 249,
-	"./fa": 250,
-	"./fa.js": 250,
-	"./fi": 251,
-	"./fi.js": 251,
-	"./fo": 252,
-	"./fo.js": 252,
-	"./fr": 255,
-	"./fr-ca": 253,
-	"./fr-ca.js": 253,
-	"./fr-ch": 254,
-	"./fr-ch.js": 254,
-	"./fr.js": 255,
-	"./fy": 256,
-	"./fy.js": 256,
-	"./gd": 257,
-	"./gd.js": 257,
-	"./gl": 258,
-	"./gl.js": 258,
-	"./gom-latn": 259,
-	"./gom-latn.js": 259,
-	"./he": 260,
-	"./he.js": 260,
-	"./hi": 261,
-	"./hi.js": 261,
-	"./hr": 262,
-	"./hr.js": 262,
-	"./hu": 263,
-	"./hu.js": 263,
-	"./hy-am": 264,
-	"./hy-am.js": 264,
-	"./id": 265,
-	"./id.js": 265,
-	"./is": 266,
-	"./is.js": 266,
-	"./it": 267,
-	"./it.js": 267,
-	"./ja": 268,
-	"./ja.js": 268,
-	"./jv": 269,
-	"./jv.js": 269,
-	"./ka": 270,
-	"./ka.js": 270,
-	"./kk": 271,
-	"./kk.js": 271,
-	"./km": 272,
-	"./km.js": 272,
-	"./kn": 273,
-	"./kn.js": 273,
-	"./ko": 274,
-	"./ko.js": 274,
-	"./ky": 275,
-	"./ky.js": 275,
-	"./lb": 276,
-	"./lb.js": 276,
-	"./lo": 277,
-	"./lo.js": 277,
-	"./lt": 278,
-	"./lt.js": 278,
-	"./lv": 279,
-	"./lv.js": 279,
-	"./me": 280,
-	"./me.js": 280,
-	"./mi": 281,
-	"./mi.js": 281,
-	"./mk": 282,
-	"./mk.js": 282,
-	"./ml": 283,
-	"./ml.js": 283,
-	"./mr": 284,
-	"./mr.js": 284,
-	"./ms": 286,
-	"./ms-my": 285,
-	"./ms-my.js": 285,
-	"./ms.js": 286,
-	"./my": 287,
-	"./my.js": 287,
-	"./nb": 288,
-	"./nb.js": 288,
-	"./ne": 289,
-	"./ne.js": 289,
-	"./nl": 291,
-	"./nl-be": 290,
-	"./nl-be.js": 290,
-	"./nl.js": 291,
-	"./nn": 292,
-	"./nn.js": 292,
-	"./pa-in": 293,
-	"./pa-in.js": 293,
-	"./pl": 294,
-	"./pl.js": 294,
-	"./pt": 296,
-	"./pt-br": 295,
-	"./pt-br.js": 295,
-	"./pt.js": 296,
-	"./ro": 297,
-	"./ro.js": 297,
-	"./ru": 298,
-	"./ru.js": 298,
-	"./sd": 299,
-	"./sd.js": 299,
-	"./se": 300,
-	"./se.js": 300,
-	"./si": 301,
-	"./si.js": 301,
-	"./sk": 302,
-	"./sk.js": 302,
-	"./sl": 303,
-	"./sl.js": 303,
-	"./sq": 304,
-	"./sq.js": 304,
-	"./sr": 306,
-	"./sr-cyrl": 305,
-	"./sr-cyrl.js": 305,
-	"./sr.js": 306,
-	"./ss": 307,
-	"./ss.js": 307,
-	"./sv": 308,
-	"./sv.js": 308,
-	"./sw": 309,
-	"./sw.js": 309,
-	"./ta": 310,
-	"./ta.js": 310,
-	"./te": 311,
-	"./te.js": 311,
-	"./tet": 312,
-	"./tet.js": 312,
-	"./th": 313,
-	"./th.js": 313,
-	"./tl-ph": 314,
-	"./tl-ph.js": 314,
-	"./tlh": 315,
-	"./tlh.js": 315,
-	"./tr": 316,
-	"./tr.js": 316,
-	"./tzl": 317,
-	"./tzl.js": 317,
-	"./tzm": 319,
-	"./tzm-latn": 318,
-	"./tzm-latn.js": 318,
-	"./tzm.js": 319,
-	"./uk": 320,
-	"./uk.js": 320,
-	"./ur": 321,
-	"./ur.js": 321,
-	"./uz": 323,
-	"./uz-latn": 322,
-	"./uz-latn.js": 322,
-	"./uz.js": 323,
-	"./vi": 324,
-	"./vi.js": 324,
-	"./x-pseudo": 325,
-	"./x-pseudo.js": 325,
-	"./yo": 326,
-	"./yo.js": 326,
-	"./zh-cn": 327,
-	"./zh-cn.js": 327,
-	"./zh-hk": 328,
-	"./zh-hk.js": 328,
-	"./zh-tw": 329,
-	"./zh-tw.js": 329
+	"./af": 216,
+	"./af.js": 216,
+	"./ar": 223,
+	"./ar-dz": 217,
+	"./ar-dz.js": 217,
+	"./ar-kw": 218,
+	"./ar-kw.js": 218,
+	"./ar-ly": 219,
+	"./ar-ly.js": 219,
+	"./ar-ma": 220,
+	"./ar-ma.js": 220,
+	"./ar-sa": 221,
+	"./ar-sa.js": 221,
+	"./ar-tn": 222,
+	"./ar-tn.js": 222,
+	"./ar.js": 223,
+	"./az": 224,
+	"./az.js": 224,
+	"./be": 225,
+	"./be.js": 225,
+	"./bg": 226,
+	"./bg.js": 226,
+	"./bn": 227,
+	"./bn.js": 227,
+	"./bo": 228,
+	"./bo.js": 228,
+	"./br": 229,
+	"./br.js": 229,
+	"./bs": 230,
+	"./bs.js": 230,
+	"./ca": 231,
+	"./ca.js": 231,
+	"./cs": 232,
+	"./cs.js": 232,
+	"./cv": 233,
+	"./cv.js": 233,
+	"./cy": 234,
+	"./cy.js": 234,
+	"./da": 235,
+	"./da.js": 235,
+	"./de": 238,
+	"./de-at": 236,
+	"./de-at.js": 236,
+	"./de-ch": 237,
+	"./de-ch.js": 237,
+	"./de.js": 238,
+	"./dv": 239,
+	"./dv.js": 239,
+	"./el": 240,
+	"./el.js": 240,
+	"./en-au": 241,
+	"./en-au.js": 241,
+	"./en-ca": 242,
+	"./en-ca.js": 242,
+	"./en-gb": 243,
+	"./en-gb.js": 243,
+	"./en-ie": 244,
+	"./en-ie.js": 244,
+	"./en-nz": 245,
+	"./en-nz.js": 245,
+	"./eo": 246,
+	"./eo.js": 246,
+	"./es": 248,
+	"./es-do": 247,
+	"./es-do.js": 247,
+	"./es.js": 248,
+	"./et": 249,
+	"./et.js": 249,
+	"./eu": 250,
+	"./eu.js": 250,
+	"./fa": 251,
+	"./fa.js": 251,
+	"./fi": 252,
+	"./fi.js": 252,
+	"./fo": 253,
+	"./fo.js": 253,
+	"./fr": 256,
+	"./fr-ca": 254,
+	"./fr-ca.js": 254,
+	"./fr-ch": 255,
+	"./fr-ch.js": 255,
+	"./fr.js": 256,
+	"./fy": 257,
+	"./fy.js": 257,
+	"./gd": 258,
+	"./gd.js": 258,
+	"./gl": 259,
+	"./gl.js": 259,
+	"./gom-latn": 260,
+	"./gom-latn.js": 260,
+	"./he": 261,
+	"./he.js": 261,
+	"./hi": 262,
+	"./hi.js": 262,
+	"./hr": 263,
+	"./hr.js": 263,
+	"./hu": 264,
+	"./hu.js": 264,
+	"./hy-am": 265,
+	"./hy-am.js": 265,
+	"./id": 266,
+	"./id.js": 266,
+	"./is": 267,
+	"./is.js": 267,
+	"./it": 268,
+	"./it.js": 268,
+	"./ja": 269,
+	"./ja.js": 269,
+	"./jv": 270,
+	"./jv.js": 270,
+	"./ka": 271,
+	"./ka.js": 271,
+	"./kk": 272,
+	"./kk.js": 272,
+	"./km": 273,
+	"./km.js": 273,
+	"./kn": 274,
+	"./kn.js": 274,
+	"./ko": 275,
+	"./ko.js": 275,
+	"./ky": 276,
+	"./ky.js": 276,
+	"./lb": 277,
+	"./lb.js": 277,
+	"./lo": 278,
+	"./lo.js": 278,
+	"./lt": 279,
+	"./lt.js": 279,
+	"./lv": 280,
+	"./lv.js": 280,
+	"./me": 281,
+	"./me.js": 281,
+	"./mi": 282,
+	"./mi.js": 282,
+	"./mk": 283,
+	"./mk.js": 283,
+	"./ml": 284,
+	"./ml.js": 284,
+	"./mr": 285,
+	"./mr.js": 285,
+	"./ms": 287,
+	"./ms-my": 286,
+	"./ms-my.js": 286,
+	"./ms.js": 287,
+	"./my": 288,
+	"./my.js": 288,
+	"./nb": 289,
+	"./nb.js": 289,
+	"./ne": 290,
+	"./ne.js": 290,
+	"./nl": 292,
+	"./nl-be": 291,
+	"./nl-be.js": 291,
+	"./nl.js": 292,
+	"./nn": 293,
+	"./nn.js": 293,
+	"./pa-in": 294,
+	"./pa-in.js": 294,
+	"./pl": 295,
+	"./pl.js": 295,
+	"./pt": 297,
+	"./pt-br": 296,
+	"./pt-br.js": 296,
+	"./pt.js": 297,
+	"./ro": 298,
+	"./ro.js": 298,
+	"./ru": 299,
+	"./ru.js": 299,
+	"./sd": 300,
+	"./sd.js": 300,
+	"./se": 301,
+	"./se.js": 301,
+	"./si": 302,
+	"./si.js": 302,
+	"./sk": 303,
+	"./sk.js": 303,
+	"./sl": 304,
+	"./sl.js": 304,
+	"./sq": 305,
+	"./sq.js": 305,
+	"./sr": 307,
+	"./sr-cyrl": 306,
+	"./sr-cyrl.js": 306,
+	"./sr.js": 307,
+	"./ss": 308,
+	"./ss.js": 308,
+	"./sv": 309,
+	"./sv.js": 309,
+	"./sw": 310,
+	"./sw.js": 310,
+	"./ta": 311,
+	"./ta.js": 311,
+	"./te": 312,
+	"./te.js": 312,
+	"./tet": 313,
+	"./tet.js": 313,
+	"./th": 314,
+	"./th.js": 314,
+	"./tl-ph": 315,
+	"./tl-ph.js": 315,
+	"./tlh": 316,
+	"./tlh.js": 316,
+	"./tr": 317,
+	"./tr.js": 317,
+	"./tzl": 318,
+	"./tzl.js": 318,
+	"./tzm": 320,
+	"./tzm-latn": 319,
+	"./tzm-latn.js": 319,
+	"./tzm.js": 320,
+	"./uk": 321,
+	"./uk.js": 321,
+	"./ur": 322,
+	"./ur.js": 322,
+	"./uz": 324,
+	"./uz-latn": 323,
+	"./uz-latn.js": 323,
+	"./uz.js": 324,
+	"./vi": 325,
+	"./vi.js": 325,
+	"./x-pseudo": 326,
+	"./x-pseudo.js": 326,
+	"./yo": 327,
+	"./yo.js": 327,
+	"./zh-cn": 328,
+	"./zh-cn.js": 328,
+	"./zh-hk": 329,
+	"./zh-hk.js": 329,
+	"./zh-tw": 330,
+	"./zh-tw.js": 330
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -2355,23 +2415,23 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 640;
+webpackContext.id = 641;
 
 
 /***/ }),
 
-/***/ 672:
+/***/ 673:
 /***/ (function(module, exports) {
 
-module.exports = "<ng-template let-item=\"item\" #referenceTemplate>\n  <div class=\"reference-template-container\" [ngSwitch]=\"item.hasIn(['record', '$ref'])\">\n    <span *ngSwitchCase=\"true\">\n      <i class=\"fa fa-check-circle success\" aria-hidden=\"true\"></i>\n      <a href=\"{{item.getIn(['record', '$ref'])}}\" target=\"_blank\">{{item.getIn(['reference', 'misc', 0])}}</a>\n    </span>\n    <span *ngSwitchDefault>\n      <i class=\"fa fa-exclamation-triangle warning\" aria-hidden=\"true\"></i>\n      {{item.getIn(['reference', 'misc', 0])}}\n    </span>\n  </div>\n</ng-template>\n<json-editor *ngIf=\"record && schema\"\n  [config]=\"config.jsonEditorConfig\"\n  [record]=\"record\"\n  (onRecordChange)=\"onRecordChange($event)\"\n  [schema]=\"schema\"\n  [templates]=\"{referenceTemplate: referenceTemplate}\">\n</json-editor>"
+module.exports = "<ng-template let-item=\"item\" #referenceTemplate>\n  <div class=\"reference-template-container\" [ngSwitch]=\"item.hasIn(['record', '$ref'])\">\n    <span *ngSwitchCase=\"true\">\n      <i class=\"fa fa-check-circle success\" aria-hidden=\"true\"></i>\n      <a href=\"{{item.getIn(['record', '$ref'])}}\" target=\"_blank\">{{item.getIn(['reference', 'misc', 0])}}</a>\n    </span>\n    <span *ngSwitchDefault>\n      <i class=\"fa fa-exclamation-triangle warning\" aria-hidden=\"true\"></i>\n      {{item.getIn(['reference', 'misc', 0])}}\n    </span>\n  </div>\n</ng-template>\n<json-editor *ngIf=\"record && schema\"\n  [config]=\"config.jsonEditorConfig\"\n  [record]=\"record\"\n  [jsonPatches]=\"patches\"\n  [errorMap]=\"errorMap\"\n  (onRecordChange)=\"onRecordChange($event)\"\n  [schema]=\"schema\"\n  [templates]=\"{referenceTemplate: referenceTemplate}\">\n</json-editor>"
 
 /***/ }),
 
-/***/ 716:
+/***/ 717:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_index__ = __webpack_require__(741);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_index__ = __webpack_require__(748);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__src_index__["a"]; });
 /**
  * @module
@@ -2383,11 +2443,11 @@ module.exports = "<ng-template let-item=\"item\" #referenceTemplate>\n  <div cla
 
 /***/ }),
 
-/***/ 717:
+/***/ 718:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_tracker__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_tracker__ = __webpack_require__(58);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AbstractFieldComponent; });
 /*
  * This file is part of ng2-json-editor.
@@ -2431,21 +2491,30 @@ var __extends = (this && this.__extends) || (function () {
  */
 var AbstractFieldComponent = (function (_super) {
     __extends(AbstractFieldComponent, _super);
-    function AbstractFieldComponent(appGlobalsService, pathUtilService, changeDetectorRef) {
+    function AbstractFieldComponent(appGlobalsService, errorsService, pathUtilService, changeDetectorRef, jsonStoreService) {
         var _this = _super.call(this) || this;
         _this.appGlobalsService = appGlobalsService;
+        _this.errorsService = errorsService;
         _this.pathUtilService = pathUtilService;
         _this.changeDetectorRef = changeDetectorRef;
+        _this.jsonStoreService = jsonStoreService;
         _this.pathCache = {};
         _this.externalErrors = [];
         return _this;
     }
     AbstractFieldComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.externalCategorizedErrorSubscription = this.appGlobalsService.externalCategorizedErrorsSubject
+        this.externalCategorizedErrorSubscription = this.errorsService.externalCategorizedErrorsSubject
             .subscribe(function (externalCategorizedErrorMap) {
-            _this.externalErrors = externalCategorizedErrorMap.Errors[_this.pathString] || [];
+            _this.externalErrors = externalCategorizedErrorMap.errors[_this.pathString] || [];
             _this.changeDetectorRef.markForCheck();
+        });
+        this.jsonPatchesSubscription = this.jsonStoreService.patchesByPath$
+            .map(function (patchesByPath) { return patchesByPath[_this.pathString]; })
+            .subscribe(function (patches) {
+            _this.jsonPatches = patches || [];
+            _this.removeJsonPatch = _this.jsonPatches
+                .find(function (patch) { return patch.op === 'remove'; });
         });
     };
     /**
@@ -2472,7 +2541,22 @@ var AbstractFieldComponent = (function (_super) {
     };
     AbstractFieldComponent.prototype.ngOnDestroy = function () {
         this.externalCategorizedErrorSubscription.unsubscribe();
+        this.jsonPatchesSubscription.unsubscribe();
     };
+    Object.defineProperty(AbstractFieldComponent.prototype, "disabled", {
+        get: function () {
+            return this.schema.disabled && !this.appGlobalsService.adminMode;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(AbstractFieldComponent.prototype, "redLeftBorderClass", {
+        get: function () {
+            return this.removeJsonPatch ? 'red-left-border' : '';
+        },
+        enumerable: true,
+        configurable: true
+    });
     return AbstractFieldComponent;
 }(__WEBPACK_IMPORTED_MODULE_0__abstract_tracker__["a" /* AbstractTrackerComponent */]));
 
@@ -2480,7 +2564,7 @@ var AbstractFieldComponent = (function (_super) {
 
 /***/ }),
 
-/***/ 718:
+/***/ 719:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2505,9 +2589,10 @@ var __extends = (this && this.__extends) || (function () {
  */
 var AbstractListFieldComponent = (function (_super) {
     __extends(AbstractListFieldComponent, _super);
-    function AbstractListFieldComponent(appGlobalsService, jsonStoreService, pathUtilService, changeDetectorRef) {
-        var _this = _super.call(this, appGlobalsService, pathUtilService, changeDetectorRef) || this;
+    function AbstractListFieldComponent(appGlobalsService, errorsService, jsonStoreService, pathUtilService, changeDetectorRef) {
+        var _this = _super.call(this, appGlobalsService, errorsService, pathUtilService, changeDetectorRef, jsonStoreService) || this;
         _this.appGlobalsService = appGlobalsService;
+        _this.errorsService = errorsService;
         _this.jsonStoreService = jsonStoreService;
         _this.pathUtilService = pathUtilService;
         _this.changeDetectorRef = changeDetectorRef;
@@ -2537,12 +2622,20 @@ var AbstractListFieldComponent = (function (_super) {
         this.jsonStoreService.removeIn(elementPath);
         this.values = this.jsonStoreService.getIn(this.path);
     };
-    AbstractListFieldComponent.prototype.getPathForChildString = function (index) {
+    AbstractListFieldComponent.prototype.getPathStringForChild = function (index) {
         return "" + this.pathString + this.pathUtilService.separator + index;
     };
     Object.defineProperty(AbstractListFieldComponent.prototype, "sortableClass", {
         get: function () {
             return this.schema.sortable ? 'sortable' : '';
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(AbstractListFieldComponent.prototype, "addJsonPatches", {
+        get: function () {
+            return this.jsonPatches
+                .filter(function (patch) { return patch.op === 'add'; });
         },
         enumerable: true,
         configurable: true
@@ -2554,7 +2647,7 @@ var AbstractListFieldComponent = (function (_super) {
 
 /***/ }),
 
-/***/ 719:
+/***/ 720:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2596,12 +2689,12 @@ var AbstractTrackerComponent = (function () {
 
 /***/ }),
 
-/***/ 720:
+/***/ 721:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddFieldDropdownComponent; });
 /*
  * This file is part of ng2-json-editor.
@@ -2669,7 +2762,7 @@ AddFieldDropdownComponent.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["e" /* DomUtilService */], },
     { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["c" /* EmptyValueService */], },
     { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["a" /* PathUtilService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["i" /* KeysStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["k" /* KeysStoreService */], },
 ]; };
 AddFieldDropdownComponent.propDecorators = {
     'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
@@ -2680,14 +2773,14 @@ AddFieldDropdownComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 721:
+/***/ 722:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddNestedFieldDropdownComponent; });
 /*
  * This file is part of ng2-json-editor.
@@ -2719,20 +2812,23 @@ var AddNestedFieldDropdownComponent = (function () {
         this.jsonSchemaService = jsonSchemaService;
         this.pathUtilService = pathUtilService;
         this.domUtilService = domUtilService;
-        this.nestedKeysMap = {};
     }
-    AddNestedFieldDropdownComponent.prototype.ngOnInit = function () {
+    AddNestedFieldDropdownComponent.prototype.ngOnChanges = function (changes) {
         var _this = this;
-        this.nestedKeysMap[this.pathString] = this.keysStoreService.keysMap[this.pathString];
-        var nestedPathPrefix = this.pathString + this.pathUtilService.separator;
-        Object.keys(this.keysStoreService.keysMap)
-            .filter(function (path) { return path.startsWith(nestedPathPrefix); })
-            .forEach(function (path) {
-            _this.nestedKeysMap[path] = _this.keysStoreService.keysMap[path];
-        });
-        this.keysStoreService.onKeysChange
-            .filter(function (change) { return change.path.startsWith(_this.pathString); })
-            .subscribe(function (change) { _this.nestedKeysMap[change.path] = change.keys; });
+        var pathStringChange = changes['pathString'];
+        if (pathStringChange) {
+            this.nestedKeysMap = {};
+            this.nestedKeysMap[this.pathString] = this.keysStoreService.keysMap[this.pathString];
+            var nestedPathPrefix_1 = this.pathString + this.pathUtilService.separator;
+            Object.keys(this.keysStoreService.keysMap)
+                .filter(function (path) { return path.startsWith(nestedPathPrefix_1); })
+                .forEach(function (path) {
+                _this.nestedKeysMap[path] = _this.keysStoreService.keysMap[path];
+            });
+            this.keysStoreService.onKeysChange
+                .filter(function (change) { return change.path.startsWith(_this.pathString); })
+                .subscribe(function (change) { _this.nestedKeysMap[change.path] = change.keys; });
+        }
     };
     /**
      * Return keys that could be added for the given path.
@@ -2768,13 +2864,14 @@ AddNestedFieldDropdownComponent.decorators = [
                 selector: 'add-nested-field-dropdown',
                 styles: [".btn-add-field-dropdown { padding: 0 3px; font-size: 11px; opacity: 0.4; border: 0; background: transparent; font-weight: bold; line-height: 1; text-shadow: 0 1px 0 #fff; color: darkslategray; margin-bottom: 2px; float: left; } .btn-add-field-dropdown:hover { color: blue; opacity: 0.6; } .dropdown-filter-container { padding: 0 3px; } .dropdown-filter-container input { width: 100%; } ",
                     ".dropdown-header.title { font-size: 13.5px; font-weight: bold; padding-left: 10px; } .dropdown-divider { margin: 4px 0; } .dropdown-menu li > .dropdown-item { display: block; padding: 3px 20px; clear: both; font-weight: normal; line-height: 1.42857; color: #333333; white-space: nowrap; } .dropdown-menu li > .dropdown-item:hover { text-decoration: none; color: #262626; background-color: #f5f5f5; } "],
-                template: "<div class=\"btn-group add-field-dropdown-container\" dropdown keyboardNav=\"true\"> <button type=\"button\" class=\"btn-add-field-dropdown\" dropdownToggle> <i class=\"fa fa-plus\"></i> <i class=\"fa fa-caret-down\"></i> </button> <ul class=\"dropdown-menu\" *dropdownMenu> <div *ngFor=\"let path of nestedKeysMap | keys; first as isFirst\"> <div *ngIf=\"addableKeysForPath(path); let addableKeys\"> <li *ngIf=\"!isFirst\" class=\"divider dropdown-divider\"></li> <li *ngIf=\"!isFirst\" class=\"dropdown-header title\">{{path | lastPathElement}}</li> <li *ngFor=\"let key of addableKeys\"> <a class=\"dropdown-item\" href=\"javascript:void(0)\" (click)=\"onFieldSelect(path, key)\">{{key}}</a> </li> </div> </div> </ul> </div>"
+                template: "<div class=\"btn-group add-field-dropdown-container\" dropdown keyboardNav=\"true\"> <button type=\"button\" class=\"btn-add-field-dropdown\" dropdownToggle> <i class=\"fa fa-plus\"></i> <i class=\"fa fa-caret-down\"></i> </button> <ul class=\"dropdown-menu\" *dropdownMenu> <div *ngFor=\"let path of nestedKeysMap | keys; first as isFirst\"> <div *ngIf=\"addableKeysForPath(path); let addableKeys\"> <li *ngIf=\"!isFirst\" class=\"divider dropdown-divider\"></li> <li *ngIf=\"!isFirst\" class=\"dropdown-header title\">{{path | lastPathElement}}</li> <li *ngFor=\"let key of addableKeys\"> <a class=\"dropdown-item\" href=\"javascript:void(0)\" (click)=\"onFieldSelect(path, key)\">{{key}}</a> </li> </div> </div> </ul> </div>",
+                changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
 /** @nocollapse */
 AddNestedFieldDropdownComponent.ctorParameters = function () { return [
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["i" /* KeysStoreService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["k" /* JsonSchemaService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["k" /* KeysStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["m" /* JsonSchemaService */], },
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["a" /* PathUtilService */], },
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["e" /* DomUtilService */], },
 ]; };
@@ -2786,13 +2883,13 @@ AddNestedFieldDropdownComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 722:
+/***/ 723:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__add_field_dropdown_component__ = __webpack_require__(720);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__add_field_dropdown_component__ = __webpack_require__(721);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__add_field_dropdown_component__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__add_nested_field_dropdown_component__ = __webpack_require__(721);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__add_nested_field_dropdown_component__ = __webpack_require__(722);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__add_nested_field_dropdown_component__["a"]; });
 
 
@@ -2800,36 +2897,35 @@ AddNestedFieldDropdownComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 723:
+/***/ 724:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddNewElementButtonComponent; });
 
 
-
 var AddNewElementButtonComponent = (function () {
-    function AddNewElementButtonComponent(domUtilService, emptyValueService, jsonStoreService, pathUtilService) {
+    function AddNewElementButtonComponent(domUtilService, emptyValueService, jsonStoreService, pathUtilService, keyStoreService) {
         this.domUtilService = domUtilService;
         this.emptyValueService = emptyValueService;
         this.jsonStoreService = jsonStoreService;
         this.pathUtilService = pathUtilService;
+        this.keyStoreService = keyStoreService;
     }
     AddNewElementButtonComponent.prototype.addNewElement = function () {
         var _this = this;
         var itemSchema = this.schema.items;
         var emptyValue = this.emptyValueService.generateEmptyValue(itemSchema);
-        var values = this.jsonStoreService.getIn(this.path) || __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_immutable__["List"])();
-        this.jsonStoreService.setIn(this.path, values.push(emptyValue));
+        var values = this.jsonStoreService.getIn(this.path);
+        var insertIndex = values ? values.size : 0;
+        var insertPath = this.path.concat(insertIndex);
+        this.jsonStoreService.addIn(insertPath, emptyValue);
         // focus on the new added element
-        var newElementPath = this.path.concat(values.size);
-        var newElementPathString = this.pathUtilService.toPathString(newElementPath);
+        var insertPathString = this.pathUtilService.toPathString(insertPath);
         setTimeout(function () {
-            _this.domUtilService.focusAndSelectFirstEditableChildById(newElementPathString);
+            _this.domUtilService.focusAndSelectFirstEditableChildById(insertPathString);
         });
     };
     return AddNewElementButtonComponent;
@@ -2845,10 +2941,11 @@ AddNewElementButtonComponent.decorators = [
 ];
 /** @nocollapse */
 AddNewElementButtonComponent.ctorParameters = function () { return [
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["e" /* DomUtilService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["c" /* EmptyValueService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["g" /* JsonStoreService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["a" /* PathUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["e" /* DomUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["c" /* EmptyValueService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["g" /* JsonStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["a" /* PathUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["k" /* KeysStoreService */], },
 ]; };
 AddNewElementButtonComponent.propDecorators = {
     'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
@@ -2858,18 +2955,80 @@ AddNewElementButtonComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 724:
+/***/ 725:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__add_new_element_button_component__ = __webpack_require__(723);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__add_new_element_button_component__ = __webpack_require__(724);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__add_new_element_button_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 725:
+/***/ 726:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddPatchViewComponent; });
+/*
+ * This file is part of ng2-json-editor.
+ * Copyright (C) 2017 CERN.
+ *
+ * ng2-json-editor is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * ng2-json-editor is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ * In applying this license, CERN does not
+ * waive the privileges and immunities granted to it by virtue of its status
+ * as an Intergovernmental Organization or submit itself to any jurisdiction.
+*/
+
+var AddPatchViewComponent = (function () {
+    function AddPatchViewComponent() {
+    }
+    return AddPatchViewComponent;
+}());
+
+AddPatchViewComponent.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
+                selector: 'add-patch-view',
+                styles: ["td { vertical-align: top; padding-right: 10px !important; } .align-self-end { align-self: flex-end; } .patch-container { display: flex; padding-left: 4px; } .green-left-border { border-left: 9px solid #2ecc71; } .grow { flex-grow: 1; } "],
+                template: "<div class=\"patch-container green-left-border\" [id]=\"patch.path\" tabindex=\"-1\"> <div class=\"grow\"> <ng-template [ngTemplateOutlet]=\"anyTypeTemplate\" [ngTemplateOutletContext]=\"{value: patch.value}\"></ng-template> </div> <patch-actions class=\"align-self-end\" [patch]=\"patch\"></patch-actions> </div> <ng-template #anyTypeTemplate let-value=\"value\"> <ng-container [ngSwitch]=\"value | typeOf\"> <ng-container *ngSwitchCase=\"'object'\"> <ng-template [ngTemplateOutlet]=\"objectTemplate\" [ngTemplateOutletContext]=\"{object: value}\"></ng-template> </ng-container> <ng-container *ngSwitchCase=\"'array'\"> <ng-template [ngTemplateOutlet]=\"arrayTemplate\" [ngTemplateOutletContext]=\"{array: value}\"></ng-template> </ng-container> <ng-container *ngSwitchDefault> <ng-template [ngTemplateOutlet]=\"primitiveTemplate\" [ngTemplateOutletContext]=\"{primitive: value}\"></ng-template> </ng-container> </ng-container> </ng-template> <ng-template #objectTemplate let-object=\"object\"> <table> <tr *ngFor=\"let key of object | keys\"> <td> <label>{{key}}</label> </td> <td> <ng-template [ngTemplateOutlet]=\"anyTypeTemplate\" [ngTemplateOutletContext]=\"{value: object[key]}\"></ng-template> </td> </tr> </table> </ng-template> <ng-template #arrayTemplate let-array=\"array\"> <table> <tr *ngFor=\"let item of array\"> <td> <ng-template [ngTemplateOutlet]=\"anyTypeTemplate\" [ngTemplateOutletContext]=\"{value: item}\"></ng-template> </td> </tr> </table> </ng-template> <ng-template #primitiveTemplate let-primitive=\"primitive\"> <span>{{primitive}}</span> </ng-template>",
+                changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
+            },] },
+];
+/** @nocollapse */
+AddPatchViewComponent.ctorParameters = function () { return []; };
+AddPatchViewComponent.propDecorators = {
+    'patch': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
+};
+
+
+/***/ }),
+
+/***/ 727:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__add_patch_view_component__ = __webpack_require__(726);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__add_patch_view_component__["a"]; });
+
+
+
+/***/ }),
+
+/***/ 728:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2932,27 +3091,27 @@ AnyTypeFieldComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 726:
+/***/ 729:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__any_type_field_component__ = __webpack_require__(725);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__any_type_field_component__ = __webpack_require__(728);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__any_type_field_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 727:
+/***/ 730:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_observable_of__ = __webpack_require__(677);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_observable_of__ = __webpack_require__(678);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_observable_of___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_observable_of__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AutocompleteInputComponent; });
 /*
  * This file is part of INSPIRE.
@@ -3038,9 +3197,9 @@ AutocompleteInputComponent.decorators = [
 ];
 /** @nocollapse */
 AutocompleteInputComponent.ctorParameters = function () { return [
-    { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["t" /* RemoteAutocompletionService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["w" /* RemoteAutocompletionService */], },
     { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["g" /* JsonStoreService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["i" /* KeysStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["k" /* KeysStoreService */], },
     { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["b" /* AppGlobalsService */], },
 ]; };
 AutocompleteInputComponent.propDecorators = {
@@ -3058,24 +3217,405 @@ AutocompleteInputComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 728:
+/***/ 731:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__autocomplete_input_component__ = __webpack_require__(727);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__autocomplete_input_component__ = __webpack_require__(730);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__autocomplete_input_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 729:
+/***/ 732:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services__ = __webpack_require__(5);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BottomConsoleBadgesComponent; });
+/*
+ * This file is part of ng2-json-editor.
+ * Copyright (C) 2017 CERN.
+ *
+ * ng2-json-editor is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * ng2-json-editor is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ * In applying this license, CERN does not
+ * waive the privileges and immunities granted to it by virtue of its status
+ * as an Intergovernmental Organization or submit itself to any jurisdiction.
+ */
+
+
+var BottomConsoleBadgesComponent = (function () {
+    function BottomConsoleBadgesComponent(errorsService, changeDetectorRef, jsonStoreService) {
+        this.errorsService = errorsService;
+        this.changeDetectorRef = changeDetectorRef;
+        this.jsonStoreService = jsonStoreService;
+        this.badgeClick = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* EventEmitter */]();
+        this.globalErrorCount = 0;
+        this.internalErrorCount = 0;
+        this.globalWarningCount = 0;
+        this.internalWarningCount = 0;
+        this.patchCount = 0;
+    }
+    BottomConsoleBadgesComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.externalErrorCounterSubscription = this.errorsService.externalErrorCountersSubject
+            .subscribe(function (errorCounters) {
+            _this.globalErrorCount = errorCounters.errors;
+            _this.globalWarningCount = errorCounters.warnings;
+            _this.changeDetectorRef.markForCheck();
+        });
+        this.internalErrorCounterSubscription = this.errorsService.internalErrorCountersSubject
+            .subscribe(function (errorCounters) {
+            _this.internalErrorCount = errorCounters.errors;
+            _this.internalWarningCount = errorCounters.warnings;
+            _this.changeDetectorRef.markForCheck();
+        });
+        this.patchCounterSubscription = this.jsonStoreService.patchesByPath$
+            .map(function (patchesByPath) {
+            return Object.keys(patchesByPath)
+                .map(function (path) { return patchesByPath[path].length; })
+                .reduce(function (sum, patchCountPerPath) { return sum + patchCountPerPath; });
+        }).subscribe(function (patchCounter) {
+            _this.patchCount = patchCounter;
+            _this.changeDetectorRef.markForCheck();
+        });
+    };
+    BottomConsoleBadgesComponent.prototype.onBadgeClick = function (event, badgeName) {
+        event.preventDefault();
+        this.badgeClick.emit(badgeName);
+    };
+    BottomConsoleBadgesComponent.prototype.ngOnDestroy = function () {
+        this.externalErrorCounterSubscription.unsubscribe();
+        this.internalErrorCounterSubscription.unsubscribe();
+        this.patchCounterSubscription.unsubscribe();
+    };
+    return BottomConsoleBadgesComponent;
+}());
+
+BottomConsoleBadgesComponent.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
+                selector: 'bottom-console-badges',
+                styles: [".error { color: #D14024; } .error .badge { background-color: #D14024; } .error .badge:hover { background-color: #e06148; } .error:hover { color: #e06148; } .warning { color: #f1c40f; } .warning .badge { background-color: #f1c40f; } .warning .badge:hover { background-color: #f4d03f; } .warning:hover { color: #f4d03f; } .patch { color: #e67e22; } .patch .badge { background-color: #e67e22; } .patch .badge:hover { background-color: #eb9950; } .patch:hover { color: #eb9950; } a { text-decoration: none; padding-right: 7px; padding-top: 7px; } a:hover { cursor: pointer; } .badges-container { display: flex; } @media screen and (max-width: 1440px) { .badges-container { flex-direction: column; } } "],
+                template: "<div class=\"badges-container\"> <a *ngIf=\"internalErrorCount + globalErrorCount > 0\" class=\"error\" (click)=\"onBadgeClick($event, 'Errors')\"> <span class=\"\">Errors</span> <span class=\"badge\">{{internalErrorCount + globalErrorCount}}</span> </a> <a *ngIf=\"internalWarningCount + globalWarningCount > 0\" class=\"warning\" (click)=\"onBadgeClick($event, 'Warnings')\"> <span>Warnings</span> <span class=\"badge\">{{internalWarningCount + globalWarningCount}}</span> </a> <a *ngIf=\"patchCount > 0\" class=\"patch\" (click)=\"onBadgeClick($event, 'Patches')\"> <span>Conflicts</span> <span class=\"badge\">{{patchCount}}</span> </a> </div>",
+                changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
+            },] },
+];
+/** @nocollapse */
+BottomConsoleBadgesComponent.ctorParameters = function () { return [
+    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["f" /* ErrorsService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["X" /* ChangeDetectorRef */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["g" /* JsonStoreService */], },
+]; };
+BottomConsoleBadgesComponent.propDecorators = {
+    'badgeClick': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Y" /* Output */] },],
+};
+
+
+/***/ }),
+
+/***/ 733:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bottom_console_badges_component__ = __webpack_require__(732);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__bottom_console_badges_component__["a"]; });
+
+
+
+/***/ }),
+
+/***/ 734:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BottomConsoleComponent; });
+/*
+ * This file is part of ng2-json-editor.
+ * Copyright (C) 2017 CERN.
+ *
+ * ng2-json-editor is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * ng2-json-editor is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ * In applying this license, CERN does not
+ * waive the privileges and immunities granted to it by virtue of its status
+ * as an Intergovernmental Organization or submit itself to any jurisdiction.
+ */
+
+var BottomConsoleComponent = (function () {
+    function BottomConsoleComponent() {
+        this.isOpen = false;
+        this.activeTab = '';
+        this.onCollapse = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* EventEmitter */]();
+    }
+    BottomConsoleComponent.prototype.closePanel = function () {
+        this.onCollapse.emit(false);
+    };
+    BottomConsoleComponent.prototype.isActive = function (tabName) {
+        return tabName === this.activeTab;
+    };
+    return BottomConsoleComponent;
+}());
+
+BottomConsoleComponent.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
+                selector: 'bottom-console',
+                styles: [""],
+                template: "<div *ngIf=\"isOpen\" class=\"bottom-console-container\"> <tabset> <tab [active]=\"isActive('Errors')\"> <errors-console-tab [errorType]=\"'errors'\"></errors-console-tab> </tab> <tab [active]=\"isActive('Warnings')\"> <errors-console-tab [errorType]=\"'warnings'\"></errors-console-tab> </tab> <tab [active]=\"isActive('Patches')\"> <patches-console-tab></patches-console-tab> </tab> <tab (select)=\"closePanel()\" [customClass]=\"'pull-right'\"> <ng-template tabHeading> <i class=\"fa fa-window-close\"></i> </ng-template> </tab> </tabset> </div>",
+                changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
+            },] },
+];
+/** @nocollapse */
+BottomConsoleComponent.ctorParameters = function () { return []; };
+BottomConsoleComponent.propDecorators = {
+    'isOpen': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
+    'activeTab': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
+    'onCollapse': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Y" /* Output */] },],
+};
+
+
+/***/ }),
+
+/***/ 735:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services__ = __webpack_require__(5);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ErrorsConsoleTabComponent; });
+/*
+ * This file is part of ng2-json-editor.
+ * Copyright (C) 2017 CERN.
+ *
+ * ng2-json-editor is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * ng2-json-editor is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ * In applying this license, CERN does not
+ * waive the privileges and immunities granted to it by virtue of its status
+ * as an Intergovernmental Organization or submit itself to any jurisdiction.
+ */
+
+
+var ErrorsConsoleTabComponent = (function () {
+    function ErrorsConsoleTabComponent(domUtilService, pathUtilService, errorsService, changeDetectorRef) {
+        this.domUtilService = domUtilService;
+        this.pathUtilService = pathUtilService;
+        this.errorsService = errorsService;
+        this.changeDetectorRef = changeDetectorRef;
+    }
+    ErrorsConsoleTabComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.errorsService.externalCategorizedErrorsSubject
+            .map(function (categorizedErrorMap) { return categorizedErrorMap[_this.errorType]; })
+            .subscribe(function (errorMap) {
+            _this.externalErrorMap = errorMap;
+            _this.changeDetectorRef.markForCheck();
+        });
+        this.errorsService.externalErrorCountersSubject
+            .map(function (errorCounters) { return errorCounters[_this.errorType]; })
+            .subscribe(function (errorCount) {
+            _this.externalErrorCount = errorCount;
+            _this.changeDetectorRef.markForCheck();
+        });
+        this.errorsService.internalCategorizedErrorsSubject
+            .map(function (categorizedErrorMap) { return categorizedErrorMap[_this.errorType]; })
+            .subscribe(function (errorMap) {
+            _this.internalErrorMap = errorMap;
+            _this.changeDetectorRef.markForCheck();
+        });
+        this.errorsService.internalErrorCountersSubject
+            .map(function (errorCounters) { return errorCounters[_this.errorType]; })
+            .subscribe(function (errorCount) {
+            _this.internalErrorCount = errorCount;
+            _this.changeDetectorRef.markForCheck();
+        });
+        this.iconClassName = this.errorType === 'errors' ? 'fa fa-times' : 'fa fa-exclamation-triangle';
+    };
+    ErrorsConsoleTabComponent.prototype.focusAndSelectPath = function (path) {
+        this.domUtilService.focusAndSelectFirstEditableChildById(path, true);
+    };
+    return ErrorsConsoleTabComponent;
+}());
+
+ErrorsConsoleTabComponent.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
+                selector: 'errors-console-tab',
+                styles: [".list-group-item { cursor: pointer; color: #0074D9; } .list-group-item:hover { background-color: #faebcc; text-decoration: underline; } ",
+                    ".fa-exclamation-triangle { color: #f1c40f; } .fa-times { color: #D14024; } "],
+                template: "<ng-template tabHeading> <i [ngClass]=\"iconClassName\"></i> {{errorType | titlecase}} <span class=\"badge\">{{internalErrorCount + externalErrorCount}}</span> </ng-template> <ul class=\"list-group\"> <ng-container *ngFor=\"let key of internalErrorMap | keys\"> <li *ngFor=\"let error of internalErrorMap[key]\" class=\"list-group-item\" (click)=\"focusAndSelectPath(key)\"> <i [ngClass]=\"iconClassName\"></i> {{ error.message }} </li> </ng-container> <ng-container *ngFor=\"let key of externalErrorMap | keys\"> <li *ngFor=\"let error of externalErrorMap[key]\" class=\"list-group-item\" (click)=\"focusAndSelectPath(key)\"> <i [ngClass]=\"iconClassName\"></i> {{ error.message }} </li> </ng-container> </ul>",
+                changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
+            },] },
+];
+/** @nocollapse */
+ErrorsConsoleTabComponent.ctorParameters = function () { return [
+    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["e" /* DomUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["a" /* PathUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["f" /* ErrorsService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["X" /* ChangeDetectorRef */], },
+]; };
+ErrorsConsoleTabComponent.propDecorators = {
+    'errorType': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
+};
+
+
+/***/ }),
+
+/***/ 736:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__errors_console_tab_component__ = __webpack_require__(735);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__errors_console_tab_component__["a"]; });
+
+
+
+/***/ }),
+
+/***/ 737:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bottom_console_component__ = __webpack_require__(734);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__bottom_console_component__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__patches_console_tab__ = __webpack_require__(738);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__patches_console_tab__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__errors_console_tab__ = __webpack_require__(736);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_2__errors_console_tab__["a"]; });
+
+
+
+
+
+/***/ }),
+
+/***/ 738:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__patches_console_tab_component__ = __webpack_require__(739);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__patches_console_tab_component__["a"]; });
+
+
+
+/***/ }),
+
+/***/ 739:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services__ = __webpack_require__(5);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PatchesConsoleTabComponent; });
+/*
+ * This file is part of ng2-json-editor.
+ * Copyright (C) 2017 CERN.
+ *
+ * ng2-json-editor is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * ng2-json-editor is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ * In applying this license, CERN does not
+ * waive the privileges and immunities granted to it by virtue of its status
+ * as an Intergovernmental Organization or submit itself to any jurisdiction.
+ */
+
+
+var PatchesConsoleTabComponent = (function () {
+    function PatchesConsoleTabComponent(domUtilService, pathUtilService, jsonStoreService, changeDetectorRef) {
+        this.domUtilService = domUtilService;
+        this.pathUtilService = pathUtilService;
+        this.jsonStoreService = jsonStoreService;
+        this.changeDetectorRef = changeDetectorRef;
+    }
+    PatchesConsoleTabComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.jsonStoreService.patchesByPath$
+            .map(function (patchesByPath) {
+            return Object.keys(patchesByPath)
+                .map(function (path) { return patchesByPath[path]; })
+                .reduce(function (pre, cur) { return pre.concat(cur); });
+        })
+            .subscribe(function (patches) {
+            _this.patches = patches;
+            _this.changeDetectorRef.markForCheck();
+        });
+    };
+    PatchesConsoleTabComponent.prototype.focusPatchForPath = function (path) {
+        this.domUtilService.focusPatchElementById(path);
+    };
+    return PatchesConsoleTabComponent;
+}());
+
+PatchesConsoleTabComponent.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
+                selector: 'patches-console-tab',
+                styles: [".list-group-item { cursor: pointer; color: #0074D9; } .list-group-item:hover { background-color: #faebcc; text-decoration: underline; } ",
+                    ".fa-bolt { color: #e67e22; } "],
+                template: "<ng-template tabHeading> <i class=\"fa fa-bolt\"></i> Conflicts <span class=\"badge\">{{patches.length}}</span> </ng-template> <ul class=\"list-group\"> <li *ngFor=\"let patch of patches\" class=\"list-group-item\" (click)=\"focusPatchForPath(patch.path)\"> <i class=\"fa fa-bolt\"></i> {{patch.path}} - {{patch.op}} </li> </ul>",
+                changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
+            },] },
+];
+/** @nocollapse */
+PatchesConsoleTabComponent.ctorParameters = function () { return [
+    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["e" /* DomUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["a" /* PathUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["g" /* JsonStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["X" /* ChangeDetectorRef */], },
+]; };
+
+
+/***/ }),
+
+/***/ 740:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_list_field__ = __webpack_require__(139);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplexListFieldComponent; });
 /*
  * This file is part of ng2-json-editor.
@@ -3113,21 +3653,30 @@ var __extends = (this && this.__extends) || (function () {
 
 var ComplexListFieldComponent = (function (_super) {
     __extends(ComplexListFieldComponent, _super);
-    function ComplexListFieldComponent(appGlobalsService, jsonStoreService, domUtilService, pathUtilService, changeDetectorRef) {
-        var _this = _super.call(this, appGlobalsService, jsonStoreService, pathUtilService, changeDetectorRef) || this;
+    function ComplexListFieldComponent(appGlobalsService, errorsService, jsonStoreService, domUtilService, pathUtilService, changeDetectorRef, listPageChangerService) {
+        var _this = _super.call(this, appGlobalsService, errorsService, jsonStoreService, pathUtilService, changeDetectorRef) || this;
         _this.appGlobalsService = appGlobalsService;
+        _this.errorsService = errorsService;
         _this.jsonStoreService = jsonStoreService;
         _this.domUtilService = domUtilService;
         _this.pathUtilService = pathUtilService;
         _this.changeDetectorRef = changeDetectorRef;
+        _this.listPageChangerService = listPageChangerService;
         _this.currentFound = 0;
         _this.currentPage = 1;
         return _this;
     }
     ComplexListFieldComponent.prototype.ngOnInit = function () {
+        var _this = this;
         _super.prototype.ngOnInit.call(this);
         this.navigator = this.schema.longListNavigatorConfig;
         this.paginatedItems = this.getItemsForPage(this.currentPage);
+        if (this.navigator) {
+            this.listPageChangerService
+                .registerPaginatedList(this.pathString, this.navigator.itemsPerPage)
+                .skipWhile(function (page) { return page === _this.currentPage; })
+                .subscribe(function (page) { return _this.onPageChange(page); });
+        }
     };
     ComplexListFieldComponent.prototype.ngOnChanges = function (changes) {
         var valuesChange = changes['values'];
@@ -3148,6 +3697,17 @@ var ComplexListFieldComponent = (function (_super) {
             }
         }
     };
+    ComplexListFieldComponent.prototype.hasErrorOrPatch = function (index) {
+        var itemPath = this.getPathStringForChild(index);
+        return this.errorsService.hasError(itemPath) || this.jsonStoreService.hasPatch(itemPath);
+    };
+    Object.defineProperty(ComplexListFieldComponent.prototype, "headerItemTemplate", {
+        get: function () {
+            return this.appGlobalsService.templates[this.navigator.headerItemTemplateName];
+        },
+        enumerable: true,
+        configurable: true
+    });
     ComplexListFieldComponent.prototype.onFindClick = function () {
         var _this = this;
         // clear for new search
@@ -3249,18 +3809,20 @@ var ComplexListFieldComponent = (function (_super) {
 ComplexListFieldComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
                 selector: 'complex-list-field',
-                styles: [".complex-list-field-wrapper { margin: 5px 15px 15px 15px; padding: 5px; box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.25); } .navigator-container { width: 100%; } .navigator-item-right { float: right; padding-right: 13px !important; } .navigator-item-right label { position: relative; top: -19px; } .navigator-item-left { padding-left: 13px !important; } .transparent { background: transparent; } .borderless { border: none; } .find-button { color: darkslategray; opacity: 0.83; } .find-button .fa-search { opacity: 0.83; } .element-button-container { padding-top: 8px; } .element-button-container .left, .element-button-container .right { padding: 0px; } .element-button-container .right { text-align: right; } "],
-                template: "<div [id]=\"pathString\"> <!-- Navigator --> <table *ngIf=\"navigator\" class=\"navigator-container\"> <tr> <td class=\"form-group navigator-item-left\"> <div class=\"input-group input-group-sm\"> <span class=\"input-group-btn\"> <button type=\"button\" class=\"btn btn-default find-button\" (click)=\"onFindClick()\"> <i class=\"fa fa-search\" aria-hidden=\"true\"></i> </button> </span> <input type=\"search\" class=\"form-control\" [(ngModel)]=\"findExpression\" (keypress)=\"onFindInputKeypress($event.key)\" placeholder=\"Find\" /> <span class=\"input-group-btn\" *ngIf=\"shouldDisplayFoundNavigation\"> <button type=\"button\" class=\"btn btn-default\" [disabled]=\"currentFound <= 0\" (click)=\"onFoundNavigate(-1)\">❮</button> </span> <span class=\"input-group-btn\" *ngIf=\"shouldDisplayFoundNavigation\"> <button type=\"button\" class=\"btn btn-default\" [disabled]=\"currentFound >= foundIndices.length - 1\" (click)=\"onFoundNavigate(1)\">❯</button> </span> <span *ngIf=\"foundIndices\" [ngSwitch]=\"foundIndices.length\" class=\"input-group-addon transparent borderless\"> <span *ngSwitchCase=\"0\"> Nothing found </span> <span *ngSwitchDefault> {{currentFound + 1}} of {{foundIndices.length}} </span> </span> </div> </td> <td class=\"navigator-item-right\"> <label> {{paginatedItems[0].index + 1}}-{{paginatedItems[paginatedItems.length - 1].index + 1}} of {{values.size}} {{path[path.length - 1]}} </label> <br> <pagination [totalItems]=\"values.size\" [ngModel]=\"currentPage\" [maxSize]=\"navigator.maxVisiblePageCount\" [itemsPerPage]=\"navigator.itemsPerPage\" class=\"pagination-sm pagination-top\" [boundaryLinks]=\"true\" [rotate]=\"false\" [firstText]=\"'❮❮'\" [previousText]=\"'❮'\" [nextText]=\"'❯'\" [lastText]=\"'❯❯'\" (pageChanged)=\"onPageChange($event.page)\"></pagination> </td> </tr> </table> <!-- Elements --> <div *ngFor=\"let item of paginatedItems; trackBy:trackByIndex\"> <div class=\"complex-list-field-wrapper\"> <span *ngIf=\"shouldDisplayTemplate && values.get(item.index).keySeq().size != 0\"> <ng-template [ngTemplateOutlet]=\"customTemplate\" [ngTemplateOutletContext]=\"{item: values.get(item.index)}\"></ng-template> <a href=\"javascript:void(0)\" (click)=\"item.isEditFormVisible = !item.isEditFormVisible\"> {{item.isEditFormVisible ? 'Hide Fields' : 'Show Fields'}} </a> </span> <span *ngIf=\"item.isEditFormVisible\"> <object-field [value]=\"values.get(item.index)\" [schema]=\"schema.items\" [path]=\"getPathForChild(item.index)\"> </object-field> <div class=\"row element-button-container\"> <div class=\"col-md-6 left\"> <add-nested-field-dropdown [pathString]=\"pathString + '/' + item.index\" [schema]=\"schema.items\"></add-nested-field-dropdown> </div> <div class=\"col-md-6 right\"> <list-action-group (onMove)=\"moveElement(item.index, $event)\" (onDelete)=\"deleteElement(item.index)\" [canMove]=\"schema.sortable\"></list-action-group> </div> </div> </span> </div> </div> </div>",
+                styles: [".complex-list-field-wrapper { margin: 10px 15px 15px 10px; padding: 5px; box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.25); } .navigator-container { width: 100%; position: sticky; top: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; padding: 0 15px; background-color: white; box-shadow: 0 0.5px 0 0 #ffffff inset, 0 1px 2px 0 #B3B3B3; } .item-count-label { position: relative; top: -19px; } .transparent { background: transparent; } .borderless { border: none; } .find-button { color: darkslategray; } .find-button .fa-search { opacity: 0.83; } .element-button-container { padding-top: 8px; } .element-button-container .left, .element-button-container .right { padding: 0px; } .element-button-container .right { text-align: right; } "],
+                template: "<div [id]=\"pathString\" [ngClass]=\"redLeftBorderClass\"> <!-- Navigator --> <div *ngIf=\"navigator\" class=\"navigator-container\"> <div> <div class=\"input-group input-group-sm\"> <span class=\"input-group-btn\"> <button type=\"button\" class=\"btn btn-default find-button\" (click)=\"onFindClick()\"> <i class=\"fa fa-search\" aria-hidden=\"true\"></i> </button> </span> <input type=\"search\" class=\"form-control\" [(ngModel)]=\"findExpression\" (keypress)=\"onFindInputKeypress($event.key)\" placeholder=\"Find\" /> <span class=\"input-group-btn\" *ngIf=\"shouldDisplayFoundNavigation\"> <button type=\"button\" class=\"btn btn-default\" [disabled]=\"currentFound <= 0\" (click)=\"onFoundNavigate(-1)\">❮</button> </span> <span class=\"input-group-btn\" *ngIf=\"shouldDisplayFoundNavigation\"> <button type=\"button\" class=\"btn btn-default\" [disabled]=\"currentFound >= foundIndices.length - 1\" (click)=\"onFoundNavigate(1)\">❯</button> </span> <span *ngIf=\"foundIndices\" [ngSwitch]=\"foundIndices.length\" class=\"input-group-addon transparent borderless\"> <span *ngSwitchCase=\"0\"> Nothing found </span> <span *ngSwitchDefault> {{currentFound + 1}} of {{foundIndices.length}} </span> </span> </div> </div> <div *ngIf=\"headerItemTemplate\"> <ng-template [ngTemplateOutlet]=\"headerItemTemplate\"></ng-template> </div> <div> <label class=\"item-count-label\"> {{paginatedItems[0].index + 1}}-{{paginatedItems[paginatedItems.length - 1].index + 1}} of {{values.size}} {{path[path.length - 1]}} </label> <br> <pagination [totalItems]=\"values.size\" [ngModel]=\"currentPage\" [maxSize]=\"navigator.maxVisiblePageCount\" [itemsPerPage]=\"navigator.itemsPerPage\" class=\"pagination-sm pagination-top\" [boundaryLinks]=\"true\" [rotate]=\"false\" [firstText]=\"'❮❮'\" [previousText]=\"'❮'\" [nextText]=\"'❯'\" [lastText]=\"'❯❯'\" (pageChanged)=\"onPageChange($event.page)\"></pagination> </div> </div> <!-- Elements --> <div *ngFor=\"let item of paginatedItems; trackBy:trackByElement\"> <div class=\"complex-list-field-wrapper\"> <span *ngIf=\"shouldDisplayTemplate && values.get(item.index).keySeq().size != 0\"> <ng-template [ngTemplateOutlet]=\"customTemplate\" [ngTemplateOutletContext]=\"{item: values.get(item.index)}\"></ng-template> <a href=\"javascript:void(0)\" (click)=\"item.isEditFormVisible = !item.isEditFormVisible\"> {{item.isEditFormVisible ? 'Hide Fields' : 'Show Fields'}} </a> </span> <span *ngIf=\"item.isEditFormVisible || hasErrorOrPatch(item.index)\"> <object-field [value]=\"values.get(item.index)\" [schema]=\"schema.items\" [path]=\"getPathForChild(item.index)\"> </object-field> <div class=\"row element-button-container\"> <div class=\"col-md-6 left\"> <add-nested-field-dropdown [pathString]=\"pathString + '/' + item.index\" [schema]=\"schema.items\"></add-nested-field-dropdown> </div> <div class=\"col-md-6 right\"> <list-action-group (onMove)=\"moveElement(item.index, $event)\" (onDelete)=\"deleteElement(item.index)\" [canMove]=\"schema.sortable\"></list-action-group> </div> </div> </span> </div> </div> <div *ngFor=\"let patch of addJsonPatches\" class=\"complex-list-field-wrapper\"> <add-patch-view [patch]=\"patch\"></add-patch-view> </div> <div *ngIf=\"removeJsonPatch\"> <patch-actions [patch]=\"removeJsonPatch\"></patch-actions> </div> </div>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
 /** @nocollapse */
 ComplexListFieldComponent.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["b" /* AppGlobalsService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["f" /* ErrorsService */], },
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["g" /* JsonStoreService */], },
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["e" /* DomUtilService */], },
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["a" /* PathUtilService */], },
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["X" /* ChangeDetectorRef */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["v" /* ListPageChangerService */], },
 ]; };
 ComplexListFieldComponent.propDecorators = {
     'values': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
@@ -3271,23 +3833,23 @@ ComplexListFieldComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 730:
+/***/ 741:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__complex_list_field_component__ = __webpack_require__(729);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__complex_list_field_component__ = __webpack_require__(740);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__complex_list_field_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 731:
+/***/ 742:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_tracker__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_tracker__ = __webpack_require__(58);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditorPreviewerComponent; });
 /*
  * This file is part of ng2-json-editor.
@@ -3350,267 +3912,24 @@ EditorPreviewerComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 732:
+/***/ 743:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__editor_previewer_component__ = __webpack_require__(731);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__editor_previewer_component__ = __webpack_require__(742);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__editor_previewer_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 733:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services__ = __webpack_require__(6);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ErrorPanelItemComponent; });
-/*
- * This file is part of ng2-json-editor.
- * Copyright (C) 2017 CERN.
- *
- * ng2-json-editor is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of the
- * License, or (at your option) any later version.
- *
- * ng2-json-editor is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
- * In applying this license, CERN does not
- * waive the privileges and immunities granted to it by virtue of its status
- * as an Intergovernmental Organization or submit itself to any jurisdiction.
- */
-
-
-var ErrorPanelItemComponent = (function () {
-    function ErrorPanelItemComponent(domUtilService, pathUtilService) {
-        this.domUtilService = domUtilService;
-        this.pathUtilService = pathUtilService;
-    }
-    ErrorPanelItemComponent.prototype.isJsonPointerPath = function (key) {
-        return key.startsWith(this.pathUtilService.separator);
-    };
-    ErrorPanelItemComponent.prototype.keys = function (errorMap) {
-        return Object.keys(errorMap);
-    };
-    ErrorPanelItemComponent.prototype.focusPath = function (event, path) {
-        event.preventDefault();
-        this.domUtilService.focusAndSelectFirstEditableChildById(path, true);
-    };
-    return ErrorPanelItemComponent;
-}());
-
-ErrorPanelItemComponent.decorators = [
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
-                selector: 'error-panel-item',
-                styles: ["i.fa-exclamation-triangle { color: #FFDD00; } i.fa-times { color: #D14024; } a:hover { background-color: #faebcc; text-decoration: underline; } a.list-group-item { cursor: pointer; color: #0074D9; } "],
-                template: "<ul class=\"list-group\" *ngFor=\"let key of keys(errorMap)\"> <div [ngSwitch]=\"isJsonPointerPath(key)\" *ngFor=\"let error of errorMap[key]\"> <div *ngSwitchCase=\"true\" class=\"list-group\"> <a (click)=\"focusPath($event, key)\" class=\"list-group-item\"> <i *ngIf=\"heading === 'Errors'\" class=\"fa fa-times\" aria-hidden=\"true\"></i> <i *ngIf=\"heading === 'Warnings'\" class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\"></i> {{error.message}} </a> </div> <div *ngSwitchDefault> <li class=\"list-group-item\"> <i *ngIf=\"heading === 'Errors'\" class=\"fa fa-times\" aria-hidden=\"true\"></i> <i *ngIf=\"heading === 'Warnings'\" class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\"></i> {{error.message}} </li> </div> </div> </ul>",
-                changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
-            },] },
-];
-/** @nocollapse */
-ErrorPanelItemComponent.ctorParameters = function () { return [
-    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["e" /* DomUtilService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["a" /* PathUtilService */], },
-]; };
-ErrorPanelItemComponent.propDecorators = {
-    'errorMap': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
-    'heading': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
-};
-
-
-/***/ }),
-
-/***/ 734:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__error_panel_item_component__ = __webpack_require__(733);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__error_panel_item_component__["a"]; });
-
-
-
-/***/ }),
-
-/***/ 735:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_tracker__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(6);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ErrorPanelComponent; });
-/*
- * This file is part of ng2-json-editor.
- * Copyright (C) 2017 CERN.
- *
- * ng2-json-editor is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of the
- * License, or (at your option) any later version.
- *
- * ng2-json-editor is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
- * In applying this license, CERN does not
- * waive the privileges and immunities granted to it by virtue of its status
- * as an Intergovernmental Organization or submit itself to any jurisdiction.
- */
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-
-
-
-var ErrorPanelComponent = (function (_super) {
-    __extends(ErrorPanelComponent, _super);
-    function ErrorPanelComponent(appGlobalsService, changeDetectorRef) {
-        var _this = _super.call(this) || this;
-        _this.appGlobalsService = appGlobalsService;
-        _this.changeDetectorRef = changeDetectorRef;
-        _this.isOpen = false;
-        _this.activeTab = '';
-        _this.externalErrorMap = { Errors: {}, Warnings: {} };
-        _this.internalErrorMap = { Errors: {}, Warnings: {} };
-        _this.onCollapse = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* EventEmitter */]();
-        _this.tabs = [
-            { title: 'Errors', customClass: 'error-tab-class' },
-            { title: 'Warnings', customClass: 'warning-tab-class' }
-        ];
-        _this.externalErrorCount = 0;
-        _this.internalErrorCount = 0;
-        _this.externalWarningCount = 0;
-        _this.internalWarningCount = 0;
-        return _this;
-    }
-    ErrorPanelComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.externalCategorizedErrorSubscription = this.appGlobalsService.externalCategorizedErrorsSubject
-            .subscribe(function (categorizedErrorMap) {
-            _this.externalErrorMap = categorizedErrorMap;
-            _this.changeDetectorRef.markForCheck();
-        });
-        this.externalErrorCounterSubscription = this.appGlobalsService.externalErrorCountersSubject
-            .subscribe(function (errorCounters) {
-            _this.externalErrorCount = errorCounters.errors;
-            _this.externalWarningCount = errorCounters.warnings;
-            if (!_this.checkForErrors) {
-                _this.isOpen = false;
-                _this.onCollapse.emit(false);
-            }
-            _this.changeDetectorRef.markForCheck();
-        });
-        this.internalCategorizedErrorSubscription = this.appGlobalsService.internalCategorizedErrorsSubject
-            .subscribe(function (categorizedErrorMap) {
-            _this.internalErrorMap = categorizedErrorMap;
-            _this.changeDetectorRef.markForCheck();
-        });
-        this.internalErrorCounterSubscription = this.appGlobalsService.internalErrorCountersSubject
-            .subscribe(function (errorCounters) {
-            _this.internalErrorCount = errorCounters.errors;
-            _this.internalWarningCount = errorCounters.warnings;
-            if (!_this.checkForErrors) {
-                _this.isOpen = false;
-                _this.onCollapse.emit(false);
-            }
-            _this.changeDetectorRef.markForCheck();
-        });
-    };
-    Object.defineProperty(ErrorPanelComponent.prototype, "checkForErrors", {
-        get: function () {
-            return this.externalErrorCount || this.externalWarningCount
-                || this.internalErrorCount || this.internalWarningCount;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    ErrorPanelComponent.prototype.isTabActive = function (tabTitle) {
-        return this.activeTab === tabTitle;
-    };
-    ErrorPanelComponent.prototype.closePanel = function () {
-        this.onCollapse.emit(false);
-    };
-    ErrorPanelComponent.prototype.isTabEnabled = function (tabTitle) {
-        if (tabTitle === 'Warnings') {
-            return this.externalWarningCount || this.internalWarningCount;
-        }
-        return this.externalErrorCount || this.internalErrorCount;
-    };
-    ErrorPanelComponent.prototype.ngOnDestroy = function () {
-        this.externalCategorizedErrorSubscription.unsubscribe();
-        this.internalCategorizedErrorSubscription.unsubscribe();
-        this.externalErrorCounterSubscription.unsubscribe();
-        this.internalErrorCounterSubscription.unsubscribe();
-    };
-    return ErrorPanelComponent;
-}(__WEBPACK_IMPORTED_MODULE_1__abstract_tracker__["a" /* AbstractTrackerComponent */]));
-
-ErrorPanelComponent.decorators = [
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
-                selector: 'error-panel',
-                styles: [".error-tab-class { color: #D14024; } .warning-tab-class { color: #FFDD00; } "],
-                template: "<div *ngIf=\"isOpen\" [ngClass]=\"{'error-panel-container': isOpen}\"> <tabset> <tab *ngFor=\"let tab of tabs\" [active]=\"isTabActive(tab.title)\" [disabled]=\"!isTabEnabled(tab.title)\"> <ng-template tabHeading> <div *ngIf=\"tab.title === 'Errors' then errorBlock else warningBlock\"></div> <ng-template #errorBlock> <span [ngClass]=\"tab.customClass\"> <i class=\"fa fa-times\" aria-hidden=\"true\"></i> </span> <span [ngClass]=\"'error-link'\">{{tab.title}} <span class=\"badge\">{{internalErrorCount + externalErrorCount}}</span> </span> </ng-template> <ng-template #warningBlock> <span [ngClass]=\"tab.customClass\"> <i class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\"></i> </span> <span [ngClass]=\"'warning-link'\">{{tab.title}} <span class=\"badge\">{{internalWarningCount + externalWarningCount}}</span> </span> </ng-template> </ng-template> <div [ngClass]=\"'error-panel-item-container'\"> <error-panel-item [heading]=\"tab.title\" [errorMap]=\"externalErrorMap[tab.title]\"></error-panel-item> <error-panel-item [heading]=\"tab.title\" [errorMap]=\"internalErrorMap[tab.title]\"></error-panel-item> </div> </tab> <tab (select)=\"closePanel()\" [customClass]=\"'tab-align-right'\"> <ng-template tabHeading> <i class=\"fa fa-window-close\" aria-hidden=\"true\"></i> </ng-template> </tab> </tabset> </div> ",
-                changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
-            },] },
-];
-/** @nocollapse */
-ErrorPanelComponent.ctorParameters = function () { return [
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["b" /* AppGlobalsService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["X" /* ChangeDetectorRef */], },
-]; };
-ErrorPanelComponent.propDecorators = {
-    'isOpen': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
-    'activeTab': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
-    'externalErrorMap': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
-    'internalErrorMap': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
-    'onCollapse': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Y" /* Output */] },],
-};
-
-
-/***/ }),
-
-/***/ 736:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__error_panel_component__ = __webpack_require__(735);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__error_panel_component__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__error_panel_item__ = __webpack_require__(734);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__error_panel_item__["a"]; });
-
-
-
-
-/***/ }),
-
-/***/ 737:
+/***/ 744:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FindReplaceComponent; });
 /*
  * This file is part of ng2-json-editor.
@@ -3691,9 +4010,9 @@ FindReplaceComponent.decorators = [
 FindReplaceComponent.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["X" /* ChangeDetectorRef */], },
     { type: __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["c" /* DomSanitizer */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["s" /* FindReplaceAllService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["u" /* FindReplaceAllService */], },
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["g" /* JsonStoreService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["r" /* ModalService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["t" /* ModalService */], },
 ]; };
 FindReplaceComponent.propDecorators = {
     'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
@@ -3703,18 +4022,18 @@ FindReplaceComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 738:
+/***/ 745:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__find_replace_component__ = __webpack_require__(737);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__find_replace_component__ = __webpack_require__(744);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__find_replace_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 739:
+/***/ 746:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3765,28 +4084,28 @@ HtmlViewComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 740:
+/***/ 747:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__html_view_component__ = __webpack_require__(739);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__html_view_component__ = __webpack_require__(746);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__html_view_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 741:
+/***/ 748:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__json_editor_module__ = __webpack_require__(743);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__json_editor_module__ = __webpack_require__(750);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__json_editor_module__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services__ = __webpack_require__(5);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_pipes__ = __webpack_require__(411);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_pipes__ = __webpack_require__(412);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_classes__ = __webpack_require__(410);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_classes__ = __webpack_require__(411);
 /* unused harmony namespace reexport */
 // export everything in order to be AoT compatible
 
@@ -3797,18 +4116,18 @@ HtmlViewComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 742:
+/***/ 749:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_immutable__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_immutable__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_immutable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_skipWhile__ = __webpack_require__(684);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_skipWhile__ = __webpack_require__(685);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_skipWhile___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_skipWhile__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__abstract_tracker__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__abstract_tracker__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__shared_services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JsonEditorComponent; });
 /*
  * This file is part of ng2-json-editor.
@@ -3849,10 +4168,11 @@ var __extends = (this && this.__extends) || (function () {
 
 var JsonEditorComponent = (function (_super) {
     __extends(JsonEditorComponent, _super);
-    function JsonEditorComponent(http, appGlobalsService, jsonStoreService, jsonUtilService, jsonSchemaService, keysStoreService, recordFixerService, schemaFixerService, shortcutsService, tabsUtilService, pathUtilService) {
+    function JsonEditorComponent(http, appGlobalsService, errorsService, jsonStoreService, jsonUtilService, jsonSchemaService, keysStoreService, recordFixerService, schemaFixerService, shortcutsService, tabsUtilService, pathUtilService) {
         var _this = _super.call(this) || this;
         _this.http = http;
         _this.appGlobalsService = appGlobalsService;
+        _this.errorsService = errorsService;
         _this.jsonStoreService = jsonStoreService;
         _this.jsonUtilService = jsonUtilService;
         _this.jsonSchemaService = jsonSchemaService;
@@ -3865,8 +4185,8 @@ var JsonEditorComponent = (function (_super) {
         _this.templates = {};
         _this.onRecordChange = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* EventEmitter */]();
         _this._errorMap = {};
-        _this.isErrorPanelOpen = false;
-        _this.errorPanelActiveTab = '';
+        _this.isBottomConsoleOpen = false;
+        _this.bottomConsoleActiveTab = '';
         return _this;
     }
     Object.defineProperty(JsonEditorComponent.prototype, "errorMap", {
@@ -3875,7 +4195,7 @@ var JsonEditorComponent = (function (_super) {
         },
         set: function (errors) {
             this._errorMap = errors;
-            this.appGlobalsService.externalErrors = this.errorMap;
+            this.errorsService.externalErrors = this.errorMap;
         },
         enumerable: true,
         configurable: true
@@ -3895,7 +4215,7 @@ var JsonEditorComponent = (function (_super) {
         // set config to make it globally accessible all over the app
         this.appGlobalsService.config = this.config;
         // set errors that is used by other components
-        this.appGlobalsService.externalErrors = this.errorMap;
+        this.errorsService.externalErrors = this.errorMap;
         this.appGlobalsService.templates = this.templates;
         this.appGlobalsService.adminMode$.subscribe(function (adminMode) {
             _this.keysStoreService.buildKeysMap(_this._record, _this.schema);
@@ -3911,6 +4231,7 @@ var JsonEditorComponent = (function (_super) {
             // emit the change as plain JS object
             _this.onRecordChange.emit(json.toJS());
         });
+        this.jsonStoreService.setJsonPatches(this.jsonPatches);
         this.jsonSchemaService.setSchema(this.schema);
         // construct enhanced sorted filtered keys map for objects in the record
         this.keysStoreService.buildKeysMap(this._record, this.schema);
@@ -4016,14 +4337,14 @@ var JsonEditorComponent = (function (_super) {
     };
     Object.defineProperty(JsonEditorComponent.prototype, "shorterEditorContainerClass", {
         get: function () {
-            return this.isErrorPanelOpen ? 'shorter-editor-container' : '';
+            return this.isBottomConsoleOpen ? 'shorter-editor-container' : '';
         },
         enumerable: true,
         configurable: true
     });
-    JsonEditorComponent.prototype.openErrorPanel = function (errorPanelTabName) {
-        this.isErrorPanelOpen = true;
-        this.errorPanelActiveTab = errorPanelTabName;
+    JsonEditorComponent.prototype.openBottomConsole = function (tabName) {
+        this.isBottomConsoleOpen = true;
+        this.bottomConsoleActiveTab = tabName;
     };
     return JsonEditorComponent;
 }(__WEBPACK_IMPORTED_MODULE_4__abstract_tracker__["a" /* AbstractTrackerComponent */]));
@@ -4032,8 +4353,8 @@ JsonEditorComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
                 selector: 'json-editor',
                 encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["p" /* ViewEncapsulation */].None,
-                styles: ["body, html { height: 100%; background-color: #ecf0f1; } .editor-container { height: 100%; margin-right: 0px; margin-left: 0px; } .editor-container .row { margin-left: 0px; margin-right: 0px; } .shorter-editor-container { height: 75%; } #ng2-json-editor { /* Styles for tabset */ } #ng2-json-editor .hidden { display: none; } #ng2-json-editor th { font-weight: 400; padding: 1px 0px 1px 6px; background-color: #ecf0f1; color: #8e8e8e; font-weight: bold; } #ng2-json-editor th .dropdown-filter-container { font-weight: initial; } #ng2-json-editor td { background-color: #f9f9f9; border: none; padding: 0; } #ng2-json-editor td > * { vertical-align: middle; } #ng2-json-editor td.label-holder { width: 1%; white-space: nowrap; padding: 3px; background-color: #dae8ef; border-top: 1px solid #bdc3c7; } #ng2-json-editor td.label-holder button { color: #595959; } #ng2-json-editor tr.error td, #ng2-json-editor td.error { color: white; background-color: #e74c3c !important; transition: all .4s; } #ng2-json-editor tbody { border: none; } #ng2-json-editor .error-panel-container { height: 25%; overflow: hidden; } #ng2-json-editor .error-panel-container .tab-content { height: 90%; overflow: auto; } #ng2-json-editor .error-panel-container .nav-tabs > .tab-align-right { float: right; } #ng2-json-editor .error-link { color: #D14024; } #ng2-json-editor .error-link .badge { background-color: #a94442; } #ng2-json-editor ::-webkit-validation-bubble-heading .warning-link { color: #FFDD00; } #ng2-json-editor ::-webkit-validation-bubble-heading .warning-link .badge { background-color: #8a6d3b; } #ng2-json-editor table { margin-bottom: 0px !important; } #ng2-json-editor .main-container { font-size: 13px; border-left: 1px solid #a5adb5; height: 100%; overflow: auto; } #ng2-json-editor .main-container .tab-container > .nav-tabs { font-size: 14px; } #ng2-json-editor .add-field-dropdown-container { width: 100%; } #ng2-json-editor .middle.main-container { padding: 0px; } #ng2-json-editor .menu-container { background-color: #1D2D3D; height: 100%; overflow: auto; } #ng2-json-editor .menu-container div.dropdown { width: 100%; } #ng2-json-editor .menu-container ul.dropdown-menu { right: 0px; padding-bottom: 15px; } #ng2-json-editor .menu-container button.btn-add-field-dropdown { background: white; padding: 5px; opacity: 0.9; line-height: normal; font-size: 16px; width: 100%; } #ng2-json-editor .menu-container button.btn-add-field-dropdown:hover { opacity: 1; color: black; } #ng2-json-editor bs-dropdown-container { position: inherit !important; } #ng2-json-editor .editor-btn-delete { font-weight: bold; line-height: 1; text-shadow: 0 1px 0 #fff; opacity: 0.2; background: transparent; border: 0; padding: 0 0 3px 3px; } #ng2-json-editor .editor-btn-delete:hover { color: red; opacity: 0.6; } #ng2-json-editor .editor-btn-delete.editor-btn-delete-text { font-size: 13px; opacity: 0.5; padding: 0px; } #ng2-json-editor .editor-btn-move-down { padding-bottom: 0; } #ng2-json-editor .editor-btn-move-up, #ng2-json-editor .editor-btn-move-down { padding: 0; font-size: 11px; border: 0; background: transparent; opacity: 0.2; } #ng2-json-editor .editor-btn-move-up:hover, #ng2-json-editor .editor-btn-move-down:hover { opacity: 0.6; } #ng2-json-editor ul.pagination-top { margin: -16px 0px 0px 0px; } #ng2-json-editor td.button-holder, #ng2-json-editor th.button-holder { width: 40.33px; text-align: center; vertical-align: middle; } #ng2-json-editor td.button-holder.sortable, #ng2-json-editor th.button-holder.sortable { width: 46px; } #ng2-json-editor th.button-holder .add-field-dropdown-container { width: 100%; } #ng2-json-editor th.button-holder .btn-add-field-dropdown { width: 100%; } #ng2-json-editor label { color: #c1c1c1; } #ng2-json-editor .highlight { border: 2px solid yellow !important; } #ng2-json-editor table.editable-inner-table { table-layout: fixed; } #ng2-json-editor table.editable-inner-table > tbody > tr { border-bottom: 1px solid white !important; } #ng2-json-editor table.editable-inner-table add-new-element-button .button-container { padding-left: 6px; } #ng2-json-editor table.editable-inner-table label { display: inline; font-weight: initial; padding-left: 5px; } #ng2-json-editor table.editable-inner-table .dropdown-menu { left: inherit; right: 0px; min-width: 100px; } #ng2-json-editor .title-dropdown-item button { width: 100%; text-align: left; padding-left: 20px !important; padding-right: 20px !important; } #ng2-json-editor .title-dropdown-item:hover { background: #f5f5f5; } #ng2-json-editor .tooltip.top .tooltip-arrow { border-top-color: transparent; } #ng2-json-editor .tooltip { width: 90%; } #ng2-json-editor button.btn-toggle { float: right; margin-top: 5px; margin-right: 5px; } #ng2-json-editor .autocomplete-container .dropdown { position: relative !important; top: 0px !important; left: 0px !important; } #ng2-json-editor .max-height-90-vh { max-height: 90vh; } #ng2-json-editor .max-height-70-vh { max-height: 70vh; } #ng2-json-editor div.admin-mode { padding-top: 8px; width: 100%; } #ng2-json-editor label.admin-mode { color: #e0dfdf; font-size: 13px; font-weight: normal; width: 90%; padding-left: 4px; } #ng2-json-editor hr { margin-top: 5px; margin-bottom: 5px; border-top: 1px solid #757575; } #ng2-json-editor .btn { border-radius: 0; } #ng2-json-editor .btn.btn-success { background-color: #16a085; border-color: #16a085; color: white; } #ng2-json-editor .btn.btn-success:hover, #ng2-json-editor .btn.btn-success:active, #ng2-json-editor .btn.btn-success:focus { background-color: #19b698 !important; color: white; } #ng2-json-editor .btn .fa { margin-right: 5px; } #ng2-json-editor .nav { margin-bottom: 3px; } #ng2-json-editor .nav-tabs > li.active > a, #ng2-json-editor .nav-tabs > li.active > a:hover, #ng2-json-editor .nav-tabs > li.active > a:focus { border-top: 1px solid #2c3e50; background-color: white; } #ng2-json-editor .nav-tabs > li > a:hover { border-top: 1px solid #2c3e50; border-bottom: 1px solid transparent; border-left: 1px solid transparent; border-right: 1px solid transparent; transition: all .4s; } #ng2-json-editor .nav.nav-tabs { border-bottom: 5px solid white; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.24); } #ng2-json-editor .nav-tabs > li > a { margin-right: 0px; border-radius: 0px; border-right: 1px solid #e0e2e2; } complex-list-field add-field-dropdown { display: none; } "],
-                template: "<div id=\"ng2-json-editor\" class=\"row editor-container\" [ngClass]=\"shorterEditorContainerClass\"> <div class=\"col-md-2 menu-container\"> <tree-menu [record]=\"_record\" [schema]=\"schema\"></tree-menu> <add-field-dropdown [fields]=\"keys$ | async\" [pathString]=\"pathString\" [schema]=\"schema\">Add field</add-field-dropdown> <hr> <div *ngIf=\"config.enableAdminModeSwitch\" class=\"admin-mode\" tooltip=\"Allows editing all fields (use with care)\"> <input id=\"admin-mode-checkbox\" type=\"checkbox\" [(ngModel)]=\"appGlobalsService.adminMode\" /> <label class=\"admin-mode\" for=\"admin-mode-checkbox\">Enable Admin Mode</label> </div> <hr> <validation-badges (onBadgeClick)=\"openErrorPanel($event)\"></validation-badges> </div> <div id=\"middle-main-container\" class=\"middle main-container\" [ngClass]=\"middleContainerColMdClass\" [shortcuts]=\"shortcuts\"> <tabset *ngIf=\"config.tabsConfig\"> <tab *ngFor=\"let tabName of tabNames; trackBy:trackByElement\" [heading]=\"tabName\" (select)=\"activeTabName = tabName\" [active]=\"isActiveTab(tabName)\"> <sub-record [value]=\"_record\" [tabName]=\"tabName\" [schema]=\"schema\" [keys]=\"keys$ | async\" [pathString]=\"pathString\"></sub-record> </tab> </tabset> <sub-record *ngIf=\"!config.tabsConfig\" [value]=\"_record\" [schema]=\"schema\" [keys]=\"keys$ | async\" [pathString]=\"pathString\"></sub-record> </div> <div id=\"right-main-container\" *ngIf=\"!isPreviewerDisabled\" [ngClass]=\"rightContainerColMdClass\" class=\"main-container\"> <button id=\"btn-preview-toggle\" type=\"button\" class=\"btn btn-default btn-toggle\" (click)=\"isPreviewerHidden = !isPreviewerHidden\">{{isPreviewerHidden ? \"Show Preview\" : \"Hide Preview\"}}</button> <editor-previewer [hidden]=\"isPreviewerHidden\" [previews]=\"previews\"> </editor-previewer> </div> </div> <error-panel [activeTab]=\"errorPanelActiveTab\" [isOpen]=\"isErrorPanelOpen\" (onCollapse)=\"isErrorPanelOpen = $event\"></error-panel> <!-- Modal View controlled by ModalService --> <modal-view> </modal-view>",
+                styles: ["body, html { height: 100%; background-color: #ecf0f1; } .editor-container { height: 100%; margin-right: 0px; margin-left: 0px; } .editor-container .row { margin-left: 0px; margin-right: 0px; } .shorter-editor-container { height: 75%; } #ng2-json-editor { /* Styles for tabset */ } #ng2-json-editor .hidden { display: none; } #ng2-json-editor th { font-weight: 400; padding: 1px 0px 1px 6px; background-color: #ecf0f1; color: #8e8e8e; font-weight: bold; } #ng2-json-editor th .dropdown-filter-container { font-weight: initial; } #ng2-json-editor td { background-color: #f9f9f9; border: none; padding: 0; } #ng2-json-editor td > * { vertical-align: middle; } #ng2-json-editor td.label-holder { width: 1%; white-space: nowrap; padding: 3px; background-color: #dae8ef; border-top: 1px solid #bdc3c7; } #ng2-json-editor td.label-holder button { color: #595959; } #ng2-json-editor tr.error td, #ng2-json-editor td.error { color: white; background-color: #e74c3c !important; transition: all .4s; } #ng2-json-editor tbody { border: none; } #ng2-json-editor table { margin-bottom: 0px !important; } #ng2-json-editor .main-container { font-size: 13px; border-left: 1px solid #a5adb5; height: 100%; overflow: auto; } #ng2-json-editor .main-container .tab-container > .nav-tabs { font-size: 14px; } #ng2-json-editor .add-field-dropdown-container { width: 100%; } #ng2-json-editor .middle.main-container { padding: 0px; } #ng2-json-editor .menu-container { background-color: #1D2D3D; height: 100%; overflow: auto; } #ng2-json-editor .menu-container div.dropdown { width: 100%; } #ng2-json-editor .menu-container ul.dropdown-menu { right: 0px; padding-bottom: 15px; } #ng2-json-editor .menu-container button.btn-add-field-dropdown { background: white; padding: 5px; opacity: 0.9; line-height: normal; font-size: 16px; width: 100%; } #ng2-json-editor .menu-container button.btn-add-field-dropdown:hover { opacity: 1; color: black; } #ng2-json-editor bs-dropdown-container { position: inherit !important; } #ng2-json-editor .editor-btn-delete { font-weight: bold; line-height: 1; text-shadow: 0 1px 0 #fff; opacity: 0.2; background: transparent; border: 0; padding: 0 0 3px 3px; } #ng2-json-editor .editor-btn-delete:hover { color: red; opacity: 0.6; } #ng2-json-editor .editor-btn-delete.editor-btn-delete-text { font-size: 13px; opacity: 0.5; padding: 0px; } #ng2-json-editor .editor-btn-move-down { padding-bottom: 0; } #ng2-json-editor .editor-btn-move-up, #ng2-json-editor .editor-btn-move-down { padding: 0; font-size: 11px; border: 0; background: transparent; opacity: 0.2; } #ng2-json-editor .editor-btn-move-up:hover, #ng2-json-editor .editor-btn-move-down:hover { opacity: 0.6; } #ng2-json-editor ul.pagination-top { margin: -16px 0px 0px 0px; } #ng2-json-editor td.button-holder, #ng2-json-editor th.button-holder { width: 40.33px; text-align: center; vertical-align: middle; } #ng2-json-editor td.button-holder.sortable, #ng2-json-editor th.button-holder.sortable { width: 46px; } #ng2-json-editor th.button-holder .add-field-dropdown-container { width: 100%; } #ng2-json-editor th.button-holder .btn-add-field-dropdown { width: 100%; } #ng2-json-editor label { color: #c1c1c1; } #ng2-json-editor .highlight { border: 2px solid yellow !important; } #ng2-json-editor table.editable-inner-table { table-layout: fixed; } #ng2-json-editor table.editable-inner-table > tbody > tr { border-bottom: 1px solid white !important; } #ng2-json-editor table.editable-inner-table add-new-element-button .button-container { padding-left: 6px; } #ng2-json-editor table.editable-inner-table label { display: inline; font-weight: initial; padding-left: 5px; } #ng2-json-editor table.editable-inner-table .dropdown-menu { left: inherit; right: 0px; min-width: 100px; } #ng2-json-editor .title-dropdown-item button { width: 100%; text-align: left; padding-left: 20px !important; padding-right: 20px !important; } #ng2-json-editor .title-dropdown-item:hover { background: #f5f5f5; } #ng2-json-editor .tooltip.top .tooltip-arrow { border-top-color: transparent; } #ng2-json-editor .tooltip { width: 90%; } #ng2-json-editor button.btn-toggle { float: right; margin-top: 5px; margin-right: 5px; } #ng2-json-editor .autocomplete-container .dropdown { position: relative !important; top: 0px !important; left: 0px !important; } #ng2-json-editor .max-height-90-vh { max-height: 90vh; } #ng2-json-editor .max-height-70-vh { max-height: 70vh; } #ng2-json-editor div.admin-mode { padding-top: 8px; width: 100%; } #ng2-json-editor label.admin-mode { color: #e0dfdf; font-size: 13px; font-weight: normal; width: 90%; padding-left: 4px; } #ng2-json-editor hr { margin-top: 5px; margin-bottom: 5px; border-top: 1px solid #757575; } #ng2-json-editor .btn { border-radius: 0; } #ng2-json-editor .btn.btn-success { background-color: #16a085; border-color: #16a085; color: white; } #ng2-json-editor .btn.btn-success:hover, #ng2-json-editor .btn.btn-success:active, #ng2-json-editor .btn.btn-success:focus { background-color: #19b698 !important; color: white; } #ng2-json-editor .btn .fa { margin-right: 5px; } #ng2-json-editor .nav { margin-bottom: 3px; } #ng2-json-editor .nav-tabs > li.active > a, #ng2-json-editor .nav-tabs > li.active > a:hover, #ng2-json-editor .nav-tabs > li.active > a:focus { border-top: 1px solid #2c3e50; background-color: white; } #ng2-json-editor .nav-tabs > li > a:hover { border-top: 1px solid #2c3e50; border-bottom: 1px solid transparent; border-left: 1px solid transparent; border-right: 1px solid transparent; transition: all .4s; } #ng2-json-editor .nav.nav-tabs { border-bottom: 5px solid white; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.24); } #ng2-json-editor .nav-tabs > li > a { margin-right: 0px; border-radius: 0px; border-right: 1px solid #e0e2e2; } .bottom-console-container { height: 25%; overflow: hidden; } .bottom-console-container .tab-content { height: 90%; overflow: scroll; } .red-left-border { border-left: 9px solid #e74c3c !important; } complex-list-field add-field-dropdown { display: none; } "],
+                template: "<div id=\"ng2-json-editor\" class=\"row editor-container\" [ngClass]=\"shorterEditorContainerClass\"> <div class=\"col-md-2 menu-container\"> <tree-menu [record]=\"_record\" [schema]=\"schema\"></tree-menu> <add-field-dropdown [fields]=\"keys$ | async\" [pathString]=\"pathString\" [schema]=\"schema\">Add field</add-field-dropdown> <hr> <div *ngIf=\"config.enableAdminModeSwitch\" class=\"admin-mode\" tooltip=\"Allows editing all fields (use with care)\"> <input id=\"admin-mode-checkbox\" type=\"checkbox\" [(ngModel)]=\"appGlobalsService.adminMode\" /> <label class=\"admin-mode\" for=\"admin-mode-checkbox\">Enable Admin Mode</label> </div> <hr> <bottom-console-badges (badgeClick)=\"openBottomConsole($event)\"></bottom-console-badges> </div> <div id=\"middle-main-container\" class=\"middle main-container\" [ngClass]=\"middleContainerColMdClass\" [shortcuts]=\"shortcuts\"> <tabset *ngIf=\"config.tabsConfig\"> <tab *ngFor=\"let tabName of tabNames; trackBy:trackByElement\" [heading]=\"tabName\" (select)=\"activeTabName = tabName\" [active]=\"isActiveTab(tabName)\"> <sub-record [value]=\"_record\" [tabName]=\"tabName\" [schema]=\"schema\" [keys]=\"keys$ | async\" [pathString]=\"pathString\"></sub-record> </tab> </tabset> <sub-record *ngIf=\"!config.tabsConfig\" [value]=\"_record\" [schema]=\"schema\" [keys]=\"keys$ | async\" [pathString]=\"pathString\"></sub-record> </div> <div id=\"right-main-container\" *ngIf=\"!isPreviewerDisabled\" [ngClass]=\"rightContainerColMdClass\" class=\"main-container\"> <button id=\"btn-preview-toggle\" type=\"button\" class=\"btn btn-default btn-toggle\" (click)=\"isPreviewerHidden = !isPreviewerHidden\">{{isPreviewerHidden ? \"Show Preview\" : \"Hide Preview\"}}</button> <editor-previewer [hidden]=\"isPreviewerHidden\" [previews]=\"previews\"> </editor-previewer> </div> </div> <bottom-console [activeTab]=\"bottomConsoleActiveTab\" [isOpen]=\"isBottomConsoleOpen\" (onCollapse)=\"isBottomConsoleOpen = $event\"></bottom-console> <!-- Modal View controlled by ModalService --> <modal-view> </modal-view>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
@@ -4041,14 +4362,15 @@ JsonEditorComponent.decorators = [
 JsonEditorComponent.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */], },
     { type: __WEBPACK_IMPORTED_MODULE_5__shared_services__["b" /* AppGlobalsService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_5__shared_services__["f" /* ErrorsService */], },
     { type: __WEBPACK_IMPORTED_MODULE_5__shared_services__["g" /* JsonStoreService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_5__shared_services__["j" /* JsonUtilService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_5__shared_services__["k" /* JsonSchemaService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_5__shared_services__["i" /* KeysStoreService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_5__shared_services__["l" /* RecordFixerService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_5__shared_services__["m" /* SchemaFixerService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_5__shared_services__["n" /* ShortcutService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_5__shared_services__["h" /* TabsUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_5__shared_services__["l" /* JsonUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_5__shared_services__["m" /* JsonSchemaService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_5__shared_services__["k" /* KeysStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_5__shared_services__["n" /* RecordFixerService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_5__shared_services__["o" /* SchemaFixerService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_5__shared_services__["p" /* ShortcutService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_5__shared_services__["j" /* TabsUtilService */], },
     { type: __WEBPACK_IMPORTED_MODULE_5__shared_services__["a" /* PathUtilService */], },
 ]; };
 JsonEditorComponent.propDecorators = {
@@ -4056,6 +4378,7 @@ JsonEditorComponent.propDecorators = {
     'record': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
     'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
     'errorMap': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
+    'jsonPatches': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
     'templates': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
     'onRecordChange': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Y" /* Output */] },],
 };
@@ -4063,7 +4386,7 @@ JsonEditorComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 743:
+/***/ 750:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4071,33 +4394,36 @@ JsonEditorComponent.propDecorators = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_bootstrap__ = __webpack_require__(650);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_slide_toggle__ = __webpack_require__(664);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__add_field_dropdown__ = __webpack_require__(722);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__add_new_element_button__ = __webpack_require__(724);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__any_type_field__ = __webpack_require__(726);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__autocomplete_input__ = __webpack_require__(728);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__complex_list_field__ = __webpack_require__(730);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__editor_previewer__ = __webpack_require__(732);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__sub_record__ = __webpack_require__(785);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__validation_badges__ = __webpack_require__(796);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__find_replace__ = __webpack_require__(738);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__html_view__ = __webpack_require__(740);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__json_editor_component__ = __webpack_require__(742);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__modal_view__ = __webpack_require__(746);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__object_field__ = __webpack_require__(748);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__primitive_list_field__ = __webpack_require__(752);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__primitive_field__ = __webpack_require__(750);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__ref_field__ = __webpack_require__(754);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__table_list_field__ = __webpack_require__(789);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__table_item_field__ = __webpack_require__(787);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__title_dropdown__ = __webpack_require__(791);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__string_input__ = __webpack_require__(783);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__tree_menu__ = __webpack_require__(793);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__searchable_dropdown__ = __webpack_require__(756);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__list_action_group__ = __webpack_require__(744);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__shared__ = __webpack_require__(762);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__error_panel__ = __webpack_require__(736);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_bootstrap__ = __webpack_require__(651);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_slide_toggle__ = __webpack_require__(665);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__add_field_dropdown__ = __webpack_require__(723);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__add_new_element_button__ = __webpack_require__(725);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__any_type_field__ = __webpack_require__(729);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__autocomplete_input__ = __webpack_require__(731);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__complex_list_field__ = __webpack_require__(741);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__editor_previewer__ = __webpack_require__(743);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__sub_record__ = __webpack_require__(797);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__bottom_console_badges__ = __webpack_require__(733);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__find_replace__ = __webpack_require__(745);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__html_view__ = __webpack_require__(747);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__json_editor_component__ = __webpack_require__(749);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__modal_view__ = __webpack_require__(753);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__object_field__ = __webpack_require__(755);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__primitive_list_field__ = __webpack_require__(761);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__primitive_field__ = __webpack_require__(759);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__ref_field__ = __webpack_require__(763);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__table_list_field__ = __webpack_require__(801);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__table_item_field__ = __webpack_require__(799);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__title_dropdown__ = __webpack_require__(805);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__string_input__ = __webpack_require__(795);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__tree_menu__ = __webpack_require__(807);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__searchable_dropdown__ = __webpack_require__(765);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__list_action_group__ = __webpack_require__(751);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__shared__ = __webpack_require__(771);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__bottom_console__ = __webpack_require__(737);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__text_diff__ = __webpack_require__(803);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__patch_actions__ = __webpack_require__(757);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__add_patch_view__ = __webpack_require__(727);
 /* unused harmony reexport AddFieldDropdownComponent */
 /* unused harmony reexport AddNestedFieldDropdownComponent */
 /* unused harmony reexport AddNewElementButtonComponent */
@@ -4106,7 +4432,7 @@ JsonEditorComponent.propDecorators = {
 /* unused harmony reexport ComplexListFieldComponent */
 /* unused harmony reexport ObjectFieldComponent */
 /* unused harmony reexport EditorPreviewerComponent */
-/* unused harmony reexport ErrorPanelComponent */
+/* unused harmony reexport BottomConsoleComponent */
 /* unused harmony reexport FindReplaceComponent */
 /* unused harmony reexport ModalViewComponent */
 /* unused harmony reexport PrimitiveListFieldComponent */
@@ -4122,9 +4448,13 @@ JsonEditorComponent.propDecorators = {
 /* unused harmony reexport JsonEditorComponent */
 /* unused harmony reexport SubRecordComponent */
 /* unused harmony reexport HtmlViewComponent */
-/* unused harmony reexport ValidationBadgesComponent */
-/* unused harmony reexport ErrorPanelItemComponent */
+/* unused harmony reexport BottomConsoleBadgesComponent */
 /* unused harmony reexport StringInputComponent */
+/* unused harmony reexport TextDiffComponent */
+/* unused harmony reexport PatchActionsComponent */
+/* unused harmony reexport PatchesConsoleTabComponent */
+/* unused harmony reexport ErrorsConsoleTabComponent */
+/* unused harmony reexport AddPatchViewComponent */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return JsonEditorModule; });
 /*
  * This file is part of ng2-json-editor.
@@ -4152,6 +4482,9 @@ JsonEditorComponent.propDecorators = {
 
 
 // TODO: investigate if all modules or only used ones are in the bundle of the example app.
+
+
+
 
 
 
@@ -4211,10 +4544,14 @@ JsonEditorModule.decorators = [
                     __WEBPACK_IMPORTED_MODULE_16__json_editor_component__["a" /* JsonEditorComponent */],
                     __WEBPACK_IMPORTED_MODULE_12__sub_record__["a" /* SubRecordComponent */],
                     __WEBPACK_IMPORTED_MODULE_15__html_view__["a" /* HtmlViewComponent */],
-                    __WEBPACK_IMPORTED_MODULE_13__validation_badges__["a" /* ValidationBadgesComponent */],
-                    __WEBPACK_IMPORTED_MODULE_30__error_panel__["a" /* ErrorPanelComponent */],
-                    __WEBPACK_IMPORTED_MODULE_30__error_panel__["b" /* ErrorPanelItemComponent */],
-                    __WEBPACK_IMPORTED_MODULE_25__string_input__["a" /* StringInputComponent */]
+                    __WEBPACK_IMPORTED_MODULE_13__bottom_console_badges__["a" /* BottomConsoleBadgesComponent */],
+                    __WEBPACK_IMPORTED_MODULE_30__bottom_console__["a" /* BottomConsoleComponent */],
+                    __WEBPACK_IMPORTED_MODULE_25__string_input__["a" /* StringInputComponent */],
+                    __WEBPACK_IMPORTED_MODULE_31__text_diff__["a" /* TextDiffComponent */],
+                    __WEBPACK_IMPORTED_MODULE_32__patch_actions__["a" /* PatchActionsComponent */],
+                    __WEBPACK_IMPORTED_MODULE_30__bottom_console__["b" /* PatchesConsoleTabComponent */],
+                    __WEBPACK_IMPORTED_MODULE_30__bottom_console__["c" /* ErrorsConsoleTabComponent */],
+                    __WEBPACK_IMPORTED_MODULE_33__add_patch_view__["a" /* AddPatchViewComponent */]
                 ]),
                 exports: [__WEBPACK_IMPORTED_MODULE_16__json_editor_component__["a" /* JsonEditorComponent */]],
                 imports: [
@@ -4234,18 +4571,18 @@ JsonEditorModule.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 744:
+/***/ 751:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__list_action_group_component__ = __webpack_require__(745);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__list_action_group_component__ = __webpack_require__(752);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__list_action_group_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 745:
+/***/ 752:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4301,23 +4638,23 @@ ListActionGroupComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 746:
+/***/ 753:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modal_view_component__ = __webpack_require__(747);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modal_view_component__ = __webpack_require__(754);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__modal_view_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 747:
+/***/ 754:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ModalViewComponent; });
 /*
  * This file is part of ng2-json-editor.
@@ -4376,7 +4713,7 @@ ModalViewComponent.decorators = [
 ];
 /** @nocollapse */
 ModalViewComponent.ctorParameters = function () { return [
-    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["r" /* ModalService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["t" /* ModalService */], },
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["X" /* ChangeDetectorRef */], },
 ]; };
 ModalViewComponent.propDecorators = {
@@ -4386,24 +4723,24 @@ ModalViewComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 748:
+/***/ 755:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__object_field_component__ = __webpack_require__(749);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__object_field_component__ = __webpack_require__(756);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__object_field_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 749:
+/***/ 756:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_field__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ObjectFieldComponent; });
 /*
  * This file is part of ng2-json-editor.
@@ -4441,9 +4778,10 @@ var __extends = (this && this.__extends) || (function () {
 
 var ObjectFieldComponent = (function (_super) {
     __extends(ObjectFieldComponent, _super);
-    function ObjectFieldComponent(appGlobalsService, jsonStoreService, pathUtilService, changeDetectorRef, keysStoreService) {
-        var _this = _super.call(this, appGlobalsService, pathUtilService, changeDetectorRef) || this;
+    function ObjectFieldComponent(appGlobalsService, errorsService, jsonStoreService, pathUtilService, changeDetectorRef, keysStoreService) {
+        var _this = _super.call(this, appGlobalsService, errorsService, pathUtilService, changeDetectorRef, jsonStoreService) || this;
         _this.appGlobalsService = appGlobalsService;
+        _this.errorsService = errorsService;
         _this.jsonStoreService = jsonStoreService;
         _this.pathUtilService = pathUtilService;
         _this.changeDetectorRef = changeDetectorRef;
@@ -4460,10 +4798,9 @@ var ObjectFieldComponent = (function (_super) {
     ObjectFieldComponent.prototype.deleteField = function (name) {
         var fieldPath = this.path.concat(name);
         this.jsonStoreService.removeIn(fieldPath);
-        this.keysStoreService.deleteKey(this.pathString, name);
     };
-    ObjectFieldComponent.prototype.isDisabled = function (key) {
-        return this.schema.properties[key].disabled && !this.appGlobalsService.adminMode;
+    ObjectFieldComponent.prototype.isPropertyDisabled = function (name) {
+        return this.schema.properties[name].disabled && !this.appGlobalsService.adminMode;
     };
     return ObjectFieldComponent;
 }(__WEBPACK_IMPORTED_MODULE_1__abstract_field__["a" /* AbstractFieldComponent */]));
@@ -4472,17 +4809,18 @@ ObjectFieldComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
                 selector: 'object-field',
                 styles: ["table.table { background-color: #f9f9f9; } "],
-                template: "<table [id]=\"pathString\" class=\"table\"> <tr *ngFor=\"let key of keys$ | async; trackBy:trackByElement\"> <!-- SUB FIELD TITLE MENU --> <td class=\"label-holder\"> <div> <title-dropdown [title]=\"key | underscoreToSpace\" [isDisabled]=\"isDisabled(key)\"> <li *ngIf=\"schema.properties[key].type === 'array'\" class=\"title-dropdown-item\"> <add-new-element-button [path]=\"getPathForChild(key)\" [schema]=\"schema.properties[key]\"></add-new-element-button> </li> <li class=\"title-dropdown-item\"> <button type=\"button\" class=\"editor-btn-delete editor-btn-delete-text\" (click)=\"deleteField(key)\">Delete</button> </li> </title-dropdown> </div> </td> <!-- SUB FIELD COMPONENT --> <td> <any-type-field [value]=\"value.get(key) | selfOrEmpty:schema.properties[key]\" [schema]=schema.properties[key] [path]=\"getPathForChild(key)\"></any-type-field> </td> </tr> <!-- ADD SUB FIELD FROM SCHEMA DROPDOWN --> <tr> <td class=\"button-holder\"> <add-field-dropdown [fields]=\"keys$ | async\" [pathString]=\"pathString\" [schema]=\"schema\"> <i class=\"fa fa-plus\"></i> </add-field-dropdown> </td> </tr> </table>",
+                template: "<table [id]=\"pathString\" class=\"table\" [ngClass]=\"redLeftBorderClass\"> <tr *ngFor=\"let key of keys$ | async; trackBy:trackByElement\"> <!-- SUB FIELD TITLE MENU --> <td class=\"label-holder\"> <div> <title-dropdown [title]=\"key | underscoreToSpace\" [isDisabled]=\"isPropertyDisabled(key)\"> <li *ngIf=\"schema.properties[key].type === 'array'\" class=\"title-dropdown-item\"> <add-new-element-button [path]=\"getPathForChild(key)\" [schema]=\"schema.properties[key]\"></add-new-element-button> </li> <li class=\"title-dropdown-item\"> <button type=\"button\" class=\"editor-btn-delete editor-btn-delete-text\" (click)=\"deleteField(key)\">Delete</button> </li> </title-dropdown> </div> </td> <!-- SUB FIELD COMPONENT --> <td> <any-type-field [value]=\"value.get(key) | selfOrEmpty:schema.properties[key]\" [schema]=schema.properties[key] [path]=\"getPathForChild(key)\"></any-type-field> </td> </tr> <tr *ngIf=\"removeJsonPatch\"> <patch-actions [patch]=\"removeJsonPatch\"></patch-actions> </tr> <!-- ADD SUB FIELD FROM SCHEMA DROPDOWN --> <tr> <td class=\"button-holder\"> <add-field-dropdown [fields]=\"keys$ | async\" [pathString]=\"pathString\" [schema]=\"schema\"> <i class=\"fa fa-plus\"></i> </add-field-dropdown> </td> </tr> </table>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
 /** @nocollapse */
 ObjectFieldComponent.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["b" /* AppGlobalsService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["f" /* ErrorsService */], },
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["g" /* JsonStoreService */], },
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["a" /* PathUtilService */], },
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["X" /* ChangeDetectorRef */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["i" /* KeysStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["k" /* KeysStoreService */], },
 ]; };
 ObjectFieldComponent.propDecorators = {
     'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
@@ -4493,24 +4831,102 @@ ObjectFieldComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 750:
+/***/ 757:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__primitive_field_component__ = __webpack_require__(751);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__patch_actions_component__ = __webpack_require__(758);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__patch_actions_component__["a"]; });
+
+
+
+/***/ }),
+
+/***/ 758:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services__ = __webpack_require__(5);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PatchActionsComponent; });
+/*
+ * This file is part of ng2-json-editor.
+ * Copyright (C) 2017 CERN.
+ *
+ * ng2-json-editor is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * ng2-json-editor is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ * In applying this license, CERN does not
+ * waive the privileges and immunities granted to it by virtue of its status
+ * as an Intergovernmental Organization or submit itself to any jurisdiction.
+*/
+
+
+var PatchActionsComponent = (function () {
+    function PatchActionsComponent(jsonStoreService) {
+        this.jsonStoreService = jsonStoreService;
+    }
+    PatchActionsComponent.prototype.onAcceptClick = function () {
+        this.jsonStoreService.applyPatch(this.patch);
+    };
+    PatchActionsComponent.prototype.onRejectClick = function () {
+        this.jsonStoreService.rejectPatch(this.patch);
+    };
+    PatchActionsComponent.prototype.onAddNewClick = function () {
+        this.patch.op = 'add-as-new';
+        this.jsonStoreService.applyPatch(this.patch);
+    };
+    return PatchActionsComponent;
+}());
+
+PatchActionsComponent.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
+                selector: 'patch-actions',
+                styles: [".patch-actions-container { display: inline-block; padding-left: 2px; } .patch-actions-container > button { border: none; background-color: transparent; padding: 1px 3px 1.5px; } .patch-actions-container > button .fa { font-size: 18px; } .patch-actions-container > button .fa-check-circle { color: #27ae60; } .patch-actions-container > button .fa-times-circle { color: #e74c3c; } .patch-actions-container > button .fa-plus-circle { color: #f1c40f; } "],
+                template: "<div class=\"patch-actions-container\" tabindex=\"-1\"> <button><i class=\"fa fa-check-circle\" (click)=\"onAcceptClick()\"></i></button> <button><i class=\"fa fa-times-circle\" (click)=\"onRejectClick()\"></i></button> <button  *ngIf=\"addActionEnabled\"><i class=\"fa fa-plus-circle\" (click)=\"onAddNewClick()\"></i></button> </div>",
+                changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
+            },] },
+];
+/** @nocollapse */
+PatchActionsComponent.ctorParameters = function () { return [
+    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["g" /* JsonStoreService */], },
+]; };
+PatchActionsComponent.propDecorators = {
+    'patch': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
+    'addActionEnabled': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
+};
+
+
+/***/ }),
+
+/***/ 759:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__primitive_field_component__ = __webpack_require__(760);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__primitive_field_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 751:
+/***/ 760:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_field__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PrimitiveFieldComponent; });
 /*
  * This file is part of ng2-json-editor.
@@ -4548,11 +4964,12 @@ var __extends = (this && this.__extends) || (function () {
 
 var PrimitiveFieldComponent = (function (_super) {
     __extends(PrimitiveFieldComponent, _super);
-    function PrimitiveFieldComponent(schemaValidationService, componentTypeService, appGlobalsService, jsonStoreService, keysStoreService, pathUtilService, domUtilService, changeDetectorRef) {
-        var _this = _super.call(this, appGlobalsService, pathUtilService, changeDetectorRef) || this;
+    function PrimitiveFieldComponent(schemaValidationService, componentTypeService, appGlobalsService, errorsService, jsonStoreService, keysStoreService, pathUtilService, domUtilService, changeDetectorRef) {
+        var _this = _super.call(this, appGlobalsService, errorsService, pathUtilService, changeDetectorRef, jsonStoreService) || this;
         _this.schemaValidationService = schemaValidationService;
         _this.componentTypeService = componentTypeService;
         _this.appGlobalsService = appGlobalsService;
+        _this.errorsService = errorsService;
         _this.jsonStoreService = jsonStoreService;
         _this.keysStoreService = keysStoreService;
         _this.pathUtilService = pathUtilService;
@@ -4568,17 +4985,17 @@ var PrimitiveFieldComponent = (function (_super) {
         var _this = this;
         _super.prototype.ngOnInit.call(this);
         this.lastCommitedValue = this.value;
-        this.internalCategorizedErrorSubscription = this.appGlobalsService
+        this.internalCategorizedErrorSubscription = this.errorsService
             .internalCategorizedErrorsSubject
             .subscribe(function (internalCategorizedErrorMap) {
-            _this.internalErrors = internalCategorizedErrorMap.Errors[_this.pathString] || [];
+            _this.internalErrors = internalCategorizedErrorMap.errors[_this.pathString] || [];
         });
         this.validate();
     };
     PrimitiveFieldComponent.prototype.ngOnDestroy = function () {
         _super.prototype.ngOnDestroy.call(this);
         if (this.internalErrors.length > 0) {
-            this.appGlobalsService.extendInternalErrors(this.pathString, []);
+            this.errorsService.extendInternalErrors(this.pathString, []);
         }
         this.internalCategorizedErrorSubscription.unsubscribe();
     };
@@ -4615,7 +5032,7 @@ var PrimitiveFieldComponent = (function (_super) {
     };
     Object.defineProperty(PrimitiveFieldComponent.prototype, "tabIndex", {
         get: function () {
-            return this.schema.disabled ? -1 : 1;
+            return this.disabled ? -1 : 1;
         },
         enumerable: true,
         configurable: true
@@ -4631,13 +5048,6 @@ var PrimitiveFieldComponent = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(PrimitiveFieldComponent.prototype, "disabled", {
-        get: function () {
-            return this.schema.disabled && !this.appGlobalsService.adminMode;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(PrimitiveFieldComponent.prototype, "disabledClass", {
         get: function () {
             return this.disabled ? 'disabled' : '';
@@ -4648,11 +5058,25 @@ var PrimitiveFieldComponent = (function (_super) {
     PrimitiveFieldComponent.prototype.hasErrors = function () {
         return _super.prototype.hasErrors.call(this) || this.internalErrors.length > 0;
     };
+    Object.defineProperty(PrimitiveFieldComponent.prototype, "errorClass", {
+        get: function () {
+            return !this.jsonPatches[0] && this.hasErrors() ? 'error' : '';
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(PrimitiveFieldComponent.prototype, "isPathToAnIndex", {
+        get: function () {
+            return typeof this.path[this.path.length - 1] === 'number';
+        },
+        enumerable: true,
+        configurable: true
+    });
     PrimitiveFieldComponent.prototype.validate = function () {
         // don't validate if value is empty
         if (this.value) {
             this.internalErrors = this.schemaValidationService.validateValue(this.value, this.schema);
-            this.appGlobalsService.extendInternalErrors(this.pathString, this.internalErrors);
+            this.errorsService.extendInternalErrors(this.pathString, this.internalErrors);
         }
     };
     return PrimitiveFieldComponent;
@@ -4662,18 +5086,19 @@ PrimitiveFieldComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
                 selector: 'primitive-field',
                 encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["p" /* ViewEncapsulation */].None,
-                styles: ["td.value-container div[contenteditable=true], td.value-container input { vertical-align: middle; transition: all 0.5s ease; border: none; background-color: transparent; display: inline-block; width: 100%; } table.primitive-field-container { width: 100%; } td.link-button-container { width: 22px; } td.value-container { width: 100%; padding: 3px 3px 3px 6px !important; } td.value-container:hover { background-color: #ffa !important; } a.no-decoration { text-decoration: none; } [contenteditable=true] { min-height: 18px; word-break: break-word; } [contenteditable=true]:empty:before { content: attr(placeholder); color: darkgray; display: block; /* For Firefox */ } .tooltip-left-align { margin-left: 12px; padding: 0px; } .disabled { cursor: not-allowed; } .disabled div { pointer-events: none; } .disabled div input, .disabled div button, .disabled div a, .disabled div i, .disabled div string-input > div { opacity: .5; } "],
-                template: "<div [ngSwitch]=\"schema.componentType\" [id]=\"pathString\"> <table class=\"primitive-field-container\"> <tr [ngClass]=\"{error: hasErrors()}\"> <ng-template #errorsTooltipTemplate> <ul class=\"tooltip-left-align\"> <li *ngFor=\"let error of internalErrors\"> {{error.message}} </li> <li *ngFor=\"let error of externalErrors\"> {{error.message}} </li> </ul> </ng-template> <td class=\"value-container\" [ngClass]=\"disabledClass\" [tooltip]=\"errorsTooltipTemplate\" [isDisabled]=\"!hasErrors()\" placement=\"{{tooltipPosition}}\" container=\"body\"> <div *ngSwitchCase=\"'string'\"> <string-input [pathString]=\"pathString\" [value]=\"value\" (valueChange)=\"onValueChange($event)\" [disabled]=\"disabled\" [tabIndex]=\"tabIndex\" [latexPreviewEnabled]=\"schema.latexPreviewEnabled\" [placeholder]=\"schema.title\" (blur)=\"onBlur()\" (onKeypress)=\"onKeypress($event)\"> </string-input> </div> <div *ngSwitchCase=\"'enum'\"> <searchable-dropdown [pathString]=\"pathString\" [value]=\"value\" [placeholder]=\"schema.title\" [items]=\"schema.enum\" [shortcutMap]=\"schema.enumShorcutMap\" (onSelect)=\"onSearchableDropdownSelect($event)\" [tabIndex]=\"tabIndex\" (onBlur)=\"domUtilService.clearHighlight()\"></searchable-dropdown> </div> <div *ngSwitchCase=\"'autocomplete'\"> <autocomplete-input [pathString]=\"pathString\" [value]=\"value\" [path]=\"path\" [autocompletionConfig]=\"schema.autocompletionConfig\" (onBlur)=\"onBlur()\" (onKeypress)=\"onKeypress($event)\" (onValueChange)=\"onValueChange($event)\" [placeholder]=\"schema.title\" [tabIndex]=\"tabIndex\"></autocomplete-input> </div> <div *ngSwitchCase=\"'integer'\"> <input type=\"number\" [(ngModel)]=\"value\" [tabindex]=\"tabIndex\" [attr.data-path]=\"pathString\" (blur)=\"onBlur()\" (keypress)=\"onKeypress($event)\" [placeholder]=\"schema.title\"> </div> <div *ngSwitchCase=\"'boolean'\"> <input type=\"checkbox\" [(ngModel)]=\"value\" (ngModelChange)=\"onBlur()\" [placeholder]=\"schema.title\"> </div> <div *ngSwitchDefault> ## Not recognized type: {{valueType}} </div> </td> <td class=\"link-button-container\"> <a *ngIf=\"schema.linkBuilder\" class=\"no-decoration\" target=\"_blank\" [href]=\"schema.linkBuilder(value)\"> <i class=\"fa fa-link\" aria-hidden=\"true\"></i> </a> <a *ngIf=\"!schema.linkBuilder && schema.format === 'url'\" class=\"no-decoration\" target=\"_blank\" [href]=\"value\"> <i class=\"fa fa-link\" aria-hidden=\"true\"></i> </a> </td> </tr> </table> </div>",
+                styles: ["td.value-container div[contenteditable=true], td.value-container input { vertical-align: middle; transition: all 0.5s ease; border: none; background-color: transparent; display: inline-block; width: 100%; } table.primitive-field-container { width: 100%; } td.link-button-container { width: 22px; } td.value-container { width: 100%; padding: 3px 3px 3px 6px !important; } td.value-container:hover { background-color: #ffa !important; } a.no-decoration { text-decoration: none; } [contenteditable=true] { min-height: 18px; word-break: break-word; } [contenteditable=true]:empty:before { content: attr(placeholder); color: darkgray; display: block; /* For Firefox */ } .tooltip-left-align { margin-left: 12px; padding: 0px; } .disabled { cursor: not-allowed; } .disabled div { pointer-events: none; } .disabled div input, .disabled div button, .disabled div a, .disabled div i, .disabled div string-input > div { opacity: .5; } .btn-merge { border: none; background: transparent; width: 100%; text-align: left; } "],
+                template: "<div [id]=\"pathString\"> <table class=\"primitive-field-container\" [ngSwitch]=\"schema.componentType\"> <tr [ngClass]=\"errorClass\"> <ng-template #errorsTooltipTemplate> <ul class=\"tooltip-left-align\"> <li *ngFor=\"let error of internalErrors\"> {{error.message}} </li> <li *ngFor=\"let error of externalErrors\"> {{error.message}} </li> </ul> </ng-template> <td *ngIf=\"!jsonPatches[0]; else patchTemplate\" class=\"value-container\" [ngClass]=\"disabledClass\" [tooltip]=\"errorsTooltipTemplate\" [isDisabled]=\"!hasErrors()\" placement=\"{{tooltipPosition}}\" container=\"body\"> <div *ngSwitchCase=\"'string'\"> <string-input [pathString]=\"pathString\" [value]=\"value\" (valueChange)=\"onValueChange($event)\" [disabled]=\"disabled\" [tabIndex]=\"tabIndex\" [latexPreviewEnabled]=\"schema.latexPreviewEnabled\" [placeholder]=\"schema.title\" (blur)=\"onBlur()\" (onKeypress)=\"onKeypress($event)\"> </string-input> </div> <div *ngSwitchCase=\"'enum'\"> <searchable-dropdown [pathString]=\"pathString\" [value]=\"value\" [placeholder]=\"schema.title\" [items]=\"schema.enum\" [shortcutMap]=\"schema.enumShorcutMap\" (onSelect)=\"onSearchableDropdownSelect($event)\" [tabIndex]=\"tabIndex\" (onBlur)=\"domUtilService.clearHighlight()\"></searchable-dropdown> </div> <div *ngSwitchCase=\"'autocomplete'\"> <autocomplete-input [pathString]=\"pathString\" [value]=\"value\" [path]=\"path\" [autocompletionConfig]=\"schema.autocompletionConfig\" (onBlur)=\"onBlur()\" (onKeypress)=\"onKeypress($event)\" (onValueChange)=\"onValueChange($event)\" [placeholder]=\"schema.title\" [tabIndex]=\"tabIndex\"></autocomplete-input> </div> <div *ngSwitchCase=\"'integer'\"> <input type=\"number\" [(ngModel)]=\"value\" [tabindex]=\"tabIndex\" [attr.data-path]=\"pathString\" (blur)=\"onBlur()\" (keypress)=\"onKeypress($event)\" [placeholder]=\"schema.title\"> </div> <div *ngSwitchCase=\"'boolean'\"> <input type=\"checkbox\" [(ngModel)]=\"value\" (ngModelChange)=\"onBlur()\" [placeholder]=\"schema.title\"> </div> <div *ngSwitchDefault> ## Not recognized type: {{valueType}} </div> </td> <td class=\"link-button-container\"> <a *ngIf=\"schema.linkBuilder\" class=\"no-decoration\" target=\"_blank\" [href]=\"schema.linkBuilder(value)\"> <i class=\"fa fa-link\" aria-hidden=\"true\"></i> </a> <a *ngIf=\"!schema.linkBuilder && schema.format === 'url'\" class=\"no-decoration\" target=\"_blank\" [href]=\"value\"> <i class=\"fa fa-link\" aria-hidden=\"true\"></i> </a> </td> </tr> </table> </div> <ng-template #patchTemplate> <button class=\"btn btn-default btn-merge\" type=\"button\" [popover]=\"mergePopover\" popoverTitle=\"Merge\" container=\"body\"> {{value}} <i class=\"fa fa-bolt\"></i> </button> </ng-template> <ng-template #mergePopover> <text-diff [currentText]=\"value\" [newText]=\"jsonPatches[0].value\"></text-diff> <patch-actions [patch]=\"jsonPatches[0]\" [addActionEnabled]=\"isPathToAnIndex\"></patch-actions> </ng-template>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
 /** @nocollapse */
 PrimitiveFieldComponent.ctorParameters = function () { return [
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["p" /* SchemaValidationService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["q" /* ComponentTypeService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["r" /* SchemaValidationService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["s" /* ComponentTypeService */], },
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["b" /* AppGlobalsService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["f" /* ErrorsService */], },
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["g" /* JsonStoreService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["i" /* KeysStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["k" /* KeysStoreService */], },
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["a" /* PathUtilService */], },
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["e" /* DomUtilService */], },
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["X" /* ChangeDetectorRef */], },
@@ -4687,24 +5112,24 @@ PrimitiveFieldComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 752:
+/***/ 761:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__primitive_list_field_component__ = __webpack_require__(753);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__primitive_list_field_component__ = __webpack_require__(762);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__primitive_list_field_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 753:
+/***/ 762:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_list_field__ = __webpack_require__(139);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PrimitiveListFieldComponent; });
 /*
  * This file is part of ng2-json-editor.
@@ -4742,9 +5167,10 @@ var __extends = (this && this.__extends) || (function () {
 
 var PrimitiveListFieldComponent = (function (_super) {
     __extends(PrimitiveListFieldComponent, _super);
-    function PrimitiveListFieldComponent(appGlobalsService, jsonStoreService, pathUtilService, changeDetectorRef) {
-        var _this = _super.call(this, appGlobalsService, jsonStoreService, pathUtilService, changeDetectorRef) || this;
+    function PrimitiveListFieldComponent(appGlobalsService, errorsService, jsonStoreService, pathUtilService, changeDetectorRef) {
+        var _this = _super.call(this, appGlobalsService, errorsService, jsonStoreService, pathUtilService, changeDetectorRef) || this;
         _this.appGlobalsService = appGlobalsService;
+        _this.errorsService = errorsService;
         _this.jsonStoreService = jsonStoreService;
         _this.pathUtilService = pathUtilService;
         _this.changeDetectorRef = changeDetectorRef;
@@ -4757,13 +5183,14 @@ PrimitiveListFieldComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
                 selector: 'primitive-list-field',
                 styles: ["td { padding: 0px !important; } "],
-                template: "<div [id]=\"pathString\"> <div class=\"wide\"> <table class=\"table\"> <tr *ngFor=\"let value of values | selfOrEmpty:schema; let i = index; trackBy:trackByIndex\"> <td> <primitive-field [value]=\"value\" [schema]=\"schema.items\" [path]=\"getPathForChild(i)\"></primitive-field> </td> <td *ngIf=\"values.size > 0\" class=\"button-holder\" [ngClass]=\"sortableClass\"> <list-action-group (onMove)=\"moveElement(i, $event)\" (onDelete)=\"deleteElement(i)\" [canMove]=\"schema.sortable\"></list-action-group> </td> </tr> </table> </div> </div> ",
+                template: "<div [id]=\"pathString\" [ngClass]=\"redLeftBorderClass\"> <div class=\"wide\"> <table class=\"table\"> <tr *ngFor=\"let value of values | selfOrEmpty:schema; let i = index; trackBy:trackByIndex\"> <td> <primitive-field [value]=\"value\" [schema]=\"schema.items\" [path]=\"getPathForChild(i)\"></primitive-field> </td> <td *ngIf=\"values.size > 0\" class=\"button-holder\" [ngClass]=\"sortableClass\"> <list-action-group (onMove)=\"moveElement(i, $event)\" (onDelete)=\"deleteElement(i)\" [canMove]=\"schema.sortable\"></list-action-group> </td> </tr> <tr *ngIf=\"removeJsonPatch\"> <patch-actions [patch]=\"removeJsonPatch\"></patch-actions> </tr> </table> <table class=\"table\"> <tr *ngFor=\"let patch of addJsonPatches\"> <add-patch-view [patch]=\"patch\"></add-patch-view> </tr> </table> </div> </div>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
 /** @nocollapse */
 PrimitiveListFieldComponent.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["b" /* AppGlobalsService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["f" /* ErrorsService */], },
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["g" /* JsonStoreService */], },
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["a" /* PathUtilService */], },
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["X" /* ChangeDetectorRef */], },
@@ -4777,18 +5204,18 @@ PrimitiveListFieldComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 754:
+/***/ 763:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ref_field_component__ = __webpack_require__(755);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ref_field_component__ = __webpack_require__(764);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__ref_field_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 755:
+/***/ 764:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4796,9 +5223,9 @@ PrimitiveListFieldComponent.propDecorators = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch__ = __webpack_require__(679);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch__ = __webpack_require__(680);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__shared_services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RefFieldComponent; });
 /*
  * This file is part of ng2-json-editor.
@@ -4963,18 +5390,18 @@ RefFieldComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 756:
+/***/ 765:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__searchable_dropdown_component__ = __webpack_require__(757);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__searchable_dropdown_component__ = __webpack_require__(766);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__searchable_dropdown_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 757:
+/***/ 766:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5081,7 +5508,7 @@ SearchableDropdownComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 758:
+/***/ 767:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5128,7 +5555,7 @@ var SizedStack = (function () {
 
 /***/ }),
 
-/***/ 759:
+/***/ 768:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5182,12 +5609,12 @@ ContentModelDirective.propDecorators = {
 
 /***/ }),
 
-/***/ 760:
+/***/ 769:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__shortcuts_directive__ = __webpack_require__(761);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__content_model_directive__ = __webpack_require__(759);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__shortcuts_directive__ = __webpack_require__(770);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__content_model_directive__ = __webpack_require__(768);
 /* unused harmony reexport ShortcutsDirective */
 /* unused harmony reexport ContentModelDirective */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SHARED_DIRECTIVES; });
@@ -5202,12 +5629,12 @@ var SHARED_DIRECTIVES = [
 
 /***/ }),
 
-/***/ 761:
+/***/ 770:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mousetrap__ = __webpack_require__(641);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mousetrap__ = __webpack_require__(642);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mousetrap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_mousetrap__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ShortcutsDirective; });
 /*
@@ -5267,13 +5694,13 @@ ShortcutsDirective.propDecorators = {
 
 /***/ }),
 
-/***/ 762:
+/***/ 771:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__pipes__ = __webpack_require__(411);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__directives__ = __webpack_require__(760);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__pipes__ = __webpack_require__(412);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__directives__ = __webpack_require__(769);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__pipes__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_1__services__["d"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_2__directives__["a"]; });
@@ -5285,7 +5712,7 @@ ShortcutsDirective.propDecorators = {
 
 /***/ }),
 
-/***/ 763:
+/***/ 772:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5334,12 +5761,12 @@ AddAlwaysShowFieldsPipe.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 764:
+/***/ 773:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DifferentKeysPipe; });
 /*
@@ -5388,7 +5815,7 @@ DifferentKeysPipe.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 765:
+/***/ 774:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5437,7 +5864,7 @@ FilterByExpressionPipe.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 766:
+/***/ 775:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5502,7 +5929,7 @@ FilterHiddenFieldsPipe.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 767:
+/***/ 776:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5537,6 +5964,9 @@ var KeysPipe = (function () {
      * Transforms object to array of its keys (Object.keys replacement for templates)
      */
     KeysPipe.prototype.transform = function (object) {
+        if (!object) {
+            return null;
+        }
         return Object.keys(object);
     };
     return KeysPipe;
@@ -5554,12 +5984,12 @@ KeysPipe.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 768:
+/***/ 777:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LastPathElementPipe; });
 /*
  * This file is part of ng2-json-editor.
@@ -5612,7 +6042,7 @@ LastPathElementPipe.ctorParameters = function () { return [
 
 /***/ }),
 
-/***/ 769:
+/***/ 778:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5671,12 +6101,12 @@ SanitizeUrlPipe.ctorParameters = function () { return [
 
 /***/ }),
 
-/***/ 770:
+/***/ 779:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SelfOrEmptyPipe; });
 /*
  * This file is part of ng2-json-editor.
@@ -5730,12 +6160,12 @@ SelfOrEmptyPipe.ctorParameters = function () { return [
 
 /***/ }),
 
-/***/ 771:
+/***/ 780:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SetFirstElementPathPipe; });
 /*
  * This file is part of ng2-json-editor.
@@ -5786,7 +6216,7 @@ SetFirstElementPathPipe.ctorParameters = function () { return [
 
 /***/ }),
 
-/***/ 772:
+/***/ 781:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5842,7 +6272,62 @@ SortAlphabeticallyPipe.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 773:
+/***/ 782:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TypeOfPipe; });
+/*
+ * This file is part of ng2-json-editor.
+ * Copyright (C) 2017 CERN.
+ *
+ * ng2-json-editor is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * ng2-json-editor is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ * In applying this license, CERN does not
+ * waive the privileges and immunities granted to it by virtue of its status
+ * as an Intergovernmental Organization or submit itself to any jurisdiction.
+*/
+
+var TypeOfPipe = (function () {
+    function TypeOfPipe() {
+    }
+    /**
+     * `typeof` with extra 'array'
+     */
+    TypeOfPipe.prototype.transform = function (value) {
+        if (Array.isArray(value)) {
+            return 'array';
+        }
+        return typeof value;
+    };
+    return TypeOfPipe;
+}());
+
+TypeOfPipe.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["d" /* Pipe */], args: [{
+                name: 'typeOf',
+                pure: false
+            },] },
+];
+/** @nocollapse */
+TypeOfPipe.ctorParameters = function () { return []; };
+
+
+/***/ }),
+
+/***/ 783:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5890,12 +6375,145 @@ UnderscoreToSpacePipe.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 774:
+/***/ 784:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ErrorsService; });
+/*
+ * This file is part of ng2-json-editor.
+ * Copyright (C) 2017 CERN.
+ *
+ * ng2-json-editor is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * ng2-json-editor is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ * In applying this license, CERN does not
+ * waive the privileges and immunities granted to it by virtue of its status
+ * as an Intergovernmental Organization or submit itself to any jurisdiction.
+ */
+
+
+var ErrorsService = (function () {
+    function ErrorsService() {
+        this._externalCategorizedErrorsSubject = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
+        this._internalCategorizedErrorsSubject = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
+        this._externalErrorCountersSubject = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
+        this._internalErrorCountersSubject = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
+        this.internalErrorMap = {};
+        this.internalCategorizedErrorMap = { errors: {}, warnings: {} };
+        this.externalCategorizedErrorMap = { errors: {}, warnings: {} };
+    }
+    Object.defineProperty(ErrorsService.prototype, "externalCategorizedErrorsSubject", {
+        get: function () {
+            return this._externalCategorizedErrorsSubject;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ErrorsService.prototype, "externalErrorCountersSubject", {
+        get: function () {
+            return this._externalErrorCountersSubject;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ErrorsService.prototype, "internalCategorizedErrorsSubject", {
+        get: function () {
+            return this._internalCategorizedErrorsSubject;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ErrorsService.prototype, "internalErrorCountersSubject", {
+        get: function () {
+            return this._internalErrorCountersSubject;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ErrorsService.prototype, "externalErrors", {
+        set: function (errors) {
+            var _a = this.categorizeErrorMap(errors), categorizedErrorMap = _a.categorizedErrorMap, errorCounter = _a.errorCounter, warningCounter = _a.warningCounter;
+            this.externalCategorizedErrorMap = categorizedErrorMap;
+            this.externalCategorizedErrorsSubject.next(this.externalCategorizedErrorMap);
+            this.externalErrorCountersSubject.next({
+                errors: errorCounter,
+                warnings: warningCounter
+            });
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ErrorsService.prototype.extendInternalErrors = function (path, errors) {
+        this.internalErrorMap[path] = errors;
+        var _a = this.categorizeErrorMap(this.internalErrorMap), categorizedErrorMap = _a.categorizedErrorMap, errorCounter = _a.errorCounter, warningCounter = _a.warningCounter;
+        this.internalCategorizedErrorMap = categorizedErrorMap;
+        this.internalCategorizedErrorsSubject.next(this.internalCategorizedErrorMap);
+        this.internalErrorCountersSubject.next({
+            errors: errorCounter,
+            warnings: warningCounter
+        });
+    };
+    ErrorsService.prototype.hasError = function (path) {
+        var internalErrors = this.internalCategorizedErrorMap.errors[path];
+        var externalErrors = this.externalCategorizedErrorMap.errors[path];
+        var internalErrorCount = internalErrors ? internalErrors.length : 0;
+        var externalErrorCount = externalErrors ? externalErrors.length : 0;
+        return (internalErrorCount + externalErrorCount) > 0;
+    };
+    ErrorsService.prototype.categorizeErrorMap = function (errorMap) {
+        var categorizedErrorMap = { errors: {}, warnings: {} };
+        var errorCounter = 0;
+        var warningCounter = 0;
+        Object.keys(errorMap)
+            .forEach(function (key) {
+            var validationErrors = errorMap[key];
+            validationErrors.forEach(function (error) {
+                if (error.type === 'Error') {
+                    categorizedErrorMap.errors[key] ? categorizedErrorMap.errors[key].push(error)
+                        : categorizedErrorMap.errors[key] = [error];
+                    errorCounter++;
+                }
+                else {
+                    categorizedErrorMap.warnings[key] ? categorizedErrorMap.warnings[key].push(error)
+                        : categorizedErrorMap.warnings[key] = [error];
+                    warningCounter++;
+                }
+            });
+        });
+        return { categorizedErrorMap: categorizedErrorMap, errorCounter: errorCounter, warningCounter: warningCounter };
+    };
+    return ErrorsService;
+}());
+
+ErrorsService.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */] },
+];
+/** @nocollapse */
+ErrorsService.ctorParameters = function () { return []; };
+
+
+/***/ }),
+
+/***/ 785:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FindReplaceAllService; });
 
@@ -5970,12 +6588,12 @@ FindReplaceAllService.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 775:
+/***/ 786:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_katex__ = __webpack_require__(624);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_katex__ = __webpack_require__(625);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_katex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_katex__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return KatexService; });
 
@@ -6133,12 +6751,12 @@ KatexService.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 776:
+/***/ 787:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ModalService; });
 /*
@@ -6188,7 +6806,7 @@ ModalService.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 777:
+/***/ 788:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6325,13 +6943,13 @@ RecordFixerService.ctorParameters = function () { return [
 
 /***/ }),
 
-/***/ 778:
+/***/ 789:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__path_util_service__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__path_util_service__ = __webpack_require__(34);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RemoteAutocompletionService; });
 /*
  * This file is part of ng2-json-editor.
@@ -6391,12 +7009,12 @@ RemoteAutocompletionService.ctorParameters = function () { return [
 
 /***/ }),
 
-/***/ 779:
+/***/ 790:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__(638);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__(639);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__json_util_service__ = __webpack_require__(415);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__component_type_service__ = __webpack_require__(141);
@@ -6639,7 +7257,7 @@ SchemaFixerService.ctorParameters = function () { return [
 
 /***/ }),
 
-/***/ 780:
+/***/ 791:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6755,7 +7373,7 @@ SchemaValidationService.ctorParameters = function () { return [
 
 /***/ }),
 
-/***/ 781:
+/***/ 792:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6868,7 +7486,57 @@ ShortcutService.ctorParameters = function () { return [
 
 /***/ }),
 
-/***/ 782:
+/***/ 793:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_diff__ = __webpack_require__(614);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_diff___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_diff__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TextDiffService; });
+/*
+ * This file is part of ng2-json-editor.
+ * Copyright (C) 2017 CERN.
+ *
+ * ng2-json-editor is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * ng2-json-editor is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ * In applying this license, CERN does not
+ * waive the privileges and immunities granted to it by virtue of its status
+ * as an Intergovernmental Organization or submit itself to any jurisdiction.
+ */
+
+
+var TextDiffService = (function () {
+    function TextDiffService() {
+    }
+    TextDiffService.prototype.diffByWord = function (currentText, newText) {
+        if (newText === void 0) { newText = ''; }
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_diff__["diffWords"])(currentText, newText);
+    };
+    return TextDiffService;
+}());
+
+TextDiffService.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */] },
+];
+/** @nocollapse */
+TextDiffService.ctorParameters = function () { return []; };
+
+
+/***/ }),
+
+/***/ 794:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6930,23 +7598,23 @@ WindowHrefService.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ 783:
+/***/ 795:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__string_input_component__ = __webpack_require__(784);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__string_input_component__ = __webpack_require__(796);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__string_input_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 784:
+/***/ 796:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StringInputComponent; });
 /*
  * This file is part of ng2-json-editor.
@@ -7038,7 +7706,7 @@ StringInputComponent.decorators = [
 /** @nocollapse */
 StringInputComponent.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["e" /* DomUtilService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["f" /* KatexService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["i" /* KatexService */], },
 ]; };
 StringInputComponent.propDecorators = {
     'latexPreviewEl': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */], args: ['latexPreview',] },],
@@ -7056,24 +7724,24 @@ StringInputComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 785:
+/***/ 797:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sub_record_component__ = __webpack_require__(786);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__sub_record_component__ = __webpack_require__(798);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__sub_record_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 786:
+/***/ 798:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_tracker__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_tracker__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SubRecordComponent; });
 /*
  * This file is part of ng2-json-editor.
@@ -7140,7 +7808,6 @@ var SubRecordComponent = (function (_super) {
     // delete only work for others, not toggles (UPDATE: config comment if this changes)
     SubRecordComponent.prototype.deleteField = function (field) {
         this.jsonStoreService.removeIn(this.getPathForChild(field));
-        this.keysStoreService.deleteKey(this.pathString, field);
     };
     SubRecordComponent.prototype.getPathForChild = function (key) {
         if (!this.pathCache[key]) {
@@ -7172,8 +7839,8 @@ SubRecordComponent.decorators = [
 SubRecordComponent.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["g" /* JsonStoreService */], },
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["b" /* AppGlobalsService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["h" /* TabsUtilService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["i" /* KeysStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["j" /* TabsUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["k" /* KeysStoreService */], },
 ]; };
 SubRecordComponent.propDecorators = {
     'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
@@ -7186,24 +7853,24 @@ SubRecordComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 787:
+/***/ 799:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__table_item_field_component__ = __webpack_require__(788);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__table_item_field_component__ = __webpack_require__(800);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__table_item_field_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 788:
+/***/ 800:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_field__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TableItemFieldComponent; });
 /*
  * This file is part of ng2-json-editor.
@@ -7241,9 +7908,10 @@ var __extends = (this && this.__extends) || (function () {
 
 var TableItemFieldComponent = (function (_super) {
     __extends(TableItemFieldComponent, _super);
-    function TableItemFieldComponent(appGlobalsService, jsonStoreService, pathUtilService, changeDetectorRef) {
-        var _this = _super.call(this, appGlobalsService, pathUtilService, changeDetectorRef) || this;
+    function TableItemFieldComponent(appGlobalsService, errorsService, jsonStoreService, pathUtilService, changeDetectorRef) {
+        var _this = _super.call(this, appGlobalsService, errorsService, pathUtilService, changeDetectorRef, jsonStoreService) || this;
         _this.appGlobalsService = appGlobalsService;
+        _this.errorsService = errorsService;
         _this.jsonStoreService = jsonStoreService;
         _this.pathUtilService = pathUtilService;
         _this.changeDetectorRef = changeDetectorRef;
@@ -7258,13 +7926,14 @@ TableItemFieldComponent.decorators = [
                 // tslint:disable-next-line
                 selector: '[table-item-field]',
                 styles: [""],
-                template: "<td *ngFor=\"let key of keys; trackBy:trackByElement\" [style.width]=\"schema.properties[key].columnWidth + '%'\"> <any-type-field [value]=\"value.get(key) | selfOrEmpty:schema.properties[key]\" [schema]=\"schema.properties[key]\" [path]=\"getPathForChild(key)\"> </any-type-field> <add-new-element-button *ngIf=\"schema.properties[key].type === 'array'\" [path]=\"getPathForChild(key)\" [schema]=\"schema.properties[key]\"> </add-new-element-button> </td> <!-- td element with list-action-group (up/down and delete buttons) --> <ng-content></ng-content>",
+                template: "<td *ngFor=\"let key of keys; trackBy:trackByElement; first as isFirst\" [style.width]=\"schema.properties[key].columnWidth + '%'\" [ngClass]=\"isFirst ? redLeftBorderClass : ''\"> <patch-actions *ngIf=\"removeJsonPatch && isFirst\" [patch]=\"removeJsonPatch\"></patch-actions> <any-type-field [value]=\"value.get(key) | selfOrEmpty:schema.properties[key]\" [schema]=\"schema.properties[key]\" [path]=\"getPathForChild(key)\"> </any-type-field> <add-new-element-button *ngIf=\"schema.properties[key].type === 'array'\" [path]=\"getPathForChild(key)\" [schema]=\"schema.properties[key]\"> </add-new-element-button> </td> <!-- td element with list-action-group (up/down and delete buttons) --> <ng-content></ng-content>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
 /** @nocollapse */
 TableItemFieldComponent.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["b" /* AppGlobalsService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["f" /* ErrorsService */], },
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["g" /* JsonStoreService */], },
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["a" /* PathUtilService */], },
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["X" /* ChangeDetectorRef */], },
@@ -7279,24 +7948,24 @@ TableItemFieldComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 789:
+/***/ 801:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__table_list_field_component__ = __webpack_require__(790);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__table_list_field_component__ = __webpack_require__(802);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__table_list_field_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 790:
+/***/ 802:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_list_field__ = __webpack_require__(139);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TableListFieldComponent; });
 /*
  * This file is part of ng2-json-editor.
@@ -7334,9 +8003,10 @@ var __extends = (this && this.__extends) || (function () {
 
 var TableListFieldComponent = (function (_super) {
     __extends(TableListFieldComponent, _super);
-    function TableListFieldComponent(appGlobalsService, jsonStoreService, pathUtilService, keysStoreService, changeDetectorRef) {
-        var _this = _super.call(this, appGlobalsService, jsonStoreService, pathUtilService, changeDetectorRef) || this;
+    function TableListFieldComponent(appGlobalsService, errorsService, jsonStoreService, pathUtilService, keysStoreService, changeDetectorRef) {
+        var _this = _super.call(this, appGlobalsService, errorsService, jsonStoreService, pathUtilService, changeDetectorRef) || this;
         _this.appGlobalsService = appGlobalsService;
+        _this.errorsService = errorsService;
         _this.jsonStoreService = jsonStoreService;
         _this.pathUtilService = pathUtilService;
         _this.keysStoreService = keysStoreService;
@@ -7357,16 +8027,17 @@ TableListFieldComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
                 selector: 'table-list-field',
                 styles: ["table.editable-inner-table { border: none; } table.editable-inner-table thead > tr > th { vertical-align: middle; border: none; color: #c1c1c1; } "],
-                template: "<div [id]=\"pathString\"> <div> <table class=\"table editable-inner-table\"> <thead class=\"thead-inverse\"> <tr> <th *ngFor=\"let key of keys$ | async; trackBy:trackByElement\" [style.width]=\"schema.items.properties[key].columnWidth + '%'\"> {{key | underscoreToSpace}} </th> <th class=\"button-holder\" [ngClass]=\"sortableClass\"> <add-field-dropdown *ngIf=\"values.size > 0\" [fields]=\"keys$ | async\" [pathString]=\"pathString\" [schema]=\"schema.items\"> <i class=\"fa fa-plus\"></i> </add-field-dropdown> </th> </tr> </thead> <tr *ngFor=\"let value of values; let i = index; trackBy:trackByIndex\" table-item-field [id]=\"getPathForChildString(i)\" [value]=\"value\" [schema]=\"schema.items\" [path]=\"getPathForChild(i)\" [keys]=\"keys$ | async\"> <td *ngIf=\"values.size > 0\" class=\"button-holder\" [ngClass]=\"sortableClass\"> <list-action-group (onMove)=\"moveElement(i, $event)\" (onDelete)=\"deleteElement(i)\" [canMove]=\"schema.sortable\"></list-action-group> </td> </tr> </table> </div> </div>",
+                template: "<div [id]=\"pathString\" [ngClass]=\"redLeftBorderClass\"> <table class=\"table editable-inner-table\"> <thead class=\"thead-inverse\"> <tr> <th *ngFor=\"let key of keys$ | async; trackBy:trackByElement\" [style.width]=\"schema.items.properties[key].columnWidth + '%'\"> {{key | underscoreToSpace}} </th> <th class=\"button-holder\" [ngClass]=\"sortableClass\"> <add-field-dropdown *ngIf=\"values.size > 0\" [fields]=\"keys$ | async\" [pathString]=\"pathString\" [schema]=\"schema.items\"> <i class=\"fa fa-plus\"></i> </add-field-dropdown> </th> </tr> </thead> <tr *ngFor=\"let value of values; let i = index; trackBy:trackByIndex\" table-item-field [id]=\"getPathStringForChild(i)\" [value]=\"value\" [schema]=\"schema.items\" [path]=\"getPathForChild(i)\" [keys]=\"keys$ | async\"> <td *ngIf=\"values.size > 0\" class=\"button-holder\" [ngClass]=\"sortableClass\"> <list-action-group (onMove)=\"moveElement(i, $event)\" (onDelete)=\"deleteElement(i)\" [canMove]=\"schema.sortable\"></list-action-group> </td> </tr> <tr *ngIf=\"removeJsonPatch\"> <patch-actions [patch]=\"removeJsonPatch\"></patch-actions> </tr> </table> <div *ngFor=\"let patch of addJsonPatches\"> <add-patch-view [patch]=\"patch\"></add-patch-view> </div> </div>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
 /** @nocollapse */
 TableListFieldComponent.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["b" /* AppGlobalsService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["f" /* ErrorsService */], },
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["g" /* JsonStoreService */], },
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["a" /* PathUtilService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["i" /* KeysStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["k" /* KeysStoreService */], },
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["X" /* ChangeDetectorRef */], },
 ]; };
 TableListFieldComponent.propDecorators = {
@@ -7378,18 +8049,94 @@ TableListFieldComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 791:
+/***/ 803:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__title_dropdown_component__ = __webpack_require__(792);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__text_diff_component__ = __webpack_require__(804);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__text_diff_component__["a"]; });
+
+
+
+/***/ }),
+
+/***/ 804:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services__ = __webpack_require__(5);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TextDiffComponent; });
+/*
+ * This file is part of ng2-json-editor.
+ * Copyright (C) 2017 CERN.
+ *
+ * ng2-json-editor is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * ng2-json-editor is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ * In applying this license, CERN does not
+ * waive the privileges and immunities granted to it by virtue of its status
+ * as an Intergovernmental Organization or submit itself to any jurisdiction.
+*/
+
+
+var TextDiffComponent = (function () {
+    function TextDiffComponent(textDiffService) {
+        this.textDiffService = textDiffService;
+    }
+    Object.defineProperty(TextDiffComponent.prototype, "diffs", {
+        get: function () {
+            return this.textDiffService
+                .diffByWord(this.currentText, this.newText);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return TextDiffComponent;
+}());
+
+TextDiffComponent.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
+                selector: 'text-diff',
+                template: "<span *ngFor=\"let diff of diffs\" [ngClass]=\"{added: diff.added, removed: diff.removed}\">{{diff.value}}</span>",
+                styles: [".added { color: green; font-weight: bold; } .removed { color: red; text-decoration: line-through; } "],
+                changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
+            },] },
+];
+/** @nocollapse */
+TextDiffComponent.ctorParameters = function () { return [
+    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["h" /* TextDiffService */], },
+]; };
+TextDiffComponent.propDecorators = {
+    'newText': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
+    'currentText': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["N" /* Input */] },],
+};
+
+
+/***/ }),
+
+/***/ 805:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__title_dropdown_component__ = __webpack_require__(806);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__title_dropdown_component__["a"]; });
 
 
 
 /***/ }),
 
-/***/ 792:
+/***/ 806:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7441,12 +8188,12 @@ TitleDropdownComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 793:
+/***/ 807:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__tree_menu_component__ = __webpack_require__(795);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tree_menu_item_component__ = __webpack_require__(794);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__tree_menu_component__ = __webpack_require__(809);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tree_menu_item_component__ = __webpack_require__(808);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__tree_menu_component__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__tree_menu_item_component__["a"]; });
 
@@ -7456,13 +8203,13 @@ TitleDropdownComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 794:
+/***/ 808:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_tracker__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_tracker__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreeMenuItemComponent; });
 /*
  * This file is part of ng2-json-editor.
@@ -7571,7 +8318,7 @@ TreeMenuItemComponent.decorators = [
 ];
 /** @nocollapse */
 TreeMenuItemComponent.ctorParameters = function () { return [
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["o" /* WindowHrefService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["q" /* WindowHrefService */], },
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["e" /* DomUtilService */], },
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["a" /* PathUtilService */], },
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["b" /* AppGlobalsService */], },
@@ -7587,13 +8334,13 @@ TreeMenuItemComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 795:
+/***/ 809:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_tracker__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_tracker__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__(5);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreeMenuComponent; });
 /*
  * This file is part of ng2-json-editor.
@@ -7679,103 +8426,7 @@ TreeMenuComponent.propDecorators = {
 
 /***/ }),
 
-/***/ 796:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__validation_badges_component__ = __webpack_require__(797);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__validation_badges_component__["a"]; });
-
-
-
-/***/ }),
-
-/***/ 797:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services__ = __webpack_require__(6);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ValidationBadgesComponent; });
-/*
- * This file is part of ng2-json-editor.
- * Copyright (C) 2017 CERN.
- *
- * ng2-json-editor is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of the
- * License, or (at your option) any later version.
- *
- * ng2-json-editor is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
- * In applying this license, CERN does not
- * waive the privileges and immunities granted to it by virtue of its status
- * as an Intergovernmental Organization or submit itself to any jurisdiction.
- */
-
-
-var ValidationBadgesComponent = (function () {
-    function ValidationBadgesComponent(appGlobalsService, changeDetectorRef) {
-        this.appGlobalsService = appGlobalsService;
-        this.changeDetectorRef = changeDetectorRef;
-        this.onBadgeClick = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* EventEmitter */]();
-        this.globalErrorCount = 0;
-        this.internalErrorCount = 0;
-        this.globalWarningCount = 0;
-        this.internalWarningCount = 0;
-    }
-    ValidationBadgesComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.externalErrorCounterSubscription = this.appGlobalsService.externalErrorCountersSubject
-            .subscribe(function (errorCounters) {
-            _this.globalErrorCount = errorCounters.errors;
-            _this.globalWarningCount = errorCounters.warnings;
-            _this.changeDetectorRef.markForCheck();
-        });
-        this.internalErrorCounterSubscription = this.appGlobalsService.internalErrorCountersSubject
-            .subscribe(function (errorCounters) {
-            _this.internalErrorCount = errorCounters.errors;
-            _this.internalWarningCount = errorCounters.warnings;
-            _this.changeDetectorRef.markForCheck();
-        });
-    };
-    ValidationBadgesComponent.prototype._onBadgeClick = function (event, badgeName) {
-        event.preventDefault();
-        this.onBadgeClick.emit(badgeName);
-    };
-    ValidationBadgesComponent.prototype.ngOnDestroy = function () {
-        this.externalErrorCounterSubscription.unsubscribe();
-        this.internalErrorCounterSubscription.unsubscribe();
-    };
-    return ValidationBadgesComponent;
-}());
-
-ValidationBadgesComponent.decorators = [
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
-                selector: 'validation-badges',
-                styles: [""],
-                template: "<a href='#' *ngIf=\"internalErrorCount + globalErrorCount > 0\" [ngClass]=\"'error-link'\" (click)=\"_onBadgeClick($event, 'Errors')\"> Errors <span class=\"badge\">{{internalErrorCount + globalErrorCount}}</span> </a> <a href='#' *ngIf=\"internalWarningCount + globalWarningCount > 0\" [ngClass]=\"'warning-link'\" (click)=\"_onBadgeClick($event, 'Warnings')\"> Warnings <span class=\"badge\">{{internalWarningCount + globalWarningCount}}</span> </a> "
-            },] },
-];
-/** @nocollapse */
-ValidationBadgesComponent.ctorParameters = function () { return [
-    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["b" /* AppGlobalsService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["X" /* ChangeDetectorRef */], },
-]; };
-ValidationBadgesComponent.propDecorators = {
-    'onBadgeClick': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Y" /* Output */] },],
-};
-
-
-/***/ }),
-
-/***/ 855:
+/***/ 867:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(419);
@@ -7787,12 +8438,12 @@ module.exports = __webpack_require__(419);
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_field_component__ = __webpack_require__(717);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_field_component__ = __webpack_require__(718);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__abstract_field_component__["a"]; });
 
 
 
 /***/ })
 
-},[855]);
+},[867]);
 //# sourceMappingURL=main.bundle.js.map
