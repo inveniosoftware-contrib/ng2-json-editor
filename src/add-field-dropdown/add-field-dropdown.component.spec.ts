@@ -22,7 +22,7 @@
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Set } from 'immutable';
-import { Ng2BootstrapModule } from 'ng2-bootstrap';
+import { Ng2BootstrapModule } from 'ngx-bootstrap';
 
 import { AddFieldDropdownComponent } from './add-field-dropdown.component';
 import { DifferentKeysPipe, FilterByExpressionPipe } from '../shared/pipes';

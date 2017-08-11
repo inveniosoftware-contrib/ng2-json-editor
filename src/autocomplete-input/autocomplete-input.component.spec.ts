@@ -28,7 +28,7 @@ import {
 } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
-import { Ng2BootstrapModule } from 'ng2-bootstrap';
+import { Ng2BootstrapModule } from 'ngx-bootstrap';
 
 import { AutocompleteInputComponent } from '../autocomplete-input';
 import {
