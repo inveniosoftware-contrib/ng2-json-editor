@@ -26,7 +26,7 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
-import { AppGlobalsService, JsonStoreService, PathUtilService, KeysStoreService } from '../shared/services';
+import { AppGlobalsService, JsonStoreService, PathUtilService, KeysStoreService, ErrorsService } from '../shared/services';
 import { JSONSchema } from '../shared/interfaces';
 
 @Component({
@@ -44,11 +44,12 @@ export class TableListFieldComponent extends AbstractListFieldComponent {
   @Input() path: Array<any>;
 
   constructor(public appGlobalsService: AppGlobalsService,
+    public errorsService: ErrorsService,
     public jsonStoreService: JsonStoreService,
     public pathUtilService: PathUtilService,
     public keysStoreService: KeysStoreService,
     public changeDetectorRef: ChangeDetectorRef) {
-    super(appGlobalsService, jsonStoreService, pathUtilService, changeDetectorRef);
+    super(appGlobalsService, errorsService, jsonStoreService, pathUtilService, changeDetectorRef);
   }
 
   get keys$(): ReplaySubject<Set<string>> {

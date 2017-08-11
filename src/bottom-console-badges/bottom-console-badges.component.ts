@@ -22,7 +22,7 @@
 
 import { Component, Output, EventEmitter, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 
-import { AppGlobalsService, JsonStoreService } from '../shared/services';
+import { ErrorsService, JsonStoreService } from '../shared/services';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -46,18 +46,18 @@ export class BottomConsoleBadgesComponent implements OnInit, OnDestroy {
   internalErrorCounterSubscription: Subscription;
   patchCounterSubscription: Subscription;
 
-  constructor(private appGlobalsService: AppGlobalsService,
+  constructor(private errorsService: ErrorsService,
     private changeDetectorRef: ChangeDetectorRef,
     private jsonStoreService: JsonStoreService) { }
 
   ngOnInit() {
-    this.externalErrorCounterSubscription = this.appGlobalsService.externalErrorCountersSubject
+    this.externalErrorCounterSubscription = this.errorsService.externalErrorCountersSubject
       .subscribe(errorCounters => {
         this.globalErrorCount = errorCounters.errors;
         this.globalWarningCount = errorCounters.warnings;
         this.changeDetectorRef.markForCheck();
       });
-    this.internalErrorCounterSubscription = this.appGlobalsService.internalErrorCountersSubject
+    this.internalErrorCounterSubscription = this.errorsService.internalErrorCountersSubject
       .subscribe(errorCounters => {
         this.internalErrorCount = errorCounters.errors;
         this.internalWarningCount = errorCounters.warnings;

@@ -35,7 +35,8 @@ import { AbstractFieldComponent } from '../abstract-field';
 import {
   AppGlobalsService,
   JsonStoreService,
-  PathUtilService
+  PathUtilService,
+  ErrorsService
 } from '../shared/services';
 import { JSONSchema } from '../shared/interfaces';
 
@@ -57,9 +58,10 @@ export class TableItemFieldComponent extends AbstractFieldComponent {
   @Input() keys: Set<string>;
 
   constructor(public appGlobalsService: AppGlobalsService,
+    public errorsService: ErrorsService,
     public jsonStoreService: JsonStoreService,
     public pathUtilService: PathUtilService,
     public changeDetectorRef: ChangeDetectorRef) {
-    super(appGlobalsService, pathUtilService, changeDetectorRef, jsonStoreService);
+    super(appGlobalsService, errorsService, pathUtilService, changeDetectorRef, jsonStoreService);
   }
 }

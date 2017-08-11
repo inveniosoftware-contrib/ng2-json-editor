@@ -17,7 +17,7 @@ import { ShortcutActionService } from './shortcut-action.service';
 import { ShortcutService } from './shortcut.service';
 import { WindowHrefService } from './window-href.service';
 import { TabsUtilService } from './tabs-util.service';
-import { ErrorMapUtilService } from './error-map-util.service';
+import { ErrorsService } from './errors.service';
 import { KatexService } from './katex.service';
 import { TextDiffService } from './text-diff.service';
 import { ListPageChangerService } from './list-page-changer.service';
@@ -42,7 +42,7 @@ export {
   ShortcutService,
   WindowHrefService,
   TabsUtilService,
-  ErrorMapUtilService,
+  ErrorsService,
   KatexService,
   TextDiffService,
   ListPageChangerService
@@ -68,7 +68,7 @@ export const SHARED_SERVICES = [
   ShortcutService,
   WindowHrefService,
   TabsUtilService,
-  ErrorMapUtilService,
+  ErrorsService,
   KatexService,
   TextDiffService,
   ListPageChangerService

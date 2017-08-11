@@ -21,14 +21,14 @@
  */
 
 
-import { ErrorMapUtilService } from './error-map-util.service';
+import { ErrorsService } from './errors.service';
 
-describe('ComponentTypeService', () => {
+describe('ErrorsService', () => {
 
-  let service: ErrorMapUtilService;
+  let service: ErrorsService;
 
   beforeEach(() => {
-    service = new ErrorMapUtilService();
+    service = new ErrorsService();
   });
 
   it(`should categorize a map of SchemaValidationErrors by splitting

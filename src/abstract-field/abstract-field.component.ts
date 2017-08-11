@@ -24,7 +24,7 @@ import { OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { AbstractTrackerComponent } from '../abstract-tracker';
-import { AppGlobalsService, PathUtilService, JsonStoreService } from '../shared/services';
+import { AppGlobalsService, PathUtilService, JsonStoreService, ErrorsService } from '../shared/services';
 import { ValidationError, PathCache, JSONSchema, JsonPatch } from '../shared/interfaces';
 
 /**
@@ -49,6 +49,7 @@ export abstract class AbstractFieldComponent
   jsonPatchesSubscription: Subscription;
 
   constructor(public appGlobalsService: AppGlobalsService,
+    public errorsService: ErrorsService,
     public pathUtilService: PathUtilService,
     public changeDetectorRef: ChangeDetectorRef,
     public jsonStoreService: JsonStoreService) {
@@ -56,7 +57,7 @@ export abstract class AbstractFieldComponent
   }
 
   ngOnInit() {
-    this.externalCategorizedErrorSubscription = this.appGlobalsService.externalCategorizedErrorsSubject
+    this.externalCategorizedErrorSubscription = this.errorsService.externalCategorizedErrorsSubject
       .subscribe(externalCategorizedErrorMap => {
         this.externalErrors = externalCategorizedErrorMap.errors[this.pathString] || [];
         this.changeDetectorRef.markForCheck();
@@ -69,6 +70,7 @@ export abstract class AbstractFieldComponent
           .find(patch => patch.op === 'remove');
       });
   }
+
   /**
    * Gets path for child, returns from `pathCache` if it is a hit
    * in order not to re-render child component due to reference change its path.

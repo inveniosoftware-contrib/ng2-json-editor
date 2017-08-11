@@ -33,6 +33,7 @@ import {
 import { AbstractFieldComponent } from '../abstract-field';
 import {
   AppGlobalsService,
+  ErrorsService,
   ComponentTypeService,
   JsonStoreService,
   KeysStoreService,
@@ -66,12 +67,13 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   constructor(public schemaValidationService: SchemaValidationService,
     public componentTypeService: ComponentTypeService,
     public appGlobalsService: AppGlobalsService,
+    public errorsService: ErrorsService,
     public jsonStoreService: JsonStoreService,
     public keysStoreService: KeysStoreService,
     public pathUtilService: PathUtilService,
     public domUtilService: DomUtilService,
     public changeDetectorRef: ChangeDetectorRef) {
-    super(appGlobalsService, pathUtilService, changeDetectorRef, jsonStoreService);
+    super(appGlobalsService, errorsService, pathUtilService, changeDetectorRef, jsonStoreService);
     this.appGlobalsService.adminMode$.subscribe(adminMode => {
       this.changeDetectorRef.markForCheck();
     });
@@ -80,7 +82,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   ngOnInit() {
     super.ngOnInit();
     this.lastCommitedValue = this.value;
-    this.internalCategorizedErrorSubscription = this.appGlobalsService
+    this.internalCategorizedErrorSubscription = this.errorsService
       .internalCategorizedErrorsSubject
       .subscribe(internalCategorizedErrorMap => {
         this.internalErrors = internalCategorizedErrorMap.errors[this.pathString] || [];
@@ -91,7 +93,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   ngOnDestroy() {
     super.ngOnDestroy();
     if (this.internalErrors.length > 0) {
-      this.appGlobalsService.extendInternalErrors(this.pathString, []);
+      this.errorsService.extendInternalErrors(this.pathString, []);
     }
     this.internalCategorizedErrorSubscription.unsubscribe();
   }
@@ -165,7 +167,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     // don't validate if value is empty
     if (this.value) {
       this.internalErrors = this.schemaValidationService.validateValue(this.value, this.schema);
-      this.appGlobalsService.extendInternalErrors(this.pathString, this.internalErrors);
+      this.errorsService.extendInternalErrors(this.pathString, this.internalErrors);
     }
   }
 

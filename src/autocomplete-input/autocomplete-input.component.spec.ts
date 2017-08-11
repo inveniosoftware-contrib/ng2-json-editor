@@ -36,7 +36,7 @@ import {
   JsonStoreService,
   PathUtilService,
   AppGlobalsService,
-  ErrorMapUtilService,
+  ErrorsService,
   KeysStoreService,
   JsonSchemaService
 } from '../shared/services';
@@ -79,7 +79,7 @@ describe('AutocompleteInputComponent', () => {
         JsonStoreService,
         KeysStoreService,
         PathUtilService,
-        ErrorMapUtilService,
+        ErrorsService,
         JsonSchemaService
       ]
     }).compileComponents();

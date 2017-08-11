@@ -28,7 +28,7 @@ import {
   ChangeDetectorRef
 } from '@angular/core';
 
-import { DomUtilService, PathUtilService, AppGlobalsService } from '../../shared/services';
+import { DomUtilService, PathUtilService, ErrorsService } from '../../shared/services';
 import { SchemaValidationErrors } from '../../shared/interfaces';
 
 @Component({
@@ -52,29 +52,29 @@ export class ErrorsConsoleTabComponent implements OnInit {
 
   constructor(public domUtilService: DomUtilService,
     public pathUtilService: PathUtilService,
-    public appGlobalsService: AppGlobalsService,
+    public errorsService: ErrorsService,
     public changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.appGlobalsService.externalCategorizedErrorsSubject
+    this.errorsService.externalCategorizedErrorsSubject
       .map(categorizedErrorMap => categorizedErrorMap[this.errorType])
       .subscribe(errorMap => {
         this.externalErrorMap = errorMap;
         this.changeDetectorRef.markForCheck();
       });
-    this.appGlobalsService.externalErrorCountersSubject
+    this.errorsService.externalErrorCountersSubject
       .map(errorCounters => errorCounters[this.errorType])
       .subscribe(errorCount => {
         this.externalErrorCount = errorCount;
         this.changeDetectorRef.markForCheck();
       });
-    this.appGlobalsService.internalCategorizedErrorsSubject
+    this.errorsService.internalCategorizedErrorsSubject
       .map(categorizedErrorMap => categorizedErrorMap[this.errorType])
       .subscribe(errorMap => {
         this.internalErrorMap = errorMap;
         this.changeDetectorRef.markForCheck();
       });
-    this.appGlobalsService.internalErrorCountersSubject
+    this.errorsService.internalErrorCountersSubject
       .map(errorCounters => errorCounters[this.errorType])
       .subscribe(errorCount => {
         this.internalErrorCount = errorCount;
