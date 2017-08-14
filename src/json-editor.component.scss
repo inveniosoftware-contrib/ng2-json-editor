@@ -154,11 +154,6 @@ body, html {
     }
   }
 
-  // fixes ng2-bootstrap dropdown position
-  bs-dropdown-container {
-    position: inherit !important;
-  }
-
   .editor-btn-delete {
     font-weight: bold;
     line-height: 1;

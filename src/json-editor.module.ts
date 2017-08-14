@@ -25,8 +25,15 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-// TODO: investigate if all modules or only used ones are in the bundle of the example app.
-import { Ng2BootstrapModule } from 'ng2-bootstrap';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { PopoverModule } from 'ngx-bootstrap/popover';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+
+
 import { SlideToggleModule } from 'ng2-slide-toggle';
 
 import {
@@ -102,7 +109,13 @@ import { AddPatchViewComponent } from './add-patch-view';
   ],
   exports: [JsonEditorComponent],
   imports: [
-    Ng2BootstrapModule.forRoot(),
+    TooltipModule.forRoot(),
+    PopoverModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    PaginationModule.forRoot(),
+    ModalModule.forRoot(),
+    TabsModule.forRoot(),
+    TypeaheadModule.forRoot(),
     SlideToggleModule,
     CommonModule,
     FormsModule,
