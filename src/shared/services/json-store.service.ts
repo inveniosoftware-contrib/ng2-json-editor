@@ -11,7 +11,7 @@ import { SizedStack } from '../classes';
 export class JsonStoreService {
 
   private _patchesByPath$ = new ReplaySubject<JsonPatchesByPath>(1);
-  private patchesByPath: JsonPatchesByPath;
+  private patchesByPath: JsonPatchesByPath = {};
 
   private json: Map<string, any>;
   private _jsonChange = new ReplaySubject<Map<string, any>>(1);

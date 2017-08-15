@@ -67,7 +67,7 @@ export class BottomConsoleBadgesComponent implements OnInit, OnDestroy {
       .map(patchesByPath => {
         return Object.keys(patchesByPath)
           .map(path => patchesByPath[path].length)
-          .reduce((sum, patchCountPerPath) => sum + patchCountPerPath);
+          .reduce((sum, patchCountPerPath) => sum + patchCountPerPath, 0);
       }).subscribe(patchCounter => {
         this.patchCount = patchCounter;
         this.changeDetectorRef.markForCheck();

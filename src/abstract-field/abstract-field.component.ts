@@ -43,7 +43,7 @@ export abstract class AbstractFieldComponent
   externalCategorizedErrorSubscription: Subscription;
   externalErrors: Array<ValidationError> = [];
   schema: JSONSchema;
-  jsonPatches: Array<JsonPatch>;
+  jsonPatches: Array<JsonPatch> = [];
   // used by some components to display remove patch in a different way.
   removeJsonPatch: JsonPatch;
   jsonPatchesSubscription: Subscription;

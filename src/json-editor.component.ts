@@ -143,8 +143,13 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
         // emit the change as plain JS object
         this.onRecordChange.emit(json.toJS());
       });
-    this.jsonStoreService.setJsonPatches(this.jsonPatches);
+
+    if (this.jsonPatches) {
+      this.jsonStoreService.setJsonPatches(this.jsonPatches);
+    }
+
     this.jsonSchemaService.setSchema(this.schema);
+
     // construct enhanced sorted filtered keys map for objects in the record
     this.keysStoreService.buildKeysMap(this._record, this.schema);
 
