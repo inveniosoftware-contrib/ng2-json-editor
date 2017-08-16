@@ -58,7 +58,9 @@ export class EmptyValueService {
     if (schema.type === 'array') {
       let emptyArray = [];
       let arrayElementSchema = schema.items;
-      emptyArray.push(this.generateEmptyValueRecursively(arrayElementSchema));
+      if (schema.componentType !== 'complex-list') {
+        emptyArray.push(this.generateEmptyValueRecursively(arrayElementSchema));
+      }
       return emptyArray;
     }
     return EmptyValueService.defaultValueLookup[schema.type];
