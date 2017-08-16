@@ -78,12 +78,22 @@ export class KeysStoreService {
   }
 
   deleteKey(parentPath: string, key: string) {
+    // remove deleted one from parent
     this.keysMap[parentPath] = this.keysMap[parentPath].delete(key);
     this.keys$Map[parentPath].next(this.keysMap[parentPath]);
     this.onKeysChange.next({ path: parentPath, keys: this.keysMap[parentPath] });
+    // delete keys for deleted one
     let deletedKeyPath = `${parentPath}${this.pathUtilService.separator}${key}`;
     delete this.keysMap[deletedKeyPath];
     delete this.keys$Map[deletedKeyPath];
+    // delete keys for all children of the deleted one
+    let deletedKeyPathChildPrefix = deletedKeyPath + this.pathUtilService.separator;
+    Object.keys(this.keysMap)
+      .filter(path => path.startsWith(deletedKeyPathChildPrefix))
+      .forEach(childPath => {
+        delete this.keysMap[childPath];
+        delete this.keys$Map[childPath];
+      });
   }
 
 
