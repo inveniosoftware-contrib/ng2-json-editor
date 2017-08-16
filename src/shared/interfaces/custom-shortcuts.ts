@@ -44,6 +44,20 @@ export interface CustomShortcuts {
   moveDown?: ShortcutConfig;
 
   /**
+   * Moves up the most outer focused array item.
+   *
+   * Default value: `mod+alt+up`
+   */
+  moveUpRoot?: ShortcutConfig;
+
+  /**
+   * Moves down the most outer focused array item.
+   *
+   * Default value: `mod+alt+down`
+   */
+  moveDownRoot?: ShortcutConfig;
+
+  /**
    * Navigates up to the above/below focusable field in the table.
    *
    * Default value: `mod+up`

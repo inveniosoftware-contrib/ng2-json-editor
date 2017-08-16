@@ -90,14 +90,22 @@ export class ShortcutActionService {
     this.move(path, 1);
   }
 
+  moveUpRootAction(path: Array<any>): void {
+    this.move(path, -1, true);
+  }
+
+  moveDownRootAction(path: Array<any>): void {
+    this.move(path, 1, true);
+  }
+
   /**
    * @param {Array<any>} path - Path of the element that is moved
    * @param {number} direction - Movement direction. -1 for UP, +1 for DOWN
    */
-  private move(path: Array<any>, direction: number): void {
+  private move(path: Array<any>, direction: number, root = false): void {
     this.domUtilService.blurFirstEditableChildById(this.pathUtilService.toPathString(path));
-    let index = this.pathUtilService.getElementIndexInForwardOrReversePath(path, false);
-    path[path.length - 2] = this.moveElement(index, direction, this.pathUtilService.getNearestOrRootArrayParentInPath(path, false));
+    let index = this.pathUtilService.getElementIndexInForwardOrReversePath(path, root);
+    path = this.moveElement(index, direction, this.pathUtilService.getNearestOrRootArrayParentInPath(path, root));
     let pathString = this.pathUtilService.toPathString(path);
     setTimeout(() => {
       this.focusElementInPath(pathString);
@@ -107,9 +115,9 @@ export class ShortcutActionService {
   /**
    * @param {number} index - Index of the element that is moved
    * @param {number} direction - Movement direction. -1 for UP, +1 for DOWN
-   * @returns {number} - Returns the new index of the moved element
+   * @returns {number} - Returns the new path of the moved element
    */
-  private moveElement(index: number, direction: number, path: Array<any>): number {
+  private moveElement(index: number, direction: number, path: Array<any>): Array<any> {
     let values = this.jsonStoreService.getIn(path);
     let newIndex = ((index + direction) < values.size &&
       (index + direction) >= 0) ? index + direction : values.size - Math.abs((index + direction));
@@ -118,7 +126,7 @@ export class ShortcutActionService {
       .set(index, values.get(newIndex))
       .set(newIndex, temp);
     this.jsonStoreService.setIn(path, values);
-    return newIndex;
+    return path.concat(newIndex);
   }
 
   deleteAction(path: Array<any>) {

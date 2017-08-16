@@ -69,12 +69,12 @@ describe('ShortcutAction', function () {
   });
 
   it(`should move row up using 'mod+shift+up' shortcut`, () => {
-    let currentFirstRowPromise = page.getValuesOfChildrenById('/keywords/0');
-    let currentSecondRowPromise = page.getValuesOfChildrenById('/keywords/1');
-    let currentElem = page.getChildOfElementByCss(page.getElementById('/keywords/1/value'), 'div[contenteditable=true]');
+    let currentFirstRowPromise = page.getValuesOfChildrenById('/external_system_identifiers/0');
+    let currentSecondRowPromise = page.getValuesOfChildrenById('/external_system_identifiers/1');
+    let currentElem = page.getChildOfElementByCss(page.getElementById('/external_system_identifiers/1/value'), 'div[contenteditable=true]');
     currentElem.sendKeys(protractor.Key.chord(mod, protractor.Key.SHIFT, protractor.Key.UP));
-    let targetFirstRowPromise = page.getValuesOfChildrenById('/keywords/0');
-    let targetSecondRowPromise = page.getValuesOfChildrenById('/keywords/1');
+    let targetFirstRowPromise = page.getValuesOfChildrenById('/external_system_identifiers/0');
+    let targetSecondRowPromise = page.getValuesOfChildrenById('/external_system_identifiers/1');
     expect(targetFirstRowPromise).toEqual(currentSecondRowPromise);
     expect(targetSecondRowPromise).toEqual(currentFirstRowPromise);
     // Test for issue of overriding the new value with the old one when moving up because of triggering the commitValueChange()
@@ -83,14 +83,14 @@ describe('ShortcutAction', function () {
   });
 
   it(`should move row down using 'mod+shift+down' shortcut`, () => {
-    let currentRowPromise = page.getValuesOfChildrenById('/keywords/0');
-    let currentElem = page.getChildOfElementByCss(page.getElementById('/keywords/0/value'), 'div[contenteditable=true]');
+    let currentRowPromise = page.getValuesOfChildrenById('/external_system_identifiers/0');
+    let currentElem = page.getChildOfElementByCss(page.getElementById('/external_system_identifiers/0/value'), 'div[contenteditable=true]');
     currentElem.sendKeys(protractor.Key.chord(mod, protractor.Key.SHIFT, protractor.Key.DOWN));
-    currentElem = page.getChildOfElementByCss(page.getElementById('/keywords/1/value'), 'div[contenteditable=true]');
+    currentElem = page.getChildOfElementByCss(page.getElementById('/external_system_identifiers/1/value'), 'div[contenteditable=true]');
     // Trigger move down shortcut two time in a row to test issue of not updating tabindexes correctly on sequential
     // trigger of the shortcut. As a result the shortcut was not working properly.
     currentElem.sendKeys(protractor.Key.chord(mod, protractor.Key.SHIFT, protractor.Key.DOWN));
-    let targetRowPromise = page.getValuesOfChildrenById('/keywords/2');
+    let targetRowPromise = page.getValuesOfChildrenById('/external_system_identifiers/2');
     expect(targetRowPromise).toEqual(currentRowPromise);
   });
 

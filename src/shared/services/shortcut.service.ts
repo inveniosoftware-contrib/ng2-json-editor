@@ -50,6 +50,14 @@ export class ShortcutService {
       key: 'mod+shift+down',
       action: this.shortcutActionService.generateShortcutAction('moveDownAction')
     },
+    moveUpRoot: {
+      key: 'mod+alt+up',
+      action: this.shortcutActionService.generateShortcutAction('moveUpRootAction')
+    },
+    moveDownRoot: {
+      key: 'mod+alt+down',
+      action: this.shortcutActionService.generateShortcutAction('moveDownRootAction')
+    },
     delete: {
       key: 'mod+backspace',
       action: this.shortcutActionService.generateShortcutAction('deleteAction')
