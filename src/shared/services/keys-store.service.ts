@@ -96,6 +96,46 @@ export class KeysStoreService {
       });
   }
 
+  /**
+   * Swap
+   */
+  swapListElementKeys(listPath: Array<any>, index1: number, index2: number) {
+    let listSchema = this.jsonSchemaService.forPathArray(listPath);
+    if (listSchema.componentType !== 'complex-list') { return; }
+
+    let listPathString = this.pathUtilService.toPathString(listPath);
+    let ps1 = `${listPathString}${this.pathUtilService.separator}${index1}`;
+    let ps2 = `${listPathString}${this.pathUtilService.separator}${index2}`;
+    let keys1 = this.keysMap[ps1];
+    this.setKeys(ps1, this.keysMap[ps2]);
+    this.setKeys(ps2, keys1);
+    // swap children as well
+    let ps1ChildPrefix = ps1 + this.pathUtilService.separator;
+    let ps2ChildPrefix = ps2 + this.pathUtilService.separator;
+    let childrenSwaps: Array<{ from: string, to: string, keys: OrderedSet<string> }> = [];
+    Object.keys(this.keysMap)
+      .forEach(path => {
+        if (path.startsWith(ps1ChildPrefix)) {
+          let toPath = path.replace(ps1ChildPrefix, ps2ChildPrefix);
+          childrenSwaps.push({ from: path, to: toPath, keys: this.keysMap[path] });
+        } else if (path.startsWith(ps2ChildPrefix)) {
+          let toPath = path.replace(ps2ChildPrefix, ps1ChildPrefix);
+          childrenSwaps.push({ from: path, to: toPath, keys: this.keysMap[path] });
+        }
+      });
+    childrenSwaps
+      .forEach(swap => {
+        this.setKeys(swap.to, swap.keys);
+        this.onKeysChange.next({ path: swap.to, keys: this.keysMap[swap.to] });
+      });
+    childrenSwaps
+      .filter(swap => !childrenSwaps.some(otherSwap => swap.from === otherSwap.to))
+      .forEach(swap => {
+        delete this.keysMap[swap.from];
+        delete this.keys$Map[swap.from];
+      });
+  }
+
 
   buildKeysMap(json: Map<string, any>, schema: JSONSchema) {
     this.keys$Map = {};
