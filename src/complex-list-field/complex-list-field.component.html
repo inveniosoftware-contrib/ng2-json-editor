@@ -20,21 +20,25 @@
           <span *ngSwitchCase="0">
               Nothing found
           </span>
-          <span *ngSwitchDefault>
+        <span *ngSwitchDefault>
               {{currentFound + 1}} of {{foundIndices.length}}
           </span>
         </span>
       </div>
+    </div>
+    <div class="btn-group">
+      <label class="btn btn-switch" [class.active]="shouldDisplayOnlyEditFormItems" (click)="shouldDisplayOnlyEditFormItems = true">To Edit</label>
+      <label class="btn btn-switch" [class.active]="!shouldDisplayOnlyEditFormItems" (click)="shouldDisplayOnlyEditFormItems = false">All</label>
     </div>
     <div *ngIf="headerItemTemplate">
       <ng-template [ngTemplateOutlet]="headerItemTemplate"></ng-template>
     </div>
     <div>
       <label class="item-count-label">
-          {{paginatedItems[0].index + 1}}-{{paginatedItems[paginatedItems.length - 1].index + 1}} of {{values.size}} {{path[path.length - 1]}}
+        {{paginatableItems.size}} {{path[path.length - 1]}}
       </label>
       <br>
-      <pagination [totalItems]="values.size" [ngModel]="currentPage" [maxSize]="navigator.maxVisiblePageCount" [itemsPerPage]="navigator.itemsPerPage"
+      <pagination [totalItems]="paginatableItems.size" [ngModel]="currentPage" [maxSize]="navigator.maxVisiblePageCount" [itemsPerPage]="navigator.itemsPerPage"
         class="pagination-sm pagination-top" [boundaryLinks]="true" [rotate]="false" [firstText]="'❮❮'" [previousText]="'❮'"
         [nextText]="'❯'" [lastText]="'❯❯'" (pageChanged)="onPageChange($event.page)"></pagination>
     </div>

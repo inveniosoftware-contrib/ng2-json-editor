@@ -1,4 +1,4 @@
 export interface PaginatedItem {
-  index?: number;
-  isEditFormVisible?: boolean;
+  index: number;
+  isEditFormVisible: boolean;
 }
