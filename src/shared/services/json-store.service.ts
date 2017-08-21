@@ -47,7 +47,7 @@ export class JsonStoreService {
     return this.json.getIn(path);
   }
 
-  removeIn(path: Array<any>): any {
+  removeIn(path: Array<any>) {
     this.history.push({
       path: this.pathUtilService.toPathString(path),
       op: 'add',
@@ -79,6 +79,30 @@ export class JsonStoreService {
     } else {
       this.setIn(path, value);
     }
+  }
+
+  /**
+   * Moves the element at given index UP or DOWN within the list
+   * @param listPath path to a list in json
+   * @param index index of the element that is being moved
+   * @param direction 1 for DOWN, -1 for UP movement
+   * @return new path of the moved element
+   */
+  moveIn(listPath: Array<any>, index: number, direction: number): Array<any> {
+    let list = this.getIn(listPath);
+    let newIndex = index + direction;
+    if (newIndex >= list.size || newIndex < 0) {
+      newIndex = list.size - Math.abs(newIndex);
+    }
+    let temp = list.get(index);
+    list = list
+      .set(index, list.get(newIndex))
+      .set(newIndex, temp);
+    this.setIn(listPath, list);
+
+    this.keysStoreService.swapListElementKeys(listPath, index, newIndex);
+
+    return listPath.concat(newIndex);
   }
 
   setJson(json: Map<string, any>) {

@@ -105,28 +105,11 @@ export class ShortcutActionService {
   private move(path: Array<any>, direction: number, root = false): void {
     this.domUtilService.blurFirstEditableChildById(this.pathUtilService.toPathString(path));
     let index = this.pathUtilService.getElementIndexInForwardOrReversePath(path, root);
-    path = this.moveElement(index, direction, this.pathUtilService.getNearestOrRootArrayParentInPath(path, root));
+    path = this.jsonStoreService.moveIn(this.pathUtilService.getNearestOrRootArrayParentInPath(path, root), index, direction);
     let pathString = this.pathUtilService.toPathString(path);
     setTimeout(() => {
       this.focusElementInPath(pathString);
     });
-  }
-
-  /**
-   * @param {number} index - Index of the element that is moved
-   * @param {number} direction - Movement direction. -1 for UP, +1 for DOWN
-   * @returns {number} - Returns the new path of the moved element
-   */
-  private moveElement(index: number, direction: number, path: Array<any>): Array<any> {
-    let values = this.jsonStoreService.getIn(path);
-    let newIndex = ((index + direction) < values.size &&
-      (index + direction) >= 0) ? index + direction : values.size - Math.abs((index + direction));
-    let temp = values.get(index);
-    values = values
-      .set(index, values.get(newIndex))
-      .set(newIndex, temp);
-    this.jsonStoreService.setIn(path, values);
-    return path.concat(newIndex);
   }
 
   deleteAction(path: Array<any>) {

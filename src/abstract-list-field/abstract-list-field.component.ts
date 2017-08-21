@@ -47,24 +47,15 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
   }
 
   /**
-   * @param {number} index - Index of the element that is moved
-   * @param {number} direction - Movement direction. -1 for UP, +1 for DOWN
+   * @param index - Index of the element that is moved
+   * @param  direction - Movement direction. -1 for UP, +1 for DOWN
    */
   moveElement(index: number, direction: number) {
-    let newIndex = index + direction;
-    // Do nothing if the last moved down or the first moved up.
-    if (newIndex < 0 || newIndex >= this.values.size) {
-      return;
-    }
-    let temp = this.values.get(index);
-    this.values = this.values
-      .set(index, this.values.get(newIndex))
-      .set(newIndex, temp);
-    this.jsonStoreService.setIn(this.path, this.values);
+    this.jsonStoreService.moveIn(this.path, index, direction);
   }
 
   /**
-   * @param {number} index - Index of the element to be deleted
+   * @param index - Index of the element to be deleted
    */
   deleteElement(index: number) {
     let elementPath = this.path.concat(index);

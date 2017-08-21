@@ -36,6 +36,10 @@ class MockJsonSchemaService extends JsonSchemaService {
   forPathString(path: string): JSONSchema {
     return MockJsonSchemaService.schemaToReturn;
   }
+
+  forPathArray(path: Array<any>): JSONSchema {
+    return MockJsonSchemaService.schemaToReturn;
+  }
 }
 
 describe('KeysStoreService', () => {
@@ -367,5 +371,118 @@ describe('KeysStoreService', () => {
     service.forPath('')
       .subscribe(keys => expect(keys.toArray()).toEqual(expected.toArray()));
     expect(service.forPath('/key2')).toBeUndefined();
+  });
+
+  it('should delete keys of children when deleting a key', () => {
+    let schema = {
+      type: 'object',
+      properties: {
+        key: {
+          type: 'object',
+          properties: {
+            child: {
+              type: 'object',
+              properties: {
+                grandChild: {
+                  type: 'string'
+                }
+              }
+            }
+          }
+        }
+      }
+    };
+    let json = fromJS({
+      key: {
+        child: {
+          grandChild: 'value'
+        }
+      }
+    });
+    service.buildKeysMap(json, schema);
+    service.deleteKey('', 'key');
+    expect(service.forPath('/key/child')).toBeUndefined();
+    expect(service.keysMap['/key/child']).toBeUndefined();
+  });
+
+  it('should swap keys recursively', () => {
+    let schema = {
+      type: 'object',
+      properties: {
+        key: {
+          type: 'array',
+          componentType: 'complex-list',
+          items: {
+            type: 'object',
+            properties: {
+              child1: {
+                type: 'object',
+                properties: {
+                  grandChild1: {
+                    type: 'string'
+                  },
+                  grandChild2: {
+                    type: 'string'
+                  },
+                  grandChild3: {
+                    type: 'string'
+                  }
+                }
+              },
+              child2: {
+                type: 'string'
+              },
+              child3: {
+                type: 'string',
+              },
+              child4: {
+                type: 'object',
+                properties: {
+                  grandChild4: {
+                    type: 'string'
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    };
+    MockJsonSchemaService.schemaToReturn = schema.properties.key;
+    let json = fromJS({
+      key: [
+        {
+          child1: {
+            grandChild1: 'val',
+            grandChild3: 'val'
+          },
+          child3: 'val'
+        },
+        {
+          child1: {
+            grandChild2: 'val',
+            grandChild3: 'val'
+          },
+          child2: 'val',
+          child3: 'val',
+          child4: {
+            grandChild4: 'val'
+          }
+        }
+      ]
+    });
+    let expectedKey0 = ['child1', 'child2', 'child3', 'child4'];
+    let expectedKey1 = ['child1', 'child3'];
+    let expectedKey0Child1 = ['grandChild2', 'grandChild3'];
+    let expectedKey0Child4 = ['grandChild4'];
+    let expectedKey1Child1 = ['grandChild1', 'grandChild3'];
+    service.buildKeysMap(json, schema);
+    service.swapListElementKeys(['key'], 0 , 1);
+    expect(service.keysMap['/key/0'].toArray()).toEqual(expectedKey0);
+    expect(service.keysMap['/key/1'].toArray()).toEqual(expectedKey1);
+    expect(service.keysMap['/key/0/child1'].toArray()).toEqual(expectedKey0Child1);
+    expect(service.keysMap['/key/0/child4'].toArray()).toEqual(expectedKey0Child4);
+    expect(service.keysMap['/key/1/child4']).toBeUndefined();
+    expect(service.keysMap['/key/1/child1'].toArray()).toEqual(expectedKey1Child1);
   });
 });
