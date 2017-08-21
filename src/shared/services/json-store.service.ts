@@ -21,7 +21,7 @@ export class JsonStoreService {
   constructor(private pathUtilService: PathUtilService,
     private keysStoreService: KeysStoreService) { }
 
-  setIn(path: Array<any>, value: any) {
+  setIn(path: Array<any>, value: any, allowUndo = true) {
     // if value is undefined or empty string
     if (!value) {
       this.removeIn(path);
@@ -39,6 +39,17 @@ export class JsonStoreService {
         this.json = this.json.setIn(pathToIndex, List());
       }
     }
+
+    // save revert patch for undo if it's all document or top-level
+    if (allowUndo && path.length <= 1) {
+      this.history.push({
+        path: this.pathUtilService.toPathString(path),
+        op: 'replace',
+        value: this.json.getIn(path)
+      });
+    }
+
+    // set new value
     this.json = this.json.setIn(path, value);
     this._jsonChange.next(this.json);
   }
@@ -134,11 +145,11 @@ export class JsonStoreService {
     return patch.path;
   }
 
-  applyPatch(patch: JsonPatch) {
+  applyPatch(patch: JsonPatch, allowUndo = true) {
     let path = this.pathUtilService.toPathArray(patch.path);
     switch (patch.op) {
       case 'replace':
-        this.setIn(path, patch.value);
+        this.setIn(path, patch.value, allowUndo);
         break;
       case 'remove':
         this.removeIn(path);
@@ -164,17 +175,19 @@ export class JsonStoreService {
 
   private removeJsonPatch(patch: JsonPatch) {
     let path = this.getComponentPathForPatch(patch);
-    let patchIndex = this.patchesByPath[path].indexOf(patch);
-    if (patchIndex > -1) {
-      this.patchesByPath[path].splice(patchIndex, 1);
-      this._patchesByPath$.next(this.patchesByPath);
+    if (this.patchesByPath[path]) {
+      let patchIndex = this.patchesByPath[path].indexOf(patch);
+      if (patchIndex > -1) {
+        this.patchesByPath[path].splice(patchIndex, 1);
+        this._patchesByPath$.next(this.patchesByPath);
+      }
     }
   }
 
   rollbackLastChange(): string {
     let lastChangeReversePatch = this.history.pop();
     if (lastChangeReversePatch) {
-      this.applyPatch(lastChangeReversePatch);
+      this.applyPatch(lastChangeReversePatch, false);
       return lastChangeReversePatch.path;
     } else {
       return undefined;
