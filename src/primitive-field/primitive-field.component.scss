@@ -45,16 +45,6 @@ a.no-decoration {
   padding:0px;
 }
 
-.disabled {
-  cursor: not-allowed;
-  div {
-    pointer-events: none;
-    input, button, a, i, string-input > div {
-        opacity: .5;
-      }
-  }
-}
-
 .btn-merge {
   border: none;
   background: transparent;

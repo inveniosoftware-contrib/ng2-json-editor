@@ -43,6 +43,7 @@ import {
 export class ListActionGroupComponent {
 
   @Input() canMove: boolean;
+  @Input() isDisabled: boolean;
   @Output() onDelete = new EventEmitter<void>();
   @Output() onMove = new EventEmitter<number>();
 

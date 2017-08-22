@@ -39,6 +39,7 @@ export class AddNestedFieldDropdownComponent implements OnChanges {
 
   @Input() schema: JSONSchema;
   @Input() pathString: string;
+  @Input() isDisabled: boolean;
 
   nestedKeysMap: { [path: string]: Set<string> };
 

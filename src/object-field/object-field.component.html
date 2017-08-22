@@ -24,7 +24,7 @@
   <!-- ADD SUB FIELD FROM SCHEMA DROPDOWN -->
   <tr>
     <td class="button-holder">
-      <add-field-dropdown [fields]="keys$ | async" [pathString]="pathString" [schema]="schema">
+      <add-field-dropdown [fields]="keys$ | async" [pathString]="pathString" [schema]="schema" [isDisabled]="disabled">
         <i class="fa fa-plus"></i>
       </add-field-dropdown>
     </td>
