@@ -6,7 +6,7 @@
           {{key | underscoreToSpace}}
         </th>
         <th class="button-holder" [ngClass]="sortableClass">
-          <add-field-dropdown *ngIf="values.size > 0" [fields]="keys$ | async" [pathString]="pathString" [schema]="schema.items">
+          <add-field-dropdown *ngIf="values.size > 0" [fields]="keys$ | async" [pathString]="pathString" [schema]="schema.items" [isDisabled]="disabled">
             <i class="fa fa-plus"></i>
           </add-field-dropdown>
         </th>
@@ -15,7 +15,7 @@
     <tr *ngFor="let value of values; let i = index; trackBy:trackByIndex" table-item-field [id]="getPathStringForChild(i)" [value]="value"
       [schema]="schema.items" [path]="getPathForChild(i)" [keys]="keys$ | async">
       <td *ngIf="values.size > 0" class="button-holder" [ngClass]="sortableClass">
-        <list-action-group (onMove)="moveElement(i, $event)" (onDelete)="deleteElement(i)" [canMove]="schema.sortable"></list-action-group>
+        <list-action-group (onMove)="moveElement(i, $event)" (onDelete)="deleteElement(i)" [canMove]="schema.sortable" [isDisabled]="disabled"></list-action-group>
       </td>
     </tr>
     <tr *ngIf="removeJsonPatch">

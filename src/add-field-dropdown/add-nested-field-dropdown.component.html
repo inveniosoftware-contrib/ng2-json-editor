@@ -1,5 +1,5 @@
-<div class="btn-group add-field-dropdown-container" dropdown keyboardNav="true">
-  <button type="button" class="btn-add-field-dropdown" dropdownToggle>
+<div class="btn-group add-field-dropdown-container" dropdown keyboardNav="true" [isDisabled]="isDisabled">
+  <button type="button" class="btn btn-add-field-dropdown" dropdownToggle>
     <i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i>
   </button>
   <ul class="dropdown-menu" *dropdownMenu>

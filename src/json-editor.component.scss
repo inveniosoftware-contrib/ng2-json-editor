@@ -329,7 +329,7 @@ body, html {
     }
 
     .fa {
-        margin-right: 5px;
+        margin-right: 2px;
       }
   }
 
@@ -361,6 +361,20 @@ body, html {
     margin-right: 0px;
     border-radius: 0px;
     border-right: 1px solid #e0e2e2;
+  }
+
+  .disabled {
+    cursor: not-allowed;
+    div {
+      pointer-events: none;
+      input, button, a, i, string-input > div {
+          opacity: .5;
+        }
+    }
+
+    button {
+      pointer-events: none;
+    }
   }
 }
 

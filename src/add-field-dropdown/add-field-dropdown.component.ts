@@ -38,6 +38,7 @@ export class AddFieldDropdownComponent {
   @Input() schema: JSONSchema;
   @Input() fields: Set<string>;
   @Input() pathString: string;
+  @Input() isDisabled: boolean;
 
   expression = '';
 
@@ -47,7 +48,7 @@ export class AddFieldDropdownComponent {
     public pathUtilService: PathUtilService,
     public keysStoreService: KeysStoreService) { }
 
-  get disabled(): boolean {
+  get hidden(): boolean {
     return Object.keys(this.schema.properties).length === this.fields.size;
   }
 
