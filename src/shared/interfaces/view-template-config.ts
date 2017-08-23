@@ -2,6 +2,8 @@ import { Map } from 'immutable';
 
 export interface ViewTemplateConfig {
     /**
+     * Template to be used represent list item if `showEditForm` returns false
+     *
      * Used for complex list fields only (list of nested objects).
      * The template needs to be defined with <ng-template #myTemplate></ng-template> and passed to the json-editor like so:
      * <json-editor [templates]="{myTemplate: myTemplate}"></json-editor>
@@ -15,5 +17,5 @@ export interface ViewTemplateConfig {
      * - true if the fields to edit should be visible by default
      * - false if the fields to edit should be hidden by default
      */
-    showEditForm?: (item: Map<string, any>) => boolean;
+    showEditForm: (item: Map<string, any>) => boolean;
   };

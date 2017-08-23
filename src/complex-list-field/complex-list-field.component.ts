@@ -30,7 +30,7 @@ import {
   ChangeDetectorRef,
   TemplateRef
 } from '@angular/core';
-import { List, Map, Set } from 'immutable';
+import { List, Map, Set, Iterable } from 'immutable';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
 import {
@@ -57,7 +57,8 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
   @Input() schema: JSONSchema;
   @Input() path: Array<any>;
 
-  paginatedItems: Array<PaginatedItem>;
+  paginatedItems: Iterable<number, PaginatedItem>;
+  paginatableItems: Iterable<number, PaginatedItem>;
 
   foundIndices: Array<number>;
   currentFound = 0;
@@ -65,6 +66,7 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
   findExpression: string;
   navigator: LongListNavigatorConfig;
   shouldDisplayFoundNavigation: boolean;
+  private _shouldDisplayOnlyEditFormItems = true;
 
   constructor(public appGlobalsService: AppGlobalsService,
     public errorsService: ErrorsService,
@@ -79,7 +81,8 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
   ngOnInit() {
     super.ngOnInit();
     this.navigator = this.schema.longListNavigatorConfig;
-    this.paginatedItems = this.getItemsForPage(this.currentPage);
+    this.paginatableItems = this.getPaginatableItems();
+    this.paginatedItems = this.getPaginatableItemsForPage(this.currentPage);
 
     if (this.navigator) {
       this.listPageChangerService
@@ -105,7 +108,8 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
             this.currentPage = lastPage;
           }
         }
-        this.paginatedItems = this.getItemsForPage(this.currentPage);
+        this.paginatableItems = this.getPaginatableItems();
+        this.paginatedItems = this.getPaginatableItemsForPage(this.currentPage);
       }
     }
   }
@@ -170,17 +174,32 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
 
   onPageChange(page: number) {
     this.currentPage = page;
-    this.paginatedItems = this.getItemsForPage(page);
+    this.paginatedItems = this.getPaginatableItemsForPage(page);
   }
 
-  getItemsForPage(page: number): Array<PaginatedItem> {
-    let indices = this.getIndicesToDisplay(page);
+  getPaginatableItemsForPage(page: number): Iterable<number, PaginatedItem> {
+    if (this.navigator) {
+      let begin = (page - 1) * this.navigator.itemsPerPage;
+      let end = (page * this.navigator.itemsPerPage);
+      return this.paginatableItems.slice(begin, end);
+    } else {
+      return this.paginatableItems;
+    }
+  }
 
-    return indices.map((index) => {
-      let showEditForm = this.schema.viewTemplateConfig ? this.schema.viewTemplateConfig.showEditForm : undefined;
-      let isEditFormVisible = !showEditForm || showEditForm(this.values.get(index));
-      return { index, isEditFormVisible };
-    });
+  getPaginatableItems(): Iterable<number, PaginatedItem> {
+    return this.values
+      .map((value, index) => {
+        let viewTemplateConfig = this.schema.viewTemplateConfig;
+        let isEditFormVisible = viewTemplateConfig ? viewTemplateConfig.showEditForm(value) : true;
+        return { index, isEditFormVisible };
+      }).filter(item => {
+        if (this.shouldDisplayOnlyEditFormItems) {
+          return item.isEditFormVisible;
+        } else {
+          return true;
+        }
+      });
   }
 
   getPageForIndex(index: number): number {
@@ -195,21 +214,18 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
     return this.schema.viewTemplateConfig !== undefined;
   }
 
-  private getIndicesToDisplay(page: number): Array<number> {
-    let indices: Array<number>;
-    if (this.navigator) {
-      let start = (page - 1) * this.navigator.itemsPerPage;
-      indices = Array.apply(0, Array(this.navigator.itemsPerPage))
-        .map((el, index) => start + index);
-      // check if the indices includes some numbers that are out of values index range.
-      let lastIndexDiff = indices[indices.length - 1] - (this.values.size - 1);
-      if (lastIndexDiff > 0) {
-        indices.splice(indices.length - lastIndexDiff);
-      }
-    } else {
-      indices = this.values.keySeq().toArray();
-    }
+  get sortable(): boolean {
+    return this.schema.sortable && !this.shouldDisplayOnlyEditFormItems;
+  }
 
-    return indices;
+  set shouldDisplayOnlyEditFormItems(value: boolean) {
+    this.currentPage = 1;
+    this._shouldDisplayOnlyEditFormItems = value;
+    this.paginatableItems = this.getPaginatableItems();
+    this.paginatedItems = this.getPaginatableItemsForPage(this.currentPage);
+  }
+
+  get shouldDisplayOnlyEditFormItems(): boolean {
+    return this._shouldDisplayOnlyEditFormItems;
   }
 }

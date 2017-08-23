@@ -315,7 +315,6 @@ body, html {
   }
 
   .btn {
-    border-radius: 0;
 
     &.btn-success {
       background-color: $green-sea;
@@ -374,6 +373,19 @@ body, html {
 
     button {
       pointer-events: none;
+    }
+  }
+  
+  $custom-active-color: #31617B;
+  .pagination > .active > a {
+    background-color: $custom-active-color;
+    border-color: $custom-active-color;
+  }
+  
+  .btn.btn-switch {
+    background-color: #7DA0B3;
+    &.active {
+      background-color: $custom-active-color;
     }
   }
 }
