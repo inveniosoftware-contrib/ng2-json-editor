@@ -214,6 +214,10 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
     return this.schema.viewTemplateConfig !== undefined;
   }
 
+  get sortable(): boolean {
+    return this.schema.sortable && !this.shouldDisplayOnlyEditFormItems;
+  }
+
   set shouldDisplayOnlyEditFormItems(value: boolean) {
     this.currentPage = 1;
     this._shouldDisplayOnlyEditFormItems = value;

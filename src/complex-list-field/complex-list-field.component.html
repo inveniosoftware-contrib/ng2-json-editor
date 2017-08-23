@@ -60,7 +60,9 @@
             <add-nested-field-dropdown [pathString]="pathString + '/' + item.index" [schema]="schema.items" [isDisabled]="disabled"></add-nested-field-dropdown>
           </div>
           <div class="col-md-6 right">
-            <list-action-group (onMove)="moveElement(item.index, $event)" (onDelete)="deleteElement(item.index)" [canMove]="schema.sortable" [isDisabled]="disabled"></list-action-group>
+            <list-action-group (onMove)="moveElement(item.index, $event)" (onDelete)="deleteElement(item.index)" [canMove]="sortable"
+              [isDisabled]="disabled">
+            </list-action-group>
           </div>
         </div>
       </span>
