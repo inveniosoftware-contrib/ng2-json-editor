@@ -44,11 +44,14 @@ export class DomUtilService {
       if (el) {
         let firstEditable = el.querySelector(this.editableSelector) as HTMLElement;
         if (firstEditable) {
-          firstEditable.focus();
-          this.selectAllContent(firstEditable);
-          if (highlight) {
-            firstEditable.classList.add(this.highlightClass);
-            this.highlightedElement = firstEditable;
+          if (firstEditable.classList.contains('hidden')) {
+            // has latex preview, click to disable to preview
+            (firstEditable.nextElementSibling as HTMLElement).click();
+            setTimeout(() => {
+              this.focusAndSelectContent(firstEditable, highlight);
+            });
+          } else {
+            this.focusAndSelectContent(firstEditable, highlight);
           }
         } else {
           // if element doesn't have any input, open add-field-dropdown if it exists.
@@ -56,6 +59,15 @@ export class DomUtilService {
         }
       }
     });
+  }
+
+  private focusAndSelectContent(el: HTMLElement, highlight: boolean) {
+    el.focus();
+    this.selectAllContent(el);
+    if (highlight) {
+      el.classList.add(this.highlightClass);
+      this.highlightedElement = el;
+    }
   }
 
   focusFirstInputChildByElement(el: HTMLElement) {
