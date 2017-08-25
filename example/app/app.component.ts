@@ -61,10 +61,5 @@ export class AppComponent {
       this.patches = data.patches; // set ./assets/mock-data/patches.json
       this.errorMap = data.errorMap;
     });
-
-  }
-
-  onRecordChange(record: Object) {
-    this.record = record;
   }
 }

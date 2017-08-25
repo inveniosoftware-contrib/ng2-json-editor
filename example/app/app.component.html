@@ -12,10 +12,9 @@
 </ng-template>
 <json-editor *ngIf="record && schema"
   [config]="config.jsonEditorConfig"
-  [record]="record"
+  [(record)]="record"
   [jsonPatches]="patches"
   [errorMap]="errorMap"
-  (onRecordChange)="onRecordChange($event)"
   [schema]="schema"
   [templates]="{referenceTemplate: referenceTemplate}">
 </json-editor>

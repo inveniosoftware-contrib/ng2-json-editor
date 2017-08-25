@@ -26,11 +26,12 @@ import {
   Input,
   Output,
   OnInit,
+  OnChanges,
+  SimpleChanges,
   ViewEncapsulation,
   ChangeDetectionStrategy,
   TemplateRef
 } from '@angular/core';
-import { Http } from '@angular/http';
 import { fromJS, Map, Set } from 'immutable';
 import 'rxjs/add/operator/skipWhile';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
@@ -65,26 +66,17 @@ import { JsonEditorConfig, Preview, SchemaValidationErrors, JsonPatch } from './
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class JsonEditorComponent extends AbstractTrackerComponent implements OnInit {
+export class JsonEditorComponent extends AbstractTrackerComponent implements OnChanges, OnInit {
 
   @Input() config: JsonEditorConfig;
   @Input() record: Object;
   @Input() schema: any;
-  @Input() set errorMap(errors: SchemaValidationErrors) {
-    this._errorMap = errors;
-    this.errorsService.externalErrors = this.errorMap;
-  }
+  @Input() errorMap: SchemaValidationErrors;
   @Input() jsonPatches: Array<JsonPatch>;
-
-  get errorMap(): SchemaValidationErrors {
-    return this._errorMap;
-  }
-
   @Input() templates: { [templateName: string]: TemplateRef<any> } = {};
 
-  @Output() onRecordChange: EventEmitter<Object> = new EventEmitter<Object>();
+  @Output() recordChange = new EventEmitter<Object>();
 
-  private _errorMap: SchemaValidationErrors = {};
   _record: Map<string, any>;
   tabNames: Array<string>;
   previews: Array<Preview>;
@@ -92,8 +84,10 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   isBottomConsoleOpen = false;
   bottomConsoleActiveTab = '';
 
-  constructor(public http: Http,
-    public appGlobalsService: AppGlobalsService,
+  // used to decide if the [record] is change caused by recordChange.emit or parent component
+  private lastEmittedRecord: Object;
+
+  constructor(public appGlobalsService: AppGlobalsService,
     public errorsService: ErrorsService,
     public jsonStoreService: JsonStoreService,
     public jsonUtilService: JsonUtilService,
@@ -108,57 +102,86 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnI
   }
 
   ngOnInit() {
-    if (!(this.schema && this.record)) {
-      throw new Error(`[schema] or [record] is undefined 
-        if you are fetching them async then please consider using:
-          <json-editor *ngIf="mySchema && myRecord" ...> </json-editor>
-        in order to wait for them to be fetched before initializing json-editor
-      `);
-    } else if (!this.config) {
-      this.config = {};
-      console.warn(`[config] is undefined, make sure that is intended.`);
-    }
-
-    this.schema = this.schemaFixerService.fixSchema(this.schema, this.config.schemaOptions);
-    this.record = this.recordFixerService.fixRecord(this.record, this.schema);
-
-    this.extractPreviews();
-
-    // set config to make it globally accessible all over the app
-    this.appGlobalsService.config = this.config;
-    // set errors that is used by other components
-    this.errorsService.externalErrors = this.errorMap;
-    this.appGlobalsService.templates = this.templates;
     this.appGlobalsService.adminMode$.subscribe(adminMode => {
       this.keysStoreService.buildKeysMap(this._record, this.schema);
     });
-    // use fromJS to convert input to immutable then pass it to the store
-    this._record = fromJS(this.record);
-    this.jsonStoreService.setJson(this._record);
+
     // listen for all changes on json
     this.jsonStoreService.jsonChange
       .skipWhile(json => json === this._record)
       .subscribe(json => {
         this._record = json;
         // emit the change as plain JS object
-        this.onRecordChange.emit(json.toJS());
+        this.lastEmittedRecord = json.toJS();
+        this.recordChange.emit(this.lastEmittedRecord);
       });
+  }
 
-    if (this.jsonPatches) {
-      this.jsonStoreService.setJsonPatches(this.jsonPatches);
+  ngOnChanges(changes: SimpleChanges) {
+    // throw error if a required input is undefined
+    if (changes['schema'] && !this.schema) {
+      this.throwInputUndefined('schema');
+    }
+    if (changes['record'] && !this.record) {
+      this.throwInputUndefined('record');
     }
 
-    this.jsonSchemaService.setSchema(this.schema);
-
-    // construct enhanced sorted filtered keys map for objects in the record
-    this.keysStoreService.buildKeysMap(this._record, this.schema);
-
-    // setup variables need for tab grouping.
-    if (this.config.tabsConfig) {
-      this.tabNames = this.tabsUtilService.getTabNames(this.config.tabsConfig);
-      this.tabsUtilService.activeTabName$.subscribe(tabName => { this.appGlobalsService.activeTabName = tabName; });
-      this.appGlobalsService.activeTabName = this.config.tabsConfig.defaultTabName;
+    // warn if an important input is undefined
+    if (changes['config'] && !this.config) {
+      this.config = {};
+      console.warn(`[config] is undefined, make sure that is intended.`);
     }
+
+    let recordChanged = changes['record'] && this.record !== this.lastEmittedRecord;
+    let schemaChanged = changes['schema'] || changes['config'];
+
+    if (schemaChanged) {
+      this.schema = this.schemaFixerService.fixSchema(this.schema, this.config.schemaOptions);
+      this.jsonSchemaService.setSchema(this.schema);
+    }
+
+    if (schemaChanged || recordChanged) {
+      this.record = this.recordFixerService.fixRecord(this.record, this.schema);
+      this._record = fromJS(this.record);
+      this.jsonStoreService.setJson(this._record);
+      this.keysStoreService.buildKeysMap(this._record, this.schema);
+    }
+
+
+    if (changes['config']) {
+      this.appGlobalsService.config = this.config;
+      if (this.config.tabsConfig) {
+        this.tabNames = this.tabsUtilService.getTabNames(this.config.tabsConfig);
+        this.tabsUtilService.activeTabName$.subscribe(tabName => { this.appGlobalsService.activeTabName = tabName; });
+        this.appGlobalsService.activeTabName = this.config.tabsConfig.defaultTabName;
+      }
+    }
+
+    if (recordChanged || changes['config']) {
+      this.extractPreviews();
+    }
+
+    if (changes['jsonPatches']) {
+      if (this.jsonPatches) {
+        this.jsonStoreService.setJsonPatches(this.jsonPatches);
+      }
+    }
+
+    if (changes['errorMap']) {
+      this.errorsService.externalErrors = this.errorMap;
+    }
+
+    if (changes['templates']) {
+      this.appGlobalsService.templates = this.templates;
+    }
+  }
+
+  private throwInputUndefined(inputName: string) {
+    throw new Error(`[${inputName}] is undefined!
+      if you are fetching ${inputName} async then please consider using:
+        <json-editor *ngIf="${inputName}" [${inputName}]="${inputName}" ...> </json-editor>
+      in order to wait for it to be fetched before initializing json-editor`
+    );
   }
 
   /**

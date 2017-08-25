@@ -103,7 +103,7 @@ export class SchemaFixerService {
     // fixes that needs above fixes to be done deeply for the current schema
     schema.componentType = this.componentTypeService.getComponentType(schema);
 
-    return schema;
+    return Object.assign({}, schema);
   }
 
   /**

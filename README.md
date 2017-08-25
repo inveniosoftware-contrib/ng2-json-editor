@@ -39,13 +39,13 @@ Then add it to your module's `imports`.
 ### Use
 
 ```html
-<json-editor [config]="config" [schema]="mySchema" [record]="myRecord" (onRecordChange)="doStuffWithNewRecord($event)"></json-editor>
+<json-editor [config]="config" [schema]="mySchema" [(record)]="myRecord""></json-editor>
 ```
 
 - `config` : configuration object. See [configuration docs](https://inveniosoftware-contrib.github.io/ng2-json-editor/docs/interfaces/_json_editor_config_.jsoneditorconfig.html) for options.
 - `schema` : valid json-schema for the record. See [json schema limitations](#json-schema-limitations)
 - `record` : valid json to  be edited.
-- `onRecordChange` emitted when record change, `$event` is the edited record.
+- `recordChange` emitted when record change, `$event` is the edited record.
 - `errorMap (={})`: errors for individual parts of the record (format should be [errors-map.json](./example/assets/mock-data/error-map.json)
 - `templates: { [templateName: string]: TemplateRef<any> }`: Templates with name, to be used by configured fields for example autocomplete result item.
 
