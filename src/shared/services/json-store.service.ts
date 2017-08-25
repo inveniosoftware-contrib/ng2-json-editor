@@ -23,7 +23,7 @@ export class JsonStoreService {
 
   setIn(path: Array<any>, value: any, allowUndo = true) {
     // if value is undefined or empty string
-    if (!value) {
+    if (value === '' || value === undefined) {
       this.removeIn(path);
       return;
     }
