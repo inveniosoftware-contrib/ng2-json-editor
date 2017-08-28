@@ -1,7 +1,7 @@
 <div [id]="pathString" [ngClass]="redLeftBorderClass">
-  <!-- Navigator -->
-  <div *ngIf="navigator" class="navigator-container">
-    <div>
+  <!-- Top Bar: Navigator, ToEdit/All switch, custom header item etc. -->
+  <div *ngIf="navigator || shouldDisplayViewTemplate" class="top-bar-container">
+    <div *ngIf="navigator">
       <div class="input-group input-group-sm">
         <span class="input-group-btn">
             <button type="button" class="btn btn-default find-button" (click)="onFindClick()">
@@ -26,14 +26,14 @@
         </span>
       </div>
     </div>
-    <div class="btn-group">
+    <div *ngIf="shouldDisplayViewTemplate" class="btn-group">
       <label class="btn btn-switch" [class.active]="shouldDisplayOnlyEditFormItems" (click)="shouldDisplayOnlyEditFormItems = true">To Edit</label>
       <label class="btn btn-switch" [class.active]="!shouldDisplayOnlyEditFormItems" (click)="shouldDisplayOnlyEditFormItems = false">All</label>
     </div>
     <div *ngIf="headerItemTemplate">
       <ng-template [ngTemplateOutlet]="headerItemTemplate"></ng-template>
     </div>
-    <div>
+    <div *ngIf="navigator">
       <label class="item-count-label">
         {{paginatableItems.size}} {{path[path.length - 1]}}
       </label>
@@ -46,7 +46,7 @@
   <!-- Elements -->
   <div *ngFor="let item of paginatedItems; trackBy:trackByElement">
     <div class="complex-list-field-wrapper">
-      <span *ngIf="shouldDisplayTemplate && values.get(item.index).keySeq().size != 0">
+      <span *ngIf="shouldDisplayViewTemplate && values.get(item.index).keySeq().size != 0">
         <ng-template [ngTemplateOutlet]="customTemplate" [ngTemplateOutletContext]="{item: values.get(item.index)}"></ng-template>
         <a href="javascript:void(0)" (click)="item.isEditFormVisible = !item.isEditFormVisible">
           {{item.isEditFormVisible ? 'Hide Fields' : 'Show Fields'}}
