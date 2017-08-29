@@ -210,7 +210,7 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
     return this.appGlobalsService.templates[this.schema.viewTemplateConfig.itemTemplateName];
   }
 
-  get shouldDisplayTemplate(): boolean {
+  get shouldDisplayViewTemplate(): boolean {
     return this.schema.viewTemplateConfig !== undefined;
   }
 
