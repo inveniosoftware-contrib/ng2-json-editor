@@ -61,7 +61,6 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   @Input() value: string | number | boolean;
 
   internalErrors: Array<ValidationError> = [];
-  private internalCategorizedErrorSubscription: Subscription;
   private lastCommitedValue: string | number | boolean;
 
   constructor(public schemaValidationService: SchemaValidationService,
@@ -74,19 +73,21 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     public domUtilService: DomUtilService,
     public changeDetectorRef: ChangeDetectorRef) {
     super(appGlobalsService, errorsService, pathUtilService, changeDetectorRef, jsonStoreService);
-    this.appGlobalsService.adminMode$.subscribe(adminMode => {
-      this.changeDetectorRef.markForCheck();
-    });
   }
 
   ngOnInit() {
     super.ngOnInit();
     this.lastCommitedValue = this.value;
-    this.internalCategorizedErrorSubscription = this.errorsService
-      .internalCategorizedErrorsSubject
-      .subscribe(internalCategorizedErrorMap => {
-        this.internalErrors = internalCategorizedErrorMap.errors[this.pathString] || [];
-      });
+    this.subcriptions.push(
+      this.errorsService
+        .internalCategorizedErrorsSubject
+        .subscribe(internalCategorizedErrorMap => {
+          this.internalErrors = internalCategorizedErrorMap.errors[this.pathString] || [];
+        }),
+      this.appGlobalsService.adminMode$.subscribe(adminMode => {
+        this.changeDetectorRef.markForCheck();
+      })
+    );
     this.validate();
   }
 
@@ -95,7 +96,6 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     if (this.internalErrors.length > 0) {
       this.errorsService.extendInternalErrors(this.pathString, []);
     }
-    this.internalCategorizedErrorSubscription.unsubscribe();
   }
 
   commitValueChange() {

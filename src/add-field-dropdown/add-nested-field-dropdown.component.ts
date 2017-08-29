@@ -20,8 +20,10 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Set } from 'immutable';
+import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/filter';
 
 import { DomUtilService, PathUtilService, KeysStoreService, JsonSchemaService } from '../shared/services';
 import { JSONSchema } from '../shared/interfaces';
@@ -35,13 +37,14 @@ import { JSONSchema } from '../shared/interfaces';
   templateUrl: './add-nested-field-dropdown.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AddNestedFieldDropdownComponent implements OnChanges {
+export class AddNestedFieldDropdownComponent implements OnChanges, OnDestroy {
 
   @Input() schema: JSONSchema;
   @Input() pathString: string;
   @Input() isDisabled: boolean;
 
   nestedKeysMap: { [path: string]: Set<string> };
+  keysChangeSubscription: Subscription;
 
   constructor(public keysStoreService: KeysStoreService,
     public jsonSchemaService: JsonSchemaService,
@@ -59,10 +62,18 @@ export class AddNestedFieldDropdownComponent implements OnChanges {
         .forEach(path => {
           this.nestedKeysMap[path] = this.keysStoreService.keysMap[path];
         });
-      this.keysStoreService.onKeysChange
+
+      if (this.keysChangeSubscription) {
+        this.keysChangeSubscription.unsubscribe();
+      }
+      this.keysChangeSubscription = this.keysStoreService.onKeysChange
         .filter(change => change.path.startsWith(this.pathString))
         .subscribe(change => { this.nestedKeysMap[change.path] = change.keys; });
     }
+  }
+
+  ngOnDestroy() {
+    this.keysChangeSubscription.unsubscribe();
   }
 
   /**
