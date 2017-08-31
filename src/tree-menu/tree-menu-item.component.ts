@@ -70,7 +70,7 @@ export class TreeMenuItemComponent extends AbstractTrackerComponent implements O
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['value'] && this.schema.type === 'object') {
+    if (changes['value'] && this.value && this.schema.type === 'object') {
       this.keys = this.value.keySeq().toSet();
     }
   }
