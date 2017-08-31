@@ -42,7 +42,7 @@ Then add it to your module's `imports`.
 <json-editor [config]="config" [schema]="mySchema" [record]="myRecord" (onRecordChange)="doStuffWithNewRecord($event)"></json-editor>
 ```
 
-- `config` : configuration object. See [configuration docs](https://inveniosoftware-contrib.github.io/ng2-json-editor/docs/interfaces/_json_editor_config_.jsoneditorconfig.html) for options.
+- `config` : configuration object. See [configuration docs](https://inveniosoftware-contrib.github.io/ng2-json-editor/docs/interfaces/_interfaces_json_editor_config_.jsoneditorconfig.html) for options.
 - `schema` : valid json-schema for the record. See [json schema limitations](#json-schema-limitations)
 - `record` : valid json to  be edited.
 - `onRecordChange` emitted when record change, `$event` is the edited record.
