@@ -85,10 +85,12 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
     this.paginatedItems = this.getPaginatableItemsForPage(this.currentPage);
 
     if (this.navigator) {
-      this.listPageChangerService
-        .registerPaginatedList(this.pathString, this.navigator.itemsPerPage)
-        .skipWhile(page => page === this.currentPage)
-        .subscribe(page => this.onPageChange(page));
+      this.subcriptions.push(
+        this.listPageChangerService
+          .registerPaginatedList(this.pathString, this.navigator.itemsPerPage)
+          .skipWhile(page => page === this.currentPage)
+          .subscribe(page => this.onPageChange(page))
+      );
     }
   }
 

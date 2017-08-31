@@ -40,13 +40,13 @@ export abstract class AbstractFieldComponent
 
   path: Array<any>;
   pathCache: PathCache = {};
-  externalCategorizedErrorSubscription: Subscription;
   externalErrors: Array<ValidationError> = [];
   schema: JSONSchema;
   jsonPatches: Array<JsonPatch> = [];
   // used by some components to display remove patch in a different way.
   removeJsonPatch: JsonPatch;
-  jsonPatchesSubscription: Subscription;
+
+  protected subcriptions: Array<Subscription> = [];
 
   constructor(public appGlobalsService: AppGlobalsService,
     public errorsService: ErrorsService,
@@ -57,18 +57,20 @@ export abstract class AbstractFieldComponent
   }
 
   ngOnInit() {
-    this.externalCategorizedErrorSubscription = this.errorsService.externalCategorizedErrorsSubject
-      .subscribe(externalCategorizedErrorMap => {
-        this.externalErrors = externalCategorizedErrorMap.errors[this.pathString] || [];
-        this.changeDetectorRef.markForCheck();
-      });
-    this.jsonPatchesSubscription = this.jsonStoreService.patchesByPath$
-      .map(patchesByPath => patchesByPath[this.pathString])
-      .subscribe(patches => {
-        this.jsonPatches = patches || [];
-        this.removeJsonPatch = this.jsonPatches
-          .find(patch => patch.op === 'remove');
-      });
+    this.subcriptions.push(
+      this.errorsService.externalCategorizedErrorsSubject
+        .subscribe(externalCategorizedErrorMap => {
+          this.externalErrors = externalCategorizedErrorMap.errors[this.pathString] || [];
+          this.changeDetectorRef.markForCheck();
+        }),
+      this.jsonStoreService.patchesByPath$
+        .map(patchesByPath => patchesByPath[this.pathString])
+        .subscribe(patches => {
+          this.jsonPatches = patches || [];
+          this.removeJsonPatch = this.jsonPatches
+            .find(patch => patch.op === 'remove');
+        })
+    );
   }
 
   /**
@@ -93,8 +95,9 @@ export abstract class AbstractFieldComponent
   }
 
   ngOnDestroy() {
-    this.externalCategorizedErrorSubscription.unsubscribe();
-    this.jsonPatchesSubscription.unsubscribe();
+    this.subcriptions.forEach(sub => {
+      sub.unsubscribe();
+    });
   }
 
   get disabled() {
