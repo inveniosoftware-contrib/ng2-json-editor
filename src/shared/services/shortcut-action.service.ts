@@ -64,9 +64,7 @@ export class ShortcutActionService {
     let values = this.jsonStoreService.getIn(path) || List();
     this.jsonStoreService.setIn(path, values.push(emptyValue));
     path.push(values.size);
-    setTimeout(() => {
-      this.focusElementInPath(this.pathUtilService.toPathString(path));
-    });
+    this.waitThenFocus(this.pathUtilService.toPathString(path));
   }
 
   addBelowToRootAction(path: Array<any>): void {
@@ -77,9 +75,7 @@ export class ShortcutActionService {
     let values = this.jsonStoreService.getIn(rootPath) || List();
     this.jsonStoreService.setIn(rootPath, values.insert(path[1] + 1, emptyValue));
     rootPath.push(path[1] + 1);
-    setTimeout(() => {
-      this.focusElementInPath(this.pathUtilService.toPathString(rootPath));
-    });
+    this.waitThenFocus(this.pathUtilService.toPathString(rootPath));
   }
 
   moveUpAction(path: Array<any>): void {
@@ -107,9 +103,7 @@ export class ShortcutActionService {
     let index = this.pathUtilService.getElementIndexInForwardOrReversePath(path, root);
     path = this.jsonStoreService.moveIn(this.pathUtilService.getNearestOrRootArrayParentInPath(path, root), index, direction);
     let pathString = this.pathUtilService.toPathString(path);
-    setTimeout(() => {
-      this.focusElementInPath(pathString);
-    });
+    this.waitThenFocus(pathString);
   }
 
   deleteAction(path: Array<any>) {
@@ -206,22 +200,21 @@ export class ShortcutActionService {
         newPathString = `${newPathString}${this.pathUtilService.separator}${originalPath[originalPath.length - 1]}`;
       }
       this.jsonStoreService.setIn(arrayParentPath, valuesList.insert(elemIndex + 1, newValue));
-      setTimeout(() => {
-        this.focusElementInPath(newPathString);
-      });
+      this.waitThenFocus(newPathString);
     }
   }
 
   undoAction() {
     let rolledBackPath = this.jsonStoreService.rollbackLastChange();
     if (rolledBackPath) {
-      let parentPath = this.pathUtilService.toPathArray(rolledBackPath).slice(0, -1);
-      this.keysStoreService.buildKeysMap(this.jsonStoreService.getIn(parentPath), this.jsonSchemaService.forPathArray(parentPath));
+      this.waitThenFocus(rolledBackPath);
     }
   }
 
-  private focusElementInPath(path: string) {
-    this.domUtilService.focusAndSelectFirstEditableChildById(path, true);
+  private waitThenFocus(path: string) {
+    setTimeout(() => {
+      this.domUtilService.focusAndSelectFirstEditableChildById(path, true);
+    });
   }
 
   generateShortcutAction(action: string) {
