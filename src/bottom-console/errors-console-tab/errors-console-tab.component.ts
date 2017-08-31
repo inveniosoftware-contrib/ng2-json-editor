@@ -46,8 +46,8 @@ export class ErrorsConsoleTabComponent implements OnInit {
 
   internalErrorMap: SchemaValidationErrors;
   externalErrorMap: SchemaValidationErrors;
-  externalErrorCount: number;
-  internalErrorCount: number;
+  externalErrorCount = 0;
+  internalErrorCount = 0;
   iconClassName: string;
 
   constructor(public domUtilService: DomUtilService,
