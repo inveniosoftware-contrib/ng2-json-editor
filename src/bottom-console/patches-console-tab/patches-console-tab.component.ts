@@ -41,7 +41,7 @@ import { JsonPatch } from '../../shared/interfaces';
 })
 export class PatchesConsoleTabComponent implements OnInit {
 
-  patches: Array<JsonPatch>;
+  patches: Array<JsonPatch> = [];
 
   constructor(private domUtilService: DomUtilService,
     private pathUtilService: PathUtilService,
