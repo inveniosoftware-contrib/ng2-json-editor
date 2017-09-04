@@ -203,6 +203,7 @@ export class KeysStoreService {
   private schemafy(keys: Seq<number, string>, schema: JSONSchema): OrderedSet<string> {
     return keys
       .filter(key => this.isNotHidden(key, schema) || this.appGlobalsService.adminMode)
+      .concat(schema.required || [])
       .concat(schema.alwaysShow || [])
       .sort((a, b) => this.compareByPriority(a, b, schema))
       .toOrderedSet();
