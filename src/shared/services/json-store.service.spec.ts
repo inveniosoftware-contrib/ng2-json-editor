@@ -27,7 +27,8 @@ import { PathUtilService } from './path-util.service';
 import { KeysStoreService } from './keys-store.service';
 
 class MockKeysStoreService extends KeysStoreService {
-  buildKeysMapRecursivelyForPath(map: any, path: any) {}
+  buildKeysMapRecursivelyForPath(map: any, path: any) { }
+  syncKeysForPath(path: any, json: any) { }
 }
 
 describe('JsonStoreService', () => {

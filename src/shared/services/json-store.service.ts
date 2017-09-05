@@ -52,10 +52,8 @@ export class JsonStoreService {
     // set new value
     this.json = this.json.setIn(path, value);
 
-    // build keys if a list or map is set
-    if (Map.isMap(value) || List.isList(value)) {
-      this.keysStoreService.buildKeysMapRecursivelyForPath(value, path);
-    }
+    this.keysStoreService.syncKeysForPath(path, this.json);
+
 
     this._jsonChange.next(this.json);
   }
@@ -90,9 +88,6 @@ export class JsonStoreService {
         list = list.insert(lastPathElement, value);
       }
       this.setIn(pathWithoutIndex, list);
-      if (Map.isMap(value)) {
-        this.keysStoreService.buildKeysMapRecursivelyForPath(value, path);
-      }
     } else {
       this.setIn(path, value);
     }
