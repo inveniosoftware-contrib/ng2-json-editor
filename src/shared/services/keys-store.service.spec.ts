@@ -477,7 +477,7 @@ describe('KeysStoreService', () => {
     let expectedKey0Child4 = ['grandChild4'];
     let expectedKey1Child1 = ['grandChild1', 'grandChild3'];
     service.buildKeysMap(json, schema);
-    service.swapListElementKeys(['key'], 0 , 1);
+    service.swapListElementKeys(['key'], 0, 1);
     expect(service.keysMap['/key/0'].toArray()).toEqual(expectedKey0);
     expect(service.keysMap['/key/1'].toArray()).toEqual(expectedKey1);
     expect(service.keysMap['/key/0/child1'].toArray()).toEqual(expectedKey0Child1);
@@ -485,4 +485,193 @@ describe('KeysStoreService', () => {
     expect(service.keysMap['/key/1/child4']).toBeUndefined();
     expect(service.keysMap['/key/1/child1'].toArray()).toEqual(expectedKey1Child1);
   });
+
+  it('should set path, when object key not present ', () => {
+    let schema = {
+      type: 'object',
+      properties: {
+        child: {
+          type: 'object',
+          properties: {
+            grandChild: {
+              type: 'string'
+            }
+          }
+        }
+      }
+    };
+    MockJsonSchemaService.schemaToReturn = schema;
+    // build initial keys map
+    let json = fromJS({});
+    service.buildKeysMap(json, schema);
+
+    // new json after set
+    let newJson = fromJS({
+      child: {
+        grandChild: 'value'
+      }
+    });
+    let expectedKeysMap = {
+      '': OrderedSet(['child']),
+      '/child': OrderedSet(['grandChild'])
+    };
+    service.syncKeysForPath(['child', 'grandChild'], newJson);
+    expect(service.keysMap).toEqual(expectedKeysMap);
+  });
+
+  it('should set path, when table-list key not present ', () => {
+    let schema = {
+      type: 'object',
+      properties: {
+        tableList: {
+          type: 'array',
+          componentType: 'table-list',
+          items: {
+            type: 'object',
+            properties: {
+              child1: {
+                type: 'string'
+              },
+              child2: {
+                type: 'string'
+              }
+            }
+          }
+        }
+      }
+    };
+    MockJsonSchemaService.schemaToReturn = schema;
+    // build initial keys map
+    let json = fromJS({});
+    service.buildKeysMap(json, schema);
+    // new json after set
+    let newJson = fromJS({
+      tableList: [
+        { child1: 'value' }
+      ]
+    });
+    let expectedKeysMap = {
+      '': OrderedSet(['tableList']),
+      '/tableList': OrderedSet(['child1'])
+    };
+    service.syncKeysForPath(['tableList', 0, 'child1'], newJson);
+    expect(service.keysMap).toEqual(expectedKeysMap);
+  });
+
+  it('should set path, when key not present in table-list item)', () => {
+    let schema = {
+      type: 'object',
+      properties: {
+        tableList: {
+          type: 'array',
+          componentType: 'table-list',
+          items: {
+            type: 'object',
+            properties: {
+              prop1: {
+                type: 'string'
+              },
+              prop2: {
+                type: 'string'
+              }
+            }
+          }
+        }
+      }
+    };
+    MockJsonSchemaService.schemaToReturn = schema.properties.tableList;
+    // build initial keys map
+    let json = fromJS({
+      tableList: [
+        { prop1: 'value' }
+      ]
+    });
+    service.buildKeysMap(json, schema);
+    // new json after set
+    let newJson = fromJS({
+      tableList: [
+        { prop1: 'value' },
+        { prop2: 'value' }
+      ]
+    });
+    let expectedKeysMap = {
+      '': OrderedSet(['tableList']),
+      '/tableList': OrderedSet(['prop1', 'prop2'])
+    };
+    service.syncKeysForPath(['tableList', 1], newJson);
+    expect(service.keysMap).toEqual(expectedKeysMap);
+  });
+
+  it('should not set path, when nothing is missing', () => {
+    let schema = {
+      type: 'object',
+      properties: {
+        child: {
+          type: 'object',
+          properties: {
+            grandChild: {
+              type: 'string'
+            }
+          }
+        }
+      }
+    };
+    MockJsonSchemaService.schemaToReturn = schema.properties.child.properties.grandChild;
+    // build initial keys map
+    let json = fromJS({
+      child: {
+        grandChild: 'value'
+      }
+    });
+    service.buildKeysMap(json, schema);
+    let expectedKeysMap = service.keysMap;
+    // new json after set
+    let newJson = fromJS({
+      child: {
+        grandChild: 'newValue'
+      }
+    });
+    service.syncKeysForPath(['child', 'grandChild'], newJson);
+    expect(service.keysMap).toEqual(expectedKeysMap);
+  });
+
+  it('should not set path but built keys when nothing is missing but path is object', () => {
+    let schema = {
+      type: 'object',
+      properties: {
+        child: {
+          type: 'object',
+          properties: {
+            grandChild1: {
+              type: 'string'
+            },
+            grandChild2: {
+              type: 'string'
+            }
+          }
+        }
+      }
+    };
+    MockJsonSchemaService.schemaToReturn = schema.properties.child;
+    // build initial keys map
+    let json = fromJS({
+      child: {
+        grandChild1: 'value'
+      }
+    });
+    service.buildKeysMap(json, schema);
+    let expectedKeysMap = {
+      '': OrderedSet(['child']),
+      '/child': OrderedSet(['grandChild2'])
+    };
+    // new json after set
+    let newJson = fromJS({
+      child: {
+        grandChild2: 'value',
+      }
+    });
+    service.syncKeysForPath(['child'], newJson);
+    expect(service.keysMap).toEqual(expectedKeysMap);
+  });
+
 });

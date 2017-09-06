@@ -45,11 +45,12 @@ export class KeysStoreService {
 
   /**
    * Adds a key to the specified path.
+   *
    * @param path path to add the key to
    * @param key key to be added
-   * @param schema OBJECT schema that belongs to path (schema.items for table-list)
+   * @param schema schema that belongs to path (schema.items for table-list)
    */
-  addKey(path: string, key: string, schema: JSONSchema): string {
+  addKey(path: string, key: string, schema: JSONSchema, value?: any): string {
 
     // FIXME: could do O(logn) insert instead of O(nlogn) since the set is already sorted.
     this.keysMap[path] = this.keysMap[path]
@@ -61,7 +62,7 @@ export class KeysStoreService {
 
     let keySchema = schema.properties[key];
     if (keySchema.type === 'object' || keySchema.componentType === 'table-list') {
-      this.buildKeysMapRecursivelyForPath(Map<string, any>(), newKeyPath, keySchema);
+      this.buildKeysMapRecursivelyForPath(value || Map<string, any>(), newKeyPath, keySchema);
     }
 
     return newKeyPath;
@@ -74,6 +75,46 @@ export class KeysStoreService {
     // don't invoke deleteKey if parentPath is primitive-list
     if (this.keysMap[parentPath]) {
       this.deleteKey(parentPath, lastKey);
+    }
+  }
+  /**
+   * Sync keys in store for the given path or its parent, grand parent etc. if necessary
+   *
+   * @param path path to the (re)set field
+   * @param json whole json
+   */
+  syncKeysForPath(path: Array<any>, json: Map<string, any>) {
+    // search from leaf to root, to find the first path with entry in keys map
+    for (let i = path.length - 1; i >= 0; i--) {
+      let currentPath = path.slice(0, i);
+      let currentPathString = this.pathUtilService.toPathString(currentPath);
+      if (this.keysMap[currentPathString]) {
+        // path[i] is key that should be added to currentPat
+        let key = path[i];
+        // if currentPath has the key
+        if (this.keysMap[currentPathString].has(key)) {
+          // just build the store keys map for that /current/path/key if it is object or array
+          let keyPath = currentPath.concat(key);
+          let keySchema = this.jsonSchemaService.forPathArray(keyPath);
+          if (keySchema.type === 'object' || keySchema.type === 'array') {
+            this.buildKeysMapRecursivelyForPath(json.getIn(keyPath), keyPath, keySchema);
+          }
+        // if currentPath doesn't have the key
+        } else {
+          let currentSchema = this.jsonSchemaService.forPathArray(currentPath);
+          // if currentPath is to a table list
+          if (currentSchema.componentType === 'table-list') {
+            // have to rebuild keys map for it because key is here an index we don't know what to add
+            this.buildKeysMapRecursivelyForPath(json.getIn(currentPath), currentPath, currentSchema);
+          // if not to a table list.
+          } else {
+            // just add the key which will build keys map for /current/path/key as well if needed
+            this.addKey(currentPathString, key, currentSchema, json.getIn(currentPath.concat(path[i])));
+          }
+        }
+        // break when a entry found for a path in keys map
+        break;
+      }
     }
   }
 
@@ -97,7 +138,7 @@ export class KeysStoreService {
   }
 
   /**
-   * Swap
+   * Swaps keys of given two indices in object list recursively
    */
   swapListElementKeys(listPath: Array<any>, index1: number, index2: number) {
     let listSchema = this.jsonSchemaService.forPathArray(listPath);
