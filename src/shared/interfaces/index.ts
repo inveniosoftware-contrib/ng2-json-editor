@@ -24,3 +24,4 @@ export { KatexData } from './katex-data';
 export { JsonPatch } from './json-patch';
 export { CustomFormatValidation } from './custom-format-validation';
 export { JsonPatchesByPath } from './json-patches-by-path';
+export { ViewTemplateConfig } from './view-template-config';
