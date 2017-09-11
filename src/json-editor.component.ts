@@ -48,12 +48,11 @@ import {
   PathUtilService,
   RecordFixerService,
   SchemaFixerService,
-  ShortcutService,
   TabsUtilService,
   ErrorsService
 } from './shared/services';
 
-import { JsonEditorConfig, Preview, SchemaValidationErrors, JsonPatch } from './shared/interfaces';
+import { JsonEditorConfig, Preview, SchemaValidationErrors, JsonPatch, Shortcut, CustomShortcutKeys } from './shared/interfaces';
 
 
 @Component({
@@ -83,6 +82,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
   isPreviewerHidden: boolean;
   isBottomConsoleOpen = false;
   bottomConsoleActiveTab = '';
+  customShortcutKeys: CustomShortcutKeys;
 
   // used to decide if the [record] is change caused by recordChange.emit or parent component
   private lastEmittedRecord: Object;
@@ -95,7 +95,6 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
     public keysStoreService: KeysStoreService,
     public recordFixerService: RecordFixerService,
     public schemaFixerService: SchemaFixerService,
-    public shortcutsService: ShortcutService,
     public tabsUtilService: TabsUtilService,
     public pathUtilService: PathUtilService) {
     super();
@@ -155,6 +154,8 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
         this.tabsUtilService.activeTabName$.subscribe(tabName => { this.appGlobalsService.activeTabName = tabName; });
         this.appGlobalsService.activeTabName = this.config.tabsConfig.defaultTabName;
       }
+
+      this.customShortcutKeys = this.config.shortcuts;
     }
 
     if (recordChanged || changes['config']) {
@@ -220,10 +221,6 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
 
   get keys$(): ReplaySubject<Set<string>> {
     return this.keysStoreService.forPath(this.pathString);
-  }
-
-  get shortcuts() {
-    return this.shortcutsService.getShortcutsWithConfig(this.config.shortcuts);
   }
 
   get isPreviewerDisabled(): boolean {

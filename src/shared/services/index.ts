@@ -14,7 +14,6 @@ import { RecordFixerService } from './record-fixer.service';
 import { SchemaFixerService } from './schema-fixer.service';
 import { SchemaValidationService } from './schema-validation.service';
 import { ShortcutActionService } from './shortcut-action.service';
-import { ShortcutService } from './shortcut.service';
 import { WindowHrefService } from './window-href.service';
 import { TabsUtilService } from './tabs-util.service';
 import { ErrorsService } from './errors.service';
@@ -39,7 +38,6 @@ export {
   SchemaFixerService,
   SchemaValidationService,
   ShortcutActionService,
-  ShortcutService,
   WindowHrefService,
   TabsUtilService,
   ErrorsService,
@@ -65,7 +63,6 @@ export const SHARED_SERVICES = [
   SchemaFixerService,
   SchemaValidationService,
   ShortcutActionService,
-  ShortcutService,
   WindowHrefService,
   TabsUtilService,
   ErrorsService,
