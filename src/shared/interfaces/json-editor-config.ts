@@ -1,6 +1,6 @@
 import { PreviewConfig } from './preview-config';
 import { SchemaOption } from './schema-option';
-import { CustomShortcuts } from './custom-shortcuts';
+import { CustomShortcutKeys } from './custom-shortcut-keys';
 import { TabsConfig } from './tabs-config';
 import { CustomFormatValidation } from './custom-format-validation';
 
@@ -44,7 +44,7 @@ export interface JsonEditorConfig {
   /**
    * Configuration for the shortcuts.
    */
-  shortcuts?: CustomShortcuts;
+  shortcuts?: CustomShortcutKeys;
 
   /**
    * Configuration for custom tabs to group top level properties.

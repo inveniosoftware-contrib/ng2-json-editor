@@ -1,108 +1,107 @@
-import { ShortcutConfig } from './shortcut-config';
 
-export interface CustomShortcuts {
+export interface CustomShortcutKeys {
   /**
    * Adds a new empty row in the closest parent list.
    *
    * Default value: `alt+a`
    */
-  add?: ShortcutConfig;
+  add?: string;
 
   /**
    * Adds a new empty field to the root parent list.
    *
    * Default value: `mod+shift+a`
    */
-  addToRoot?: ShortcutConfig;
+  addToRoot?: string;
 
   /**
    * Adds a new empty field to the root parent list under the current field.
    *
    * Default value: `mod+shift+b`
    */
-  addBelowToRoot?: ShortcutConfig;
+  addBelowToRoot?: string;
 
   /**
    * Deletes the table row of the focused field.
    *
    * Default value: `mod+backspace`
    */
-  delete?: ShortcutConfig;
+  delete?: string;
 
   /**
    * Moves up the table row of the focused field.
    *
    * Default value: `mod+shift+up`
    */
-  moveUp?: ShortcutConfig;
+  moveUp?: string;
 
   /**
    * Moves down the table row of the focused field.
    *
    * Default value: `mod+shift+down`
    */
-  moveDown?: ShortcutConfig;
+  moveDown?: string;
 
   /**
    * Moves up the most outer focused array item.
    *
    * Default value: `mod+alt+up`
    */
-  moveUpRoot?: ShortcutConfig;
+  moveUpRoot?: string;
 
   /**
    * Moves down the most outer focused array item.
    *
    * Default value: `mod+alt+down`
    */
-  moveDownRoot?: ShortcutConfig;
+  moveDownRoot?: string;
 
   /**
    * Navigates up to the above/below focusable field in the table.
    *
    * Default value: `mod+up`
    */
-  navigateUp?: ShortcutConfig;
+  navigateUp?: string;
 
   /**
    * Navigates down to the above/below focusable field in the table.
    *
    * Default value: `mod+down`
    */
-  navigateDown?: ShortcutConfig;
+  navigateDown?: string;
 
   /**
    * Navigates right to the previous/next focusable field in the table.
    *
    * Default value: `mod+right`
    */
-  navigateRight?: ShortcutConfig;
+  navigateRight?: string;
 
   /**
    * Navigates left to the previous/next focusable field in the table.
    *
    * Default value: `mod+left`
    */
-  navigateLeft?: ShortcutConfig;
+  navigateLeft?: string;
 
   /**
    * Copies the table row of the focused field below and lets the focused field of the new row empty.
    *
    * Default value: `alt+c`
    */
-  copy?: ShortcutConfig;
+  copy?: string;
 
   /**
    * Copies the table item of the focused field below. This functionality can copy a complex schema item in an array.
    *
    * Default value: `mod+alt+r`
    */
-  copyFromRoot?: ShortcutConfig;
+  copyFromRoot?: string;
 
   /**
    * Undo an important change such as deleting a field
    *
    * Default value: `mod+alt+z`
    */
-  undo?: ShortcutConfig;
+  undo?: string;
 }

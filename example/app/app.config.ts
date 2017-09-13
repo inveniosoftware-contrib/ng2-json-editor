@@ -74,12 +74,7 @@ export class AppConfig {
       }
     },
     shortcuts: {
-      navigateLeft: {
-        key: 'mod+left'
-      },
-      navigateRight: {
-        key: 'mod+right'
-      }
+      navigateRight: 'mod+shift+right'
     },
     customFormatValidation: {
       date: {

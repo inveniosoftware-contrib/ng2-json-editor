@@ -29,7 +29,7 @@ import { JsonSchemaService } from './json-schema.service';
 import { DomUtilService } from './dom-util.service';
 import { PathUtilService } from './path-util.service';
 import { KeysStoreService } from './keys-store.service';
-import { JSONSchema } from '../interfaces';
+import { JSONSchema, ShortcutActionFunction } from '../interfaces';
 
 @Injectable()
 export class ShortcutActionService {
@@ -217,14 +217,14 @@ export class ShortcutActionService {
     });
   }
 
-  generateShortcutAction(action: string) {
+  generateShortcutAction(actionName: string): ShortcutActionFunction {
 
     return (event: KeyboardEvent) => {
       event.preventDefault();
       let eventTarget = event.target as HTMLInputElement;
       let pathString = eventTarget.getAttribute('data-path');
       if (pathString) {
-        this[action](this.pathUtilService.toPathArray(pathString));
+        this[actionName](this.pathUtilService.toPathArray(pathString));
       }
       return false;
     };
