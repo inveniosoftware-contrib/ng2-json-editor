@@ -66,7 +66,7 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
   findExpression: string;
   navigator: LongListNavigatorConfig;
   shouldDisplayFoundNavigation: boolean;
-  private _shouldDisplayOnlyEditFormItems = true;
+  private _shouldDisplayOnlyEditFormItems = false;
 
   constructor(public appGlobalsService: AppGlobalsService,
     public errorsService: ErrorsService,
