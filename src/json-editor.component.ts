@@ -232,6 +232,9 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
   }
 
   get middleContainerColMdClass(): string {
+    if (this.config.compact) {
+      return 'col-md-12';
+    }
     if (this.isPreviewerDisabled) {
       return 'col-md-10';
     }

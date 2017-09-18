@@ -55,4 +55,9 @@ export interface JsonEditorConfig {
    * Configuration for custom formats schema validation.
    */
   customFormatValidation?: CustomFormatValidation;
+
+  /**
+   * Removes left content tree menu and bottom console.
+   */
+  compact?: boolean;
 }
