@@ -32,7 +32,7 @@ class MockComponentTypeService extends ComponentTypeService {
   }
 }
 
-describe('SchemaFixerService', () => {
+fdescribe('SchemaFixerService', () => {
 
   let service: SchemaFixerService;
 
@@ -263,8 +263,12 @@ describe('SchemaFixerService', () => {
       }
     };
     let config = {
-      '/parent/items': {
-        order: ['prop2', 'prop1']
+      properties: {
+        parent: {
+          items: {
+            order: ['prop2', 'prop1']
+          }
+        }
       }
     };
     let expected = {
@@ -320,8 +324,10 @@ describe('SchemaFixerService', () => {
         }
       };
       let config = {
-        '/parent': {
-          disabled: true
+        properties: {
+          parent: {
+            disabled: true
+          }
         }
       };
       let expected = {
@@ -377,8 +383,12 @@ describe('SchemaFixerService', () => {
       }
     };
     let config = {
-      '/parent/items': {
-        order: ['prop2', 'prop1', 'doesnotexist']
+      properties: {
+        parent: {
+          items: {
+            order: ['prop2', 'prop1', 'doesnotexist']
+          }
+        }
       }
     };
     spyOn(console, 'warn');
@@ -387,7 +397,7 @@ describe('SchemaFixerService', () => {
     expect(console.warn).toHaveBeenCalledWith('doesnotexist defined in order config does not exist in schema.');
   });
 
-  it('should enrich schema with config', () => {
+  it('should enrich schema with nested config', () => {
     let schema = {
       type: 'object',
       properties: {
@@ -402,9 +412,15 @@ describe('SchemaFixerService', () => {
       }
     };
     let config = {
-      '/parent/properties/prop': {
-        configTrue: true,
-        configFalse: false
+      properties: {
+        parent: {
+          properties: {
+            prop: {
+              configTrue: true,
+              configFalse: false
+            }
+          }
+        }
       }
     };
     let expected = {
@@ -442,18 +458,16 @@ describe('SchemaFixerService', () => {
       }
     };
     let config = {
-      '': {
-        alwaysShow: ['prop1', 'doesnotexist']
-      }
+      alwaysShow: ['prop1', 'doesnotexist']
     };
     spyOn(console, 'warn');
 
     let fixed = service.fixSchema(schema, config);
     expect(console.warn).toHaveBeenCalledWith('doesnotexist is configured as alwaysShow but it is not in ["prop1","prop2"]');
-    expect(fixed['alwaysShow'].includes('doesnotexist')).toBeFalsy();
+    expect(fixed['alwaysShow'].indexOf('doesnotexist') > -1).toBeFalsy();
   });
 
-  it('should enrich root schema with config when path is empty', () => {
+  it('should enrich root schema with config', () => {
     let schema = {
       type: 'object',
       properties: {
@@ -463,10 +477,8 @@ describe('SchemaFixerService', () => {
       }
     };
     let config = {
-      '': {
-        configTrue: true,
-        configFalse: false
-      }
+      configTrue: true,
+      configFalse: false
     };
     let expected = {
       type: 'object',

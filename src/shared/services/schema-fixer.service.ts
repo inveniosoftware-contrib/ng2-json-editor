@@ -25,7 +25,7 @@ import * as _ from 'lodash';
 
 import { JsonUtilService } from './json-util.service';
 import { ComponentTypeService } from './component-type.service';
-import { JSONSchema } from '../interfaces';
+import { JSONSchema, SchemaOptions } from '../interfaces';
 
 @Injectable()
 export class SchemaFixerService {
@@ -36,13 +36,13 @@ export class SchemaFixerService {
   /**
    * Fixes schema to be in a format that expected by json-editor
    *
-   * @param {Object} schema - json schema
-   * @param {Object} config - schema specific options
-   * @return {Object} - fixed schema
+   * @param schema - json schema
+   * @param config - schema specific options
+   * @return {JSONSchema} - fixed schema
    */
-  fixSchema(schema: JSONSchema, config?: Object): Object {
+  fixSchema(schema: JSONSchema, config?: SchemaOptions): JSONSchema {
     if (config) {
-      this.enrichSchemaWithConfig(schema, config);
+      schema = this.enrichSchemaWithConfig(schema, config);
     }
     schema = this.fixRecursively(schema);
     return schema;
@@ -52,25 +52,13 @@ export class SchemaFixerService {
    * Enriches given schema with given configuration objects
    * puts config into correct places in schema.
    *
-   * @param {Object} schema - json schema
-   * @param {Object} config - schema specific options
+   * @param schema - json schema
+   * @param config - schema specific options
    */
-  private enrichSchemaWithConfig(schema: JSONSchema, config: Object) {
-    Object.keys(config).forEach(field => {
-      try {
-        let schemaField;
-        if (field === '') {
-          // enrich root schema when the config path is empty
-          schemaField = schema;
-        } else {
-          schemaField = this.jsonUtilService.getValueInPath(schema.properties, field);
-        }
-        Object.assign(schemaField, config[field]);
-      } catch (error) {
-        console.warn(`Config for "${field}" path is ignored, since it does not exist in schema`);
-      }
-    });
+  private enrichSchemaWithConfig(schema: JSONSchema, config: SchemaOptions): JSONSchema {
+    return _.merge(config, schema);
   }
+
   /**
    * Applies all fixes to schema recursively
    */
