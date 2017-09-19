@@ -30,6 +30,31 @@ $error-color: $alizarin;
 $label-holder-background-color: #dae8ef;
 $label-holder-button-color: #595959;
 
+@mixin top-level-add-field-dropdown-container {
+  div.dropdown {
+    width: 100%;
+  }
+
+  ul.dropdown-menu {
+    right: 0px;
+    padding-bottom: 15px;
+  }
+
+  button.btn-add-field-dropdown {
+    background: white;
+    padding: 5px;
+    opacity: 0.9;
+    line-height: normal;
+    font-size: 16px;
+    width: 100%;
+
+    &:hover {
+      opacity: 1;
+      color: black;
+    }
+  }
+}
+
 body, html {
   height:100%;
   background-color: #ecf0f1;
@@ -114,6 +139,10 @@ body, html {
     .tab-container > .nav-tabs {
       font-size: 14px;
     }
+    
+    & > add-field-dropdown {
+      @include top-level-add-field-dropdown-container;
+    }
   }
 
   .add-field-dropdown-container {
@@ -125,33 +154,10 @@ body, html {
   }
 
   .menu-container {
-
     background-color: #1D2D3D;
     height: 100%;
     overflow: auto;
-
-    div.dropdown {
-      width: 100%;
-    }
-
-    ul.dropdown-menu {
-      right: 0px;
-      padding-bottom: 15px;
-    }
-
-    button.btn-add-field-dropdown {
-      background: white;
-      padding: 5px;
-      opacity: 0.9;
-      line-height: normal;
-      font-size: 16px;
-      width: 100%;
-
-      &:hover {
-        opacity: 1;
-        color: black;
-      }
-    }
+    @include top-level-add-field-dropdown-container;
   }
 
   .editor-btn-delete {

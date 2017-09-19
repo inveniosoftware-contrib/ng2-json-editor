@@ -1,5 +1,5 @@
 <div id="ng2-json-editor" class="row editor-container" [ngClass]="shorterEditorContainerClass">
-  <div class="col-md-2 menu-container">
+  <div *ngIf="!config.compact" class="col-md-2 menu-container">
     <tree-menu [record]="_record" [schema]="schema"></tree-menu>
     <add-field-dropdown [fields]="keys$ | async" [pathString]="pathString" [schema]="schema">Add field</add-field-dropdown>
     <hr>
@@ -11,6 +11,7 @@
     <bottom-console-badges (badgeClick)="openBottomConsole($event)"></bottom-console-badges>
   </div>
   <div id="middle-main-container" class="middle main-container" [ngClass]="middleContainerColMdClass" [shortcuts]="customShortcutKeys">
+    <add-field-dropdown *ngIf="config.compact" [fields]="keys$ | async" [pathString]="pathString" [schema]="schema">Add field</add-field-dropdown>    
     <tabset *ngIf="config.tabsConfig">
       <tab *ngFor="let tabName of tabNames; trackBy:trackByElement" [heading]="tabName" (select)="activeTabName = tabName" [active]="isActiveTab(tabName)">
         <sub-record [value]="_record" [tabName]="tabName" [schema]="schema" [keys]="keys$ | async" [pathString]="pathString"></sub-record>
@@ -24,7 +25,7 @@
   </div>
 </div>
 
-<bottom-console [activeTab]="bottomConsoleActiveTab" [isOpen]="isBottomConsoleOpen" (onCollapse)="isBottomConsoleOpen = $event"></bottom-console>
+<bottom-console *ngIf="!config.compact" [activeTab]="bottomConsoleActiveTab" [isOpen]="isBottomConsoleOpen" (onCollapse)="isBottomConsoleOpen = $event"></bottom-console>
 <!-- Modal View controlled by ModalService -->
 <modal-view>
 </modal-view>
