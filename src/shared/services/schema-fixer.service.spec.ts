@@ -32,7 +32,7 @@ class MockComponentTypeService extends ComponentTypeService {
   }
 }
 
-fdescribe('SchemaFixerService', () => {
+describe('SchemaFixerService', () => {
 
   let service: SchemaFixerService;
 
@@ -495,6 +495,52 @@ fdescribe('SchemaFixerService', () => {
     let fixed = service.fixSchema(schema, config);
     expect(fixed).toEqual(expected);
   });
+
+  it('should enrich anyOf schema with config', () => {
+    let schema = {
+      type: 'object',
+      properties: {
+        foo: {
+          anyOf: [
+            {
+              type: 'object',
+              properties: {
+                enumProp: {
+                  type: 'string',
+                  enum: ['a', 'b']
+                }
+              }
+            },
+            {
+              type: 'object',
+              properties: {
+                enumProp: {
+                  type: 'string',
+                  enum: ['c', 'd']
+                }
+              }
+            }
+          ]
+        }
+      }
+
+    };
+    let config = {
+      properties: {
+        foo: {
+          anyOf: [
+            {
+              sortable: true
+            }
+          ]
+        }
+      }
+
+    };
+    let fixed = service.fixSchema(schema, config);
+    expect(fixed.properties.foo.sortable).toBeTruthy();
+  });
+
 
   it('should set componentType when schema has deeper anyOf', () => {
     let schema = {
