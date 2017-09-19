@@ -1,5 +1,5 @@
 import { PreviewConfig } from './preview-config';
-import { SchemaOption } from './schema-option';
+import { SchemaOptions } from './schema-options';
 import { CustomShortcutKeys } from './custom-shortcut-keys';
 import { TabsConfig } from './tabs-config';
 import { CustomFormatValidation } from './custom-format-validation';
@@ -22,19 +22,29 @@ export interface JsonEditorConfig {
 
   /**
    * Configurations for properties defined in the schema.
-   *
+   * It has the same structure of schema for only fields that will be configured.
    * Example:
    * ```
    * {
-   *  '/anArray/items/properties/anElementProp': { ...SchemaOption... },
-   *  '/anObject/properties/aProp' : { ...SchemaOption... },
-   *  '/anObject/properties/anotherProp' : { ...SchemaOption... },
-   *  '/anotherObject': { ...SchemaOption... },
-   *  ...
+   *   properties: {
+   *     prop1: {
+   *        ...SchemaOption...
+   *     },
+   *     prop1993: {
+   *       items: {
+   *         ...SchemaOption...,
+   *         properties: {
+   *           elementProp7: {
+   *             ...SchemaOption...
+   *           }
+   *         }
+   *       }
+   *     }
+   *   }
    * }
    * ```
    */
-  schemaOptions?: { [jsonPointer: string]: SchemaOption };
+  schemaOptions?: SchemaOptions;
 
   /**
    * Configuration for previews to be displayed in previewer (on the right side).

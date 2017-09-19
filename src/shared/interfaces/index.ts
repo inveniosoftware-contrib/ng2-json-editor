@@ -8,6 +8,7 @@ export { Preview } from './preview';
 export { RefConfig } from './ref-config';
 export { RefAnchorAttributes } from './ref-anchor-attributes';
 export { SchemaOption } from './schema-option';
+export { SchemaOptions } from './schema-options';
 export { HttpHeader } from './http-header';
 export { OnValueChangeFunction } from './on-value-change-function';
 export { CustomShortcutKeys } from './custom-shortcut-keys';
