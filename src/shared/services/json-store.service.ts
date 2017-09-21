@@ -14,7 +14,7 @@ export class JsonStoreService {
   private patchesByPath: JsonPatchesByPath = {};
 
   private json: Map<string, any>;
-  private _jsonChange = new ReplaySubject<Map<string, any>>(1);
+  private _json$ = new ReplaySubject<Map<string, any>>(1);
   // list of reverse patches for important changes
   private history = new SizedStack<JsonPatch>(5);
 
@@ -55,7 +55,7 @@ export class JsonStoreService {
     this.keysStoreService.syncKeysForPath(path, this.json);
 
 
-    this._jsonChange.next(this.json);
+    this._json$.next(this.json);
   }
 
   getIn(path: Array<any>): any {
@@ -70,7 +70,7 @@ export class JsonStoreService {
     });
 
     this.json = this.json.removeIn(path);
-    this._jsonChange.next(this.json);
+    this._json$.next(this.json);
     this.keysStoreService.deletePath(path);
   }
 
@@ -176,6 +176,7 @@ export class JsonStoreService {
 
   private removeJsonPatch(patch: JsonPatch) {
     let path = this.getComponentPathForPatch(patch);
+    // don't do anything if it's UNDO json-patch.
     if (this.patchesByPath[path]) {
       let patchIndex = this.patchesByPath[path].indexOf(patch);
       if (patchIndex > -1) {
@@ -195,8 +196,8 @@ export class JsonStoreService {
     }
   }
 
-  get jsonChange(): ReplaySubject<Map<string, any>> {
-    return this._jsonChange;
+  get json$(): ReplaySubject<Map<string, any>> {
+    return this._json$;
   }
 
   get patchesByPath$(): ReplaySubject<JsonPatchesByPath> {
