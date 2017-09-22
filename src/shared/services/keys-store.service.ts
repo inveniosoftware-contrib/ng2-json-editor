@@ -99,14 +99,14 @@ export class KeysStoreService {
           if (keySchema.type === 'object' || keySchema.type === 'array') {
             this.buildKeysMapRecursivelyForPath(json.getIn(keyPath), keyPath, keySchema);
           }
-        // if currentPath doesn't have the key
+          // if currentPath doesn't have the key
         } else {
           let currentSchema = this.jsonSchemaService.forPathArray(currentPath);
           // if currentPath is to a table list
           if (currentSchema.componentType === 'table-list') {
             // have to rebuild keys map for it because key is here an index we don't know what to add
             this.buildKeysMapRecursivelyForPath(json.getIn(currentPath), currentPath, currentSchema);
-          // if not to a table list.
+            // if not to a table list.
           } else {
             // just add the key which will build keys map for /current/path/key as well if needed
             this.addKey(currentPathString, key, currentSchema, json.getIn(currentPath.concat(path[i])));
@@ -193,7 +193,7 @@ export class KeysStoreService {
     }
 
     if (schema.type === 'object') {
-      let map = mapOrList as Map<string, any>;
+      let map = mapOrList as Map<string, any> || Map<string, any>();
       let finalKeys = this.buildkeysForObject(pathString, map, schema);
 
       // recursive call
@@ -204,19 +204,15 @@ export class KeysStoreService {
           this.buildKeysMapRecursivelyForPath(map.get(key), nextPath, schema.properties[key]);
         });
     } else if (schema.componentType === 'table-list') {
-      let list = mapOrList as List<Map<string, any>>;
+      let list = mapOrList as List<Map<string, any>> || List<Map<string, any>>();
       this.buildKeysForTableList(pathString, list, schema);
       // there is no recursive call for table list items because they aren't expected to have object or object list as property.
-    } else {
-      // recursive calls for each item of list if it's not a table-list
-      let list = mapOrList as List<any>;
-      if (this.isObjectOrArray(schema.items)) {
-        // recursive call
-        list.forEach((element, index) => {
-          let elementPath = `${pathString}${this.pathUtilService.separator}${index}`;
-          this.buildKeysMapRecursivelyForPath(element, elementPath, schema.items);
-        });
-      }
+    } else if (schema.componentType === 'complex-list') {
+      let list = mapOrList as List<Map<string, any>> || List<Map<string, any>>();
+      list.forEach((element, index) => {
+        let elementPath = `${pathString}${this.pathUtilService.separator}${index}`;
+        this.buildKeysMapRecursivelyForPath(element, elementPath, schema.items);
+      });
     }
   }
 

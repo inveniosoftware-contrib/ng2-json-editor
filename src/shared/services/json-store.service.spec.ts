@@ -61,7 +61,7 @@ describe('JsonStoreService', () => {
       }
     });
 
-    service.jsonChange.subscribe(changedJson => {
+    service.json$.subscribe(changedJson => {
       // expect(immutable1).toEqual(immutable2) doesn't work as expected
       expect(changedJson.equals(expected)).toBeTruthy();
     });
@@ -87,7 +87,7 @@ describe('JsonStoreService', () => {
       }
     });
 
-    service.jsonChange.subscribe(changedJson => {
+    service.json$.subscribe(changedJson => {
       // expect(immutable1).toEqual(immutable2) doesn't work as expected
       expect(changedJson.equals(expected)).toBeTruthy();
     });
@@ -112,7 +112,7 @@ describe('JsonStoreService', () => {
       }
     });
 
-    service.jsonChange.subscribe(changedJson => {
+    service.json$.subscribe(changedJson => {
       expect(changedJson.equals(expected)).toBeTruthy();
     });
 
@@ -135,7 +135,7 @@ describe('JsonStoreService', () => {
       }
     });
 
-    service.jsonChange.subscribe(changedJson => {
+    service.json$.subscribe(changedJson => {
       expect(changedJson.equals(expected)).toBeTruthy();
     });
 
@@ -166,7 +166,7 @@ describe('JsonStoreService', () => {
       }
     });
 
-    service.jsonChange.subscribe(changedJson => {
+    service.json$.subscribe(changedJson => {
       expect(changedJson.equals(expected)).toBeTruthy();
     });
 
@@ -188,7 +188,7 @@ describe('JsonStoreService', () => {
         { foo: 'bar' }
       ]
     });
-    service.jsonChange.subscribe(changedJson => {
+    service.json$.subscribe(changedJson => {
       expect(changedJson.equals(expected)).toBeTruthy();
     });
 
@@ -208,7 +208,7 @@ describe('JsonStoreService', () => {
         aList: [1]
       }
     });
-    service.jsonChange.subscribe(changedJson => {
+    service.json$.subscribe(changedJson => {
       expect(changedJson.equals(expected)).toBeTruthy();
     });
 

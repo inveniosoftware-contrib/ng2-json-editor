@@ -53,7 +53,7 @@ export class PatchesConsoleTabComponent implements OnInit {
       .map(patchesByPath => {
         return Object.keys(patchesByPath)
           .map(path => patchesByPath[path])
-          .reduce((pre, cur) => pre.concat(cur));
+          .reduce((pre, cur) => pre.concat(cur), []);
       })
       .subscribe(patches => {
         this.patches = patches;

@@ -75,6 +75,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
   @Input() templates: { [templateName: string]: TemplateRef<any> } = {};
 
   @Output() recordChange = new EventEmitter<Object>();
+  @Output() jsonPatchesChange = new EventEmitter<Array<JsonPatch>>();
 
   _record: Map<string, any>;
   tabNames: Array<string>;
@@ -106,13 +107,23 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
     });
 
     // listen for all changes on json
-    this.jsonStoreService.jsonChange
+    this.jsonStoreService.json$
       .skipWhile(json => json === this._record)
       .subscribe(json => {
         this._record = json;
         // emit the change as plain JS object
         this.lastEmittedRecord = json.toJS();
         this.recordChange.emit(this.lastEmittedRecord);
+      });
+
+    // list for all changes on jsonPatches
+    this.jsonStoreService.patchesByPath$
+      .map(patchesByPath => {
+        // flat json patches by path to an array with all json patches
+        return Object.keys(patchesByPath)
+          .reduce((allPathes, path) => allPathes.concat(patchesByPath[path]), []);
+      }).subscribe(patches => {
+        this.jsonPatchesChange.emit(patches);
       });
   }
 

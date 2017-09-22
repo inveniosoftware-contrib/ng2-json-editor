@@ -134,6 +134,7 @@ describe('KeysStoreService', () => {
       properties: {
         anArray: {
           type: 'array',
+          componentType: 'complex-list',
           items: {
             type: 'object',
             properties: {
