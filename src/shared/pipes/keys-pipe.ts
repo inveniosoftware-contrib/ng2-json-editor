@@ -32,7 +32,7 @@ export class KeysPipe implements PipeTransform {
   /**
    * Transforms object to array of its keys (Object.keys replacement for templates)
    */
-  transform(object: Object): Array<string> {
+  transform(object: object): Array<string> {
     if (!object) { return null; }
 
     return Object.keys(object);

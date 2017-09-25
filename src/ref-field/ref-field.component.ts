@@ -51,7 +51,7 @@ export class RefFieldComponent implements OnChanges {
   @Input() value: Map<string, string>;
   @Input() path: Array<any>;
 
-  refData: Object;
+  refData: object;
   requestOptions: RequestOptions;
 
   isPreviewButtonHidden = false;

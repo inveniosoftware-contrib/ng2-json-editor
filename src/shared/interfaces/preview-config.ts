@@ -26,5 +26,5 @@ export interface PreviewConfig {
    *
    * - config is ignored if it returns `undefined`.
    */
-  getUrl?: (json: Object) => string;
+  getUrl?: (json: object) => string;
 }

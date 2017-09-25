@@ -68,7 +68,7 @@ import { JsonEditorConfig, Preview, SchemaValidationErrors, JsonPatch, Shortcut,
 export class JsonEditorComponent extends AbstractTrackerComponent implements OnChanges, OnInit {
 
   @Input() config: JsonEditorConfig;
-  @Input() record: Object;
+  @Input() record: object;
   @Input() schema: any;
   @Input() errorMap: SchemaValidationErrors;
   @Input() jsonPatches: Array<JsonPatch>;
@@ -86,7 +86,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
   customShortcutKeys: CustomShortcutKeys;
 
   // used to decide if the [record] is change caused by recordChange.emit or parent component
-  private lastEmittedRecord: Object;
+  private lastEmittedRecord: object;
 
   constructor(public appGlobalsService: AppGlobalsService,
     public errorsService: ErrorsService,

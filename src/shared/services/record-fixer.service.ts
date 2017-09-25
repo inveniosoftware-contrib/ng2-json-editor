@@ -40,7 +40,7 @@ export class RecordFixerService {
    * @param {Object} schema - extended schema of rawRecord
    * @return {Object} - fixed record
    */
-  fixRecord(rawRecord: Object, schema: JSONSchema): Object {
+  fixRecord(rawRecord: object, schema: JSONSchema): object {
     let record = Object.assign({}, rawRecord);
     Object.keys(record).forEach(field => {
       if (!schema.properties[field]) {
@@ -68,7 +68,7 @@ export class RecordFixerService {
    * @param parent - parent of the field/element
    * @param schema - schema of visited field/element
    */
-  private fix(key: string | number, parent: Object | Array<any>, schema: JSONSchema) {
+  private fix(key: string | number, parent: object | Array<any>, schema: JSONSchema) {
     if (schema.hidden) {
       return;
     }
@@ -110,7 +110,7 @@ export class RecordFixerService {
    *
    * TODO: replace this with only `delete` when logging is not necessary!
    */
-  private deleteField(object: Object, field: string) {
+  private deleteField(object: object, field: string) {
     delete object[field];
     console.warn(`"${field}" is removed from input json since it's not in the schema`);
   }
