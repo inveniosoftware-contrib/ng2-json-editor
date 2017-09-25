@@ -87,7 +87,7 @@ describe('AddFieldToObjectDropdownComponent', () => {
 
   xit('should show different keys of schema', () => {
     showDropdownButton.dispatchEvent(new Event('click'));
-    let items: Set<string> = Set(
+    const items: Set<string> = Set(
       Array.prototype
         .slice.call(nativeEl.querySelectorAll('li a'))
         .map((a: HTMLAnchorElement) => a.textContent) as Array<string>
@@ -97,7 +97,7 @@ describe('AddFieldToObjectDropdownComponent', () => {
 
   xit('should add field with empty value when dropdown item clicked', () => {
     showDropdownButton.dispatchEvent(new Event('click'));
-    let anchor = nativeEl.querySelector('li a') as HTMLAnchorElement;
+    const anchor = nativeEl.querySelector('li a') as HTMLAnchorElement;
     expect(component.fields.has(anchor.textContent)).toBeFalsy();
     spyOn(component.keysStoreService, 'addKey');
     anchor.dispatchEvent(new Event('click'));

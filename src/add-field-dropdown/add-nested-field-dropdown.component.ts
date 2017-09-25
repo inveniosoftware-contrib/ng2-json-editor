@@ -52,11 +52,11 @@ export class AddNestedFieldDropdownComponent implements OnChanges, OnDestroy {
     public domUtilService: DomUtilService) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    let pathStringChange = changes['pathString'];
+    const pathStringChange = changes['pathString'];
     if (pathStringChange) {
       this.nestedKeysMap = {};
       this.nestedKeysMap[this.pathString] = this.keysStoreService.keysMap[this.pathString];
-      let nestedPathPrefix = this.pathString + this.pathUtilService.separator;
+      const nestedPathPrefix = this.pathString + this.pathUtilService.separator;
       Object.keys(this.keysStoreService.keysMap)
         .filter(path => path.startsWith(nestedPathPrefix))
         .forEach(path => {
@@ -82,13 +82,13 @@ export class AddNestedFieldDropdownComponent implements OnChanges, OnDestroy {
    * @return schema key - hidden keys - existing keys
    */
   addableKeysForPath(path: string): Set<string> {
-    let keys = this.nestedKeysMap[path];
-    let schema = this.jsonSchemaService.forPathString(path);
+    const keys = this.nestedKeysMap[path];
+    const schema = this.jsonSchemaService.forPathString(path);
     // || schema.items.properties is to handle the keys when the path belongs to table-list.
-    let schemaProps = schema.properties || schema.items.properties;
-    let schemaKeys = Set<string>(Object.keys(schemaProps)
+    const schemaProps = schema.properties || schema.items.properties;
+    const schemaKeys = Set<string>(Object.keys(schemaProps)
       .filter(key => !schemaProps[key].hidden));
-    let addableKeys = schemaKeys.subtract(keys);
+    const addableKeys = schemaKeys.subtract(keys);
     return addableKeys.size > 0 ? addableKeys : undefined;
   }
 
@@ -97,7 +97,7 @@ export class AddNestedFieldDropdownComponent implements OnChanges, OnDestroy {
     if (schema.componentType === 'table-list') {
       schema = schema.items;
     }
-    let newKeyPath = this.keysStoreService.addKey(path, key, schema);
+    const newKeyPath = this.keysStoreService.addKey(path, key, schema);
     if (this.keysStoreService.keysMap[newKeyPath]) {
       this.nestedKeysMap[newKeyPath] = this.keysStoreService.keysMap[newKeyPath];
     }

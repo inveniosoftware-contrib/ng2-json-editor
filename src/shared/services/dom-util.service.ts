@@ -40,9 +40,9 @@ export class DomUtilService {
     this.tabsUtilService.selectTabIfNeeded(id);
     this.listPageChangerService.changePage(id);
     setTimeout(() => {
-      let el = document.getElementById(id);
+      const el = document.getElementById(id);
       if (el) {
-        let firstEditable = el.querySelector(this.editableSelector) as HTMLElement;
+        const firstEditable = el.querySelector(this.editableSelector) as HTMLElement;
         if (firstEditable) {
           if (firstEditable.classList.contains('hidden')) {
             // has latex preview, click to disable to preview
@@ -71,14 +71,14 @@ export class DomUtilService {
   }
 
   focusFirstInputChildByElement(el: HTMLElement) {
-    let firstInput = el.querySelector('input') as HTMLElement;
+    const firstInput = el.querySelector('input') as HTMLElement;
     if (firstInput) {
       firstInput.focus();
     }
   }
 
   focusRightOrLeftParentCell(id: string, direction: number) {
-    let el = document.getElementById(id);
+    const el = document.getElementById(id);
     if (el && el.tabIndex) {
       let elementParentCell = el.parentElement;
       while (elementParentCell.nodeName !== 'TD') {
@@ -86,7 +86,7 @@ export class DomUtilService {
       }
       let nextSibling = direction > 0 ? elementParentCell.nextElementSibling : elementParentCell.previousElementSibling;
       while (nextSibling && nextSibling.nodeName === 'TD') {
-        let inputElement = nextSibling.querySelector(`input[tabindex='1'], div[contenteditable=true][tabindex='1']`) as HTMLElement;
+        const inputElement = nextSibling.querySelector(`input[tabindex='1'], div[contenteditable=true][tabindex='1']`) as HTMLElement;
         if (inputElement) {
           inputElement.focus();
           this.selectAllContent(inputElement);
@@ -98,8 +98,8 @@ export class DomUtilService {
   }
 
   blurFirstEditableChildById(id: string) {
-    let el = document.getElementById(id);
-    let firstEditable = el.querySelector(this.editableSelector) as HTMLElement;
+    const el = document.getElementById(id);
+    const firstEditable = el.querySelector(this.editableSelector) as HTMLElement;
     if (firstEditable) {
       firstEditable.blur();
     }
@@ -116,13 +116,13 @@ export class DomUtilService {
     this.tabsUtilService.selectTabIfNeeded(id);
     this.listPageChangerService.changePage(id);
     setTimeout(() => {
-      let el = document.getElementById(id);
-      let mergeButton = el.querySelector('.btn-merge') as HTMLButtonElement;
+      const el = document.getElementById(id);
+      const mergeButton = el.querySelector('.btn-merge') as HTMLButtonElement;
       if (mergeButton) {
         mergeButton.focus();
         mergeButton.click();
       } else {
-        let patchActionsContainer = el.querySelector('.patch-actions-container') as HTMLElement;
+        const patchActionsContainer = el.querySelector('.patch-actions-container') as HTMLElement;
         if (patchActionsContainer) {
           patchActionsContainer.focus();
         }
@@ -135,18 +135,18 @@ export class DomUtilService {
       el.select();
     } else {
       // select all content for contenteditable element.
-      let range = document.createRange();
+      const range = document.createRange();
       range.selectNodeContents(el);
-      let sel = window.getSelection();
+      const sel = window.getSelection();
       sel.removeAllRanges();
       sel.addRange(range);
     }
   }
 
   private openDropdown(el: HTMLElement) {
-    let dropdown = el.querySelector('div.btn-group');
+    const dropdown = el.querySelector('div.btn-group');
     if (dropdown) {
-      let dropDownButton = dropdown.querySelector('button') as HTMLButtonElement;
+      const dropDownButton = dropdown.querySelector('button') as HTMLButtonElement;
       if (dropDownButton) {
         dropDownButton.click();
       }

@@ -32,16 +32,12 @@ import { PathUtilService } from './path-util.service';
 export class TabsUtilService {
 
   private schemaKeyToTabName: { [key: string]: string };
-  private _activeTabName$: ReplaySubject<string> = new ReplaySubject<string>(1);
+  readonly activeTabName$: ReplaySubject<string> = new ReplaySubject<string>(1);
 
   constructor(public pathUtilService: PathUtilService) { }
 
-  get activeTabName$(): ReplaySubject<string> {
-    return this._activeTabName$;
-  }
-
   getTabNames(tabsConfig: TabsConfig): Array<string> {
-    let tabNames = tabsConfig.tabs.map(tab => tab.name);
+    const tabNames = tabsConfig.tabs.map(tab => tab.name);
     // insert default tab name at the beginning
     return [tabsConfig.defaultTabName]
       .concat(tabNames);
@@ -50,9 +46,9 @@ export class TabsUtilService {
   getSchemaKeyToTabName(tabsConfig: TabsConfig, schema: JSONSchema): { [key: string]: string } {
     if (!this.schemaKeyToTabName) {
       // set tab.name for configured keys
-      let keyToTabName = tabsConfig.tabs
+      const keyToTabName = tabsConfig.tabs
         .map(tab => {
-          let keysWithTabName = {};
+          const keysWithTabName = {};
           tab.properties.forEach(key => {
             keysWithTabName[key] = tab.name;
           });
@@ -72,7 +68,7 @@ export class TabsUtilService {
   // TODO: maybe this could be a decorator
   selectTabIfNeeded(path: string) {
     if (this.schemaKeyToTabName) {
-      let tabName = this.schemaKeyToTabName[this.pathUtilService.toPathArray(path)[0]];
+      const tabName = this.schemaKeyToTabName[this.pathUtilService.toPathArray(path)[0]];
       this.activeTabName$.next(tabName);
     }
   }

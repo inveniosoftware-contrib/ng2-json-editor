@@ -31,7 +31,7 @@ import { JSONSchema } from '../interfaces';
 export class AddAlwaysShowFieldsPipe implements PipeTransform {
 
   transform(fields: Set<string>, schema: JSONSchema): Set<string> {
-    let alwaysShowFields = schema.alwaysShow || [];
+    const alwaysShowFields = schema.alwaysShow || [];
     return fields.union(alwaysShowFields);
   }
 }

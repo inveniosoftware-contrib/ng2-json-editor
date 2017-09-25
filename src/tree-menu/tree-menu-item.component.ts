@@ -88,7 +88,7 @@ export class TreeMenuItemComponent extends AbstractTrackerComponent implements O
   }
 
   get isCollapsable(): boolean {
-    let schemaType = this.schema.type;
+    const schemaType = this.schema.type;
     return this.isNotLeaf && (schemaType === 'object' || schemaType === 'array');
   }
 

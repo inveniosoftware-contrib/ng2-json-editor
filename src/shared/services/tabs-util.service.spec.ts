@@ -34,7 +34,7 @@ describe('TabsUtilService', () => {
   });
 
   it('should return key to tabName', () => {
-    let config = {
+    const config = {
       defaultTabName: 'Default',
       tabs: [
         {
@@ -52,7 +52,7 @@ describe('TabsUtilService', () => {
         }
       ]
     };
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         key1Default: {
@@ -72,14 +72,14 @@ describe('TabsUtilService', () => {
         }
       }
     };
-    let expected = {
+    const expected = {
       key1Tab1: 'Tab1',
       key2Tab1: 'Tab1',
       key1Tab2: 'Tab2',
       key1Default: 'Default',
       key2Default: 'Default'
     };
-    let result = service.getSchemaKeyToTabName(config, schema);
+    const result = service.getSchemaKeyToTabName(config, schema);
     expect(result).toEqual(expected);
   });
 });

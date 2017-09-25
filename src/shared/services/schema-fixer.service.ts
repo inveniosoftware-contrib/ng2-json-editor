@@ -114,9 +114,9 @@ export class SchemaFixerService {
    * Fixes order config to assign the right priority to properties
    */
   private fixOrder(schema: JSONSchema): JSONSchema {
-    let order: Array<string> = schema.order;
+    const order: Array<string> = schema.order;
     order.forEach((orderKey: string, index: number) => {
-      let priority = order.length - index;
+      const priority = order.length - index;
       if (orderKey in schema.properties) {
         schema.properties[orderKey].priority = priority;
       } else {
@@ -131,11 +131,11 @@ export class SchemaFixerService {
    * it merges all enum fields in anyOf elements
    */
   private fixAnyOf(schema: JSONSchema): JSONSchema {
-    let anyOf = schema.anyOf;
+    const anyOf = schema.anyOf;
 
     // find existence count of all enum properties in anyOf elements
     // the reason of this, a field could be enum type for some and not for some other anyOf element
-    let enumPropCount = {};
+    const enumPropCount = {};
     anyOf.forEach(anyOfElement => {
       Object.keys(anyOfElement.properties)
         .filter(prop => anyOfElement.properties[prop].enum)
@@ -148,14 +148,14 @@ export class SchemaFixerService {
     });
 
     // combine all enum arrays in anyOf elements
-    let enums = {};
+    const enums = {};
     Object.keys(enumPropCount)
       .forEach(prop => {
         anyOf.forEach(anyOfElement => {
           if (!enums[prop]) {
             enums[prop] = [];
           }
-          let enumValues = anyOfElement.properties[prop].enum;
+          const enumValues = anyOfElement.properties[prop].enum;
           // check if current field is enum for current anyOf element
           if (enumValues) {
             enums[prop] = enums[prop].concat(enumValues);
@@ -163,7 +163,7 @@ export class SchemaFixerService {
         });
       });
 
-    let fixedSchema = anyOf[0];
+    const fixedSchema = anyOf[0];
     // shallow cleaning of format and pattern
     Object.keys(fixedSchema.properties)
       .forEach(prop => {
@@ -173,7 +173,7 @@ export class SchemaFixerService {
 
     Object.keys(enumPropCount)
       .forEach(prop => {
-        let uniqueEnumValues = Array.from(new Set(enums[prop])) as Array<string>;
+        const uniqueEnumValues = Array.from(new Set(enums[prop])) as Array<string>;
         // if a field enum for all anyOf elements
         if (enumPropCount[prop] === anyOf.length) {
           // merge all enum values into one
@@ -206,7 +206,7 @@ export class SchemaFixerService {
    * and warns on console.
    */
   private fixAlwaysShow(schema: JSONSchema): JSONSchema {
-    let alwaysShow: Array<string> = schema.alwaysShow;
+    const alwaysShow: Array<string> = schema.alwaysShow;
     schema.alwaysShow = alwaysShow.filter(key => {
       if (schema.properties[key]) {
         return true;

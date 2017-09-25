@@ -36,7 +36,7 @@ describe('ErrorsService', () => {
       json pointer paths which include only the type of messages of the
       array that they belong to.`, () => {
 
-    let errorMap = {
+    const errorMap = {
       '/key/path/1': [
         {
           message: 'Error message.',
@@ -53,7 +53,7 @@ describe('ErrorsService', () => {
       }]
     };
 
-    let categorizedErrorMap = {
+    const categorizedErrorMap = {
       categorizedErrorMap: {
         errors: {
           '/key/path/1': [{

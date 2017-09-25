@@ -36,10 +36,10 @@ import { AppConfig } from './app.config';
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
-  record: Object;
-  schema: Object;
+  record: object;
+  schema: object;
   patches: Array<any>;
-  errorMap: Object;
+  errorMap: object;
 
   constructor(private http: Http, public config: AppConfig) {
     Observable.zip(

@@ -41,12 +41,12 @@ export class RemoteAutocompletionService {
   }
 
   private mapResponseToResults(response: Response, resultsPath: string): Array<AutocompletionResult> {
-    let pathElements = this.pathUtilService.toPathArray(resultsPath);
+    const pathElements = this.pathUtilService.toPathArray(resultsPath);
     let responseJson = response.json();
     pathElements.forEach(pathElement => {
       responseJson = responseJson[pathElement];
     });
-    let results: Array<AutocompletionResult> = responseJson;
+    const results: Array<AutocompletionResult> = responseJson;
     return results;
   }
 }

@@ -51,7 +51,7 @@ export class RefFieldComponent implements OnChanges {
   @Input() value: Map<string, string>;
   @Input() path: Array<any>;
 
-  refData: Object;
+  refData: object;
   requestOptions: RequestOptions;
 
   isPreviewButtonHidden = false;
@@ -65,8 +65,8 @@ export class RefFieldComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.refConfig) {
-      let valueChange = changes['value'];
-      let schemaChange = changes['schema'];
+      const valueChange = changes['value'];
+      const schemaChange = changes['schema'];
 
       if (valueChange && this.refConfig && this.refConfig.anchorBuilder && this.ref) {
         this.anchorAttributes = this.refConfig.anchorBuilder(this.ref);
@@ -138,7 +138,7 @@ export class RefFieldComponent implements OnChanges {
   }
 
   private createRequestOptionsWithConfig(): RequestOptions {
-    let headers = new Headers();
+    const headers = new Headers();
     if (this.refConfig.headers) {
       this.refConfig.headers
         .forEach(header => headers.append(header.name, header.value));

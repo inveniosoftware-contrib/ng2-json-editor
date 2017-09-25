@@ -79,10 +79,10 @@ export class AppConfig {
               conference_record: {
                 refFieldConfig: {
                   anchorBuilder: (url) => {
-                    let parts = url.split('/');
-                    let type = parts[parts.length - 2].slice(0, -1);
-                    let display = `View ${type}`;
-                    let href = url.replace(/\/api\//, '/');
+                    const parts = url.split('/');
+                    const type = parts[parts.length - 2].slice(0, -1);
+                    const display = `View ${type}`;
+                    const href = url.replace(/\/api\//, '/');
                     return { href, display };
                   }
                 }
@@ -107,7 +107,7 @@ export class AppConfig {
     customFormatValidation: {
       date: {
         formatChecker: (value) => {
-          let formats = [
+          const formats = [
             /^\d{4}$/,
             /^\d{4}-\d{2}$/,
             /^\d{4}-\d{2}-\d{2}$/
@@ -123,7 +123,7 @@ export class AppConfig {
       },
       'date-time': {
         formatChecker: (value) => {
-          let regex = /^\d\d\d\d-[0-1]\d-[0-3]\d[t\s][0-2]\d:[0-5]\d:[0-5]\d(?:\.\d+)?(?:z|[+-]\d\d:\d\d)?$/i;
+          const regex = /^\d\d\d\d-[0-1]\d-[0-3]\d[t\s][0-2]\d:[0-5]\d:[0-5]\d(?:\.\d+)?(?:z|[+-]\d\d:\d\d)?$/i;
           if (value.match(regex)) {
             return true;
           };

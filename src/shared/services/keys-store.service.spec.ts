@@ -45,7 +45,7 @@ class MockJsonSchemaService extends JsonSchemaService {
 describe('KeysStoreService', () => {
   let service: KeysStoreService;
 
-  let assertKeys$Map = (expectedKeysMap: Map<string, OrderedSet<string>>) => {
+  const assertKeys$Map = (expectedKeysMap: Map<string, OrderedSet<string>>) => {
     expectedKeysMap.forEach((expectedKeys, path) => {
       service.forPath(path).subscribe(keys => {
         expect(keys).toEqual(expectedKeys);
@@ -62,7 +62,7 @@ describe('KeysStoreService', () => {
   });
 
   it('should build keys map for simple json', () => {
-    let map = fromJS({
+    const map = fromJS({
       aString: 'value',
       aStringArray: [
         'value1',
@@ -73,7 +73,7 @@ describe('KeysStoreService', () => {
         prop2: 'value'
       }
     });
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         aString: {
@@ -98,7 +98,7 @@ describe('KeysStoreService', () => {
         }
       }
     };
-    let expectedKeysMap = Map({
+    const expectedKeysMap = Map({
       '': OrderedSet(['aString', 'aStringArray', 'anObject']),
       '/anObject': OrderedSet(['prop1', 'prop2'])
     });
@@ -108,7 +108,7 @@ describe('KeysStoreService', () => {
   });
 
   it('should build keys map for nested complex json with table list', () => {
-    let map = fromJS({
+    const map = fromJS({
       anArray: [
         {
           anObject: {
@@ -129,7 +129,7 @@ describe('KeysStoreService', () => {
         }
       ]
     });
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         anArray: {
@@ -172,7 +172,7 @@ describe('KeysStoreService', () => {
         }
       }
     };
-    let expectedKeysMap = Map({
+    const expectedKeysMap = Map({
       '': OrderedSet(['anArray']),
       '/anArray/0': OrderedSet(['aString', 'anObject', 'innerArray']),
       '/anArray/1': OrderedSet(['anObject']),
@@ -185,7 +185,7 @@ describe('KeysStoreService', () => {
   });
 
   it('built keys should be ordered by schema.priority (ositive larger first, then alphabetically, then negative)', () => {
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         key1: {
@@ -208,21 +208,21 @@ describe('KeysStoreService', () => {
         }
       }
     };
-    let json = fromJS({
+    const json = fromJS({
       key1: 'value',
       key2: 'value',
       key3: 'value',
       key4: 'value',
       key5: 'value'
     });
-    let expected = OrderedSet(['key4', 'key3', 'key5', 'key2', 'key1']);
+    const expected = OrderedSet(['key4', 'key3', 'key5', 'key2', 'key1']);
     service.buildKeysMap(json, schema);
     service.forPath('')
       .subscribe(keys => expect(keys).toEqual(expected));
   });
 
   it('built keys should not have hidden', () => {
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         key1: {
@@ -234,18 +234,18 @@ describe('KeysStoreService', () => {
         }
       }
     };
-    let json = fromJS({
+    const json = fromJS({
       key1: 'value',
       key2: 'value'
     });
-    let expected = OrderedSet(['key2']);
+    const expected = OrderedSet(['key2']);
     service.buildKeysMap(json, schema);
     service.forPath('')
       .subscribe(keys => expect(keys).toEqual(expected));
   });
 
   it('built keys should have alwaysShow', () => {
-    let schema = {
+    const schema = {
       type: 'object',
       alwaysShow: ['key2'],
       properties: {
@@ -257,17 +257,17 @@ describe('KeysStoreService', () => {
         }
       }
     };
-    let json = fromJS({
+    const json = fromJS({
       key1: 'value'
     });
-    let expected = OrderedSet(['key1', 'key2']);
+    const expected = OrderedSet(['key1', 'key2']);
     service.buildKeysMap(json, schema);
     service.forPath('')
       .subscribe(keys => expect(keys).toEqual(expected));
   });
 
   it('should add simple key and return the new key path', () => {
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         key1: {
@@ -278,20 +278,20 @@ describe('KeysStoreService', () => {
         }
       }
     };
-    let json = fromJS({
+    const json = fromJS({
       key1: 'value'
     });
     service.buildKeysMap(json, schema);
-    let newKeyPath = service.addKey('', 'key2', schema);
-    let expected = OrderedSet(['key1', 'key2']);
-    let expectNewKeyPath = '/key2';
+    const newKeyPath = service.addKey('', 'key2', schema);
+    const expected = OrderedSet(['key1', 'key2']);
+    const expectNewKeyPath = '/key2';
     service.forPath('')
       .subscribe(keys => expect(keys.toArray()).toEqual(expected.toArray()));
     expect(newKeyPath).toEqual(expectNewKeyPath);
   });
 
   it('should add key in the right place to maintain the order', () => {
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         key1: {
@@ -304,18 +304,18 @@ describe('KeysStoreService', () => {
         }
       }
     };
-    let json = fromJS({
+    const json = fromJS({
       key1: 'value'
     });
     service.buildKeysMap(json, schema);
     service.addKey('', 'key2', schema);
-    let expected = OrderedSet(['key2', 'key1']);
+    const expected = OrderedSet(['key2', 'key1']);
     service.forPath('')
       .subscribe(keys => expect(keys.toArray()).toEqual(expected.toArray()));
   });
 
   it('should add object key then build keys for it', () => {
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         key1: {
@@ -331,12 +331,12 @@ describe('KeysStoreService', () => {
         }
       }
     };
-    let json = fromJS({
+    const json = fromJS({
       key1: 'value'
     });
     service.buildKeysMap(json, schema);
     service.addKey('', 'key2', schema);
-    let expected = OrderedSet(['key1', 'key2']);
+    const expected = OrderedSet(['key1', 'key2']);
     service.forPath('')
       .subscribe(keys => expect(keys.toArray()).toEqual(expected.toArray()));
     service.forPath('/key2')
@@ -344,7 +344,7 @@ describe('KeysStoreService', () => {
   });
 
   it('should delete key and its keys', () => {
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         key1: {
@@ -360,7 +360,7 @@ describe('KeysStoreService', () => {
         }
       }
     };
-    let json = fromJS({
+    const json = fromJS({
       key1: 'value',
       key2: {
         innerKey: 'value'
@@ -368,14 +368,14 @@ describe('KeysStoreService', () => {
     });
     service.buildKeysMap(json, schema);
     service.deleteKey('', 'key2');
-    let expected = OrderedSet(['key1']);
+    const expected = OrderedSet(['key1']);
     service.forPath('')
       .subscribe(keys => expect(keys.toArray()).toEqual(expected.toArray()));
     expect(service.forPath('/key2')).toBeUndefined();
   });
 
   it('should delete keys of children when deleting a key', () => {
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         key: {
@@ -393,7 +393,7 @@ describe('KeysStoreService', () => {
         }
       }
     };
-    let json = fromJS({
+    const json = fromJS({
       key: {
         child: {
           grandChild: 'value'
@@ -407,7 +407,7 @@ describe('KeysStoreService', () => {
   });
 
   it('should swap keys recursively', () => {
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         key: {
@@ -450,7 +450,7 @@ describe('KeysStoreService', () => {
       }
     };
     MockJsonSchemaService.schemaToReturn = schema.properties.key;
-    let json = fromJS({
+    const json = fromJS({
       key: [
         {
           child1: {
@@ -472,11 +472,11 @@ describe('KeysStoreService', () => {
         }
       ]
     });
-    let expectedKey0 = ['child1', 'child2', 'child3', 'child4'];
-    let expectedKey1 = ['child1', 'child3'];
-    let expectedKey0Child1 = ['grandChild2', 'grandChild3'];
-    let expectedKey0Child4 = ['grandChild4'];
-    let expectedKey1Child1 = ['grandChild1', 'grandChild3'];
+    const expectedKey0 = ['child1', 'child2', 'child3', 'child4'];
+    const expectedKey1 = ['child1', 'child3'];
+    const expectedKey0Child1 = ['grandChild2', 'grandChild3'];
+    const expectedKey0Child4 = ['grandChild4'];
+    const expectedKey1Child1 = ['grandChild1', 'grandChild3'];
     service.buildKeysMap(json, schema);
     service.swapListElementKeys(['key'], 0, 1);
     expect(service.keysMap['/key/0'].toArray()).toEqual(expectedKey0);
@@ -488,7 +488,7 @@ describe('KeysStoreService', () => {
   });
 
   it('should set path, when object key not present ', () => {
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         child: {
@@ -503,16 +503,16 @@ describe('KeysStoreService', () => {
     };
     MockJsonSchemaService.schemaToReturn = schema;
     // build initial keys map
-    let json = fromJS({});
+    const json = fromJS({});
     service.buildKeysMap(json, schema);
 
     // new json after set
-    let newJson = fromJS({
+    const newJson = fromJS({
       child: {
         grandChild: 'value'
       }
     });
-    let expectedKeysMap = {
+    const expectedKeysMap = {
       '': OrderedSet(['child']),
       '/child': OrderedSet(['grandChild'])
     };
@@ -521,7 +521,7 @@ describe('KeysStoreService', () => {
   });
 
   it('should set path, when table-list key not present ', () => {
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         tableList: {
@@ -543,15 +543,15 @@ describe('KeysStoreService', () => {
     };
     MockJsonSchemaService.schemaToReturn = schema;
     // build initial keys map
-    let json = fromJS({});
+    const json = fromJS({});
     service.buildKeysMap(json, schema);
     // new json after set
-    let newJson = fromJS({
+    const newJson = fromJS({
       tableList: [
         { child1: 'value' }
       ]
     });
-    let expectedKeysMap = {
+    const expectedKeysMap = {
       '': OrderedSet(['tableList']),
       '/tableList': OrderedSet(['child1'])
     };
@@ -560,7 +560,7 @@ describe('KeysStoreService', () => {
   });
 
   it('should set path, when key not present in table-list item)', () => {
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         tableList: {
@@ -582,20 +582,20 @@ describe('KeysStoreService', () => {
     };
     MockJsonSchemaService.schemaToReturn = schema.properties.tableList;
     // build initial keys map
-    let json = fromJS({
+    const json = fromJS({
       tableList: [
         { prop1: 'value' }
       ]
     });
     service.buildKeysMap(json, schema);
     // new json after set
-    let newJson = fromJS({
+    const newJson = fromJS({
       tableList: [
         { prop1: 'value' },
         { prop2: 'value' }
       ]
     });
-    let expectedKeysMap = {
+    const expectedKeysMap = {
       '': OrderedSet(['tableList']),
       '/tableList': OrderedSet(['prop1', 'prop2'])
     };
@@ -604,7 +604,7 @@ describe('KeysStoreService', () => {
   });
 
   it('should not set path, when nothing is missing', () => {
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         child: {
@@ -619,15 +619,15 @@ describe('KeysStoreService', () => {
     };
     MockJsonSchemaService.schemaToReturn = schema.properties.child.properties.grandChild;
     // build initial keys map
-    let json = fromJS({
+    const json = fromJS({
       child: {
         grandChild: 'value'
       }
     });
     service.buildKeysMap(json, schema);
-    let expectedKeysMap = service.keysMap;
+    const expectedKeysMap = service.keysMap;
     // new json after set
-    let newJson = fromJS({
+    const newJson = fromJS({
       child: {
         grandChild: 'newValue'
       }
@@ -637,7 +637,7 @@ describe('KeysStoreService', () => {
   });
 
   it('should not set path but built keys when nothing is missing but path is object', () => {
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         child: {
@@ -655,18 +655,18 @@ describe('KeysStoreService', () => {
     };
     MockJsonSchemaService.schemaToReturn = schema.properties.child;
     // build initial keys map
-    let json = fromJS({
+    const json = fromJS({
       child: {
         grandChild1: 'value'
       }
     });
     service.buildKeysMap(json, schema);
-    let expectedKeysMap = {
+    const expectedKeysMap = {
       '': OrderedSet(['child']),
       '/child': OrderedSet(['grandChild2'])
     };
     // new json after set
-    let newJson = fromJS({
+    const newJson = fromJS({
       child: {
         grandChild2: 'value',
       }

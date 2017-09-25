@@ -42,14 +42,14 @@ describe('JsonStoreService', () => {
   });
 
   it('should set in path and notify when some lists parents is missing', () => {
-    let json = fromJS({
+    const json = fromJS({
       aMap: {}
     });
     service.setJson(json);
 
-    let path = ['aMap', 'aList', 0, 'innerList', 0, 'innerProperty'];
-    let value = 'value';
-    let expected = fromJS({
+    const path = ['aMap', 'aList', 0, 'innerList', 0, 'innerProperty'];
+    const value = 'value';
+    const expected = fromJS({
       aMap: {
         aList: [
           {
@@ -70,14 +70,14 @@ describe('JsonStoreService', () => {
   });
 
   it('should set in path and notify when some map parents are missing', () => {
-    let json = fromJS({
+    const json = fromJS({
       aMap: {}
     });
     service.setJson(json);
 
-    let path = ['aMap', 'anotherMap', 'innerMap', 'innerProperty'];
-    let value = 'value';
-    let expected = fromJS({
+    const path = ['aMap', 'anotherMap', 'innerMap', 'innerProperty'];
+    const value = 'value';
+    const expected = fromJS({
       aMap: {
         anotherMap: {
           innerMap: {
@@ -97,16 +97,16 @@ describe('JsonStoreService', () => {
 
 
   it('should insert a new element if addIn path is to an array index', () => {
-    let json = fromJS({
+    const json = fromJS({
       aMap: {
         aList: ['val1', 'val2', 'val3']
       }
     });
     service.setJson(json);
 
-    let path = ['aMap', 'aList', 1];
-    let value = 'toBeInsertedAt1';
-    let expected = fromJS({
+    const path = ['aMap', 'aList', 1];
+    const value = 'toBeInsertedAt1';
+    const expected = fromJS({
       aMap: {
         aList: ['val1', 'toBeInsertedAt1', 'val2', 'val3']
       }
@@ -120,16 +120,16 @@ describe('JsonStoreService', () => {
   });
 
   it('should append a new element if addIn path is to the -', () => {
-    let json = fromJS({
+    const json = fromJS({
       aMap: {
         aList: ['val1', 'val2', 'val3']
       }
     });
     service.setJson(json);
 
-    let path = ['aMap', 'aList', '-'];
-    let value = 'toBeAppended';
-    let expected = fromJS({
+    const path = ['aMap', 'aList', '-'];
+    const value = 'toBeAppended';
+    const expected = fromJS({
       aMap: {
         aList: ['val1', 'val2', 'val3', 'toBeAppended']
       }
@@ -143,10 +143,10 @@ describe('JsonStoreService', () => {
   });
 
   it('should removeIn if setIn value is empty string', () => {
-    let json = fromJS({
+    const json = fromJS({
       foo: 'bar'
     });
-    let path = ['foo'];
+    const path = ['foo'];
     service.setJson(json);
     spyOn(service, 'removeIn');
     service.setIn(path, '');
@@ -154,13 +154,13 @@ describe('JsonStoreService', () => {
   });
 
   it('should add new field if addIn path is to an object property', () => {
-    let json = fromJS({
+    const json = fromJS({
       aMap: {}
     });
     service.setJson(json);
-    let value = 'value';
-    let path = ['aMap', 'aProp'];
-    let expected = fromJS({
+    const value = 'value';
+    const path = ['aMap', 'aProp'];
+    const expected = fromJS({
       aMap: {
         aProp: 'value'
       }
@@ -174,16 +174,16 @@ describe('JsonStoreService', () => {
   });
 
   it('should addIn an object', () => {
-    let json = fromJS({
+    const json = fromJS({
       aList: []
     });
     service.setJson(json);
 
-    let value = {
+    const value = {
       foo: 'bar'
     };
-    let path = ['aList', '-'];
-    let expected = fromJS({
+    const path = ['aList', '-'];
+    const expected = fromJS({
       aList: [
         { foo: 'bar' }
       ]
@@ -196,14 +196,14 @@ describe('JsonStoreService', () => {
   });
 
   it('should setIn an array', () => {
-    let json = fromJS({
+    const json = fromJS({
       aMap: {}
     });
     service.setJson(json);
 
-    let value = [1];
-    let path = ['aMap', 'aList'];
-    let expected = fromJS({
+    const value = [1];
+    const path = ['aMap', 'aList'];
+    const expected = fromJS({
       aMap: {
         aList: [1]
       }

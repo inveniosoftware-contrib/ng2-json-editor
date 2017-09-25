@@ -51,13 +51,13 @@ export class BottomConsoleBadgesComponent implements OnInit, OnDestroy {
     private jsonStoreService: JsonStoreService) { }
 
   ngOnInit() {
-    this.externalErrorCounterSubscription = this.errorsService.externalErrorCountersSubject
+    this.externalErrorCounterSubscription = this.errorsService.externalErrorCounters$
       .subscribe(errorCounters => {
         this.globalErrorCount = errorCounters.errors;
         this.globalWarningCount = errorCounters.warnings;
         this.changeDetectorRef.markForCheck();
       });
-    this.internalErrorCounterSubscription = this.errorsService.internalErrorCountersSubject
+    this.internalErrorCounterSubscription = this.errorsService.internalErrorCounters$
       .subscribe(errorCounters => {
         this.internalErrorCount = errorCounters.errors;
         this.internalWarningCount = errorCounters.warnings;

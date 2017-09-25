@@ -27,12 +27,12 @@ import { Ng2JsonEditorPage, WDPromise } from '../app.po';
 export class ShortcutActionPage extends Ng2JsonEditorPage {
 
   getNumberOfChildRowsbyId(id: string): WDPromise<number> {
-    let tableElem = element(by.id(id));
+    const tableElem = element(by.id(id));
     return tableElem.all(by.css('tr[id*=\'' + id + '\']')).count();
   }
 
   getNumberOfChildTablesbyId(id: string): WDPromise<number> {
-    let tableElem = element(by.id(id));
+    const tableElem = element(by.id(id));
     return tableElem.all(by.css('table[id*=\'' + id + '\']')).count();
   }
 
@@ -45,17 +45,17 @@ export class ShortcutActionPage extends Ng2JsonEditorPage {
   }
 
   getNumberOfContentEditableElementsById(id: string): WDPromise<number> {
-    let elem = element(by.id(id));
+    const elem = element(by.id(id));
     return elem.all(by.css('div[contenteditable=true]')).count();
   }
 
   getNumberOfInputElementsById(id: string): WDPromise<number> {
-    let elem = element(by.id(id));
+    const elem = element(by.id(id));
     return elem.all(by.css('input')).count();
   }
 
   getValuesOfChildrenById(id: string): WDPromise<Array<string>> {
-    let elems = this.getChildrenOfElementByCss(this.getElementById(id), 'div[contenteditable=true], input');
+    const elems = this.getChildrenOfElementByCss(this.getElementById(id), 'div[contenteditable=true], input');
     return elems
       .map(elem => {
         return elem.getTagName()

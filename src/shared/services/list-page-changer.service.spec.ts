@@ -37,10 +37,10 @@ describe('ListPageChangerService', () => {
   });
 
   it('should change page', () => {
-    let listPath = '/list';
-    let itemPath = '/list/3';
-    let itemsPerPage = 3;
-    let expectedPage = 2;
+    const listPath = '/list';
+    const itemPath = '/list/3';
+    const itemsPerPage = 3;
+    const expectedPage = 2;
     service.registerPaginatedList(listPath, itemsPerPage)
       .subscribe(page => {
         expect(page).toEqual(expectedPage);

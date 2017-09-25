@@ -24,7 +24,7 @@ import { SizedStack } from './sized-stack';
 
 describe('SizedStack', () => {
   it('should respect the size', () => {
-    let stack = new SizedStack<number>(2);
+    const stack = new SizedStack<number>(2);
     stack.push(0);
     stack.push(1);
     stack.push(2);

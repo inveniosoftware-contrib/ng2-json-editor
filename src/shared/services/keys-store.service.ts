@@ -58,9 +58,9 @@ export class KeysStoreService {
       .sort((a, b) => this.compareByPriority(a, b, schema)) as OrderedSet<string>;
     this.keys$Map[path].next(this.keysMap[path]);
     this.onKeysChange.next({ path, keys: this.keysMap[path] });
-    let newKeyPath = `${path}${this.pathUtilService.separator}${key}`;
+    const newKeyPath = `${path}${this.pathUtilService.separator}${key}`;
 
-    let keySchema = schema.properties[key];
+    const keySchema = schema.properties[key];
     if (keySchema.type === 'object' || keySchema.componentType === 'table-list') {
       this.buildKeysMapRecursivelyForPath(value || Map<string, any>(), newKeyPath, keySchema);
     }
@@ -70,8 +70,8 @@ export class KeysStoreService {
 
 
   deletePath(path: Array<any>) {
-    let lastKey = path[path.length - 1];
-    let parentPath = this.pathUtilService.toPathString(path.slice(0, -1));
+    const lastKey = path[path.length - 1];
+    const parentPath = this.pathUtilService.toPathString(path.slice(0, -1));
     // don't invoke deleteKey if parentPath is primitive-list
     if (this.keysMap[parentPath]) {
       this.deleteKey(parentPath, lastKey);
@@ -86,22 +86,22 @@ export class KeysStoreService {
   syncKeysForPath(path: Array<any>, json: Map<string, any>) {
     // search from leaf to root, to find the first path with entry in keys map
     for (let i = path.length - 1; i >= 0; i--) {
-      let currentPath = path.slice(0, i);
-      let currentPathString = this.pathUtilService.toPathString(currentPath);
+      const currentPath = path.slice(0, i);
+      const currentPathString = this.pathUtilService.toPathString(currentPath);
       if (this.keysMap[currentPathString]) {
         // path[i] is key that should be added to currentPat
-        let key = path[i];
+        const key = path[i];
         // if currentPath has the key
         if (this.keysMap[currentPathString].has(key)) {
           // just build the store keys map for that /current/path/key if it is object or array
-          let keyPath = currentPath.concat(key);
-          let keySchema = this.jsonSchemaService.forPathArray(keyPath);
+          const keyPath = currentPath.concat(key);
+          const keySchema = this.jsonSchemaService.forPathArray(keyPath);
           if (keySchema.type === 'object' || keySchema.type === 'array') {
             this.buildKeysMapRecursivelyForPath(json.getIn(keyPath), keyPath, keySchema);
           }
           // if currentPath doesn't have the key
         } else {
-          let currentSchema = this.jsonSchemaService.forPathArray(currentPath);
+          const currentSchema = this.jsonSchemaService.forPathArray(currentPath);
           // if currentPath is to a table list
           if (currentSchema.componentType === 'table-list') {
             // have to rebuild keys map for it because key is here an index we don't know what to add
@@ -124,11 +124,11 @@ export class KeysStoreService {
     this.keys$Map[parentPath].next(this.keysMap[parentPath]);
     this.onKeysChange.next({ path: parentPath, keys: this.keysMap[parentPath] });
     // delete keys for deleted one
-    let deletedKeyPath = `${parentPath}${this.pathUtilService.separator}${key}`;
+    const deletedKeyPath = `${parentPath}${this.pathUtilService.separator}${key}`;
     delete this.keysMap[deletedKeyPath];
     delete this.keys$Map[deletedKeyPath];
     // delete keys for all children of the deleted one
-    let deletedKeyPathChildPrefix = deletedKeyPath + this.pathUtilService.separator;
+    const deletedKeyPathChildPrefix = deletedKeyPath + this.pathUtilService.separator;
     Object.keys(this.keysMap)
       .filter(path => path.startsWith(deletedKeyPathChildPrefix))
       .forEach(childPath => {
@@ -141,26 +141,26 @@ export class KeysStoreService {
    * Swaps keys of given two indices in object list recursively
    */
   swapListElementKeys(listPath: Array<any>, index1: number, index2: number) {
-    let listSchema = this.jsonSchemaService.forPathArray(listPath);
+    const listSchema = this.jsonSchemaService.forPathArray(listPath);
     if (listSchema.componentType !== 'complex-list') { return; }
 
-    let listPathString = this.pathUtilService.toPathString(listPath);
-    let ps1 = `${listPathString}${this.pathUtilService.separator}${index1}`;
-    let ps2 = `${listPathString}${this.pathUtilService.separator}${index2}`;
-    let keys1 = this.keysMap[ps1];
+    const listPathString = this.pathUtilService.toPathString(listPath);
+    const ps1 = `${listPathString}${this.pathUtilService.separator}${index1}`;
+    const ps2 = `${listPathString}${this.pathUtilService.separator}${index2}`;
+    const keys1 = this.keysMap[ps1];
     this.setKeys(ps1, this.keysMap[ps2]);
     this.setKeys(ps2, keys1);
     // swap children as well
-    let ps1ChildPrefix = ps1 + this.pathUtilService.separator;
-    let ps2ChildPrefix = ps2 + this.pathUtilService.separator;
-    let childrenSwaps: Array<{ from: string, to: string, keys: OrderedSet<string> }> = [];
+    const ps1ChildPrefix = ps1 + this.pathUtilService.separator;
+    const ps2ChildPrefix = ps2 + this.pathUtilService.separator;
+    const childrenSwaps: Array<{ from: string, to: string, keys: OrderedSet<string> }> = [];
     Object.keys(this.keysMap)
       .forEach(path => {
         if (path.startsWith(ps1ChildPrefix)) {
-          let toPath = path.replace(ps1ChildPrefix, ps2ChildPrefix);
+          const toPath = path.replace(ps1ChildPrefix, ps2ChildPrefix);
           childrenSwaps.push({ from: path, to: toPath, keys: this.keysMap[path] });
         } else if (path.startsWith(ps2ChildPrefix)) {
-          let toPath = path.replace(ps2ChildPrefix, ps1ChildPrefix);
+          const toPath = path.replace(ps2ChildPrefix, ps1ChildPrefix);
           childrenSwaps.push({ from: path, to: toPath, keys: this.keysMap[path] });
         }
       });
@@ -186,31 +186,31 @@ export class KeysStoreService {
 
   buildKeysMapRecursivelyForPath(mapOrList: Iterable<string | number, any>, path: string | Array<any>, schema?: JSONSchema) {
     // TODO: remove this and unify typing when #330 is fixed
-    let pathString = Array.isArray(path) ? this.pathUtilService.toPathString(path) : path;
+    const pathString = Array.isArray(path) ? this.pathUtilService.toPathString(path) : path;
 
     if (!schema) {
       schema = this.jsonSchemaService.forPathString(pathString);
     }
 
     if (schema.type === 'object') {
-      let map = mapOrList as Map<string, any> || Map<string, any>();
-      let finalKeys = this.buildkeysForObject(pathString, map, schema);
+      const map = mapOrList as Map<string, any> || Map<string, any>();
+      const finalKeys = this.buildkeysForObject(pathString, map, schema);
 
       // recursive call
       finalKeys
         .filter(key => this.isObjectOrArray(schema.properties[key]))
         .forEach(key => {
-          let nextPath = `${pathString}${this.pathUtilService.separator}${key}`;
+          const nextPath = `${pathString}${this.pathUtilService.separator}${key}`;
           this.buildKeysMapRecursivelyForPath(map.get(key), nextPath, schema.properties[key]);
         });
     } else if (schema.componentType === 'table-list') {
-      let list = mapOrList as List<Map<string, any>> || List<Map<string, any>>();
+      const list = mapOrList as List<Map<string, any>> || List<Map<string, any>>();
       this.buildKeysForTableList(pathString, list, schema);
       // there is no recursive call for table list items because they aren't expected to have object or object list as property.
     } else if (schema.componentType === 'complex-list') {
-      let list = mapOrList as List<Map<string, any>> || List<Map<string, any>>();
+      const list = mapOrList as List<Map<string, any>> || List<Map<string, any>>();
       list.forEach((element, index) => {
-        let elementPath = `${pathString}${this.pathUtilService.separator}${index}`;
+        const elementPath = `${pathString}${this.pathUtilService.separator}${index}`;
         this.buildKeysMapRecursivelyForPath(element, elementPath, schema.items);
       });
     }
@@ -219,17 +219,17 @@ export class KeysStoreService {
   // default value for `list`, if this is called for alwaysShow in which case `list` would be undefined
   private buildKeysForTableList(path: string, list = List<Map<string, any>>(), schema: JSONSchema) {
     // get present unique keys in all items of table-list
-    let keys = Seq.Set(list
+    const keys = Seq.Set(list
       .map(object => object.keySeq().toArray())
       .reduce((pre, cur) => pre.concat(cur), []));
-    let itemSchema = schema.items;
-    let finalKeys = this.schemafy(keys, itemSchema);
+    const itemSchema = schema.items;
+    const finalKeys = this.schemafy(keys, itemSchema);
     this.setKeys(path, finalKeys);
   }
 
   // default value for `map`, if this is called for alwaysShow in which case `map` would be undefined
   private buildkeysForObject(path: string, map = Map<string, any>(), schema: JSONSchema): OrderedSet<string> {
-    let finalKeys = this.schemafy(map.keySeq(), schema);
+    const finalKeys = this.schemafy(map.keySeq(), schema);
     this.setKeys(path, finalKeys);
     return finalKeys;
   }
@@ -248,8 +248,8 @@ export class KeysStoreService {
 
   private compareByPriority(a: string, b: string, schema: JSONSchema): number {
     // Sort by priority, larger is the first.
-    let pa = schema.properties[a].priority || 0;
-    let pb = schema.properties[b].priority || 0;
+    const pa = schema.properties[a].priority || 0;
+    const pb = schema.properties[b].priority || 0;
 
     if (pa > pb) { return -1; }
     if (pa < pb) { return 1; }

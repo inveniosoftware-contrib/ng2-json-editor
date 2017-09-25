@@ -6,7 +6,7 @@ export interface RefConfig {
    * Name of the template where you can access the data which is fetched from `$ref` url.
    *
    * - `@Input() templates` for `<json-editor>` must have an entry where key is this and value is a `TemplateRef`
-   * - template parameter: `response: Object` is json body, `response.$error` is used to propagate http error during fetching `$ref`
+   * - template parameter: `response: object` is json body, `response.$error` is used to propagate http error during fetching `$ref`
    */
   templateName?: string;
 

@@ -30,7 +30,7 @@ import { Set } from 'immutable';
   name: 'differentKeys'
 })
 export class DifferentKeysPipe implements PipeTransform {
-  transform(object: Object, keys: Set<string>): Set<string> {
+  transform(object: object, keys: Set<string>): Set<string> {
     return Set.fromKeys(object).subtract(keys);
   }
 }

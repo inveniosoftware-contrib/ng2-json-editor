@@ -75,7 +75,7 @@ export class SchemaValidationService {
     //  ajv didn't support format:url, so was added using web url regex for validation
     this.ajv.addFormat('url', this.reWebUrl);
     if (this.appGlobalsService.config && this.appGlobalsService.config.customFormatValidation) {
-      let customFormats = this.appGlobalsService.config.customFormatValidation;
+      const customFormats = this.appGlobalsService.config.customFormatValidation;
 
       Object.keys(customFormats).forEach(key => {
         this.ajv.addFormat(key, customFormats[key].formatChecker);
@@ -90,7 +90,7 @@ export class SchemaValidationService {
    *
    */
   validateValue(value: any, schema: JSONSchema): Array<ValidationError> {
-    let validationErrors = [];
+    const validationErrors = [];
 
     if (!this.ajv.validate(schema, value)) {
       this.ajv.errors.forEach(error => {

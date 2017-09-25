@@ -10,11 +10,12 @@ import { SizedStack } from '../classes';
 @Injectable()
 export class JsonStoreService {
 
-  private _patchesByPath$ = new ReplaySubject<JsonPatchesByPath>(1);
-  private patchesByPath: JsonPatchesByPath = {};
+  readonly patchesByPath$ = new ReplaySubject<JsonPatchesByPath>(1);
+  readonly json$ = new ReplaySubject<Map<string, any>>(1);
 
+  private patchesByPath: JsonPatchesByPath = {};
   private json: Map<string, any>;
-  private _json$ = new ReplaySubject<Map<string, any>>(1);
+
   // list of reverse patches for important changes
   private history = new SizedStack<JsonPatch>(5);
 
@@ -33,7 +34,7 @@ export class JsonStoreService {
     // immutablejs setIn creates Map for keys that don't exist in path
     // therefore List() should be set manually for some of those keys.
     for (let i = 0; i < path.length - 1; i++) {
-      let pathToIndex = path.slice(0, i + 1);
+      const pathToIndex = path.slice(0, i + 1);
       // create a list for a key if the next key is a number.
       if (!this.json.hasIn(pathToIndex) && typeof path[i + 1] === 'number') {
         this.json = this.json.setIn(pathToIndex, List());
@@ -55,7 +56,7 @@ export class JsonStoreService {
     this.keysStoreService.syncKeysForPath(path, this.json);
 
 
-    this._json$.next(this.json);
+    this.json$.next(this.json);
   }
 
   getIn(path: Array<any>): any {
@@ -70,15 +71,15 @@ export class JsonStoreService {
     });
 
     this.json = this.json.removeIn(path);
-    this._json$.next(this.json);
+    this.json$.next(this.json);
     this.keysStoreService.deletePath(path);
   }
 
   addIn(path: Array<any>, value: any) {
-    let lastPathElement = path[path.length - 1];
-    let isInsert = typeof lastPathElement === 'number' || lastPathElement === '-';
+    const lastPathElement = path[path.length - 1];
+    const isInsert = typeof lastPathElement === 'number' || lastPathElement === '-';
     if (isInsert) {
-      let pathWithoutIndex = path.slice(0, path.length - 1);
+      const pathWithoutIndex = path.slice(0, path.length - 1);
       let list = this.getIn(pathWithoutIndex) as List<any> || List();
       value = this.toImmutable(value);
       if (lastPathElement === '-') {
@@ -106,7 +107,7 @@ export class JsonStoreService {
     if (newIndex >= list.size || newIndex < 0) {
       newIndex = list.size - Math.abs(newIndex);
     }
-    let temp = list.get(index);
+    const temp = list.get(index);
     list = list
       .set(index, list.get(newIndex))
       .set(newIndex, temp);
@@ -124,7 +125,7 @@ export class JsonStoreService {
   setJsonPatches(patches: Array<JsonPatch>) {
     this.patchesByPath = {};
     patches.forEach(patch => {
-      let path = this.getComponentPathForPatch(patch);
+      const path = this.getComponentPathForPatch(patch);
 
       if (!this.patchesByPath[path]) {
         this.patchesByPath[path] = [];
@@ -136,8 +137,8 @@ export class JsonStoreService {
 
   private getComponentPathForPatch(patch: JsonPatch): string {
     if (patch.op === 'add') {
-      let pathArray = this.pathUtilService.toPathArray(patch.path);
-      let lastPathElement = pathArray[pathArray.length - 1];
+      const pathArray = this.pathUtilService.toPathArray(patch.path);
+      const lastPathElement = pathArray[pathArray.length - 1];
       if (lastPathElement === '-' || !isNaN(Number(lastPathElement))) {
         pathArray.pop();
         return this.pathUtilService.toPathString(pathArray);
@@ -147,7 +148,7 @@ export class JsonStoreService {
   }
 
   applyPatch(patch: JsonPatch, allowUndo = true) {
-    let path = this.pathUtilService.toPathArray(patch.path);
+    const path = this.pathUtilService.toPathArray(patch.path);
     switch (patch.op) {
       case 'replace':
         this.setIn(path, patch.value, allowUndo);
@@ -175,33 +176,25 @@ export class JsonStoreService {
   }
 
   private removeJsonPatch(patch: JsonPatch) {
-    let path = this.getComponentPathForPatch(patch);
+    const path = this.getComponentPathForPatch(patch);
     // don't do anything if it's UNDO json-patch.
     if (this.patchesByPath[path]) {
-      let patchIndex = this.patchesByPath[path].indexOf(patch);
+      const patchIndex = this.patchesByPath[path].indexOf(patch);
       if (patchIndex > -1) {
         this.patchesByPath[path].splice(patchIndex, 1);
-        this._patchesByPath$.next(this.patchesByPath);
+        this.patchesByPath$.next(this.patchesByPath);
       }
     }
   }
 
   rollbackLastChange(): string {
-    let lastChangeReversePatch = this.history.pop();
+    const lastChangeReversePatch = this.history.pop();
     if (lastChangeReversePatch) {
       this.applyPatch(lastChangeReversePatch, false);
       return lastChangeReversePatch.path;
     } else {
       return undefined;
     }
-  }
-
-  get json$(): ReplaySubject<Map<string, any>> {
-    return this._json$;
-  }
-
-  get patchesByPath$(): ReplaySubject<JsonPatchesByPath> {
-    return this._patchesByPath$;
   }
 
   /**

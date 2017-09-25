@@ -27,6 +27,7 @@ import {
 } from '@angular/core/testing';
 import { Ng2BootstrapModule } from 'ngx-bootstrap';
 import { Observable } from 'rxjs/Observable';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import { SearchableDropdownComponent } from '../searchable-dropdown';
 import { TextDiffComponent } from '../text-diff';
@@ -70,11 +71,9 @@ function changeInputElementValue(el: HTMLInputElement, value: string) {
 }
 
 class MockJsonStoreService extends JsonStoreService {
-  setIn(path: Array<any>, value: any) { }
+  readonly patchesByPath$ = Observable.of({}) as ReplaySubject<any>;
 
-  get patchesByPath$(): any {
-    return Observable.of({});
-  }
+  setIn(path: Array<any>, value: any) { }
 }
 
 describe('PrimitiveFieldComponent', () => {
@@ -140,13 +139,13 @@ describe('PrimitiveFieldComponent', () => {
   it('should be binded to view', () => {
     /**
      * inputEl.value is not updated in test environment
-    let modelValue = 'modelValue';
+    const modelValue = 'modelValue';
     component.value = modelValue;
     fixture.detectChanges();
     expect(inputEl.value).toEqual(modelValue);
     */
 
-    let inputValue = '2';
+    const inputValue = '2';
     changeInputElementValue(inputEl, inputValue);
     fixture.detectChanges();
     expect(component.value).toEqual(Number(inputValue));
@@ -155,7 +154,7 @@ describe('PrimitiveFieldComponent', () => {
   it('should call jsonStore for change on blur', () => {
     spyOn(component.jsonStoreService, 'setIn');
     // change the value
-    let newValue = '2';
+    const newValue = '2';
     changeInputElementValue(inputEl, newValue);
     fixture.detectChanges();
     // blur
@@ -166,11 +165,11 @@ describe('PrimitiveFieldComponent', () => {
   it('should call jsonStore for change on enter pressed', () => {
     spyOn(component.jsonStoreService, 'setIn');
     // change the value
-    let newValue = '2';
+    const newValue = '2';
     changeInputElementValue(inputEl, newValue);
     fixture.detectChanges();
     // press enter
-    let enterPressedEvent = new Event('keypress');
+    const enterPressedEvent = new Event('keypress');
     enterPressedEvent['key'] = 'Enter';
     inputEl.dispatchEvent(enterPressedEvent);
 

@@ -33,7 +33,7 @@ export class JsonUtilService {
    * Returns value of the property located in dot separated path of json.
    */
   getValueInPath(json: any, path: string): any {
-    let pathElements = this.pathUtilService.toPathArray(path);
+    const pathElements = this.pathUtilService.toPathArray(path);
     let value = json;
     pathElements.forEach(pathElement => {
       value = value[pathElement];

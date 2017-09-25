@@ -31,30 +31,30 @@ describe('DifferentKeysPipe', () => {
   });
 
   it('should return different keys', () => {
-    let obj = {
+    const obj = {
       propDiff1: 1,
       propA: 1,
       propB: 1,
       propDiff2: 1
     };
 
-    let existingKeys = Set(['propA', 'propB']);
+    const existingKeys = Set(['propA', 'propB']);
 
-    let differentKeys = Set(['propDiff1', 'propDiff2']);
+    const differentKeys = Set(['propDiff1', 'propDiff2']);
 
-    let pipeResult = pipe.transform(obj, existingKeys);
+    const pipeResult = pipe.transform(obj, existingKeys);
     expect(pipeResult).toEqual(differentKeys);
   });
 
   it('should return empty if keys are same', () => {
-    let obj = {
+    const obj = {
       propA: 1,
       propB: 1
     };
 
-    let existingKeys = Set(['propA', 'propB']);
+    const existingKeys = Set(['propA', 'propB']);
 
-    let pipeResult = pipe.transform(obj, existingKeys);
+    const pipeResult = pipe.transform(obj, existingKeys);
     expect(pipeResult).toEqual(Set());
   });
 

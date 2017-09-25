@@ -62,11 +62,11 @@ export class FindReplaceComponent {
     if (!(this.find && this.replace)) {
       return;
     }
-    let value = this.jsonStoreService.getIn(this.path);
-    let result = this.findReplaceAllService
+    const value = this.jsonStoreService.getIn(this.path);
+    const result = this.findReplaceAllService
       .findReplaceInImmutable(value, this.schema, this.find, this.replace, this.exactPhrase);
     this.replaced = result.replaced;
-    let stringyfiedDiffHtml = JSON.stringify(result.diffHtml, undefined, 2);
+    const stringyfiedDiffHtml = JSON.stringify(result.diffHtml, undefined, 2);
     this.modalService.displayModal({
       title: 'After Replace',
       bodyHtml: this.domSanitizer.bypassSecurityTrustHtml(`<pre class="max-height-70-vh"><code>${stringyfiedDiffHtml}</code></pre>`),

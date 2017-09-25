@@ -30,10 +30,10 @@ describe('UnderscoreToSpacePipe', () => {
   });
 
   it('should replace underscores with spaces', () => {
-    let underscored = 'a_b_c';
-    let spaced = 'a b c';
+    const underscored = 'a_b_c';
+    const spaced = 'a b c';
 
-    let pipeResult = pipe.transform(underscored);
+    const pipeResult = pipe.transform(underscored);
     expect(pipeResult).toEqual(spaced);
   });
 

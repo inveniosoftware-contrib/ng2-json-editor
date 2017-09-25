@@ -40,7 +40,7 @@ import {
 export class SearchableDropdownComponent implements OnInit {
 
   @Input() items: Array<string>;
-  @Input() shortcutMap: Object;
+  @Input() shortcutMap: object;
   @Input() value: string;
   @Input() pathString: string;
   @Input() tabIndex: number;
@@ -92,7 +92,7 @@ export class SearchableDropdownComponent implements OnInit {
   onInputBlur(event: FocusEvent) {
     // this avoids closing dropdown when an item is selected
     // so that onItemClick() can be executed properly before closing.
-    let relatedTarget = event.relatedTarget as HTMLElement;
+    const relatedTarget = event.relatedTarget as HTMLElement;
     if (!relatedTarget || relatedTarget.className !== 'dropdown-item') {
       this.status.isOpen = false;
     }

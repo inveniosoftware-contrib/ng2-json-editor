@@ -58,7 +58,7 @@ export class AddFieldDropdownComponent {
   }
 
   onFieldSelect(field: string) {
-    let newFieldPathString = this.keysStoreService.addKey(this.pathString, field, this.schema);
+    const newFieldPathString = this.keysStoreService.addKey(this.pathString, field, this.schema);
     this.domUtilService.focusAndSelectFirstEditableChildById(newFieldPathString);
     this.expression = '';
   }

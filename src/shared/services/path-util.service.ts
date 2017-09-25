@@ -38,7 +38,7 @@ export class PathUtilService {
    */
   getNearestOrRootArrayParentInPath(path: Array<any>, root: boolean): Array<any> {
     let _path = [];
-    let pathLength = path.length;
+    const pathLength = path.length;
     for (let index = 0; index < pathLength; index++) {
       _path = root ? path.slice(0, index + 1) : path.slice(0, path.length - index);
       if (typeof _path[_path.length - 1] === 'number') {
@@ -63,7 +63,7 @@ export class PathUtilService {
    */
   findIndexFromPath(path: Array<any>, directPathSearch: boolean): number {
     path = directPathSearch ? path : path.reverse();
-    for (let index in path) {
+    for (const index in path) {
       if (!isNaN(path[index])) {
         return path[index];
       }

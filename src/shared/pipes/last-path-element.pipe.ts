@@ -35,7 +35,7 @@ export class LastPathElementPipe implements PipeTransform {
   constructor(private pathUtilService: PathUtilService) { }
 
   transform(path: string): string {
-    let elements = path.split(this.pathUtilService.separator);
+    const elements = path.split(this.pathUtilService.separator);
     return elements[elements.length - 1];
   }
 }

@@ -95,16 +95,16 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    let valuesChange = changes['values'];
+    const valuesChange = changes['values'];
     if (valuesChange && !valuesChange.isFirstChange()) {
-      let preSize = valuesChange.previousValue.size;
-      let curSize = valuesChange.currentValue.size;
+      const preSize = valuesChange.previousValue.size;
+      const curSize = valuesChange.currentValue.size;
 
       if (curSize !== preSize) {
         if (this.navigator) {
           // check if element added in the end by comparing the last elements
-          let elementAddedToEnd = valuesChange.previousValue.equals(valuesChange.currentValue.pop());
-          let lastPage = this.getPageForIndex(curSize - 1);
+          const elementAddedToEnd = valuesChange.previousValue.equals(valuesChange.currentValue.pop());
+          const lastPage = this.getPageForIndex(curSize - 1);
           // change the page if a new element is added in the end and it's not on the last page
           if (curSize > preSize && this.currentPage !== lastPage && elementAddedToEnd) {
             this.currentPage = lastPage;
@@ -117,7 +117,7 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
   }
 
   hasErrorOrPatch(index: number) {
-    let itemPath = this.getPathStringForChild(index);
+    const itemPath = this.getPathStringForChild(index);
     return this.errorsService.hasError(itemPath) || this.jsonStoreService.hasPatch(itemPath);
   }
 
@@ -131,7 +131,7 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
     this.currentFound = 0;
     // search to look for the first match
     if (this.navigator.findSingle) {
-      let foundIndex = this.values
+      const foundIndex = this.values
         .findIndex(value => this.navigator.findSingle(value, this.findExpression));
       if (foundIndex > -1) {
         this.foundIndices.push(foundIndex);
@@ -169,8 +169,8 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
 
   navigateToItem(index: number) {
     this.currentPage = this.getPageForIndex(index);
-    let itemPath = this.path.concat(index);
-    let itemId = this.pathUtilService.toPathString(itemPath);
+    const itemPath = this.path.concat(index);
+    const itemId = this.pathUtilService.toPathString(itemPath);
     setTimeout(() => this.domUtilService.focusAndSelectFirstEditableChildById(itemId));
   }
 
@@ -181,8 +181,8 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
 
   getPaginatableItemsForPage(page: number): Iterable<number, PaginatedItem> {
     if (this.navigator) {
-      let begin = (page - 1) * this.navigator.itemsPerPage;
-      let end = (page * this.navigator.itemsPerPage);
+      const begin = (page - 1) * this.navigator.itemsPerPage;
+      const end = (page * this.navigator.itemsPerPage);
       return this.paginatableItems.slice(begin, end);
     } else {
       return this.paginatableItems;
@@ -192,8 +192,8 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
   getPaginatableItems(): Iterable<number, PaginatedItem> {
     return this.values
       .map((value, index) => {
-        let viewTemplateConfig = this.schema.viewTemplateConfig;
-        let isEditFormVisible = viewTemplateConfig ? viewTemplateConfig.showEditForm(value) : true;
+        const viewTemplateConfig = this.schema.viewTemplateConfig;
+        const isEditFormVisible = viewTemplateConfig ? viewTemplateConfig.showEditForm(value) : true;
         return { index, isEditFormVisible };
       }).filter(item => {
         if (this.shouldDisplayOnlyEditFormItems) {
