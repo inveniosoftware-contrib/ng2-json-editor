@@ -34,7 +34,7 @@ export class EmptyValueService {
   };
 
   generateEmptyValue(schema: JSONSchema): any {
-    let emptyValue = this.generateEmptyValueRecursively(schema);
+    const emptyValue = this.generateEmptyValueRecursively(schema);
     if (typeof emptyValue === 'object') {
       return fromJS(emptyValue);
     } else {
@@ -44,20 +44,20 @@ export class EmptyValueService {
 
   private generateEmptyValueRecursively(schema: JSONSchema): any {
     if (schema.type === 'object') {
-      let emptyObject = {};
+      const emptyObject = {};
       Object.keys(schema.properties)
         .filter(prop => {
-          let required = schema.required || [];
+          const required = schema.required || [];
           return required.indexOf(prop) > -1;
         }).forEach(prop => {
-          let propSchema = schema.properties[prop];
+          const propSchema = schema.properties[prop];
           emptyObject[prop] = this.generateEmptyValueRecursively(propSchema);
         });
       return emptyObject;
     }
     if (schema.type === 'array') {
-      let emptyArray = [];
-      let arrayElementSchema = schema.items;
+      const emptyArray = [];
+      const arrayElementSchema = schema.items;
       if (schema.componentType !== 'complex-list') {
         emptyArray.push(this.generateEmptyValueRecursively(arrayElementSchema));
       }

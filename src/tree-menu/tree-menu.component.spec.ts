@@ -88,7 +88,7 @@ describe('TreeMenuComponent', () => {
   let fixture: ComponentFixture<TestHostComponent>;
   let component: TestHostComponent;
   let nativeEl: HTMLElement;
-  let appGlobalsService = new AppGlobalsService(undefined);
+  const appGlobalsService = new AppGlobalsService();
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -123,7 +123,7 @@ describe('TreeMenuComponent', () => {
   });
 
   it('should be nested if menuMaxDepth is not set', () => {
-    let menuItemsCount = nativeEl.querySelectorAll('tree-menu-item').length;
+    const menuItemsCount = nativeEl.querySelectorAll('tree-menu-item').length;
 
     expect(menuItemsCount).toEqual(component.allKeysCount);
   });
@@ -136,7 +136,7 @@ describe('TreeMenuComponent', () => {
     nativeEl = fixture.nativeElement;
     fixture.detectChanges();
 
-    let menuItemsCount = nativeEl.querySelectorAll('tree-menu-item').length;
+    const menuItemsCount = nativeEl.querySelectorAll('tree-menu-item').length;
     expect(menuItemsCount).toEqual(component.firstLevelKeysCount);
   });
 });

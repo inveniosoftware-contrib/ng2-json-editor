@@ -39,7 +39,7 @@ export class ContentModelDirective implements OnChanges {
   }
 
   private emitContentModelChange() {
-    let value = this.elementRef.nativeElement.innerText;
+    const value = this.elementRef.nativeElement.innerText;
     this.contentModelChange.emit(value);
   }
 

@@ -82,7 +82,7 @@ describe('SearchableDropdownComponent', () => {
     fixture.detectChanges();
 
     // trigger Enter key press
-    let enterPressedEvent = new Event('keypress');
+    const enterPressedEvent = new Event('keypress');
     enterPressedEvent['key'] = 'Enter';
     inputEl.dispatchEvent(enterPressedEvent);
 
@@ -91,23 +91,23 @@ describe('SearchableDropdownComponent', () => {
 
   xit('should show all items when clicked if expression is empty', () => {
     // set enum.items
-    let items = ['First', 'Second'];
+    const items = ['First', 'Second'];
     component.items = items;
     inputEl.dispatchEvent(new Event('click'));
     fixture.detectChanges();
-    let dropdownItems = getDropdownItems()
+    const dropdownItems = getDropdownItems()
       .map((item) => item.textContent);
     expect(dropdownItems).toEqual(items);
   });
 
   xit('should show filtered items by pipe if expression is not empty', () => {
     component.items = ['a1', 'a2', 'b1'];
-    let itemsWithA = ['a1', 'a2'];
+    const itemsWithA = ['a1', 'a2'];
     component.status.isOpen = true;
     inputEl.value = 'a';
     inputEl.dispatchEvent(new Event('input'));
     fixture.detectChanges();
-    let dropdownItems = getDropdownItems()
+    const dropdownItems = getDropdownItems()
       .map((item) => item.textContent);
     expect(dropdownItems).toEqual(itemsWithA);
   });

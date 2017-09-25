@@ -53,7 +53,7 @@ const getResponseJson = {
 
 class MockHttp extends Http {
   get(url: string, options?: RequestOptionsArgs): Observable<Response> {
-    let responseOptions = new ResponseOptions({ body: getResponseJson });
+    const responseOptions = new ResponseOptions({ body: getResponseJson });
     return Observable.of(new Response(responseOptions));
   }
 }
@@ -79,7 +79,7 @@ describe('RemoteAutocompletionService', () => {
   }));
 
   it('should get autocompletion results', (done) => {
-    let options = {
+    const options = {
       url: '/whatever/json', // ignored for test
       path: mockOptionsPath,
       size: 1 // ignored for test

@@ -66,7 +66,7 @@ export class StringInputComponent implements AfterViewInit, OnInit, OnChanges {
   constructor(public domUtilService: DomUtilService, public katexService: KatexService) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    let valueChange = changes['value'];
+    const valueChange = changes['value'];
     if (valueChange) {
       this.contentModel = this.value;
       if (this.latexPreviewEnabled && !valueChange.firstChange) {

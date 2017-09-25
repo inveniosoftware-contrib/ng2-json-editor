@@ -33,19 +33,19 @@ describe('Preview panel', function() {
   });
 
   it(`should expand/collapse preview window`, () => {
-    let previewToggleButton = element(by.id('btn-preview-toggle'));
-    let middleColumn = element(by.id('middle-main-container'));
-    let rightColumn = element(by.id('right-main-container'));
+    const previewToggleButton = element(by.id('btn-preview-toggle'));
+    const middleColumn = element(by.id('middle-main-container'));
+    const rightColumn = element(by.id('right-main-container'));
 
     expect(previewToggleButton.getText()).toEqual('Hide Preview');
 
-    let middleColumnWidthBefore = middleColumn.getCssValue('width');
-    let rightColumnWidthBefore = rightColumn.getCssValue('width');
+    const middleColumnWidthBefore = middleColumn.getCssValue('width');
+    const rightColumnWidthBefore = rightColumn.getCssValue('width');
 
     previewToggleButton.click();
 
-    let middleColumnWidthAfter = middleColumn.getCssValue('width');
-    let rightColumnWidthAfter = rightColumn.getCssValue('width');
+    const middleColumnWidthAfter = middleColumn.getCssValue('width');
+    const rightColumnWidthAfter = rightColumn.getCssValue('width');
 
     protractor.promise.all(
       [

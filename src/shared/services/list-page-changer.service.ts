@@ -40,12 +40,12 @@ export class ListPageChangerService {
    * @param itemPath path to a list item
    */
   changePage(itemPath: string) {
-    let itemPathArray = this.pathUtilService.toPathArray(itemPath);
-    let itemIndex = itemPathArray[itemPathArray.length - 1] as number;
-    let listPath = this.pathUtilService.toPathString(itemPathArray.slice(0, -1));
+    const itemPathArray = this.pathUtilService.toPathArray(itemPath);
+    const itemIndex = itemPathArray[itemPathArray.length - 1] as number;
+    const listPath = this.pathUtilService.toPathString(itemPathArray.slice(0, -1));
     if (this.pageChange$Map[listPath]) {
-      let itemsPerPage = this.itemsPerPageMap[listPath];
-      let page = Math.floor((itemIndex / itemsPerPage) + 1);
+      const itemsPerPage = this.itemsPerPageMap[listPath];
+      const page = Math.floor((itemIndex / itemsPerPage) + 1);
       this.pageChange$Map[listPath].next(page);
     }
   }

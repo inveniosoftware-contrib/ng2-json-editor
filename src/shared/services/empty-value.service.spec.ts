@@ -32,7 +32,7 @@ describe('EmptyValueService', () => {
   });
 
   it('should respect required for object type', () => {
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         prop1: {
@@ -43,7 +43,7 @@ describe('EmptyValueService', () => {
         'prop1'
       ]
     };
-    let empty: Map<string, any> = service.generateEmptyValue(schema);
+    const empty: Map<string, any> = service.generateEmptyValue(schema);
     expect(empty.get('prop1')).toBeDefined();
   });
 

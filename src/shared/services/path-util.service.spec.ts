@@ -29,47 +29,47 @@ describe('PathUtilService', () => {
   });
 
   it('should return the right nearest parent given a path', () => {
-    let path = ['aMap', 'aList', 0, 'innerList', 0, 'innerProperty'];
-    let expectedNearestParent = ['aMap', 'aList', 0, 'innerList'];
+    const path = ['aMap', 'aList', 0, 'innerList', 0, 'innerProperty'];
+    const expectedNearestParent = ['aMap', 'aList', 0, 'innerList'];
     expect(pathUtilService.getNearestOrRootArrayParentInPath(path, false)).toEqual(expectedNearestParent);
   });
 
   it('should return the right root parent given a path', () => {
-    let path = ['aMap', 'aList', 0, 'innerList', 0, 'innerProperty'];
-    let expectedRootParent = ['aMap', 'aList'];
+    const path = ['aMap', 'aList', 0, 'innerList', 0, 'innerProperty'];
+    const expectedRootParent = ['aMap', 'aList'];
     expect(pathUtilService.getNearestOrRootArrayParentInPath(path, true)).toEqual(expectedRootParent);
   });
 
   it('should return the right index in direct given path', () => {
-    let path = ['aMap', 'aList', 1, 'innerList', 0, 'innerProperty'];
-    let expectedDirectIndex = 1;
+    const path = ['aMap', 'aList', 1, 'innerList', 0, 'innerProperty'];
+    const expectedDirectIndex = 1;
     expect(pathUtilService.getElementIndexInForwardOrReversePath(path, true)).toBe(expectedDirectIndex);
   });
 
   it('should return the right index in reverse given path', () => {
-    let path = ['aMap', 'aList', 1, 'innerList', 0, 'innerProperty'];
-    let expectedReverseIndex = 0;
+    const path = ['aMap', 'aList', 1, 'innerList', 0, 'innerProperty'];
+    const expectedReverseIndex = 0;
     expect(pathUtilService.getElementIndexInForwardOrReversePath(path, false)).toBe(expectedReverseIndex);
   });
 
   it('should convert path string (json-pointer) to path array', () => {
-    let pathString = '/foo/bar/0';
-    let expected = ['foo', 'bar', 0];
-    let result = pathUtilService.toPathArray(pathString);
+    const pathString = '/foo/bar/0';
+    const expected = ['foo', 'bar', 0];
+    const result = pathUtilService.toPathArray(pathString);
     expect(result).toEqual(expected);
   });
 
   it('should convert path array to path string (json-pointer)', () => {
-    let path = ['foo', 'bar', 0];
-    let expected = '/foo/bar/0';
-    let result = pathUtilService.toPathString(path);
+    const path = ['foo', 'bar', 0];
+    const expected = '/foo/bar/0';
+    const result = pathUtilService.toPathString(path);
     expect(result).toEqual(expected);
   });
 
   it('should convert path array to path string (json-pointer) for empty path', () => {
-    let path = [];
-    let expected = '';
-    let result = pathUtilService.toPathString(path);
+    const path = [];
+    const expected = '';
+    const result = pathUtilService.toPathString(path);
     expect(result).toEqual(expected);
   });
 });

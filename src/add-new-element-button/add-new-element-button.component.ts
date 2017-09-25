@@ -25,14 +25,14 @@ export class AddNewElementButtonComponent {
     public keyStoreService: KeysStoreService) { }
 
   addNewElement() {
-    let itemSchema = this.schema.items;
-    let emptyValue = this.emptyValueService.generateEmptyValue(itemSchema);
-    let values: List<any> = this.jsonStoreService.getIn(this.path);
-    let insertIndex = values ? values.size : 0;
-    let insertPath = this.path.concat(insertIndex);
+    const itemSchema = this.schema.items;
+    const emptyValue = this.emptyValueService.generateEmptyValue(itemSchema);
+    const values: List<any> = this.jsonStoreService.getIn(this.path);
+    const insertIndex = values ? values.size : 0;
+    const insertPath = this.path.concat(insertIndex);
     this.jsonStoreService.addIn(insertPath, emptyValue);
     // focus on the new added element
-    let insertPathString = this.pathUtilService.toPathString(insertPath);
+    const insertPathString = this.pathUtilService.toPathString(insertPath);
     setTimeout(() => {
       this.domUtilService.focusAndSelectFirstEditableChildById(insertPathString);
     });

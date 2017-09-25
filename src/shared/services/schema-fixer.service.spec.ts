@@ -41,7 +41,7 @@ describe('SchemaFixerService', () => {
   });
 
   it('should fix anyOf with multiple enum properties', () => {
-    let schema = {
+    const schema = {
       anyOf: [
         {
           type: 'object',
@@ -83,7 +83,7 @@ describe('SchemaFixerService', () => {
         }
       ]
     };
-    let expected = {
+    const expected = {
       type: 'object',
       componentType: MOCK_TYPE,
       properties: {
@@ -109,12 +109,12 @@ describe('SchemaFixerService', () => {
         }
       }
     };
-    let fixed = service.fixSchema(schema, {});
+    const fixed = service.fixSchema(schema, {});
     expect(fixed).toEqual(expected);
   });
 
   it('should fix anyOf with partial enum properties', () => {
-    let schema = {
+    const schema = {
       anyOf: [
         {
           type: 'object',
@@ -152,7 +152,7 @@ describe('SchemaFixerService', () => {
         }
       ]
     };
-    let expected = {
+    const expected = {
       type: 'object',
       componentType: MOCK_TYPE,
       properties: {
@@ -179,12 +179,12 @@ describe('SchemaFixerService', () => {
         }
       }
     };
-    let fixed = service.fixSchema(schema, {});
+    const fixed = service.fixSchema(schema, {});
     expect(fixed).toEqual(expected);
   });
 
   it('should fix allOf', () => {
-    let schema = {
+    const schema = {
       allOf: [
         {
           type: 'object'
@@ -216,7 +216,7 @@ describe('SchemaFixerService', () => {
         }
       ]
     };
-    let expected = {
+    const expected = {
       type: 'object',
       componentType: MOCK_TYPE,
       properties: {
@@ -238,12 +238,12 @@ describe('SchemaFixerService', () => {
         }
       }
     };
-    let fixed = service.fixSchema(schema, {});
+    const fixed = service.fixSchema(schema, {});
     expect(fixed).toEqual(expected);
   });
 
   it('should fix order config', () => {
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         parent: {
@@ -262,7 +262,7 @@ describe('SchemaFixerService', () => {
         }
       }
     };
-    let config = {
+    const config = {
       properties: {
         parent: {
           items: {
@@ -271,7 +271,7 @@ describe('SchemaFixerService', () => {
         }
       }
     };
-    let expected = {
+    const expected = {
       type: 'object',
       componentType: MOCK_TYPE,
       properties: {
@@ -298,13 +298,13 @@ describe('SchemaFixerService', () => {
         }
       }
     };
-    let fixed = service.fixSchema(schema, config);
+    const fixed = service.fixSchema(schema, config);
     expect(fixed).toEqual(expected);
   });
 
   it(`should pass disable config for an element to all items and properties
       of its children `, () => {
-      let schema = {
+      const schema = {
         type: 'object',
         properties: {
           parent: {
@@ -323,14 +323,14 @@ describe('SchemaFixerService', () => {
           }
         }
       };
-      let config = {
+      const config = {
         properties: {
           parent: {
             disabled: true
           }
         }
       };
-      let expected = {
+      const expected = {
         type: 'object',
         componentType: MOCK_TYPE,
         properties: {
@@ -358,12 +358,12 @@ describe('SchemaFixerService', () => {
           }
         }
       };
-      let fixed = service.fixSchema(schema, config);
+      const fixed = service.fixSchema(schema, config);
       expect(fixed).toEqual(expected);
     });
 
   it('should warn user when config order key does not exist', () => {
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         parent: {
@@ -382,7 +382,7 @@ describe('SchemaFixerService', () => {
         }
       }
     };
-    let config = {
+    const config = {
       properties: {
         parent: {
           items: {
@@ -393,12 +393,12 @@ describe('SchemaFixerService', () => {
     };
     spyOn(console, 'warn');
 
-    let fixed = service.fixSchema(schema, config);
+    const fixed = service.fixSchema(schema, config);
     expect(console.warn).toHaveBeenCalledWith('doesnotexist defined in order config does not exist in schema.');
   });
 
   it('should enrich schema with nested config', () => {
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         parent: {
@@ -411,7 +411,7 @@ describe('SchemaFixerService', () => {
         }
       }
     };
-    let config = {
+    const config = {
       properties: {
         parent: {
           properties: {
@@ -423,7 +423,7 @@ describe('SchemaFixerService', () => {
         }
       }
     };
-    let expected = {
+    const expected = {
       type: 'object',
       componentType: MOCK_TYPE,
       properties: {
@@ -441,12 +441,12 @@ describe('SchemaFixerService', () => {
         }
       }
     };
-    let fixed = service.fixSchema(schema, config);
+    const fixed = service.fixSchema(schema, config);
     expect(fixed).toEqual(expected);
   });
 
   it('should remove alwayShow keys that are not in the schema', () => {
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         prop1: {
@@ -457,18 +457,18 @@ describe('SchemaFixerService', () => {
         }
       }
     };
-    let config = {
+    const config = {
       alwaysShow: ['prop1', 'doesnotexist']
     };
     spyOn(console, 'warn');
 
-    let fixed = service.fixSchema(schema, config);
+    const fixed = service.fixSchema(schema, config);
     expect(console.warn).toHaveBeenCalledWith('doesnotexist is configured as alwaysShow but it is not in ["prop1","prop2"]');
     expect(fixed['alwaysShow'].indexOf('doesnotexist') > -1).toBeFalsy();
   });
 
   it('should enrich root schema with config', () => {
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         foo: {
@@ -476,11 +476,11 @@ describe('SchemaFixerService', () => {
         }
       }
     };
-    let config = {
+    const config = {
       configTrue: true,
       configFalse: false
     };
-    let expected = {
+    const expected = {
       type: 'object',
       componentType: MOCK_TYPE,
       configTrue: true,
@@ -492,12 +492,12 @@ describe('SchemaFixerService', () => {
         }
       }
     };
-    let fixed = service.fixSchema(schema, config);
+    const fixed = service.fixSchema(schema, config);
     expect(fixed).toEqual(expected);
   });
 
   it('should enrich anyOf schema with config', () => {
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         foo: {
@@ -525,7 +525,7 @@ describe('SchemaFixerService', () => {
       }
 
     };
-    let config = {
+    const config = {
       properties: {
         foo: {
           anyOf: [
@@ -537,13 +537,13 @@ describe('SchemaFixerService', () => {
       }
 
     };
-    let fixed = service.fixSchema(schema, config);
+    const fixed = service.fixSchema(schema, config);
     expect(fixed.properties.foo.sortable).toBeTruthy();
   });
 
 
   it('should set componentType when schema has deeper anyOf', () => {
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         aList: {
@@ -579,7 +579,7 @@ describe('SchemaFixerService', () => {
         }
       }
     };
-    let expected = {
+    const expected = {
       type: 'object',
       componentType: MOCK_TYPE,
       properties: {

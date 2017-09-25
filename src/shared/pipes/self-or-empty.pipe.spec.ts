@@ -33,7 +33,7 @@ describe('SelfOrEmptyPipe', () => {
   });
 
   it('should return empty value if given value is undefined', () => {
-    let schema = {
+    const schema = {
       type: 'object',
         properties: {
           prop1: {
@@ -42,14 +42,14 @@ describe('SelfOrEmptyPipe', () => {
         }
     };
 
-  let value = undefined;
-  let expectedResult = Map();
-  let pipeResult = pipe.transform(value, schema);
+  const value = undefined;
+  const expectedResult = Map();
+  const pipeResult = pipe.transform(value, schema);
   expect(pipeResult).toEqual(expectedResult);
   });
 
   it('should return list with single empty element if given list is undefined', () => {
-    let schema = {
+    const schema = {
       type: 'array',
       items: {
         properties: {
@@ -61,14 +61,14 @@ describe('SelfOrEmptyPipe', () => {
       }
     };
 
-    let value = undefined;
-    let expectedResult = List([Map()]);
-    let pipeResult = pipe.transform(value, schema);
+    const value = undefined;
+    const expectedResult = List([Map()]);
+    const pipeResult = pipe.transform(value, schema);
     expect(pipeResult).toEqual(expectedResult);
   });
 
   it('should return value if given value is defined', () => {
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         prop1: {
@@ -77,9 +77,9 @@ describe('SelfOrEmptyPipe', () => {
       }
     };
 
-    let value = Map<string, string>({'prop1': 'dummy'});
-    let expectedResult = Map<string, string>({'prop1': 'dummy'});
-    let pipeResult = pipe.transform(value, schema);
+    const value = Map<string, string>({'prop1': 'dummy'});
+    const expectedResult = Map<string, string>({'prop1': 'dummy'});
+    const pipeResult = pipe.transform(value, schema);
     expect(pipeResult).toEqual(expectedResult);
   });
 

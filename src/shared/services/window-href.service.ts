@@ -30,9 +30,9 @@ export class WindowHrefService {
   getHrefWithoutHash(): string {
     // check if it is already cached
     if (!WindowHrefService.hrefWithoutHash) {
-      let href = window.location.href;
+      const href = window.location.href;
       // check if there is an hash in href
-      let lastHashIndex = href.lastIndexOf('#');
+      const lastHashIndex = href.lastIndexOf('#');
       if (lastHashIndex > 0) {
         // remove hash.
         WindowHrefService.hrefWithoutHash = href.substring(0, lastHashIndex);

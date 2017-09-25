@@ -28,7 +28,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FilterByExpressionPipe implements PipeTransform {
 
   transform(array: Array<string>, prefix: string): Array<string> {
-    let pattern = new RegExp(prefix, 'i');
+    const pattern = new RegExp(prefix, 'i');
     return array.filter(value => value.match(pattern));
   }
 }

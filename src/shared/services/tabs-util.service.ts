@@ -37,7 +37,7 @@ export class TabsUtilService {
   constructor(public pathUtilService: PathUtilService) { }
 
   getTabNames(tabsConfig: TabsConfig): Array<string> {
-    let tabNames = tabsConfig.tabs.map(tab => tab.name);
+    const tabNames = tabsConfig.tabs.map(tab => tab.name);
     // insert default tab name at the beginning
     return [tabsConfig.defaultTabName]
       .concat(tabNames);
@@ -46,9 +46,9 @@ export class TabsUtilService {
   getSchemaKeyToTabName(tabsConfig: TabsConfig, schema: JSONSchema): { [key: string]: string } {
     if (!this.schemaKeyToTabName) {
       // set tab.name for configured keys
-      let keyToTabName = tabsConfig.tabs
+      const keyToTabName = tabsConfig.tabs
         .map(tab => {
-          let keysWithTabName = {};
+          const keysWithTabName = {};
           tab.properties.forEach(key => {
             keysWithTabName[key] = tab.name;
           });
@@ -68,7 +68,7 @@ export class TabsUtilService {
   // TODO: maybe this could be a decorator
   selectTabIfNeeded(path: string) {
     if (this.schemaKeyToTabName) {
-      let tabName = this.schemaKeyToTabName[this.pathUtilService.toPathArray(path)[0]];
+      const tabName = this.schemaKeyToTabName[this.pathUtilService.toPathArray(path)[0]];
       this.activeTabName$.next(tabName);
     }
   }

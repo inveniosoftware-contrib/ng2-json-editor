@@ -140,11 +140,11 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   }
 
   get tooltipPosition(): string {
-    let tooltipPlacement = 'top';
     if (this.pathString.startsWith(this.appGlobalsService.firstElementPathForCurrentTab)) {
-      tooltipPlacement = 'bottom';
+      return 'bottom';
+    } else {
+      return 'top';
     }
-    return tooltipPlacement;
   }
 
   get disabledClass(): string {

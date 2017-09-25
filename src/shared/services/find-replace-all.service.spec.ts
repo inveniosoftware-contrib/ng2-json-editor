@@ -32,7 +32,7 @@ describe('FindReplaceAllService', () => {
   });
 
   it('should find and replace all in nested map', () => {
-    let map = fromJS({
+    const map = fromJS({
       foo: {
         bar: {
           a: 'valueA',
@@ -41,7 +41,7 @@ describe('FindReplaceAllService', () => {
       }
     });
 
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         foo: {
@@ -63,7 +63,7 @@ describe('FindReplaceAllService', () => {
       }
     };
 
-    let expected = fromJS({
+    const expected = fromJS({
       foo: {
         bar: {
           a: 'replacementA',
@@ -72,13 +72,13 @@ describe('FindReplaceAllService', () => {
       }
     });
 
-    let replacedMap = service.findReplaceInImmutable(map, schema, 'value', 'replacement').replaced;
+    const replacedMap = service.findReplaceInImmutable(map, schema, 'value', 'replacement').replaced;
 
     expect(replacedMap.equals(expected)).toBeTruthy();
   });
 
   it('should return correct diffHtml for nested map', () => {
-    let map = fromJS({
+    const map = fromJS({
       foo: {
         bar: {
           a: 'valueA',
@@ -88,7 +88,7 @@ describe('FindReplaceAllService', () => {
       }
     });
 
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         foo: {
@@ -113,7 +113,7 @@ describe('FindReplaceAllService', () => {
       }
     };
 
-    let expected = {
+    const expected = {
       foo: {
         bar: {
           a: `<strong style='color: green;'>replacement</strong><del><em style='color: red;'>value</em></del>A`,
@@ -123,13 +123,13 @@ describe('FindReplaceAllService', () => {
       }
     };
 
-    let diffHtml = service.findReplaceInImmutable(map, schema, 'value', 'replacement').diffHtml;
+    const diffHtml = service.findReplaceInImmutable(map, schema, 'value', 'replacement').diffHtml;
 
     expect(diffHtml).toEqual(expected);
   });
 
   it('should return correct diffHtml and replaced for nested map with list property', () => {
-    let map = fromJS({
+    const map = fromJS({
       foo:
       [
         {
@@ -144,7 +144,7 @@ describe('FindReplaceAllService', () => {
       ]
     });
 
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         foo: {
@@ -161,7 +161,7 @@ describe('FindReplaceAllService', () => {
       }
     };
 
-    let expectedReplaced = fromJS({
+    const expectedReplaced = fromJS({
       foo:
       [
         {
@@ -176,7 +176,7 @@ describe('FindReplaceAllService', () => {
       ]
     });
 
-    let expectedDiffHtml = {
+    const expectedDiffHtml = {
       foo: [
         {
           a: `<strong style='color: green;'>replacement</strong><del><em style='color: red;'>value</em></del>1A`
@@ -190,20 +190,20 @@ describe('FindReplaceAllService', () => {
       ]
     };
 
-    let result = service.findReplaceInImmutable(map, schema, 'value', 'replacement');
+    const result = service.findReplaceInImmutable(map, schema, 'value', 'replacement');
 
     expect(result.diffHtml).toEqual(expectedDiffHtml);
     expect(result.replaced.equals(expectedReplaced)).toBeTruthy();
   });
 
   it('should find and replace all occurrences in a field', () => {
-    let map = fromJS({
+    const map = fromJS({
       foo: {
         bar: 'value:value'
       }
     });
 
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         foo: {
@@ -217,19 +217,19 @@ describe('FindReplaceAllService', () => {
       }
     };
 
-    let expected = fromJS({
+    const expected = fromJS({
       foo: {
         bar: 'replacement:replacement'
       }
     });
 
-    let replacedMap = service.findReplaceInImmutable(map, schema, 'value', 'replacement').replaced;
+    const replacedMap = service.findReplaceInImmutable(map, schema, 'value', 'replacement').replaced;
 
     expect(replacedMap.equals(expected)).toBeTruthy();
   });
 
   it('should replace only if exact match when matchWhole is set', () => {
-    let map = fromJS({
+    const map = fromJS({
       foo: {
         bar: {
           prop: 'value',
@@ -239,7 +239,7 @@ describe('FindReplaceAllService', () => {
       }
     });
 
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         foo: {
@@ -264,7 +264,7 @@ describe('FindReplaceAllService', () => {
       }
     };
 
-    let expected = fromJS({
+    const expected = fromJS({
       foo: {
         bar: {
           prop: 'replacement',
@@ -274,13 +274,13 @@ describe('FindReplaceAllService', () => {
       }
     });
 
-    let replacedMap = service.findReplaceInImmutable(map, schema, 'value', 'replacement', true).replaced;
+    const replacedMap = service.findReplaceInImmutable(map, schema, 'value', 'replacement', true).replaced;
 
     expect(replacedMap.equals(expected)).toBeTruthy();
   });
 
   it('should find and replace in list of maps but skip disabled string field', () => {
-    let list = fromJS([
+    const list = fromJS([
       {
         foo: {
           bar: {
@@ -299,7 +299,7 @@ describe('FindReplaceAllService', () => {
       },
     ]);
 
-    let schema = {
+    const schema = {
       type: 'array',
       items: {
         type: 'object',
@@ -325,7 +325,7 @@ describe('FindReplaceAllService', () => {
       }
     };
 
-    let expected = fromJS([
+    const expected = fromJS([
       {
         foo: {
           bar: {
@@ -344,13 +344,13 @@ describe('FindReplaceAllService', () => {
       },
     ]);
 
-    let replacedList = service.findReplaceInImmutable(list, schema, 'value', 'replacement').replaced;
+    const replacedList = service.findReplaceInImmutable(list, schema, 'value', 'replacement').replaced;
 
     expect(replacedList.equals(expected)).toBeTruthy();
   });
 
   it('should find and replace in list of maps but skip disabled list and map field', () => {
-    let list = fromJS([
+    const list = fromJS([
       {
         foo: {
           bar: {
@@ -383,7 +383,7 @@ describe('FindReplaceAllService', () => {
       }
     ]);
 
-    let schema = {
+    const schema = {
       type: 'array',
       items: {
         type: 'object',
@@ -436,7 +436,7 @@ describe('FindReplaceAllService', () => {
       }
     };
 
-    let expected = fromJS([
+    const expected = fromJS([
       {
         foo: {
           bar: {
@@ -473,13 +473,13 @@ describe('FindReplaceAllService', () => {
       }
     ]);
 
-    let replacedList = service.findReplaceInImmutable(list, schema, 'value', 'replacement').replaced;
+    const replacedList = service.findReplaceInImmutable(list, schema, 'value', 'replacement').replaced;
 
     expect(replacedList.equals(expected)).toBeTruthy();
   });
 
   it('should skip $ref fields', () => {
-    let list = fromJS([
+    const list = fromJS([
       {
         record: {
           $ref: 'value1'
@@ -492,7 +492,7 @@ describe('FindReplaceAllService', () => {
       },
     ]);
 
-    let schema = {
+    const schema = {
       type: 'array',
       items: {
         type: 'object',
@@ -509,7 +509,7 @@ describe('FindReplaceAllService', () => {
       }
     };
 
-    let expected = fromJS([
+    const expected = fromJS([
       {
         record: {
           $ref: 'value1'
@@ -522,18 +522,18 @@ describe('FindReplaceAllService', () => {
       },
     ]);
 
-    let replacedList = service.findReplaceInImmutable(list, schema, 'value', 'replacement').replaced;
+    const replacedList = service.findReplaceInImmutable(list, schema, 'value', 'replacement').replaced;
 
     expect(replacedList.equals(expected)).toBeTruthy();
   });
 
   it('should skip hidden fields', () => {
-    let map = fromJS({
+    const map = fromJS({
       hiddenProp: 'valueHidden',
       notHiddenProp: 'valueNotHidden'
     });
 
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         hiddenProp: {
@@ -546,12 +546,12 @@ describe('FindReplaceAllService', () => {
       }
     };
 
-    let expected = fromJS({
+    const expected = fromJS({
       hiddenProp: 'valueHidden',
       notHiddenProp: 'replacementNotHidden'
     });
 
-    let replacedList = service.findReplaceInImmutable(map, schema, 'value', 'replacement').replaced;
+    const replacedList = service.findReplaceInImmutable(map, schema, 'value', 'replacement').replaced;
 
     expect(replacedList.equals(expected)).toBeTruthy();
   });

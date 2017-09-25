@@ -142,8 +142,8 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
       console.warn(`[config] is undefined, make sure that is intended.`);
     }
 
-    let recordChanged = changes['record'] && this.record !== this.lastEmittedRecord;
-    let schemaChanged = changes['schema'] || changes['config'];
+    const recordChanged = changes['record'] && this.record !== this.lastEmittedRecord;
+    const schemaChanged = changes['schema'] || changes['config'];
 
     if (schemaChanged) {
       this.schema = this.schemaFixerService.fixSchema(this.schema, this.config.schemaOptions);

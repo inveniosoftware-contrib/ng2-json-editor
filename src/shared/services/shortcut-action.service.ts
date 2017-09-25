@@ -50,7 +50,7 @@ export class ShortcutActionService {
   }
 
   private add(path: Array<any>, root: boolean): void {
-    let _path = this.pathUtilService.getNearestOrRootArrayParentInPath(path, root);
+    const _path = this.pathUtilService.getNearestOrRootArrayParentInPath(path, root);
     this.addNewElementInArray(_path, this.jsonSchemaService.forPathArray(_path));
   }
 
@@ -59,20 +59,20 @@ export class ShortcutActionService {
    * @param schema - Schema of the element that is about to be inserted
    */
   private addNewElementInArray(path: Array<any>, schema: JSONSchema) {
-    let itemSchema = schema.items;
-    let emptyValue = this.emptyValueService.generateEmptyValue(itemSchema);
-    let values = this.jsonStoreService.getIn(path) || List();
+    const itemSchema = schema.items;
+    const emptyValue = this.emptyValueService.generateEmptyValue(itemSchema);
+    const values = this.jsonStoreService.getIn(path) || List();
     this.jsonStoreService.setIn(path, values.push(emptyValue));
     path.push(values.size);
     this.waitThenFocus(this.pathUtilService.toPathString(path));
   }
 
   addBelowToRootAction(path: Array<any>): void {
-    let rootPath = this.pathUtilService.getNearestOrRootArrayParentInPath(path, true);
-    let schema = this.jsonSchemaService.forPathArray(rootPath);
-    let itemSchema = schema.items;
-    let emptyValue = this.emptyValueService.generateEmptyValue(itemSchema);
-    let values = this.jsonStoreService.getIn(rootPath) || List();
+    const rootPath = this.pathUtilService.getNearestOrRootArrayParentInPath(path, true);
+    const schema = this.jsonSchemaService.forPathArray(rootPath);
+    const itemSchema = schema.items;
+    const emptyValue = this.emptyValueService.generateEmptyValue(itemSchema);
+    const values = this.jsonStoreService.getIn(rootPath) || List();
     this.jsonStoreService.setIn(rootPath, values.insert(path[1] + 1, emptyValue));
     rootPath.push(path[1] + 1);
     this.waitThenFocus(this.pathUtilService.toPathString(rootPath));
@@ -100,9 +100,9 @@ export class ShortcutActionService {
    */
   private move(path: Array<any>, direction: number, root = false): void {
     this.domUtilService.blurFirstEditableChildById(this.pathUtilService.toPathString(path));
-    let index = this.pathUtilService.getElementIndexInForwardOrReversePath(path, root);
+    const index = this.pathUtilService.getElementIndexInForwardOrReversePath(path, root);
     path = this.jsonStoreService.moveIn(this.pathUtilService.getNearestOrRootArrayParentInPath(path, root), index, direction);
-    let pathString = this.pathUtilService.toPathString(path);
+    const pathString = this.pathUtilService.toPathString(path);
     this.waitThenFocus(pathString);
   }
 
@@ -118,7 +118,7 @@ export class ShortcutActionService {
    * @param {number} index - Index of the element that is deleted from array parent path
    */
   private deleteElement(path: Array<any>, index: number) {
-    let values = this.jsonStoreService.getIn(path);
+    const values = this.jsonStoreService.getIn(path);
     this.jsonStoreService.setIn(path, values.remove(index));
   }
 
@@ -135,15 +135,15 @@ export class ShortcutActionService {
    * @param {number} direction - Navigation direction. -1 for UP, +1 for DOWN
    */
   private navigateUpDown(path: Array<any>, direction: number) {
-    let values = this.jsonStoreService.getIn(this.pathUtilService.getNearestOrRootArrayParentInPath(path, false));
+    const values = this.jsonStoreService.getIn(this.pathUtilService.getNearestOrRootArrayParentInPath(path, false));
     if (List.isList(values)) {
-      let elemIndexInPath = this.pathUtilService.getElementIndexInForwardOrReversePath(path, true);
+      const elemIndexInPath = this.pathUtilService.getElementIndexInForwardOrReversePath(path, true);
       if ((elemIndexInPath + direction) < values.size && (elemIndexInPath + direction) >= 0) {
         path[path.length - 2] = elemIndexInPath + direction;
       } else {
         path[path.length - 2] = values.size - Math.abs((elemIndexInPath + direction));
       }
-      let pathString = this.pathUtilService.toPathString(path);
+      const pathString = this.pathUtilService.toPathString(path);
       this.domUtilService.focusAndSelectFirstEditableChildById(pathString);
     }
   }
@@ -161,7 +161,7 @@ export class ShortcutActionService {
    * @param {number} direction - Navigation direction. -1 for LEFT, +1 for RIGHT
    */
   private navigateRightLeft(path: Array<any>, direction: number) {
-    let pathString = this.pathUtilService.toPathString(path);
+    const pathString = this.pathUtilService.toPathString(path);
     this.domUtilService.focusRightOrLeftParentCell(pathString, direction);
   }
 
@@ -188,12 +188,12 @@ export class ShortcutActionService {
    * for usage as in `copyAction`
    */
   private copyRowOrSchemaBelow(originalPath: Array<any>, root: boolean) {
-    let arrayParentPath = this.pathUtilService.getNearestOrRootArrayParentInPath(originalPath, root);
+    const arrayParentPath = this.pathUtilService.getNearestOrRootArrayParentInPath(originalPath, root);
     if (this.jsonSchemaService.forPathArray(arrayParentPath)['items'].hasOwnProperty('properties')) {
-      let elemIndex = this.pathUtilService.getElementIndexInForwardOrReversePath(originalPath, root);
-      let valuesList = this.jsonStoreService.getIn(arrayParentPath) || List();
+      const elemIndex = this.pathUtilService.getElementIndexInForwardOrReversePath(originalPath, root);
+      const valuesList = this.jsonStoreService.getIn(arrayParentPath) || List();
       let newValue = valuesList.get(elemIndex);
-      let newPath = arrayParentPath.concat(elemIndex + 1);
+      const newPath = arrayParentPath.concat(elemIndex + 1);
       let newPathString = this.pathUtilService.toPathString(newPath);
       if (!root) {
         newValue = newValue.set(originalPath[originalPath.length - 1]);
@@ -205,7 +205,7 @@ export class ShortcutActionService {
   }
 
   undoAction() {
-    let rolledBackPath = this.jsonStoreService.rollbackLastChange();
+    const rolledBackPath = this.jsonStoreService.rollbackLastChange();
     if (rolledBackPath) {
       this.waitThenFocus(rolledBackPath);
     }
@@ -221,8 +221,8 @@ export class ShortcutActionService {
 
     return (event: KeyboardEvent) => {
       event.preventDefault();
-      let eventTarget = event.target as HTMLInputElement;
-      let pathString = eventTarget.getAttribute('data-path');
+      const eventTarget = event.target as HTMLInputElement;
+      const pathString = eventTarget.getAttribute('data-path');
       if (pathString) {
         this[actionName](this.pathUtilService.toPathArray(pathString));
       }

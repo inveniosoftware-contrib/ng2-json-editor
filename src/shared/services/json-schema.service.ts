@@ -54,7 +54,7 @@ export class JsonSchemaService {
    * Returns the schema extracted from the json-pointer string
    */
   forPathString(path: string): JSONSchema {
-    let pathArray = this.pathUtilService.toPathArray(path);
+    const pathArray = this.pathUtilService.toPathArray(path);
     return this.forPathArray(pathArray);
   }
 

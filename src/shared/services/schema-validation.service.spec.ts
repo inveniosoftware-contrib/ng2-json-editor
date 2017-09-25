@@ -31,11 +31,11 @@ describe('SchemaValidationService', () => {
   let service: SchemaValidationService;
 
   beforeEach(() => {
-    service = new SchemaValidationService(new AppGlobalsService(null));
+    service = new SchemaValidationService(new AppGlobalsService());
   });
 
   it('should validate pattern correctly', () => {
-    let expectedInValid = [{
+    const expectedInValid = [{
       message: `should match pattern "[0-9]"`,
       type: 'Error'
     }];

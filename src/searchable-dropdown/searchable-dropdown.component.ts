@@ -92,7 +92,7 @@ export class SearchableDropdownComponent implements OnInit {
   onInputBlur(event: FocusEvent) {
     // this avoids closing dropdown when an item is selected
     // so that onItemClick() can be executed properly before closing.
-    let relatedTarget = event.relatedTarget as HTMLElement;
+    const relatedTarget = event.relatedTarget as HTMLElement;
     if (!relatedTarget || relatedTarget.className !== 'dropdown-item') {
       this.status.isOpen = false;
     }

@@ -20,12 +20,12 @@ export class FindReplaceAllService {
    */
   findReplaceInImmutable(immutable: any, schema: JSONSchema, find: string, replace: string, exact = false, diffHtml?: Array<any> | Object):
     { replaced: any, diffHtml: Array<any> | Object } {
-    let immutableAsMutable = immutable.asMutable();
-    let isList = List.isList(immutable);
+    const immutableAsMutable = immutable.asMutable();
+    const isList = List.isList(immutable);
     // create empty array or object for the immutable to store diff
     diffHtml = isList ? [] : {};
     immutableAsMutable.forEach((value, key) => {
-      let innerSchema = isList ? schema.items : schema.properties[key];
+      const innerSchema = isList ? schema.items : schema.properties[key];
       // ignore disabled and ref fields
       if (innerSchema.disabled || innerSchema.hidden || key === '$ref') {
         return;
@@ -34,10 +34,10 @@ export class FindReplaceAllService {
         // assign value to diff as initial, if nothing has changed it will remain same
         let diff = value;
         // create html diff for each possible change
-        let singleDiffHtml = `<strong style='color: green;'>${replace}</strong><del><em style='color: red;'>${find}</em></del>`;
+        const singleDiffHtml = `<strong style='color: green;'>${replace}</strong><del><em style='color: red;'>${find}</em></del>`;
         if (!exact) {
-          let regExp = new RegExp(find, 'g');
-          let replaced = value.replace(regExp, replace);
+          const regExp = new RegExp(find, 'g');
+          const replaced = value.replace(regExp, replace);
           immutableAsMutable.set(key, replaced);
           // create diff for multiple changes in value
           diff = diff.replace(regExp, singleDiffHtml);
@@ -49,7 +49,7 @@ export class FindReplaceAllService {
       // TODO: is `schema.type === 'object' || schema.type === 'array'` better?
       } else if (List.isList(value) || Map.isMap(value)) {
         // create empty array or object for the value in diffHtml
-        let result = this.
+        const result = this.
           findReplaceInImmutable(immutableAsMutable.get(key), innerSchema, find, replace, exact, diffHtml[key]);
         diffHtml[key] = result.diffHtml;
         immutableAsMutable.set(key, result.replaced);

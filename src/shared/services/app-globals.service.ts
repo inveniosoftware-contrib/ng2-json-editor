@@ -35,8 +35,6 @@ export class AppGlobalsService {
   config: JsonEditorConfig;
   private _adminMode = false;
 
-  constructor() { }
-
   set adminMode(adminMode: boolean) {
     this._adminMode = adminMode;
     this.adminMode$.next(this._adminMode);

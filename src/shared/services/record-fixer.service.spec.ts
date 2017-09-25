@@ -33,7 +33,7 @@ describe('RecordFixerService', () => {
   });
 
   it('should throw error if schema type object but value is not', () => {
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         anObject: {
@@ -46,10 +46,10 @@ describe('RecordFixerService', () => {
         }
       }
     };
-    let record = {
+    const record = {
       anObject: 'aString'
     };
-    let errorMessage = '"anObject" in "aString" is specified as "object" by schema but it is not an object in json';
+    const errorMessage = '"anObject" in "aString" is specified as "object" by schema but it is not an object in json';
     expect(() => service.fixRecord(record, schema)).toThrowError(errorMessage);
   });
 

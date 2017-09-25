@@ -113,7 +113,7 @@ export class ShortcutsDirective implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    let customShortcutKeysChange = changes['shortcuts'];
+    const customShortcutKeysChange = changes['shortcuts'];
     if (customShortcutKeysChange && this.shortcuts) {
       Object.keys(this._shortcuts).forEach(actionName => {
         if (this.shortcuts[actionName]) {
@@ -125,7 +125,7 @@ export class ShortcutsDirective implements OnInit, OnDestroy, OnChanges {
 
   ngOnInit(): void {
     Object.keys(this._shortcuts).forEach(method => {
-      let action = this._shortcuts[method].action;
+      const action = this._shortcuts[method].action;
       this.mousetrap.bind(this._shortcuts[method].key, action);
     });
   }

@@ -41,7 +41,7 @@ export class RecordFixerService {
    * @return {Object} - fixed record
    */
   fixRecord(rawRecord: object, schema: JSONSchema): object {
-    let record = Object.assign({}, rawRecord);
+    const record = Object.assign({}, rawRecord);
     Object.keys(record).forEach(field => {
       if (!schema.properties[field]) {
         // Delete if field is not in schema!
@@ -74,7 +74,7 @@ export class RecordFixerService {
     }
 
     // Fixes for each type/condition, can be added below.
-    let value = parent[key];
+    const value = parent[key];
 
     // Recursive calls
     if (schema.type === 'object') {

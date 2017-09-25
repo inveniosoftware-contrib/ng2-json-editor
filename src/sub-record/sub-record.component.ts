@@ -64,7 +64,7 @@ export class SubRecordComponent extends AbstractTrackerComponent implements OnCh
     if (changes['keys']) {
       let keys;
       if (this.tabName) {
-        let keyToTabName = this.tabsUtilService.getSchemaKeyToTabName(this.appGlobalsService.config.tabsConfig, this.schema);
+        const keyToTabName = this.tabsUtilService.getSchemaKeyToTabName(this.appGlobalsService.config.tabsConfig, this.schema);
         keys = this.keys
           .filter(key => keyToTabName[key] === this.tabName);
       } else {

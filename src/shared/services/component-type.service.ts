@@ -44,7 +44,7 @@ export class ComponentTypeService {
       throw new Error('schema is undefined');
     }
 
-    let schemaType = schema.type;
+    const schemaType = schema.type;
     if (!schemaType) {
       if (Object.keys(schema).length === 0) { // if shema === {} (empty object)
         return 'raw';
@@ -60,14 +60,14 @@ export class ComponentTypeService {
         return 'ref';
       }
     } else if (schemaType === 'array') {
-      let itemSchema = schema.items;
+      const itemSchema = schema.items;
       if (itemSchema.type === 'object') {
         // complex-array: if it's an object array
         // if its elements have at least a property with object (not ref-field)
         // or a non-primitive array.
-        let isComplexArray = Object.keys(itemSchema.properties)
+        const isComplexArray = Object.keys(itemSchema.properties)
           .some(prop => {
-            let propSchema = itemSchema.properties[prop];
+            const propSchema = itemSchema.properties[prop];
             return (propSchema.type === 'object' && !propSchema.properties['$ref']) ||
               (propSchema.type === 'array' && (propSchema.items.type === 'object' || propSchema.items.type === 'array'));
           });

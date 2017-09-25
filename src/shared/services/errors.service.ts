@@ -37,7 +37,7 @@ export class ErrorsService {
   externalCategorizedErrorMap: CategorizedValidationErrors = { errors: {}, warnings: {} };
 
   set externalErrors(errors: SchemaValidationErrors) {
-    let { categorizedErrorMap, errorCounter, warningCounter } = this.categorizeErrorMap(errors);
+    const { categorizedErrorMap, errorCounter, warningCounter } = this.categorizeErrorMap(errors);
     this.externalCategorizedErrorMap = categorizedErrorMap;
 
     this.externalCategorizedErrors$.next(this.externalCategorizedErrorMap);
@@ -49,7 +49,7 @@ export class ErrorsService {
 
   extendInternalErrors(path: string, errors: Array<ValidationError>) {
     this.internalErrorMap[path] = errors;
-    let { categorizedErrorMap, errorCounter, warningCounter } = this.categorizeErrorMap(this.internalErrorMap);
+    const { categorizedErrorMap, errorCounter, warningCounter } = this.categorizeErrorMap(this.internalErrorMap);
     this.internalCategorizedErrorMap = categorizedErrorMap;
 
     this.internalCategorizedErrors$.next(this.internalCategorizedErrorMap);
@@ -60,10 +60,10 @@ export class ErrorsService {
   }
 
   hasError(path: string) {
-    let internalErrors = this.internalCategorizedErrorMap.errors[path];
-    let externalErrors = this.externalCategorizedErrorMap.errors[path];
-    let internalErrorCount = internalErrors ? internalErrors.length : 0;
-    let externalErrorCount = externalErrors ? externalErrors.length : 0;
+    const internalErrors = this.internalCategorizedErrorMap.errors[path];
+    const externalErrors = this.externalCategorizedErrorMap.errors[path];
+    const internalErrorCount = internalErrors ? internalErrors.length : 0;
+    const externalErrorCount = externalErrors ? externalErrors.length : 0;
     return (internalErrorCount + externalErrorCount) > 0;
   }
 
@@ -72,13 +72,13 @@ export class ErrorsService {
     errorCounter: number, warningCounter: number
   } {
 
-    let categorizedErrorMap = { errors: {}, warnings: {} };
+    const categorizedErrorMap = { errors: {}, warnings: {} };
     let errorCounter = 0;
     let warningCounter = 0;
 
     Object.keys(errorMap)
       .forEach(key => {
-        let validationErrors = errorMap[key];
+        const validationErrors = errorMap[key];
         validationErrors.forEach(error => {
           if (error.type === 'Error') {
             categorizedErrorMap.errors[key] ? categorizedErrorMap.errors[key].push(error)

@@ -32,7 +32,7 @@ describe('JsonSchemaService', () => {
 
   it('should return the correct schema for array element', () => {
 
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         abstracts: {
@@ -51,7 +51,7 @@ describe('JsonSchemaService', () => {
         }
       }
     };
-    let expectedArrayElementSchema = {
+    const expectedArrayElementSchema = {
       properties: {
         source: {
           type: 'string'
@@ -62,14 +62,14 @@ describe('JsonSchemaService', () => {
       },
       type: 'object'
     };
-    let arrayElementPath = ['abstracts', 0];
+    const arrayElementPath = ['abstracts', 0];
     service.setSchema(schema);
     expect(service.forPathArray(arrayElementPath)).toEqual(expectedArrayElementSchema);
   });
 
   it('should return the correct schema for property of array element', () => {
 
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         abstracts: {
@@ -88,17 +88,17 @@ describe('JsonSchemaService', () => {
         }
       }
     };
-    let expectedPropertyOfArrayElementSchema = {
+    const expectedPropertyOfArrayElementSchema = {
       'type': 'string'
     };
-    let propertyOfArrayElementPath = ['abstracts', 0, 'source'];
+    const propertyOfArrayElementPath = ['abstracts', 0, 'source'];
     service.setSchema(schema);
     expect(service.forPathArray(propertyOfArrayElementPath)).toEqual(expectedPropertyOfArrayElementSchema);
   });
 
   it('should return the correct schema for property of an object', () => {
 
-    let schema = {
+    const schema = {
       type: 'objcet',
       properties: {
         authors: {
@@ -123,17 +123,17 @@ describe('JsonSchemaService', () => {
         }
       }
     };
-    let expectedPropertyOfObjectSchema = {
+    const expectedPropertyOfObjectSchema = {
       type: 'string'
     };
-    let propertyOfObjectPath = ['authors', 0, 'affiliations', 0, 'value'];
+    const propertyOfObjectPath = ['authors', 0, 'affiliations', 0, 'value'];
     service.setSchema(schema);
     expect(service.forPathArray(propertyOfObjectPath)).toEqual(expectedPropertyOfObjectSchema);
   });
 
   it('should return the correct schema for element of an array which is property of an object', () => {
 
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         authors: {
@@ -158,7 +158,7 @@ describe('JsonSchemaService', () => {
         }
       }
     };
-    let expectedPropertyOfArrayWhichIsPropertyOfObjectElementSchema = {
+    const expectedPropertyOfArrayWhichIsPropertyOfObjectElementSchema = {
         properties: {
           value: {
             type: 'string'
@@ -166,7 +166,7 @@ describe('JsonSchemaService', () => {
         },
         type: 'object'
       };
-    let propertyOfArrayWhichIsPropertyOfObjectElementPath = ['authors', 0, 'affiliations', 0];
+    const propertyOfArrayWhichIsPropertyOfObjectElementPath = ['authors', 0, 'affiliations', 0];
     service.setSchema(schema);
     expect(service.forPathArray(propertyOfArrayWhichIsPropertyOfObjectElementPath))
       .toEqual(expectedPropertyOfArrayWhichIsPropertyOfObjectElementSchema);

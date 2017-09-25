@@ -31,7 +31,7 @@ describe('ComponentTypeService', () => {
   });
 
   it('should return primitive-list', () => {
-    let schema = {
+    const schema = {
       type: 'array',
       items: {
         type: 'string'
@@ -41,7 +41,7 @@ describe('ComponentTypeService', () => {
   });
 
   it('should return table-list', () => {
-    let schema = {
+    const schema = {
       type: 'array',
       items: {
         type: 'object',
@@ -62,7 +62,7 @@ describe('ComponentTypeService', () => {
   });
 
   it('should return table-list with an ref-field element property', () => {
-    let schema = {
+    const schema = {
       type: 'array',
       items: {
         type: 'object',
@@ -82,7 +82,7 @@ describe('ComponentTypeService', () => {
   });
 
   it('should return complex-list', () => {
-    let schema = {
+    const schema = {
       type: 'array',
       items: {
         type: 'object',
@@ -101,7 +101,7 @@ describe('ComponentTypeService', () => {
   });
 
   it('should return complex-list if an element property is an object', () => {
-    let schema = {
+    const schema = {
       type: 'array',
       items: {
         type: 'object',
@@ -117,12 +117,12 @@ describe('ComponentTypeService', () => {
   });
 
   it('should return raw', () => {
-    let schema = {};
+    const schema = {};
     expect(service.getComponentType(schema)).toEqual('raw');
   });
 
   it('should return object', () => {
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {}
     };
@@ -130,7 +130,7 @@ describe('ComponentTypeService', () => {
   });
 
   it('should return ref', () => {
-    let schema = {
+    const schema = {
       type: 'object',
       properties: {
         $ref: {
@@ -142,7 +142,7 @@ describe('ComponentTypeService', () => {
   });
 
   it('should return autocomplete', () => {
-    let schema = {
+    const schema = {
       autocompletionConfig: {
         size: 1
       },
@@ -152,7 +152,7 @@ describe('ComponentTypeService', () => {
   });
 
   it('should return enum', () => {
-    let schema = {
+    const schema = {
       enum: [],
       type: 'string'
     };
@@ -160,7 +160,7 @@ describe('ComponentTypeService', () => {
   });
 
   it('should not return array', () => {
-    let schema = {
+    const schema = {
       type: 'array',
       items: {
         type: 'number'

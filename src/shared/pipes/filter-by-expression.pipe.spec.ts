@@ -30,10 +30,10 @@ describe('FilterByExpressionPipe', () => {
   });
 
   it('should filter by expression', () => {
-    let values = ['ab', '_ab_', '_ab', 'ab_', 'a', 'b', 'xyz'];
-    let expression = 'ab';
-    let filtered = ['ab', '_ab_', '_ab', 'ab_'];
-    let pipeResult = pipe.transform(values, expression);
+    const values = ['ab', '_ab_', '_ab', 'ab_', 'a', 'b', 'xyz'];
+    const expression = 'ab';
+    const filtered = ['ab', '_ab_', '_ab', 'ab_'];
+    const pipeResult = pipe.transform(values, expression);
     expect(pipeResult).toEqual(filtered);
   });
 

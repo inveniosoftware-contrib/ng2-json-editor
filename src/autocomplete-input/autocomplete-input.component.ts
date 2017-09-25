@@ -83,7 +83,7 @@ export class AutocompleteInputComponent implements OnInit {
   }
 
   onCompletionSelect(completionItem: AutocompletionResult) {
-    let onCompletionSelect = this.autocompletionConfig.onCompletionSelect;
+    const onCompletionSelect = this.autocompletionConfig.onCompletionSelect;
     // if callback set and it is remote autocompletion source
     if (onCompletionSelect && this.typeaheadOptionField) {
       // .slice() is used to pass by value instead of reference

@@ -32,7 +32,7 @@ describe('FilterHiddenFieldsPipe', () => {
   });
 
   it('should not return hidden keys', () => {
-    let schema = {
+    const schema = {
       properties: {
         key1: {
           hidden: true
@@ -41,15 +41,15 @@ describe('FilterHiddenFieldsPipe', () => {
         }
       }
     };
-    let keys = Set(['key1', 'key2']);
+    const keys = Set(['key1', 'key2']);
 
-    let expected = Set(['key2']);
+    const expected = Set(['key2']);
 
     expect(pipe.transform(keys, schema, false)).toEqual(expected);
   });
 
   it('should return hidden keys if adminMode is set', () => {
-    let schema = {
+    const schema = {
       properties: {
         key1: {
           hidden: true
@@ -58,9 +58,9 @@ describe('FilterHiddenFieldsPipe', () => {
         }
       }
     };
-    let keys = Set(['key1', 'key2']);
+    const keys = Set(['key1', 'key2']);
 
-    let expected = Set(['key1', 'key2']);
+    const expected = Set(['key1', 'key2']);
 
     expect(pipe.transform(keys, schema, true)).toEqual(expected);
   });

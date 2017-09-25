@@ -38,7 +38,7 @@ export class FilterHiddenFieldsPipe implements PipeTransform {
    * @return - filtered keys
    */
   transform(keys: Set<string>, schema: JSONSchema, adminMode: boolean): Set<string> {
-    let schemaProps = schema.properties;
+    const schemaProps = schema.properties;
     if (!keys) { return undefined; }
     return keys
       .filter(key => {
