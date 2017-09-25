@@ -56,25 +56,25 @@ export class ErrorsConsoleTabComponent implements OnInit {
     public changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.errorsService.externalCategorizedErrorsSubject
+    this.errorsService.externalCategorizedErrors$
       .map(categorizedErrorMap => categorizedErrorMap[this.errorType])
       .subscribe(errorMap => {
         this.externalErrorMap = errorMap;
         this.changeDetectorRef.markForCheck();
       });
-    this.errorsService.externalErrorCountersSubject
+    this.errorsService.externalErrorCounters$
       .map(errorCounters => errorCounters[this.errorType])
       .subscribe(errorCount => {
         this.externalErrorCount = errorCount;
         this.changeDetectorRef.markForCheck();
       });
-    this.errorsService.internalCategorizedErrorsSubject
+    this.errorsService.internalCategorizedErrors$
       .map(categorizedErrorMap => categorizedErrorMap[this.errorType])
       .subscribe(errorMap => {
         this.internalErrorMap = errorMap;
         this.changeDetectorRef.markForCheck();
       });
-    this.errorsService.internalErrorCountersSubject
+    this.errorsService.internalErrorCounters$
       .map(errorCounters => errorCounters[this.errorType])
       .subscribe(errorCount => {
         this.internalErrorCount = errorCount;

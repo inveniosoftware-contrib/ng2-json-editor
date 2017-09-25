@@ -27,6 +27,7 @@ import {
 } from '@angular/core/testing';
 import { Ng2BootstrapModule } from 'ngx-bootstrap';
 import { Observable } from 'rxjs/Observable';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import { SearchableDropdownComponent } from '../searchable-dropdown';
 import { TextDiffComponent } from '../text-diff';
@@ -70,11 +71,9 @@ function changeInputElementValue(el: HTMLInputElement, value: string) {
 }
 
 class MockJsonStoreService extends JsonStoreService {
-  setIn(path: Array<any>, value: any) { }
+  readonly patchesByPath$ = Observable.of({}) as ReplaySubject<any>;
 
-  get patchesByPath$(): any {
-    return Observable.of({});
-  }
+  setIn(path: Array<any>, value: any) { }
 }
 
 describe('PrimitiveFieldComponent', () => {

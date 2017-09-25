@@ -28,36 +28,20 @@ import { SchemaValidationErrors, CategorizedValidationErrors, ValidationError } 
 @Injectable()
 export class ErrorsService {
 
-  private _externalCategorizedErrorsSubject = new ReplaySubject<CategorizedValidationErrors>(1);
-  private _internalCategorizedErrorsSubject = new ReplaySubject<CategorizedValidationErrors>(1);
-  private _externalErrorCountersSubject = new ReplaySubject<{ errors: number, warnings: number }>(1);
-  private _internalErrorCountersSubject = new ReplaySubject<{ errors: number, warnings: number }>(1);
-  private internalErrorMap: SchemaValidationErrors = {};
-  public internalCategorizedErrorMap: CategorizedValidationErrors = { errors: {}, warnings: {} };
-  public externalCategorizedErrorMap: CategorizedValidationErrors = { errors: {}, warnings: {} };
-
-  get externalCategorizedErrorsSubject(): ReplaySubject<CategorizedValidationErrors> {
-    return this._externalCategorizedErrorsSubject;
-  }
-
-  get externalErrorCountersSubject(): ReplaySubject<{ errors: number, warnings: number }> {
-    return this._externalErrorCountersSubject;
-  }
-
-  get internalCategorizedErrorsSubject(): ReplaySubject<CategorizedValidationErrors> {
-    return this._internalCategorizedErrorsSubject;
-  }
-
-  get internalErrorCountersSubject(): ReplaySubject<{ errors: number, warnings: number }> {
-    return this._internalErrorCountersSubject;
-  }
+  readonly externalCategorizedErrors$ = new ReplaySubject<CategorizedValidationErrors>(1);
+  readonly internalCategorizedErrors$ = new ReplaySubject<CategorizedValidationErrors>(1);
+  readonly externalErrorCounters$ = new ReplaySubject<{ errors: number, warnings: number }>(1);
+  readonly internalErrorCounters$ = new ReplaySubject<{ errors: number, warnings: number }>(1);
+  internalErrorMap: SchemaValidationErrors = {};
+  internalCategorizedErrorMap: CategorizedValidationErrors = { errors: {}, warnings: {} };
+  externalCategorizedErrorMap: CategorizedValidationErrors = { errors: {}, warnings: {} };
 
   set externalErrors(errors: SchemaValidationErrors) {
     let { categorizedErrorMap, errorCounter, warningCounter } = this.categorizeErrorMap(errors);
     this.externalCategorizedErrorMap = categorizedErrorMap;
 
-    this.externalCategorizedErrorsSubject.next(this.externalCategorizedErrorMap);
-    this.externalErrorCountersSubject.next({
+    this.externalCategorizedErrors$.next(this.externalCategorizedErrorMap);
+    this.externalErrorCounters$.next({
       errors: errorCounter,
       warnings: warningCounter
     });
@@ -68,8 +52,8 @@ export class ErrorsService {
     let { categorizedErrorMap, errorCounter, warningCounter } = this.categorizeErrorMap(this.internalErrorMap);
     this.internalCategorizedErrorMap = categorizedErrorMap;
 
-    this.internalCategorizedErrorsSubject.next(this.internalCategorizedErrorMap);
-    this.internalErrorCountersSubject.next({
+    this.internalCategorizedErrors$.next(this.internalCategorizedErrorMap);
+    this.internalErrorCounters$.next({
       errors: errorCounter,
       warnings: warningCounter
     });

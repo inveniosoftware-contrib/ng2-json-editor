@@ -32,13 +32,9 @@ import { PathUtilService } from './path-util.service';
 export class TabsUtilService {
 
   private schemaKeyToTabName: { [key: string]: string };
-  private _activeTabName$: ReplaySubject<string> = new ReplaySubject<string>(1);
+  readonly activeTabName$: ReplaySubject<string> = new ReplaySubject<string>(1);
 
   constructor(public pathUtilService: PathUtilService) { }
-
-  get activeTabName$(): ReplaySubject<string> {
-    return this._activeTabName$;
-  }
 
   getTabNames(tabsConfig: TabsConfig): Array<string> {
     let tabNames = tabsConfig.tabs.map(tab => tab.name);

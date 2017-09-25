@@ -80,7 +80,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     this.lastCommitedValue = this.value;
     this.subcriptions.push(
       this.errorsService
-        .internalCategorizedErrorsSubject
+        .internalCategorizedErrors$
         .subscribe(internalCategorizedErrorMap => {
           this.internalErrors = internalCategorizedErrorMap.errors[this.pathString] || [];
         }),

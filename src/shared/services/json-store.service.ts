@@ -10,11 +10,12 @@ import { SizedStack } from '../classes';
 @Injectable()
 export class JsonStoreService {
 
-  private _patchesByPath$ = new ReplaySubject<JsonPatchesByPath>(1);
-  private patchesByPath: JsonPatchesByPath = {};
+  readonly patchesByPath$ = new ReplaySubject<JsonPatchesByPath>(1);
+  readonly json$ = new ReplaySubject<Map<string, any>>(1);
 
+  private patchesByPath: JsonPatchesByPath = {};
   private json: Map<string, any>;
-  private _json$ = new ReplaySubject<Map<string, any>>(1);
+
   // list of reverse patches for important changes
   private history = new SizedStack<JsonPatch>(5);
 
@@ -55,7 +56,7 @@ export class JsonStoreService {
     this.keysStoreService.syncKeysForPath(path, this.json);
 
 
-    this._json$.next(this.json);
+    this.json$.next(this.json);
   }
 
   getIn(path: Array<any>): any {
@@ -70,7 +71,7 @@ export class JsonStoreService {
     });
 
     this.json = this.json.removeIn(path);
-    this._json$.next(this.json);
+    this.json$.next(this.json);
     this.keysStoreService.deletePath(path);
   }
 
@@ -181,7 +182,7 @@ export class JsonStoreService {
       let patchIndex = this.patchesByPath[path].indexOf(patch);
       if (patchIndex > -1) {
         this.patchesByPath[path].splice(patchIndex, 1);
-        this._patchesByPath$.next(this.patchesByPath);
+        this.patchesByPath$.next(this.patchesByPath);
       }
     }
   }
@@ -194,14 +195,6 @@ export class JsonStoreService {
     } else {
       return undefined;
     }
-  }
-
-  get json$(): ReplaySubject<Map<string, any>> {
-    return this._json$;
-  }
-
-  get patchesByPath$(): ReplaySubject<JsonPatchesByPath> {
-    return this._patchesByPath$;
   }
 
   /**
