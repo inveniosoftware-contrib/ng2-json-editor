@@ -76,6 +76,11 @@ body, html {
 }
 
 #ng2-json-editor {
+  
+  .dropdown-menu {
+    max-height: 400px;
+    overflow-y: scroll;
+  }
 
   .hidden {
     display: none;
