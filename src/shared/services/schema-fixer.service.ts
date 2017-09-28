@@ -56,7 +56,27 @@ export class SchemaFixerService {
    * @param config - schema specific options
    */
   private enrichSchemaWithConfig(schema: JSONSchema, config: SchemaOptions): JSONSchema {
-    return _.merge(config, schema);
+    return _.mergeWith(schema, config, (currentSchema, currentConfig, key) => {
+      if ((key === 'properties' || key === 'items') && !currentSchema) {
+        console.warn(`config => ${JSON.stringify(currentConfig, (configKey, value) => {
+            if (typeof value === 'function') {
+              return 'ƒ()';
+            }
+            return value;
+          }, 2)} should not be under "${key}" because schema does not have "${key}"`);
+        // cancel merge to avoid creating broken json schema
+        return null;
+      }
+      if (currentSchema && key === 'properties') {
+        const configKeys = Object.keys(currentConfig);
+        configKeys
+          .filter(configKey => !currentSchema[configKey])
+          .forEach(wrongConfigKey => {
+            delete currentConfig[wrongConfigKey];
+            console.warn(wrongConfigKey);
+          });
+      }
+    });
   }
 
   /**
