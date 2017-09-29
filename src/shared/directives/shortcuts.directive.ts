@@ -24,7 +24,6 @@ import {
   ElementRef,
   Directive,
   Input,
-  OnInit,
   OnChanges,
   OnDestroy,
   SimpleChanges
@@ -38,12 +37,12 @@ import { Shortcut, CustomShortcutKeys } from '../interfaces';
 @Directive({
   selector: '[shortcuts]'
 })
-export class ShortcutsDirective implements OnInit, OnDestroy, OnChanges {
+export class ShortcutsDirective implements OnDestroy, OnChanges {
   // custom shortcut keys
   @Input() shortcuts: CustomShortcutKeys;
 
-  // actions with default shortcut keys
-  private _shortcuts: {[actionName: string]: Shortcut} = {
+  // actions with default shortcut keys, update with the custom keys later
+  private readonly actionNameToShortcut: { [actionName: string]: Shortcut } = {
     add: {
       key: 'alt+a',
       action: this.shortcutActionService.generateShortcutAction('addAction')
@@ -115,22 +114,21 @@ export class ShortcutsDirective implements OnInit, OnDestroy, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     const customShortcutKeysChange = changes['shortcuts'];
     if (customShortcutKeysChange && this.shortcuts) {
-      Object.keys(this._shortcuts).forEach(actionName => {
+      Object.keys(this.actionNameToShortcut).forEach(actionName => {
+        const shortcut = this.actionNameToShortcut[actionName];
         if (this.shortcuts[actionName]) {
-          this._shortcuts[actionName].key = this.shortcuts[actionName];
+          shortcut.key = this.shortcuts[actionName];
         }
+        this.mousetrap.bind(shortcut.key, shortcut.action);
       });
     }
   }
 
-  ngOnInit(): void {
-    Object.keys(this._shortcuts).forEach(method => {
-      const action = this._shortcuts[method].action;
-      this.mousetrap.bind(this._shortcuts[method].key, action);
-    });
-  }
 
-  ngOnDestroy(): void {
-    this.mousetrap.unbind(Object.keys(this._shortcuts));
+  ngOnDestroy() {
+    Object.keys(this.actionNameToShortcut)
+      .forEach(actionName => {
+        this.mousetrap.unbind(this.actionNameToShortcut[actionName].key);
+      });
   }
 }
