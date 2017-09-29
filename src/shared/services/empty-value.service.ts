@@ -43,18 +43,24 @@ export class EmptyValueService {
   }
 
   private generateEmptyValueRecursively(schema: JSONSchema): any {
+    if (schema.default) {
+      return schema.default;
+    }
+
     if (schema.type === 'object') {
       const emptyObject = {};
       Object.keys(schema.properties)
         .filter(prop => {
           const required = schema.required || [];
-          return required.indexOf(prop) > -1;
+          const alwaysShow = schema.alwaysShow || [];
+          return required.indexOf(prop) > -1 || alwaysShow.indexOf(prop) > -1;
         }).forEach(prop => {
           const propSchema = schema.properties[prop];
           emptyObject[prop] = this.generateEmptyValueRecursively(propSchema);
         });
       return emptyObject;
     }
+
     if (schema.type === 'array') {
       const emptyArray = [];
       const arrayElementSchema = schema.items;
@@ -63,6 +69,7 @@ export class EmptyValueService {
       }
       return emptyArray;
     }
+
     return EmptyValueService.defaultValueLookup[schema.type];
   }
 

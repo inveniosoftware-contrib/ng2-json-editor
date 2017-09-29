@@ -77,7 +77,11 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
 
   ngOnInit() {
     super.ngOnInit();
-    this.lastCommitedValue = this.value;
+
+    if (this.value !== this.schema.default) {
+      this.lastCommitedValue = this.value;
+    }
+
     this.subcriptions.push(
       this.errorsService
         .internalCategorizedErrors$

@@ -162,6 +162,17 @@ describe('PrimitiveFieldComponent', () => {
     expect(component.jsonStoreService.setIn).toHaveBeenCalledWith(component.path, Number(newValue));
   });
 
+  it('should not call jsonStore on blur if there is no change', () => {
+    spyOn(component.jsonStoreService, 'setIn');
+
+    const sameValue = component.value;
+    changeInputElementValue(inputEl, sameValue.toString());
+    fixture.detectChanges();
+    // blur
+    inputEl.dispatchEvent(new Event('blur'));
+    expect(component.jsonStoreService.setIn).not.toHaveBeenCalled();
+  });
+
   it('should call jsonStore for change on enter pressed', () => {
     spyOn(component.jsonStoreService, 'setIn');
     // change the value
@@ -174,5 +185,18 @@ describe('PrimitiveFieldComponent', () => {
     inputEl.dispatchEvent(enterPressedEvent);
 
     expect(component.jsonStoreService.setIn).toHaveBeenCalledWith(component.path, Number(newValue));
+  });
+
+  it('should call jsonStore for default value even on blur', () => {
+    spyOn(component.jsonStoreService, 'setIn');
+    // change the value
+    const defaultValue = 99;
+    component.schema.default = defaultValue;
+    component.value = 99;
+    component.ngOnInit();
+    fixture.detectChanges();
+    // blur
+    inputEl.dispatchEvent(new Event('blur'));
+    expect(component.jsonStoreService.setIn).toHaveBeenCalledWith(component.path, defaultValue);
   });
 });

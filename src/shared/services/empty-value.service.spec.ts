@@ -47,4 +47,36 @@ describe('EmptyValueService', () => {
     expect(empty.get('prop1')).toBeDefined();
   });
 
+  it('should respect alwaysShow for object type', () => {
+    const schema = {
+      type: 'object',
+      properties: {
+        prop1: {
+          type: 'string'
+        }
+      },
+      alwaysShow: [
+        'prop1'
+      ]
+    };
+    const empty: Map<string, any> = service.generateEmptyValue(schema);
+    expect(empty.get('prop1')).toBeDefined();
+  });
+
+  it('should return default if it set.', () => {
+    const schema = {
+      type: 'object',
+      default: {
+        prop1: 'default'
+      },
+      properties: {
+        prop1: {
+          type: 'string'
+        }
+      }
+    };
+    const empty: Map<string, any> = service.generateEmptyValue(schema);
+    expect(empty.get('prop1')).toEqual('default');
+  });
+
 });
