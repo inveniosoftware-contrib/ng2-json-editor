@@ -23,9 +23,16 @@ export interface SchemaOption {
   hidden?: boolean;
 
   /**
-   * Array of keys that should always be shown in UI, even if they aren't present in the record.
+   * Array of properties of __an__ object that are going to be shown in UI, even if they aren't present in the record.
    */
   alwaysShow?: Array<string>;
+
+  /**
+   * Properties of __any__ object that matches this, are going to be shown in UI, even if they aren't present in the record.
+   *
+   * - It is applied recursively for all oject children of the object that's is set.
+   */
+  alwaysShowRegExp?: RegExp;
 
   /**
    * Indicator to be used for sorting all fields on the UI. Larger priority fields appears up-most/left-most on the UI.

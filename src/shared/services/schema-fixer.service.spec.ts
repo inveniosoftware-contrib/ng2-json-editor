@@ -467,6 +467,36 @@ describe('SchemaFixerService', () => {
     expect(fixed['alwaysShow'].indexOf('doesnotexist') > -1).toBeFalsy();
   });
 
+  it('should add keys that matches alwaysShowRegExp to alwaysShow', () => {
+    const schema = {
+      type: 'object',
+      alwaysShow: ['prop'],
+      alwaysShowRegExp: new RegExp('special'),
+      properties: {
+        specialProp: {
+          type: 'string'
+        },
+        objectProp: {
+          type: 'object',
+          properties: {
+            specialInnerProp: {
+              type: 'string'
+            }
+          }
+        },
+        prop: {
+          type: 'string'
+        },
+        anotherProp: {
+          type: 'string'
+        }
+      }
+    };
+    const fixed = service.fixSchema(schema);
+    expect(fixed.alwaysShow).toEqual(['prop', 'specialProp']);
+    expect(fixed.properties['objectProp'].alwaysShow).toEqual(['specialInnerProp']);
+  });
+
   it('should enrich root schema with config', () => {
     const schema = {
       type: 'object',

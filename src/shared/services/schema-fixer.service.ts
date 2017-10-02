@@ -59,11 +59,11 @@ export class SchemaFixerService {
     return _.mergeWith(schema, config, (currentSchema, currentConfig, key) => {
       if ((key === 'properties' || key === 'items') && !currentSchema) {
         console.warn(`config => ${JSON.stringify(currentConfig, (configKey, value) => {
-            if (typeof value === 'function') {
-              return 'ƒ()';
-            }
-            return value;
-          }, 2)} should not be under "${key}" because schema does not have "${key}"`);
+          if (typeof value === 'function') {
+            return 'ƒ()';
+          }
+          return value;
+        }, 2)} should not be under "${key}" because schema does not have "${key}"`);
         // cancel merge to avoid creating broken json schema
         return null;
       }
@@ -96,6 +96,9 @@ export class SchemaFixerService {
     }
     if (schema.alwaysShow) {
       schema = this.fixAlwaysShow(schema);
+    }
+    if (schema.alwaysShowRegExp) {
+      schema = this.fixAlwaysShowRegExp(schema);
     }
     // schema fixes must be done above
 
@@ -222,11 +225,34 @@ export class SchemaFixerService {
   }
 
   /**
+   * Adds keys that matches `alwaysShowRegExp` to `alwaysShow`.
+   * Passes `alwaysShowRegExp` down to children so that it is applied recursively.
+   */
+  private fixAlwaysShowRegExp(schema: JSONSchema): JSONSchema {
+    if (!schema.alwaysShow) {
+      schema.alwaysShow = [];
+    }
+    Object.keys(schema.properties)
+      .forEach(key => {
+        // pass alwaysShowRegExp down to apply it recursively.
+        const subSchema = schema.properties[key];
+        if (subSchema.type === 'object') {
+          subSchema.alwaysShowRegExp = schema.alwaysShowRegExp;
+        }
+
+        if (key.search(schema.alwaysShowRegExp) > -1) {
+          schema.alwaysShow.push(key);
+        }
+      });
+    return schema;
+  }
+
+  /**
    * Removes alwayShow fields that aren't in the schema.properties
    * and warns on console.
    */
   private fixAlwaysShow(schema: JSONSchema): JSONSchema {
-    const alwaysShow: Array<string> = schema.alwaysShow;
+    const alwaysShow = schema.alwaysShow;
     schema.alwaysShow = alwaysShow.filter(key => {
       if (schema.properties[key]) {
         return true;
