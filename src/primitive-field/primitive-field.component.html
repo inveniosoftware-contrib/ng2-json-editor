@@ -20,7 +20,7 @@
           </div>
           <div *ngSwitchCase="'enum'">
             <searchable-dropdown [pathString]="pathString" [value]="value" [placeholder]="schema.title" [items]="schema.enum" [shortcutMap]="schema.enumShorcutMap"
-              (onSelect)="onSearchableDropdownSelect($event)" [tabIndex]="tabIndex" (onBlur)="domUtilService.clearHighlight()"></searchable-dropdown>
+              (onSelect)="onSearchableDropdownSelect($event)" [tabIndex]="tabIndex" (onBlur)="onBlur()"></searchable-dropdown>
           </div>
           <div *ngSwitchCase="'autocomplete'">
             <autocomplete-input [pathString]="pathString" [value]="value" [path]="path" [autocompletionConfig]="schema.autocompletionConfig"

@@ -33,6 +33,7 @@ export interface JSONSchema extends SchemaOption {
   anyOf?: Array<JSONSchema>;
   oneOf?: Array<JSONSchema>;
   not?: JSONSchema;
+  default?: any;
   // custom properties
   componentType?: string;
 }
