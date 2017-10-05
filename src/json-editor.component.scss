@@ -79,7 +79,7 @@ body, html {
   
   .dropdown-menu {
     max-height: 400px;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
 
   .hidden {
@@ -223,7 +223,7 @@ body, html {
     }
 
     .btn-add-field-dropdown {
-      width: 100%;
+      float: right;
     }
   }
 
