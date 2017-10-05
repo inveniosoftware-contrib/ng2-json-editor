@@ -27,6 +27,7 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_interfaces_schema_option_.schemaoption.html#alwaysshow" class="tsd-kind-icon">always<wbr>Show</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_interfaces_schema_option_.schemaoption.html#alwaysshowregexp" class="tsd-kind-icon">always<wbr>Show<wbr>Reg<wbr>Exp</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_interfaces_schema_option_.schemaoption.html#autocompletionconfig" class="tsd-kind-icon">autocompletion<wbr>Config</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_interfaces_schema_option_.schemaoption.html#columnwidth" class="tsd-kind-icon">column<wbr>Width</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_interfaces_schema_option_.schemaoption.html#disabled" class="tsd-kind-icon">disabled</a></li>
@@ -57,8 +58,23 @@
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Array of keys that should always be shown in UI, even if they aren&#39;t present in the record.</p>
+							<p>Array of properties of <strong>an</strong> object that are going to be shown in UI, even if they aren&#39;t present in the record.</p>
 						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="alwaysshowregexp" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> always<wbr>Show<wbr>Reg<wbr>Exp</h3>
+					<div class="tsd-signature tsd-kind-icon">always<wbr>Show<wbr>Reg<wbr>Exp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RegExp</span></div>
+					<aside class="tsd-sources">
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Properties of <strong>any</strong> object that matches this, are going to be shown in UI, even if they aren&#39;t present in the record.</p>
+						</div>
+						<ul>
+							<li>It is applied recursively for all oject children of the object that&#39;s is set.</li>
+						</ul>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
@@ -310,6 +326,9 @@
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
 								<a href="_interfaces_schema_option_.schemaoption.html#alwaysshow" class="tsd-kind-icon">always<wbr>Show</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="_interfaces_schema_option_.schemaoption.html#alwaysshowregexp" class="tsd-kind-icon">always<wbr>Show<wbr>Reg<wbr>Exp</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
 								<a href="_interfaces_schema_option_.schemaoption.html#autocompletionconfig" class="tsd-kind-icon">autocompletion<wbr>Config</a>

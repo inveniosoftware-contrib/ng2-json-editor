@@ -42,6 +42,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_services_schema_fixer_service_.schemafixerservice.html#enrichschemawithconfig" class="tsd-kind-icon">enrich<wbr>Schema<wbr>With<wbr>Config</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_services_schema_fixer_service_.schemafixerservice.html#fixallof" class="tsd-kind-icon">fix<wbr>All<wbr>Of</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_services_schema_fixer_service_.schemafixerservice.html#fixalwaysshow" class="tsd-kind-icon">fix<wbr>Always<wbr>Show</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_services_schema_fixer_service_.schemafixerservice.html#fixalwaysshowregexp" class="tsd-kind-icon">fix<wbr>Always<wbr>Show<wbr>Reg<wbr>Exp</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_services_schema_fixer_service_.schemafixerservice.html#fixanyof" class="tsd-kind-icon">fix<wbr>Any<wbr>Of</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_services_schema_fixer_service_.schemafixerservice.html#fixdisabled" class="tsd-kind-icon">fix<wbr>Disabled</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_services_schema_fixer_service_.schemafixerservice.html#fixorder" class="tsd-kind-icon">fix<wbr>Order</a></li>
@@ -166,6 +167,32 @@
 								<div class="lead">
 									<p>Removes alwayShow fields that aren&#39;t in the schema.properties
 									and warns on console.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>schema: <a href="../interfaces/_interfaces_json_schema_.jsonschema.html" class="tsd-signature-type">JSONSchema</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_interfaces_json_schema_.jsonschema.html" class="tsd-signature-type">JSONSchema</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="fixalwaysshowregexp" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> fix<wbr>Always<wbr>Show<wbr>Reg<wbr>Exp</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">fix<wbr>Always<wbr>Show<wbr>Reg<wbr>Exp<span class="tsd-signature-symbol">(</span>schema<span class="tsd-signature-symbol">: </span><a href="../interfaces/_interfaces_json_schema_.jsonschema.html" class="tsd-signature-type">JSONSchema</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_interfaces_json_schema_.jsonschema.html" class="tsd-signature-type">JSONSchema</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Adds keys that matches <code>alwaysShowRegExp</code> to <code>alwaysShow</code>.
+									Passes <code>alwaysShowRegExp</code> down to children so that it is applied recursively.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -344,6 +371,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
 								<a href="_services_schema_fixer_service_.schemafixerservice.html#fixalwaysshow" class="tsd-kind-icon">fix<wbr>Always<wbr>Show</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="_services_schema_fixer_service_.schemafixerservice.html#fixalwaysshowregexp" class="tsd-kind-icon">fix<wbr>Always<wbr>Show<wbr>Reg<wbr>Exp</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
 								<a href="_services_schema_fixer_service_.schemafixerservice.html#fixanyof" class="tsd-kind-icon">fix<wbr>Any<wbr>Of</a>

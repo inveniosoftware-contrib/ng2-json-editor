@@ -44,25 +44,18 @@ webpackJsonp([0,3],{
 
 var AppGlobalsService = (function () {
     function AppGlobalsService() {
-        this._adminMode = false;
-        this._adminMode$ = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
+        this.adminMode$ = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
         this.activeTabName = '';
         this.tabNameToFirstTopLevelElement = {};
+        this._adminMode = false;
     }
-    Object.defineProperty(AppGlobalsService.prototype, "adminMode$", {
-        get: function () {
-            return this._adminMode$;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(AppGlobalsService.prototype, "adminMode", {
         get: function () {
             return this._adminMode;
         },
         set: function (adminMode) {
             this._adminMode = adminMode;
-            this._adminMode$.next(this._adminMode);
+            this.adminMode$.next(this._adminMode);
         },
         enumerable: true,
         configurable: true
@@ -237,12 +230,16 @@ var EmptyValueService = (function () {
     };
     EmptyValueService.prototype.generateEmptyValueRecursively = function (schema) {
         var _this = this;
+        if (schema.default) {
+            return schema.default;
+        }
         if (schema.type === 'object') {
             var emptyObject_1 = {};
             Object.keys(schema.properties)
                 .filter(function (prop) {
                 var required = schema.required || [];
-                return required.indexOf(prop) > -1;
+                var alwaysShow = schema.alwaysShow || [];
+                return required.indexOf(prop) > -1 || alwaysShow.indexOf(prop) > -1;
             }).forEach(function (prop) {
                 var propSchema = schema.properties[prop];
                 emptyObject_1[prop] = _this.generateEmptyValueRecursively(propSchema);
@@ -1120,9 +1117,9 @@ var JsonStoreService = (function () {
     function JsonStoreService(pathUtilService, keysStoreService) {
         this.pathUtilService = pathUtilService;
         this.keysStoreService = keysStoreService;
-        this._patchesByPath$ = new __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__["ReplaySubject"](1);
+        this.patchesByPath$ = new __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__["ReplaySubject"](1);
+        this.json$ = new __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__["ReplaySubject"](1);
         this.patchesByPath = {};
-        this._json$ = new __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__["ReplaySubject"](1);
         // list of reverse patches for important changes
         this.history = new __WEBPACK_IMPORTED_MODULE_5__classes__["a" /* SizedStack */](5);
     }
@@ -1154,7 +1151,7 @@ var JsonStoreService = (function () {
         // set new value
         this.json = this.json.setIn(path, value);
         this.keysStoreService.syncKeysForPath(path, this.json);
-        this._json$.next(this.json);
+        this.json$.next(this.json);
     };
     JsonStoreService.prototype.getIn = function (path) {
         return this.json.getIn(path);
@@ -1166,7 +1163,7 @@ var JsonStoreService = (function () {
             value: this.json.getIn(path)
         });
         this.json = this.json.removeIn(path);
-        this._json$.next(this.json);
+        this.json$.next(this.json);
         this.keysStoreService.deletePath(path);
     };
     JsonStoreService.prototype.addIn = function (path, value) {
@@ -1269,7 +1266,7 @@ var JsonStoreService = (function () {
             var patchIndex = this.patchesByPath[path].indexOf(patch);
             if (patchIndex > -1) {
                 this.patchesByPath[path].splice(patchIndex, 1);
-                this._patchesByPath$.next(this.patchesByPath);
+                this.patchesByPath$.next(this.patchesByPath);
             }
         }
     };
@@ -1283,20 +1280,6 @@ var JsonStoreService = (function () {
             return undefined;
         }
     };
-    Object.defineProperty(JsonStoreService.prototype, "json$", {
-        get: function () {
-            return this._json$;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(JsonStoreService.prototype, "patchesByPath$", {
-        get: function () {
-            return this._patchesByPath$;
-        },
-        enumerable: true,
-        configurable: true
-    });
     /**
      * Converts the value to immutable if it is not an immutable.
      */
@@ -1493,15 +1476,8 @@ ListPageChangerService.ctorParameters = function () { return [
 var TabsUtilService = (function () {
     function TabsUtilService(pathUtilService) {
         this.pathUtilService = pathUtilService;
-        this._activeTabName$ = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
+        this.activeTabName$ = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
     }
-    Object.defineProperty(TabsUtilService.prototype, "activeTabName$", {
-        get: function () {
-            return this._activeTabName$;
-        },
-        enumerable: true,
-        configurable: true
-    });
     TabsUtilService.prototype.getTabNames = function (tabsConfig) {
         var tabNames = tabsConfig.tabs.map(function (tab) { return tab.name; });
         // insert default tab name at the beginning
@@ -2152,7 +2128,7 @@ var AbstractFieldComponent = (function (_super) {
     }
     AbstractFieldComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.subcriptions.push(this.errorsService.externalCategorizedErrorsSubject
+        this.subcriptions.push(this.errorsService.externalCategorizedErrors$
             .subscribe(function (externalCategorizedErrorMap) {
             _this.externalErrors = externalCategorizedErrorMap.errors[_this.pathString] || [];
             _this.changeDetectorRef.markForCheck();
@@ -2922,13 +2898,13 @@ var BottomConsoleBadgesComponent = (function () {
     }
     BottomConsoleBadgesComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.externalErrorCounterSubscription = this.errorsService.externalErrorCountersSubject
+        this.externalErrorCounterSubscription = this.errorsService.externalErrorCounters$
             .subscribe(function (errorCounters) {
             _this.globalErrorCount = errorCounters.errors;
             _this.globalWarningCount = errorCounters.warnings;
             _this.changeDetectorRef.markForCheck();
         });
-        this.internalErrorCounterSubscription = this.errorsService.internalErrorCountersSubject
+        this.internalErrorCounterSubscription = this.errorsService.internalErrorCounters$
             .subscribe(function (errorCounters) {
             _this.internalErrorCount = errorCounters.errors;
             _this.internalWarningCount = errorCounters.warnings;
@@ -3091,25 +3067,25 @@ var ErrorsConsoleTabComponent = (function () {
     }
     ErrorsConsoleTabComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.errorsService.externalCategorizedErrorsSubject
+        this.errorsService.externalCategorizedErrors$
             .map(function (categorizedErrorMap) { return categorizedErrorMap[_this.errorType]; })
             .subscribe(function (errorMap) {
             _this.externalErrorMap = errorMap;
             _this.changeDetectorRef.markForCheck();
         });
-        this.errorsService.externalErrorCountersSubject
+        this.errorsService.externalErrorCounters$
             .map(function (errorCounters) { return errorCounters[_this.errorType]; })
             .subscribe(function (errorCount) {
             _this.externalErrorCount = errorCount;
             _this.changeDetectorRef.markForCheck();
         });
-        this.errorsService.internalCategorizedErrorsSubject
+        this.errorsService.internalCategorizedErrors$
             .map(function (categorizedErrorMap) { return categorizedErrorMap[_this.errorType]; })
             .subscribe(function (errorMap) {
             _this.internalErrorMap = errorMap;
             _this.changeDetectorRef.markForCheck();
         });
-        this.errorsService.internalErrorCountersSubject
+        this.errorsService.internalErrorCounters$
             .map(function (errorCounters) { return errorCounters[_this.errorType]; })
             .subscribe(function (errorCount) {
             _this.internalErrorCount = errorCount;
@@ -4045,7 +4021,7 @@ JsonEditorComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */], args: [{
                 selector: 'json-editor',
                 encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["p" /* ViewEncapsulation */].None,
-                styles: ["body, html { height: 100%; background-color: #ecf0f1; } .editor-container { height: 100%; margin-right: 0px; margin-left: 0px; } .editor-container .row { margin-left: 0px; margin-right: 0px; } .shorter-editor-container { height: 75%; } #ng2-json-editor { /* Styles for tabset */ } #ng2-json-editor .hidden { display: none; } #ng2-json-editor th { font-weight: 400; padding: 1px 0px 1px 6px; background-color: #ecf0f1; color: #8e8e8e; font-weight: bold; } #ng2-json-editor th .dropdown-filter-container { font-weight: initial; } #ng2-json-editor td { background-color: #f9f9f9; border: none; padding: 0; } #ng2-json-editor td > * { vertical-align: middle; } #ng2-json-editor td.label-holder { width: 1%; white-space: nowrap; padding: 3px; background-color: #dae8ef; border-top: 1px solid #bdc3c7; } #ng2-json-editor td.label-holder button { color: #595959; } #ng2-json-editor tr.error td, #ng2-json-editor td.error { color: white; background-color: #e74c3c !important; transition: all .4s; } #ng2-json-editor tbody { border: none; } #ng2-json-editor table { margin-bottom: 0px !important; } #ng2-json-editor .main-container { font-size: 13px; border-left: 1px solid #a5adb5; height: 100%; overflow: auto; } #ng2-json-editor .main-container .tab-container > .nav-tabs { font-size: 14px; } #ng2-json-editor .main-container > add-field-dropdown div.dropdown { width: 100%; } #ng2-json-editor .main-container > add-field-dropdown ul.dropdown-menu { right: 0px; padding-bottom: 15px; } #ng2-json-editor .main-container > add-field-dropdown button.btn-add-field-dropdown { background: white; padding: 5px; opacity: 0.9; line-height: normal; font-size: 16px; width: 100%; } #ng2-json-editor .main-container > add-field-dropdown button.btn-add-field-dropdown:hover { opacity: 1; color: black; } #ng2-json-editor .add-field-dropdown-container { width: 100%; } #ng2-json-editor .middle.main-container { padding: 0px; } #ng2-json-editor .menu-container { background-color: #1D2D3D; height: 100%; overflow: auto; } #ng2-json-editor .menu-container div.dropdown { width: 100%; } #ng2-json-editor .menu-container ul.dropdown-menu { right: 0px; padding-bottom: 15px; } #ng2-json-editor .menu-container button.btn-add-field-dropdown { background: white; padding: 5px; opacity: 0.9; line-height: normal; font-size: 16px; width: 100%; } #ng2-json-editor .menu-container button.btn-add-field-dropdown:hover { opacity: 1; color: black; } #ng2-json-editor .editor-btn-delete { font-weight: bold; line-height: 1; text-shadow: 0 1px 0 #fff; opacity: 0.2; background: transparent; border: 0; padding: 0 0 3px 3px; } #ng2-json-editor .editor-btn-delete:hover { color: red; opacity: 0.6; } #ng2-json-editor .editor-btn-delete.editor-btn-delete-text { font-size: 13px; opacity: 0.5; padding: 0px; } #ng2-json-editor .editor-btn-move-down { padding-bottom: 0; } #ng2-json-editor .editor-btn-move-up, #ng2-json-editor .editor-btn-move-down { padding: 0; font-size: 11px; border: 0; background: transparent; opacity: 0.2; } #ng2-json-editor .editor-btn-move-up:hover, #ng2-json-editor .editor-btn-move-down:hover { opacity: 0.6; } #ng2-json-editor ul.pagination-top { margin: -16px 0px 0px 0px; } #ng2-json-editor td.button-holder, #ng2-json-editor th.button-holder { width: 40.33px; text-align: center; vertical-align: middle; } #ng2-json-editor td.button-holder.sortable, #ng2-json-editor th.button-holder.sortable { width: 46px; } #ng2-json-editor th.button-holder .add-field-dropdown-container { width: 100%; } #ng2-json-editor th.button-holder .btn-add-field-dropdown { width: 100%; } #ng2-json-editor label { color: #c1c1c1; } #ng2-json-editor .highlight { border: 2px solid yellow !important; } #ng2-json-editor table.editable-inner-table { table-layout: fixed; } #ng2-json-editor table.editable-inner-table > tbody > tr { border-bottom: 1px solid white !important; } #ng2-json-editor table.editable-inner-table add-new-element-button .button-container { padding-left: 6px; } #ng2-json-editor table.editable-inner-table label { display: inline; font-weight: initial; padding-left: 5px; } #ng2-json-editor table.editable-inner-table .dropdown-menu { left: inherit; right: 0px; min-width: 100px; } #ng2-json-editor .title-dropdown-item button { width: 100%; text-align: left; padding-left: 20px !important; padding-right: 20px !important; } #ng2-json-editor .title-dropdown-item:hover { background: #f5f5f5; } #ng2-json-editor .tooltip.top .tooltip-arrow { border-top-color: transparent; } #ng2-json-editor .tooltip { width: 90%; } #ng2-json-editor button.btn-toggle { float: right; margin-top: 5px; margin-right: 5px; } #ng2-json-editor .autocomplete-container .dropdown { position: relative !important; top: 0px !important; left: 0px !important; } #ng2-json-editor .max-height-90-vh { max-height: 90vh; } #ng2-json-editor .max-height-70-vh { max-height: 70vh; } #ng2-json-editor div.admin-mode { padding-top: 8px; width: 100%; } #ng2-json-editor label.admin-mode { color: #e0dfdf; font-size: 13px; font-weight: normal; width: 90%; padding-left: 4px; } #ng2-json-editor hr { margin-top: 5px; margin-bottom: 5px; border-top: 1px solid #757575; } #ng2-json-editor .btn.btn-success { background-color: #16a085; border-color: #16a085; color: white; } #ng2-json-editor .btn.btn-success:hover, #ng2-json-editor .btn.btn-success:active, #ng2-json-editor .btn.btn-success:focus { background-color: #19b698 !important; color: white; } #ng2-json-editor .btn .fa { margin-right: 2px; } #ng2-json-editor .nav { margin-bottom: 3px; } #ng2-json-editor .nav-tabs > li.active > a, #ng2-json-editor .nav-tabs > li.active > a:hover, #ng2-json-editor .nav-tabs > li.active > a:focus { border-top: 1px solid #2c3e50; background-color: white; } #ng2-json-editor .nav-tabs > li > a:hover { border-top: 1px solid #2c3e50; border-bottom: 1px solid transparent; border-left: 1px solid transparent; border-right: 1px solid transparent; transition: all .4s; } #ng2-json-editor .nav.nav-tabs { border-bottom: 5px solid white; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.24); } #ng2-json-editor .nav-tabs > li > a { margin-right: 0px; border-radius: 0px; border-right: 1px solid #e0e2e2; } #ng2-json-editor .disabled { cursor: not-allowed; } #ng2-json-editor .disabled div { pointer-events: none; } #ng2-json-editor .disabled div input, #ng2-json-editor .disabled div button, #ng2-json-editor .disabled div a, #ng2-json-editor .disabled div i, #ng2-json-editor .disabled div string-input > div { opacity: .5; } #ng2-json-editor .disabled button { pointer-events: none; } #ng2-json-editor .pagination > .active > a { background-color: #31617B; border-color: #31617B; } #ng2-json-editor .btn.btn-switch { background-color: #7DA0B3; } #ng2-json-editor .btn.btn-switch.active { background-color: #31617B; } .bottom-console-container { height: 25%; overflow: hidden; } .bottom-console-container .tab-content { height: 90%; overflow: scroll; } .red-left-border { border-left: 9px solid #e74c3c !important; } complex-list-field add-field-dropdown { display: none; } "],
+                styles: ["body, html { height: 100%; background-color: #ecf0f1; } .editor-container { height: 100%; margin-right: 0px; margin-left: 0px; } .editor-container .row { margin-left: 0px; margin-right: 0px; } .shorter-editor-container { height: 75%; } #ng2-json-editor { /* Styles for tabset */ } #ng2-json-editor .dropdown-menu { max-height: 400px; overflow-y: scroll; } #ng2-json-editor .hidden { display: none; } #ng2-json-editor th { font-weight: 400; padding: 1px 0px 1px 6px; background-color: #ecf0f1; color: #8e8e8e; font-weight: bold; } #ng2-json-editor th .dropdown-filter-container { font-weight: initial; } #ng2-json-editor td { background-color: #f9f9f9; border: none; padding: 0; } #ng2-json-editor td > * { vertical-align: middle; } #ng2-json-editor td.label-holder { width: 1%; white-space: nowrap; padding: 3px; background-color: #dae8ef; border-top: 1px solid #bdc3c7; } #ng2-json-editor td.label-holder button { color: #595959; } #ng2-json-editor tr.error td, #ng2-json-editor td.error { color: white; background-color: #e74c3c !important; transition: all .4s; } #ng2-json-editor tbody { border: none; } #ng2-json-editor table { margin-bottom: 0px !important; } #ng2-json-editor .main-container { font-size: 13px; border-left: 1px solid #a5adb5; height: 100%; overflow: auto; } #ng2-json-editor .main-container .tab-container > .nav-tabs { font-size: 14px; } #ng2-json-editor .main-container > add-field-dropdown div.dropdown { width: 100%; } #ng2-json-editor .main-container > add-field-dropdown ul.dropdown-menu { right: 0px; padding-bottom: 15px; } #ng2-json-editor .main-container > add-field-dropdown button.btn-add-field-dropdown { background: white; padding: 5px; opacity: 0.9; line-height: normal; font-size: 16px; width: 100%; } #ng2-json-editor .main-container > add-field-dropdown button.btn-add-field-dropdown:hover { opacity: 1; color: black; } #ng2-json-editor .add-field-dropdown-container { width: 100%; } #ng2-json-editor .middle.main-container { padding: 0px; } #ng2-json-editor .menu-container { background-color: #1D2D3D; height: 100%; overflow: auto; } #ng2-json-editor .menu-container div.dropdown { width: 100%; } #ng2-json-editor .menu-container ul.dropdown-menu { right: 0px; padding-bottom: 15px; } #ng2-json-editor .menu-container button.btn-add-field-dropdown { background: white; padding: 5px; opacity: 0.9; line-height: normal; font-size: 16px; width: 100%; } #ng2-json-editor .menu-container button.btn-add-field-dropdown:hover { opacity: 1; color: black; } #ng2-json-editor .editor-btn-delete { font-weight: bold; line-height: 1; text-shadow: 0 1px 0 #fff; opacity: 0.2; background: transparent; border: 0; padding: 0 0 3px 3px; } #ng2-json-editor .editor-btn-delete:hover { color: red; opacity: 0.6; } #ng2-json-editor .editor-btn-delete.editor-btn-delete-text { font-size: 13px; opacity: 0.5; padding: 0px; } #ng2-json-editor .editor-btn-move-down { padding-bottom: 0; } #ng2-json-editor .editor-btn-move-up, #ng2-json-editor .editor-btn-move-down { padding: 0; font-size: 11px; border: 0; background: transparent; opacity: 0.2; } #ng2-json-editor .editor-btn-move-up:hover, #ng2-json-editor .editor-btn-move-down:hover { opacity: 0.6; } #ng2-json-editor ul.pagination-top { margin: -16px 0px 0px 0px; } #ng2-json-editor td.button-holder, #ng2-json-editor th.button-holder { width: 40.33px; text-align: center; vertical-align: middle; } #ng2-json-editor td.button-holder.sortable, #ng2-json-editor th.button-holder.sortable { width: 46px; } #ng2-json-editor th.button-holder .add-field-dropdown-container { width: 100%; } #ng2-json-editor th.button-holder .btn-add-field-dropdown { width: 100%; } #ng2-json-editor label { color: #c1c1c1; } #ng2-json-editor .highlight { border: 2px solid yellow !important; } #ng2-json-editor table.editable-inner-table { table-layout: fixed; } #ng2-json-editor table.editable-inner-table > tbody > tr { border-bottom: 1px solid white !important; } #ng2-json-editor table.editable-inner-table add-new-element-button .button-container { padding-left: 6px; } #ng2-json-editor table.editable-inner-table label { display: inline; font-weight: initial; padding-left: 5px; } #ng2-json-editor table.editable-inner-table .dropdown-menu { left: inherit; right: 0px; min-width: 100px; } #ng2-json-editor .title-dropdown-item button { width: 100%; text-align: left; padding-left: 20px !important; padding-right: 20px !important; } #ng2-json-editor .title-dropdown-item:hover { background: #f5f5f5; } #ng2-json-editor .tooltip.top .tooltip-arrow { border-top-color: transparent; } #ng2-json-editor .tooltip { width: 90%; } #ng2-json-editor button.btn-toggle { float: right; margin-top: 5px; margin-right: 5px; } #ng2-json-editor .autocomplete-container .dropdown { position: relative !important; top: 0px !important; left: 0px !important; } #ng2-json-editor .max-height-90-vh { max-height: 90vh; } #ng2-json-editor .max-height-70-vh { max-height: 70vh; } #ng2-json-editor div.admin-mode { padding-top: 8px; width: 100%; } #ng2-json-editor label.admin-mode { color: #e0dfdf; font-size: 13px; font-weight: normal; width: 90%; padding-left: 4px; } #ng2-json-editor hr { margin-top: 5px; margin-bottom: 5px; border-top: 1px solid #757575; } #ng2-json-editor .btn.btn-success { background-color: #16a085; border-color: #16a085; color: white; } #ng2-json-editor .btn.btn-success:hover, #ng2-json-editor .btn.btn-success:active, #ng2-json-editor .btn.btn-success:focus { background-color: #19b698 !important; color: white; } #ng2-json-editor .btn .fa { margin-right: 2px; } #ng2-json-editor .nav { margin-bottom: 3px; } #ng2-json-editor .nav-tabs > li.active > a, #ng2-json-editor .nav-tabs > li.active > a:hover, #ng2-json-editor .nav-tabs > li.active > a:focus { border-top: 1px solid #2c3e50; background-color: white; } #ng2-json-editor .nav-tabs > li > a:hover { border-top: 1px solid #2c3e50; border-bottom: 1px solid transparent; border-left: 1px solid transparent; border-right: 1px solid transparent; transition: all .4s; } #ng2-json-editor .nav.nav-tabs { border-bottom: 5px solid white; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.24); } #ng2-json-editor .nav-tabs > li > a { margin-right: 0px; border-radius: 0px; border-right: 1px solid #e0e2e2; } #ng2-json-editor .disabled { cursor: not-allowed; } #ng2-json-editor .disabled div { pointer-events: none; } #ng2-json-editor .disabled div input, #ng2-json-editor .disabled div button, #ng2-json-editor .disabled div a, #ng2-json-editor .disabled div i, #ng2-json-editor .disabled div string-input > div { opacity: .5; } #ng2-json-editor .disabled button { pointer-events: none; } #ng2-json-editor .pagination > .active > a { background-color: #31617B; border-color: #31617B; } #ng2-json-editor .btn.btn-switch { background-color: #7DA0B3; } #ng2-json-editor .btn.btn-switch.active { background-color: #31617B; } .bottom-console-container { height: 25%; overflow: hidden; } .bottom-console-container .tab-content { height: 90%; overflow: scroll; } .red-left-border { border-left: 9px solid #e74c3c !important; } complex-list-field add-field-dropdown { display: none; } "],
                 template: "<div id=\"ng2-json-editor\" class=\"row editor-container\" [ngClass]=\"shorterEditorContainerClass\"> <div *ngIf=\"!config.compact\" class=\"col-md-2 menu-container\"> <tree-menu [record]=\"_record\" [schema]=\"schema\"></tree-menu> <add-field-dropdown [fields]=\"keys$ | async\" [pathString]=\"pathString\" [schema]=\"schema\">Add field</add-field-dropdown> <hr> <div *ngIf=\"config.enableAdminModeSwitch\" class=\"admin-mode\" tooltip=\"Allows editing all fields (use with care)\"> <input id=\"admin-mode-checkbox\" type=\"checkbox\" [(ngModel)]=\"appGlobalsService.adminMode\" /> <label class=\"admin-mode\" for=\"admin-mode-checkbox\">Enable Admin Mode</label> </div> <hr> <bottom-console-badges (badgeClick)=\"openBottomConsole($event)\"></bottom-console-badges> </div> <div id=\"middle-main-container\" class=\"middle main-container\" [ngClass]=\"middleContainerColMdClass\" [shortcuts]=\"customShortcutKeys\"> <add-field-dropdown *ngIf=\"config.compact\" [fields]=\"keys$ | async\" [pathString]=\"pathString\" [schema]=\"schema\">Add field</add-field-dropdown>     <tabset *ngIf=\"config.tabsConfig\"> <tab *ngFor=\"let tabName of tabNames; trackBy:trackByElement\" [heading]=\"tabName\" (select)=\"activeTabName = tabName\" [active]=\"isActiveTab(tabName)\"> <sub-record [value]=\"_record\" [tabName]=\"tabName\" [schema]=\"schema\" [keys]=\"keys$ | async\" [pathString]=\"pathString\"></sub-record> </tab> </tabset> <sub-record *ngIf=\"!config.tabsConfig\" [value]=\"_record\" [schema]=\"schema\" [keys]=\"keys$ | async\" [pathString]=\"pathString\"></sub-record> </div> <div id=\"right-main-container\" *ngIf=\"!isPreviewerDisabled\" [ngClass]=\"rightContainerColMdClass\" class=\"main-container\"> <button id=\"btn-preview-toggle\" type=\"button\" class=\"btn btn-default btn-toggle\" (click)=\"isPreviewerHidden = !isPreviewerHidden\">{{isPreviewerHidden ? \"Show Preview\" : \"Hide Preview\"}}</button> <editor-previewer [hidden]=\"isPreviewerHidden\" [previews]=\"previews\"> </editor-previewer> </div> </div> <bottom-console *ngIf=\"!config.compact\" [activeTab]=\"bottomConsoleActiveTab\" [isOpen]=\"isBottomConsoleOpen\" (onCollapse)=\"isBottomConsoleOpen = $event\"></bottom-console> <!-- Modal View controlled by ModalService --> <modal-view> </modal-view>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
             },] },
@@ -4690,9 +4666,11 @@ var PrimitiveFieldComponent = (function (_super) {
     PrimitiveFieldComponent.prototype.ngOnInit = function () {
         var _this = this;
         _super.prototype.ngOnInit.call(this);
-        this.lastCommitedValue = this.value;
+        if (this.value !== this.schema.default) {
+            this.lastCommitedValue = this.value;
+        }
         this.subcriptions.push(this.errorsService
-            .internalCategorizedErrorsSubject
+            .internalCategorizedErrors$
             .subscribe(function (internalCategorizedErrorMap) {
             _this.internalErrors = internalCategorizedErrorMap.errors[_this.pathString] || [];
         }), this.appGlobalsService.adminMode$.subscribe(function (adminMode) {
@@ -4746,11 +4724,12 @@ var PrimitiveFieldComponent = (function (_super) {
     });
     Object.defineProperty(PrimitiveFieldComponent.prototype, "tooltipPosition", {
         get: function () {
-            var tooltipPlacement = 'top';
             if (this.pathString.startsWith(this.appGlobalsService.firstElementPathForCurrentTab)) {
-                tooltipPlacement = 'bottom';
+                return 'bottom';
             }
-            return tooltipPlacement;
+            else {
+                return 'top';
+            }
         },
         enumerable: true,
         configurable: true
@@ -4794,7 +4773,7 @@ PrimitiveFieldComponent.decorators = [
                 selector: 'primitive-field',
                 encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["p" /* ViewEncapsulation */].None,
                 styles: ["td.value-container div[contenteditable=true], td.value-container input { vertical-align: middle; transition: all 0.5s ease; border: none; background-color: transparent; display: inline-block; width: 100%; } table.primitive-field-container { width: 100%; } td.link-button-container { width: 22px; } td.value-container { width: 100%; padding: 3px 3px 3px 6px !important; } td.value-container:hover { background-color: #ffa !important; } a.no-decoration { text-decoration: none; } [contenteditable=true] { min-height: 18px; word-break: break-word; } [contenteditable=true]:empty:before { content: attr(placeholder); color: darkgray; display: block; /* For Firefox */ } .tooltip-left-align { margin-left: 12px; padding: 0px; } .btn-merge { border: none; background: transparent; width: 100%; text-align: left; white-space: normal; } .orange-left-border { border-left: 7px solid #e67e22; border-radius: 0; } .fa-bolt { color: #e67e22; } "],
-                template: "<div [id]=\"pathString\"> <table class=\"primitive-field-container\" [ngSwitch]=\"schema.componentType\"> <tr [ngClass]=\"errorClass\"> <ng-template #errorsTooltipTemplate> <ul class=\"tooltip-left-align\"> <li *ngFor=\"let error of internalErrors\"> {{error.message}} </li> <li *ngFor=\"let error of externalErrors\"> {{error.message}} </li> </ul> </ng-template> <td *ngIf=\"!jsonPatches[0]; else patchTemplate\" class=\"value-container\" [ngClass]=\"disabledClass\" [tooltip]=\"errorsTooltipTemplate\" [isDisabled]=\"!hasErrors()\" placement=\"{{tooltipPosition}}\" container=\"body\"> <div *ngSwitchCase=\"'string'\"> <string-input [pathString]=\"pathString\" [value]=\"value\" (valueChange)=\"onValueChange($event)\" [disabled]=\"disabled\" [tabIndex]=\"tabIndex\" [latexPreviewEnabled]=\"schema.latexPreviewEnabled\" [placeholder]=\"schema.title\" (blur)=\"onBlur()\" (onKeypress)=\"onKeypress($event)\"> </string-input> </div> <div *ngSwitchCase=\"'enum'\"> <searchable-dropdown [pathString]=\"pathString\" [value]=\"value\" [placeholder]=\"schema.title\" [items]=\"schema.enum\" [shortcutMap]=\"schema.enumShorcutMap\" (onSelect)=\"onSearchableDropdownSelect($event)\" [tabIndex]=\"tabIndex\" (onBlur)=\"domUtilService.clearHighlight()\"></searchable-dropdown> </div> <div *ngSwitchCase=\"'autocomplete'\"> <autocomplete-input [pathString]=\"pathString\" [value]=\"value\" [path]=\"path\" [autocompletionConfig]=\"schema.autocompletionConfig\" (onBlur)=\"onBlur()\" (onKeypress)=\"onKeypress($event)\" (onValueChange)=\"onValueChange($event)\" [placeholder]=\"schema.title\" [tabIndex]=\"tabIndex\"></autocomplete-input> </div> <div *ngSwitchCase=\"'integer'\"> <input type=\"number\" [(ngModel)]=\"value\" [tabindex]=\"tabIndex\" [attr.data-path]=\"pathString\" (blur)=\"onBlur()\" (keypress)=\"onKeypress($event)\" [placeholder]=\"schema.title\"> </div> <div *ngSwitchCase=\"'boolean'\"> <input type=\"checkbox\" [(ngModel)]=\"value\" (ngModelChange)=\"onBlur()\" [placeholder]=\"schema.title\"> </div> <div *ngSwitchDefault> ## Not recognized type: {{valueType}} </div> </td> <td class=\"link-button-container\"> <a *ngIf=\"schema.linkBuilder\" class=\"no-decoration\" target=\"_blank\" [href]=\"schema.linkBuilder(value)\"> <i class=\"fa fa-link\" aria-hidden=\"true\"></i> </a> <a *ngIf=\"!schema.linkBuilder && schema.format === 'url'\" class=\"no-decoration\" target=\"_blank\" [href]=\"value\"> <i class=\"fa fa-link\" aria-hidden=\"true\"></i> </a> </td> </tr> </table> </div> <ng-template #patchTemplate> <button class=\"btn btn-default btn-merge orange-left-border\" type=\"button\" [popover]=\"mergePopover\" popoverTitle=\"Merge\" container=\"body\"> {{value}} <i class=\"fa fa-bolt\"></i> </button> </ng-template> <ng-template #mergePopover> <text-diff [currentText]=\"value\" [newText]=\"jsonPatches[0].value\"></text-diff> <patch-actions [patch]=\"jsonPatches[0]\" [addActionEnabled]=\"isPathToAnIndex\"></patch-actions> </ng-template>",
+                template: "<div [id]=\"pathString\"> <table class=\"primitive-field-container\" [ngSwitch]=\"schema.componentType\"> <tr [ngClass]=\"errorClass\"> <ng-template #errorsTooltipTemplate> <ul class=\"tooltip-left-align\"> <li *ngFor=\"let error of internalErrors\"> {{error.message}} </li> <li *ngFor=\"let error of externalErrors\"> {{error.message}} </li> </ul> </ng-template> <td *ngIf=\"!jsonPatches[0]; else patchTemplate\" class=\"value-container\" [ngClass]=\"disabledClass\" [tooltip]=\"errorsTooltipTemplate\" [isDisabled]=\"!hasErrors()\" placement=\"{{tooltipPosition}}\" container=\"body\"> <div *ngSwitchCase=\"'string'\"> <string-input [pathString]=\"pathString\" [value]=\"value\" (valueChange)=\"onValueChange($event)\" [disabled]=\"disabled\" [tabIndex]=\"tabIndex\" [latexPreviewEnabled]=\"schema.latexPreviewEnabled\" [placeholder]=\"schema.title\" (blur)=\"onBlur()\" (onKeypress)=\"onKeypress($event)\"> </string-input> </div> <div *ngSwitchCase=\"'enum'\"> <searchable-dropdown [pathString]=\"pathString\" [value]=\"value\" [placeholder]=\"schema.title\" [items]=\"schema.enum\" [shortcutMap]=\"schema.enumShorcutMap\" (onSelect)=\"onSearchableDropdownSelect($event)\" [tabIndex]=\"tabIndex\" (onBlur)=\"onBlur()\"></searchable-dropdown> </div> <div *ngSwitchCase=\"'autocomplete'\"> <autocomplete-input [pathString]=\"pathString\" [value]=\"value\" [path]=\"path\" [autocompletionConfig]=\"schema.autocompletionConfig\" (onBlur)=\"onBlur()\" (onKeypress)=\"onKeypress($event)\" (onValueChange)=\"onValueChange($event)\" [placeholder]=\"schema.title\" [tabIndex]=\"tabIndex\"></autocomplete-input> </div> <div *ngSwitchCase=\"'integer'\"> <input type=\"number\" [(ngModel)]=\"value\" [tabindex]=\"tabIndex\" [attr.data-path]=\"pathString\" (blur)=\"onBlur()\" (keypress)=\"onKeypress($event)\" [placeholder]=\"schema.title\"> </div> <div *ngSwitchCase=\"'boolean'\"> <input type=\"checkbox\" [(ngModel)]=\"value\" (ngModelChange)=\"onBlur()\" [placeholder]=\"schema.title\"> </div> <div *ngSwitchDefault> ## Not recognized type: {{valueType}} </div> </td> <td class=\"link-button-container\"> <a *ngIf=\"schema.linkBuilder\" class=\"no-decoration\" target=\"_blank\" [href]=\"schema.linkBuilder(value)\"> <i class=\"fa fa-link\" aria-hidden=\"true\"></i> </a> <a *ngIf=\"!schema.linkBuilder && schema.format === 'url'\" class=\"no-decoration\" target=\"_blank\" [href]=\"value\"> <i class=\"fa fa-link\" aria-hidden=\"true\"></i> </a> </td> </tr> </table> </div> <ng-template #patchTemplate> <button class=\"btn btn-default btn-merge orange-left-border\" type=\"button\" [popover]=\"mergePopover\" popoverTitle=\"Merge\" container=\"body\"> {{value}} <i class=\"fa fa-bolt\"></i> </button> </ng-template> <ng-template #mergePopover> <text-diff [currentText]=\"value\" [newText]=\"jsonPatches[0].value\"></text-diff> <patch-actions [patch]=\"jsonPatches[0]\" [addActionEnabled]=\"isPathToAnIndex\"></patch-actions> </ng-template>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
@@ -5373,8 +5352,8 @@ var ShortcutsDirective = (function () {
     function ShortcutsDirective(el, shortcutActionService) {
         this.el = el;
         this.shortcutActionService = shortcutActionService;
-        // actions with default shortcut keys
-        this._shortcuts = {
+        // actions with default shortcut keys, update with the custom keys later
+        this.actionNameToShortcut = {
             add: {
                 key: 'alt+a',
                 action: this.shortcutActionService.generateShortcutAction('addAction')
@@ -5442,22 +5421,21 @@ var ShortcutsDirective = (function () {
         var _this = this;
         var customShortcutKeysChange = changes['shortcuts'];
         if (customShortcutKeysChange && this.shortcuts) {
-            Object.keys(this._shortcuts).forEach(function (actionName) {
+            Object.keys(this.actionNameToShortcut).forEach(function (actionName) {
+                var shortcut = _this.actionNameToShortcut[actionName];
                 if (_this.shortcuts[actionName]) {
-                    _this._shortcuts[actionName].key = _this.shortcuts[actionName];
+                    shortcut.key = _this.shortcuts[actionName];
                 }
+                _this.mousetrap.bind(shortcut.key, shortcut.action);
             });
         }
     };
-    ShortcutsDirective.prototype.ngOnInit = function () {
-        var _this = this;
-        Object.keys(this._shortcuts).forEach(function (method) {
-            var action = _this._shortcuts[method].action;
-            _this.mousetrap.bind(_this._shortcuts[method].key, action);
-        });
-    };
     ShortcutsDirective.prototype.ngOnDestroy = function () {
-        this.mousetrap.unbind(Object.keys(this._shortcuts));
+        var _this = this;
+        Object.keys(this.actionNameToShortcut)
+            .forEach(function (actionName) {
+            _this.mousetrap.unbind(_this.actionNameToShortcut[actionName].key);
+        });
     };
     return ShortcutsDirective;
 }());
@@ -6193,48 +6171,20 @@ UnderscoreToSpacePipe.ctorParameters = function () { return []; };
 
 var ErrorsService = (function () {
     function ErrorsService() {
-        this._externalCategorizedErrorsSubject = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
-        this._internalCategorizedErrorsSubject = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
-        this._externalErrorCountersSubject = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
-        this._internalErrorCountersSubject = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
+        this.externalCategorizedErrors$ = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
+        this.internalCategorizedErrors$ = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
+        this.externalErrorCounters$ = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
+        this.internalErrorCounters$ = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
         this.internalErrorMap = {};
         this.internalCategorizedErrorMap = { errors: {}, warnings: {} };
         this.externalCategorizedErrorMap = { errors: {}, warnings: {} };
     }
-    Object.defineProperty(ErrorsService.prototype, "externalCategorizedErrorsSubject", {
-        get: function () {
-            return this._externalCategorizedErrorsSubject;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ErrorsService.prototype, "externalErrorCountersSubject", {
-        get: function () {
-            return this._externalErrorCountersSubject;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ErrorsService.prototype, "internalCategorizedErrorsSubject", {
-        get: function () {
-            return this._internalCategorizedErrorsSubject;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ErrorsService.prototype, "internalErrorCountersSubject", {
-        get: function () {
-            return this._internalErrorCountersSubject;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(ErrorsService.prototype, "externalErrors", {
         set: function (errors) {
             var _a = this.categorizeErrorMap(errors), categorizedErrorMap = _a.categorizedErrorMap, errorCounter = _a.errorCounter, warningCounter = _a.warningCounter;
             this.externalCategorizedErrorMap = categorizedErrorMap;
-            this.externalCategorizedErrorsSubject.next(this.externalCategorizedErrorMap);
-            this.externalErrorCountersSubject.next({
+            this.externalCategorizedErrors$.next(this.externalCategorizedErrorMap);
+            this.externalErrorCounters$.next({
                 errors: errorCounter,
                 warnings: warningCounter
             });
@@ -6246,8 +6196,8 @@ var ErrorsService = (function () {
         this.internalErrorMap[path] = errors;
         var _a = this.categorizeErrorMap(this.internalErrorMap), categorizedErrorMap = _a.categorizedErrorMap, errorCounter = _a.errorCounter, warningCounter = _a.warningCounter;
         this.internalCategorizedErrorMap = categorizedErrorMap;
-        this.internalCategorizedErrorsSubject.next(this.internalCategorizedErrorMap);
-        this.internalErrorCountersSubject.next({
+        this.internalCategorizedErrors$.next(this.internalCategorizedErrorMap);
+        this.internalErrorCounters$.next({
             errors: errorCounter,
             warnings: warningCounter
         });
@@ -6859,7 +6809,27 @@ var SchemaFixerService = (function () {
      * @param config - schema specific options
      */
     SchemaFixerService.prototype.enrichSchemaWithConfig = function (schema, config) {
-        return __WEBPACK_IMPORTED_MODULE_1_lodash__["merge"](config, schema);
+        return __WEBPACK_IMPORTED_MODULE_1_lodash__["mergeWith"](schema, config, function (currentSchema, currentConfig, key) {
+            if ((key === 'properties' || key === 'items') && !currentSchema) {
+                console.warn("config => " + JSON.stringify(currentConfig, function (configKey, value) {
+                    if (typeof value === 'function') {
+                        return 'ƒ()';
+                    }
+                    return value;
+                }, 2) + " should not be under \"" + key + "\" because schema does not have \"" + key + "\"");
+                // cancel merge to avoid creating broken json schema
+                return null;
+            }
+            if (currentSchema && key === 'properties') {
+                var configKeys = Object.keys(currentConfig);
+                configKeys
+                    .filter(function (configKey) { return !currentSchema[configKey]; })
+                    .forEach(function (wrongConfigKey) {
+                    delete currentConfig[wrongConfigKey];
+                    console.warn(wrongConfigKey);
+                });
+            }
+        });
     };
     /**
      * Applies all fixes to schema recursively
@@ -6880,6 +6850,9 @@ var SchemaFixerService = (function () {
         }
         if (schema.alwaysShow) {
             schema = this.fixAlwaysShow(schema);
+        }
+        if (schema.alwaysShowRegExp) {
+            schema = this.fixAlwaysShowRegExp(schema);
         }
         // schema fixes must be done above
         // recursively call for deeper parts of schema
@@ -6997,6 +6970,27 @@ var SchemaFixerService = (function () {
     };
     SchemaFixerService.prototype.fixAllOf = function (schema) {
         return __WEBPACK_IMPORTED_MODULE_1_lodash__["merge"].apply(__WEBPACK_IMPORTED_MODULE_1_lodash__, [{}].concat(schema.allOf));
+    };
+    /**
+     * Adds keys that matches `alwaysShowRegExp` to `alwaysShow`.
+     * Passes `alwaysShowRegExp` down to children so that it is applied recursively.
+     */
+    SchemaFixerService.prototype.fixAlwaysShowRegExp = function (schema) {
+        if (!schema.alwaysShow) {
+            schema.alwaysShow = [];
+        }
+        Object.keys(schema.properties)
+            .forEach(function (key) {
+            // pass alwaysShowRegExp down to apply it recursively.
+            var subSchema = schema.properties[key];
+            if (subSchema.type === 'object') {
+                subSchema.alwaysShowRegExp = schema.alwaysShowRegExp;
+            }
+            if (key.search(schema.alwaysShowRegExp) > -1) {
+                schema.alwaysShow.push(key);
+            }
+        });
+        return schema;
     };
     /**
      * Removes alwayShow fields that aren't in the schema.properties
