@@ -52,7 +52,13 @@ import {
   ErrorsService
 } from './shared/services';
 
-import { JsonEditorConfig, Preview, SchemaValidationErrors, JsonPatch, Shortcut, CustomShortcutKeys } from './shared/interfaces';
+import { JsonEditorConfig,
+  Preview,
+  SchemaValidationErrors,
+  JsonPatch,
+  Shortcut,
+  CustomShortcutKeys,
+  JSONSchema } from './shared/interfaces';
 
 
 @Component({
@@ -69,6 +75,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
 
   @Input() config: JsonEditorConfig;
   @Input() record: object;
+  // original schema
   @Input() schema: any;
   @Input() errorMap: SchemaValidationErrors;
   @Input() jsonPatches: Array<JsonPatch>;
@@ -84,6 +91,8 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
   isBottomConsoleOpen = false;
   bottomConsoleActiveTab = '';
   customShortcutKeys: CustomShortcutKeys;
+  // altered schema enchanced with configs
+  fixedSchema: JSONSchema;
 
   // used to decide if the [record] is change caused by recordChange.emit or parent component
   private lastEmittedRecord: object;
@@ -103,7 +112,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
 
   ngOnInit() {
     this.appGlobalsService.adminMode$.subscribe(adminMode => {
-      this.keysStoreService.buildKeysMap(this._record, this.schema);
+      this.keysStoreService.buildKeysMap(this._record, this.fixedSchema);
     });
 
     // listen for all changes on json
@@ -146,15 +155,15 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
     const schemaChanged = changes['schema'] || changes['config'];
 
     if (schemaChanged) {
-      this.schema = this.schemaFixerService.fixSchema(this.schema, this.config.schemaOptions);
-      this.jsonSchemaService.setSchema(this.schema);
+      this.fixedSchema = this.schemaFixerService.fixSchema(this.schema, this.config.schemaOptions);
+      this.jsonSchemaService.setSchema(this.fixedSchema);
     }
 
     if (schemaChanged || recordChanged) {
-      this.record = this.recordFixerService.fixRecord(this.record, this.schema);
+      this.record = this.recordFixerService.fixRecord(this.record, this.fixedSchema);
       this._record = fromJS(this.record);
       this.jsonStoreService.setJson(this._record);
-      this.keysStoreService.buildKeysMap(this._record, this.schema);
+      this.keysStoreService.buildKeysMap(this._record, this.fixedSchema);
     }
 
 
