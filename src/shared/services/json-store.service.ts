@@ -88,7 +88,8 @@ export class JsonStoreService {
       } else {
         list = list.insert(lastPathElement, value);
       }
-      this.setIn(pathWithoutIndex, list);
+      // allowUndo=false to avoid creating replace history patch when adding an item to a list.
+      this.setIn(pathWithoutIndex, list, false);
     } else {
       this.setIn(path, value);
     }
