@@ -40,7 +40,8 @@ export class SchemaFixerService {
    * @param config - schema specific options
    * @return {JSONSchema} - fixed schema
    */
-  fixSchema(schema: JSONSchema, config?: SchemaOptions): JSONSchema {
+  fixSchema(originalSchema: JSONSchema, config?: SchemaOptions): JSONSchema {
+    let schema = _.cloneDeep(originalSchema);
     if (config) {
       schema = this.enrichSchemaWithConfig(schema, config);
     }
@@ -114,7 +115,7 @@ export class SchemaFixerService {
     // fixes that needs above fixes to be done deeply for the current schema
     schema.componentType = this.componentTypeService.getComponentType(schema);
 
-    return Object.assign({}, schema);
+    return schema;
   }
 
   /**
