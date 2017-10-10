@@ -27,8 +27,8 @@
       </div>
     </div>
     <div *ngIf="shouldDisplayViewTemplate" class="btn-group">
-      <label class="btn btn-switch" [class.active]="shouldDisplayOnlyEditFormItems" (click)="shouldDisplayOnlyEditFormItems = true">To Edit</label>
       <label class="btn btn-switch" [class.active]="!shouldDisplayOnlyEditFormItems" (click)="shouldDisplayOnlyEditFormItems = false">All</label>
+      <label class="btn btn-switch" [class.active]="shouldDisplayOnlyEditFormItems" (click)="shouldDisplayOnlyEditFormItems = true">To Edit</label>
     </div>
     <div *ngIf="headerItemTemplate">
       <ng-template [ngTemplateOutlet]="headerItemTemplate"></ng-template>
