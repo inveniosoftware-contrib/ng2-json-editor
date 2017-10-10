@@ -113,14 +113,25 @@ export class ShortcutsDirective implements OnDestroy, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     const customShortcutKeysChange = changes['shortcuts'];
-    if (customShortcutKeysChange && this.shortcuts) {
-      Object.keys(this.actionNameToShortcut).forEach(actionName => {
-        const shortcut = this.actionNameToShortcut[actionName];
-        if (this.shortcuts[actionName]) {
-          shortcut.key = this.shortcuts[actionName];
-        }
-        this.mousetrap.bind(shortcut.key, shortcut.action);
-      });
+    if (customShortcutKeysChange) {
+      const actionNames = Object.keys(this.actionNameToShortcut);
+      // if custom shortcut keys are set
+      if (this.shortcuts) {
+        actionNames.forEach(actionName => {
+          const shortcut = this.actionNameToShortcut[actionName];
+          if (this.shortcuts[actionName]) {
+            // override shortcut key
+            shortcut.key = this.shortcuts[actionName];
+          }
+          this.mousetrap.bind(shortcut.key, shortcut.action);
+        });
+      } else {
+        actionNames.forEach(actionName => {
+          const shortcut = this.actionNameToShortcut[actionName];
+          this.mousetrap.bind(shortcut.key, shortcut.action);
+        });
+      }
+
     }
   }
 
