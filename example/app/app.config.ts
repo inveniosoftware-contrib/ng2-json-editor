@@ -98,6 +98,17 @@ export class AppConfig {
               }
             }
           }
+        },
+        imprints: {
+          items: {
+            properties: {
+              date: {
+                errorMessage: {
+                  format: 'This is not a date!'
+                }
+              }
+            }
+          }
         }
       }
     },

@@ -43,7 +43,8 @@
     "zone.js": "^0.8.4"
   },
   "dependencies": {
-    "ajv": "^4.11.3",
+    "ajv": "^5.0.0",
+    "ajv-errors": "^1.0.0",
     "diff": "^3.3.0",
     "immutable": "^3.8.1",
     "katex": "^0.7.1",
