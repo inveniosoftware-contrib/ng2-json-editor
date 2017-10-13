@@ -3,6 +3,7 @@ import { LongListNavigatorConfig } from './long-list-navigator-config';
 import { ViewTemplateConfig } from './view-template-config';
 import { RefConfig } from './ref-config';
 import { OnValueChangeFunction } from './on-value-change-function';
+import { CustomErrorMessages } from './custom-error-messages';
 
 export interface SchemaOption {
   /**
@@ -109,4 +110,9 @@ export interface SchemaOption {
    * Flag to enable LaTeX preview in a field.
    */
   latexPreviewEnabled?: boolean;
+
+  /**
+   * Custom error messages for schema validation
+   */
+  errorMessage?: string | CustomErrorMessages;
 }

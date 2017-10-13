@@ -22,14 +22,16 @@
 
 import { Injectable } from '@angular/core';
 import * as Ajv from 'ajv';
-import { AppGlobalsService } from './app-globals.service';
+import * as enableCustomErrorMessages from 'ajv-errors';
 
+import { AppGlobalsService } from './app-globals.service';
 import { JSONSchema, ValidationError } from '../interfaces';
 
 @Injectable()
 export class SchemaValidationService {
 
-  private ajv = new Ajv({ allErrors: true });
+  // `jsonPointer: true` is required for `avj-errors` package
+  private ajv = new Ajv({ allErrors: true, jsonPointers: true });
 
   // https://gist.github.com/dperini/729294
   private reWebUrl = new RegExp(
@@ -72,6 +74,8 @@ export class SchemaValidationService {
   );
 
   constructor(public appGlobalsService: AppGlobalsService) {
+    enableCustomErrorMessages(this.ajv);
+
     //  ajv didn't support format:url, so was added using web url regex for validation
     this.ajv.addFormat('url', this.reWebUrl);
     if (this.appGlobalsService.config && this.appGlobalsService.config.customFormatValidation) {
