@@ -25,6 +25,7 @@ import {
   ComponentFixture,
   TestBed
 } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { Ng2BootstrapModule } from 'ngx-bootstrap';
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
@@ -96,7 +97,8 @@ describe('PrimitiveFieldComponent', () => {
         PatchActionsComponent
       ],
       imports: [
-        Ng2BootstrapModule.forRoot()
+        Ng2BootstrapModule.forRoot(),
+        FormsModule
       ],
       providers: [
         AppGlobalsService,

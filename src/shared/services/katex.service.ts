@@ -85,7 +85,7 @@ export class KatexService {
     }
 
     return -1;
-  };
+  }
 
   private splitAtDelimiters(startData: Array<KatexData>, leftDelim: string, rightDelim: string, display: boolean): Array<KatexData> {
     const finalData = [];

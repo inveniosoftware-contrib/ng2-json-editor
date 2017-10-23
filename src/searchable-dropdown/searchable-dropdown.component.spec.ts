@@ -25,6 +25,7 @@ import {
   ComponentFixture,
   TestBed,
 } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { Ng2BootstrapModule } from 'ngx-bootstrap';
 
 import { SearchableDropdownComponent } from './searchable-dropdown.component';
@@ -52,7 +53,8 @@ describe('SearchableDropdownComponent', () => {
         SearchableDropdownComponent,
       ],
       imports: [
-        Ng2BootstrapModule.forRoot()
+        Ng2BootstrapModule.forRoot(),
+        FormsModule
       ]
     }).compileComponents();
   }));

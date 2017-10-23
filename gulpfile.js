@@ -27,15 +27,17 @@ var extReplace = require('gulp-ext-replace');
 var ngc = require('gulp-ngc');
 var del = require('del');
 var tsLint = require('gulp-tslint');
+var Linter = require('tslint').Linter;
+var tsLintProgram = Linter.createProgram('./src/tsconfig.json');
 var inlineResources = require('inline-ng2-resources');
 var KarmaServer = require('karma').Server;
 var runSequence = require('run-sequence');
 
 // run tslint
 gulp.task('tslint', () => {
-  return gulp.src('./src/**/*.ts')
+  return gulp.src('./src/**/*.ts', { base: '.' })
     .pipe(tsLint({
-      configuration: 'tslint.json',
+      program: tsLintProgram,
       formatter: 'prose'
     }))
     .pipe(tsLint.report({

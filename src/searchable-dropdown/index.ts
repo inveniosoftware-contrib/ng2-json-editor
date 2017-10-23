@@ -1,1 +1,1 @@
-export { SearchableDropdownComponent } from './searchable-dropdown.component'
+export { SearchableDropdownComponent } from './searchable-dropdown.component';
