@@ -18,4 +18,4 @@ export interface ViewTemplateConfig {
      * - false if the fields to edit should be hidden by default
      */
     showEditForm: (item: Map<string, any>) => boolean;
-  };
+  }

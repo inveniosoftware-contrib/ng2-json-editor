@@ -157,4 +157,4 @@ export {
   PatchesConsoleTabComponent,
   ErrorsConsoleTabComponent,
   AddPatchViewComponent
-}
+};

@@ -298,14 +298,6 @@ body, html {
     }
   }
 
-  .max-height-90-vh {
-    max-height: 90vh;
-  }
-
-  .max-height-70-vh {
-    max-height: 70vh;
-  }
-
   div.admin-mode {
     padding-top: 8px;
     width: 100%;
@@ -414,6 +406,14 @@ body, html {
 
 .red-left-border {
   border-left: 9px solid #e74c3c !important;
+}
+
+.max-height-90-vh {
+  max-height: 90vh;
+}
+
+.max-height-70-vh {
+  max-height: 70vh;
 }
 
 // Hide all add-field-dropdown in complex-list-field in favor of single add-nested-field-dropdown

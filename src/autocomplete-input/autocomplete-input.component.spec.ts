@@ -21,6 +21,7 @@
 */
 
 import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 import {
   async,
   ComponentFixture,
@@ -71,7 +72,8 @@ describe('AutocompleteInputComponent', () => {
       ],
       imports: [
         Ng2BootstrapModule.forRoot(),
-        HttpModule
+        HttpModule,
+        FormsModule
       ],
       providers: [
         { provide: RemoteAutocompletionService, useClass: MockRemoteAutocompletionService },
