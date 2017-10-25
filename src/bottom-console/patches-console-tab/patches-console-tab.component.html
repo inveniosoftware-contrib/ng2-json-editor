@@ -1,7 +1,11 @@
 <ng-template tabHeading>
-   <i class="fa fa-bolt"></i> Conflicts <span class="badge">{{patches.length}}</span>
+  <i class="fa fa-bolt"></i> Conflicts <span class="badge">{{patches.length}}</span>
 </ng-template>
 
+<div class="all-actions-container">
+  <button class="btn btn-success" (click)="acceptAll()">Accept All<i class="fa fa-check icon-padding-left"></i></button>
+  <button class="btn btn-danger" (click)="rejectAll()">Reject All<i class="fa fa-times icon-padding-left"></i></button>
+</div>
 <ul class="list-group">
   <li *ngFor="let patch of patches" class="list-group-item" (click)="focusPatchForPath(patch.path)">
     <i class="fa fa-bolt"></i> {{patch.path}} - {{patch.op}}

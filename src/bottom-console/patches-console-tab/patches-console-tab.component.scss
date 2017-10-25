@@ -1,3 +1,15 @@
 .fa-bolt {
   color: #e67e22;
 }
+
+.icon-padding-left {
+  padding-left: 8px;
+}
+
+.all-actions-container {
+  padding: 8px;
+  & > button {
+    margin-right: 4px;
+    margin-left: 4px;
+  }
+}

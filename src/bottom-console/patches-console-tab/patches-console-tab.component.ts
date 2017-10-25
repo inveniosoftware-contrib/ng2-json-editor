@@ -64,5 +64,15 @@ export class PatchesConsoleTabComponent implements OnInit {
   focusPatchForPath(path: string) {
     this.domUtilService.focusPatchElementById(path);
   }
+
+  acceptAll() {
+    this.patches
+      .forEach(patch => this.jsonStoreService.applyPatch(patch));
+  }
+
+  rejectAll() {
+    this.patches
+    .forEach(patch => this.jsonStoreService.rejectPatch(patch));
+  }
 }
 
