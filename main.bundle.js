@@ -5001,9 +5001,33 @@ JsonSchemaService.ctorParameters = function () { return [
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__ = __webpack_require__("../../../../rxjs/ReplaySubject.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__path_util_service__ = __webpack_require__("../../../../../dist/src/shared/services/path-util.service.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__keys_store_service__ = __webpack_require__("../../../../../dist/src/shared/services/keys-store.service.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__classes__ = __webpack_require__("../../../../../dist/src/shared/classes/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__ = __webpack_require__("../../../../rxjs/Subject.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__path_util_service__ = __webpack_require__("../../../../../dist/src/shared/services/path-util.service.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__keys_store_service__ = __webpack_require__("../../../../../dist/src/shared/services/keys-store.service.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__classes__ = __webpack_require__("../../../../../dist/src/shared/classes/index.js");
+/*
+ * This file is part of ng2-json-editor.
+ * Copyright (C) 2016 CERN.
+ *
+ * ng2-json-editor is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * ng2-json-editor is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ * In applying this license, CERN does not
+ * waive the privileges and immunities granted to it by virtue of its status
+ * as an Intergovernmental Organization or submit itself to any jurisdiction.
+*/
+
 
 
 
@@ -5015,14 +5039,13 @@ var JsonStoreService = (function () {
         this.pathUtilService = pathUtilService;
         this.keysStoreService = keysStoreService;
         this.patchesByPath$ = new __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__["ReplaySubject"](1);
-        this.json$ = new __WEBPACK_IMPORTED_MODULE_2_rxjs_ReplaySubject__["ReplaySubject"](1);
+        this.json$ = new __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__["Subject"]();
         this.patchesByPath = {};
         // list of reverse patches for important changes
-        this.history = new __WEBPACK_IMPORTED_MODULE_5__classes__["a" /* SizedStack */](5);
+        this.history = new __WEBPACK_IMPORTED_MODULE_6__classes__["a" /* SizedStack */](5);
     }
     JsonStoreService.prototype.setIn = function (path, value, allowUndo) {
         if (allowUndo === void 0) { allowUndo = true; }
-        // if value is undefined or empty string
         if (value === '' || value === undefined) {
             this.removeIn(path);
             return;
@@ -5195,8 +5218,8 @@ JsonStoreService.decorators = [
 ];
 /** @nocollapse */
 JsonStoreService.ctorParameters = function () { return [
-    { type: __WEBPACK_IMPORTED_MODULE_3__path_util_service__["a" /* PathUtilService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_4__keys_store_service__["a" /* KeysStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_4__path_util_service__["a" /* PathUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_5__keys_store_service__["a" /* KeysStoreService */], },
 ]; };
 
 
