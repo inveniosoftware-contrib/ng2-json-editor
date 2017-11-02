@@ -20,10 +20,10 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { Set } from 'immutable';
 
-import { DomUtilService, EmptyValueService, PathUtilService, KeysStoreService } from '../shared/services';
+import { DomUtilService, KeysStoreService } from '../shared/services';
 import { JSONSchema } from '../shared/interfaces';
 
 @Component({
@@ -31,9 +31,10 @@ import { JSONSchema } from '../shared/interfaces';
   styleUrls: [
     './add-field-dropdown.component.scss'
   ],
-  templateUrl: './add-field-dropdown.component.html'
+  templateUrl: './add-field-dropdown.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AddFieldDropdownComponent {
+export class AddFieldDropdownComponent implements OnChanges {
 
   @Input() schema: JSONSchema;
   @Input() fields: Set<string>;
@@ -41,15 +42,16 @@ export class AddFieldDropdownComponent {
   @Input() isDisabled: boolean;
 
   expression = '';
+  hidden = false;
 
-  constructor(public elementRef: ElementRef,
-    public domUtilService: DomUtilService,
-    public emptyValueService: EmptyValueService,
-    public pathUtilService: PathUtilService,
-    public keysStoreService: KeysStoreService) { }
+  constructor(private elementRef: ElementRef,
+    private domUtilService: DomUtilService,
+    private keysStoreService: KeysStoreService) { }
 
-  get hidden(): boolean {
-    return Object.keys(this.schema.properties).length === this.fields.size;
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['schema'] || changes['fields']) {
+      this.hidden = Object.keys(this.schema.properties).length === this.fields.size;
+    }
   }
 
   onDropdownShown() {
