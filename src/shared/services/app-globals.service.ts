@@ -31,7 +31,7 @@ export class AppGlobalsService {
   readonly adminMode$ = new ReplaySubject<boolean>(1);
   activeTabName = '';
   tabNameToFirstTopLevelElement: { [tabName: string]: string } = {};
-  templates: { [templateName: string]: TemplateRef<any> };
+  templates: { [templateName: string]: TemplateRef<any> } = {};
   config: JsonEditorConfig;
   private _adminMode = false;
 

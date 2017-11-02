@@ -35,9 +35,11 @@ export class JsonStoreService {
 
   readonly patchesByPath$ = new ReplaySubject<JsonPatchesByPath>(1);
   readonly json$ = new Subject<Map<string, any>>();
+  readonly jsonPatches$ = new Subject<Array<JsonPatch>>();
 
   private patchesByPath: JsonPatchesByPath = {};
   private json: Map<string, any>;
+  private jsonPatches: Array<JsonPatch>;
 
   // list of reverse patches for important changes
   private history = new SizedStack<JsonPatch>(5);
@@ -149,12 +151,13 @@ export class JsonStoreService {
     this.patchesByPath = {};
     patches.forEach(patch => {
       const path = this.getComponentPathForPatch(patch);
-
       if (!this.patchesByPath[path]) {
         this.patchesByPath[path] = [];
       }
       this.patchesByPath[path].push(patch);
     });
+
+    this.jsonPatches = patches;
     this.patchesByPath$.next(this.patchesByPath);
   }
 
@@ -206,6 +209,7 @@ export class JsonStoreService {
       if (patchIndex > -1) {
         this.patchesByPath[path].splice(patchIndex, 1);
         this.patchesByPath$.next(this.patchesByPath);
+        this.jsonPatches$.next(this.jsonPatches.filter(jsonPatch => jsonPatch !== patch));
       }
     }
   }
