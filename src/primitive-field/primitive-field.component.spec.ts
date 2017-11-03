@@ -25,6 +25,7 @@ import {
   ComponentFixture,
   TestBed
 } from '@angular/core/testing';
+import { SimpleChange } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Ng2BootstrapModule } from 'ngx-bootstrap';
 import { Observable } from 'rxjs/Observable';
@@ -125,6 +126,7 @@ describe('PrimitiveFieldComponent', () => {
     // force component to render completely by setting @Input() manually
     component.value = 1;
     component.path = ['default', 'path'];
+    component.pathString = '/defaut/path';
     component.schema = {
       type: 'integer',
       componentType: 'integer'

@@ -79,11 +79,12 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
   @Input() schema: any;
   @Input() errorMap: SchemaValidationErrors;
   @Input() jsonPatches: Array<JsonPatch>;
-  @Input() templates: { [templateName: string]: TemplateRef<any> } = {};
+  @Input() templates: { [templateName: string]: TemplateRef<any> };
 
   @Output() recordChange = new EventEmitter<Object>();
   @Output() jsonPatchesChange = new EventEmitter<Array<JsonPatch>>();
 
+  readonly pathString = '';
   _record: Map<string, any>;
   tabNames: Array<string>;
   previews: Array<Preview>;
@@ -126,12 +127,8 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
       });
 
     // list for all changes on jsonPatches
-    this.jsonStoreService.patchesByPath$
-      .map(patchesByPath => {
-        // flat json patches by path to an array with all json patches
-        return Object.keys(patchesByPath)
-          .reduce((allPathes, path) => allPathes.concat(patchesByPath[path]), []);
-      }).subscribe(patches => {
+    this.jsonStoreService.jsonPatches$
+      .subscribe(patches => {
         this.jsonPatchesChange.emit(patches);
       });
   }
@@ -193,7 +190,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
     }
 
     if (changes['templates']) {
-      this.appGlobalsService.templates = this.templates;
+      this.appGlobalsService.templates = this.templates || {};
     }
   }
 
@@ -263,10 +260,6 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
 
   set activeTabName(tabName: string) {
     this.appGlobalsService.activeTabName = tabName;
-  }
-
-  get pathString(): string {
-    return '';
   }
 
   isActiveTab(tabName) {

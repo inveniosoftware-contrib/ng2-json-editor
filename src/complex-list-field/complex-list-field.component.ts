@@ -95,6 +95,8 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    super.ngOnChanges(changes);
+
     const valuesChange = changes['values'];
     if (valuesChange && !valuesChange.isFirstChange()) {
       const preSize = valuesChange.previousValue.size;
