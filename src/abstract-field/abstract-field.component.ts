@@ -20,7 +20,7 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { OnInit, OnDestroy, ChangeDetectorRef, OnChanges, SimpleChanges } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { AbstractTrackerComponent } from '../abstract-tracker';
@@ -36,9 +36,12 @@ import { ValidationError, PathCache, JSONSchema, JsonPatch } from '../shared/int
  * It provides trackByFunction from AbstractTrackerComponent, and handles errors for the component.
  */
 export abstract class AbstractFieldComponent
-  extends AbstractTrackerComponent implements OnInit, OnDestroy {
+  extends AbstractTrackerComponent implements OnInit, OnDestroy, OnChanges {
 
+  // @Input
   path: Array<any>;
+
+  pathString: string;
   pathCache: PathCache = {};
   externalErrors: Array<ValidationError> = [];
   schema: JSONSchema;
@@ -73,6 +76,12 @@ export abstract class AbstractFieldComponent
     );
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['path']) {
+      this.pathString = this.pathUtilService.toPathString(this.path);
+    }
+  }
+
   /**
    * Gets path for child, returns from `pathCache` if it is a hit
    * in order not to re-render child component due to reference change its path.
@@ -84,10 +93,6 @@ export abstract class AbstractFieldComponent
       this.pathCache[key] = this.path.concat(key);
     }
     return this.pathCache[key];
-  }
-
-  get pathString(): string {
-    return this.pathUtilService.toPathString(this.path);
   }
 
   hasErrors(): boolean {

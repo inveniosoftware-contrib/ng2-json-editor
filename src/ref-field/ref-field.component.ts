@@ -51,6 +51,7 @@ export class RefFieldComponent implements OnChanges {
   @Input() value: Map<string, string>;
   @Input() path: Array<any>;
 
+  pathString: string;
   refData: object;
   requestOptions: RequestOptions;
 
@@ -85,15 +86,15 @@ export class RefFieldComponent implements OnChanges {
         }
       }
     }
+
+    if (changes['path']) {
+      this.pathString = this.pathUtilService.toPathString(this.path);
+    }
   }
 
   onPreviewClick() {
     this.isPreviewButtonHidden = true;
     this.fetchRef();
-  }
-
-  get pathString() {
-    return this.pathUtilService.toPathString(this.path);
   }
 
   get customTemplate(): TemplateRef<any> {

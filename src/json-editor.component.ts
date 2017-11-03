@@ -84,6 +84,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
   @Output() recordChange = new EventEmitter<Object>();
   @Output() jsonPatchesChange = new EventEmitter<Array<JsonPatch>>();
 
+  readonly pathString = '';
   _record: Map<string, any>;
   tabNames: Array<string>;
   previews: Array<Preview>;
@@ -259,10 +260,6 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
 
   set activeTabName(tabName: string) {
     this.appGlobalsService.activeTabName = tabName;
-  }
-
-  get pathString(): string {
-    return '';
   }
 
   isActiveTab(tabName) {
