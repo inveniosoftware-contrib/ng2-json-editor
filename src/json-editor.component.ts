@@ -36,9 +36,6 @@ import { fromJS, Map, Set } from 'immutable';
 import 'rxjs/add/operator/skipWhile';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
-
-import { AbstractTrackerComponent } from './abstract-tracker';
-
 import {
   AppGlobalsService,
   JsonStoreService,
@@ -71,7 +68,7 @@ import { JsonEditorConfig,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class JsonEditorComponent extends AbstractTrackerComponent implements OnChanges, OnInit {
+export class JsonEditorComponent implements OnChanges, OnInit {
 
   @Input() config: JsonEditorConfig;
   @Input() record: object;
@@ -108,7 +105,6 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
     public schemaFixerService: SchemaFixerService,
     public tabsUtilService: TabsUtilService,
     public pathUtilService: PathUtilService) {
-    super();
   }
 
   ngOnInit() {
@@ -273,6 +269,10 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
   openBottomConsole(tabName: string) {
     this.isBottomConsoleOpen = true;
     this.bottomConsoleActiveTab = tabName;
+  }
+
+  trackByElement(index: number, element: any): any {
+    return element;
   }
 
 }

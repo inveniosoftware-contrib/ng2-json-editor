@@ -22,7 +22,6 @@
 
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { AbstractTrackerComponent } from '../abstract-tracker';
 import { Preview } from '../shared/interfaces';
 
 @Component({
@@ -33,7 +32,7 @@ import { Preview } from '../shared/interfaces';
   templateUrl: './editor-previewer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EditorPreviewerComponent extends AbstractTrackerComponent {
+export class EditorPreviewerComponent {
 
   @Input() previews: Array<Preview>;
 
@@ -41,4 +40,7 @@ export class EditorPreviewerComponent extends AbstractTrackerComponent {
     window.open(url, 'Preview', 'left=20,top=20,width=750,height=750');
   }
 
+  trackByIndex(index: number, element: any): number {
+    return index;
+  }
 }

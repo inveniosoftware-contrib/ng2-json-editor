@@ -23,7 +23,6 @@
 import { OnInit, OnDestroy, ChangeDetectorRef, OnChanges, SimpleChanges } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
-import { AbstractTrackerComponent } from '../abstract-tracker';
 import { AppGlobalsService, PathUtilService, JsonStoreService, ErrorsService } from '../shared/services';
 import { ValidationError, PathCache, JSONSchema, JsonPatch } from '../shared/interfaces';
 
@@ -35,8 +34,7 @@ import { ValidationError, PathCache, JSONSchema, JsonPatch } from '../shared/int
  *
  * It provides trackByFunction from AbstractTrackerComponent, and handles errors for the component.
  */
-export abstract class AbstractFieldComponent
-  extends AbstractTrackerComponent implements OnInit, OnDestroy, OnChanges {
+export abstract class AbstractFieldComponent implements OnInit, OnDestroy, OnChanges {
 
   // @Input
   path: Array<any>;
@@ -56,7 +54,6 @@ export abstract class AbstractFieldComponent
     public pathUtilService: PathUtilService,
     public changeDetectorRef: ChangeDetectorRef,
     public jsonStoreService: JsonStoreService) {
-    super();
   }
 
   ngOnInit() {
@@ -111,6 +108,14 @@ export abstract class AbstractFieldComponent
 
   get redLeftBorderClass(): string {
     return this.removeJsonPatch ? 'red-left-border' : '';
+  }
+
+  trackByElement(index: number, element: any): any {
+    return element;
+  }
+
+  trackByIndex(index: number, element: any): number {
+    return index;
   }
 
 }
