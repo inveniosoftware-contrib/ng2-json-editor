@@ -81,17 +81,18 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     if (this.value !== this.schema.default) {
       this.lastCommitedValue = this.value;
     }
-
-    this.subcriptions.push(
-      this.errorsService
-        .internalCategorizedErrors$
-        .subscribe(internalCategorizedErrorMap => {
-          this.internalErrors = internalCategorizedErrorMap.errors[this.pathString] || [];
-        }),
-      this.appGlobalsService.adminMode$.subscribe(adminMode => {
+    this.errorsService
+      .internalCategorizedErrors$
+      .takeUntil(this.isDestroyed)
+      .subscribe(internalCategorizedErrorMap => {
+        this.internalErrors = internalCategorizedErrorMap.errors[this.pathString] || [];
+      });
+    this.appGlobalsService
+      .adminMode$
+      .takeUntil(this.isDestroyed)
+      .subscribe(adminMode => {
         this.changeDetectorRef.markForCheck();
-      })
-    );
+      });
     this.validate();
   }
 

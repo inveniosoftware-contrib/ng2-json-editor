@@ -27,6 +27,7 @@ import {
   ChangeDetectorRef
 } from '@angular/core';
 
+import { AbstractSubscriberComponent } from '../../abstract-subscriber';
 import { DomUtilService, PathUtilService, JsonStoreService } from '../../shared/services';
 import { JsonPatch } from '../../shared/interfaces';
 
@@ -39,14 +40,16 @@ import { JsonPatch } from '../../shared/interfaces';
   templateUrl: './patches-console-tab.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PatchesConsoleTabComponent implements OnInit {
+export class PatchesConsoleTabComponent extends AbstractSubscriberComponent implements OnInit {
 
   patches: Array<JsonPatch> = [];
 
   constructor(private domUtilService: DomUtilService,
     private pathUtilService: PathUtilService,
     private jsonStoreService: JsonStoreService,
-    private changeDetectorRef: ChangeDetectorRef) { }
+    private changeDetectorRef: ChangeDetectorRef) {
+    super();
+  }
 
   ngOnInit() {
     this.jsonStoreService.patchesByPath$
@@ -55,6 +58,7 @@ export class PatchesConsoleTabComponent implements OnInit {
           .map(path => patchesByPath[path])
           .reduce((pre, cur) => pre.concat(cur), []);
       })
+      .takeUntil(this.isDestroyed)
       .subscribe(patches => {
         this.patches = patches;
         this.changeDetectorRef.markForCheck();
@@ -72,7 +76,7 @@ export class PatchesConsoleTabComponent implements OnInit {
 
   rejectAll() {
     this.patches
-    .forEach(patch => this.jsonStoreService.rejectPatch(patch));
+      .forEach(patch => this.jsonStoreService.rejectPatch(patch));
   }
 }
 
