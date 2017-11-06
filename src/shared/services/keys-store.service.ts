@@ -23,6 +23,7 @@
 import { Injectable } from '@angular/core';
 import { Map, List, OrderedSet, Iterable, Set, Seq } from 'immutable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { Subject } from 'rxjs/Subject';
 
 import { JSONSchema } from '../interfaces';
 import { PathUtilService } from './path-util.service';
@@ -33,7 +34,7 @@ import { AppGlobalsService } from './app-globals.service';
 export class KeysStoreService {
   private keys$Map: { [path: string]: ReplaySubject<OrderedSet<string>> };
   public keysMap: { [path: string]: OrderedSet<string> };
-  public onKeysChange = new ReplaySubject<{ path: string, keys: OrderedSet<string> }>(1);
+  public onKeysChange = new Subject<{ path: string, keys: OrderedSet<string> }>();
 
   constructor(private appGlobalsService: AppGlobalsService,
     private pathUtilService: PathUtilService,
