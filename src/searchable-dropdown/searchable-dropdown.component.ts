@@ -26,8 +26,12 @@ import {
   Input,
   Output,
   OnInit,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ViewChild,
+  ElementRef
 } from '@angular/core';
+
+import { BsDropdownDirective } from 'ngx-bootstrap/dropdown';
 
 @Component({
   selector: 'searchable-dropdown',
@@ -45,27 +49,16 @@ export class SearchableDropdownComponent implements OnInit {
   @Input() pathString: string;
   @Input() tabIndex: number;
   @Input() placeholder: string;
-  expression = '';
-  status: { isOpen: boolean } = { isOpen: false };
+  expression: string;
 
   @Output() onSelect = new EventEmitter<string>();
   @Output() onBlur = new EventEmitter<void>();
 
+  @ViewChild('filterInput') filterInputElRef: ElementRef;
+  @ViewChild('dropdown') dropdown: BsDropdownDirective;
 
   ngOnInit() {
     this.placeholder = this.value || this.placeholder || '';
-  }
-
-  get expressionOrValue(): string {
-    return this.status.isOpen ? this.expression : this.value;
-  }
-
-  set expressionOrValue(expressionOrValue: string) {
-    if (this.status.isOpen) {
-      this.expression = expressionOrValue;
-    } else {
-      this.value = expressionOrValue;
-    }
   }
 
   onItemClick(item: string) {
@@ -73,20 +66,22 @@ export class SearchableDropdownComponent implements OnInit {
     this.onSelect.emit(item);
     // only necessary to force closing when selected is item equals to value
     // in which case dropdown doesn't close automatically for some reason
-    this.status.isOpen = false;
+    this.dropdown.hide();
   }
 
-  onKeypress(key: string) {
-    if (key === 'Enter') {
-      if (this.shortcutMap && this.shortcutMap[this.expression]) {
-        this.onItemClick(this.shortcutMap[this.expression]);
-      }
-      this.status.isOpen = false;
+  onEnterKeyUp() {
+    if (this.shortcutMap && this.shortcutMap[this.expression]) {
+      this.onItemClick(this.shortcutMap[this.expression]);
     }
+    this.dropdown.hide();
   }
 
-  onInputFocus(event: FocusEvent) {
-    this.status.isOpen = true;
+  onValueDisplayFocus() {
+    this.dropdown.show();
+    this.expression = '';
+    setTimeout(() => {
+      (this.filterInputElRef.nativeElement as HTMLInputElement).focus();
+    });
   }
 
   onInputBlur(event: FocusEvent) {
@@ -94,7 +89,7 @@ export class SearchableDropdownComponent implements OnInit {
     // so that onItemClick() can be executed properly before closing.
     const relatedTarget = event.relatedTarget as HTMLElement;
     if (!relatedTarget || relatedTarget.className !== 'dropdown-item') {
-      this.status.isOpen = false;
+      this.dropdown.hide();
     }
     this.onBlur.emit();
   }

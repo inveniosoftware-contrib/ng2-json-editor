@@ -1,9 +1,9 @@
-<div class="btn-group" dropdown keyboardNav="true" [isOpen]="status.isOpen" (onShown)="status.isOpen = true" (onHidden)="status.isOpen = false">
+<div class="btn-group" #dropdown="bs-dropdown" dropdown keyboardNav="true">
   <!-- there is no dropdownToggle since it is handled manually see: onInputFocus and onInputBlur in ts -->
   <div class="toggle-container">
-    <input #inputToggle attr.data-path="{{pathString}}" [placeholder]="placeholder" [(ngModel)]="expressionOrValue" (keypress)="onKeypress($event.key)"
-      [tabindex]="tabIndex" (blur)="onInputBlur($event)" (focus)="onInputFocus($event)">
-    <i class="fa fa-caret-down" (click)="inputToggle.focus()"></i>
+    <input *ngIf="dropdown.isOpen; else valueDisplayTemplate" #filterInput class="value" attr.data-path="{{pathString}}" [placeholder]="placeholder"
+      [(ngModel)]="expression" (keyup.enter)="onEnterKeyUp()" (blur)="onInputBlur($event)">
+    <i class="fa fa-caret-down"></i>
   </div>
   <ul class="dropdown-menu" *dropdownMenu role="menu">
     <li *ngFor="let item of items | filterByExpression:expression" role="menuitem">
@@ -12,3 +12,7 @@
     </li>
   </ul>
 </div>
+
+<ng-template #valueDisplayTemplate>
+  <span class="value" [tabindex]="tabIndex" (focus)="onValueDisplayFocus()">{{value}}</span>
+</ng-template>
