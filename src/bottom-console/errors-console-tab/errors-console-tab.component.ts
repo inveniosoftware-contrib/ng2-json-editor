@@ -28,6 +28,7 @@ import {
   ChangeDetectorRef
 } from '@angular/core';
 
+import { AbstractSubscriberComponent } from '../../abstract-subscriber';
 import { DomUtilService, PathUtilService, ErrorsService } from '../../shared/services';
 import { SchemaValidationErrors } from '../../shared/interfaces';
 
@@ -40,7 +41,7 @@ import { SchemaValidationErrors } from '../../shared/interfaces';
   templateUrl: './errors-console-tab.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ErrorsConsoleTabComponent implements OnInit {
+export class ErrorsConsoleTabComponent extends AbstractSubscriberComponent implements OnInit {
 
   @Input() errorType: 'errors' | 'warnings';
 
@@ -53,29 +54,35 @@ export class ErrorsConsoleTabComponent implements OnInit {
   constructor(public domUtilService: DomUtilService,
     public pathUtilService: PathUtilService,
     public errorsService: ErrorsService,
-    public changeDetectorRef: ChangeDetectorRef) { }
+    public changeDetectorRef: ChangeDetectorRef) {
+    super();
+  }
 
   ngOnInit() {
     this.errorsService.externalCategorizedErrors$
       .map(categorizedErrorMap => categorizedErrorMap[this.errorType])
+      .takeUntil(this.isDestroyed)
       .subscribe(errorMap => {
         this.externalErrorMap = errorMap;
         this.changeDetectorRef.markForCheck();
       });
     this.errorsService.externalErrorCounters$
       .map(errorCounters => errorCounters[this.errorType])
+      .takeUntil(this.isDestroyed)
       .subscribe(errorCount => {
         this.externalErrorCount = errorCount;
         this.changeDetectorRef.markForCheck();
       });
     this.errorsService.internalCategorizedErrors$
       .map(categorizedErrorMap => categorizedErrorMap[this.errorType])
+      .takeUntil(this.isDestroyed)
       .subscribe(errorMap => {
         this.internalErrorMap = errorMap;
         this.changeDetectorRef.markForCheck();
       });
     this.errorsService.internalErrorCounters$
       .map(errorCounters => errorCounters[this.errorType])
+      .takeUntil(this.isDestroyed)
       .subscribe(errorCount => {
         this.internalErrorCount = errorCount;
         this.changeDetectorRef.markForCheck();

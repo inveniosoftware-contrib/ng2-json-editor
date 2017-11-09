@@ -21,9 +21,8 @@
 */
 
 import { OnInit, OnDestroy, ChangeDetectorRef, OnChanges, SimpleChanges } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
 
-import { AbstractTrackerComponent } from '../abstract-tracker';
+import { AbstractSubscriberComponent } from '../abstract-subscriber';
 import { AppGlobalsService, PathUtilService, JsonStoreService, ErrorsService } from '../shared/services';
 import { ValidationError, PathCache, JSONSchema, JsonPatch } from '../shared/interfaces';
 
@@ -35,8 +34,7 @@ import { ValidationError, PathCache, JSONSchema, JsonPatch } from '../shared/int
  *
  * It provides trackByFunction from AbstractTrackerComponent, and handles errors for the component.
  */
-export abstract class AbstractFieldComponent
-  extends AbstractTrackerComponent implements OnInit, OnDestroy, OnChanges {
+export abstract class AbstractFieldComponent extends AbstractSubscriberComponent implements OnInit, OnDestroy, OnChanges {
 
   // @Input
   path: Array<any>;
@@ -49,8 +47,6 @@ export abstract class AbstractFieldComponent
   // used by some components to display remove patch in a different way.
   removeJsonPatch: JsonPatch;
 
-  protected subcriptions: Array<Subscription> = [];
-
   constructor(public appGlobalsService: AppGlobalsService,
     public errorsService: ErrorsService,
     public pathUtilService: PathUtilService,
@@ -60,20 +56,20 @@ export abstract class AbstractFieldComponent
   }
 
   ngOnInit() {
-    this.subcriptions.push(
-      this.errorsService.externalCategorizedErrors$
-        .subscribe(externalCategorizedErrorMap => {
-          this.externalErrors = externalCategorizedErrorMap.errors[this.pathString] || [];
-          this.changeDetectorRef.markForCheck();
-        }),
-      this.jsonStoreService.patchesByPath$
-        .map(patchesByPath => patchesByPath[this.pathString])
-        .subscribe(patches => {
-          this.jsonPatches = patches || [];
-          this.removeJsonPatch = this.jsonPatches
-            .find(patch => patch.op === 'remove');
-        })
-    );
+    this.errorsService.externalCategorizedErrors$
+      .takeUntil(this.isDestroyed)
+      .subscribe(externalCategorizedErrorMap => {
+        this.externalErrors = externalCategorizedErrorMap.errors[this.pathString] || [];
+        this.changeDetectorRef.markForCheck();
+      });
+    this.jsonStoreService.patchesByPath$
+      .map(patchesByPath => patchesByPath[this.pathString])
+      .takeUntil(this.isDestroyed)
+      .subscribe(patches => {
+        this.jsonPatches = patches || [];
+        this.removeJsonPatch = this.jsonPatches
+          .find(patch => patch.op === 'remove');
+      });
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -99,18 +95,20 @@ export abstract class AbstractFieldComponent
     return this.externalErrors.length > 0;
   }
 
-  ngOnDestroy() {
-    this.subcriptions.forEach(sub => {
-      sub.unsubscribe();
-    });
-  }
-
   get disabled() {
     return this.schema.disabled && !this.appGlobalsService.adminMode;
   }
 
   get redLeftBorderClass(): string {
     return this.removeJsonPatch ? 'red-left-border' : '';
+  }
+
+  trackByElement(index: number, element: any): any {
+    return element;
+  }
+
+  trackByIndex(index: number, element: any): number {
+    return index;
   }
 
 }

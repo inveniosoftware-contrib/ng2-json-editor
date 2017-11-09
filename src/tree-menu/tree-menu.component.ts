@@ -32,7 +32,6 @@ import {
 import { Map, Set } from 'immutable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
-import { AbstractTrackerComponent } from '../abstract-tracker';
 import { DomUtilService, PathUtilService, AppGlobalsService } from '../shared/services';
 import { JSONSchema } from '../shared/interfaces';
 
@@ -44,7 +43,7 @@ import { JSONSchema } from '../shared/interfaces';
   templateUrl: './tree-menu.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TreeMenuComponent extends AbstractTrackerComponent implements OnChanges {
+export class TreeMenuComponent implements OnChanges {
 
   @Input() record: Map<string, any>;
   @Input() schema: JSONSchema;
@@ -56,7 +55,6 @@ export class TreeMenuComponent extends AbstractTrackerComponent implements OnCha
   constructor(private domUtilService: DomUtilService,
     private pathUtilService: PathUtilService,
     private appGlobalsService: AppGlobalsService) {
-    super();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -67,6 +65,10 @@ export class TreeMenuComponent extends AbstractTrackerComponent implements OnCha
 
   getChildPath(key: string) {
     return `${this.pathUtilService.separator}${key}`;
+  }
+
+  trackByElement(index: number, element: any): any {
+    return element;
   }
 
   get adminMode$(): ReplaySubject<boolean> {

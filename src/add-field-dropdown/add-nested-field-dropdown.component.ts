@@ -23,8 +23,8 @@
 import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { Set } from 'immutable';
 import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/operator/filter';
 
+import { AbstractSubscriberComponent } from '../abstract-subscriber';
 import { DomUtilService, PathUtilService, KeysStoreService, JsonSchemaService } from '../shared/services';
 import { JSONSchema } from '../shared/interfaces';
 
@@ -37,7 +37,7 @@ import { JSONSchema } from '../shared/interfaces';
   templateUrl: './add-nested-field-dropdown.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AddNestedFieldDropdownComponent implements OnChanges, OnDestroy {
+export class AddNestedFieldDropdownComponent extends AbstractSubscriberComponent implements OnChanges, OnDestroy {
 
   @Input() schema: JSONSchema;
   @Input() pathString: string;
@@ -49,7 +49,9 @@ export class AddNestedFieldDropdownComponent implements OnChanges, OnDestroy {
   constructor(public keysStoreService: KeysStoreService,
     public jsonSchemaService: JsonSchemaService,
     public pathUtilService: PathUtilService,
-    public domUtilService: DomUtilService) { }
+    public domUtilService: DomUtilService) {
+    super();
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     const pathStringChange = changes['pathString'];
@@ -68,12 +70,9 @@ export class AddNestedFieldDropdownComponent implements OnChanges, OnDestroy {
       }
       this.keysChangeSubscription = this.keysStoreService.onKeysChange
         .filter(change => change.path.startsWith(this.pathString))
+        .takeUntil(this.isDestroyed)
         .subscribe(change => { this.nestedKeysMap[change.path] = change.keys; });
     }
-  }
-
-  ngOnDestroy() {
-    this.keysChangeSubscription.unsubscribe();
   }
 
   /**

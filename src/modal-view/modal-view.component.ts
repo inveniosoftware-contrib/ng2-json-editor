@@ -20,9 +20,10 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild } from '@angular/core';
+import { Component, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, OnInit } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
 
+import { AbstractSubscriberComponent } from '../abstract-subscriber';
 import { ModalService } from '../shared/services';
 import { ModalOptions } from '../shared/interfaces';
 
@@ -34,29 +35,35 @@ import { ModalOptions } from '../shared/interfaces';
   templateUrl: './modal-view.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ModalViewComponent {
+export class ModalViewComponent extends AbstractSubscriberComponent implements OnInit {
 
   @ViewChild('modal') modal: ModalDirective;
   options: ModalOptions;
 
   // TODO: unsubcribe on destroy
-  constructor(
-    private modalService: ModalService,
-    private changeDetectorRef: ChangeDetectorRef
-  ) {
+  constructor(private modalService: ModalService,
+    private changeDetectorRef: ChangeDetectorRef) {
+    super();
+  }
+
+  ngOnInit() {
     this.modalService
-      .display$.subscribe(display => {
+      .display$
+      .takeUntil(this.isDestroyed)
+      .subscribe(display => {
         display ? this.modal.show() : this.modal.hide();
       });
     this.modalService
-      .options$.subscribe(options => {
+      .options$
+      .takeUntil(this.isDestroyed)
+      .subscribe(options => {
         this.options = options;
         this.changeDetectorRef.markForCheck();
       });
   }
 
   onShow() {
-    if ( this.options && this.options.onShow ) {
+    if (this.options && this.options.onShow) {
       this.options.onShow();
     }
   }

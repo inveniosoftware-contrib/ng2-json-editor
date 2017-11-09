@@ -28,7 +28,6 @@ import {
   TestBed
 } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
 import { Ng2BootstrapModule } from 'ngx-bootstrap';
 
 import { AutocompleteInputComponent } from '../autocomplete-input';

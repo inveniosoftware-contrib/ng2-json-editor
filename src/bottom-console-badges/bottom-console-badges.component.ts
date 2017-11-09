@@ -22,6 +22,7 @@
 
 import { Component, Output, EventEmitter, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 
+import { AbstractSubscriberComponent } from '../abstract-subscriber';
 import { ErrorsService, JsonStoreService } from '../shared/services';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -33,7 +34,7 @@ import { Subscription } from 'rxjs/Subscription';
   templateUrl: './bottom-console-badges.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BottomConsoleBadgesComponent implements OnInit, OnDestroy {
+export class BottomConsoleBadgesComponent extends AbstractSubscriberComponent implements OnInit, OnDestroy {
 
   @Output() badgeClick = new EventEmitter<string>();
 
@@ -48,16 +49,20 @@ export class BottomConsoleBadgesComponent implements OnInit, OnDestroy {
 
   constructor(private errorsService: ErrorsService,
     private changeDetectorRef: ChangeDetectorRef,
-    private jsonStoreService: JsonStoreService) { }
+    private jsonStoreService: JsonStoreService) {
+    super();
+  }
 
   ngOnInit() {
     this.externalErrorCounterSubscription = this.errorsService.externalErrorCounters$
+      .takeUntil(this.isDestroyed)
       .subscribe(errorCounters => {
         this.globalErrorCount = errorCounters.errors;
         this.globalWarningCount = errorCounters.warnings;
         this.changeDetectorRef.markForCheck();
       });
     this.internalErrorCounterSubscription = this.errorsService.internalErrorCounters$
+      .takeUntil(this.isDestroyed)
       .subscribe(errorCounters => {
         this.internalErrorCount = errorCounters.errors;
         this.internalWarningCount = errorCounters.warnings;
@@ -68,7 +73,9 @@ export class BottomConsoleBadgesComponent implements OnInit, OnDestroy {
         return Object.keys(patchesByPath)
           .map(path => patchesByPath[path].length)
           .reduce((sum, patchCountPerPath) => sum + patchCountPerPath, 0);
-      }).subscribe(patchCounter => {
+      })
+      .takeUntil(this.isDestroyed)
+      .subscribe(patchCounter => {
         this.patchCount = patchCounter;
         this.changeDetectorRef.markForCheck();
       });

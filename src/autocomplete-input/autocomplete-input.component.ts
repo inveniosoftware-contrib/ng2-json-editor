@@ -23,8 +23,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import 'rxjs/add/observable/of';
-
 import { JsonStoreService, RemoteAutocompletionService, AppGlobalsService, KeysStoreService } from '../shared/services';
 import { AutocompletionConfig, AutocompletionResult } from '../shared/interfaces';
 

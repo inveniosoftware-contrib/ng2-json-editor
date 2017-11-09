@@ -20,6 +20,8 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
+import './rxjs-operators';
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -32,7 +34,6 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
-
 
 import { SlideToggleModule } from 'ng2-slide-toggle';
 

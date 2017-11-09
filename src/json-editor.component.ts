@@ -33,12 +33,10 @@ import {
   TemplateRef
 } from '@angular/core';
 import { fromJS, Map, Set } from 'immutable';
-import 'rxjs/add/operator/skipWhile';
+
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
-
-import { AbstractTrackerComponent } from './abstract-tracker';
-
+import { AbstractSubscriberComponent } from './abstract-subscriber';
 import {
   AppGlobalsService,
   JsonStoreService,
@@ -52,13 +50,15 @@ import {
   ErrorsService
 } from './shared/services';
 
-import { JsonEditorConfig,
+import {
+  JsonEditorConfig,
   Preview,
   SchemaValidationErrors,
   JsonPatch,
   Shortcut,
   CustomShortcutKeys,
-  JSONSchema } from './shared/interfaces';
+  JSONSchema
+} from './shared/interfaces';
 
 
 @Component({
@@ -71,7 +71,7 @@ import { JsonEditorConfig,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class JsonEditorComponent extends AbstractTrackerComponent implements OnChanges, OnInit {
+export class JsonEditorComponent extends AbstractSubscriberComponent implements OnChanges, OnInit {
 
   @Input() config: JsonEditorConfig;
   @Input() record: object;
@@ -112,13 +112,16 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
   }
 
   ngOnInit() {
-    this.appGlobalsService.adminMode$.subscribe(adminMode => {
-      this.keysStoreService.buildKeysMap(this._record, this.fixedSchema);
-    });
+    this.appGlobalsService.adminMode$
+      .takeUntil(this.isDestroyed)
+      .subscribe(adminMode => {
+        this.keysStoreService.buildKeysMap(this._record, this.fixedSchema);
+      });
 
     // listen for all changes on json
     this.jsonStoreService.json$
       .skipWhile(json => json === this._record)
+      .takeUntil(this.isDestroyed)
       .subscribe(json => {
         this._record = json;
         // emit the change as plain JS object
@@ -128,6 +131,7 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
 
     // list for all changes on jsonPatches
     this.jsonStoreService.jsonPatches$
+      .takeUntil(this.isDestroyed)
       .subscribe(patches => {
         this.jsonPatchesChange.emit(patches);
       });
@@ -273,6 +277,10 @@ export class JsonEditorComponent extends AbstractTrackerComponent implements OnC
   openBottomConsole(tabName: string) {
     this.isBottomConsoleOpen = true;
     this.bottomConsoleActiveTab = tabName;
+  }
+
+  trackByElement(index: number, element: any): any {
+    return element;
   }
 
 }

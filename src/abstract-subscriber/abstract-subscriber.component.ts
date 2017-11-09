@@ -1,6 +1,6 @@
 /*
  * This file is part of ng2-json-editor.
- * Copyright (C) 2016 CERN.
+ * Copyright (C) 2017 CERN.
  *
  * ng2-json-editor is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -20,13 +20,14 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-export abstract class AbstractTrackerComponent {
+import { OnDestroy } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
 
-  trackByElement(index: number, element: any): any {
-    return element;
-  }
+export abstract class AbstractSubscriberComponent implements OnDestroy {
+  protected isDestroyed = new Subject<void>();
 
-  trackByIndex(index: number, element: any): any {
-    return index;
+  ngOnDestroy() {
+    this.isDestroyed.next();
+    this.isDestroyed.complete();
   }
 }

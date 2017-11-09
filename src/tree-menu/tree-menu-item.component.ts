@@ -32,7 +32,6 @@ import {
 import { Map, Set } from 'immutable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
-import { AbstractTrackerComponent } from '../abstract-tracker';
 import { DomUtilService, WindowHrefService, PathUtilService, AppGlobalsService } from '../shared/services';
 import { JSONSchema } from '../shared/interfaces';
 
@@ -44,7 +43,7 @@ import { JSONSchema } from '../shared/interfaces';
   templateUrl: './tree-menu-item.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TreeMenuItemComponent extends AbstractTrackerComponent implements OnInit, OnChanges {
+export class TreeMenuItemComponent implements OnInit, OnChanges {
 
   @Input() label: string;
   @Input() value: any;
@@ -62,7 +61,6 @@ export class TreeMenuItemComponent extends AbstractTrackerComponent implements O
     private domUtilService: DomUtilService,
     private pathUtilService: PathUtilService,
     private appGlobalsService: AppGlobalsService) {
-    super();
   }
 
   ngOnInit() {
@@ -106,6 +104,10 @@ export class TreeMenuItemComponent extends AbstractTrackerComponent implements O
 
   getChildPath(indexOrKey: number | string) {
     return `${this.path}${this.pathUtilService.separator}${indexOrKey}`;
+  }
+
+  trackByElement(index: number, element: any): any {
+    return element;
   }
 
 }
