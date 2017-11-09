@@ -6,13 +6,13 @@
     <i class="fa fa-caret-down"></i>
   </div>
   <ul class="dropdown-menu" *dropdownMenu role="menu">
-    <li *ngFor="let item of items | filterByExpression:expression" role="menuitem">
+    <li *ngFor="let displayValue of displayValues | filterByExpression:expression" role="menuitem">
       <!-- href is needed for keyboard navigation -->
-      <a class="dropdown-item" href="javascript:void(0)" (click)="onItemClick(item)">{{item}}</a>
+      <a class="dropdown-item" href="javascript:void(0)" (click)="onItemClick(displayValue)">{{displayValue}}</a>
     </li>
   </ul>
 </div>
 
 <ng-template #valueDisplayTemplate>
-  <span class="value" [tabindex]="tabIndex" (focus)="onValueDisplayFocus()">{{value}}</span>
+  <span class="value" [tabindex]="tabIndex" (focus)="onValueDisplayFocus()">{{biDisplayValueMap.getValue(value)}}</span>
 </ng-template>

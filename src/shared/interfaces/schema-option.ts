@@ -51,6 +51,13 @@ export interface SchemaOption {
   enumShortcutMap?: { [key: string]: string };
 
   /**
+   * Original enum item value to its display value
+   *
+   * - This map could also configure subset of enum values, unconfigured ones will have same display as original value.
+   */
+  enumDisplayValueMap?: { [key: string]: string };
+
+  /**
    * Configuration for objects properties that has `$ref` string as a property which points to another json.
    */
   refFieldConfig?: RefConfig;

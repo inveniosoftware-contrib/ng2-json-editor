@@ -25,11 +25,14 @@ import {
   EventEmitter,
   Input,
   Output,
-  OnInit,
+  OnChanges,
+  SimpleChanges,
   ChangeDetectionStrategy,
   ViewChild,
   ElementRef
 } from '@angular/core';
+
+import { BiDirectionalMap } from 'bi-directional-map/dist';
 
 import { BsDropdownDirective } from 'ngx-bootstrap/dropdown';
 
@@ -41,15 +44,18 @@ import { BsDropdownDirective } from 'ngx-bootstrap/dropdown';
   templateUrl: './searchable-dropdown.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchableDropdownComponent implements OnInit {
+export class SearchableDropdownComponent implements OnChanges {
 
   @Input() items: Array<string>;
-  @Input() shortcutMap: object;
+  @Input() shortcutMap: { [key: string]: string };
+  @Input() displayValueMap: { [key: string]: string };
   @Input() value: string;
   @Input() pathString: string;
   @Input() tabIndex: number;
   @Input() placeholder: string;
   expression: string;
+  biDisplayValueMap: BiDirectionalMap<string, string>;
+  displayValues: Array<string>;
 
   @Output() onSelect = new EventEmitter<string>();
   @Output() onBlur = new EventEmitter<void>();
@@ -57,13 +63,29 @@ export class SearchableDropdownComponent implements OnInit {
   @ViewChild('filterInput') filterInputElRef: ElementRef;
   @ViewChild('dropdown') dropdown: BsDropdownDirective;
 
-  ngOnInit() {
-    this.placeholder = this.value || this.placeholder || '';
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['value']) {
+      this.placeholder = this.value || this.placeholder || '';
+    }
+
+    if (changes['displayValueMap'] || changes['items']) {
+      this.displayValueMap = this.displayValueMap || Object.create(null);
+      this.biDisplayValueMap = new BiDirectionalMap<string, string>(this.displayValueMap);
+      // set original value as display value for not configured items.
+      this.items
+        .filter(item => !this.displayValueMap[item])
+        .forEach(item => {
+          this.biDisplayValueMap.set(item, item);
+        });
+
+      this.displayValues = Array.from(this.biDisplayValueMap.values());
+    }
   }
 
-  onItemClick(item: string) {
-    this.value = item;
-    this.onSelect.emit(item);
+  onItemClick(displayValue: string) {
+    const originalValue = this.biDisplayValueMap.getKey(displayValue);
+    this.onSelect.emit(originalValue);
+
     // only necessary to force closing when selected is item equals to value
     // in which case dropdown doesn't close automatically for some reason
     this.dropdown.hide();
