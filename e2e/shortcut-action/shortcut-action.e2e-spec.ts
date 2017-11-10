@@ -50,7 +50,7 @@ describe('ShortcutAction', function () {
   it(`should add a new row under table using 'mod+shift+a' shortcut`, () => {
     page.getNumberOfChildRowsbyId('/arxiv_eprints')
       .then(tableRowsNum => {
-        const inputElem = page.getChildOfElementByCss(page.getElementById('/arxiv_eprints/0/categories/0'), 'input');
+        const inputElem = page.getChildOfElementByCss(page.getElementById('/arxiv_eprints/0/value'), 'div[contenteditable=true]');
         inputElem.sendKeys(protractor.Key.chord(mod, protractor.Key.SHIFT, 'a'));
         const newTableRowsNumPromise = page.getNumberOfChildRowsbyId('/arxiv_eprints');
         expect(newTableRowsNumPromise).toEqual(tableRowsNum + 1);
@@ -108,7 +108,7 @@ describe('ShortcutAction', function () {
     expect(elemAfterDeletionAndThatWasShifted.getText()).toEqual(elemBeforeDeletionThatWillBeShifted);
   });
 
-  it(`should copy new row under abstracts.0 table using 'alt+c' shortcut. 
+  it(`should copy new row under abstracts.0 table using 'alt+c' shortcut.
     The copied cell under the focused one must be empty and the remaining cells must be exactly copied.`, () => {
       const currentRowPromise = page.getValuesOfChildrenById('/imprints/0');
       const inputElem = page.getChildOfElementByCss(page.getElementById('/imprints/0/date'), 'div[contenteditable=true]');

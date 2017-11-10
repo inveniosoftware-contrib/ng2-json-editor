@@ -6,19 +6,12 @@ div.btn-group {
   left: 0px !important;
 }
 
-$input-width: 93%;
-
 .toggle-container {
   width: 100%;
+  display: inline-flex;
   
-  input {
-    width: $input-width;
-  }
-
-  i {
-    width: 98 - $input-width;
-    height: 100%;
-    text-align: right;
+  .value {
+    flex-grow: 1;
   }
 }
 

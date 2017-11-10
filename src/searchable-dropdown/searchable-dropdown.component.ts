@@ -25,9 +25,16 @@ import {
   EventEmitter,
   Input,
   Output,
-  OnInit,
-  ChangeDetectionStrategy
+  OnChanges,
+  SimpleChanges,
+  ChangeDetectionStrategy,
+  ViewChild,
+  ElementRef
 } from '@angular/core';
+
+import { BiDirectionalMap } from 'bi-directional-map/dist';
+
+import { BsDropdownDirective } from 'ngx-bootstrap/dropdown';
 
 @Component({
   selector: 'searchable-dropdown',
@@ -37,56 +44,66 @@ import {
   templateUrl: './searchable-dropdown.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchableDropdownComponent implements OnInit {
+export class SearchableDropdownComponent implements OnChanges {
 
   @Input() items: Array<string>;
-  @Input() shortcutMap: object;
+  @Input() shortcutMap: { [key: string]: string };
+  @Input() displayValueMap: { [key: string]: string };
   @Input() value: string;
   @Input() pathString: string;
   @Input() tabIndex: number;
   @Input() placeholder: string;
-  expression = '';
-  status: { isOpen: boolean } = { isOpen: false };
+  expression: string;
+  biDisplayValueMap: BiDirectionalMap<string, string>;
+  displayValues: Array<string>;
 
   @Output() onSelect = new EventEmitter<string>();
   @Output() onBlur = new EventEmitter<void>();
 
+  @ViewChild('filterInput') filterInputElRef: ElementRef;
+  @ViewChild('dropdown') dropdown: BsDropdownDirective;
 
-  ngOnInit() {
-    this.placeholder = this.value || this.placeholder || '';
-  }
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['value']) {
+      this.placeholder = this.value || this.placeholder || '';
+    }
 
-  get expressionOrValue(): string {
-    return this.status.isOpen ? this.expression : this.value;
-  }
+    if (changes['displayValueMap'] || changes['items']) {
+      this.displayValueMap = this.displayValueMap || Object.create(null);
+      this.biDisplayValueMap = new BiDirectionalMap<string, string>(this.displayValueMap);
+      // set original value as display value for not configured items.
+      this.items
+        .filter(item => !this.displayValueMap[item])
+        .forEach(item => {
+          this.biDisplayValueMap.set(item, item);
+        });
 
-  set expressionOrValue(expressionOrValue: string) {
-    if (this.status.isOpen) {
-      this.expression = expressionOrValue;
-    } else {
-      this.value = expressionOrValue;
+      this.displayValues = Array.from(this.biDisplayValueMap.values());
     }
   }
 
-  onItemClick(item: string) {
-    this.value = item;
-    this.onSelect.emit(item);
+  onItemClick(displayValue: string) {
+    const originalValue = this.biDisplayValueMap.getKey(displayValue);
+    this.onSelect.emit(originalValue);
+
     // only necessary to force closing when selected is item equals to value
     // in which case dropdown doesn't close automatically for some reason
-    this.status.isOpen = false;
+    this.dropdown.hide();
   }
 
-  onKeypress(key: string) {
-    if (key === 'Enter') {
-      if (this.shortcutMap && this.shortcutMap[this.expression]) {
-        this.onItemClick(this.shortcutMap[this.expression]);
-      }
-      this.status.isOpen = false;
+  onEnterKeyUp() {
+    if (this.shortcutMap && this.shortcutMap[this.expression]) {
+      this.onItemClick(this.shortcutMap[this.expression]);
     }
+    this.dropdown.hide();
   }
 
-  onInputFocus(event: FocusEvent) {
-    this.status.isOpen = true;
+  onValueDisplayFocus() {
+    this.dropdown.show();
+    this.expression = '';
+    setTimeout(() => {
+      (this.filterInputElRef.nativeElement as HTMLInputElement).focus();
+    });
   }
 
   onInputBlur(event: FocusEvent) {
@@ -94,7 +111,7 @@ export class SearchableDropdownComponent implements OnInit {
     // so that onItemClick() can be executed properly before closing.
     const relatedTarget = event.relatedTarget as HTMLElement;
     if (!relatedTarget || relatedTarget.className !== 'dropdown-item') {
-      this.status.isOpen = false;
+      this.dropdown.hide();
     }
     this.onBlur.emit();
   }
