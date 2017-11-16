@@ -10,7 +10,7 @@
     <hr>
     <bottom-console-badges (badgeClick)="openBottomConsole($event)"></bottom-console-badges>
   </div>
-  <div id="middle-main-container" class="middle main-container" [ngClass]="middleContainerColMdClass" [shortcuts]="customShortcutKeys">
+  <div id="middle-main-container" class="middle main-container" [class.compact]="config.compact" [ngClass]="middleContainerColMdClass" [shortcuts]="customShortcutKeys">
     <add-field-dropdown *ngIf="config.compact" [fields]="keys$ | async" [pathString]="pathString" [schema]="fixedSchema">Add field</add-field-dropdown>    
     <tabset *ngIf="config.tabsConfig">
       <tab *ngFor="let tabName of tabNames; trackBy:trackByElement" [heading]="tabName" (select)="activeTabName = tabName" [active]="isActiveTab(tabName)">
