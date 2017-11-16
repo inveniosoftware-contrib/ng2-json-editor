@@ -135,6 +135,10 @@ body, html {
     margin-bottom: 0px !important;
   }
 
+  .main-container.compact {
+    border-left: none;
+  }
+
   .main-container {
     font-size: 13px;
     border-left: 1px solid #a5adb5;
