@@ -122,4 +122,9 @@ export interface SchemaOption {
    * Custom error messages for schema validation
    */
   errorMessage?: string | CustomErrorMessages;
+
+  /**
+   * Names of templates to be put as extra custom items to title dropdown.
+   */
+  titleDropdownItemTemplateNames?: Array<string>;
 }

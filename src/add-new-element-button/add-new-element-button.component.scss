@@ -17,7 +17,7 @@ div.button-container {
   padding: 0px;
 
   &:hover {
-    color: green;
+    color: green !important;
     opacity: 0.6;
   }
 }

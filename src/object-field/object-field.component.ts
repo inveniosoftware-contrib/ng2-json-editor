@@ -65,4 +65,8 @@ export class ObjectFieldComponent extends AbstractFieldComponent {
   isPropertyDisabled(name: string): boolean {
     return this.schema.properties[name].disabled && !this.appGlobalsService.adminMode ;
   }
+
+  getTitleDropdownItemTemplateNamesForChild(key: string): Array<string> {
+    return this.schema.properties[key].titleDropdownItemTemplateNames;
+  }
 }
