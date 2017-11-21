@@ -101,4 +101,8 @@ export class SubRecordComponent implements OnChanges {
   trackByElement(index: number, element: any): any {
     return element;
   }
+
+  getTitleDropdownItemTemplateNamesForChild(key: string): Array<string> {
+    return this.schema.properties[key].titleDropdownItemTemplateNames;
+  }
 }

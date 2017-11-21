@@ -55,6 +55,27 @@ $label-holder-button-color: #595959;
   }
 }
 
+@mixin opac-btn($hover-color) {
+  font-weight: bold;
+  line-height: 1;
+  text-shadow: 0 1px 0 #fff;
+  opacity: 0.2;
+  background: transparent;
+  border: 0;
+  padding: 0 0 3px 3px;
+
+  &:hover {
+    color: $hover-color;
+    opacity: 0.6;
+  }
+}
+
+@mixin opac-text-btn {
+  font-size: $text-button-font-size;
+  opacity: 0.5;
+  padding: 0px;
+}
+
 body, html {
   height:100%;
   background-color: #ecf0f1;
@@ -170,24 +191,16 @@ body, html {
   }
 
   .editor-btn-delete {
-    font-weight: bold;
-    line-height: 1;
-    text-shadow: 0 1px 0 #fff;
-    opacity: 0.2;
-    background: transparent;
-    border: 0;
-    padding: 0 0 3px 3px;
-
-    &:hover {
-      color: red;
-      opacity: 0.6;
-    }
+    @include opac-btn(red);
 
     &.editor-btn-delete-text {
-      font-size: $text-button-font-size;
-      opacity: 0.5;
-      padding: 0px;
+      @include opac-text-btn;
     }
+  }
+
+  .custom-title-dropdown-item button {
+    @include opac-btn(#337ab7);
+    @include opac-text-btn;
   }
 
   .editor-btn-move-down {

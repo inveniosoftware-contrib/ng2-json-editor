@@ -10,6 +10,11 @@
           <li class="title-dropdown-item">
             <button type="button" class="editor-btn-delete editor-btn-delete-text" (click)="deleteField(key)">Delete</button>
           </li>
+          <ng-container *ngIf="getTitleDropdownItemTemplateNamesForChild(key)">
+            <li *ngFor="let templateName of getTitleDropdownItemTemplateNamesForChild(key)" class="title-dropdown-item custom-title-dropdown-item">
+              <ng-template [ngTemplateOutlet]="appGlobalsService.templates[templateName]"></ng-template>
+            </li>
+          </ng-container>
         </title-dropdown>
       </div>
     </td>
