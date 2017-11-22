@@ -81,6 +81,21 @@ describe('ComponentTypeService', () => {
     expect(service.getComponentType(schema)).toEqual('table-list');
   });
 
+  it('should return primitive-list for array of ref fields', () => {
+    const schema = {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          $ref: {
+            type: 'string'
+          }
+        }
+      }
+    };
+    expect(service.getComponentType(schema)).toEqual('primitive-list');
+  });
+
   it('should return complex-list', () => {
     const schema = {
       type: 'array',
