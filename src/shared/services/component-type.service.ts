@@ -61,7 +61,7 @@ export class ComponentTypeService {
       }
     } else if (schemaType === 'array') {
       const itemSchema = schema.items;
-      if (itemSchema.type === 'object') {
+      if (itemSchema.type === 'object' && !itemSchema.properties['$ref']) {
         // complex-array: if it's an object array
         // if its elements have at least a property with object (not ref-field)
         // or a non-primitive array.
