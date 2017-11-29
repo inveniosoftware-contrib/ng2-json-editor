@@ -11,7 +11,7 @@
           </li>
         </ul>
       </ng-template>
-      <td *ngIf="!jsonPatches[0]; else patchTemplate" class="value-container" [ngClass]="disabledClass" [tooltip]="errorsTooltipTemplate"
+      <td *ngIf="!jsonPatches[0]; else patchTemplate" class="value-container" [class.disabled]="disabled" [tooltip]="errorsTooltipTemplate"
         [isDisabled]="!hasErrors()" placement="{{tooltipPosition}}" container="body">
         <div *ngSwitchCase="'string'">
           <string-input [pathString]="pathString" [value]="value" (valueChange)="onValueChange($event)" [disabled]="disabled" [tabIndex]="tabIndex"
