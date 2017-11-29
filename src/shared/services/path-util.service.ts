@@ -26,15 +26,13 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class PathUtilService {
 
-  get separator() {
-    return '/';
-  }
+  readonly separator = '/';
 
   /**
    *
-   * @param {Array<any>} path - Element's path
-   * @param {boolean} root - Find nearest or root parent array. True for root and false for nearest array parent
-   * @returns {Array<any>} - Returns the path to the array parent
+   * @param path - Element's path
+   * @param root - Find nearest or root parent array. True for root and false for nearest array parent
+   * @returns - Returns the path to the array parent
    */
   getNearestOrRootArrayParentInPath(path: Array<any>, root: boolean): Array<any> {
     let _path = [];
@@ -56,10 +54,10 @@ export class PathUtilService {
 
   /**
    *
-   * @param {Array<any>} path - The path of an element
-   * @param {boolean} directPathSearch - Flag for define direct or reverse searching in path. Set to true for searching in direct
+   * @param path - The path of an element
+   * @param directPathSearch - Flag for define direct or reverse searching in path. Set to true for searching in direct
    * or false for searching in reverse path
-   * @returns {number} - Returns found index in path or -1 if not found
+   * @returns - Returns found index in path or -1 if not found
    */
   findIndexFromPath(path: Array<any>, directPathSearch: boolean): number {
     path = directPathSearch ? path : path.reverse();

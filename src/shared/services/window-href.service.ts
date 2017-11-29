@@ -25,22 +25,19 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class WindowHrefService {
   // initial value is set to avoid ngc error.
-  private static hrefWithoutHash = '';
+  readonly hrefWithoutHash: string;
 
-  getHrefWithoutHash(): string {
-    // check if it is already cached
-    if (!WindowHrefService.hrefWithoutHash) {
-      const href = window.location.href;
-      // check if there is an hash in href
-      const lastHashIndex = href.lastIndexOf('#');
-      if (lastHashIndex > 0) {
-        // remove hash.
-        WindowHrefService.hrefWithoutHash = href.substring(0, lastHashIndex);
-      } else {
-         WindowHrefService.hrefWithoutHash = href;
-      }
+  constructor() {
+    this.hrefWithoutHash = this.getHrefWithoutHash();
+  }
+
+  private getHrefWithoutHash(): string {
+    const href = window.location.href;
+    const lastHashIndex = href.lastIndexOf('#');
+    if (lastHashIndex > 0) {
+      return href.substring(0, lastHashIndex);
+    } else {
+       return href;
     }
-    // return cached value
-    return WindowHrefService.hrefWithoutHash;
   }
 }

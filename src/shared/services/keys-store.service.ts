@@ -69,7 +69,6 @@ export class KeysStoreService {
     return newKeyPath;
   }
 
-
   deletePath(path: Array<any>) {
     const lastKey = path[path.length - 1];
     const parentPath = this.pathUtilService.toPathString(path.slice(0, -1));
@@ -78,6 +77,7 @@ export class KeysStoreService {
       this.deleteKey(parentPath, lastKey);
     }
   }
+
   /**
    * Sync keys in store for the given path or its parent, grand parent etc. if necessary
    *
@@ -177,7 +177,6 @@ export class KeysStoreService {
         delete this.keys$Map[swap.from];
       });
   }
-
 
   buildKeysMap(json: Map<string, any>, schema: JSONSchema) {
     this.keys$Map = {};

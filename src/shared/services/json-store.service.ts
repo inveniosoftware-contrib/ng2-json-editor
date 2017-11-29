@@ -79,7 +79,6 @@ export class JsonStoreService {
 
     this.keysStoreService.syncKeysForPath(path, this.json);
 
-
     this.json$.next(this.json);
   }
 
@@ -197,7 +196,7 @@ export class JsonStoreService {
     this.removeJsonPatch(patch);
   }
 
-  hasPatch(path: string) {
+  hasPatch(path: string): boolean {
     return this.patchesByPath[path] && this.patchesByPath[path].length > 0;
   }
 

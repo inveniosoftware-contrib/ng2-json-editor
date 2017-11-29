@@ -42,8 +42,9 @@ describe('ListPageChangerService', () => {
     const itemsPerPage = 3;
     const expectedPage = 2;
     service.registerPaginatedList(listPath, itemsPerPage)
-      .subscribe(page => {
-        expect(page).toEqual(expectedPage);
-      });
+    .subscribe(page => {
+      expect(page).toEqual(expectedPage);
+    });
+    service.changePage(itemPath);
   });
 });

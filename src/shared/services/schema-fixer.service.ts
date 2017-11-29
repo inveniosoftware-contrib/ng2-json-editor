@@ -38,7 +38,7 @@ export class SchemaFixerService {
    *
    * @param schema - json schema
    * @param config - schema specific options
-   * @return {JSONSchema} - fixed schema
+   * @return - fixed schema
    */
   fixSchema(originalSchema: JSONSchema, config?: SchemaOptions): JSONSchema {
     let schema = _.cloneDeep(originalSchema);
