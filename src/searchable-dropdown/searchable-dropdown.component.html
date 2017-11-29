@@ -3,7 +3,7 @@
   <div class="toggle-container">
     <input *ngIf="dropdown.isOpen; else valueDisplayTemplate" #filterInput class="value" attr.data-path="{{pathString}}" [placeholder]="placeholder"
       [(ngModel)]="expression" (keyup.enter)="onEnterKeyUp()" (blur)="onInputBlur($event)">
-    <i class="fa fa-caret-down"></i>
+    <i class="fa fa-caret-down" (click)="showDropdown()"></i>
   </div>
   <ul class="dropdown-menu" *dropdownMenu role="menu">
     <li *ngFor="let displayValue of displayValues | filterByExpression:expression" role="menuitem">
@@ -14,5 +14,5 @@
 </div>
 
 <ng-template #valueDisplayTemplate>
-  <span class="value" [tabindex]="tabIndex" (focus)="onValueDisplayFocus()">{{biDisplayValueMap.getValue(value)}}</span>
+  <span class="value" [tabindex]="tabIndex" (focus)="showDropdown()">{{biDisplayValueMap.getValue(value)}}</span>
 </ng-template>
