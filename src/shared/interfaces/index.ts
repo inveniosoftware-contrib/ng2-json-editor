@@ -1,5 +1,4 @@
 export { AutocompletionConfig } from './autocompletion-config';
-export { AutocompletionResult } from './autocompletion-result';
 export { JsonEditorConfig } from './json-editor-config';
 export { LongListNavigatorConfig } from './long-list-navigator-config';
 export { ModalOptions } from './modal-options';
