@@ -36,9 +36,9 @@ export class RecordFixerService {
    * Fixes given record according to given schema, in other words
    * changes it to match the format expected the by te json-editor
    *
-   * @param {Object} rawRecord - json record to be fixed
-   * @param {Object} schema - extended schema of rawRecord
-   * @return {Object} - fixed record
+   * @param rawRecord - json record to be fixed
+   * @param schema - extended schema of rawRecord
+   * @return - fixed record
    */
   fixRecord(rawRecord: object, schema: JSONSchema): object {
     const record = Object.assign({}, rawRecord);

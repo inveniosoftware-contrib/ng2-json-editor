@@ -64,7 +64,7 @@ export class TreeMenuItemComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.href = `${this.windowHrefService.getHrefWithoutHash()}#${this.path}`;
+    this.href = `${this.windowHrefService.hrefWithoutHash}#${this.path}`;
   }
 
   ngOnChanges(changes: SimpleChanges) {

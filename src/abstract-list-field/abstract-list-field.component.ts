@@ -67,10 +67,6 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
     return `${this.pathString}${this.pathUtilService.separator}${index}`;
   }
 
-  get sortableClass() {
-    return this.schema.sortable ? 'sortable' : '';
-  }
-
   get addJsonPatches(): Array<JsonPatch> {
     return this.jsonPatches
       .filter(patch => patch.op === 'add');

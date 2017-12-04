@@ -40,7 +40,7 @@ import {
   KeysStoreService,
   JsonSchemaService
 } from '../shared/services';
-import { AutocompletionResult, AutocompletionConfig } from '../shared/interfaces';
+import { AutocompletionConfig } from '../shared/interfaces';
 
 const autocompletionServiceResults = [
   { text: 'Result1' },
@@ -49,7 +49,7 @@ const autocompletionServiceResults = [
 ];
 class MockRemoteAutocompletionService extends RemoteAutocompletionService {
   getAutocompletionResults(options: AutocompletionConfig,
-    token: string): Observable<Array<AutocompletionResult>> {
+    token: string): any {
     return Observable.of(autocompletionServiceResults);
   }
 }

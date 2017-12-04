@@ -98,7 +98,7 @@ export class SearchableDropdownComponent implements OnChanges {
     this.dropdown.hide();
   }
 
-  onValueDisplayFocus() {
+  showDropdown() {
     this.dropdown.show();
     this.expression = '';
     setTimeout(() => {

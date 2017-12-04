@@ -152,10 +152,6 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     }
   }
 
-  get disabledClass(): string {
-    return this.disabled ? 'disabled' : '';
-  }
-
   hasErrors(): boolean {
     return super.hasErrors() || this.internalErrors.length > 0;
   }

@@ -95,8 +95,8 @@ export class ShortcutActionService {
   }
 
   /**
-   * @param {Array<any>} path - Path of the element that is moved
-   * @param {number} direction - Movement direction. -1 for UP, +1 for DOWN
+   * @param path - Path of the element that is moved
+   * @param direction - Movement direction. -1 for UP, +1 for DOWN
    */
   private move(path: Array<any>, direction: number, root = false): void {
     this.domUtilService.blurFirstEditableChildById(this.pathUtilService.toPathString(path));
@@ -114,8 +114,8 @@ export class ShortcutActionService {
   }
 
   /**
-   * @param {Array<any>} path - Path of the element's array parent
-   * @param {number} index - Index of the element that is deleted from array parent path
+   * @param path - Path of the element's array parent
+   * @param index - Index of the element that is deleted from array parent path
    */
   private deleteElement(path: Array<any>, index: number) {
     const values = this.jsonStoreService.getIn(path);
@@ -131,8 +131,8 @@ export class ShortcutActionService {
   }
 
   /**
-   * @param {Array<any>} path - Path of the element that is focused
-   * @param {number} direction - Navigation direction. -1 for UP, +1 for DOWN
+   * @param path - Path of the element that is focused
+   * @param direction - Navigation direction. -1 for UP, +1 for DOWN
    */
   private navigateUpDown(path: Array<any>, direction: number) {
     const values = this.jsonStoreService.getIn(this.pathUtilService.getNearestOrRootArrayParentInPath(path, false));
@@ -157,8 +157,8 @@ export class ShortcutActionService {
   }
 
   /**
-   * @param {Array<any>} path - Path of the element that is focused
-   * @param {number} direction - Navigation direction. -1 for LEFT, +1 for RIGHT
+   * @param path - Path of the element that is focused
+   * @param direction - Navigation direction. -1 for LEFT, +1 for RIGHT
    */
   private navigateRightLeft(path: Array<any>, direction: number) {
     const pathString = this.pathUtilService.toPathString(path);
@@ -167,7 +167,7 @@ export class ShortcutActionService {
 
   /**
    * Copies the current row in table below and sets the value of the previous focused field to empty in the new row
-   * @param {Array<any>} path - Path
+   * @param path - Path
    */
   copyAction(path: Array<any>) {
     this.copyRowOrSchemaBelow(path, false);
@@ -176,15 +176,15 @@ export class ShortcutActionService {
   /**
    * Copies the root parent element below(eg creates a new author in authors list)
    * when you edit an author's field)
-   * @param {Array<any>} path - Path
+   * @param path - Path
    */
   copyFromRootAction(path: Array<any>) {
     this.copyRowOrSchemaBelow(path, true);
   }
 
   /**
-   * @param {Array<any>} originalPath - Path of the element that is copied
-   * @param {boolean} root - Copy item from parent or root. Set to true for usage as in `copyFromRootAction` and false
+   * @param originalPath - Path of the element that is copied
+   * @param root - Copy item from parent or root. Set to true for usage as in `copyFromRootAction` and false
    * for usage as in `copyAction`
    */
   private copyRowOrSchemaBelow(originalPath: Array<any>, root: boolean) {
