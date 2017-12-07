@@ -125,15 +125,15 @@ describe('ShortcutAction', function () {
 
   it(`should copy new row under references table using 'mod+alt+r' shortcut.
     It must copy the exact value of the root element eg Copy the whole element under the focused one.`, () => {
-      const inputElem = page.getChildOfElementByCss(page.getElementById('/keywords/0/value'), 'div[contenteditable=true]');
-      const numberOfContentEditableElementsBeforeCopyPromise = page.getNumberOfContentEditableElementsById('/keywords/0');
-      const numberOfInputElementsBeforeCopyPromise = page.getNumberOfInputElementsById('/keywords/0');
+      const inputElem = page.getChildOfElementByCss(page.getElementById('/imprints/0/date'), 'div[contenteditable=true]');
+      const numberOfContentEditableElementsBeforeCopyPromise = page.getNumberOfContentEditableElementsById('/imprints/0');
+      const numberOfInputElementsBeforeCopyPromise = page.getNumberOfInputElementsById('/imprints/0');
       inputElem.sendKeys(protractor.Key.chord(mod, protractor.Key.ALT, 'r'));
-      const afterCopyInputElemValue = page.getChildOfElementByCss(page.getElementById('/keywords/1/value'), 'div[contenteditable=true]')
+      const afterCopyInputElemValue = page.getChildOfElementByCss(page.getElementById('/imprints/1/date'), 'div[contenteditable=true]')
         .getText();
       expect(inputElem.getText()).toEqual(afterCopyInputElemValue);
-      const numberOfContentEditableElementsAfterCopyPromise = page.getNumberOfContentEditableElementsById('/keywords/1');
-      const numberOfInputElementsAfterCopyPromise = page.getNumberOfInputElementsById('/keywords/1');
+      const numberOfContentEditableElementsAfterCopyPromise = page.getNumberOfContentEditableElementsById('/imprints/1');
+      const numberOfInputElementsAfterCopyPromise = page.getNumberOfInputElementsById('/imprints/1');
       expect(numberOfContentEditableElementsBeforeCopyPromise).toEqual(numberOfContentEditableElementsAfterCopyPromise);
       expect(numberOfInputElementsBeforeCopyPromise).toEqual(numberOfInputElementsAfterCopyPromise);
     });
