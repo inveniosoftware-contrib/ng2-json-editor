@@ -28,9 +28,9 @@ import { ListPageChangerService } from './list-page-changer.service';
 @Injectable()
 export class DomUtilService {
 
-  private editableSelector = '.value-container input, div[contenteditable=true], .switch-input';
+  private readonly editableSelector = '.value-container input, div[contenteditable=true], .switch-input, searchable-dropdown span.value';
   // highlight class is defined in json-editor.component.scss
-  private highlightClass = 'highlight';
+  private readonly highlightClass = 'highlight';
   private highlightedElement: HTMLElement;
 
   constructor(private tabsUtilService: TabsUtilService,
