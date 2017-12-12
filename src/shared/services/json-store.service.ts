@@ -208,7 +208,10 @@ export class JsonStoreService {
       if (patchIndex > -1) {
         this.patchesByPath[path].splice(patchIndex, 1);
         this.patchesByPath$.next(this.patchesByPath);
-        this.jsonPatches$.next(this.jsonPatches.filter(jsonPatch => jsonPatch !== patch));
+
+        const globalPatchIndex = this.jsonPatches.indexOf(patch);
+        this.jsonPatches.splice(globalPatchIndex, 1);
+        this.jsonPatches$.next(this.jsonPatches);
       }
     }
   }
