@@ -11,7 +11,7 @@
   </div>
 </ng-template>
 <json-editor *ngIf="record && schema"
-  [config]="config.jsonEditorConfig"
+  [config]="config"
   [(record)]="record"
   [(jsonPatches)]="patches"
   [errorMap]="errorMap"
