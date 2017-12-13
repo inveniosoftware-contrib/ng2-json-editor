@@ -1,0 +1,34 @@
+{
+  "/abstracts/0/source": [
+    {
+      "message": "Mock-Error 1: /abstracts/0/value",
+      "type": "Error"
+    },
+    {
+      "message": "Mock-Warning 1: /abstracts/0/value",
+      "type": "Warning"
+    }
+  ],
+  "/titles/0/source": [
+    {
+      "message": "Mock-Error 1: /titles/0/source",
+      "type": "Error"
+    },
+    {
+      "message": "Mock-Error 2: /titles/0/source",
+      "type": "Error"
+    }
+  ],
+  "/control_number": [
+    {
+      "message": "Mock-Error 1: /control_number",
+      "type": "Error"
+    }
+  ],
+  "/references/22": [
+    {
+      "message": "Mock-Error 1: /references/22",
+      "type": "Error"
+    }
+  ]
+}

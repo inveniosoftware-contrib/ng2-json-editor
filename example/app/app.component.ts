@@ -24,7 +24,10 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/zip';
-import { AppConfig } from './app.config';
+import { JsonEditorConfig } from '../../dist';
+
+import { environment } from '../environments/environment';
+
 
 @Component({
   // tslint:disable-next-line
@@ -40,13 +43,14 @@ export class AppComponent {
   schema: object;
   patches: Array<any>;
   errorMap: object;
+  readonly config: JsonEditorConfig = environment.editorConfig;
 
-  constructor(private http: Http, public config: AppConfig) {
+  constructor(private http: Http) {
     Observable.zip(
-      this.http.get('./assets/mock-data/record.json'),
-      this.http.get('./assets/mock-data/schema.json'),
-      this.http.get('./assets/mock-data/patches.json'),
-      this.http.get('./assets/mock-data/error-map.json'),
+      this.http.get(`./assets/${environment.mockDataFolder}/record.json`),
+      this.http.get(`./assets/${environment.mockDataFolder}/schema.json`),
+      this.http.get(`./assets/${environment.mockDataFolder}/patches.json`),
+      this.http.get(`./assets/${environment.mockDataFolder}/error-map.json`),
       (recordRes, schemaRes, patchesRes, errorMapRes) => {
         return {
           record: recordRes.json(),
@@ -56,9 +60,9 @@ export class AppComponent {
         };
       }
     ).subscribe((data) => {
-      this.record = data.record; // set ./assets/mock-data/record.json
-      this.schema = data.schema; // set ./assets/mock-data/schema.json
-      this.patches = data.patches; // set ./assets/mock-data/patches.json
+      this.record = data.record;
+      this.schema = data.schema;
+      this.patches = data.patches;
       this.errorMap = data.errorMap;
     });
   }
