@@ -1,6 +1,6 @@
 {
   "name": "ng2-json-editor",
-  "version": "0.23.0",
+  "version": "0.23.1",
   "description": "Angular2 component for editing large json documents",
   "keywords": [
     "angular2",
@@ -18,7 +18,7 @@
   "scripts": {
     "build": "gulp build",
     "start": "npm run build && npm run serve",
-    "serve:": "ng serve",  
+    "serve:": "ng serve",
     "lint": "tslint --project ./src/tsconfig.json \"src/**/*.ts\"",
     "test:unit": "ng test --code-coverage --sourcemaps=false --watch=false",
     "test": "npm-run-all build test:unit e2e",
