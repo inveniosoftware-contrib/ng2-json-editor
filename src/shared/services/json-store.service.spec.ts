@@ -21,6 +21,8 @@
 */
 
 import { fromJS } from 'immutable';
+import 'rxjs/add/operator/skip';
+import 'rxjs/add/operator/take';
 
 import { JsonStoreService } from './json-store.service';
 import { PathUtilService } from './path-util.service';
@@ -213,5 +215,79 @@ describe('JsonStoreService', () => {
     });
 
     service.setIn(path, value);
+  });
+
+  it('should apply patch and remove it after', () => {
+    const json = fromJS({
+      aMap: {
+        aValue: 'value'
+      }
+    });
+    const patch = {
+      op: 'replace',
+      path: '/aMap/aValue',
+      value: 'patchValue'
+    };
+    service.setJson(json);
+    service.setJsonPatches([patch]);
+    service.jsonPatches$.subscribe(jsonPatches => {
+      expect(jsonPatches).toEqual([]);
+    });
+    service.json$.subscribe(changedJson => {
+      expect(changedJson.getIn(['aMap', 'aValue'])).toEqual('patchValue');
+    });
+    // skip first because replay subject emits the result before applyPatch
+    service.patchesByPath$.skip(1)
+      .subscribe(patchesByPath => {
+        expect(patchesByPath[patch.path]).toEqual([]);
+      });
+    service.applyPatch(patch);
+  });
+
+  it('should reject patch and remove it after', () => {
+    const json = fromJS({
+      aMap: {
+        aValue: 'value'
+      }
+    });
+    const patch = {
+      op: 'replace',
+      path: '/aMap/aValue',
+      value: 'patchValue'
+    };
+    service.setJson(json);
+    service.setJsonPatches([patch]);
+    service.jsonPatches$.subscribe(jsonPatches => {
+      expect(jsonPatches).toEqual([]);
+    });
+    service.json$.subscribe(changedJson => {
+      expect(changedJson.getIn(['aMap', 'aValue'])).toEqual('value');
+    });
+    // skip first because replay subject emits the result before applyPatch
+    service.patchesByPath$.skip(1)
+      .subscribe(patchesByPath => {
+        expect(patchesByPath[patch.path]).toEqual([]);
+      });
+    service.rejectPatch(patch);
+  });
+
+  it('should push to histroy for root change and rollback it', () => {
+    const json = fromJS({
+      aMap: {
+        aValue: 'oldValue'
+      }
+    });
+    const change = fromJS({ aValue: 'newValue', anotherValue: 'anotherValue' });
+    service.setJson(json);
+    service.json$.take(1)
+      .subscribe(changedJson => {
+        expect(changedJson.getIn(['aMap']).toJS()).toEqual(change.toJS());
+      });
+    service.json$.skip(1)
+      .subscribe(changedJson => {
+        expect(changedJson.getIn(['aMap']).toJS()).toEqual({ aValue: 'oldValue' });
+      });
+    service.setIn(['aMap'], change);
+    service.rollbackLastChange();
   });
 });

@@ -69,6 +69,7 @@ export abstract class AbstractFieldComponent extends AbstractSubscriberComponent
         this.jsonPatches = patches || [];
         this.removeJsonPatch = this.jsonPatches
           .find(patch => patch.op === 'remove');
+        this.changeDetectorRef.markForCheck();
       });
   }
 
