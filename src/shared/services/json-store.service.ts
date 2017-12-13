@@ -57,21 +57,10 @@ export class JsonStoreService {
 
     // immutablejs setIn creates Map for keys that don't exist in path
     // therefore List() should be set manually for some of those keys.
-    for (let i = 0; i < path.length - 1; i++) {
-      const pathToIndex = path.slice(0, i + 1);
-      // create a list for a key if the next key is a number.
-      if (!this.json.hasIn(pathToIndex) && typeof path[i + 1] === 'number') {
-        this.json = this.json.setIn(pathToIndex, List());
-      }
-    }
+    this.setEmptyListBeforeEachIndexInPath(path);
 
-    // save revert patch for undo if it's all document or top-level
     if (allowUndo && path.length <= 1) {
-      this.history.push({
-        path: this.pathUtilService.toPathString(path),
-        op: 'replace',
-        value: this.json.getIn(path)
-      });
+      this.pushRevertPatchToHistory(path, 'replace');
     }
 
     // set new value
@@ -82,20 +71,33 @@ export class JsonStoreService {
     this.json$.next(this.json);
   }
 
+  private setEmptyListBeforeEachIndexInPath(path: Array<any>) {
+    for (let i = 0; i < path.length - 1; i++) {
+      const currentPath = path.slice(0, i + 1);
+      if (!this.json.hasIn(currentPath) && typeof path[i + 1] === 'number') {
+        this.json = this.json.setIn(currentPath, List());
+      }
+    }
+  }
+
   getIn(path: Array<any>): any {
     return this.json.getIn(path);
   }
 
   removeIn(path: Array<any>) {
-    this.history.push({
-      path: this.pathUtilService.toPathString(path),
-      op: 'add',
-      value: this.json.getIn(path)
-    });
+    this.pushRevertPatchToHistory(path, 'add');
 
     this.json = this.json.removeIn(path);
     this.json$.next(this.json);
     this.keysStoreService.deletePath(path);
+  }
+
+  private pushRevertPatchToHistory(path: Array<any>, revertOp: string) {
+    this.history.push({
+      path: this.pathUtilService.toPathString(path),
+      op: revertOp,
+      value: this.json.getIn(path)
+    });
   }
 
   addIn(path: Array<any>, value: any) {
@@ -116,6 +118,13 @@ export class JsonStoreService {
     } else {
       this.setIn(path, value);
     }
+  }
+
+  private toImmutable(value: any): any {
+    if (typeof value === 'object' && !(List.isList(value) || Map.isMap(value))) {
+      return fromJS(value);
+    }
+    return value;
   }
 
   /**
@@ -160,16 +169,14 @@ export class JsonStoreService {
     this.patchesByPath$.next(this.patchesByPath);
   }
 
-  private getComponentPathForPatch(patch: JsonPatch): string {
-    if (patch.op === 'add') {
-      const pathArray = this.pathUtilService.toPathArray(patch.path);
-      const lastPathElement = pathArray[pathArray.length - 1];
-      if (lastPathElement === '-' || !isNaN(Number(lastPathElement))) {
-        pathArray.pop();
-        return this.pathUtilService.toPathString(pathArray);
-      }
+  rollbackLastChange(): string {
+    const lastChangeReversePatch = this.history.pop();
+    if (lastChangeReversePatch) {
+      this.applyPatch(lastChangeReversePatch, false);
+      return lastChangeReversePatch.path;
+    } else {
+      return undefined;
     }
-    return patch.path;
   }
 
   applyPatch(patch: JsonPatch, allowUndo = true) {
@@ -216,23 +223,21 @@ export class JsonStoreService {
     }
   }
 
-  rollbackLastChange(): string {
-    const lastChangeReversePatch = this.history.pop();
-    if (lastChangeReversePatch) {
-      this.applyPatch(lastChangeReversePatch, false);
-      return lastChangeReversePatch.path;
-    } else {
-      return undefined;
+  private getComponentPathForPatch(patch: JsonPatch): string {
+    if (patch.op === 'add') {
+      return this.convertElementPathToParentArrayPath(patch.path);
     }
+    return patch.path;
   }
 
-  /**
-   * Converts the value to immutable if it is not an immutable.
-   */
-  private toImmutable(value: any): any {
-    if (typeof value === 'object' && !(List.isList(value) || Map.isMap(value))) {
-      return fromJS(value);
+  private convertElementPathToParentArrayPath(path: string): string {
+    const pathArray = this.pathUtilService.toPathArray(path);
+    const lastPathElement = pathArray[pathArray.length - 1];
+    if (lastPathElement === '-' || !isNaN(Number(lastPathElement))) {
+      pathArray.pop();
+      return this.pathUtilService.toPathString(pathArray);
+    } else {
+      return path;
     }
-    return value;
   }
 }
