@@ -114,6 +114,14 @@
       "value": "3069161"
     }
   ],
+  "deleted_records": [
+    {
+      "$ref": "http://localhost:5000/api/record/1497201"
+    }, 
+    {
+      "$ref": "http://localhost:5000/api/record/1430091"
+    }
+  ],
   "imprints": [
     {
       "date": "2016-01-08",

@@ -91,6 +91,7 @@ var AbstractFieldComponent = (function (_super) {
             _this.jsonPatches = patches || [];
             _this.removeJsonPatch = _this.jsonPatches
                 .find(function (patch) { return patch.op === 'remove'; });
+            _this.changeDetectorRef.markForCheck();
         });
     };
     AbstractFieldComponent.prototype.ngOnChanges = function (changes) {
@@ -203,13 +204,6 @@ var AbstractListFieldComponent = (function (_super) {
     AbstractListFieldComponent.prototype.getPathStringForChild = function (index) {
         return "" + this.pathString + this.pathUtilService.separator + index;
     };
-    Object.defineProperty(AbstractListFieldComponent.prototype, "sortableClass", {
-        get: function () {
-            return this.schema.sortable ? 'sortable' : '';
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(AbstractListFieldComponent.prototype, "addJsonPatches", {
         get: function () {
             return this.jsonPatches
@@ -554,7 +548,7 @@ AddNewElementButtonComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */], args: [{
                 selector: 'add-new-element-button',
                 styles: ["div.button-container { display: inline-block; width: 100%; } .btn-new-field { font-size: 13px; font-weight: bold; text-shadow: 0 1px 0 #fff; opacity: 0.5; background: transparent; border: 0; bottom: -5px; left: -5px; padding: 0px; } .btn-new-field:hover { color: green !important; opacity: 0.6; } "],
-                template: "<div class=\"button-container\"> <button type=\"button\" class=\"btn-new-field\" (click)=\"addNewElement()\">Add new</button> </div>",
+                template: "<div [class.disabled]=\"schema.disabled\"  class=\"button-container\"> <button type=\"button\" class=\"btn-new-field\" (click)=\"addNewElement()\">Add new</button> </div>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
@@ -766,9 +760,9 @@ var AutocompleteInputComponent = (function () {
     }
     AutocompleteInputComponent.prototype.ngOnInit = function () {
         var _this = this;
-        // if url option set then use remote autocompletion service
         if (this.autocompletionConfig.url) {
-            this.typeaheadOptionField = 'text';
+            // remote
+            this.typeaheadOptionField = this.autocompletionConfig.optionField || 'text';
             this.dataSource = __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"].create(function (observer) {
                 if (_this.value && _this.value.length > 0) {
                     observer.next(_this.value);
@@ -778,6 +772,8 @@ var AutocompleteInputComponent = (function () {
             });
         }
         else {
+            // local
+            this.typeaheadOptionField = this.autocompletionConfig.optionField || '';
             this.dataSource = this.autocompletionConfig.source;
         }
     };
@@ -792,12 +788,11 @@ var AutocompleteInputComponent = (function () {
         this.value = value;
         this.onValueChange.emit(value);
     };
-    AutocompleteInputComponent.prototype.onCompletionSelect = function (completionItem) {
+    AutocompleteInputComponent.prototype.onCompletionSelect = function (selection) {
         var onCompletionSelect = this.autocompletionConfig.onCompletionSelect;
-        // if callback set and it is remote autocompletion source
-        if (onCompletionSelect && this.typeaheadOptionField) {
+        if (onCompletionSelect) {
             // .slice() is used to pass by value instead of reference
-            onCompletionSelect(this.path.slice(), completionItem, this.jsonStoreService, this.keysStoreService);
+            onCompletionSelect(this.path.slice(), selection, this.jsonStoreService, this.keysStoreService);
         }
     };
     return AutocompleteInputComponent;
@@ -2803,13 +2798,6 @@ var PrimitiveFieldComponent = (function (_super) {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(PrimitiveFieldComponent.prototype, "disabledClass", {
-        get: function () {
-            return this.disabled ? 'disabled' : '';
-        },
-        enumerable: true,
-        configurable: true
-    });
     PrimitiveFieldComponent.prototype.hasErrors = function () {
         return _super.prototype.hasErrors.call(this) || this.internalErrors.length > 0;
     };
@@ -2842,7 +2830,7 @@ PrimitiveFieldComponent.decorators = [
                 selector: 'primitive-field',
                 encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_16" /* ViewEncapsulation */].None,
                 styles: ["td.value-container div[contenteditable=true], td.value-container input { vertical-align: middle; transition: all 0.5s ease; border: none; background-color: transparent; display: inline-block; width: 100%; } table.primitive-field-container { width: 100%; } td.link-button-container { width: 22px; } td.value-container { width: 100%; padding: 3px 3px 3px 6px !important; } td.value-container:hover { background-color: #ffa !important; } a.no-decoration { text-decoration: none; } [contenteditable=true] { min-height: 18px; word-break: break-word; } [contenteditable=true]:empty:before { content: attr(placeholder); color: darkgray; display: block; /* For Firefox */ } .tooltip-left-align { margin-left: 12px; padding: 0px; } .btn-merge { border: none; background: transparent; width: 100%; text-align: left; white-space: normal; } .orange-left-border { border-left: 9px solid #e67e22; border-radius: 0; } .fa-bolt { color: #e67e22; } "],
-                template: "<div [id]=\"pathString\"> <table class=\"primitive-field-container\" [ngSwitch]=\"schema.componentType\"> <tr [ngClass]=\"errorClass\"> <ng-template #errorsTooltipTemplate> <ul class=\"tooltip-left-align\"> <li *ngFor=\"let error of internalErrors\"> {{error.message}} </li> <li *ngFor=\"let error of externalErrors\"> {{error.message}} </li> </ul> </ng-template> <td *ngIf=\"!jsonPatches[0]; else patchTemplate\" class=\"value-container\" [ngClass]=\"disabledClass\" [tooltip]=\"errorsTooltipTemplate\" [isDisabled]=\"!hasErrors()\" placement=\"{{tooltipPosition}}\" container=\"body\"> <div *ngSwitchCase=\"'string'\"> <string-input [pathString]=\"pathString\" [value]=\"value\" (valueChange)=\"onValueChange($event)\" [disabled]=\"disabled\" [tabIndex]=\"tabIndex\" [latexPreviewEnabled]=\"schema.latexPreviewEnabled\" [placeholder]=\"schema.title\" (blur)=\"onBlur()\" (onKeypress)=\"onKeypress($event)\"> </string-input> </div> <div *ngSwitchCase=\"'enum'\"> <searchable-dropdown [pathString]=\"pathString\" [value]=\"value\" [placeholder]=\"schema.title\" [items]=\"schema.enum\" [shortcutMap]=\"schema.enumShorcutMap\" (onSelect)=\"onSearchableDropdownSelect($event)\" [displayValueMap]=\"schema.enumDisplayValueMap\" [tabIndex]=\"tabIndex\" (onBlur)=\"onBlur()\"></searchable-dropdown> </div> <div *ngSwitchCase=\"'autocomplete'\"> <autocomplete-input [pathString]=\"pathString\" [value]=\"value\" [path]=\"path\" [autocompletionConfig]=\"schema.autocompletionConfig\" (onBlur)=\"onBlur()\" (onKeypress)=\"onKeypress($event)\" (onValueChange)=\"onValueChange($event)\" [placeholder]=\"schema.title\" [tabIndex]=\"tabIndex\"></autocomplete-input> </div> <div *ngSwitchCase=\"'integer'\"> <input type=\"number\" [(ngModel)]=\"value\" [tabindex]=\"tabIndex\" [attr.data-path]=\"pathString\" (blur)=\"onBlur()\" (keypress)=\"onKeypress($event)\" [placeholder]=\"schema.title\"> </div> <div *ngSwitchCase=\"'boolean'\"> <input type=\"checkbox\" [(ngModel)]=\"value\" (ngModelChange)=\"onBlur()\" [placeholder]=\"schema.title\"> </div> <div *ngSwitchDefault> ## Not recognized type: {{valueType}} </div> </td> <td class=\"link-button-container\"> <a *ngIf=\"schema.linkBuilder\" class=\"no-decoration\" target=\"_blank\" [href]=\"schema.linkBuilder(value)\"> <i class=\"fa fa-link\" aria-hidden=\"true\"></i> </a> <a *ngIf=\"!schema.linkBuilder && schema.format === 'url'\" class=\"no-decoration\" target=\"_blank\" [href]=\"value\"> <i class=\"fa fa-link\" aria-hidden=\"true\"></i> </a> </td> </tr> </table> </div> <ng-template #patchTemplate> <button class=\"btn btn-default btn-merge orange-left-border\" type=\"button\" [popover]=\"mergePopover\" [popoverContext]=\"{currentValue: value, patchValue: jsonPatches[0].value}\" popoverTitle=\"Merge\" container=\"body\"> {{value}} <i class=\"fa fa-bolt\"></i> </button> </ng-template> <ng-template let-currentValue=\"currentValue\" let-patchValue=\"patchValue\" #mergePopover > <text-diff [currentText]=\"currentValue\" [newText]=\"patchValue\"></text-diff> <patch-actions [patch]=\"jsonPatches[0]\" [addActionEnabled]=\"isPathToAnIndex\"></patch-actions> </ng-template>",
+                template: "<div [id]=\"pathString\"> <table class=\"primitive-field-container\" [ngSwitch]=\"schema.componentType\"> <tr [ngClass]=\"errorClass\"> <ng-template #errorsTooltipTemplate> <ul class=\"tooltip-left-align\"> <li *ngFor=\"let error of internalErrors\"> {{error.message}} </li> <li *ngFor=\"let error of externalErrors\"> {{error.message}} </li> </ul> </ng-template> <td *ngIf=\"!jsonPatches[0]; else patchTemplate\" class=\"value-container\" [class.disabled]=\"disabled\" [tooltip]=\"errorsTooltipTemplate\" [isDisabled]=\"!hasErrors()\" placement=\"{{tooltipPosition}}\" container=\"body\"> <div *ngSwitchCase=\"'string'\"> <string-input [pathString]=\"pathString\" [value]=\"value\" (valueChange)=\"onValueChange($event)\" [disabled]=\"disabled\" [tabIndex]=\"tabIndex\" [latexPreviewEnabled]=\"schema.latexPreviewEnabled\" [placeholder]=\"schema.title\" (blur)=\"onBlur()\" (onKeypress)=\"onKeypress($event)\"> </string-input> </div> <div *ngSwitchCase=\"'enum'\"> <searchable-dropdown [pathString]=\"pathString\" [value]=\"value\" [placeholder]=\"schema.title\" [items]=\"schema.enum\" [shortcutMap]=\"schema.enumShorcutMap\" (onSelect)=\"onSearchableDropdownSelect($event)\" [displayValueMap]=\"schema.enumDisplayValueMap\" [tabIndex]=\"tabIndex\" (onBlur)=\"onBlur()\"></searchable-dropdown> </div> <div *ngSwitchCase=\"'autocomplete'\"> <autocomplete-input [pathString]=\"pathString\" [value]=\"value\" [path]=\"path\" [autocompletionConfig]=\"schema.autocompletionConfig\" (onBlur)=\"onBlur()\" (onKeypress)=\"onKeypress($event)\" (onValueChange)=\"onValueChange($event)\" [placeholder]=\"schema.title\" [tabIndex]=\"tabIndex\"></autocomplete-input> </div> <div *ngSwitchCase=\"'integer'\"> <input type=\"number\" [(ngModel)]=\"value\" [tabindex]=\"tabIndex\" [attr.data-path]=\"pathString\" (blur)=\"onBlur()\" (keypress)=\"onKeypress($event)\" [placeholder]=\"schema.title\"> </div> <div *ngSwitchCase=\"'boolean'\"> <input type=\"checkbox\" [(ngModel)]=\"value\" (ngModelChange)=\"onBlur()\" [placeholder]=\"schema.title\"> </div> <div *ngSwitchDefault> ## Not recognized type: {{valueType}} </div> </td> <td class=\"link-button-container\"> <a *ngIf=\"schema.linkBuilder\" class=\"no-decoration\" target=\"_blank\" [href]=\"schema.linkBuilder(value)\"> <i class=\"fa fa-link\" aria-hidden=\"true\"></i> </a> <a *ngIf=\"!schema.linkBuilder && schema.format === 'url'\" class=\"no-decoration\" target=\"_blank\" [href]=\"value\"> <i class=\"fa fa-link\" aria-hidden=\"true\"></i> </a> </td> </tr> </table> </div> <ng-template #patchTemplate> <button class=\"btn btn-default btn-merge orange-left-border\" type=\"button\" [popover]=\"mergePopover\" [popoverContext]=\"{currentValue: value, patchValue: jsonPatches[0].value}\" popoverTitle=\"Merge\" container=\"body\"> {{value}} <i class=\"fa fa-bolt\"></i> </button> </ng-template> <ng-template let-currentValue=\"currentValue\" let-patchValue=\"patchValue\" #mergePopover > <text-diff [currentText]=\"currentValue\" [newText]=\"patchValue\"></text-diff> <patch-actions [patch]=\"jsonPatches[0]\" [addActionEnabled]=\"isPathToAnIndex\"></patch-actions> </ng-template>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
@@ -2938,7 +2926,7 @@ PrimitiveListFieldComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */], args: [{
                 selector: 'primitive-list-field',
                 styles: ["td { padding: 0px !important; } "],
-                template: "<div [id]=\"pathString\" [ngClass]=\"redLeftBorderClass\"> <div class=\"wide\"> <table class=\"table\"> <tr *ngFor=\"let value of values | selfOrEmpty:schema; let i = index; trackBy:trackByIndex\"> <td> <primitive-field [value]=\"value\" [schema]=\"schema.items\" [path]=\"getPathForChild(i)\"></primitive-field> </td> <td *ngIf=\"values.size > 0\" class=\"button-holder\" [ngClass]=\"sortableClass\"> <list-action-group (onMove)=\"moveElement(i, $event)\" (onDelete)=\"deleteElement(i)\" [canMove]=\"schema.sortable\" [isDisabled]=\"disabled\"></list-action-group> </td> </tr> <tr *ngIf=\"removeJsonPatch\"> <patch-actions [patch]=\"removeJsonPatch\"></patch-actions> </tr> </table> <table class=\"table\"> <tr *ngFor=\"let patch of addJsonPatches\"> <add-patch-view [patch]=\"patch\"></add-patch-view> </tr> </table> </div> </div>",
+                template: "<div [id]=\"pathString\" [ngClass]=\"redLeftBorderClass\"> <div class=\"wide\"> <table class=\"table\"> <tr *ngFor=\"let value of values | selfOrEmpty:schema; let i = index; trackBy:trackByIndex\"> <td> <any-type-field [value]=\"value\" [schema]=\"schema.items\" [path]=\"getPathForChild(i)\"></any-type-field> </td> <td *ngIf=\"values.size > 0\" class=\"button-holder\" [class.sortable]=\"schema.sortable\"> <list-action-group (onMove)=\"moveElement(i, $event)\" (onDelete)=\"deleteElement(i)\" [canMove]=\"schema.sortable\" [isDisabled]=\"disabled\"></list-action-group> </td> </tr> <tr *ngIf=\"removeJsonPatch\"> <patch-actions [patch]=\"removeJsonPatch\"></patch-actions> </tr> </table> <table class=\"table\"> <tr *ngFor=\"let patch of addJsonPatches\"> <add-patch-view [patch]=\"patch\"></add-patch-view> </tr> </table> </div> </div>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
@@ -3241,7 +3229,7 @@ var SearchableDropdownComponent = (function () {
         }
         this.dropdown.hide();
     };
-    SearchableDropdownComponent.prototype.onValueDisplayFocus = function () {
+    SearchableDropdownComponent.prototype.showDropdown = function () {
         var _this = this;
         this.dropdown.show();
         this.expression = '';
@@ -3265,7 +3253,7 @@ SearchableDropdownComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */], args: [{
                 selector: 'searchable-dropdown',
                 styles: ["div.btn-group { width: 100%; } .dropdown-menu { left: 0px !important; } .toggle-container { width: 100%; display: inline-flex; } .toggle-container .value { flex-grow: 1; } .dropdown-toggle { box-shadow: none !important; } "],
-                template: "<div class=\"btn-group\" #dropdown=\"bs-dropdown\" dropdown keyboardNav=\"true\"> <!-- there is no dropdownToggle since it is handled manually see: onInputFocus and onInputBlur in ts --> <div class=\"toggle-container\"> <input *ngIf=\"dropdown.isOpen; else valueDisplayTemplate\" #filterInput class=\"value\" attr.data-path=\"{{pathString}}\" [placeholder]=\"placeholder\" [(ngModel)]=\"expression\" (keyup.enter)=\"onEnterKeyUp()\" (blur)=\"onInputBlur($event)\"> <i class=\"fa fa-caret-down\"></i> </div> <ul class=\"dropdown-menu\" *dropdownMenu role=\"menu\"> <li *ngFor=\"let displayValue of displayValues | filterByExpression:expression\" role=\"menuitem\"> <!-- href is needed for keyboard navigation --> <a class=\"dropdown-item\" href=\"javascript:void(0)\" (click)=\"onItemClick(displayValue)\">{{displayValue}}</a> </li> </ul> </div> <ng-template #valueDisplayTemplate> <span class=\"value\" [tabindex]=\"tabIndex\" (focus)=\"onValueDisplayFocus()\">{{biDisplayValueMap.getValue(value)}}</span> </ng-template>",
+                template: "<div class=\"btn-group\" #dropdown=\"bs-dropdown\" dropdown keyboardNav=\"true\"> <!-- there is no dropdownToggle since it is handled manually see: onInputFocus and onInputBlur in ts --> <div class=\"toggle-container\"> <input *ngIf=\"dropdown.isOpen; else valueDisplayTemplate\" #filterInput class=\"value\" attr.data-path=\"{{pathString}}\" [placeholder]=\"placeholder\" [(ngModel)]=\"expression\" (keyup.enter)=\"onEnterKeyUp()\" (blur)=\"onInputBlur($event)\"> <i class=\"fa fa-caret-down\" (click)=\"showDropdown()\"></i> </div> <ul class=\"dropdown-menu\" *dropdownMenu role=\"menu\"> <li *ngFor=\"let displayValue of displayValues | filterByExpression:expression\" role=\"menuitem\"> <!-- href is needed for keyboard navigation --> <a class=\"dropdown-item\" href=\"javascript:void(0)\" (click)=\"onItemClick(displayValue)\">{{displayValue}}</a> </li> </ul> </div> <ng-template #valueDisplayTemplate> <span class=\"value\" [tabindex]=\"tabIndex\" (focus)=\"showDropdown()\">{{biDisplayValueMap.getValue(value)}}</span> </ng-template>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
@@ -4451,7 +4439,7 @@ var ComponentTypeService = (function () {
         }
         else if (schemaType === 'array') {
             var itemSchema_1 = schema.items;
-            if (itemSchema_1.type === 'object') {
+            if (itemSchema_1.type === 'object' && !itemSchema_1.properties['$ref']) {
                 // complex-array: if it's an object array
                 // if its elements have at least a property with object (not ref-field)
                 // or a non-primitive array.
@@ -4525,7 +4513,7 @@ var DomUtilService = (function () {
     function DomUtilService(tabsUtilService, listPageChangerService) {
         this.tabsUtilService = tabsUtilService;
         this.listPageChangerService = listPageChangerService;
-        this.editableSelector = '.value-container input, div[contenteditable=true], .switch-input';
+        this.editableSelector = '.value-container input, div[contenteditable=true], .switch-input, searchable-dropdown span.value';
         // highlight class is defined in json-editor.component.scss
         this.highlightClass = 'highlight';
     }
@@ -5165,38 +5153,38 @@ var JsonStoreService = (function () {
         value = this.toImmutable(value);
         // immutablejs setIn creates Map for keys that don't exist in path
         // therefore List() should be set manually for some of those keys.
-        for (var i = 0; i < path.length - 1; i++) {
-            var pathToIndex = path.slice(0, i + 1);
-            // create a list for a key if the next key is a number.
-            if (!this.json.hasIn(pathToIndex) && typeof path[i + 1] === 'number') {
-                this.json = this.json.setIn(pathToIndex, Object(__WEBPACK_IMPORTED_MODULE_1_immutable__["List"])());
-            }
-        }
-        // save revert patch for undo if it's all document or top-level
+        this.setEmptyListBeforeEachIndexInPath(path);
         if (allowUndo && path.length <= 1) {
-            this.history.push({
-                path: this.pathUtilService.toPathString(path),
-                op: 'replace',
-                value: this.json.getIn(path)
-            });
+            this.pushRevertPatchToHistory(path, 'replace');
         }
         // set new value
         this.json = this.json.setIn(path, value);
         this.keysStoreService.syncKeysForPath(path, this.json);
         this.json$.next(this.json);
     };
+    JsonStoreService.prototype.setEmptyListBeforeEachIndexInPath = function (path) {
+        for (var i = 0; i < path.length - 1; i++) {
+            var currentPath = path.slice(0, i + 1);
+            if (!this.json.hasIn(currentPath) && typeof path[i + 1] === 'number') {
+                this.json = this.json.setIn(currentPath, Object(__WEBPACK_IMPORTED_MODULE_1_immutable__["List"])());
+            }
+        }
+    };
     JsonStoreService.prototype.getIn = function (path) {
         return this.json.getIn(path);
     };
     JsonStoreService.prototype.removeIn = function (path) {
-        this.history.push({
-            path: this.pathUtilService.toPathString(path),
-            op: 'add',
-            value: this.json.getIn(path)
-        });
+        this.pushRevertPatchToHistory(path, 'add');
         this.json = this.json.removeIn(path);
         this.json$.next(this.json);
         this.keysStoreService.deletePath(path);
+    };
+    JsonStoreService.prototype.pushRevertPatchToHistory = function (path, revertOp) {
+        this.history.push({
+            path: this.pathUtilService.toPathString(path),
+            op: revertOp,
+            value: this.json.getIn(path)
+        });
     };
     JsonStoreService.prototype.addIn = function (path, value) {
         var lastPathElement = path[path.length - 1];
@@ -5218,6 +5206,12 @@ var JsonStoreService = (function () {
         else {
             this.setIn(path, value);
         }
+    };
+    JsonStoreService.prototype.toImmutable = function (value) {
+        if (typeof value === 'object' && !(__WEBPACK_IMPORTED_MODULE_1_immutable__["List"].isList(value) || __WEBPACK_IMPORTED_MODULE_1_immutable__["Map"].isMap(value))) {
+            return Object(__WEBPACK_IMPORTED_MODULE_1_immutable__["fromJS"])(value);
+        }
+        return value;
     };
     /**
      * Moves the element at given index UP or DOWN within the list
@@ -5256,16 +5250,15 @@ var JsonStoreService = (function () {
         this.jsonPatches = patches;
         this.patchesByPath$.next(this.patchesByPath);
     };
-    JsonStoreService.prototype.getComponentPathForPatch = function (patch) {
-        if (patch.op === 'add') {
-            var pathArray = this.pathUtilService.toPathArray(patch.path);
-            var lastPathElement = pathArray[pathArray.length - 1];
-            if (lastPathElement === '-' || !isNaN(Number(lastPathElement))) {
-                pathArray.pop();
-                return this.pathUtilService.toPathString(pathArray);
-            }
+    JsonStoreService.prototype.rollbackLastChange = function () {
+        var lastChangeReversePatch = this.history.pop();
+        if (lastChangeReversePatch) {
+            this.applyPatch(lastChangeReversePatch, false);
+            return lastChangeReversePatch.path;
         }
-        return patch.path;
+        else {
+            return undefined;
+        }
     };
     JsonStoreService.prototype.applyPatch = function (patch, allowUndo) {
         if (allowUndo === void 0) { allowUndo = true; }
@@ -5301,28 +5294,28 @@ var JsonStoreService = (function () {
             if (patchIndex > -1) {
                 this.patchesByPath[path].splice(patchIndex, 1);
                 this.patchesByPath$.next(this.patchesByPath);
-                this.jsonPatches$.next(this.jsonPatches.filter(function (jsonPatch) { return jsonPatch !== patch; }));
+                var globalPatchIndex = this.jsonPatches.indexOf(patch);
+                this.jsonPatches.splice(globalPatchIndex, 1);
+                this.jsonPatches$.next(this.jsonPatches);
             }
         }
     };
-    JsonStoreService.prototype.rollbackLastChange = function () {
-        var lastChangeReversePatch = this.history.pop();
-        if (lastChangeReversePatch) {
-            this.applyPatch(lastChangeReversePatch, false);
-            return lastChangeReversePatch.path;
+    JsonStoreService.prototype.getComponentPathForPatch = function (patch) {
+        if (patch.op === 'add') {
+            return this.convertElementPathToParentArrayPath(patch.path);
+        }
+        return patch.path;
+    };
+    JsonStoreService.prototype.convertElementPathToParentArrayPath = function (path) {
+        var pathArray = this.pathUtilService.toPathArray(path);
+        var lastPathElement = pathArray[pathArray.length - 1];
+        if (lastPathElement === '-' || !isNaN(Number(lastPathElement))) {
+            pathArray.pop();
+            return this.pathUtilService.toPathString(pathArray);
         }
         else {
-            return undefined;
+            return path;
         }
-    };
-    /**
-     * Converts the value to immutable if it is not an immutable.
-     */
-    JsonStoreService.prototype.toImmutable = function (value) {
-        if (typeof value === 'object' && !(__WEBPACK_IMPORTED_MODULE_1_immutable__["List"].isList(value) || __WEBPACK_IMPORTED_MODULE_1_immutable__["Map"].isMap(value))) {
-            return Object(__WEBPACK_IMPORTED_MODULE_1_immutable__["fromJS"])(value);
-        }
-        return value;
     };
     return JsonStoreService;
 }());
@@ -6025,19 +6018,13 @@ ModalService.ctorParameters = function () { return []; };
 
 var PathUtilService = (function () {
     function PathUtilService() {
+        this.separator = '/';
     }
-    Object.defineProperty(PathUtilService.prototype, "separator", {
-        get: function () {
-            return '/';
-        },
-        enumerable: true,
-        configurable: true
-    });
     /**
      *
-     * @param {Array<any>} path - Element's path
-     * @param {boolean} root - Find nearest or root parent array. True for root and false for nearest array parent
-     * @returns {Array<any>} - Returns the path to the array parent
+     * @param path - Element's path
+     * @param root - Find nearest or root parent array. True for root and false for nearest array parent
+     * @returns - Returns the path to the array parent
      */
     PathUtilService.prototype.getNearestOrRootArrayParentInPath = function (path, root) {
         var _path = [];
@@ -6057,10 +6044,10 @@ var PathUtilService = (function () {
     };
     /**
      *
-     * @param {Array<any>} path - The path of an element
-     * @param {boolean} directPathSearch - Flag for define direct or reverse searching in path. Set to true for searching in direct
+     * @param path - The path of an element
+     * @param directPathSearch - Flag for define direct or reverse searching in path. Set to true for searching in direct
      * or false for searching in reverse path
-     * @returns {number} - Returns found index in path or -1 if not found
+     * @returns - Returns found index in path or -1 if not found
      */
     PathUtilService.prototype.findIndexFromPath = function (path, directPathSearch) {
         path = directPathSearch ? path : path.reverse();
@@ -6145,9 +6132,9 @@ var RecordFixerService = (function () {
      * Fixes given record according to given schema, in other words
      * changes it to match the format expected the by te json-editor
      *
-     * @param {Object} rawRecord - json record to be fixed
-     * @param {Object} schema - extended schema of rawRecord
-     * @return {Object} - fixed record
+     * @param rawRecord - json record to be fixed
+     * @param schema - extended schema of rawRecord
+     * @return - fixed record
      */
     RecordFixerService.prototype.fixRecord = function (rawRecord, schema) {
         var _this = this;
@@ -6285,11 +6272,10 @@ var RemoteAutocompletionService = (function () {
     };
     RemoteAutocompletionService.prototype.mapResponseToResults = function (response, resultsPath) {
         var pathElements = this.pathUtilService.toPathArray(resultsPath);
-        var responseJson = response.json();
+        var results = response.json();
         pathElements.forEach(function (pathElement) {
-            responseJson = responseJson[pathElement];
+            results = results[pathElement];
         });
-        var results = responseJson;
         return results;
     };
     return RemoteAutocompletionService;
@@ -6352,7 +6338,7 @@ var SchemaFixerService = (function () {
      *
      * @param schema - json schema
      * @param config - schema specific options
-     * @return {JSONSchema} - fixed schema
+     * @return - fixed schema
      */
     SchemaFixerService.prototype.fixSchema = function (originalSchema, config) {
         var schema = __WEBPACK_IMPORTED_MODULE_1_lodash__["cloneDeep"](originalSchema);
@@ -6802,8 +6788,8 @@ var ShortcutActionService = (function () {
         this.move(path, 1, true);
     };
     /**
-     * @param {Array<any>} path - Path of the element that is moved
-     * @param {number} direction - Movement direction. -1 for UP, +1 for DOWN
+     * @param path - Path of the element that is moved
+     * @param direction - Movement direction. -1 for UP, +1 for DOWN
      */
     ShortcutActionService.prototype.move = function (path, direction, root) {
         if (root === void 0) { root = false; }
@@ -6819,8 +6805,8 @@ var ShortcutActionService = (function () {
         this.deleteElement(this.pathUtilService.getNearestOrRootArrayParentInPath(path, false), this.pathUtilService.getElementIndexInForwardOrReversePath(path, false));
     };
     /**
-     * @param {Array<any>} path - Path of the element's array parent
-     * @param {number} index - Index of the element that is deleted from array parent path
+     * @param path - Path of the element's array parent
+     * @param index - Index of the element that is deleted from array parent path
      */
     ShortcutActionService.prototype.deleteElement = function (path, index) {
         var values = this.jsonStoreService.getIn(path);
@@ -6833,8 +6819,8 @@ var ShortcutActionService = (function () {
         this.navigateUpDown(path, 1);
     };
     /**
-     * @param {Array<any>} path - Path of the element that is focused
-     * @param {number} direction - Navigation direction. -1 for UP, +1 for DOWN
+     * @param path - Path of the element that is focused
+     * @param direction - Navigation direction. -1 for UP, +1 for DOWN
      */
     ShortcutActionService.prototype.navigateUpDown = function (path, direction) {
         var values = this.jsonStoreService.getIn(this.pathUtilService.getNearestOrRootArrayParentInPath(path, false));
@@ -6857,8 +6843,8 @@ var ShortcutActionService = (function () {
         this.navigateRightLeft(path, 1);
     };
     /**
-     * @param {Array<any>} path - Path of the element that is focused
-     * @param {number} direction - Navigation direction. -1 for LEFT, +1 for RIGHT
+     * @param path - Path of the element that is focused
+     * @param direction - Navigation direction. -1 for LEFT, +1 for RIGHT
      */
     ShortcutActionService.prototype.navigateRightLeft = function (path, direction) {
         var pathString = this.pathUtilService.toPathString(path);
@@ -6866,7 +6852,7 @@ var ShortcutActionService = (function () {
     };
     /**
      * Copies the current row in table below and sets the value of the previous focused field to empty in the new row
-     * @param {Array<any>} path - Path
+     * @param path - Path
      */
     ShortcutActionService.prototype.copyAction = function (path) {
         this.copyRowOrSchemaBelow(path, false);
@@ -6874,14 +6860,14 @@ var ShortcutActionService = (function () {
     /**
      * Copies the root parent element below(eg creates a new author in authors list)
      * when you edit an author's field)
-     * @param {Array<any>} path - Path
+     * @param path - Path
      */
     ShortcutActionService.prototype.copyFromRootAction = function (path) {
         this.copyRowOrSchemaBelow(path, true);
     };
     /**
-     * @param {Array<any>} originalPath - Path of the element that is copied
-     * @param {boolean} root - Copy item from parent or root. Set to true for usage as in `copyFromRootAction` and false
+     * @param originalPath - Path of the element that is copied
+     * @param root - Copy item from parent or root. Set to true for usage as in `copyFromRootAction` and false
      * for usage as in `copyAction`
      */
     ShortcutActionService.prototype.copyRowOrSchemaBelow = function (originalPath, root) {
@@ -7109,29 +7095,21 @@ TextDiffService.ctorParameters = function () { return []; };
 
 var WindowHrefService = (function () {
     function WindowHrefService() {
+        this.hrefWithoutHash = this.getHrefWithoutHash();
     }
     WindowHrefService.prototype.getHrefWithoutHash = function () {
-        // check if it is already cached
-        if (!WindowHrefService.hrefWithoutHash) {
-            var href = window.location.href;
-            // check if there is an hash in href
-            var lastHashIndex = href.lastIndexOf('#');
-            if (lastHashIndex > 0) {
-                // remove hash.
-                WindowHrefService.hrefWithoutHash = href.substring(0, lastHashIndex);
-            }
-            else {
-                WindowHrefService.hrefWithoutHash = href;
-            }
+        var href = window.location.href;
+        var lastHashIndex = href.lastIndexOf('#');
+        if (lastHashIndex > 0) {
+            return href.substring(0, lastHashIndex);
         }
-        // return cached value
-        return WindowHrefService.hrefWithoutHash;
+        else {
+            return href;
+        }
     };
     return WindowHrefService;
 }());
 
-// initial value is set to avoid ngc error.
-WindowHrefService.hrefWithoutHash = '';
 WindowHrefService.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */] },
 ];
@@ -7561,7 +7539,7 @@ TableListFieldComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */], args: [{
                 selector: 'table-list-field',
                 styles: ["table.editable-inner-table { border: none; } table.editable-inner-table thead > tr > th { vertical-align: middle; border: none; color: #c1c1c1; } "],
-                template: "<div [id]=\"pathString\" [ngClass]=\"redLeftBorderClass\"> <table class=\"table editable-inner-table\"> <thead class=\"thead-inverse\"> <tr> <th *ngFor=\"let key of keys$ | async; trackBy:trackByElement\" [style.width]=\"schema.items.properties[key].columnWidth + '%'\"> {{key | underscoreToSpace}} </th> <th class=\"button-holder\" [ngClass]=\"sortableClass\"> <add-field-dropdown *ngIf=\"values.size > 0\" [fields]=\"keys$ | async\" [pathString]=\"pathString\" [schema]=\"schema.items\" [isDisabled]=\"disabled\"> <i class=\"fa fa-plus\"></i> </add-field-dropdown> </th> </tr> </thead> <tr *ngFor=\"let value of values; let i = index; trackBy:trackByIndex\" table-item-field [id]=\"getPathStringForChild(i)\" [value]=\"value\" [schema]=\"schema.items\" [path]=\"getPathForChild(i)\" [keys]=\"keys$ | async\"> <td *ngIf=\"values.size > 0\" class=\"button-holder\" [ngClass]=\"sortableClass\"> <list-action-group (onMove)=\"moveElement(i, $event)\" (onDelete)=\"deleteElement(i)\" [canMove]=\"schema.sortable\" [isDisabled]=\"disabled\"></list-action-group> </td> </tr> <tr *ngIf=\"removeJsonPatch\"> <patch-actions [patch]=\"removeJsonPatch\"></patch-actions> </tr> </table> <div *ngFor=\"let patch of addJsonPatches\"> <add-patch-view [patch]=\"patch\"></add-patch-view> </div> </div>",
+                template: "<div [id]=\"pathString\" [ngClass]=\"redLeftBorderClass\"> <table class=\"table editable-inner-table\"> <thead class=\"thead-inverse\"> <tr> <th *ngFor=\"let key of keys$ | async; trackBy:trackByElement\" [style.width]=\"schema.items.properties[key].columnWidth + '%'\"> {{key | underscoreToSpace}} </th> <th class=\"button-holder\" [class.sortable]=\"schema.sortable\"> <add-field-dropdown *ngIf=\"values.size > 0\" [fields]=\"keys$ | async\" [pathString]=\"pathString\" [schema]=\"schema.items\" [isDisabled]=\"disabled\"> <i class=\"fa fa-plus\"></i> </add-field-dropdown> </th> </tr> </thead> <tr *ngFor=\"let value of values; let i = index; trackBy:trackByIndex\" table-item-field [id]=\"getPathStringForChild(i)\" [value]=\"value\" [schema]=\"schema.items\" [path]=\"getPathForChild(i)\" [keys]=\"keys$ | async\"> <td *ngIf=\"values.size > 0\" class=\"button-holder\" [class.sortable]=\"schema.sortable\"> <list-action-group (onMove)=\"moveElement(i, $event)\" (onDelete)=\"deleteElement(i)\" [canMove]=\"schema.sortable\" [isDisabled]=\"disabled\"></list-action-group> </td> </tr> <tr *ngIf=\"removeJsonPatch\"> <patch-actions [patch]=\"removeJsonPatch\"></patch-actions> </tr> </table> <div *ngFor=\"let patch of addJsonPatches\"> <add-patch-view [patch]=\"patch\"></add-patch-view> </div> </div>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
@@ -7776,7 +7754,7 @@ var TreeMenuItemComponent = (function () {
         this.isCollapsed = true;
     }
     TreeMenuItemComponent.prototype.ngOnInit = function () {
-        this.href = this.windowHrefService.getHrefWithoutHash() + "#" + this.path;
+        this.href = this.windowHrefService.hrefWithoutHash + "#" + this.path;
     };
     TreeMenuItemComponent.prototype.ngOnChanges = function (changes) {
         if (changes['value'] && this.value && this.schema.type === 'object') {
@@ -7956,7 +7934,7 @@ webpackEmptyAsyncContext.id = "../../../../../example/$$_gendir lazy recursive";
 /***/ "../../../../../example/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<ng-template let-item=\"item\" #referenceTemplate>\n  <div class=\"reference-template-container\" [ngSwitch]=\"item.hasIn(['record', '$ref'])\">\n    <span *ngSwitchCase=\"true\">\n      <i class=\"fa fa-check-circle success\" aria-hidden=\"true\"></i>\n      <a href=\"{{item.getIn(['record', '$ref'])}}\" target=\"_blank\">{{item.getIn(['reference', 'misc', 0])}}</a>\n    </span>\n    <span *ngSwitchDefault>\n      <i class=\"fa fa-exclamation-triangle warning\" aria-hidden=\"true\"></i>\n      {{item.getIn(['reference', 'misc', 0])}}\n    </span>\n  </div>\n</ng-template>\n<json-editor *ngIf=\"record && schema\"\n  [config]=\"config.jsonEditorConfig\"\n  [(record)]=\"record\"\n  [(jsonPatches)]=\"patches\"\n  [errorMap]=\"errorMap\"\n  [schema]=\"schema\"\n  [templates]=\"{referenceTemplate: referenceTemplate}\">\n</json-editor>"
+module.exports = "<ng-template let-item=\"item\" #referenceTemplate>\n  <div class=\"reference-template-container\" [ngSwitch]=\"item.hasIn(['record', '$ref'])\">\n    <span *ngSwitchCase=\"true\">\n      <i class=\"fa fa-check-circle success\" aria-hidden=\"true\"></i>\n      <a href=\"{{item.getIn(['record', '$ref'])}}\" target=\"_blank\">{{item.getIn(['reference', 'misc', 0])}}</a>\n    </span>\n    <span *ngSwitchDefault>\n      <i class=\"fa fa-exclamation-triangle warning\" aria-hidden=\"true\"></i>\n      {{item.getIn(['reference', 'misc', 0])}}\n    </span>\n  </div>\n</ng-template>\n<json-editor *ngIf=\"record && schema\"\n  [config]=\"config\"\n  [(record)]=\"record\"\n  [(jsonPatches)]=\"patches\"\n  [errorMap]=\"errorMap\"\n  [schema]=\"schema\"\n  [templates]=\"{referenceTemplate: referenceTemplate}\">\n</json-editor>"
 
 /***/ }),
 
@@ -7989,7 +7967,7 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_zip__ = __webpack_require__("../../../../rxjs/add/observable/zip.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_zip___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_observable_zip__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_config__ = __webpack_require__("../../../../../example/app/app.config.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__environments_environment__ = __webpack_require__("../../../../../example/environments/environment.ts");
 /*
  * This file is part of ng2-json-editor.
  * Copyright (C) 2016 CERN.
@@ -8026,11 +8004,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var AppComponent = (function () {
-    function AppComponent(http, config) {
+    function AppComponent(http) {
         var _this = this;
         this.http = http;
-        this.config = config;
-        __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].zip(this.http.get('./assets/mock-data/record.json'), this.http.get('./assets/mock-data/schema.json'), this.http.get('./assets/mock-data/patches.json'), this.http.get('./assets/mock-data/error-map.json'), function (recordRes, schemaRes, patchesRes, errorMapRes) {
+        this.config = __WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].editorConfig;
+        __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].zip(this.http.get("./assets/" + __WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].mockDataFolder + "/record.json"), this.http.get("./assets/" + __WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].mockDataFolder + "/schema.json"), this.http.get("./assets/" + __WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].mockDataFolder + "/patches.json"), this.http.get("./assets/" + __WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].mockDataFolder + "/error-map.json"), function (recordRes, schemaRes, patchesRes, errorMapRes) {
             return {
                 record: recordRes.json(),
                 schema: schemaRes.json(),
@@ -8038,9 +8016,9 @@ var AppComponent = (function () {
                 errorMap: errorMapRes.json(),
             };
         }).subscribe(function (data) {
-            _this.record = data.record; // set ./assets/mock-data/record.json
-            _this.schema = data.schema; // set ./assets/mock-data/schema.json
-            _this.patches = data.patches; // set ./assets/mock-data/patches.json
+            _this.record = data.record;
+            _this.schema = data.schema;
+            _this.patches = data.patches;
             _this.errorMap = data.errorMap;
         });
     }
@@ -8054,204 +8032,11 @@ AppComponent = __decorate([
         styles: [__webpack_require__("../../../../../example/app/app.component.scss")],
         template: __webpack_require__("../../../../../example/app/app.component.html")
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__app_config__["a" /* AppConfig */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__app_config__["a" /* AppConfig */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
 ], AppComponent);
 
-var _a, _b;
+var _a;
 //# sourceMappingURL=/home/travis/build/inveniosoftware-contrib/ng2-json-editor/example/app.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../example/app/app.config.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppConfig; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-var AppConfig = (function () {
-    function AppConfig() {
-        this.jsonEditorConfig = {
-            schemaOptions: {
-                alwaysShow: ['deleted'],
-                properties: {
-                    $schema: {
-                        hidden: true
-                    },
-                    deleted: {
-                        toggleColor: '#e74c3c'
-                    },
-                    citeable: {
-                        toggleColor: '#3498db'
-                    },
-                    core: {
-                        toggleColor: '#27ae60'
-                    },
-                    authors: {
-                        items: {
-                            order: ['full_name', 'affiliations'],
-                            alwaysShow: ['credit_roles'],
-                            properties: {
-                                ids: {
-                                    disabled: true
-                                }
-                            }
-                        }
-                    },
-                    references: {
-                        sortable: true,
-                        longListNavigatorConfig: {
-                            findSingle: function (value, expression) {
-                                return value.getIn(['reference', 'number']) === parseInt(expression, 10);
-                            },
-                            findMultiple: function (value, expression) {
-                                return JSON.stringify(value).search(expression) > -1;
-                            },
-                            itemsPerPage: 20,
-                            maxVisiblePageCount: 5
-                        },
-                        viewTemplateConfig: {
-                            itemTemplateName: 'referenceTemplate',
-                            showEditForm: function (value) {
-                                return !(value.hasIn(['record', '$ref']));
-                            }
-                        }
-                    },
-                    arxiv_eprints: {
-                        items: {
-                            properties: {
-                                value: {
-                                    linkBuilder: function (value) {
-                                        return "http://arxiv.org/abs/" + value;
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    abstracts: {
-                        items: {
-                            properties: {
-                                source: {
-                                    columnWidth: 20
-                                },
-                                value: {
-                                    latexPreviewEnabled: true
-                                }
-                            }
-                        }
-                    },
-                    publication_info: {
-                        items: {
-                            properties: {
-                                conference_record: {
-                                    refFieldConfig: {
-                                        anchorBuilder: function (url) {
-                                            var parts = url.split('/');
-                                            var type = parts[parts.length - 2].slice(0, -1);
-                                            var display = "View " + type;
-                                            var href = url.replace(/\/api\//, '/');
-                                            return { href: href, display: display };
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    titles: {
-                        items: {
-                            properties: {
-                                title: {
-                                    latexPreviewEnabled: true
-                                }
-                            }
-                        }
-                    },
-                    imprints: {
-                        items: {
-                            properties: {
-                                date: {
-                                    errorMessage: {
-                                        format: 'This is not a date!'
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            shortcuts: {
-                navigateRight: 'mod+shift+right'
-            },
-            customFormatValidation: {
-                date: {
-                    formatChecker: function (value) {
-                        var formats = [
-                            /^\d{4}$/,
-                            /^\d{4}-\d{2}$/,
-                            /^\d{4}-\d{2}-\d{2}$/
-                        ];
-                        return formats
-                            .some(function (format) {
-                            if (value.match(format)) {
-                                return Date.parse(value) !== NaN;
-                            }
-                            return false;
-                        });
-                    }
-                },
-                'date-time': {
-                    formatChecker: function (value) {
-                        var regex = /^\d\d\d\d-[0-1]\d-[0-3]\d[t\s][0-2]\d:[0-5]\d:[0-5]\d(?:\.\d+)?(?:z|[+-]\d\d:\d\d)?$/i;
-                        if (value.match(regex)) {
-                            return true;
-                        }
-                        ;
-                        return false;
-                    }
-                }
-            },
-            enableAdminModeSwitch: true,
-            menuMaxDepth: 1,
-            tabsConfig: {
-                defaultTabName: 'Main',
-                tabs: [
-                    {
-                        name: 'References',
-                        properties: ['references']
-                    },
-                    {
-                        name: 'Authors',
-                        properties: [
-                            'collaboration',
-                            'accelerator_experiments',
-                            'authors',
-                            'corporate_author'
-                        ]
-                    }
-                ]
-            },
-            previews: [
-                {
-                    name: 'pdf',
-                    type: 'html',
-                    urlPath: '/urls/0/value'
-                }
-            ]
-        };
-    }
-    return AppConfig;
-}());
-AppConfig = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])()
-], AppConfig);
-
-//# sourceMappingURL=/home/travis/build/inveniosoftware-contrib/ng2-json-editor/example/app.config.js.map
 
 /***/ }),
 
@@ -8266,7 +8051,6 @@ AppConfig = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__dist__ = __webpack_require__("../../../../../dist/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__("../../../../../example/app/app.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_config__ = __webpack_require__("../../../../../example/app/app.config.ts");
 /*
  * This file is part of ng2-json-editor.
  * Copyright (C) 2016 CERN.
@@ -8300,7 +8084,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-
 var AppModule = (function () {
     function AppModule() {
     }
@@ -8315,9 +8098,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_3__angular_http__["c" /* HttpModule */],
             __WEBPACK_IMPORTED_MODULE_4__dist__["a" /* JsonEditorModule */]
         ],
-        providers: [
-            __WEBPACK_IMPORTED_MODULE_6__app_config__["a" /* AppConfig */]
-        ],
+        providers: [],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
@@ -8337,18 +8118,390 @@ AppModule = __decorate([
 
 /***/ }),
 
+/***/ "../../../../../example/configs/config.e2e.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export e2eConfig */
+// ALWAYS access config through `environment`, DO NOT import from here
+var e2eConfig = {
+    schemaOptions: {
+        alwaysShow: ['deleted'],
+        properties: {
+            $schema: {
+                hidden: true
+            },
+            deleted: {
+                toggleColor: '#e74c3c'
+            },
+            citeable: {
+                toggleColor: '#3498db'
+            },
+            core: {
+                toggleColor: '#27ae60'
+            },
+            authors: {
+                items: {
+                    order: ['full_name', 'affiliations'],
+                    alwaysShow: ['credit_roles'],
+                    properties: {
+                        ids: {
+                            disabled: true
+                        }
+                    }
+                }
+            },
+            references: {
+                sortable: true,
+                longListNavigatorConfig: {
+                    findSingle: function (value, expression) {
+                        return value.getIn(['reference', 'number']) === parseInt(expression, 10);
+                    },
+                    findMultiple: function (value, expression) {
+                        return JSON.stringify(value).search(expression) > -1;
+                    },
+                    itemsPerPage: 20,
+                    maxVisiblePageCount: 5
+                },
+                viewTemplateConfig: {
+                    itemTemplateName: 'referenceTemplate',
+                    showEditForm: function (value) {
+                        return !(value.hasIn(['record', '$ref']));
+                    }
+                }
+            },
+            arxiv_eprints: {
+                items: {
+                    properties: {
+                        value: {
+                            linkBuilder: function (value) {
+                                return "http://arxiv.org/abs/" + value;
+                            }
+                        }
+                    }
+                }
+            },
+            abstracts: {
+                items: {
+                    properties: {
+                        source: {
+                            columnWidth: 20
+                        },
+                        value: {
+                            latexPreviewEnabled: true
+                        }
+                    }
+                }
+            },
+            publication_info: {
+                items: {
+                    properties: {
+                        conference_record: {
+                            refFieldConfig: {
+                                anchorBuilder: function (url) {
+                                    var parts = url.split('/');
+                                    var type = parts[parts.length - 2].slice(0, -1);
+                                    var display = "View " + type;
+                                    var href = url.replace(/\/api\//, '/');
+                                    return { href: href, display: display };
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            titles: {
+                items: {
+                    properties: {
+                        title: {
+                            latexPreviewEnabled: true
+                        }
+                    }
+                }
+            },
+            imprints: {
+                items: {
+                    properties: {
+                        date: {
+                            errorMessage: {
+                                format: 'This is not a date!'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    shortcuts: {
+        navigateRight: 'mod+shift+right'
+    },
+    customFormatValidation: {
+        date: {
+            formatChecker: function (value) {
+                var formats = [
+                    /^\d{4}$/,
+                    /^\d{4}-\d{2}$/,
+                    /^\d{4}-\d{2}-\d{2}$/
+                ];
+                return formats
+                    .some(function (format) {
+                    if (value.match(format)) {
+                        return Date.parse(value) !== NaN;
+                    }
+                    return false;
+                });
+            }
+        },
+        'date-time': {
+            formatChecker: function (value) {
+                var regex = /^\d\d\d\d-[0-1]\d-[0-3]\d[t\s][0-2]\d:[0-5]\d:[0-5]\d(?:\.\d+)?(?:z|[+-]\d\d:\d\d)?$/i;
+                if (value.match(regex)) {
+                    return true;
+                }
+                ;
+                return false;
+            }
+        }
+    },
+    enableAdminModeSwitch: true,
+    menuMaxDepth: 1,
+    tabsConfig: {
+        defaultTabName: 'Main',
+        tabs: [
+            {
+                name: 'References',
+                properties: ['references']
+            },
+            {
+                name: 'Authors',
+                properties: [
+                    'collaboration',
+                    'accelerator_experiments',
+                    'authors',
+                    'corporate_author'
+                ]
+            }
+        ]
+    },
+    previews: [
+        {
+            name: 'pdf',
+            type: 'html',
+            urlPath: '/urls/0/value'
+        }
+    ]
+};
+//# sourceMappingURL=/home/travis/build/inveniosoftware-contrib/ng2-json-editor/example/config.e2e.js.map
+
+/***/ }),
+
+/***/ "../../../../../example/configs/config.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return defaultConfig; });
+// ALWAYS access config through `environment`, DO NOT import from here
+var defaultConfig = {
+    schemaOptions: {
+        alwaysShow: ['deleted'],
+        properties: {
+            $schema: {
+                hidden: true
+            },
+            deleted: {
+                toggleColor: '#e74c3c'
+            },
+            citeable: {
+                toggleColor: '#3498db'
+            },
+            core: {
+                toggleColor: '#27ae60'
+            },
+            authors: {
+                items: {
+                    order: ['full_name', 'affiliations'],
+                    alwaysShow: ['credit_roles'],
+                    properties: {
+                        ids: {
+                            disabled: true
+                        }
+                    }
+                }
+            },
+            references: {
+                sortable: true,
+                longListNavigatorConfig: {
+                    findSingle: function (value, expression) {
+                        return value.getIn(['reference', 'number']) === parseInt(expression, 10);
+                    },
+                    findMultiple: function (value, expression) {
+                        return JSON.stringify(value).search(expression) > -1;
+                    },
+                    itemsPerPage: 20,
+                    maxVisiblePageCount: 5
+                },
+                viewTemplateConfig: {
+                    itemTemplateName: 'referenceTemplate',
+                    showEditForm: function (value) {
+                        return !(value.hasIn(['record', '$ref']));
+                    }
+                }
+            },
+            arxiv_eprints: {
+                items: {
+                    properties: {
+                        value: {
+                            linkBuilder: function (value) {
+                                return "http://arxiv.org/abs/" + value;
+                            }
+                        }
+                    }
+                }
+            },
+            abstracts: {
+                items: {
+                    properties: {
+                        source: {
+                            columnWidth: 20
+                        },
+                        value: {
+                            latexPreviewEnabled: true
+                        }
+                    }
+                }
+            },
+            publication_info: {
+                items: {
+                    properties: {
+                        conference_record: {
+                            refFieldConfig: {
+                                anchorBuilder: function (url) {
+                                    var parts = url.split('/');
+                                    var type = parts[parts.length - 2].slice(0, -1);
+                                    var display = "View " + type;
+                                    var href = url.replace(/\/api\//, '/');
+                                    return { href: href, display: display };
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            titles: {
+                items: {
+                    properties: {
+                        title: {
+                            latexPreviewEnabled: true
+                        }
+                    }
+                }
+            },
+            imprints: {
+                items: {
+                    properties: {
+                        date: {
+                            errorMessage: {
+                                format: 'This is not a date!'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    shortcuts: {
+        navigateRight: 'mod+shift+right'
+    },
+    customFormatValidation: {
+        date: {
+            formatChecker: function (value) {
+                var formats = [
+                    /^\d{4}$/,
+                    /^\d{4}-\d{2}$/,
+                    /^\d{4}-\d{2}-\d{2}$/
+                ];
+                return formats
+                    .some(function (format) {
+                    if (value.match(format)) {
+                        return Date.parse(value) !== NaN;
+                    }
+                    return false;
+                });
+            }
+        },
+        'date-time': {
+            formatChecker: function (value) {
+                var regex = /^\d\d\d\d-[0-1]\d-[0-3]\d[t\s][0-2]\d:[0-5]\d:[0-5]\d(?:\.\d+)?(?:z|[+-]\d\d:\d\d)?$/i;
+                if (value.match(regex)) {
+                    return true;
+                }
+                ;
+                return false;
+            }
+        }
+    },
+    enableAdminModeSwitch: true,
+    menuMaxDepth: 1,
+    tabsConfig: {
+        defaultTabName: 'Main',
+        tabs: [
+            {
+                name: 'References',
+                properties: ['references']
+            },
+            {
+                name: 'Authors',
+                properties: [
+                    'collaboration',
+                    'accelerator_experiments',
+                    'authors',
+                    'corporate_author'
+                ]
+            }
+        ]
+    },
+    previews: [
+        {
+            name: 'pdf',
+            type: 'html',
+            urlPath: '/urls/0/value'
+        }
+    ]
+};
+//# sourceMappingURL=/home/travis/build/inveniosoftware-contrib/ng2-json-editor/example/config.js.map
+
+/***/ }),
+
+/***/ "../../../../../example/configs/index.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config__ = __webpack_require__("../../../../../example/configs/config.ts");
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__config__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__config_e2e__ = __webpack_require__("../../../../../example/configs/config.e2e.ts");
+/* unused harmony reexport e2eConfig */
+// ALWAYS access config through `environment`, DO NOT import from here
+
+
+//# sourceMappingURL=/home/travis/build/inveniosoftware-contrib/ng2-json-editor/example/index.js.map
+
+/***/ }),
+
 /***/ "../../../../../example/environments/environment.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__configs__ = __webpack_require__("../../../../../example/configs/index.ts");
 // The file contents for the current environment will overwrite these during build.
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `angular-cli.json`.
-// The file contents for the current environment will overwrite these during build.
+
 var environment = {
-    production: false
+    production: false,
+    editorConfig: __WEBPACK_IMPORTED_MODULE_0__configs__["a" /* defaultConfig */],
+    mockDataFolder: 'mock-data'
 };
 //# sourceMappingURL=/home/travis/build/inveniosoftware-contrib/ng2-json-editor/example/environment.js.map
 
