@@ -22,41 +22,80 @@
 
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { Observable } from 'rxjs/Observable';
+import { combineLatest } from 'rxjs/observable/combineLatest';
 
-import { SchemaValidationErrors, CategorizedValidationErrors, ValidationError } from '../interfaces';
+import {
+  SchemaValidationErrors,
+  CategorizedValidationErrors,
+  ValidationError,
+  ErrorCollectionType,
+  ErrorCounts
+} from '../interfaces';
 
 @Injectable()
 export class ErrorsService {
 
   readonly externalCategorizedErrors$ = new ReplaySubject<CategorizedValidationErrors>(1);
   readonly internalCategorizedErrors$ = new ReplaySubject<CategorizedValidationErrors>(1);
-  readonly externalErrorCounters$ = new ReplaySubject<{ errors: number, warnings: number }>(1);
-  readonly internalErrorCounters$ = new ReplaySubject<{ errors: number, warnings: number }>(1);
-  internalErrorMap: SchemaValidationErrors = {};
-  internalCategorizedErrorMap: CategorizedValidationErrors = { errors: {}, warnings: {} };
-  externalCategorizedErrorMap: CategorizedValidationErrors = { errors: {}, warnings: {} };
 
-  set externalErrors(errors: SchemaValidationErrors) {
-    const { categorizedErrorMap, errorCounter, warningCounter } = this.categorizeErrorMap(errors);
-    this.externalCategorizedErrorMap = categorizedErrorMap;
+  private readonly externalErrorCounts$ = new ReplaySubject<ErrorCounts>(1);
+  private readonly internalErrorCounts$ = new ReplaySubject<ErrorCounts>(1);
+  readonly errorCount$ = this.getTotalDistinctCount$('errors');
+  readonly warningCount$ = this.getTotalDistinctCount$('warnings');
 
-    this.externalCategorizedErrors$.next(this.externalCategorizedErrorMap);
-    this.externalErrorCounters$.next({
-      errors: errorCounter,
-      warnings: warningCounter
-    });
+  readonly internalErrorMap$ = new ReplaySubject<SchemaValidationErrors>(1);
+  private internalErrorMap: SchemaValidationErrors = {};
+
+  private internalCategorizedErrorMap: CategorizedValidationErrors = { errors: {}, warnings: {} };
+  private externalCategorizedErrorMap: CategorizedValidationErrors = { errors: {}, warnings: {} };
+
+  private externalErrorCounts = { errors: 0, warnings: 0 };
+  private internalErrorCounts = { errors: 0, warnings: 0 };
+
+  private getTotalDistinctCount$(type: ErrorCollectionType): Observable<number> {
+    const external$ = this.externalErrorCounts$
+      .map(counts => counts[type]);
+    const internal$ = this.internalErrorCounts$
+      .map(counts => counts[type]);
+    return combineLatest(external$, internal$, (external, internal) => external + internal)
+      .distinctUntilChanged();
   }
 
-  extendInternalErrors(path: string, errors: Array<ValidationError>) {
-    this.internalErrorMap[path] = errors;
-    const { categorizedErrorMap, errorCounter, warningCounter } = this.categorizeErrorMap(this.internalErrorMap);
-    this.internalCategorizedErrorMap = categorizedErrorMap;
+  private areErrorCountsObjectsEqual(a: ErrorCounts, b: ErrorCounts): boolean {
+    return a.errors === b.errors && a.warnings === b.warnings;
+  }
 
+  set externalErrors(errors: SchemaValidationErrors) {
+    const { categorizedErrorMap, errorCount, warningCount } = this.categorizeErrorMap(errors);
+
+    this.externalErrorCounts = { errors: errorCount, warnings: warningCount };
+    this.externalErrorCounts$.next(this.externalErrorCounts);
+
+    this.externalCategorizedErrorMap = categorizedErrorMap;
+    this.externalCategorizedErrors$.next(this.externalCategorizedErrorMap);
+  }
+
+  setInternalErrorsForPath(path: string, errors: Array<ValidationError>) {
+    this.internalErrorMap[path] = errors;
+    this.internalErrorMap$.next(this.internalErrorMap);
+
+    const categorizedErrors = this.categorizeValidationErrors(errors);
+
+    this.internalErrorCounts.errors += categorizedErrors.errors.length - this.internalCountForPath(path, 'errors');
+    this.internalErrorCounts.warnings += categorizedErrors.warnings.length - this.internalCountForPath(path, 'warnings');
+    this.internalErrorCounts$.next(this.internalErrorCounts);
+
+    this.internalCategorizedErrorMap.errors[path] = categorizedErrors.errors;
+    this.internalCategorizedErrorMap.warnings[path] = categorizedErrors.warnings;
     this.internalCategorizedErrors$.next(this.internalCategorizedErrorMap);
-    this.internalErrorCounters$.next({
-      errors: errorCounter,
-      warnings: warningCounter
-    });
+  }
+
+  private internalCountForPath(path: string, type: ErrorCollectionType): number {
+    if (this.internalCategorizedErrorMap[type][path]) {
+      return this.internalCategorizedErrorMap[type][path].length;
+    }
+    return 0;
   }
 
   hasError(path: string) {
@@ -67,30 +106,38 @@ export class ErrorsService {
     return (internalErrorCount + externalErrorCount) > 0;
   }
 
-  categorizeErrorMap(errorMap: SchemaValidationErrors): {
+  private categorizeErrorMap(errorMap: SchemaValidationErrors): {
     categorizedErrorMap: CategorizedValidationErrors,
-    errorCounter: number, warningCounter: number
+    errorCount: number, warningCount: number
   } {
-
     const categorizedErrorMap = { errors: {}, warnings: {} };
-    let errorCounter = 0;
-    let warningCounter = 0;
+    let errorCount = 0;
+    let warningCount = 0;
 
     Object.keys(errorMap)
-      .forEach(key => {
-        const validationErrors = errorMap[key];
-        validationErrors.forEach(error => {
-          if (error.type === 'Error') {
-            categorizedErrorMap.errors[key] ? categorizedErrorMap.errors[key].push(error)
-              : categorizedErrorMap.errors[key] = [error];
-            errorCounter++;
-          } else {
-            categorizedErrorMap.warnings[key] ? categorizedErrorMap.warnings[key].push(error)
-              : categorizedErrorMap.warnings[key] = [error];
-            warningCounter++;
-          }
-        });
+      .map(path => {
+        const validationErrors = errorMap[path];
+        const categorized = this.categorizeValidationErrors(validationErrors);
+        return { path, categorized };
+      }).forEach(errorsForPath => {
+        categorizedErrorMap.errors[errorsForPath.path] = errorsForPath.categorized.errors;
+        categorizedErrorMap.warnings[errorsForPath.path] = errorsForPath.categorized.warnings;
+        errorCount += errorsForPath.categorized.errors.length;
+        warningCount += errorsForPath.categorized.warnings.length;
       });
-    return { categorizedErrorMap, errorCounter, warningCounter };
+    return { categorizedErrorMap, errorCount, warningCount };
+  }
+
+  private categorizeValidationErrors(validationErrors: Array<ValidationError>) {
+    const categorized: { errors: Array<ValidationError>, warnings: Array<ValidationError> }
+      = { errors: [], warnings: [] };
+    validationErrors.forEach(error => {
+      if (error.type === 'Error') {
+        categorized.errors.push(error);
+      } else {
+        categorized.warnings.push(error);
+      }
+    });
+    return categorized;
   }
 }

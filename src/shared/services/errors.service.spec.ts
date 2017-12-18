@@ -23,6 +23,8 @@
 
 import { ErrorsService } from './errors.service';
 
+import { SchemaValidationErrors, ValidationError } from '../interfaces';
+
 describe('ErrorsService', () => {
 
   let service: ErrorsService;
@@ -31,15 +33,15 @@ describe('ErrorsService', () => {
     service = new ErrorsService();
   });
 
-  it(`should categorize a map of SchemaValidationErrors by splitting
-      them into errors and warnings array. Every array should have only
-      json pointer paths which include only the type of messages of the
-      array that they belong to.`, () => {
-
-    const errorMap = {
+  it(`should set external errors`, () => {
+    const errorMap: SchemaValidationErrors = {
       '/key/path/1': [
         {
-          message: 'Error message.',
+          message: 'Error message 1',
+          type: 'Error'
+        },
+        {
+          message: 'Error message 2',
           type: 'Error'
         },
         {
@@ -53,30 +55,87 @@ describe('ErrorsService', () => {
       }]
     };
 
-    const categorizedErrorMap = {
-      categorizedErrorMap: {
-        errors: {
-          '/key/path/1': [{
-            message: 'Error message.',
+    const expectedCategorized = {
+      errors: {
+        '/key/path/1': [
+          {
+            message: 'Error message 1',
             type: 'Error'
-          }],
-          '/key/path/2': [{
-            message: 'Another error message.',
+          },
+          {
+            message: 'Error message 2',
             type: 'Error'
-          }]
-        },
-        warnings: {
-          '/key/path/1': [{
-            message: 'Warning message.',
-            type: 'Warning'
-          }]
-        }
+          }
+        ],
+        '/key/path/2': [{
+          message: 'Another error message.',
+          type: 'Error'
+        }]
       },
-      errorCounter: 2,
-      warningCounter: 1
+      warnings: {
+        '/key/path/1': [{
+          message: 'Warning message.',
+          type: 'Warning'
+        }],
+        '/key/path/2': []
+      }
     };
 
-    expect(categorizedErrorMap).toEqual(service.categorizeErrorMap(errorMap));
+    service.externalCategorizedErrors$
+      .subscribe((categorized) => {
+        expect(categorized).toEqual(expectedCategorized);
+      });
+    service.errorCount$
+      .subscribe(count => {
+        expect(count).toBe(3);
+      });
+    service.warningCount$
+      .subscribe(count => {
+        expect(count).toBe(1);
+      });
+    service.externalErrors = errorMap;
+  });
+
+  it('should set internal errors for path', () => {
+    service['internalErrorMap'] = {
+      '/key': [
+        {
+          type: 'Error',
+          message: 'Error Message'
+        }
+      ]
+    };
+    const errors: Array<ValidationError> = [
+      {
+        type: 'Error',
+        message: 'New1',
+      },
+      {
+        type: 'Error',
+        message: 'New1',
+      }
+    ];
+    const expectedCategorized = {
+      errors: {
+        '/key': errors
+      },
+      warnings: {
+        '/key': []
+      }
+    };
+    service.setInternalErrorsForPath('/key', errors);
+    service.internalCategorizedErrors$
+      .subscribe((categorized) => {
+        expect(categorized).toEqual(expectedCategorized);
+      });
+    service.errorCount$
+      .subscribe(count => {
+        expect(count).toBe(2);
+      });
+    service.warningCount$
+      .subscribe(count => {
+        expect(count).toBe(0);
+      });
   });
 
 });

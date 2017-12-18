@@ -99,7 +99,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   ngOnDestroy() {
     super.ngOnDestroy();
     if (this.internalErrors.length > 0) {
-      this.errorsService.extendInternalErrors(this.pathString, []);
+      this.errorsService.setInternalErrorsForPath(this.pathString, []);
     }
   }
 
@@ -168,7 +168,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     // don't validate if value is empty
     if (this.value) {
       this.internalErrors = this.schemaValidationService.validateValue(this.value, this.schema);
-      this.errorsService.extendInternalErrors(this.pathString, this.internalErrors);
+      this.errorsService.setInternalErrorsForPath(this.pathString, this.internalErrors);
     }
   }
 

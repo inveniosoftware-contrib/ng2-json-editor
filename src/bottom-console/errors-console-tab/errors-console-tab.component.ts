@@ -27,10 +27,11 @@ import {
   OnInit,
   ChangeDetectorRef
 } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 import { AbstractSubscriberComponent } from '../../abstract-subscriber';
 import { DomUtilService, PathUtilService, ErrorsService } from '../../shared/services';
-import { SchemaValidationErrors } from '../../shared/interfaces';
+import { SchemaValidationErrors, ErrorCollectionType } from '../../shared/interfaces';
 
 @Component({
   selector: 'errors-console-tab',
@@ -43,12 +44,11 @@ import { SchemaValidationErrors } from '../../shared/interfaces';
 })
 export class ErrorsConsoleTabComponent extends AbstractSubscriberComponent implements OnInit {
 
-  @Input() errorType: 'errors' | 'warnings';
+  @Input() errorType: ErrorCollectionType;
 
   internalErrorMap: SchemaValidationErrors;
   externalErrorMap: SchemaValidationErrors;
-  externalErrorCount = 0;
-  internalErrorCount = 0;
+  errorCount = 0;
   iconClassName: string;
 
   constructor(public domUtilService: DomUtilService,
@@ -66,13 +66,6 @@ export class ErrorsConsoleTabComponent extends AbstractSubscriberComponent imple
         this.externalErrorMap = errorMap;
         this.changeDetectorRef.markForCheck();
       });
-    this.errorsService.externalErrorCounters$
-      .map(errorCounters => errorCounters[this.errorType])
-      .takeUntil(this.isDestroyed)
-      .subscribe(errorCount => {
-        this.externalErrorCount = errorCount;
-        this.changeDetectorRef.markForCheck();
-      });
     this.errorsService.internalCategorizedErrors$
       .map(categorizedErrorMap => categorizedErrorMap[this.errorType])
       .takeUntil(this.isDestroyed)
@@ -80,12 +73,14 @@ export class ErrorsConsoleTabComponent extends AbstractSubscriberComponent imple
         this.internalErrorMap = errorMap;
         this.changeDetectorRef.markForCheck();
       });
-    this.errorsService.internalErrorCounters$
-      .map(errorCounters => errorCounters[this.errorType])
+
+    // TODO: create WarningsConsoleTabComponent with same template to avoid `if`
+
+    const errorCount$ = this.errorType === 'errors' ? this.errorsService.errorCount$ : this.errorsService.warningCount$;
+    errorCount$
       .takeUntil(this.isDestroyed)
       .subscribe(errorCount => {
-        this.internalErrorCount = errorCount;
-        this.changeDetectorRef.markForCheck();
+        this.errorCount = errorCount;
       });
 
     this.iconClassName = this.errorType === 'errors' ? 'fa fa-times' : 'fa fa-exclamation-triangle';

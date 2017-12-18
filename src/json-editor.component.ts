@@ -83,6 +83,7 @@ export class JsonEditorComponent extends AbstractSubscriberComponent implements 
 
   @Output() recordChange = new EventEmitter<Object>();
   @Output() jsonPatchesChange = new EventEmitter<Array<JsonPatch>>();
+  @Output() validationError = new EventEmitter<SchemaValidationErrors>();
 
   readonly pathString = '';
   _record: Map<string, any>;
@@ -134,6 +135,12 @@ export class JsonEditorComponent extends AbstractSubscriberComponent implements 
       .takeUntil(this.isDestroyed)
       .subscribe(patches => {
         this.jsonPatchesChange.emit(patches);
+      });
+
+    this.errorsService.internalErrorMap$
+      .takeUntil(this.isDestroyed)
+      .subscribe(internalErrorMap => {
+        this.validationError.emit(internalErrorMap);
       });
   }
 

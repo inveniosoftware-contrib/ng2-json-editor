@@ -27,3 +27,5 @@ export { JsonPatchesByPath } from './json-patches-by-path';
 export { ViewTemplateConfig } from './view-template-config';
 export { ShortcutActionFunction } from './shortcut-action-function';
 export { CustomErrorMessages } from './custom-error-messages';
+export { ErrorCollectionType } from './error-collection-type';
+export { ErrorCounts } from './error-counts';
