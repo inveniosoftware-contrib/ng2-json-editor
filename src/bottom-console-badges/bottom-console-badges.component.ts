@@ -23,7 +23,7 @@
 import { Component, Output, EventEmitter, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 
 import { AbstractSubscriberComponent } from '../abstract-subscriber';
-import { ErrorsService, JsonStoreService } from '../shared/services';
+import { ProblemsService, JsonStoreService } from '../shared/services';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -42,25 +42,27 @@ export class BottomConsoleBadgesComponent extends AbstractSubscriberComponent im
   warningCount = 0;
   patchCount = 0;
 
-  constructor(private errorsService: ErrorsService,
+  constructor(private problemsService: ProblemsService,
     private changeDetectorRef: ChangeDetectorRef,
     private jsonStoreService: JsonStoreService) {
     super();
   }
 
   ngOnInit() {
-    this.errorsService.errorCount$
+    this.problemsService.errorCount$
       .takeUntil(this.isDestroyed)
       .subscribe(count => {
         this.errorCount = count;
-        // FIXME: use markForCheck()
-        // markForCheck() wasn't working for mysterious reasons
+        // FIXME: use markForCheck() instead
+        // markForCheck() wasn't working for mysterious reasons for initial update
         this.changeDetectorRef.detectChanges();
       });
-    this.errorsService.warningCount$
+    this.problemsService.warningCount$
       .takeUntil(this.isDestroyed)
       .subscribe(count => {
         this.warningCount = count;
+        // FIXME: use markForCheck() instead
+        // markForCheck() wasn't working for mysterious reasons for initial update
         this.changeDetectorRef.detectChanges();
       });
     this.jsonStoreService.patchesByPath$

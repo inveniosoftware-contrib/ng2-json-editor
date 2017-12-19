@@ -24,7 +24,7 @@ import { Component, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@a
 import { List } from 'immutable';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
-import { AppGlobalsService, JsonStoreService, PathUtilService, ErrorsService } from '../shared/services';
+import { AppGlobalsService, JsonStoreService, PathUtilService, ProblemsService } from '../shared/services';
 import { JSONSchema } from '../shared/interfaces';
 
 @Component({
@@ -41,11 +41,11 @@ export class PrimitiveListFieldComponent extends AbstractListFieldComponent {
   @Input() path: Array<any>;
 
   constructor(public appGlobalsService: AppGlobalsService,
-    public errorsService: ErrorsService,
+    public problemsService: ProblemsService,
     public jsonStoreService: JsonStoreService,
     public pathUtilService: PathUtilService,
     public changeDetectorRef: ChangeDetectorRef) {
-    super(appGlobalsService, errorsService, jsonStoreService, pathUtilService, changeDetectorRef);
+    super(appGlobalsService, problemsService, jsonStoreService, pathUtilService, changeDetectorRef);
   }
 
 }

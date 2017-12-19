@@ -21,20 +21,20 @@
  */
 
 
-import { ErrorsService } from './errors.service';
+import { ProblemsService } from './problems.service';
 
-import { SchemaValidationErrors, ValidationError } from '../interfaces';
+import { SchemaValidationProblems, ValidationProblem } from '../interfaces';
 
-describe('ErrorsService', () => {
+describe('ProblemsService', () => {
 
-  let service: ErrorsService;
+  let service: ProblemsService;
 
   beforeEach(() => {
-    service = new ErrorsService();
+    service = new ProblemsService();
   });
 
-  it(`should set external errors`, () => {
-    const errorMap: SchemaValidationErrors = {
+  it(`should set external problems`, () => {
+    const problemMap: SchemaValidationProblems = {
       '/key/path/1': [
         {
           message: 'Error message 1',
@@ -80,8 +80,8 @@ describe('ErrorsService', () => {
         '/key/path/2': []
       }
     };
-
-    service.externalCategorizedErrors$
+    service.externalProblems = problemMap;
+    service.externalCategorizedProblems$
       .subscribe((categorized) => {
         expect(categorized).toEqual(expectedCategorized);
       });
@@ -93,10 +93,9 @@ describe('ErrorsService', () => {
       .subscribe(count => {
         expect(count).toBe(1);
       });
-    service.externalErrors = errorMap;
   });
 
-  it('should set internal errors for path', () => {
+  it('should set internal problems for path', () => {
     service['internalErrorMap'] = {
       '/key': [
         {
@@ -105,7 +104,7 @@ describe('ErrorsService', () => {
         }
       ]
     };
-    const errors: Array<ValidationError> = [
+    const problems: Array<ValidationProblem> = [
       {
         type: 'Error',
         message: 'New1',
@@ -117,14 +116,14 @@ describe('ErrorsService', () => {
     ];
     const expectedCategorized = {
       errors: {
-        '/key': errors
+        '/key': problems
       },
       warnings: {
         '/key': []
       }
     };
-    service.setInternalErrorsForPath('/key', errors);
-    service.internalCategorizedErrors$
+    service.setInternalProblemsForPath('/key', problems);
+    service.internalCategorizedProblems$
       .subscribe((categorized) => {
         expect(categorized).toEqual(expectedCategorized);
       });

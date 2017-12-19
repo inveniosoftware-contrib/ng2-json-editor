@@ -52,7 +52,7 @@
           {{item.isEditFormVisible ? 'Hide Fields' : 'Show Fields'}}
         </a>
       </span>
-      <span *ngIf="item.isEditFormVisible || hasErrorOrPatch(item.index)">
+      <span *ngIf="item.isEditFormVisible || hasProblemOrPatch(item.index)">
         <object-field [value]="values.get(item.index)" [schema]="schema.items" [path]="getPathForChild(item.index)">
         </object-field>
         <div class="row element-button-container">

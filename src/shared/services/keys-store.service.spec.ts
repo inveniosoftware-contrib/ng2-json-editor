@@ -26,7 +26,7 @@ import { KeysStoreService } from './keys-store.service';
 import { PathUtilService } from './path-util.service';
 import { AppGlobalsService } from './app-globals.service';
 import { JsonSchemaService } from './json-schema.service';
-import { ErrorsService } from './errors.service';
+import { ProblemsService } from './errors.service';
 
 import { JSONSchema } from '../interfaces';
 

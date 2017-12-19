@@ -16,7 +16,7 @@ import { SchemaValidationService } from './schema-validation.service';
 import { ShortcutActionService } from './shortcut-action.service';
 import { WindowHrefService } from './window-href.service';
 import { TabsUtilService } from './tabs-util.service';
-import { ErrorsService } from './errors.service';
+import { ProblemsService } from './problems.service';
 import { KatexService } from './katex.service';
 import { TextDiffService } from './text-diff.service';
 import { ListPageChangerService } from './list-page-changer.service';
@@ -40,7 +40,7 @@ export {
   ShortcutActionService,
   WindowHrefService,
   TabsUtilService,
-  ErrorsService,
+  ProblemsService,
   KatexService,
   TextDiffService,
   ListPageChangerService
@@ -65,7 +65,7 @@ export const SHARED_SERVICES = [
   ShortcutActionService,
   WindowHrefService,
   TabsUtilService,
-  ErrorsService,
+  ProblemsService,
   KatexService,
   TextDiffService,
   ListPageChangerService

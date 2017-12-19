@@ -47,13 +47,13 @@ import {
   RecordFixerService,
   SchemaFixerService,
   TabsUtilService,
-  ErrorsService
+  ProblemsService
 } from './shared/services';
 
 import {
   JsonEditorConfig,
   Preview,
-  SchemaValidationErrors,
+  SchemaValidationProblems,
   JsonPatch,
   Shortcut,
   CustomShortcutKeys,
@@ -77,13 +77,13 @@ export class JsonEditorComponent extends AbstractSubscriberComponent implements 
   @Input() record: object;
   // original schema
   @Input() schema: any;
-  @Input() errorMap: SchemaValidationErrors;
+  @Input() problemMap: SchemaValidationProblems;
   @Input() jsonPatches: Array<JsonPatch>;
   @Input() templates: { [templateName: string]: TemplateRef<any> };
 
   @Output() recordChange = new EventEmitter<Object>();
   @Output() jsonPatchesChange = new EventEmitter<Array<JsonPatch>>();
-  @Output() validationError = new EventEmitter<SchemaValidationErrors>();
+  @Output() validationProblems = new EventEmitter<SchemaValidationProblems>();
 
   readonly pathString = '';
   _record: Map<string, any>;
@@ -100,7 +100,7 @@ export class JsonEditorComponent extends AbstractSubscriberComponent implements 
   private lastEmittedRecord: object;
 
   constructor(public appGlobalsService: AppGlobalsService,
-    public errorsService: ErrorsService,
+    public problemsService: ProblemsService,
     public jsonStoreService: JsonStoreService,
     public jsonUtilService: JsonUtilService,
     public jsonSchemaService: JsonSchemaService,
@@ -137,10 +137,10 @@ export class JsonEditorComponent extends AbstractSubscriberComponent implements 
         this.jsonPatchesChange.emit(patches);
       });
 
-    this.errorsService.internalErrorMap$
+    this.problemsService.internalProblemMap$
       .takeUntil(this.isDestroyed)
-      .subscribe(internalErrorMap => {
-        this.validationError.emit(internalErrorMap);
+      .subscribe(internalProblemMap => {
+        this.validationProblems.emit(internalProblemMap);
       });
   }
 
@@ -196,8 +196,8 @@ export class JsonEditorComponent extends AbstractSubscriberComponent implements 
       }
     }
 
-    if (changes['errorMap']) {
-      this.errorsService.externalErrors = this.errorMap;
+    if (changes['problemMap']) {
+      this.problemsService.externalProblems = this.problemMap;
     }
 
     if (changes['templates']) {

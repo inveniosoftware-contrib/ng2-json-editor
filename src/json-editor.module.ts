@@ -67,7 +67,7 @@ import {
 import { SearchableDropdownComponent } from './searchable-dropdown';
 import { ListActionGroupComponent } from './list-action-group';
 import { SHARED_PIPES, SHARED_SERVICES, SHARED_DIRECTIVES } from './shared';
-import { BottomConsoleComponent, PatchesConsoleTabComponent, ErrorsConsoleTabComponent } from './bottom-console';
+import { BottomConsoleComponent, PatchesConsoleTabComponent, ProblemsConsoleTabComponent } from './bottom-console';
 import { TextDiffComponent } from './text-diff';
 import { PatchActionsComponent } from './patch-actions';
 import { AddPatchViewComponent } from './add-patch-view';
@@ -105,7 +105,7 @@ import { AddPatchViewComponent } from './add-patch-view';
     TextDiffComponent,
     PatchActionsComponent,
     PatchesConsoleTabComponent,
-    ErrorsConsoleTabComponent,
+    ProblemsConsoleTabComponent,
     AddPatchViewComponent
   ],
   exports: [JsonEditorComponent],
@@ -156,6 +156,6 @@ export {
   TextDiffComponent,
   PatchActionsComponent,
   PatchesConsoleTabComponent,
-  ErrorsConsoleTabComponent,
+  ProblemsConsoleTabComponent,
   AddPatchViewComponent
 };

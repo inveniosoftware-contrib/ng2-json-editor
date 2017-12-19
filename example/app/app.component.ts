@@ -42,7 +42,7 @@ export class AppComponent {
   record: object;
   schema: object;
   patches: Array<any>;
-  errorMap: object;
+  problemMap: object;
   readonly config: JsonEditorConfig = environment.editorConfig;
 
   constructor(private http: Http) {
@@ -50,20 +50,20 @@ export class AppComponent {
       this.http.get(`./assets/${environment.mockDataFolder}/record.json`),
       this.http.get(`./assets/${environment.mockDataFolder}/schema.json`),
       this.http.get(`./assets/${environment.mockDataFolder}/patches.json`),
-      this.http.get(`./assets/${environment.mockDataFolder}/error-map.json`),
-      (recordRes, schemaRes, patchesRes, errorMapRes) => {
+      this.http.get(`./assets/${environment.mockDataFolder}/problem-map.json`),
+      (recordRes, schemaRes, patchesRes, problemMapRes) => {
         return {
           record: recordRes.json(),
           schema: schemaRes.json(),
           patches: patchesRes.json(),
-          errorMap: errorMapRes.json(),
+          problemMap: problemMapRes.json(),
         };
       }
     ).subscribe((data) => {
       this.record = data.record;
       this.schema = data.schema;
       this.patches = data.patches;
-      this.errorMap = data.errorMap;
+      this.problemMap = data.problemMap;
     });
   }
 }

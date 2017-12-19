@@ -25,7 +25,7 @@ import {
   EventEmitter, OnDestroy
 } from '@angular/core';
 
-import { CategorizedValidationErrors } from '../shared/interfaces';
+import { CategorizedValidationProblems } from '../shared/interfaces';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({

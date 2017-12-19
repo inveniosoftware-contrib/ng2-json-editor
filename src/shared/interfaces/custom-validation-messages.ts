@@ -1,4 +1,4 @@
-export interface CustomErrorMessages {
+export interface CustomValidationMessages {
   pattern?: string;
   format?: string;
   multipleOf?: string;
