@@ -64,10 +64,10 @@ var __extends = (this && this.__extends) || (function () {
  */
 var AbstractFieldComponent = (function (_super) {
     __extends(AbstractFieldComponent, _super);
-    function AbstractFieldComponent(appGlobalsService, errorsService, pathUtilService, changeDetectorRef, jsonStoreService) {
+    function AbstractFieldComponent(appGlobalsService, problemsService, pathUtilService, changeDetectorRef, jsonStoreService) {
         var _this = _super.call(this) || this;
         _this.appGlobalsService = appGlobalsService;
-        _this.errorsService = errorsService;
+        _this.problemsService = problemsService;
         _this.pathUtilService = pathUtilService;
         _this.changeDetectorRef = changeDetectorRef;
         _this.jsonStoreService = jsonStoreService;
@@ -78,10 +78,10 @@ var AbstractFieldComponent = (function (_super) {
     }
     AbstractFieldComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.errorsService.externalCategorizedErrors$
+        this.problemsService.externalCategorizedProblems$
             .takeUntil(this.isDestroyed)
-            .subscribe(function (externalCategorizedErrorMap) {
-            _this.externalErrors = externalCategorizedErrorMap.errors[_this.pathString] || [];
+            .subscribe(function (externalCategorizedProblemMap) {
+            _this.externalErrors = externalCategorizedProblemMap.errors[_this.pathString] || [];
             _this.changeDetectorRef.markForCheck();
         });
         this.jsonStoreService.patchesByPath$
@@ -177,10 +177,10 @@ var __extends = (this && this.__extends) || (function () {
  */
 var AbstractListFieldComponent = (function (_super) {
     __extends(AbstractListFieldComponent, _super);
-    function AbstractListFieldComponent(appGlobalsService, errorsService, jsonStoreService, pathUtilService, changeDetectorRef) {
-        var _this = _super.call(this, appGlobalsService, errorsService, pathUtilService, changeDetectorRef, jsonStoreService) || this;
+    function AbstractListFieldComponent(appGlobalsService, problemsService, jsonStoreService, pathUtilService, changeDetectorRef) {
+        var _this = _super.call(this, appGlobalsService, problemsService, pathUtilService, changeDetectorRef, jsonStoreService) || this;
         _this.appGlobalsService = appGlobalsService;
-        _this.errorsService = errorsService;
+        _this.problemsService = problemsService;
         _this.jsonStoreService = jsonStoreService;
         _this.pathUtilService = pathUtilService;
         _this.changeDetectorRef = changeDetectorRef;
@@ -354,7 +354,7 @@ AddFieldDropdownComponent.decorators = [
 AddFieldDropdownComponent.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */], },
     { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["c" /* DomUtilService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["k" /* KeysStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["j" /* KeysStoreService */], },
 ]; };
 AddFieldDropdownComponent.propDecorators = {
     'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
@@ -482,9 +482,9 @@ AddNestedFieldDropdownComponent.decorators = [
 ];
 /** @nocollapse */
 AddNestedFieldDropdownComponent.ctorParameters = function () { return [
-    { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["k" /* KeysStoreService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["g" /* JsonSchemaService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["n" /* PathUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["j" /* KeysStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["f" /* JsonSchemaService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["m" /* PathUtilService */], },
     { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["c" /* DomUtilService */], },
 ]; };
 AddNestedFieldDropdownComponent.propDecorators = {
@@ -556,9 +556,9 @@ AddNewElementButtonComponent.decorators = [
 AddNewElementButtonComponent.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["c" /* DomUtilService */], },
     { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["d" /* EmptyValueService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["h" /* JsonStoreService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["n" /* PathUtilService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["k" /* KeysStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["g" /* JsonStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["m" /* PathUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["j" /* KeysStoreService */], },
 ]; };
 AddNewElementButtonComponent.propDecorators = {
     'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
@@ -809,8 +809,8 @@ AutocompleteInputComponent.decorators = [
 /** @nocollapse */
 AutocompleteInputComponent.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["p" /* RemoteAutocompletionService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["h" /* JsonStoreService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["k" /* KeysStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["g" /* JsonStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["j" /* KeysStoreService */], },
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["a" /* AppGlobalsService */], },
 ]; };
 AutocompleteInputComponent.propDecorators = {
@@ -883,55 +883,50 @@ var __extends = (this && this.__extends) || (function () {
 
 var BottomConsoleBadgesComponent = (function (_super) {
     __extends(BottomConsoleBadgesComponent, _super);
-    function BottomConsoleBadgesComponent(errorsService, changeDetectorRef, jsonStoreService) {
+    function BottomConsoleBadgesComponent(problemsService, changeDetectorRef, jsonStoreService) {
         var _this = _super.call(this) || this;
-        _this.errorsService = errorsService;
+        _this.problemsService = problemsService;
         _this.changeDetectorRef = changeDetectorRef;
         _this.jsonStoreService = jsonStoreService;
         _this.badgeClick = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */]();
-        _this.globalErrorCount = 0;
-        _this.internalErrorCount = 0;
-        _this.globalWarningCount = 0;
-        _this.internalWarningCount = 0;
+        _this.errorCount = 0;
+        _this.warningCount = 0;
         _this.patchCount = 0;
         return _this;
     }
     BottomConsoleBadgesComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.externalErrorCounterSubscription = this.errorsService.externalErrorCounters$
+        this.problemsService.errorCount$
             .takeUntil(this.isDestroyed)
-            .subscribe(function (errorCounters) {
-            _this.globalErrorCount = errorCounters.errors;
-            _this.globalWarningCount = errorCounters.warnings;
-            _this.changeDetectorRef.markForCheck();
+            .subscribe(function (count) {
+            _this.errorCount = count;
+            // FIXME: use markForCheck() instead
+            // markForCheck() wasn't working for mysterious reasons for initial update
+            _this.changeDetectorRef.detectChanges();
         });
-        this.internalErrorCounterSubscription = this.errorsService.internalErrorCounters$
+        this.problemsService.warningCount$
             .takeUntil(this.isDestroyed)
-            .subscribe(function (errorCounters) {
-            _this.internalErrorCount = errorCounters.errors;
-            _this.internalWarningCount = errorCounters.warnings;
-            _this.changeDetectorRef.markForCheck();
+            .subscribe(function (count) {
+            _this.warningCount = count;
+            // FIXME: use markForCheck() instead
+            // markForCheck() wasn't working for mysterious reasons for initial update
+            _this.changeDetectorRef.detectChanges();
         });
-        this.patchCounterSubscription = this.jsonStoreService.patchesByPath$
+        this.jsonStoreService.patchesByPath$
             .map(function (patchesByPath) {
             return Object.keys(patchesByPath)
                 .map(function (path) { return patchesByPath[path].length; })
                 .reduce(function (sum, patchCountPerPath) { return sum + patchCountPerPath; }, 0);
         })
             .takeUntil(this.isDestroyed)
-            .subscribe(function (patchCounter) {
-            _this.patchCount = patchCounter;
+            .subscribe(function (patchCount) {
+            _this.patchCount = patchCount;
             _this.changeDetectorRef.markForCheck();
         });
     };
     BottomConsoleBadgesComponent.prototype.onBadgeClick = function (event, badgeName) {
         event.preventDefault();
         this.badgeClick.emit(badgeName);
-    };
-    BottomConsoleBadgesComponent.prototype.ngOnDestroy = function () {
-        this.externalErrorCounterSubscription.unsubscribe();
-        this.internalErrorCounterSubscription.unsubscribe();
-        this.patchCounterSubscription.unsubscribe();
     };
     return BottomConsoleBadgesComponent;
 }(__WEBPACK_IMPORTED_MODULE_1__abstract_subscriber__["a" /* AbstractSubscriberComponent */]));
@@ -940,15 +935,15 @@ BottomConsoleBadgesComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */], args: [{
                 selector: 'bottom-console-badges',
                 styles: [".error { color: #D14024; } .error .badge { background-color: #D14024; } .error .badge:hover { background-color: #e06148; } .error:hover { color: #e06148; } .warning { color: #f1c40f; } .warning .badge { background-color: #f1c40f; } .warning .badge:hover { background-color: #f4d03f; } .warning:hover { color: #f4d03f; } .patch { color: #e67e22; } .patch .badge { background-color: #e67e22; } .patch .badge:hover { background-color: #eb9950; } .patch:hover { color: #eb9950; } a { text-decoration: none; padding-right: 7px; padding-top: 7px; } a:hover { cursor: pointer; } .badges-container { display: flex; } @media screen and (max-width: 1440px) { .badges-container { flex-direction: column; } } "],
-                template: "<div class=\"badges-container\"> <a *ngIf=\"internalErrorCount + globalErrorCount > 0\" class=\"error\" (click)=\"onBadgeClick($event, 'Errors')\"> <span class=\"\">Errors</span> <span class=\"badge\">{{internalErrorCount + globalErrorCount}}</span> </a> <a *ngIf=\"internalWarningCount + globalWarningCount > 0\" class=\"warning\" (click)=\"onBadgeClick($event, 'Warnings')\"> <span>Warnings</span> <span class=\"badge\">{{internalWarningCount + globalWarningCount}}</span> </a> <a *ngIf=\"patchCount > 0\" class=\"patch\" (click)=\"onBadgeClick($event, 'Patches')\"> <span>Conflicts</span> <span class=\"badge\">{{patchCount}}</span> </a> </div>",
+                template: "<div class=\"badges-container\"> <a *ngIf=\"errorCount > 0\" class=\"error\" (click)=\"onBadgeClick($event, 'Errors')\"> <span class=\"\">Errors</span> <span class=\"badge\">{{errorCount}}</span> </a> <a *ngIf=\"warningCount > 0\" class=\"warning\" (click)=\"onBadgeClick($event, 'Warnings')\"> <span>Warnings</span> <span class=\"badge\">{{warningCount}}</span> </a> <a *ngIf=\"patchCount > 0\" class=\"patch\" (click)=\"onBadgeClick($event, 'Patches')\"> <span>Conflicts</span> <span class=\"badge\">{{patchCount}}</span> </a> </div>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
 /** @nocollapse */
 BottomConsoleBadgesComponent.ctorParameters = function () { return [
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["e" /* ErrorsService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["n" /* ProblemsService */], },
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["k" /* ChangeDetectorRef */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["h" /* JsonStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["g" /* JsonStoreService */], },
 ]; };
 BottomConsoleBadgesComponent.propDecorators = {
     'badgeClick': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Output */] },],
@@ -1015,7 +1010,7 @@ BottomConsoleComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */], args: [{
                 selector: 'bottom-console',
                 styles: [""],
-                template: "<div *ngIf=\"isOpen\" class=\"bottom-console-container\"> <tabset> <tab [active]=\"isActive('Errors')\"> <errors-console-tab [errorType]=\"'errors'\"></errors-console-tab> </tab> <tab [active]=\"isActive('Warnings')\"> <errors-console-tab [errorType]=\"'warnings'\"></errors-console-tab> </tab> <tab [active]=\"isActive('Patches')\"> <patches-console-tab></patches-console-tab> </tab> <tab (select)=\"closePanel()\" [customClass]=\"'pull-right'\"> <ng-template tabHeading> <i class=\"fa fa-window-close\"></i> </ng-template> </tab> </tabset> </div>",
+                template: "<div *ngIf=\"isOpen\" class=\"bottom-console-container\"> <tabset> <tab [active]=\"isActive('Errors')\"> <problems-console-tab [problemType]=\"'errors'\"></problems-console-tab> </tab> <tab [active]=\"isActive('Warnings')\"> <problems-console-tab [problemType]=\"'warnings'\"></problems-console-tab> </tab> <tab [active]=\"isActive('Patches')\"> <patches-console-tab></patches-console-tab> </tab> <tab (select)=\"closePanel()\" [customClass]=\"'pull-right'\"> <ng-template tabHeading> <i class=\"fa fa-window-close\"></i> </ng-template> </tab> </tabset> </div>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
@@ -1030,132 +1025,6 @@ BottomConsoleComponent.propDecorators = {
 
 /***/ }),
 
-/***/ "../../../../../dist/src/bottom-console/errors-console-tab/errors-console-tab.component.js":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ErrorsConsoleTabComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_subscriber__ = __webpack_require__("../../../../../dist/src/abstract-subscriber/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__("../../../../../dist/src/shared/services/index.js");
-/*
- * This file is part of ng2-json-editor.
- * Copyright (C) 2017 CERN.
- *
- * ng2-json-editor is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of the
- * License, or (at your option) any later version.
- *
- * ng2-json-editor is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
- * In applying this license, CERN does not
- * waive the privileges and immunities granted to it by virtue of its status
- * as an Intergovernmental Organization or submit itself to any jurisdiction.
- */
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-
-
-
-var ErrorsConsoleTabComponent = (function (_super) {
-    __extends(ErrorsConsoleTabComponent, _super);
-    function ErrorsConsoleTabComponent(domUtilService, pathUtilService, errorsService, changeDetectorRef) {
-        var _this = _super.call(this) || this;
-        _this.domUtilService = domUtilService;
-        _this.pathUtilService = pathUtilService;
-        _this.errorsService = errorsService;
-        _this.changeDetectorRef = changeDetectorRef;
-        _this.externalErrorCount = 0;
-        _this.internalErrorCount = 0;
-        return _this;
-    }
-    ErrorsConsoleTabComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.errorsService.externalCategorizedErrors$
-            .map(function (categorizedErrorMap) { return categorizedErrorMap[_this.errorType]; })
-            .takeUntil(this.isDestroyed)
-            .subscribe(function (errorMap) {
-            _this.externalErrorMap = errorMap;
-            _this.changeDetectorRef.markForCheck();
-        });
-        this.errorsService.externalErrorCounters$
-            .map(function (errorCounters) { return errorCounters[_this.errorType]; })
-            .takeUntil(this.isDestroyed)
-            .subscribe(function (errorCount) {
-            _this.externalErrorCount = errorCount;
-            _this.changeDetectorRef.markForCheck();
-        });
-        this.errorsService.internalCategorizedErrors$
-            .map(function (categorizedErrorMap) { return categorizedErrorMap[_this.errorType]; })
-            .takeUntil(this.isDestroyed)
-            .subscribe(function (errorMap) {
-            _this.internalErrorMap = errorMap;
-            _this.changeDetectorRef.markForCheck();
-        });
-        this.errorsService.internalErrorCounters$
-            .map(function (errorCounters) { return errorCounters[_this.errorType]; })
-            .takeUntil(this.isDestroyed)
-            .subscribe(function (errorCount) {
-            _this.internalErrorCount = errorCount;
-            _this.changeDetectorRef.markForCheck();
-        });
-        this.iconClassName = this.errorType === 'errors' ? 'fa fa-times' : 'fa fa-exclamation-triangle';
-    };
-    ErrorsConsoleTabComponent.prototype.focusAndSelectPath = function (path) {
-        this.domUtilService.focusAndSelectFirstEditableChildById(path, true);
-    };
-    return ErrorsConsoleTabComponent;
-}(__WEBPACK_IMPORTED_MODULE_1__abstract_subscriber__["a" /* AbstractSubscriberComponent */]));
-
-ErrorsConsoleTabComponent.decorators = [
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */], args: [{
-                selector: 'errors-console-tab',
-                styles: [".list-group-item { cursor: pointer; color: #0074D9; } .list-group-item:hover { background-color: #faebcc; text-decoration: underline; } ",
-                    ".fa-exclamation-triangle { color: #f1c40f; } .fa-times { color: #D14024; } "],
-                template: "<ng-template tabHeading> <i [ngClass]=\"iconClassName\"></i> {{errorType | titlecase}} <span class=\"badge\">{{internalErrorCount + externalErrorCount}}</span> </ng-template> <ul class=\"list-group\"> <ng-container *ngFor=\"let key of internalErrorMap | keys\"> <li *ngFor=\"let error of internalErrorMap[key]\" class=\"list-group-item\" (click)=\"focusAndSelectPath(key)\"> <i [ngClass]=\"iconClassName\"></i> {{ error.message }} </li> </ng-container> <ng-container *ngFor=\"let key of externalErrorMap | keys\"> <li *ngFor=\"let error of externalErrorMap[key]\" class=\"list-group-item\" (click)=\"focusAndSelectPath(key)\"> <i [ngClass]=\"iconClassName\"></i> {{ error.message }} </li> </ng-container> </ul>",
-                changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectionStrategy */].OnPush
-            },] },
-];
-/** @nocollapse */
-ErrorsConsoleTabComponent.ctorParameters = function () { return [
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["c" /* DomUtilService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["n" /* PathUtilService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["e" /* ErrorsService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["k" /* ChangeDetectorRef */], },
-]; };
-ErrorsConsoleTabComponent.propDecorators = {
-    'errorType': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
-};
-
-
-/***/ }),
-
-/***/ "../../../../../dist/src/bottom-console/errors-console-tab/index.js":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__errors_console_tab_component__ = __webpack_require__("../../../../../dist/src/bottom-console/errors-console-tab/errors-console-tab.component.js");
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__errors_console_tab_component__["a"]; });
-
-
-
-/***/ }),
-
 /***/ "../../../../../dist/src/bottom-console/index.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1163,9 +1032,9 @@ ErrorsConsoleTabComponent.propDecorators = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bottom_console_component__ = __webpack_require__("../../../../../dist/src/bottom-console/bottom-console.component.js");
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__bottom_console_component__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__patches_console_tab__ = __webpack_require__("../../../../../dist/src/bottom-console/patches-console-tab/index.js");
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_1__patches_console_tab__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__errors_console_tab__ = __webpack_require__("../../../../../dist/src/bottom-console/errors-console-tab/index.js");
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_2__errors_console_tab__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__patches_console_tab__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__problems_console_tab__ = __webpack_require__("../../../../../dist/src/bottom-console/problems-console-tab/index.js");
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_2__problems_console_tab__["a"]; });
 
 
 
@@ -1279,10 +1148,128 @@ PatchesConsoleTabComponent.decorators = [
 /** @nocollapse */
 PatchesConsoleTabComponent.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["c" /* DomUtilService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["n" /* PathUtilService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["h" /* JsonStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["m" /* PathUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["g" /* JsonStoreService */], },
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["k" /* ChangeDetectorRef */], },
 ]; };
+
+
+/***/ }),
+
+/***/ "../../../../../dist/src/bottom-console/problems-console-tab/index.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__problems_console_tab_component__ = __webpack_require__("../../../../../dist/src/bottom-console/problems-console-tab/problems-console-tab.component.js");
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__problems_console_tab_component__["a"]; });
+
+
+
+/***/ }),
+
+/***/ "../../../../../dist/src/bottom-console/problems-console-tab/problems-console-tab.component.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProblemsConsoleTabComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_subscriber__ = __webpack_require__("../../../../../dist/src/abstract-subscriber/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__("../../../../../dist/src/shared/services/index.js");
+/*
+ * This file is part of ng2-json-editor.
+ * Copyright (C) 2017 CERN.
+ *
+ * ng2-json-editor is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * ng2-json-editor is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ * In applying this license, CERN does not
+ * waive the privileges and immunities granted to it by virtue of its status
+ * as an Intergovernmental Organization or submit itself to any jurisdiction.
+ */
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+
+
+var ProblemsConsoleTabComponent = (function (_super) {
+    __extends(ProblemsConsoleTabComponent, _super);
+    function ProblemsConsoleTabComponent(domUtilService, pathUtilService, problemsService, changeDetectorRef) {
+        var _this = _super.call(this) || this;
+        _this.domUtilService = domUtilService;
+        _this.pathUtilService = pathUtilService;
+        _this.problemsService = problemsService;
+        _this.changeDetectorRef = changeDetectorRef;
+        _this.problemCount = 0;
+        return _this;
+    }
+    ProblemsConsoleTabComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.problemsService.externalCategorizedProblems$
+            .map(function (categorizedProblemMap) { return categorizedProblemMap[_this.problemType]; })
+            .takeUntil(this.isDestroyed)
+            .subscribe(function (problemMap) {
+            _this.externalProblemMap = problemMap;
+            _this.changeDetectorRef.markForCheck();
+        });
+        this.problemsService.internalCategorizedProblems$
+            .map(function (categorizedProblemMap) { return categorizedProblemMap[_this.problemType]; })
+            .takeUntil(this.isDestroyed)
+            .subscribe(function (problemMap) {
+            _this.internalProblemMap = problemMap;
+            _this.changeDetectorRef.markForCheck();
+        });
+        // TODO: create WarningsConsoleTabComponent with same template to avoid `if`
+        var problemCount$ = this.problemType === 'errors' ? this.problemsService.errorCount$ : this.problemsService.warningCount$;
+        problemCount$
+            .takeUntil(this.isDestroyed)
+            .subscribe(function (problemCount) {
+            _this.problemCount = problemCount;
+        });
+        this.iconClassName = this.problemType === 'errors' ? 'fa fa-times' : 'fa fa-exclamation-triangle';
+    };
+    ProblemsConsoleTabComponent.prototype.focusAndSelectPath = function (path) {
+        this.domUtilService.focusAndSelectFirstEditableChildById(path, true);
+    };
+    return ProblemsConsoleTabComponent;
+}(__WEBPACK_IMPORTED_MODULE_1__abstract_subscriber__["a" /* AbstractSubscriberComponent */]));
+
+ProblemsConsoleTabComponent.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */], args: [{
+                selector: 'problems-console-tab',
+                styles: [".list-group-item { cursor: pointer; color: #0074D9; } .list-group-item:hover { background-color: #faebcc; text-decoration: underline; } ",
+                    ".fa-exclamation-triangle { color: #f1c40f; } .fa-times { color: #D14024; } "],
+                template: "<ng-template tabHeading> <i [ngClass]=\"iconClassName\"></i> {{problemType | titlecase}} <span class=\"badge\">{{problemCount}}</span> </ng-template> <ul class=\"list-group\"> <ng-container *ngFor=\"let key of internalProblemMap | keys\"> <li *ngFor=\"let problem of internalProblemMap[key]\" class=\"list-group-item\" (click)=\"focusAndSelectPath(key)\"> <i [ngClass]=\"iconClassName\"></i> {{ problem.message }} </li> </ng-container> <ng-container *ngFor=\"let key of externalProblemMap | keys\"> <li *ngFor=\"let problem of externalProblemMap[key]\" class=\"list-group-item\" (click)=\"focusAndSelectPath(key)\"> <i [ngClass]=\"iconClassName\"></i> {{ problem.message }} </li> </ng-container> </ul>",
+                changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectionStrategy */].OnPush
+            },] },
+];
+/** @nocollapse */
+ProblemsConsoleTabComponent.ctorParameters = function () { return [
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["c" /* DomUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["m" /* PathUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["n" /* ProblemsService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["k" /* ChangeDetectorRef */], },
+]; };
+ProblemsConsoleTabComponent.propDecorators = {
+    'problemType': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
+};
 
 
 /***/ }),
@@ -1331,10 +1318,10 @@ var __extends = (this && this.__extends) || (function () {
 
 var ComplexListFieldComponent = (function (_super) {
     __extends(ComplexListFieldComponent, _super);
-    function ComplexListFieldComponent(appGlobalsService, errorsService, jsonStoreService, domUtilService, pathUtilService, changeDetectorRef, listPageChangerService) {
-        var _this = _super.call(this, appGlobalsService, errorsService, jsonStoreService, pathUtilService, changeDetectorRef) || this;
+    function ComplexListFieldComponent(appGlobalsService, problemsService, jsonStoreService, domUtilService, pathUtilService, changeDetectorRef, listPageChangerService) {
+        var _this = _super.call(this, appGlobalsService, problemsService, jsonStoreService, pathUtilService, changeDetectorRef) || this;
         _this.appGlobalsService = appGlobalsService;
-        _this.errorsService = errorsService;
+        _this.problemsService = problemsService;
         _this.jsonStoreService = jsonStoreService;
         _this.domUtilService = domUtilService;
         _this.pathUtilService = pathUtilService;
@@ -1380,9 +1367,9 @@ var ComplexListFieldComponent = (function (_super) {
             }
         }
     };
-    ComplexListFieldComponent.prototype.hasErrorOrPatch = function (index) {
+    ComplexListFieldComponent.prototype.hasProblemOrPatch = function (index) {
         var itemPath = this.getPathStringForChild(index);
-        return this.errorsService.hasError(itemPath) || this.jsonStoreService.hasPatch(itemPath);
+        return this.problemsService.hasProblem(itemPath) || this.jsonStoreService.hasPatch(itemPath);
     };
     Object.defineProperty(ComplexListFieldComponent.prototype, "headerItemTemplate", {
         get: function () {
@@ -1513,19 +1500,19 @@ ComplexListFieldComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */], args: [{
                 selector: 'complex-list-field',
                 styles: [".complex-list-field-wrapper { margin: 10px 15px 15px 10px; padding: 5px; box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.25); } .top-bar-container { width: 100%; position: sticky; top: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; padding: 0 15px; background-color: white; box-shadow: 0 0.5px 0 0 #ffffff inset, 0 1px 2px 0 #B3B3B3; } .item-count-label { position: relative; top: -19px; } .transparent { background: transparent; } .borderless { border: none; } .find-button { color: darkslategray; } .find-button .fa-search { opacity: 0.83; } .element-button-container { padding-top: 8px; } .element-button-container .left, .element-button-container .right { padding: 0px; } .element-button-container .right { text-align: right; } label.btn { color: white !important; } "],
-                template: "<div [id]=\"pathString\" [ngClass]=\"redLeftBorderClass\"> <!-- Top Bar: Navigator, ToEdit/All switch, custom header item etc. --> <div *ngIf=\"navigator || shouldDisplayViewTemplate\" class=\"top-bar-container\"> <div *ngIf=\"navigator\"> <div class=\"input-group input-group-sm\"> <span class=\"input-group-btn\"> <button type=\"button\" class=\"btn btn-default find-button\" (click)=\"onFindClick()\"> <i class=\"fa fa-search\" aria-hidden=\"true\"></i> </button> </span> <input type=\"search\" class=\"form-control\" [(ngModel)]=\"findExpression\" (keypress)=\"onFindInputKeypress($event.key)\" placeholder=\"Find\" /> <span class=\"input-group-btn\" *ngIf=\"shouldDisplayFoundNavigation\"> <button type=\"button\" class=\"btn btn-default\" [disabled]=\"currentFound <= 0\" (click)=\"onFoundNavigate(-1)\">❮</button> </span> <span class=\"input-group-btn\" *ngIf=\"shouldDisplayFoundNavigation\"> <button type=\"button\" class=\"btn btn-default\" [disabled]=\"currentFound >= foundIndices.length - 1\" (click)=\"onFoundNavigate(1)\">❯</button> </span> <span *ngIf=\"foundIndices\" [ngSwitch]=\"foundIndices.length\" class=\"input-group-addon transparent borderless\"> <span *ngSwitchCase=\"0\"> Nothing found </span> <span *ngSwitchDefault> {{currentFound + 1}} of {{foundIndices.length}} </span> </span> </div> </div> <div *ngIf=\"shouldDisplayViewTemplate\" class=\"btn-group\"> <label class=\"btn btn-switch\" [class.active]=\"!shouldDisplayOnlyEditFormItems\" (click)=\"shouldDisplayOnlyEditFormItems = false\">All</label> <label class=\"btn btn-switch\" [class.active]=\"shouldDisplayOnlyEditFormItems\" (click)=\"shouldDisplayOnlyEditFormItems = true\">To Edit</label> </div> <div *ngIf=\"headerItemTemplate\"> <ng-template [ngTemplateOutlet]=\"headerItemTemplate\"></ng-template> </div> <div *ngIf=\"navigator\"> <label class=\"item-count-label\"> {{paginatableItems.size}} {{path[path.length - 1]}} </label> <br> <pagination [totalItems]=\"paginatableItems.size\" [ngModel]=\"currentPage\" [maxSize]=\"navigator.maxVisiblePageCount\" [itemsPerPage]=\"navigator.itemsPerPage\" class=\"pagination-sm pagination-top\" [boundaryLinks]=\"true\" [rotate]=\"false\" [firstText]=\"'❮❮'\" [previousText]=\"'❮'\" [nextText]=\"'❯'\" [lastText]=\"'❯❯'\" (pageChanged)=\"onPageChange($event.page)\"></pagination> </div> </div> <!-- Elements --> <div *ngFor=\"let item of paginatedItems; trackBy:trackByElement\"> <div class=\"complex-list-field-wrapper\"> <span *ngIf=\"shouldDisplayViewTemplate && values.get(item.index).keySeq().size != 0\"> <ng-template [ngTemplateOutlet]=\"customTemplate\" [ngTemplateOutletContext]=\"{item: values.get(item.index)}\"></ng-template> <a href=\"javascript:void(0)\" (click)=\"item.isEditFormVisible = !item.isEditFormVisible\"> {{item.isEditFormVisible ? 'Hide Fields' : 'Show Fields'}} </a> </span> <span *ngIf=\"item.isEditFormVisible || hasErrorOrPatch(item.index)\"> <object-field [value]=\"values.get(item.index)\" [schema]=\"schema.items\" [path]=\"getPathForChild(item.index)\"> </object-field> <div class=\"row element-button-container\"> <div class=\"col-md-6 left\"> <add-nested-field-dropdown [pathString]=\"pathString + '/' + item.index\" [schema]=\"schema.items\" [isDisabled]=\"disabled\"></add-nested-field-dropdown> </div> <div class=\"col-md-6 right\"> <list-action-group (onMove)=\"moveElement(item.index, $event)\" (onDelete)=\"deleteElement(item.index)\" [canMove]=\"sortable\" [isDisabled]=\"disabled\"> </list-action-group> </div> </div> </span> </div> </div> <div *ngFor=\"let patch of addJsonPatches\" class=\"complex-list-field-wrapper\"> <add-patch-view [patch]=\"patch\"></add-patch-view> </div> <div *ngIf=\"removeJsonPatch\"> <patch-actions [patch]=\"removeJsonPatch\"></patch-actions> </div> </div>",
+                template: "<div [id]=\"pathString\" [ngClass]=\"redLeftBorderClass\"> <!-- Top Bar: Navigator, ToEdit/All switch, custom header item etc. --> <div *ngIf=\"navigator || shouldDisplayViewTemplate\" class=\"top-bar-container\"> <div *ngIf=\"navigator\"> <div class=\"input-group input-group-sm\"> <span class=\"input-group-btn\"> <button type=\"button\" class=\"btn btn-default find-button\" (click)=\"onFindClick()\"> <i class=\"fa fa-search\" aria-hidden=\"true\"></i> </button> </span> <input type=\"search\" class=\"form-control\" [(ngModel)]=\"findExpression\" (keypress)=\"onFindInputKeypress($event.key)\" placeholder=\"Find\" /> <span class=\"input-group-btn\" *ngIf=\"shouldDisplayFoundNavigation\"> <button type=\"button\" class=\"btn btn-default\" [disabled]=\"currentFound <= 0\" (click)=\"onFoundNavigate(-1)\">❮</button> </span> <span class=\"input-group-btn\" *ngIf=\"shouldDisplayFoundNavigation\"> <button type=\"button\" class=\"btn btn-default\" [disabled]=\"currentFound >= foundIndices.length - 1\" (click)=\"onFoundNavigate(1)\">❯</button> </span> <span *ngIf=\"foundIndices\" [ngSwitch]=\"foundIndices.length\" class=\"input-group-addon transparent borderless\"> <span *ngSwitchCase=\"0\"> Nothing found </span> <span *ngSwitchDefault> {{currentFound + 1}} of {{foundIndices.length}} </span> </span> </div> </div> <div *ngIf=\"shouldDisplayViewTemplate\" class=\"btn-group\"> <label class=\"btn btn-switch\" [class.active]=\"!shouldDisplayOnlyEditFormItems\" (click)=\"shouldDisplayOnlyEditFormItems = false\">All</label> <label class=\"btn btn-switch\" [class.active]=\"shouldDisplayOnlyEditFormItems\" (click)=\"shouldDisplayOnlyEditFormItems = true\">To Edit</label> </div> <div *ngIf=\"headerItemTemplate\"> <ng-template [ngTemplateOutlet]=\"headerItemTemplate\"></ng-template> </div> <div *ngIf=\"navigator\"> <label class=\"item-count-label\"> {{paginatableItems.size}} {{path[path.length - 1]}} </label> <br> <pagination [totalItems]=\"paginatableItems.size\" [ngModel]=\"currentPage\" [maxSize]=\"navigator.maxVisiblePageCount\" [itemsPerPage]=\"navigator.itemsPerPage\" class=\"pagination-sm pagination-top\" [boundaryLinks]=\"true\" [rotate]=\"false\" [firstText]=\"'❮❮'\" [previousText]=\"'❮'\" [nextText]=\"'❯'\" [lastText]=\"'❯❯'\" (pageChanged)=\"onPageChange($event.page)\"></pagination> </div> </div> <!-- Elements --> <div *ngFor=\"let item of paginatedItems; trackBy:trackByElement\"> <div class=\"complex-list-field-wrapper\"> <span *ngIf=\"shouldDisplayViewTemplate && values.get(item.index).keySeq().size != 0\"> <ng-template [ngTemplateOutlet]=\"customTemplate\" [ngTemplateOutletContext]=\"{item: values.get(item.index)}\"></ng-template> <a href=\"javascript:void(0)\" (click)=\"item.isEditFormVisible = !item.isEditFormVisible\"> {{item.isEditFormVisible ? 'Hide Fields' : 'Show Fields'}} </a> </span> <span *ngIf=\"item.isEditFormVisible || hasProblemOrPatch(item.index)\"> <object-field [value]=\"values.get(item.index)\" [schema]=\"schema.items\" [path]=\"getPathForChild(item.index)\"> </object-field> <div class=\"row element-button-container\"> <div class=\"col-md-6 left\"> <add-nested-field-dropdown [pathString]=\"pathString + '/' + item.index\" [schema]=\"schema.items\" [isDisabled]=\"disabled\"></add-nested-field-dropdown> </div> <div class=\"col-md-6 right\"> <list-action-group (onMove)=\"moveElement(item.index, $event)\" (onDelete)=\"deleteElement(item.index)\" [canMove]=\"sortable\" [isDisabled]=\"disabled\"> </list-action-group> </div> </div> </span> </div> </div> <div *ngFor=\"let patch of addJsonPatches\" class=\"complex-list-field-wrapper\"> <add-patch-view [patch]=\"patch\"></add-patch-view> </div> <div *ngIf=\"removeJsonPatch\"> <patch-actions [patch]=\"removeJsonPatch\"></patch-actions> </div> </div>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
 /** @nocollapse */
 ComplexListFieldComponent.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["a" /* AppGlobalsService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["e" /* ErrorsService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["h" /* JsonStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["n" /* ProblemsService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["g" /* JsonStoreService */], },
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["c" /* DomUtilService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["n" /* PathUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["m" /* PathUtilService */], },
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["k" /* ChangeDetectorRef */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["l" /* ListPageChangerService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["k" /* ListPageChangerService */], },
 ]; };
 ComplexListFieldComponent.propDecorators = {
     'values': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
@@ -1702,9 +1689,9 @@ FindReplaceComponent.decorators = [
 FindReplaceComponent.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["k" /* ChangeDetectorRef */], },
     { type: __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["b" /* DomSanitizer */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["f" /* FindReplaceAllService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["h" /* JsonStoreService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["m" /* ModalService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["e" /* FindReplaceAllService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["g" /* JsonStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["l" /* ModalService */], },
 ]; };
 FindReplaceComponent.propDecorators = {
     'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
@@ -1855,10 +1842,10 @@ var __extends = (this && this.__extends) || (function () {
 
 var JsonEditorComponent = (function (_super) {
     __extends(JsonEditorComponent, _super);
-    function JsonEditorComponent(appGlobalsService, errorsService, jsonStoreService, jsonUtilService, jsonSchemaService, keysStoreService, recordFixerService, schemaFixerService, tabsUtilService, pathUtilService) {
+    function JsonEditorComponent(appGlobalsService, problemsService, jsonStoreService, jsonUtilService, jsonSchemaService, keysStoreService, recordFixerService, schemaFixerService, tabsUtilService, pathUtilService) {
         var _this = _super.call(this) || this;
         _this.appGlobalsService = appGlobalsService;
-        _this.errorsService = errorsService;
+        _this.problemsService = problemsService;
         _this.jsonStoreService = jsonStoreService;
         _this.jsonUtilService = jsonUtilService;
         _this.jsonSchemaService = jsonSchemaService;
@@ -1869,6 +1856,7 @@ var JsonEditorComponent = (function (_super) {
         _this.pathUtilService = pathUtilService;
         _this.recordChange = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */]();
         _this.jsonPatchesChange = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */]();
+        _this.validationProblems = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */]();
         _this.pathString = '';
         _this.isBottomConsoleOpen = false;
         _this.bottomConsoleActiveTab = '';
@@ -1896,6 +1884,11 @@ var JsonEditorComponent = (function (_super) {
             .takeUntil(this.isDestroyed)
             .subscribe(function (patches) {
             _this.jsonPatchesChange.emit(patches);
+        });
+        this.problemsService.internalProblemMap$
+            .takeUntil(this.isDestroyed)
+            .subscribe(function (internalProblemMap) {
+            _this.validationProblems.emit(internalProblemMap);
         });
     };
     JsonEditorComponent.prototype.ngOnChanges = function (changes) {
@@ -1941,8 +1934,8 @@ var JsonEditorComponent = (function (_super) {
                 this.jsonStoreService.setJsonPatches(this.jsonPatches);
             }
         }
-        if (changes['errorMap']) {
-            this.errorsService.externalErrors = this.errorMap;
+        if (changes['problemMap']) {
+            this.problemsService.externalProblems = this.problemMap;
         }
         if (changes['templates']) {
             this.appGlobalsService.templates = this.templates || {};
@@ -2062,25 +2055,26 @@ JsonEditorComponent.decorators = [
 /** @nocollapse */
 JsonEditorComponent.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["a" /* AppGlobalsService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["e" /* ErrorsService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["h" /* JsonStoreService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["i" /* JsonUtilService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["g" /* JsonSchemaService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["k" /* KeysStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["n" /* ProblemsService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["g" /* JsonStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["h" /* JsonUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["f" /* JsonSchemaService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["j" /* KeysStoreService */], },
     { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["o" /* RecordFixerService */], },
     { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["r" /* SchemaFixerService */], },
     { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["u" /* TabsUtilService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["n" /* PathUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["m" /* PathUtilService */], },
 ]; };
 JsonEditorComponent.propDecorators = {
     'config': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
     'record': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
     'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
-    'errorMap': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
+    'problemMap': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
     'jsonPatches': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
     'templates': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
     'recordChange': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Output */] },],
     'jsonPatchesChange': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Output */] },],
+    'validationProblems': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["R" /* Output */] },],
 };
 
 
@@ -2161,7 +2155,7 @@ JsonEditorComponent.propDecorators = {
 /* unused harmony reexport TextDiffComponent */
 /* unused harmony reexport PatchActionsComponent */
 /* unused harmony reexport PatchesConsoleTabComponent */
-/* unused harmony reexport ErrorsConsoleTabComponent */
+/* unused harmony reexport ProblemsConsoleTabComponent */
 /* unused harmony reexport AddPatchViewComponent */
 /*
  * This file is part of ng2-json-editor.
@@ -2262,8 +2256,8 @@ JsonEditorModule.decorators = [
                     __WEBPACK_IMPORTED_MODULE_32__string_input__["a" /* StringInputComponent */],
                     __WEBPACK_IMPORTED_MODULE_38__text_diff__["a" /* TextDiffComponent */],
                     __WEBPACK_IMPORTED_MODULE_39__patch_actions__["a" /* PatchActionsComponent */],
-                    __WEBPACK_IMPORTED_MODULE_37__bottom_console__["c" /* PatchesConsoleTabComponent */],
-                    __WEBPACK_IMPORTED_MODULE_37__bottom_console__["b" /* ErrorsConsoleTabComponent */],
+                    __WEBPACK_IMPORTED_MODULE_37__bottom_console__["b" /* PatchesConsoleTabComponent */],
+                    __WEBPACK_IMPORTED_MODULE_37__bottom_console__["c" /* ProblemsConsoleTabComponent */],
                     __WEBPACK_IMPORTED_MODULE_40__add_patch_view__["a" /* AddPatchViewComponent */]
                 ]),
                 exports: [__WEBPACK_IMPORTED_MODULE_23__json_editor_component__["a" /* JsonEditorComponent */]],
@@ -2454,7 +2448,7 @@ ModalViewComponent.decorators = [
 ];
 /** @nocollapse */
 ModalViewComponent.ctorParameters = function () { return [
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["m" /* ModalService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["l" /* ModalService */], },
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["k" /* ChangeDetectorRef */], },
 ]; };
 ModalViewComponent.propDecorators = {
@@ -2519,10 +2513,10 @@ var __extends = (this && this.__extends) || (function () {
 
 var ObjectFieldComponent = (function (_super) {
     __extends(ObjectFieldComponent, _super);
-    function ObjectFieldComponent(appGlobalsService, errorsService, jsonStoreService, pathUtilService, changeDetectorRef, keysStoreService) {
-        var _this = _super.call(this, appGlobalsService, errorsService, pathUtilService, changeDetectorRef, jsonStoreService) || this;
+    function ObjectFieldComponent(appGlobalsService, problemsService, jsonStoreService, pathUtilService, changeDetectorRef, keysStoreService) {
+        var _this = _super.call(this, appGlobalsService, problemsService, pathUtilService, changeDetectorRef, jsonStoreService) || this;
         _this.appGlobalsService = appGlobalsService;
-        _this.errorsService = errorsService;
+        _this.problemsService = problemsService;
         _this.jsonStoreService = jsonStoreService;
         _this.pathUtilService = pathUtilService;
         _this.changeDetectorRef = changeDetectorRef;
@@ -2560,11 +2554,11 @@ ObjectFieldComponent.decorators = [
 /** @nocollapse */
 ObjectFieldComponent.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["a" /* AppGlobalsService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["e" /* ErrorsService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["h" /* JsonStoreService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["n" /* PathUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["n" /* ProblemsService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["g" /* JsonStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["m" /* PathUtilService */], },
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["k" /* ChangeDetectorRef */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["k" /* KeysStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["j" /* KeysStoreService */], },
 ]; };
 ObjectFieldComponent.propDecorators = {
     'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
@@ -2643,7 +2637,7 @@ PatchActionsComponent.decorators = [
 ];
 /** @nocollapse */
 PatchActionsComponent.ctorParameters = function () { return [
-    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["h" /* JsonStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["g" /* JsonStoreService */], },
 ]; };
 PatchActionsComponent.propDecorators = {
     'patch': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
@@ -2708,12 +2702,12 @@ var __extends = (this && this.__extends) || (function () {
 
 var PrimitiveFieldComponent = (function (_super) {
     __extends(PrimitiveFieldComponent, _super);
-    function PrimitiveFieldComponent(schemaValidationService, componentTypeService, appGlobalsService, errorsService, jsonStoreService, keysStoreService, pathUtilService, domUtilService, changeDetectorRef) {
-        var _this = _super.call(this, appGlobalsService, errorsService, pathUtilService, changeDetectorRef, jsonStoreService) || this;
+    function PrimitiveFieldComponent(schemaValidationService, componentTypeService, appGlobalsService, problemsService, jsonStoreService, keysStoreService, pathUtilService, domUtilService, changeDetectorRef) {
+        var _this = _super.call(this, appGlobalsService, problemsService, pathUtilService, changeDetectorRef, jsonStoreService) || this;
         _this.schemaValidationService = schemaValidationService;
         _this.componentTypeService = componentTypeService;
         _this.appGlobalsService = appGlobalsService;
-        _this.errorsService = errorsService;
+        _this.problemsService = problemsService;
         _this.jsonStoreService = jsonStoreService;
         _this.keysStoreService = keysStoreService;
         _this.pathUtilService = pathUtilService;
@@ -2728,8 +2722,8 @@ var PrimitiveFieldComponent = (function (_super) {
         if (this.value !== this.schema.default) {
             this.lastCommitedValue = this.value;
         }
-        this.errorsService
-            .internalCategorizedErrors$
+        this.problemsService
+            .internalCategorizedProblems$
             .takeUntil(this.isDestroyed)
             .subscribe(function (internalCategorizedErrorMap) {
             _this.internalErrors = internalCategorizedErrorMap.errors[_this.pathString] || [];
@@ -2745,7 +2739,7 @@ var PrimitiveFieldComponent = (function (_super) {
     PrimitiveFieldComponent.prototype.ngOnDestroy = function () {
         _super.prototype.ngOnDestroy.call(this);
         if (this.internalErrors.length > 0) {
-            this.errorsService.extendInternalErrors(this.pathString, []);
+            this.problemsService.setInternalProblemsForPath(this.pathString, []);
         }
     };
     PrimitiveFieldComponent.prototype.commitValueChange = function () {
@@ -2819,7 +2813,7 @@ var PrimitiveFieldComponent = (function (_super) {
         // don't validate if value is empty
         if (this.value) {
             this.internalErrors = this.schemaValidationService.validateValue(this.value, this.schema);
-            this.errorsService.extendInternalErrors(this.pathString, this.internalErrors);
+            this.problemsService.setInternalProblemsForPath(this.pathString, this.internalErrors);
         }
     };
     return PrimitiveFieldComponent;
@@ -2839,10 +2833,10 @@ PrimitiveFieldComponent.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["s" /* SchemaValidationService */], },
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["b" /* ComponentTypeService */], },
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["a" /* AppGlobalsService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["e" /* ErrorsService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["h" /* JsonStoreService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["k" /* KeysStoreService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["n" /* PathUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["n" /* ProblemsService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["g" /* JsonStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["j" /* KeysStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["m" /* PathUtilService */], },
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["c" /* DomUtilService */], },
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["k" /* ChangeDetectorRef */], },
 ]; };
@@ -2910,10 +2904,10 @@ var __extends = (this && this.__extends) || (function () {
 
 var PrimitiveListFieldComponent = (function (_super) {
     __extends(PrimitiveListFieldComponent, _super);
-    function PrimitiveListFieldComponent(appGlobalsService, errorsService, jsonStoreService, pathUtilService, changeDetectorRef) {
-        var _this = _super.call(this, appGlobalsService, errorsService, jsonStoreService, pathUtilService, changeDetectorRef) || this;
+    function PrimitiveListFieldComponent(appGlobalsService, problemsService, jsonStoreService, pathUtilService, changeDetectorRef) {
+        var _this = _super.call(this, appGlobalsService, problemsService, jsonStoreService, pathUtilService, changeDetectorRef) || this;
         _this.appGlobalsService = appGlobalsService;
-        _this.errorsService = errorsService;
+        _this.problemsService = problemsService;
         _this.jsonStoreService = jsonStoreService;
         _this.pathUtilService = pathUtilService;
         _this.changeDetectorRef = changeDetectorRef;
@@ -2933,9 +2927,9 @@ PrimitiveListFieldComponent.decorators = [
 /** @nocollapse */
 PrimitiveListFieldComponent.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["a" /* AppGlobalsService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["e" /* ErrorsService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["h" /* JsonStoreService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["n" /* PathUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["n" /* ProblemsService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["g" /* JsonStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["m" /* PathUtilService */], },
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["k" /* ChangeDetectorRef */], },
 ]; };
 PrimitiveListFieldComponent.propDecorators = {
@@ -3115,7 +3109,7 @@ RefFieldComponent.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */], },
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["k" /* ChangeDetectorRef */], },
     { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["a" /* AppGlobalsService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["n" /* PathUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_3__shared_services__["m" /* PathUtilService */], },
 ]; };
 RefFieldComponent.propDecorators = {
     'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
@@ -3134,15 +3128,18 @@ RefFieldComponent.propDecorators = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_add_observable_of___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_rxjs_add_observable_of__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_catch__ = __webpack_require__("../../../../rxjs/add/operator/catch.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_catch__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_filter__ = __webpack_require__("../../../../rxjs/add/operator/filter.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_filter___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_filter__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/add/operator/map.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_skipWhile__ = __webpack_require__("../../../../rxjs/add/operator/skipWhile.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_skipWhile___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_skipWhile__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_takeUntil__ = __webpack_require__("../../../../rxjs/add/operator/takeUntil.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_takeUntil___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_takeUntil__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_distinctUntilChanged__ = __webpack_require__("../../../../rxjs/add/operator/distinctUntilChanged.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_distinctUntilChanged___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_distinctUntilChanged__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_filter__ = __webpack_require__("../../../../rxjs/add/operator/filter.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_filter___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_filter__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/add/operator/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_skipWhile__ = __webpack_require__("../../../../rxjs/add/operator/skipWhile.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_skipWhile___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_skipWhile__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_takeUntil__ = __webpack_require__("../../../../rxjs/add/operator/takeUntil.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_takeUntil___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_takeUntil__);
 // All rxjs operators used in the codebase
+
 
 
 
@@ -3963,7 +3960,7 @@ LastPathElementPipe.decorators = [
 ];
 /** @nocollapse */
 LastPathElementPipe.ctorParameters = function () { return [
-    { type: __WEBPACK_IMPORTED_MODULE_1__services__["n" /* PathUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__services__["m" /* PathUtilService */], },
 ]; };
 
 
@@ -4137,7 +4134,7 @@ SetFirstElementPathPipe.decorators = [
 /** @nocollapse */
 SetFirstElementPathPipe.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_1__services__["a" /* AppGlobalsService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_1__services__["n" /* PathUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__services__["m" /* PathUtilService */], },
 ]; };
 
 
@@ -4733,111 +4730,6 @@ EmptyValueService.ctorParameters = function () { return []; };
 
 /***/ }),
 
-/***/ "../../../../../dist/src/shared/services/errors.service.js":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ErrorsService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__ = __webpack_require__("../../../../rxjs/ReplaySubject.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__);
-/*
- * This file is part of ng2-json-editor.
- * Copyright (C) 2017 CERN.
- *
- * ng2-json-editor is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of the
- * License, or (at your option) any later version.
- *
- * ng2-json-editor is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
- * In applying this license, CERN does not
- * waive the privileges and immunities granted to it by virtue of its status
- * as an Intergovernmental Organization or submit itself to any jurisdiction.
- */
-
-
-var ErrorsService = (function () {
-    function ErrorsService() {
-        this.externalCategorizedErrors$ = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
-        this.internalCategorizedErrors$ = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
-        this.externalErrorCounters$ = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
-        this.internalErrorCounters$ = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
-        this.internalErrorMap = {};
-        this.internalCategorizedErrorMap = { errors: {}, warnings: {} };
-        this.externalCategorizedErrorMap = { errors: {}, warnings: {} };
-    }
-    Object.defineProperty(ErrorsService.prototype, "externalErrors", {
-        set: function (errors) {
-            var _a = this.categorizeErrorMap(errors), categorizedErrorMap = _a.categorizedErrorMap, errorCounter = _a.errorCounter, warningCounter = _a.warningCounter;
-            this.externalCategorizedErrorMap = categorizedErrorMap;
-            this.externalCategorizedErrors$.next(this.externalCategorizedErrorMap);
-            this.externalErrorCounters$.next({
-                errors: errorCounter,
-                warnings: warningCounter
-            });
-        },
-        enumerable: true,
-        configurable: true
-    });
-    ErrorsService.prototype.extendInternalErrors = function (path, errors) {
-        this.internalErrorMap[path] = errors;
-        var _a = this.categorizeErrorMap(this.internalErrorMap), categorizedErrorMap = _a.categorizedErrorMap, errorCounter = _a.errorCounter, warningCounter = _a.warningCounter;
-        this.internalCategorizedErrorMap = categorizedErrorMap;
-        this.internalCategorizedErrors$.next(this.internalCategorizedErrorMap);
-        this.internalErrorCounters$.next({
-            errors: errorCounter,
-            warnings: warningCounter
-        });
-    };
-    ErrorsService.prototype.hasError = function (path) {
-        var internalErrors = this.internalCategorizedErrorMap.errors[path];
-        var externalErrors = this.externalCategorizedErrorMap.errors[path];
-        var internalErrorCount = internalErrors ? internalErrors.length : 0;
-        var externalErrorCount = externalErrors ? externalErrors.length : 0;
-        return (internalErrorCount + externalErrorCount) > 0;
-    };
-    ErrorsService.prototype.categorizeErrorMap = function (errorMap) {
-        var categorizedErrorMap = { errors: {}, warnings: {} };
-        var errorCounter = 0;
-        var warningCounter = 0;
-        Object.keys(errorMap)
-            .forEach(function (key) {
-            var validationErrors = errorMap[key];
-            validationErrors.forEach(function (error) {
-                if (error.type === 'Error') {
-                    categorizedErrorMap.errors[key] ? categorizedErrorMap.errors[key].push(error)
-                        : categorizedErrorMap.errors[key] = [error];
-                    errorCounter++;
-                }
-                else {
-                    categorizedErrorMap.warnings[key] ? categorizedErrorMap.warnings[key].push(error)
-                        : categorizedErrorMap.warnings[key] = [error];
-                    warningCounter++;
-                }
-            });
-        });
-        return { categorizedErrorMap: categorizedErrorMap, errorCounter: errorCounter, warningCounter: warningCounter };
-    };
-    return ErrorsService;
-}());
-
-ErrorsService.decorators = [
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */] },
-];
-/** @nocollapse */
-ErrorsService.ctorParameters = function () { return []; };
-
-
-/***/ }),
-
 /***/ "../../../../../dist/src/shared/services/find-replace-all.service.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -4941,7 +4833,7 @@ FindReplaceAllService.ctorParameters = function () { return []; };
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__shortcut_action_service__ = __webpack_require__("../../../../../dist/src/shared/services/shortcut-action.service.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__window_href_service__ = __webpack_require__("../../../../../dist/src/shared/services/window-href.service.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__tabs_util_service__ = __webpack_require__("../../../../../dist/src/shared/services/tabs-util.service.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__errors_service__ = __webpack_require__("../../../../../dist/src/shared/services/errors.service.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__problems_service__ = __webpack_require__("../../../../../dist/src/shared/services/problems.service.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__katex_service__ = __webpack_require__("../../../../../dist/src/shared/services/katex.service.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__text_diff_service__ = __webpack_require__("../../../../../dist/src/shared/services/text-diff.service.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__list_page_changer_service__ = __webpack_require__("../../../../../dist/src/shared/services/list-page-changer.service.js");
@@ -4950,23 +4842,23 @@ FindReplaceAllService.ctorParameters = function () { return []; };
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_2__component_type_service__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_3__dom_util_service__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_4__empty_value_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_5__find_replace_all_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return __WEBPACK_IMPORTED_MODULE_6__json_store_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return __WEBPACK_IMPORTED_MODULE_7__json_util_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_8__json_schema_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return __WEBPACK_IMPORTED_MODULE_9__keys_store_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return __WEBPACK_IMPORTED_MODULE_10__path_util_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return __WEBPACK_IMPORTED_MODULE_11__modal_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_5__find_replace_all_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_6__json_store_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return __WEBPACK_IMPORTED_MODULE_7__json_util_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_8__json_schema_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return __WEBPACK_IMPORTED_MODULE_9__keys_store_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return __WEBPACK_IMPORTED_MODULE_10__path_util_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return __WEBPACK_IMPORTED_MODULE_11__modal_service__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return __WEBPACK_IMPORTED_MODULE_12__record_fixer_service__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return __WEBPACK_IMPORTED_MODULE_13__schema_fixer_service__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return __WEBPACK_IMPORTED_MODULE_14__schema_validation_service__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return __WEBPACK_IMPORTED_MODULE_15__shortcut_action_service__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "w", function() { return __WEBPACK_IMPORTED_MODULE_16__window_href_service__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return __WEBPACK_IMPORTED_MODULE_17__tabs_util_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_18__errors_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return __WEBPACK_IMPORTED_MODULE_19__katex_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return __WEBPACK_IMPORTED_MODULE_18__problems_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return __WEBPACK_IMPORTED_MODULE_19__katex_service__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return __WEBPACK_IMPORTED_MODULE_20__text_diff_service__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return __WEBPACK_IMPORTED_MODULE_21__list_page_changer_service__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return __WEBPACK_IMPORTED_MODULE_21__list_page_changer_service__["a"]; });
 
 
 
@@ -5009,7 +4901,7 @@ var SHARED_SERVICES = [
     __WEBPACK_IMPORTED_MODULE_15__shortcut_action_service__["a" /* ShortcutActionService */],
     __WEBPACK_IMPORTED_MODULE_16__window_href_service__["a" /* WindowHrefService */],
     __WEBPACK_IMPORTED_MODULE_17__tabs_util_service__["a" /* TabsUtilService */],
-    __WEBPACK_IMPORTED_MODULE_18__errors_service__["a" /* ErrorsService */],
+    __WEBPACK_IMPORTED_MODULE_18__problems_service__["a" /* ProblemsService */],
     __WEBPACK_IMPORTED_MODULE_19__katex_service__["a" /* KatexService */],
     __WEBPACK_IMPORTED_MODULE_20__text_diff_service__["a" /* TextDiffService */],
     __WEBPACK_IMPORTED_MODULE_21__list_page_changer_service__["a" /* ListPageChangerService */]
@@ -6087,6 +5979,143 @@ PathUtilService.decorators = [
 ];
 /** @nocollapse */
 PathUtilService.ctorParameters = function () { return []; };
+
+
+/***/ }),
+
+/***/ "../../../../../dist/src/shared/services/problems.service.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProblemsService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__ = __webpack_require__("../../../../rxjs/ReplaySubject.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_observable_combineLatest__ = __webpack_require__("../../../../rxjs/observable/combineLatest.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_observable_combineLatest___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_observable_combineLatest__);
+/*
+ * This file is part of ng2-json-editor.
+ * Copyright (C) 2017 CERN.
+ *
+ * ng2-json-editor is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * ng2-json-editor is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with ng2-json-editor; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ * In applying this license, CERN does not
+ * waive the privileges and immunities granted to it by virtue of its status
+ * as an Intergovernmental Organization or submit itself to any jurisdiction.
+ */
+
+
+
+var ProblemsService = (function () {
+    function ProblemsService() {
+        this.externalCategorizedProblems$ = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
+        this.internalCategorizedProblems$ = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
+        this.externalProblemCount$ = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
+        this.internalProblemCount$ = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
+        this.errorCount$ = this.getTotalDistinctProblemCount$ForType('errors');
+        this.warningCount$ = this.getTotalDistinctProblemCount$ForType('warnings');
+        this.internalProblemMap$ = new __WEBPACK_IMPORTED_MODULE_1_rxjs_ReplaySubject__["ReplaySubject"](1);
+        this.internalProblemMap = {};
+        this.internalCategorizedProblemMap = { errors: {}, warnings: {} };
+        this.externalCategorizedProblemMap = { errors: {}, warnings: {} };
+        this.externalProblemCount = { errors: 0, warnings: 0 };
+        this.internalProblemCount = { errors: 0, warnings: 0 };
+        // set default counts to components
+        this.externalProblemCount$.next(this.externalProblemCount);
+        this.internalProblemCount$.next(this.internalProblemCount);
+    }
+    ProblemsService.prototype.getTotalDistinctProblemCount$ForType = function (type) {
+        var external$ = this.externalProblemCount$
+            .map(function (counts) { return counts[type]; });
+        var internal$ = this.internalProblemCount$
+            .map(function (counts) { return counts[type]; });
+        return Object(__WEBPACK_IMPORTED_MODULE_2_rxjs_observable_combineLatest__["combineLatest"])(external$, internal$, function (external, internal) { return external + internal; })
+            .distinctUntilChanged();
+    };
+    Object.defineProperty(ProblemsService.prototype, "externalProblems", {
+        set: function (problems) {
+            var _a = this.categorizeProblemMap(problems), categorizedProblemMap = _a.categorizedProblemMap, errorCount = _a.errorCount, warningCount = _a.warningCount;
+            this.externalProblemCount = { errors: errorCount, warnings: warningCount };
+            this.externalProblemCount$.next(this.externalProblemCount);
+            this.externalCategorizedProblemMap = categorizedProblemMap;
+            this.externalCategorizedProblems$.next(this.externalCategorizedProblemMap);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ProblemsService.prototype.setInternalProblemsForPath = function (path, problems) {
+        this.internalProblemMap[path] = problems;
+        this.internalProblemMap$.next(this.internalProblemMap);
+        var categorizedProblems = this.categorizeValidationProblems(problems);
+        this.internalProblemCount.errors += categorizedProblems.errors.length - this.internalProblemCountForPath(path, 'errors');
+        this.internalProblemCount.warnings += categorizedProblems.warnings.length - this.internalProblemCountForPath(path, 'warnings');
+        this.internalProblemCount$.next(this.internalProblemCount);
+        this.internalCategorizedProblemMap.errors[path] = categorizedProblems.errors;
+        this.internalCategorizedProblemMap.warnings[path] = categorizedProblems.warnings;
+        this.internalCategorizedProblems$.next(this.internalCategorizedProblemMap);
+    };
+    ProblemsService.prototype.internalProblemCountForPath = function (path, type) {
+        if (this.internalCategorizedProblemMap[type][path]) {
+            return this.internalCategorizedProblemMap[type][path].length;
+        }
+        return 0;
+    };
+    ProblemsService.prototype.hasProblem = function (path) {
+        var internalProblems = this.internalCategorizedProblemMap.errors[path];
+        var externalProblems = this.externalCategorizedProblemMap.errors[path];
+        var internalProblemCount = internalProblems ? internalProblems.length : 0;
+        var externalProblemCount = externalProblems ? externalProblems.length : 0;
+        return (internalProblemCount + externalProblemCount) > 0;
+    };
+    ProblemsService.prototype.categorizeProblemMap = function (problemMap) {
+        var _this = this;
+        var categorizedProblemMap = { errors: {}, warnings: {} };
+        var errorCount = 0;
+        var warningCount = 0;
+        Object.keys(problemMap)
+            .map(function (path) {
+            var validationProblems = problemMap[path];
+            var categorized = _this.categorizeValidationProblems(validationProblems);
+            return { path: path, categorized: categorized };
+        }).forEach(function (problemsForPath) {
+            categorizedProblemMap.errors[problemsForPath.path] = problemsForPath.categorized.errors;
+            categorizedProblemMap.warnings[problemsForPath.path] = problemsForPath.categorized.warnings;
+            errorCount += problemsForPath.categorized.errors.length;
+            warningCount += problemsForPath.categorized.warnings.length;
+        });
+        return { categorizedProblemMap: categorizedProblemMap, errorCount: errorCount, warningCount: warningCount };
+    };
+    ProblemsService.prototype.categorizeValidationProblems = function (validationProblems) {
+        var categorized = { errors: [], warnings: [] };
+        validationProblems.forEach(function (error) {
+            if (error.type === 'Error') {
+                categorized.errors.push(error);
+            }
+            else {
+                categorized.warnings.push(error);
+            }
+        });
+        return categorized;
+    };
+    return ProblemsService;
+}());
+
+ProblemsService.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */] },
+];
+/** @nocollapse */
+ProblemsService.ctorParameters = function () { return []; };
 
 
 /***/ }),
@@ -7227,7 +7256,7 @@ StringInputComponent.decorators = [
 /** @nocollapse */
 StringInputComponent.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["c" /* DomUtilService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["j" /* KatexService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["i" /* KatexService */], },
 ]; };
 StringInputComponent.propDecorators = {
     'latexPreviewEl': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* ViewChild */], args: ['latexPreview',] },],
@@ -7349,10 +7378,10 @@ SubRecordComponent.decorators = [
 ];
 /** @nocollapse */
 SubRecordComponent.ctorParameters = function () { return [
-    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["h" /* JsonStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["g" /* JsonStoreService */], },
     { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["a" /* AppGlobalsService */], },
     { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["u" /* TabsUtilService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["k" /* KeysStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["j" /* KeysStoreService */], },
 ]; };
 SubRecordComponent.propDecorators = {
     'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
@@ -7420,10 +7449,10 @@ var __extends = (this && this.__extends) || (function () {
 
 var TableItemFieldComponent = (function (_super) {
     __extends(TableItemFieldComponent, _super);
-    function TableItemFieldComponent(appGlobalsService, errorsService, jsonStoreService, pathUtilService, changeDetectorRef) {
-        var _this = _super.call(this, appGlobalsService, errorsService, pathUtilService, changeDetectorRef, jsonStoreService) || this;
+    function TableItemFieldComponent(appGlobalsService, problemsService, jsonStoreService, pathUtilService, changeDetectorRef) {
+        var _this = _super.call(this, appGlobalsService, problemsService, pathUtilService, changeDetectorRef, jsonStoreService) || this;
         _this.appGlobalsService = appGlobalsService;
-        _this.errorsService = errorsService;
+        _this.problemsService = problemsService;
         _this.jsonStoreService = jsonStoreService;
         _this.pathUtilService = pathUtilService;
         _this.changeDetectorRef = changeDetectorRef;
@@ -7445,9 +7474,9 @@ TableItemFieldComponent.decorators = [
 /** @nocollapse */
 TableItemFieldComponent.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["a" /* AppGlobalsService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["e" /* ErrorsService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["h" /* JsonStoreService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["n" /* PathUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["n" /* ProblemsService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["g" /* JsonStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["m" /* PathUtilService */], },
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["k" /* ChangeDetectorRef */], },
 ]; };
 TableItemFieldComponent.propDecorators = {
@@ -7515,10 +7544,10 @@ var __extends = (this && this.__extends) || (function () {
 
 var TableListFieldComponent = (function (_super) {
     __extends(TableListFieldComponent, _super);
-    function TableListFieldComponent(appGlobalsService, errorsService, jsonStoreService, pathUtilService, keysStoreService, changeDetectorRef) {
-        var _this = _super.call(this, appGlobalsService, errorsService, jsonStoreService, pathUtilService, changeDetectorRef) || this;
+    function TableListFieldComponent(appGlobalsService, problemsService, jsonStoreService, pathUtilService, keysStoreService, changeDetectorRef) {
+        var _this = _super.call(this, appGlobalsService, problemsService, jsonStoreService, pathUtilService, changeDetectorRef) || this;
         _this.appGlobalsService = appGlobalsService;
-        _this.errorsService = errorsService;
+        _this.problemsService = problemsService;
         _this.jsonStoreService = jsonStoreService;
         _this.pathUtilService = pathUtilService;
         _this.keysStoreService = keysStoreService;
@@ -7546,10 +7575,10 @@ TableListFieldComponent.decorators = [
 /** @nocollapse */
 TableListFieldComponent.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["a" /* AppGlobalsService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["e" /* ErrorsService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["h" /* JsonStoreService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["n" /* PathUtilService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["k" /* KeysStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["n" /* ProblemsService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["g" /* JsonStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["m" /* PathUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["j" /* KeysStoreService */], },
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["k" /* ChangeDetectorRef */], },
 ]; };
 TableListFieldComponent.propDecorators = {
@@ -7820,7 +7849,7 @@ TreeMenuItemComponent.decorators = [
 TreeMenuItemComponent.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["w" /* WindowHrefService */], },
     { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["c" /* DomUtilService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["n" /* PathUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["m" /* PathUtilService */], },
     { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["a" /* AppGlobalsService */], },
 ]; };
 TreeMenuItemComponent.propDecorators = {
@@ -7903,7 +7932,7 @@ TreeMenuComponent.decorators = [
 /** @nocollapse */
 TreeMenuComponent.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["c" /* DomUtilService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["n" /* PathUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["m" /* PathUtilService */], },
     { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["a" /* AppGlobalsService */], },
 ]; };
 TreeMenuComponent.propDecorators = {
@@ -7934,7 +7963,7 @@ webpackEmptyAsyncContext.id = "../../../../../example/$$_gendir lazy recursive";
 /***/ "../../../../../example/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<ng-template let-item=\"item\" #referenceTemplate>\n  <div class=\"reference-template-container\" [ngSwitch]=\"item.hasIn(['record', '$ref'])\">\n    <span *ngSwitchCase=\"true\">\n      <i class=\"fa fa-check-circle success\" aria-hidden=\"true\"></i>\n      <a href=\"{{item.getIn(['record', '$ref'])}}\" target=\"_blank\">{{item.getIn(['reference', 'misc', 0])}}</a>\n    </span>\n    <span *ngSwitchDefault>\n      <i class=\"fa fa-exclamation-triangle warning\" aria-hidden=\"true\"></i>\n      {{item.getIn(['reference', 'misc', 0])}}\n    </span>\n  </div>\n</ng-template>\n<json-editor *ngIf=\"record && schema\"\n  [config]=\"config\"\n  [(record)]=\"record\"\n  [(jsonPatches)]=\"patches\"\n  [errorMap]=\"errorMap\"\n  [schema]=\"schema\"\n  [templates]=\"{referenceTemplate: referenceTemplate}\">\n</json-editor>"
+module.exports = "<ng-template let-item=\"item\" #referenceTemplate>\n  <div class=\"reference-template-container\" [ngSwitch]=\"item.hasIn(['record', '$ref'])\">\n    <span *ngSwitchCase=\"true\">\n      <i class=\"fa fa-check-circle success\" aria-hidden=\"true\"></i>\n      <a href=\"{{item.getIn(['record', '$ref'])}}\" target=\"_blank\">{{item.getIn(['reference', 'misc', 0])}}</a>\n    </span>\n    <span *ngSwitchDefault>\n      <i class=\"fa fa-exclamation-triangle warning\" aria-hidden=\"true\"></i>\n      {{item.getIn(['reference', 'misc', 0])}}\n    </span>\n  </div>\n</ng-template>\n<json-editor *ngIf=\"record && schema\"\n  [config]=\"config\"\n  [(record)]=\"record\"\n  [(jsonPatches)]=\"patches\"\n  [problemMap]=\"problemMap\"\n  [schema]=\"schema\"\n  [templates]=\"{referenceTemplate: referenceTemplate}\">\n</json-editor>"
 
 /***/ }),
 
@@ -8008,18 +8037,18 @@ var AppComponent = (function () {
         var _this = this;
         this.http = http;
         this.config = __WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].editorConfig;
-        __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].zip(this.http.get("./assets/" + __WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].mockDataFolder + "/record.json"), this.http.get("./assets/" + __WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].mockDataFolder + "/schema.json"), this.http.get("./assets/" + __WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].mockDataFolder + "/patches.json"), this.http.get("./assets/" + __WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].mockDataFolder + "/error-map.json"), function (recordRes, schemaRes, patchesRes, errorMapRes) {
+        __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__["Observable"].zip(this.http.get("./assets/" + __WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].mockDataFolder + "/record.json"), this.http.get("./assets/" + __WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].mockDataFolder + "/schema.json"), this.http.get("./assets/" + __WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].mockDataFolder + "/patches.json"), this.http.get("./assets/" + __WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].mockDataFolder + "/problem-map.json"), function (recordRes, schemaRes, patchesRes, problemMapRes) {
             return {
                 record: recordRes.json(),
                 schema: schemaRes.json(),
                 patches: patchesRes.json(),
-                errorMap: errorMapRes.json(),
+                problemMap: problemMapRes.json(),
             };
         }).subscribe(function (data) {
             _this.record = data.record;
             _this.schema = data.schema;
             _this.patches = data.patches;
-            _this.errorMap = data.errorMap;
+            _this.problemMap = data.problemMap;
         });
     }
     return AppComponent;
