@@ -25,7 +25,7 @@ import * as Ajv from 'ajv';
 import * as enableCustomErrorMessages from 'ajv-errors';
 
 import { AppGlobalsService } from './app-globals.service';
-import { JSONSchema, ValidationError } from '../interfaces';
+import { JSONSchema, ValidationProblem } from '../interfaces';
 
 @Injectable()
 export class SchemaValidationService {
@@ -93,7 +93,7 @@ export class SchemaValidationService {
    * Uses: ajv package for json-schema validation
    *
    */
-  validateValue(value: any, schema: JSONSchema): Array<ValidationError> {
+  validateValue(value: any, schema: JSONSchema): Array<ValidationProblem> {
     const validationErrors = [];
 
     if (!this.ajv.validate(schema, value)) {

@@ -3,7 +3,7 @@ import { LongListNavigatorConfig } from './long-list-navigator-config';
 import { ViewTemplateConfig } from './view-template-config';
 import { RefConfig } from './ref-config';
 import { OnValueChangeFunction } from './on-value-change-function';
-import { CustomErrorMessages } from './custom-error-messages';
+import { CustomValidationMessages } from './custom-validation-messages';
 
 export interface SchemaOption {
   /**
@@ -121,7 +121,7 @@ export interface SchemaOption {
   /**
    * Custom error messages for schema validation
    */
-  errorMessage?: string | CustomErrorMessages;
+  errorMessage?: string | CustomValidationMessages;
 
   /**
    * Names of templates to be put as extra custom items to title dropdown.

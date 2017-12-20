@@ -23,8 +23,8 @@
 import { OnInit, OnDestroy, ChangeDetectorRef, OnChanges, SimpleChanges } from '@angular/core';
 
 import { AbstractSubscriberComponent } from '../abstract-subscriber';
-import { AppGlobalsService, PathUtilService, JsonStoreService, ErrorsService } from '../shared/services';
-import { ValidationError, PathCache, JSONSchema, JsonPatch } from '../shared/interfaces';
+import { AppGlobalsService, PathUtilService, JsonStoreService, ProblemsService } from '../shared/services';
+import { ValidationProblem, PathCache, JSONSchema, JsonPatch } from '../shared/interfaces';
 
 /**
  * This is the base class for fields
@@ -41,14 +41,14 @@ export abstract class AbstractFieldComponent extends AbstractSubscriberComponent
 
   pathString: string;
   pathCache: PathCache = {};
-  externalErrors: Array<ValidationError> = [];
+  externalErrors: Array<ValidationProblem> = [];
   schema: JSONSchema;
   jsonPatches: Array<JsonPatch> = [];
   // used by some components to display remove patch in a different way.
   removeJsonPatch: JsonPatch;
 
   constructor(public appGlobalsService: AppGlobalsService,
-    public errorsService: ErrorsService,
+    public problemsService: ProblemsService,
     public pathUtilService: PathUtilService,
     public changeDetectorRef: ChangeDetectorRef,
     public jsonStoreService: JsonStoreService) {
@@ -56,10 +56,10 @@ export abstract class AbstractFieldComponent extends AbstractSubscriberComponent
   }
 
   ngOnInit() {
-    this.errorsService.externalCategorizedErrors$
+    this.problemsService.externalCategorizedProblems$
       .takeUntil(this.isDestroyed)
-      .subscribe(externalCategorizedErrorMap => {
-        this.externalErrors = externalCategorizedErrorMap.errors[this.pathString] || [];
+      .subscribe(externalCategorizedProblemMap => {
+        this.externalErrors = externalCategorizedProblemMap.errors[this.pathString] || [];
         this.changeDetectorRef.markForCheck();
       });
     this.jsonStoreService.patchesByPath$

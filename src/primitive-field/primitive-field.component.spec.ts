@@ -48,7 +48,7 @@ import {
   PathUtilService,
   DomUtilService,
   TabsUtilService,
-  ErrorsService,
+  ProblemsService,
   JsonSchemaService,
   TextDiffService,
   ListPageChangerService
@@ -108,7 +108,7 @@ describe('PrimitiveFieldComponent', () => {
         PathUtilService,
         DomUtilService,
         TabsUtilService,
-        ErrorsService,
+        ProblemsService,
         KatexService,
         KeysStoreService,
         JsonSchemaService,

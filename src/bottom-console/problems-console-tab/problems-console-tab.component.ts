@@ -27,68 +27,63 @@ import {
   OnInit,
   ChangeDetectorRef
 } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 import { AbstractSubscriberComponent } from '../../abstract-subscriber';
-import { DomUtilService, PathUtilService, ErrorsService } from '../../shared/services';
-import { SchemaValidationErrors } from '../../shared/interfaces';
+import { DomUtilService, PathUtilService, ProblemsService } from '../../shared/services';
+import { SchemaValidationProblems, ProblemCollectionType } from '../../shared/interfaces';
 
 @Component({
-  selector: 'errors-console-tab',
+  selector: 'problems-console-tab',
   styleUrls: [
     '../abstract-console-tab/abstract-console-tab.component.scss',
-    './errors-console-tab.component.scss'
+    './problems-console-tab.component.scss'
   ],
-  templateUrl: './errors-console-tab.component.html',
+  templateUrl: './problems-console-tab.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ErrorsConsoleTabComponent extends AbstractSubscriberComponent implements OnInit {
+export class ProblemsConsoleTabComponent extends AbstractSubscriberComponent implements OnInit {
 
-  @Input() errorType: 'errors' | 'warnings';
+  @Input() problemType: ProblemCollectionType;
 
-  internalErrorMap: SchemaValidationErrors;
-  externalErrorMap: SchemaValidationErrors;
-  externalErrorCount = 0;
-  internalErrorCount = 0;
+  internalProblemMap: SchemaValidationProblems;
+  externalProblemMap: SchemaValidationProblems;
+  problemCount = 0;
   iconClassName: string;
 
   constructor(public domUtilService: DomUtilService,
     public pathUtilService: PathUtilService,
-    public errorsService: ErrorsService,
+    public problemsService: ProblemsService,
     public changeDetectorRef: ChangeDetectorRef) {
     super();
   }
 
   ngOnInit() {
-    this.errorsService.externalCategorizedErrors$
-      .map(categorizedErrorMap => categorizedErrorMap[this.errorType])
+    this.problemsService.externalCategorizedProblems$
+      .map(categorizedProblemMap => categorizedProblemMap[this.problemType])
       .takeUntil(this.isDestroyed)
-      .subscribe(errorMap => {
-        this.externalErrorMap = errorMap;
+      .subscribe(problemMap => {
+        this.externalProblemMap = problemMap;
         this.changeDetectorRef.markForCheck();
       });
-    this.errorsService.externalErrorCounters$
-      .map(errorCounters => errorCounters[this.errorType])
+    this.problemsService.internalCategorizedProblems$
+      .map(categorizedProblemMap => categorizedProblemMap[this.problemType])
       .takeUntil(this.isDestroyed)
-      .subscribe(errorCount => {
-        this.externalErrorCount = errorCount;
-        this.changeDetectorRef.markForCheck();
-      });
-    this.errorsService.internalCategorizedErrors$
-      .map(categorizedErrorMap => categorizedErrorMap[this.errorType])
-      .takeUntil(this.isDestroyed)
-      .subscribe(errorMap => {
-        this.internalErrorMap = errorMap;
-        this.changeDetectorRef.markForCheck();
-      });
-    this.errorsService.internalErrorCounters$
-      .map(errorCounters => errorCounters[this.errorType])
-      .takeUntil(this.isDestroyed)
-      .subscribe(errorCount => {
-        this.internalErrorCount = errorCount;
+      .subscribe(problemMap => {
+        this.internalProblemMap = problemMap;
         this.changeDetectorRef.markForCheck();
       });
 
-    this.iconClassName = this.errorType === 'errors' ? 'fa fa-times' : 'fa fa-exclamation-triangle';
+    // TODO: create WarningsConsoleTabComponent with same template to avoid `if`
+
+    const problemCount$ = this.problemType === 'errors' ? this.problemsService.errorCount$ : this.problemsService.warningCount$;
+    problemCount$
+      .takeUntil(this.isDestroyed)
+      .subscribe(problemCount => {
+        this.problemCount = problemCount;
+      });
+
+    this.iconClassName = this.problemType === 'errors' ? 'fa fa-times' : 'fa fa-exclamation-triangle';
   }
 
   focusAndSelectPath(path: string) {

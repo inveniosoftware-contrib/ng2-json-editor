@@ -48,7 +48,7 @@ Then add it to your module's `imports`.
 - `recordChange: EventEmitter<object>` : emitted when record change, `$event` is the edited record.
 - `jsonPatches: Array<JsonPatch>` : array of json patches to be displayed as conflicts. See [json-patch RFC](https://tools.ietf.org/html/rfc6902)
 - `jsonPatchesChange: EventEmitter<Array<JsonPatch>>` : emitted when jsonPatches change, `$event` is the update array of json patches.
-- `errorMap (={})` : errors for individual parts of the record (format should be [errors-map.json](./example/assets/mock-data/error-map.json)
+- `problemMap (={})` : problems for individual parts of the record (format should be [problem-map.json](./example/assets/mock-data/problem-map.json)
 - `templates: { [templateName: string]: TemplateRef<any> }` : Templates with name, to be used by configured fields for example autocomplete result item.
 
 ## Example

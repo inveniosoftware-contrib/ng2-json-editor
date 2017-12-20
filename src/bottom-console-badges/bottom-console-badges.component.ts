@@ -23,7 +23,7 @@
 import { Component, Output, EventEmitter, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 
 import { AbstractSubscriberComponent } from '../abstract-subscriber';
-import { ErrorsService, JsonStoreService } from '../shared/services';
+import { ProblemsService, JsonStoreService } from '../shared/services';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -38,45 +38,42 @@ export class BottomConsoleBadgesComponent extends AbstractSubscriberComponent im
 
   @Output() badgeClick = new EventEmitter<string>();
 
-  globalErrorCount = 0;
-  internalErrorCount = 0;
-  globalWarningCount = 0;
-  internalWarningCount = 0;
+  errorCount = 0;
+  warningCount = 0;
   patchCount = 0;
-  externalErrorCounterSubscription: Subscription;
-  internalErrorCounterSubscription: Subscription;
-  patchCounterSubscription: Subscription;
 
-  constructor(private errorsService: ErrorsService,
+  constructor(private problemsService: ProblemsService,
     private changeDetectorRef: ChangeDetectorRef,
     private jsonStoreService: JsonStoreService) {
     super();
   }
 
   ngOnInit() {
-    this.externalErrorCounterSubscription = this.errorsService.externalErrorCounters$
+    this.problemsService.errorCount$
       .takeUntil(this.isDestroyed)
-      .subscribe(errorCounters => {
-        this.globalErrorCount = errorCounters.errors;
-        this.globalWarningCount = errorCounters.warnings;
-        this.changeDetectorRef.markForCheck();
+      .subscribe(count => {
+        this.errorCount = count;
+        // FIXME: use markForCheck() instead
+        // markForCheck() wasn't working for mysterious reasons for initial update
+        this.changeDetectorRef.detectChanges();
       });
-    this.internalErrorCounterSubscription = this.errorsService.internalErrorCounters$
+    this.problemsService.warningCount$
       .takeUntil(this.isDestroyed)
-      .subscribe(errorCounters => {
-        this.internalErrorCount = errorCounters.errors;
-        this.internalWarningCount = errorCounters.warnings;
-        this.changeDetectorRef.markForCheck();
+      .subscribe(count => {
+        this.warningCount = count;
+        // FIXME: use markForCheck() instead
+        // markForCheck() wasn't working for mysterious reasons for initial update
+        this.changeDetectorRef.detectChanges();
       });
-    this.patchCounterSubscription = this.jsonStoreService.patchesByPath$
+    this.jsonStoreService.patchesByPath$
       .map(patchesByPath => {
         return Object.keys(patchesByPath)
           .map(path => patchesByPath[path].length)
           .reduce((sum, patchCountPerPath) => sum + patchCountPerPath, 0);
       })
       .takeUntil(this.isDestroyed)
-      .subscribe(patchCounter => {
-        this.patchCount = patchCounter;
+      .subscribe(patchCount => {
+        this.patchCount = patchCount;
         this.changeDetectorRef.markForCheck();
       });
   }
@@ -84,11 +81,5 @@ export class BottomConsoleBadgesComponent extends AbstractSubscriberComponent im
   onBadgeClick(event: Event, badgeName: string) {
     event.preventDefault();
     this.badgeClick.emit(badgeName);
-  }
-
-  ngOnDestroy() {
-    this.externalErrorCounterSubscription.unsubscribe();
-    this.internalErrorCounterSubscription.unsubscribe();
-    this.patchCounterSubscription.unsubscribe();
   }
 }

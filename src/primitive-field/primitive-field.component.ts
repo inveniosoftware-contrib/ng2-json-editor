@@ -33,7 +33,7 @@ import {
 import { AbstractFieldComponent } from '../abstract-field';
 import {
   AppGlobalsService,
-  ErrorsService,
+  ProblemsService,
   ComponentTypeService,
   JsonStoreService,
   KeysStoreService,
@@ -43,7 +43,7 @@ import {
 } from '../shared/services';
 import { JSONSchema, JsonPatch } from '../shared/interfaces';
 import { Subscription } from 'rxjs/Subscription';
-import { ValidationError } from '../shared/interfaces';
+import { ValidationProblem } from '../shared/interfaces';
 
 @Component({
   selector: 'primitive-field',
@@ -60,19 +60,19 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   @Input() path: Array<any>;
   @Input() value: string | number | boolean;
 
-  internalErrors: Array<ValidationError> = [];
+  internalErrors: Array<ValidationProblem> = [];
   private lastCommitedValue: string | number | boolean;
 
   constructor(public schemaValidationService: SchemaValidationService,
     public componentTypeService: ComponentTypeService,
     public appGlobalsService: AppGlobalsService,
-    public errorsService: ErrorsService,
+    public problemsService: ProblemsService,
     public jsonStoreService: JsonStoreService,
     public keysStoreService: KeysStoreService,
     public pathUtilService: PathUtilService,
     public domUtilService: DomUtilService,
     public changeDetectorRef: ChangeDetectorRef) {
-    super(appGlobalsService, errorsService, pathUtilService, changeDetectorRef, jsonStoreService);
+    super(appGlobalsService, problemsService, pathUtilService, changeDetectorRef, jsonStoreService);
   }
 
   ngOnInit() {
@@ -81,8 +81,8 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     if (this.value !== this.schema.default) {
       this.lastCommitedValue = this.value;
     }
-    this.errorsService
-      .internalCategorizedErrors$
+    this.problemsService
+      .internalCategorizedProblems$
       .takeUntil(this.isDestroyed)
       .subscribe(internalCategorizedErrorMap => {
         this.internalErrors = internalCategorizedErrorMap.errors[this.pathString] || [];
@@ -99,7 +99,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   ngOnDestroy() {
     super.ngOnDestroy();
     if (this.internalErrors.length > 0) {
-      this.errorsService.extendInternalErrors(this.pathString, []);
+      this.problemsService.setInternalProblemsForPath(this.pathString, []);
     }
   }
 
@@ -168,7 +168,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
     // don't validate if value is empty
     if (this.value) {
       this.internalErrors = this.schemaValidationService.validateValue(this.value, this.schema);
-      this.errorsService.extendInternalErrors(this.pathString, this.internalErrors);
+      this.problemsService.setInternalProblemsForPath(this.pathString, this.internalErrors);
     }
   }
 

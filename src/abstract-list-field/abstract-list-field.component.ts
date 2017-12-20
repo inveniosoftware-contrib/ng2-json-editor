@@ -23,7 +23,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { List } from 'immutable';
 
 import { AbstractFieldComponent } from '../abstract-field';
-import { JsonStoreService, AppGlobalsService, PathUtilService, ErrorsService } from '../shared/services';
+import { JsonStoreService, AppGlobalsService, PathUtilService, ProblemsService } from '../shared/services';
 import { JSONSchema, JsonPatch } from '../shared/interfaces';
 
 /**
@@ -39,11 +39,11 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
   path: Array<any>;
 
   constructor(public appGlobalsService: AppGlobalsService,
-    public errorsService: ErrorsService,
+    public problemsService: ProblemsService,
     public jsonStoreService: JsonStoreService,
     public pathUtilService: PathUtilService,
     public changeDetectorRef: ChangeDetectorRef) {
-    super(appGlobalsService, errorsService, pathUtilService, changeDetectorRef, jsonStoreService);
+    super(appGlobalsService, problemsService, pathUtilService, changeDetectorRef, jsonStoreService);
   }
 
   /**

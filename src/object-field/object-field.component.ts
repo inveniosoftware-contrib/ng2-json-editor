@@ -26,7 +26,7 @@ import { Map, Set } from 'immutable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import { AbstractFieldComponent } from '../abstract-field';
-import { AppGlobalsService, JsonStoreService, PathUtilService, KeysStoreService, ErrorsService } from '../shared/services';
+import { AppGlobalsService, JsonStoreService, PathUtilService, KeysStoreService, ProblemsService } from '../shared/services';
 import { JSONSchema } from '../shared/interfaces';
 
 @Component({
@@ -44,13 +44,13 @@ export class ObjectFieldComponent extends AbstractFieldComponent {
   @Input() path: Array<any>;
 
   constructor(public appGlobalsService: AppGlobalsService,
-    public errorsService: ErrorsService,
+    public problemsService: ProblemsService,
     public jsonStoreService: JsonStoreService,
     public pathUtilService: PathUtilService,
     public changeDetectorRef: ChangeDetectorRef,
     public keysStoreService: KeysStoreService,
     ) {
-    super(appGlobalsService, errorsService, pathUtilService, changeDetectorRef, jsonStoreService);
+    super(appGlobalsService, problemsService, pathUtilService, changeDetectorRef, jsonStoreService);
   }
 
   get keys$(): ReplaySubject<Set<string>> {

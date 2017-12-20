@@ -39,7 +39,7 @@ import {
   DomUtilService,
   PathUtilService,
   ListPageChangerService,
-  ErrorsService
+  ProblemsService
 } from '../shared/services';
 import { LongListNavigatorConfig, JSONSchema, PaginatedItem } from '../shared/interfaces';
 
@@ -69,13 +69,13 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
   private _shouldDisplayOnlyEditFormItems = false;
 
   constructor(public appGlobalsService: AppGlobalsService,
-    public errorsService: ErrorsService,
+    public problemsService: ProblemsService,
     public jsonStoreService: JsonStoreService,
     public domUtilService: DomUtilService,
     public pathUtilService: PathUtilService,
     public changeDetectorRef: ChangeDetectorRef,
     public listPageChangerService: ListPageChangerService) {
-    super(appGlobalsService, errorsService, jsonStoreService, pathUtilService, changeDetectorRef);
+    super(appGlobalsService, problemsService, jsonStoreService, pathUtilService, changeDetectorRef);
   }
 
   ngOnInit() {
@@ -117,9 +117,9 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
     }
   }
 
-  hasErrorOrPatch(index: number) {
+  hasProblemOrPatch(index: number) {
     const itemPath = this.getPathStringForChild(index);
-    return this.errorsService.hasError(itemPath) || this.jsonStoreService.hasPatch(itemPath);
+    return this.problemsService.hasProblem(itemPath) || this.jsonStoreService.hasPatch(itemPath);
   }
 
   get headerItemTemplate(): TemplateRef<any> {

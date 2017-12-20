@@ -1,0 +1,16 @@
+<ng-template tabHeading>
+  <i [ngClass]="iconClassName"></i> {{problemType | titlecase}} <span class="badge">{{problemCount}}</span>
+</ng-template>
+
+<ul class="list-group">
+  <ng-container *ngFor="let key of internalProblemMap | keys">
+    <li *ngFor="let problem of internalProblemMap[key]" class="list-group-item" (click)="focusAndSelectPath(key)">
+      <i [ngClass]="iconClassName"></i> {{ problem.message }}
+    </li>
+  </ng-container>
+  <ng-container *ngFor="let key of externalProblemMap | keys">
+    <li *ngFor="let problem of externalProblemMap[key]" class="list-group-item" (click)="focusAndSelectPath(key)">
+      <i [ngClass]="iconClassName"></i> {{ problem.message }}
+    </li>
+  </ng-container>
+</ul>
