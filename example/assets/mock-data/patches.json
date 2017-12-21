@@ -1,6 +1,11 @@
 [
   {
     "op": "replace",
+    "path": "/number_of_pages",
+    "value": 115
+  },
+  {
+    "op": "replace",
     "path": "/abstracts/0/source",
     "value": "arXiv-PATCHED-Version"
   },

@@ -58,6 +58,6 @@
 </ng-template>
 
 <ng-template let-currentValue="currentValue" let-patchValue="patchValue" #mergePopover >
-  <text-diff [currentText]="currentValue" [newText]="patchValue"></text-diff>
+  <text-diff [currentText]="currentValue.toString()" [newText]="patchValue.toString()"></text-diff>
   <patch-actions [patch]="jsonPatches[0]" [addActionEnabled]="isPathToAnIndex"></patch-actions>
 </ng-template>
