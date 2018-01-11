@@ -24,6 +24,7 @@ export { KatexData } from './katex-data';
 export { JsonPatch } from './json-patch';
 export { CustomFormatValidation } from './custom-format-validation';
 export { JsonPatchesByPath } from './json-patches-by-path';
+export { JsonPatchesByOp } from './json-patches-by-op';
 export { ViewTemplateConfig } from './view-template-config';
 export { ShortcutActionFunction } from './shortcut-action-function';
 export { CustomValidationMessages } from './custom-validation-messages';

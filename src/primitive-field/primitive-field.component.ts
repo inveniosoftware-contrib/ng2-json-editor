@@ -157,7 +157,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   }
 
   get errorClass(): string {
-    return !this.jsonPatches[0] && this.hasErrors() ? 'error' : '';
+    return !this.replaceJsonPatches[0] && this.hasErrors() ? 'error' : '';
   }
 
   get isPathToAnIndex(): boolean {

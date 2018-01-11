@@ -24,7 +24,7 @@ import { OnInit, OnDestroy, ChangeDetectorRef, OnChanges, SimpleChanges } from '
 
 import { AbstractSubscriberComponent } from '../abstract-subscriber';
 import { AppGlobalsService, PathUtilService, JsonStoreService, ProblemsService } from '../shared/services';
-import { ValidationProblem, PathCache, JSONSchema, JsonPatch } from '../shared/interfaces';
+import { ValidationProblem, PathCache, JSONSchema, JsonPatch, JsonPatchesByOp } from '../shared/interfaces';
 
 /**
  * This is the base class for fields
@@ -43,9 +43,12 @@ export abstract class AbstractFieldComponent extends AbstractSubscriberComponent
   pathCache: PathCache = {};
   externalErrors: Array<ValidationProblem> = [];
   schema: JSONSchema;
-  jsonPatches: Array<JsonPatch> = [];
-  // used by some components to display remove patch in a different way.
+
+  // patches grouped by op because they different UI representation
+  replaceJsonPatches: Array<JsonPatch> = [];
+  addJsonPatches: Array<JsonPatch> = [];
   removeJsonPatch: JsonPatch;
+
 
   constructor(public appGlobalsService: AppGlobalsService,
     public problemsService: ProblemsService,
@@ -62,15 +65,34 @@ export abstract class AbstractFieldComponent extends AbstractSubscriberComponent
         this.externalErrors = externalCategorizedProblemMap.errors[this.pathString] || [];
         this.changeDetectorRef.markForCheck();
       });
+
     this.jsonStoreService.patchesByPath$
       .map(patchesByPath => patchesByPath[this.pathString])
+      .map(patches => this.groupJsonPatchesByOp(patches))
       .takeUntil(this.isDestroyed)
-      .subscribe(patches => {
-        this.jsonPatches = patches || [];
-        this.removeJsonPatch = this.jsonPatches
-          .find(patch => patch.op === 'remove');
+      .subscribe(patchesByOp => {
+        this.removeJsonPatch = patchesByOp.remove[0];
+        this.addJsonPatches = patchesByOp.add;
+        this.replaceJsonPatches = patchesByOp.replace;
         this.changeDetectorRef.markForCheck();
       });
+  }
+
+  private groupJsonPatchesByOp(patches: Array<JsonPatch>): JsonPatchesByOp {
+    const group: JsonPatchesByOp = {
+      add: [],
+      remove: [],
+      replace: []
+    };
+
+    if (patches) {
+      patches.forEach((patch) => {
+        const opPatches = group[patch.op];
+        opPatches.push(patch);
+      });
+    }
+
+    return group;
   }
 
   ngOnChanges(changes: SimpleChanges) {

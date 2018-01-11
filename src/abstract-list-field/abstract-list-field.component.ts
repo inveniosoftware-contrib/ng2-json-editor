@@ -66,10 +66,4 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
   getPathStringForChild(index: number): string {
     return `${this.pathString}${this.pathUtilService.separator}${index}`;
   }
-
-  get addJsonPatches(): Array<JsonPatch> {
-    return this.jsonPatches
-      .filter(patch => patch.op === 'add');
-  }
-
 }
