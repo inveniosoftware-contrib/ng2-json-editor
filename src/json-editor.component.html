@@ -1,17 +1,30 @@
-<div id="ng2-json-editor" class="row editor-container" [ngClass]="shorterEditorContainerClass">
-  <div *ngIf="!config.compact" class="col-md-2 menu-container">
+<div id="ng2-json-editor" class="editor-container" [ngClass]="shorterEditorContainerClass">
+  
+  <div  *ngIf="!config.compact" class="collapsed-menu-container">
+    <add-field-dropdown [fields]="keys$ | async" [pathString]="pathString" 
+    [schema]="fixedSchema" class="add-field-button">
+      <i class="fa fa-plus fa-lg" aria-hidden="true" tooltip="Add Field" placement="right"></i>
+    </add-field-dropdown>
+    <bottom-console-badges (badgeClick)="openBottomConsole($event)"></bottom-console-badges>
+    <span class="open-sidebar-container" (click)="isSidebarCollapsed = !isSidebarCollapsed">
+      <i class="fa fa-angle-right fa-4x" [ngClass]="!isSidebarCollapsed ? 'rotate' : ''"></i>
+    </span>
+  </div>
+
+  <div *ngIf="!config.compact" class="menu-container" [ngClass]="isSidebarCollapsed ? 'close' : 'open'">
     <tree-menu [record]="_record" [schema]="fixedSchema"></tree-menu>
-    <add-field-dropdown [fields]="keys$ | async" [pathString]="pathString" [schema]="fixedSchema">Add field</add-field-dropdown>
     <hr>
     <div *ngIf="config.enableAdminModeSwitch" class="admin-mode" tooltip="Allows editing all fields (use with care)">
       <input id="admin-mode-checkbox" type="checkbox" [(ngModel)]="appGlobalsService.adminMode" />
       <label class="admin-mode" for="admin-mode-checkbox">Enable Admin Mode</label>
     </div>
     <hr>
-    <bottom-console-badges (badgeClick)="openBottomConsole($event)"></bottom-console-badges>
   </div>
-  <div id="middle-main-container" class="middle main-container" [class.compact]="config.compact" [ngClass]="middleContainerColMdClass" [shortcuts]="customShortcutKeys">
-    <add-field-dropdown *ngIf="config.compact" [fields]="keys$ | async" [pathString]="pathString" [schema]="fixedSchema">Add field</add-field-dropdown>    
+
+  <div id="middle-main-container" class="middle main-container" [class.compact]="config.compact" [shortcuts]="customShortcutKeys"
+    [ngClass]="isPreviewerHidden ? 'maximizeEditor' : 'maximizeEditor'">
+    <add-field-dropdown *ngIf="config.compact" [fields]="keys$ | async" [pathString]="pathString" 
+    [schema]="fixedSchema">Add field</add-field-dropdown>
     <tabset *ngIf="config.tabsConfig">
       <tab *ngFor="let tabName of tabNames; trackBy:trackByElement" [heading]="tabName" (select)="activeTabName = tabName" [active]="isActiveTab(tabName)">
         <sub-record [value]="_record" [tabName]="tabName" [schema]="fixedSchema" [keys]="keys$ | async" [pathString]="pathString"></sub-record>
@@ -19,10 +32,12 @@
     </tabset>
     <sub-record *ngIf="!config.tabsConfig" [value]="_record" [schema]="fixedSchema" [keys]="keys$ | async" [pathString]="pathString"></sub-record>
   </div>
-  <div id="right-main-container" *ngIf="!isPreviewerDisabled" [ngClass]="rightContainerColMdClass" class="main-container">
+
+  <div id="right-main-container" *ngIf="!isPreviewerDisabled" class="main-container right" [ngClass]="isPreviewerHidden ? 'minimizePreview' : 'maximizePreview' ">
     <button id="btn-preview-toggle" type="button" class="btn btn-default btn-toggle" (click)="isPreviewerHidden = !isPreviewerHidden">{{isPreviewerHidden ? "Show Preview" : "Hide Preview"}}</button>
     <editor-previewer [hidden]="isPreviewerHidden" [previews]="previews"> </editor-previewer>
   </div>
+
 </div>
 
 <bottom-console *ngIf="!config.compact" [activeTab]="bottomConsoleActiveTab" [isOpen]="isBottomConsoleOpen" (onCollapse)="isBottomConsoleOpen = $event"></bottom-console>

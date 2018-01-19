@@ -1,68 +1,63 @@
-$error-color: #D14024;
-$light-error-color: lighten($error-color, 10%);
-$warning-color: #f1c40f;
-$light-warning-color: lighten($warning-color, 10%);
-$patch-color: #e67e22;
-$light-patch-color: lighten($patch-color, 10%);
-
+$error-color: #d14024;
+$warning-color: #fbd503;
+$patch-color: #f96509;
 
 .error {
-  color: $error-color;
-  .badge {
-    background-color: $error-color;
-
-    &:hover {
-      background-color: $light-error-color
+  span {
+    border: 2px solid $error-color;  
+    i {
+      color: $error-color;
+      padding-bottom: 2px;
     }
-  }
-
-  &:hover {
-    color: $light-error-color
   }
 }
 
 .warning {
-  color: $warning-color;
-  .badge {
-    background-color: $warning-color;
-
-    &:hover {
-      background-color: $light-warning-color
+  span {
+    border: 2px solid $warning-color;
+    i {
+      color: $warning-color;
     }
-  }
-
-  &:hover {
-    color: $light-warning-color
   }
 }
 
 .patch {
-  color: $patch-color;
-  .badge {
-    background-color: $patch-color;
-
-    &:hover {
-      background-color: $light-patch-color
+  span {
+    border: 2px solid $patch-color;
+    i {
+      color: $patch-color;
     }
-  }
-
-  &:hover {
-    color: $light-patch-color
   }
 }
 
 a {
   text-decoration: none;
-  &:hover {
-    cursor: pointer;
-  }
-  padding-right: 7px;
+  cursor: pointer;
   padding-top: 7px;
+  i {
+    transition: all 0.35s ease-in-out;
+    &:hover {
+      font-size: 1.10em;
+    } 
+  }
 }
 
 .badges-container {
   display: flex;
-
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  a {
+    display: flex;
+    width: 80%;
+    margin-top: 5px;
+    span {
+      display: flex;
+      align-items: center;
+      height: 30px;
+      border-radius: 20%;
+    }
+  }
 }
 
 @media screen and (max-width: 1440px) {

@@ -7,7 +7,7 @@
         </th>
         <th class="button-holder" [class.sortable]="schema.sortable">
           <add-field-dropdown *ngIf="values.size > 0" [fields]="keys$ | async" [pathString]="pathString" [schema]="schema.items" [isDisabled]="disabled">
-            <i class="fa fa-plus"></i>
+            <i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i>
           </add-field-dropdown>
         </th>
       </tr>
