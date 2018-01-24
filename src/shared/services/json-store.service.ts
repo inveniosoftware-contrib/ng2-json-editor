@@ -225,19 +225,15 @@ export class JsonStoreService {
 
   private getComponentPathForPatch(patch: JsonPatch): string {
     if (patch.op === 'add') {
-      return this.convertElementPathToParentArrayPath(patch.path);
+      // add patches handled by parent component
+      return this.getParentPath(patch.path);
     }
     return patch.path;
   }
 
-  private convertElementPathToParentArrayPath(path: string): string {
+  private getParentPath(path: string): string {
     const pathArray = this.pathUtilService.toPathArray(path);
-    const lastPathElement = pathArray[pathArray.length - 1];
-    if (lastPathElement === '-' || !isNaN(Number(lastPathElement))) {
-      pathArray.pop();
-      return this.pathUtilService.toPathString(pathArray);
-    } else {
-      return path;
-    }
+    const parentPathArray = pathArray.slice(0, -1);
+    return this.pathUtilService.toPathString(parentPathArray);
   }
 }

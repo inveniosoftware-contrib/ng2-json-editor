@@ -23,6 +23,16 @@
       <any-type-field [value]="value.get(key) | selfOrEmpty:schema.properties[key]" [schema]=schema.properties[key] [path]="getPathForChild(key)"></any-type-field>
     </td>
   </tr>
+  <!-- ADD PATCHES FOR CHILDREN -->
+  <tr *ngFor="let patch of addJsonPatches">
+    <td class="label-holder">
+      <title-dropdown [title]="patch.path | lastPathElement | underscoreToSpace" [isDisabled]="true"></title-dropdown>
+    </td>
+    <td>
+      <add-patch-view [patch]="patch"></add-patch-view>
+    </td>
+  </tr>
+  <!-- REMOVE PATCH FOR ITSELF -->
   <tr *ngIf="removeJsonPatch">
     <patch-actions [patch]="removeJsonPatch"></patch-actions>
   </tr>

@@ -16,6 +16,13 @@
   },
   {
     "op": "add",
+    "path": "/references/0/reference/publication_info",
+    "value": {
+      "journal_title": "Patch Title"
+    }
+  },
+  {
+    "op": "add",
     "path": "/references/1/reference/misc/-",
     "value": "Another misc"
   },
@@ -25,6 +32,11 @@
     "value": {
       "value": "New Collaboration"
     }
+  },
+  {
+    "op": "add",
+    "path": "/references/1/reference/texkey",
+    "value": "valuueee123"
   },
   {
     "op": "add",

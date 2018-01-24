@@ -1,4 +1,4 @@
-<div [id]="pathString">
+<div [id]="pathString" [ngClass]="redLeftBorderClass">
   <table class="primitive-field-container" [ngSwitch]="schema.componentType">
     <tr [ngClass]="errorClass">
       <ng-template #errorsTooltipTemplate>
@@ -11,7 +11,7 @@
           </li>
         </ul>
       </ng-template>
-      <td *ngIf="!jsonPatches[0]; else patchTemplate" class="value-container" [class.disabled]="disabled" [tooltip]="errorsTooltipTemplate"
+      <td *ngIf="!replaceJsonPatches[0]; else patchTemplate" class="value-container" [class.disabled]="disabled" [tooltip]="errorsTooltipTemplate"
         [isDisabled]="!hasErrors()" placement="{{tooltipPosition}}" container="body">
         <div *ngSwitchCase="'string'">
           <string-input [pathString]="pathString" [value]="value" (valueChange)="onValueChange($event)" [disabled]="disabled" [tabIndex]="tabIndex"
@@ -20,7 +20,8 @@
         </div>
         <div *ngSwitchCase="'enum'">
           <searchable-dropdown [pathString]="pathString" [value]="value" [placeholder]="schema.title" [items]="schema.enum" [shortcutMap]="schema.enumShorcutMap"
-            (onSelect)="onSearchableDropdownSelect($event)" [displayValueMap]="schema.enumDisplayValueMap" [tabIndex]="tabIndex" (onBlur)="onBlur()"></searchable-dropdown>
+            (onSelect)="onSearchableDropdownSelect($event)" [displayValueMap]="schema.enumDisplayValueMap" [tabIndex]="tabIndex"
+            (onBlur)="onBlur()"></searchable-dropdown>
         </div>
         <div *ngSwitchCase="'autocomplete'">
           <autocomplete-input [pathString]="pathString" [value]="value" [path]="path" [autocompletionConfig]="schema.autocompletionConfig"
@@ -47,17 +48,21 @@
         </a>
       </td>
     </tr>
+    <tr *ngIf="removeJsonPatch">
+      <patch-actions [patch]="removeJsonPatch"></patch-actions>
+    </tr>
   </table>
 </div>
 
 <ng-template #patchTemplate>
-  <button class="btn btn-default btn-merge orange-left-border" type="button" [popover]="mergePopover" [popoverContext]="{currentValue: value, patchValue: jsonPatches[0].value}"
+  <button class="btn btn-default btn-merge orange-left-border" type="button" [popover]="mergePopover" [popoverContext]="{currentValue: value, patchValue: replaceJsonPatches[0].value}"
     popoverTitle="Merge" container="body">
-    {{value}} <i class="fa fa-bolt"></i>
+    {{value}}
+    <i class="fa fa-bolt"></i>
   </button>
 </ng-template>
 
-<ng-template let-currentValue="currentValue" let-patchValue="patchValue" #mergePopover >
-  <text-diff [currentText]="currentValue.toString()" [newText]="patchValue.toString()"></text-diff>
-  <patch-actions [patch]="jsonPatches[0]" [addActionEnabled]="isPathToAnIndex"></patch-actions>
+<ng-template let-currentValue="currentValue" let-patchValue="patchValue" #mergePopover>
+  <text-diff [currentText]="currentValue.toString()" [newText]="patchValue ? patchValue.toString() : ''"></text-diff>
+  <patch-actions [patch]="replaceJsonPatches[0]" [addActionEnabled]="isPathToAnIndex"></patch-actions>
 </ng-template>
