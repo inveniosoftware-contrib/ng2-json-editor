@@ -118,6 +118,13 @@ gulp watch
 npm link ng2-json-editor
 ```
 
+### Debug e2e tests with vscode
+
+- `npm start`
+- Put breakpoints
+- Go to debug view (`shift+mod+d`)
+- Run debugger with `e2e` configuration (`f5`)
+
 ### Useful commands
 
 ```bash
