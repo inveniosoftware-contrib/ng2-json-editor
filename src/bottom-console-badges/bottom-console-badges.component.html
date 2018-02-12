@@ -1,11 +1,17 @@
 <div class="badges-container">
-  <a *ngIf="errorCount > 0" class="error" (click)="onBadgeClick($event, 'Errors')">
-        <span class="">Errors</span> <span class="badge">{{errorCount}}</span>
-    </a>
-  <a *ngIf="warningCount > 0" class="warning" (click)="onBadgeClick($event, 'Warnings')">
-        <span>Warnings</span> <span class="badge">{{warningCount}}</span>
+  <a *ngIf="errorCount > 0" class="error" (click)="onBadgeClick($event, 'Errors')" tooltip="{{errorCount}} error(s)" placement="right">
+    <span class="error fa-stack fa-lg">
+      <i class="fa fa-times fa-stack-1x fa-inverse"></i>
+    </span>
   </a>
-  <a *ngIf="patchCount > 0" class="patch" (click)="onBadgeClick($event, 'Patches')">
-    <span>Conflicts</span> <span class="badge">{{patchCount}}</span>
+  <a *ngIf="warningCount > 0" class="warning" (click)="onBadgeClick($event, 'Warnings')" tooltip="{{warningCount}} warning(s)" placement="right">
+    <span class="warning fa-stack fa-lg"> 
+      <i class="fa fa-exclamation fa-stack-1x fa-inverse"></i>
+    </span>
+  </a>
+  <a *ngIf="patchCount > 0" class="patch" (click)="onBadgeClick($event, 'Patches')" tooltip="{{patchCount}} conflicts(s)" placement="right">
+    <span class="patch fa-stack fa-lg">
+      <i class="fa fa-bolt fa-stack-1x fa-inverse"></i>
+    </span>
   </a>
 </div>

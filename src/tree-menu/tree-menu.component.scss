@@ -1,6 +1,5 @@
 div.tree-menu-container {
-  padding: 8px 0;
-  overflow-x: hidden;
+  padding: 8px 2px 0 0;
   overflow-y: auto;
   text-align: center;
 }
@@ -9,7 +8,7 @@ ul.menu-item-container {
 	list-style: none;
   text-align: left;
   padding-top: 8px;
-
+  padding-left: 0px;
   li {
     margin-bottom: 2px;
   }

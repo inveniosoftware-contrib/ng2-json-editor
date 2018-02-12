@@ -91,6 +91,7 @@ export class JsonEditorComponent extends AbstractSubscriberComponent implements 
   previews: Array<Preview>;
   isPreviewerHidden: boolean;
   isBottomConsoleOpen = false;
+  isSidebarCollapsed = true;
   bottomConsoleActiveTab = '';
   customShortcutKeys: CustomShortcutKeys;
   // altered schema enchanced with configs
@@ -253,20 +254,6 @@ export class JsonEditorComponent extends AbstractSubscriberComponent implements 
 
   get isPreviewerDisabled(): boolean {
     return this.config.previews === undefined || this.config.previews.length === 0;
-  }
-
-  get rightContainerColMdClass(): string {
-    return this.isPreviewerHidden ? 'col-md-1' : 'col-md-4';
-  }
-
-  get middleContainerColMdClass(): string {
-    if (this.config.compact) {
-      return 'col-md-12';
-    }
-    if (this.isPreviewerDisabled) {
-      return 'col-md-10';
-    }
-    return this.isPreviewerHidden ? 'col-md-9' : 'col-md-6';
   }
 
   set activeTabName(tabName: string) {
