@@ -31,10 +31,10 @@ $label-holder-background-color: #dae8ef;
 $label-holder-button-color: #595959;
 
 //widths for different panels
-$default-sidebar-width: 3.5%;
-$expanded-sidebar-width: 320px;
-$default-preview-width: 50%;
-$default-middle-container-width: 40.5%;
+$default-sidebar-width: 50px;
+$expanded-sidebar-width: 280px;
+$default-preview-width: 38%;
+$default-middle-container-width: 60%;
 
 @mixin top-level-add-field-dropdown-container {
   div.dropdown {
@@ -225,12 +225,13 @@ html, body {
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    
     .add-field-button {
       position: absolute;
       top: 0px;
-      margin-top: 10px;
+      margin-bottom: 25px;
       display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
       justify-content: center;
       width: 100%;
       cursor: pointer;
@@ -240,6 +241,7 @@ html, body {
         width: 100%;
         opacity: 1;
         background-color: transparent;
+        margin-top: 10px;
         &:hover, &:focus, &:active {
           outline: none;
         }
@@ -248,6 +250,24 @@ html, body {
           &:hover {
             color: white;
           }
+        }
+      }
+    }
+    
+    .preview-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      height: 30px;
+      border-radius: 20%;
+      border: 2px solid #ddd;
+      width: 60%;
+      .fa {
+        color: #ddd;
+        &:hover {
+          color: white;
         }
       }
     }
@@ -281,7 +301,7 @@ html, body {
   .middle.main-container {
     width: $default-middle-container-width;
     &.maximizeEditor {
-      width: 97%;
+      width: 100%;
     }
   }
 
@@ -514,12 +534,13 @@ html, body {
       background-color: $custom-active-color;
     }
   }
+
   @media all and (max-width: 800px) {
-    .collapsed-menu-container { flex: 1 0px; }
     .menu-container.open {flex: 3}
     .middle.main-container { flex: 9; }
-    .right.main-container { flex: 5; }
+    .right.main-container.maximizePreview { flex: 5; }
   }
+
 }
 
 .bottom-console-container {

@@ -33,16 +33,14 @@ describe('Preview panel', function() {
   });
 
   it(`should expand/collapse preview window`, () => {
-    const previewToggleButton = element(by.id('btn-preview-toggle'));
+    const previewToggleIcon = element(by.id('preview-toggle-icon'));
     const middleColumn = element(by.id('middle-main-container'));
     const rightColumn = element(by.id('right-main-container'));
-
-    expect(previewToggleButton.getText()).toEqual('Hide Preview');
 
     const middleColumnWidthBefore = middleColumn.getCssValue('width');
     const rightColumnWidthBefore = rightColumn.getCssValue('width');
 
-    previewToggleButton.click();
+    previewToggleIcon.click();
 
     const middleColumnWidthAfter = middleColumn.getCssValue('width');
     const rightColumnWidthAfter = rightColumn.getCssValue('width');
@@ -63,7 +61,6 @@ describe('Preview panel', function() {
       }
     );
 
-    expect(previewToggleButton.getText()).toEqual('Show Preview');
   });
 
 });

@@ -1,13 +1,16 @@
 <div id="ng2-json-editor" class="editor-container" [ngClass]="shorterEditorContainerClass">
   
   <div  *ngIf="!config.compact" class="collapsed-menu-container">
-    <add-field-dropdown [fields]="keys$ | async" [pathString]="pathString" 
-    [schema]="fixedSchema" class="add-field-button">
-      <i class="fa fa-plus fa-lg" aria-hidden="true" tooltip="Add Field" placement="right"></i>
-    </add-field-dropdown>
+      <add-field-dropdown [fields]="keys$ | async" [pathString]="pathString" 
+      [schema]="fixedSchema" class="add-field-button">
+        <i class="fa fa-plus fa-2x" tooltip="Add Field" placement="right"></i>
+      </add-field-dropdown>
+    <span id="preview-toggle-icon" tooltip="{{isPreviewerHidden ? 'Show Preview' : 'Hide Preview'}}" placement="right"class="preview-icon" (click)="isPreviewerHidden = !isPreviewerHidden">
+      <i class="fa fa-1x" [ngClass]="!isPreviewerHidden ? 'fa-eye-slash' : 'fa-eye'"></i>
+    </span>
     <bottom-console-badges (badgeClick)="openBottomConsole($event)"></bottom-console-badges>
     <span class="open-sidebar-container" (click)="isSidebarCollapsed = !isSidebarCollapsed">
-      <i class="fa fa-angle-right fa-4x" [ngClass]="!isSidebarCollapsed ? 'rotate' : ''"></i>
+      <i class="fa fa-angle-right fa-4x" [class.rotate]="!isSidebarCollapsed"></i>
     </span>
   </div>
 
@@ -21,8 +24,7 @@
     <hr>
   </div>
 
-  <div id="middle-main-container" class="middle main-container" [class.compact]="config.compact" [shortcuts]="customShortcutKeys"
-    [ngClass]="isPreviewerHidden ? 'maximizeEditor' : 'maximizeEditor'">
+  <div id="middle-main-container" class="middle main-container" [shortcuts]="customShortcutKeys" [ngClass]="{ 'maximizeEditor' : isPreviewerHidden, 'compact' : config.compact }">
     <add-field-dropdown *ngIf="config.compact" [fields]="keys$ | async" [pathString]="pathString" 
     [schema]="fixedSchema">Add field</add-field-dropdown>
     <tabset *ngIf="config.tabsConfig">
@@ -34,7 +36,6 @@
   </div>
 
   <div id="right-main-container" *ngIf="!isPreviewerDisabled" class="main-container right" [ngClass]="isPreviewerHidden ? 'minimizePreview' : 'maximizePreview' ">
-    <button id="btn-preview-toggle" type="button" class="btn btn-default btn-toggle" (click)="isPreviewerHidden = !isPreviewerHidden">{{isPreviewerHidden ? "Show Preview" : "Hide Preview"}}</button>
     <editor-previewer [hidden]="isPreviewerHidden" [previews]="previews"> </editor-previewer>
   </div>
 
