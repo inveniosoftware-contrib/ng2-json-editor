@@ -51,6 +51,10 @@ a {
     display: flex;
     width: 80%;
     margin-top: 5px;
+    &:first-of-type {
+      border-top: 2px solid #283948;
+      margin-top: 10px;
+    }
     span {
       display: flex;
       align-items: center;
