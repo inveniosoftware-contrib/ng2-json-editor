@@ -86,6 +86,7 @@ html, body {
   height:100%;
   overflow-y: hidden;
   background-color: #ecf0f1;
+  overflow-x: hidden;
 }
 
 .editor-container {
@@ -263,7 +264,7 @@ html, body {
       height: 30px;
       border-radius: 20%;
       border: 2px solid #ddd;
-      width: 60%;
+      width: 30px;
       .fa {
         color: #ddd;
         &:hover {
