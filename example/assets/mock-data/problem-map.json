@@ -1,4 +1,10 @@
-{
+{ 
+  "": [
+    {
+      "message": "Mock-Error 1 whole document",
+      "type": "Error"
+    }
+  ],
   "/abstracts/0/source": [
     {
       "message": "Mock-Error 1: /abstracts/0/value",
