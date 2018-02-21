@@ -2800,8 +2800,7 @@ var PrimitiveFieldComponent = (function (_super) {
         configurable: true
     });
     PrimitiveFieldComponent.prototype.validate = function () {
-        // don't validate if value is empty
-        if (this.value) {
+        if (this.value != null && this.value !== '' && this.externalErrors.length === 0) {
             this.internalErrors = this.schemaValidationService.validateValue(this.value, this.schema);
             this.problemsService.setInternalProblemsForPath(this.pathString, this.internalErrors);
         }
@@ -7010,7 +7009,7 @@ var TabsUtilService = (function () {
     };
     // TODO: maybe this could be a decorator
     TabsUtilService.prototype.selectTabIfNeeded = function (path) {
-        if (this.schemaKeyToTabName) {
+        if (this.schemaKeyToTabName && path !== '') {
             var tabName = this.schemaKeyToTabName[this.pathUtilService.toPathArray(path)[0]];
             this.activeTabName$.next(tabName);
         }
