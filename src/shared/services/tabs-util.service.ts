@@ -67,7 +67,7 @@ export class TabsUtilService {
 
   // TODO: maybe this could be a decorator
   selectTabIfNeeded(path: string) {
-    if (this.schemaKeyToTabName) {
+    if (this.schemaKeyToTabName && path !== '') {
       const tabName = this.schemaKeyToTabName[this.pathUtilService.toPathArray(path)[0]];
       this.activeTabName$.next(tabName);
     }
