@@ -165,8 +165,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   }
 
   private validate() {
-    // don't validate if value is empty
-    if (this.value) {
+    if (this.value != null && this.value !== '' && this.externalErrors.length === 0) {
       this.internalErrors = this.schemaValidationService.validateValue(this.value, this.schema);
       this.problemsService.setInternalProblemsForPath(this.pathString, this.internalErrors);
     }
