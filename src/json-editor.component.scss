@@ -33,8 +33,6 @@ $label-holder-button-color: #595959;
 //widths for different panels
 $default-sidebar-width: 50px;
 $expanded-sidebar-width: 280px;
-$default-preview-width: 38%;
-$default-middle-container-width: 60%;
 
 @mixin top-level-add-field-dropdown-container {
   div.dropdown {
@@ -84,8 +82,8 @@ $default-middle-container-width: 60%;
 
 html, body {
   height:100%;
-  overflow-y: hidden;
   background-color: #ecf0f1;
+  overflow-x: hidden;
 }
 
 .editor-container {
@@ -219,7 +217,7 @@ html, body {
   .collapsed-menu-container {
     position: relative;
     background-color: #1D2D3D;
-    width: $default-sidebar-width;
+    flex: 0 0 50px;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -263,7 +261,7 @@ html, body {
       height: 30px;
       border-radius: 20%;
       border: 2px solid #ddd;
-      width: 60%;
+      width: 30px;
       .fa {
         color: #ddd;
         &:hover {
@@ -299,16 +297,17 @@ html, body {
   }
 
   .middle.main-container {
-    width: $default-middle-container-width;
+    flex-basis: 60%;
     &.maximizeEditor {
-      width: 100%;
+      flex-grow: 2;
     }
   }
 
   .right.main-container {
-    width: $default-preview-width;
+    flex-basis: 40%;
+    flex-shrink: 0;
     &.minimizePreview {
-      width: 0%;
+      flex-basis: 0%;
     }
     .btn-toggle {
       position: fixed;
@@ -533,12 +532,6 @@ html, body {
     &.active {
       background-color: $custom-active-color;
     }
-  }
-
-  @media all and (max-width: 800px) {
-    .menu-container.open {flex: 3}
-    .middle.main-container { flex: 9; }
-    .right.main-container.maximizePreview { flex: 5; }
   }
 
 }
