@@ -8,6 +8,15 @@
   margin: 4px 0;
 }
 
+.add-field-dropdown-container {
+  width: initial !important;
+}
+
+.dropdown-menu {
+  left: initial;
+  right: 0;
+}
+
 // copy of .dropdown-menu > li > a since there is extra div in the template to *ngFor
 .dropdown-menu li > .dropdown-item {
   display: block;

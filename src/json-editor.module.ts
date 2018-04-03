@@ -70,7 +70,7 @@ import { SHARED_PIPES, SHARED_SERVICES, SHARED_DIRECTIVES } from './shared';
 import { BottomConsoleComponent, PatchesConsoleTabComponent, ProblemsConsoleTabComponent } from './bottom-console';
 import { TextDiffComponent } from './text-diff';
 import { PatchActionsComponent } from './patch-actions';
-import { AddPatchViewComponent } from './add-patch-view';
+import { AddOrReplacePatchComponent } from './add-or-replace-patch';
 
 @NgModule({
   declarations: [
@@ -106,7 +106,7 @@ import { AddPatchViewComponent } from './add-patch-view';
     PatchActionsComponent,
     PatchesConsoleTabComponent,
     ProblemsConsoleTabComponent,
-    AddPatchViewComponent
+    AddOrReplacePatchComponent
   ],
   exports: [JsonEditorComponent],
   imports: [
@@ -157,5 +157,5 @@ export {
   PatchActionsComponent,
   PatchesConsoleTabComponent,
   ProblemsConsoleTabComponent,
-  AddPatchViewComponent
+  AddOrReplacePatchComponent
 };

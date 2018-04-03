@@ -1,4 +1,4 @@
-<div class="patch-container green-left-border" [id]="patch.path" tabindex="-1">
+<div class="patch-container" [ngClass]="leftBorderClass" [id]="patch.path" tabindex="-1">
   <div class="grow">
     <ng-template [ngTemplateOutlet]="anyTypeTemplate" [ngTemplateOutletContext]="{value: patch.value}"></ng-template>
   </div>

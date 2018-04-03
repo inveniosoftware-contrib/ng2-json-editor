@@ -53,13 +53,10 @@
         </a>
       </span>
       <span *ngIf="item.isEditFormVisible || hasProblemOrPatch(item.index)">
-        <object-field [value]="values.get(item.index)" [schema]="schema.items" [path]="getPathForChild(item.index)">
+        <object-field [value]="values.get(item.index)" [schema]="schema.items" [path]="getPathForChild(item.index)" [isComplexListFieldItem]="true">
         </object-field>
         <div class="row element-button-container">
-          <div class="col-md-6 left">
-            <add-nested-field-dropdown [pathString]="pathString + '/' + item.index" [schema]="schema.items" [isDisabled]="disabled"></add-nested-field-dropdown>
-          </div>
-          <div class="col-md-6 right">
+          <div class="col-md-12 right">
             <list-action-group (onMove)="moveElement(item.index, $event)" (onDelete)="deleteElement(item.index)" [canMove]="sortable"
               [isDisabled]="disabled">
             </list-action-group>
@@ -70,7 +67,7 @@
   </div>
 
   <div *ngFor="let patch of addJsonPatches" class="complex-list-field-wrapper">
-    <add-patch-view [patch]="patch"></add-patch-view>
+    <add-or-replace-patch [patch]="patch"></add-or-replace-patch>
   </div>
   <div *ngIf="removeJsonPatch">
     <patch-actions [patch]="removeJsonPatch"></patch-actions>
