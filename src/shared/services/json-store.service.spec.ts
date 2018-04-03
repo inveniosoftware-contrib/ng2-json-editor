@@ -290,4 +290,91 @@ describe('JsonStoreService', () => {
     service.setIn(['aMap'], change);
     service.rollbackLastChange();
   });
+
+  it('shoul set json patches and group them by path', () => {
+    const patches = [
+      {
+        path: '/p/1',
+        op: 'replace',
+        value: 'value1'
+      },
+      {
+        path: '/p/1',
+        op: 'replace',
+        value: 'value2'
+      },
+      {
+        path: '/p/2',
+        op: 'remove'
+      }
+    ];
+    const expectedPatchesByPath = {
+      '/p/1': [
+        {
+          path: '/p/1',
+          op: 'replace',
+          value: 'value1'
+        },
+        {
+          path: '/p/1',
+          op: 'replace',
+          value: 'value2'
+        }
+      ],
+      '/p/2': [
+        {
+          path: '/p/2',
+          op: 'remove'
+        }
+      ]
+    };
+    service.patchesByPath$
+      .subscribe(patchesByPath => {
+        expect(patchesByPath).toEqual(expectedPatchesByPath);
+      });
+    service.setJsonPatches(patches);
+  });
+
+  it('shoul return true for parent if a child has a patch', () => {
+    const patches = [
+      {
+        path: '/parent/children/0',
+        op: 'replace',
+        value: 'child-value'
+      },
+      {
+        path: '/other/thing',
+        op: 'remove'
+      }
+    ];
+    service.setJsonPatches(patches);
+    expect(service.hasPatchOrChildrenHavePatch('/parent')).toBe(true);
+  });
+
+  it('shoul return true for parent if it has a patch', () => {
+    const patches = [
+      {
+        path: '/parent',
+        op: 'replace',
+        value: 'parent-value'
+      },
+      {
+        path: '/other/thing',
+        op: 'remove'
+      }
+    ];
+    service.setJsonPatches(patches);
+    expect(service.hasPatchOrChildrenHavePatch('/parent')).toBe(true);
+  });
+
+  it('shoul return false for parent if it or a child does not have a patch', () => {
+    const patches = [
+      {
+        path: '/other/thing',
+        op: 'remove'
+      }
+    ];
+    service.setJsonPatches(patches);
+    expect(service.hasPatchOrChildrenHavePatch('/parent')).toBe(false);
+  });
 });

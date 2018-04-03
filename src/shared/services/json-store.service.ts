@@ -207,6 +207,16 @@ export class JsonStoreService {
     return this.patchesByPath[path] && this.patchesByPath[path].length > 0;
   }
 
+  hasPatchOrChildrenHavePatch(path: string): boolean {
+    if (this.hasPatch(path)) {
+      return true;
+    }
+
+    const childPathPrefix = `${path}${this.pathUtilService.separator}`;
+    return this.jsonPatches
+      .some(patch => patch.path.startsWith(childPathPrefix));
+  }
+
   private removeJsonPatch(patch: JsonPatch) {
     const path = this.getComponentPathForPatch(patch);
     // don't do anything if it's UNDO json-patch.
