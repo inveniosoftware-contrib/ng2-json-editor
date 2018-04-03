@@ -58,7 +58,7 @@
         <div class="row element-button-container">
           <div class="col-md-12 right">
             <list-action-group (onMove)="moveElement(item.index, $event)" (onDelete)="deleteElement(item.index)" [canMove]="sortable"
-              [isDisabled]="disabled">
+              [isDisabled]="disabled || hasPatchOrChildrenHavePatch()">
             </list-action-group>
           </div>
         </div>
