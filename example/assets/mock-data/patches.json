@@ -1,6 +1,24 @@
 [
   {
     "op": "replace",
+    "path": "/references/3",
+    "value": {
+      "reference": {
+        "collaborations": [
+          "New collaboration",
+          "The Other Collab"
+        ],
+        "label": "123"
+      } 
+    }
+  },
+  {
+    "op": "replace",
+    "path": "/inspire_categories/0/term",
+    "value": "Computing"
+  },
+  {
+    "op": "replace",
     "path": "/number_of_pages",
     "value": 115
   },

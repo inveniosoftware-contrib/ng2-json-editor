@@ -25,15 +25,18 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { JsonPatch } from '../shared/interfaces';
 
 @Component({
-  selector: 'add-patch-view',
+  selector: 'add-or-replace-patch',
   styleUrls: [
-    './add-patch-view.component.scss'
+    './add-or-replace-patch.component.scss'
   ],
-  templateUrl: './add-patch-view.component.html',
+  templateUrl: './add-or-replace-patch.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AddPatchViewComponent {
+export class AddOrReplacePatchComponent {
 
   @Input() patch: JsonPatch;
 
+  get leftBorderClass(): string {
+    return this.patch.op === 'add' ? 'green-left-border' : 'orange-left-border';
+  }
 }

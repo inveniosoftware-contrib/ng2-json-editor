@@ -42,6 +42,7 @@ export class ObjectFieldComponent extends AbstractFieldComponent {
   @Input() value: Map<string, any>;
   @Input() schema: JSONSchema;
   @Input() path: Array<any>;
+  @Input() isComplexListFieldItem = false;
 
   constructor(public appGlobalsService: AppGlobalsService,
     public problemsService: ProblemsService,

@@ -1,47 +1,58 @@
-<table [id]="pathString" class="table" [ngClass]="redLeftBorderClass">
-  <tr *ngFor="let key of keys$ | async; trackBy:trackByElement">
-    <!-- SUB FIELD TITLE MENU -->
-    <td class="label-holder">
-      <div>
-        <title-dropdown [title]="key | underscoreToSpace" [isDisabled]="isPropertyDisabled(key)">
-          <li *ngIf="schema.properties[key].type === 'array'" class="title-dropdown-item">
-            <add-new-element-button [path]="getPathForChild(key)" [schema]="schema.properties[key]"></add-new-element-button>
-          </li>
-          <li class="title-dropdown-item">
-            <button type="button" class="editor-btn-delete editor-btn-delete-text" (click)="deleteField(key)">Delete</button>
-          </li>
-          <ng-container *ngIf="getTitleDropdownItemTemplateNamesForChild(key)">
-            <li *ngFor="let templateName of getTitleDropdownItemTemplateNamesForChild(key)" class="title-dropdown-item custom-title-dropdown-item">
-              <ng-template [ngTemplateOutlet]="appGlobalsService.templates[templateName]"></ng-template>
+<div [id]="pathString">
+  <div *ngIf="isComplexListFieldItem" class="pull-right">
+    <add-nested-field-dropdown [pathString]="pathString" [schema]="schema" [isDisabled]="disabled"></add-nested-field-dropdown>
+  </div>
+
+  <table class="table" [ngClass]="redLeftBorderClass">
+    <tr *ngFor="let key of keys$ | async; trackBy:trackByElement">
+      <!-- SUB FIELD TITLE MENU -->
+      <td class="label-holder">
+        <div>
+          <title-dropdown [title]="key | underscoreToSpace" [isDisabled]="isPropertyDisabled(key)">
+            <li *ngIf="schema.properties[key].type === 'array'" class="title-dropdown-item">
+              <add-new-element-button [path]="getPathForChild(key)" [schema]="schema.properties[key]"></add-new-element-button>
             </li>
-          </ng-container>
-        </title-dropdown>
-      </div>
-    </td>
-    <!-- SUB FIELD COMPONENT -->
-    <td>
-      <any-type-field [value]="value.get(key) | selfOrEmpty:schema.properties[key]" [schema]=schema.properties[key] [path]="getPathForChild(key)"></any-type-field>
-    </td>
-  </tr>
-  <!-- ADD PATCHES FOR CHILDREN -->
-  <tr *ngFor="let patch of addJsonPatches">
-    <td class="label-holder">
-      <title-dropdown [title]="patch.path | lastPathElement | underscoreToSpace" [isDisabled]="true"></title-dropdown>
-    </td>
-    <td>
-      <add-patch-view [patch]="patch"></add-patch-view>
-    </td>
-  </tr>
-  <!-- REMOVE PATCH FOR ITSELF -->
-  <tr *ngIf="removeJsonPatch">
-    <patch-actions [patch]="removeJsonPatch"></patch-actions>
-  </tr>
-  <!-- ADD SUB FIELD FROM SCHEMA DROPDOWN -->
-  <tr>
-    <td class="button-holder">
-      <add-field-dropdown [fields]="keys$ | async" [pathString]="pathString" [schema]="schema" [isDisabled]="disabled">
-        <i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i>
-      </add-field-dropdown>
-    </td>
-  </tr>
-</table>
+            <li class="title-dropdown-item">
+              <button type="button" class="editor-btn-delete editor-btn-delete-text" (click)="deleteField(key)">Delete</button>
+            </li>
+            <ng-container *ngIf="getTitleDropdownItemTemplateNamesForChild(key)">
+              <li *ngFor="let templateName of getTitleDropdownItemTemplateNamesForChild(key)" class="title-dropdown-item custom-title-dropdown-item">
+                <ng-template [ngTemplateOutlet]="appGlobalsService.templates[templateName]"></ng-template>
+              </li>
+            </ng-container>
+          </title-dropdown>
+        </div>
+      </td>
+      <!-- SUB FIELD COMPONENT -->
+      <td>
+        <any-type-field [value]="value.get(key) | selfOrEmpty:schema.properties[key]" [schema]=schema.properties[key] [path]="getPathForChild(key)"></any-type-field>
+      </td>
+    </tr>
+    <!-- ADD PATCHES FOR CHILDREN -->
+    <tr *ngFor="let patch of addJsonPatches">
+      <td class="label-holder">
+        <title-dropdown [title]="patch.path | lastPathElement | underscoreToSpace" [isDisabled]="true"></title-dropdown>
+      </td>
+      <td>
+        <add-or-replace-patch [patch]="patch"></add-or-replace-patch>
+      </td>
+    </tr>
+    <!-- REMOVE PATCH FOR ITSELF -->
+    <tr *ngIf="removeJsonPatch">
+      <patch-actions [patch]="removeJsonPatch"></patch-actions>
+    </tr>
+    <!-- ADD SUB FIELD FROM SCHEMA DROPDOWN -->
+    <tr>
+      <td class="button-holder">
+        <add-field-dropdown [fields]="keys$ | async" [pathString]="pathString" [schema]="schema" [isDisabled]="disabled">
+          <i class="fa fa-plus"></i>
+          <i class="fa fa-caret-down"></i>
+        </add-field-dropdown>
+      </td>
+    </tr>
+  </table>
+  <!-- REPLACE PATCH FOR ITSELF -->
+  <div *ngIf="replaceJsonPatches && replaceJsonPatches[0]">
+    <add-or-replace-patch [patch]="replaceJsonPatches[0]"></add-or-replace-patch>
+  </div>
+</div>
