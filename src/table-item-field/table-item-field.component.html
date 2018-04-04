@@ -1,10 +1,10 @@
 <td *ngFor="let key of keys; trackBy:trackByElement; first as isFirst" [style.width]="schema.properties[key].columnWidth + '%'"
   [ngClass]="isFirst ? redLeftBorderClass : ''">
-  <patch-actions *ngIf="removeJsonPatch && isFirst" [patch]="removeJsonPatch"></patch-actions>
   <any-type-field [value]="value.get(key) | selfOrEmpty:schema.properties[key]" [schema]="schema.properties[key]" [path]="getPathForChild(key)">
   </any-type-field>
   <add-new-element-button *ngIf="schema.properties[key].type === 'array'" [path]="getPathForChild(key)" [schema]="schema.properties[key]">
   </add-new-element-button>
+  <patch-actions *ngIf="removeJsonPatch && isFirst" [patch]="removeJsonPatch"></patch-actions>
 </td>
 <!-- td element with list-action-group (up/down and delete buttons) -->
 <ng-content></ng-content>
