@@ -4,24 +4,24 @@
     <div *ngIf="navigator">
       <div class="input-group input-group-sm">
         <span class="input-group-btn">
-            <button type="button" class="btn btn-default find-button" (click)="onFindClick()">
-              <i class="fa fa-search" aria-hidden="true"></i>
-            </button>
+          <button type="button" class="btn btn-default find-button" (click)="onFindClick()">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
         </span>
         <input type="search" class="form-control" [(ngModel)]="findExpression" (keypress)="onFindInputKeypress($event.key)" placeholder="Find"
         />
         <span class="input-group-btn" *ngIf="shouldDisplayFoundNavigation">
-            <button type="button" class="btn btn-default" [disabled]="currentFound <= 0" (click)="onFoundNavigate(-1)">❮</button>
+          <button type="button" class="btn btn-default" [disabled]="currentFound <= 0" (click)="onFoundNavigate(-1)">❮</button>
         </span>
         <span class="input-group-btn" *ngIf="shouldDisplayFoundNavigation">
-            <button type="button" class="btn btn-default" [disabled]="currentFound >= foundIndices.length - 1" (click)="onFoundNavigate(1)">❯</button>
+          <button type="button" class="btn btn-default" [disabled]="currentFound >= foundIndices.length - 1" (click)="onFoundNavigate(1)">❯</button>
         </span>
         <span *ngIf="foundIndices" [ngSwitch]="foundIndices.length" class="input-group-addon transparent borderless">
           <span *ngSwitchCase="0">
-              Nothing found
+            Nothing found
           </span>
-        <span *ngSwitchDefault>
-              {{currentFound + 1}} of {{foundIndices.length}}
+          <span *ngSwitchDefault>
+            {{currentFound + 1}} of {{foundIndices.length}}
           </span>
         </span>
       </div>
@@ -68,6 +68,9 @@
 
   <div *ngFor="let patch of addJsonPatches" class="complex-list-field-wrapper">
     <add-or-replace-patch [patch]="patch"></add-or-replace-patch>
+  </div>
+  <div *ngIf="replaceJsonPatches && replaceJsonPatches[0]">
+    <add-or-replace-patch [patch]="replaceJsonPatches[0]"></add-or-replace-patch>
   </div>
   <div *ngIf="removeJsonPatch">
     <patch-actions [patch]="removeJsonPatch"></patch-actions>
