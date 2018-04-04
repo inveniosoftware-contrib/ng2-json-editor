@@ -9,8 +9,43 @@
           "The Other Collab"
         ],
         "label": "123"
-      } 
+      }
     }
+  },
+  {
+    "op": "replace",
+    "path": "/collaborations",
+    "value": [
+      {
+        "value": "Collab1",
+        "record": {
+          "$ref": "ref thingy"
+        }
+      },
+      {
+        "value": "Collab2"
+      }
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/references/1/reference/misc",
+    "value": [
+      "Different Misc 1",
+      "Different Misc 2"
+    ]
+  },
+  {
+    "op": "replace",
+    "path": "/authors",
+    "value": [
+      {
+        "full_name": "Urhan, Harun"
+      },
+      {
+        "full_name": "Guy, Other"
+      }
+    ]
   },
   {
     "op": "replace",

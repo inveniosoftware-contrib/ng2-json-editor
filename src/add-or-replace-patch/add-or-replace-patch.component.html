@@ -34,7 +34,7 @@
 
 <ng-template #arrayTemplate let-array="array">
   <table>
-    <tr *ngFor="let item of array">
+    <tr *ngFor="let item of array" class="array-item">
       <td>
         <ng-template [ngTemplateOutlet]="anyTypeTemplate" [ngTemplateOutletContext]="{value: item}"></ng-template>
       </td>
