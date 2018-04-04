@@ -1,4 +1,4 @@
-<div [id]="pathString" [ngClass]="redLeftBorderClass">
+<div [id]="pathString">
   <!-- Top Bar: Navigator, ToEdit/All switch, custom header item etc. -->
   <div *ngIf="navigator || shouldDisplayViewTemplate" class="top-bar-container">
     <div *ngIf="navigator">
@@ -43,26 +43,31 @@
         [nextText]="'❯'" [lastText]="'❯❯'" (pageChanged)="onPageChange($event.page)"></pagination>
     </div>
   </div>
-  <!-- Elements -->
-  <div *ngFor="let item of paginatedItems; trackBy:trackByElement">
-    <div class="complex-list-field-wrapper">
-      <span *ngIf="shouldDisplayViewTemplate && values.get(item.index).keySeq().size != 0">
-        <ng-template [ngTemplateOutlet]="customTemplate" [ngTemplateOutletContext]="{item: values.get(item.index)}"></ng-template>
-        <a href="javascript:void(0)" (click)="item.isEditFormVisible = !item.isEditFormVisible">
-          {{item.isEditFormVisible ? 'Hide Fields' : 'Show Fields'}}
-        </a>
-      </span>
-      <span *ngIf="item.isEditFormVisible || hasProblemOrPatch(item.index)">
-        <object-field [value]="values.get(item.index)" [schema]="schema.items" [path]="getPathForChild(item.index)" [isComplexListFieldItem]="true">
-        </object-field>
-        <div class="row element-button-container">
-          <div class="col-md-12 right">
-            <list-action-group (onMove)="moveElement(item.index, $event)" (onDelete)="deleteElement(item.index)" [canMove]="sortable"
-              [isDisabled]="disabled || hasPatchOrChildrenHavePatch()">
-            </list-action-group>
+  <div [ngClass]="redLeftBorderClass">
+    <!-- Elements -->
+    <div *ngFor="let item of paginatedItems; trackBy:trackByElement">
+      <div class="complex-list-field-wrapper">
+        <span *ngIf="shouldDisplayViewTemplate && values.get(item.index).keySeq().size != 0">
+          <ng-template [ngTemplateOutlet]="customTemplate" [ngTemplateOutletContext]="{item: values.get(item.index)}"></ng-template>
+          <a href="javascript:void(0)" (click)="item.isEditFormVisible = !item.isEditFormVisible">
+            {{item.isEditFormVisible ? 'Hide Fields' : 'Show Fields'}}
+          </a>
+        </span>
+        <span *ngIf="item.isEditFormVisible || hasProblemOrPatch(item.index)">
+          <object-field [value]="values.get(item.index)" [schema]="schema.items" [path]="getPathForChild(item.index)" [isComplexListFieldItem]="true">
+          </object-field>
+          <div class="row element-button-container">
+            <div class="col-md-12 right">
+              <list-action-group (onMove)="moveElement(item.index, $event)" (onDelete)="deleteElement(item.index)" [canMove]="sortable"
+                [isDisabled]="disabled || hasPatchOrChildrenHavePatch()">
+              </list-action-group>
+            </div>
           </div>
-        </div>
-      </span>
+        </span>
+      </div>
+    </div>
+    <div class="right" *ngIf="removeJsonPatch">
+      <patch-actions [patch]="removeJsonPatch"></patch-actions>
     </div>
   </div>
 
@@ -71,8 +76,5 @@
   </div>
   <div *ngIf="replaceJsonPatches && replaceJsonPatches[0]">
     <add-or-replace-patch [patch]="replaceJsonPatches[0]"></add-or-replace-patch>
-  </div>
-  <div *ngIf="removeJsonPatch">
-    <patch-actions [patch]="removeJsonPatch"></patch-actions>
   </div>
 </div>
