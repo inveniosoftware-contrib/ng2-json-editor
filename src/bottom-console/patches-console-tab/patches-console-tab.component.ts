@@ -65,8 +65,8 @@ export class PatchesConsoleTabComponent extends AbstractSubscriberComponent impl
       });
   }
 
-  focusPatchForPath(path: string) {
-    this.domUtilService.focusPatchElementById(path);
+  focusPatch(patch: JsonPatch) {
+    this.domUtilService.focusPatch(patch);
   }
 
   acceptAll() {
