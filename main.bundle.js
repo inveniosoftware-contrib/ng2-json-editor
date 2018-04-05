@@ -221,6 +221,9 @@ var AbstractListFieldComponent = (function (_super) {
     AbstractListFieldComponent.prototype.getPathStringForChild = function (index) {
         return "" + this.pathString + this.pathUtilService.separator + index;
     };
+    AbstractListFieldComponent.prototype.hasPatchOrChildrenHavePatch = function () {
+        return this.jsonStoreService.hasPatchOrChildrenHavePatch(this.pathString);
+    };
     return AbstractListFieldComponent;
 }(__WEBPACK_IMPORTED_MODULE_0__abstract_field__["a" /* AbstractFieldComponent */]));
 
@@ -484,7 +487,7 @@ AddNestedFieldDropdownComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */], args: [{
                 selector: 'add-nested-field-dropdown',
                 styles: [".btn-add-field-dropdown { padding: 0 3px; font-size: 11px; opacity: 0.4; border: 0; background: transparent; font-weight: bold; line-height: 1; text-shadow: 0 1px 0 #fff; color: darkslategray; margin-bottom: 2px; float: left; } .btn-add-field-dropdown:hover { color: blue; opacity: 0.6; } .dropdown-filter-container { padding: 0 3px; } .dropdown-filter-container input { width: 100%; } ",
-                    ".dropdown-header.title { font-size: 13.5px; font-weight: bold; padding-left: 10px; } .dropdown-divider { margin: 4px 0; } .dropdown-menu li > .dropdown-item { display: block; padding: 3px 20px; clear: both; font-weight: normal; line-height: 1.42857; color: #333333; white-space: nowrap; } .dropdown-menu li > .dropdown-item:hover { text-decoration: none; color: #262626; background-color: #f5f5f5; } "],
+                    ".dropdown-header.title { font-size: 13.5px; font-weight: bold; padding-left: 10px; } .dropdown-divider { margin: 4px 0; } .dropdown-menu { left: auto; right: 0; } .dropdown-menu li > .dropdown-item { display: block; padding: 3px 20px; clear: both; font-weight: normal; line-height: 1.42857; color: #333333; white-space: nowrap; } .dropdown-menu li > .dropdown-item:hover { text-decoration: none; color: #262626; background-color: #f5f5f5; } "],
                 template: "<div class=\"btn-group add-field-dropdown-container\" dropdown keyboardNav=\"true\" [isDisabled]=\"isDisabled\"> <button type=\"button\" class=\"btn btn-add-field-dropdown\" dropdownToggle> <i class=\"fa fa-plus\"></i> <i class=\"fa fa-caret-down\"></i> </button> <ul class=\"dropdown-menu\" *dropdownMenu> <div *ngFor=\"let path of nestedKeysMap | keys; first as isFirst\"> <div *ngIf=\"addableKeysForPath(path); let addableKeys\"> <li *ngIf=\"!isFirst\" class=\"divider dropdown-divider\"></li> <li *ngIf=\"!isFirst\" class=\"dropdown-header title\">{{path | lastPathElement}}</li> <li *ngFor=\"let key of addableKeys\"> <a class=\"dropdown-item\" href=\"javascript:void(0)\" (click)=\"onFieldSelect(path, key)\">{{key}}</a> </li> </div> </div> </ul> </div>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectionStrategy */].OnPush
             },] },
@@ -588,11 +591,11 @@ AddNewElementButtonComponent.propDecorators = {
 
 /***/ }),
 
-/***/ "../../../../../dist/src/add-patch-view/add-patch-view.component.js":
+/***/ "../../../../../dist/src/add-or-replace-patch/add-or-replace-patch.component.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddPatchViewComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddOrReplacePatchComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /*
  * This file is part of ng2-json-editor.
@@ -616,35 +619,42 @@ AddNewElementButtonComponent.propDecorators = {
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-var AddPatchViewComponent = (function () {
-    function AddPatchViewComponent() {
+var AddOrReplacePatchComponent = (function () {
+    function AddOrReplacePatchComponent() {
     }
-    return AddPatchViewComponent;
+    Object.defineProperty(AddOrReplacePatchComponent.prototype, "leftBorderClass", {
+        get: function () {
+            return this.patch.op === 'add' ? 'green-left-border' : 'orange-left-border';
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return AddOrReplacePatchComponent;
 }());
 
-AddPatchViewComponent.decorators = [
+AddOrReplacePatchComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */], args: [{
-                selector: 'add-patch-view',
+                selector: 'add-or-replace-patch',
                 styles: ["td { vertical-align: top; padding-right: 10px !important; } .align-self-end { align-self: flex-end; } .patch-container { display: flex; padding-left: 4px; } .green-left-border { border-left: 9px solid #2ecc71; } .grow { flex-grow: 1; } "],
-                template: "<div class=\"patch-container green-left-border\" [id]=\"patch.path\" tabindex=\"-1\"> <div class=\"grow\"> <ng-template [ngTemplateOutlet]=\"anyTypeTemplate\" [ngTemplateOutletContext]=\"{value: patch.value}\"></ng-template> </div> <patch-actions class=\"align-self-end\" [patch]=\"patch\"></patch-actions> </div> <ng-template #anyTypeTemplate let-value=\"value\"> <ng-container [ngSwitch]=\"value | typeOf\"> <ng-container *ngSwitchCase=\"'object'\"> <ng-template [ngTemplateOutlet]=\"objectTemplate\" [ngTemplateOutletContext]=\"{object: value}\"></ng-template> </ng-container> <ng-container *ngSwitchCase=\"'array'\"> <ng-template [ngTemplateOutlet]=\"arrayTemplate\" [ngTemplateOutletContext]=\"{array: value}\"></ng-template> </ng-container> <ng-container *ngSwitchDefault> <ng-template [ngTemplateOutlet]=\"primitiveTemplate\" [ngTemplateOutletContext]=\"{primitive: value}\"></ng-template> </ng-container> </ng-container> </ng-template> <ng-template #objectTemplate let-object=\"object\"> <table> <tr *ngFor=\"let key of object | keys\"> <td> <label>{{key}}</label> </td> <td> <ng-template [ngTemplateOutlet]=\"anyTypeTemplate\" [ngTemplateOutletContext]=\"{value: object[key]}\"></ng-template> </td> </tr> </table> </ng-template> <ng-template #arrayTemplate let-array=\"array\"> <table> <tr *ngFor=\"let item of array\"> <td> <ng-template [ngTemplateOutlet]=\"anyTypeTemplate\" [ngTemplateOutletContext]=\"{value: item}\"></ng-template> </td> </tr> </table> </ng-template> <ng-template #primitiveTemplate let-primitive=\"primitive\"> <span>{{primitive}}</span> </ng-template>",
+                template: "<div class=\"patch-container\" [ngClass]=\"leftBorderClass\" [id]=\"patch.path\" tabindex=\"-1\"> <div class=\"grow\"> <ng-template [ngTemplateOutlet]=\"anyTypeTemplate\" [ngTemplateOutletContext]=\"{value: patch.value}\"></ng-template> </div> <patch-actions class=\"align-self-end\" [patch]=\"patch\"></patch-actions> </div> <ng-template #anyTypeTemplate let-value=\"value\"> <ng-container [ngSwitch]=\"value | typeOf\"> <ng-container *ngSwitchCase=\"'object'\"> <ng-template [ngTemplateOutlet]=\"objectTemplate\" [ngTemplateOutletContext]=\"{object: value}\"></ng-template> </ng-container> <ng-container *ngSwitchCase=\"'array'\"> <ng-template [ngTemplateOutlet]=\"arrayTemplate\" [ngTemplateOutletContext]=\"{array: value}\"></ng-template> </ng-container> <ng-container *ngSwitchDefault> <ng-template [ngTemplateOutlet]=\"primitiveTemplate\" [ngTemplateOutletContext]=\"{primitive: value}\"></ng-template> </ng-container> </ng-container> </ng-template> <ng-template #objectTemplate let-object=\"object\"> <table> <tr *ngFor=\"let key of object | keys\"> <td> <label>{{key}}</label> </td> <td> <ng-template [ngTemplateOutlet]=\"anyTypeTemplate\" [ngTemplateOutletContext]=\"{value: object[key]}\"></ng-template> </td> </tr> </table> </ng-template> <ng-template #arrayTemplate let-array=\"array\"> <table> <tr *ngFor=\"let item of array\" class=\"array-item\"> <td> <ng-template [ngTemplateOutlet]=\"anyTypeTemplate\" [ngTemplateOutletContext]=\"{value: item}\"></ng-template> </td> </tr> </table> </ng-template> <ng-template #primitiveTemplate let-primitive=\"primitive\"> <span>{{primitive}}</span> </ng-template>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
 /** @nocollapse */
-AddPatchViewComponent.ctorParameters = function () { return []; };
-AddPatchViewComponent.propDecorators = {
+AddOrReplacePatchComponent.ctorParameters = function () { return []; };
+AddOrReplacePatchComponent.propDecorators = {
     'patch': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
 };
 
 
 /***/ }),
 
-/***/ "../../../../../dist/src/add-patch-view/index.js":
+/***/ "../../../../../dist/src/add-or-replace-patch/index.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__add_patch_view_component__ = __webpack_require__("../../../../../dist/src/add-patch-view/add-patch-view.component.js");
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__add_patch_view_component__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__add_or_replace_patch_component__ = __webpack_require__("../../../../../dist/src/add-or-replace-patch/add-or-replace-patch.component.js");
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__add_or_replace_patch_component__["a"]; });
 
 
 
@@ -1129,8 +1139,8 @@ var PatchesConsoleTabComponent = (function (_super) {
             _this.changeDetectorRef.markForCheck();
         });
     };
-    PatchesConsoleTabComponent.prototype.focusPatchForPath = function (path) {
-        this.domUtilService.focusPatchElementById(path);
+    PatchesConsoleTabComponent.prototype.focusPatch = function (patch) {
+        this.domUtilService.focusPatch(patch);
     };
     PatchesConsoleTabComponent.prototype.acceptAll = function () {
         var _this = this;
@@ -1150,7 +1160,7 @@ PatchesConsoleTabComponent.decorators = [
                 selector: 'patches-console-tab',
                 styles: [".list-group-item { cursor: pointer; color: #0074D9; } .list-group-item:hover { background-color: #faebcc; text-decoration: underline; } ",
                     ".fa-bolt { color: #e67e22; } .icon-padding-left { padding-left: 8px; } .all-actions-container { padding: 8px; } .all-actions-container > button { margin-right: 4px; margin-left: 4px; } "],
-                template: "<ng-template tabHeading> <i class=\"fa fa-bolt\"></i> Conflicts <span class=\"badge\">{{patches.length}}</span> </ng-template> <div *ngIf=\"patches && patches.length > 0\" class=\"all-actions-container\"> <button class=\"btn btn-success\" (click)=\"acceptAll()\">Accept All<i class=\"fa fa-check icon-padding-left\"></i></button> <button class=\"btn btn-danger\" (click)=\"rejectAll()\">Reject All<i class=\"fa fa-times icon-padding-left\"></i></button> </div> <ul class=\"list-group\"> <li *ngFor=\"let patch of patches\" class=\"list-group-item\" (click)=\"focusPatchForPath(patch.path)\"> <i class=\"fa fa-bolt\"></i> {{patch.path}} - {{patch.op}} </li> </ul>",
+                template: "<ng-template tabHeading> <i class=\"fa fa-bolt\"></i> Conflicts <span class=\"badge\">{{patches.length}}</span> </ng-template> <div *ngIf=\"patches && patches.length > 0\" class=\"all-actions-container\"> <button class=\"btn btn-success\" (click)=\"acceptAll()\">Accept All<i class=\"fa fa-check icon-padding-left\"></i></button> <button class=\"btn btn-danger\" (click)=\"rejectAll()\">Reject All<i class=\"fa fa-times icon-padding-left\"></i></button> </div> <ul class=\"list-group\"> <li *ngFor=\"let patch of patches\" class=\"list-group-item\" (click)=\"focusPatch(patch)\"> <i class=\"fa fa-bolt\"></i> {{patch.path}} - {{patch.op}} </li> </ul> ",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
@@ -1508,8 +1518,8 @@ var ComplexListFieldComponent = (function (_super) {
 ComplexListFieldComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */], args: [{
                 selector: 'complex-list-field',
-                styles: [".complex-list-field-wrapper { margin: 10px 15px 15px 10px; padding: 5px; box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.25); } .top-bar-container { width: 100%; position: sticky; top: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; padding: 0 15px; background-color: white; box-shadow: 0 0.5px 0 0 #ffffff inset, 0 1px 2px 0 #B3B3B3; } .item-count-label { position: relative; top: -19px; } .transparent { background: transparent; } .borderless { border: none; } .find-button { color: darkslategray; } .find-button .fa-search { opacity: 0.83; } .element-button-container { padding-top: 8px; } .element-button-container .left, .element-button-container .right { padding: 0px; } .element-button-container .right { text-align: right; } label.btn { color: white !important; } "],
-                template: "<div [id]=\"pathString\" [ngClass]=\"redLeftBorderClass\"> <!-- Top Bar: Navigator, ToEdit/All switch, custom header item etc. --> <div *ngIf=\"navigator || shouldDisplayViewTemplate\" class=\"top-bar-container\"> <div *ngIf=\"navigator\"> <div class=\"input-group input-group-sm\"> <span class=\"input-group-btn\"> <button type=\"button\" class=\"btn btn-default find-button\" (click)=\"onFindClick()\"> <i class=\"fa fa-search\" aria-hidden=\"true\"></i> </button> </span> <input type=\"search\" class=\"form-control\" [(ngModel)]=\"findExpression\" (keypress)=\"onFindInputKeypress($event.key)\" placeholder=\"Find\" /> <span class=\"input-group-btn\" *ngIf=\"shouldDisplayFoundNavigation\"> <button type=\"button\" class=\"btn btn-default\" [disabled]=\"currentFound <= 0\" (click)=\"onFoundNavigate(-1)\">❮</button> </span> <span class=\"input-group-btn\" *ngIf=\"shouldDisplayFoundNavigation\"> <button type=\"button\" class=\"btn btn-default\" [disabled]=\"currentFound >= foundIndices.length - 1\" (click)=\"onFoundNavigate(1)\">❯</button> </span> <span *ngIf=\"foundIndices\" [ngSwitch]=\"foundIndices.length\" class=\"input-group-addon transparent borderless\"> <span *ngSwitchCase=\"0\"> Nothing found </span> <span *ngSwitchDefault> {{currentFound + 1}} of {{foundIndices.length}} </span> </span> </div> </div> <div *ngIf=\"shouldDisplayViewTemplate\" class=\"btn-group\"> <label class=\"btn btn-switch\" [class.active]=\"!shouldDisplayOnlyEditFormItems\" (click)=\"shouldDisplayOnlyEditFormItems = false\">All</label> <label class=\"btn btn-switch\" [class.active]=\"shouldDisplayOnlyEditFormItems\" (click)=\"shouldDisplayOnlyEditFormItems = true\">To Edit</label> </div> <div *ngIf=\"headerItemTemplate\"> <ng-template [ngTemplateOutlet]=\"headerItemTemplate\"></ng-template> </div> <div *ngIf=\"navigator\"> <label class=\"item-count-label\"> {{paginatableItems.size}} {{path[path.length - 1]}} </label> <br> <pagination [totalItems]=\"paginatableItems.size\" [ngModel]=\"currentPage\" [maxSize]=\"navigator.maxVisiblePageCount\" [itemsPerPage]=\"navigator.itemsPerPage\" class=\"pagination-sm pagination-top\" [boundaryLinks]=\"true\" [rotate]=\"false\" [firstText]=\"'❮❮'\" [previousText]=\"'❮'\" [nextText]=\"'❯'\" [lastText]=\"'❯❯'\" (pageChanged)=\"onPageChange($event.page)\"></pagination> </div> </div> <!-- Elements --> <div *ngFor=\"let item of paginatedItems; trackBy:trackByElement\"> <div class=\"complex-list-field-wrapper\"> <span *ngIf=\"shouldDisplayViewTemplate && values.get(item.index).keySeq().size != 0\"> <ng-template [ngTemplateOutlet]=\"customTemplate\" [ngTemplateOutletContext]=\"{item: values.get(item.index)}\"></ng-template> <a href=\"javascript:void(0)\" (click)=\"item.isEditFormVisible = !item.isEditFormVisible\"> {{item.isEditFormVisible ? 'Hide Fields' : 'Show Fields'}} </a> </span> <span *ngIf=\"item.isEditFormVisible || hasProblemOrPatch(item.index)\"> <object-field [value]=\"values.get(item.index)\" [schema]=\"schema.items\" [path]=\"getPathForChild(item.index)\"> </object-field> <div class=\"row element-button-container\"> <div class=\"col-md-6 left\"> <add-nested-field-dropdown [pathString]=\"pathString + '/' + item.index\" [schema]=\"schema.items\" [isDisabled]=\"disabled\"></add-nested-field-dropdown> </div> <div class=\"col-md-6 right\"> <list-action-group (onMove)=\"moveElement(item.index, $event)\" (onDelete)=\"deleteElement(item.index)\" [canMove]=\"sortable\" [isDisabled]=\"disabled\"> </list-action-group> </div> </div> </span> </div> </div> <div *ngFor=\"let patch of addJsonPatches\" class=\"complex-list-field-wrapper\"> <add-patch-view [patch]=\"patch\"></add-patch-view> </div> <div *ngIf=\"removeJsonPatch\"> <patch-actions [patch]=\"removeJsonPatch\"></patch-actions> </div> </div>",
+                styles: [".complex-list-field-wrapper { margin: 10px 15px 15px 10px; padding: 5px; box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.25); } .top-bar-container { width: 100%; position: sticky; top: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; padding: 0 15px; background-color: white; box-shadow: 0 0.5px 0 0 #ffffff inset, 0 1px 2px 0 #B3B3B3; } .item-count-label { position: relative; top: -19px; } .transparent { background: transparent; } .borderless { border: none; } .find-button { color: darkslategray; } .find-button .fa-search { opacity: 0.83; } .element-button-container { padding-top: 8px; } .element-button-container .text-right { padding: 0px; } label.btn { color: white !important; } "],
+                template: "<div [id]=\"pathString\"> <!-- Top Bar: Navigator, ToEdit/All switch, custom header item etc. --> <div *ngIf=\"navigator || shouldDisplayViewTemplate\" class=\"top-bar-container\"> <div *ngIf=\"navigator\"> <div class=\"input-group input-group-sm\"> <span class=\"input-group-btn\"> <button type=\"button\" class=\"btn btn-default find-button\" (click)=\"onFindClick()\"> <i class=\"fa fa-search\" aria-hidden=\"true\"></i> </button> </span> <input type=\"search\" class=\"form-control\" [(ngModel)]=\"findExpression\" (keypress)=\"onFindInputKeypress($event.key)\" placeholder=\"Find\" /> <span class=\"input-group-btn\" *ngIf=\"shouldDisplayFoundNavigation\"> <button type=\"button\" class=\"btn btn-default\" [disabled]=\"currentFound <= 0\" (click)=\"onFoundNavigate(-1)\">❮</button> </span> <span class=\"input-group-btn\" *ngIf=\"shouldDisplayFoundNavigation\"> <button type=\"button\" class=\"btn btn-default\" [disabled]=\"currentFound >= foundIndices.length - 1\" (click)=\"onFoundNavigate(1)\">❯</button> </span> <span *ngIf=\"foundIndices\" [ngSwitch]=\"foundIndices.length\" class=\"input-group-addon transparent borderless\"> <span *ngSwitchCase=\"0\"> Nothing found </span> <span *ngSwitchDefault> {{currentFound + 1}} of {{foundIndices.length}} </span> </span> </div> </div> <div *ngIf=\"shouldDisplayViewTemplate\" class=\"btn-group\"> <label class=\"btn btn-switch\" [class.active]=\"!shouldDisplayOnlyEditFormItems\" (click)=\"shouldDisplayOnlyEditFormItems = false\">All</label> <label class=\"btn btn-switch\" [class.active]=\"shouldDisplayOnlyEditFormItems\" (click)=\"shouldDisplayOnlyEditFormItems = true\">To Edit</label> </div> <div *ngIf=\"headerItemTemplate\"> <ng-template [ngTemplateOutlet]=\"headerItemTemplate\"></ng-template> </div> <div *ngIf=\"navigator\"> <label class=\"item-count-label\"> {{paginatableItems.size}} {{path[path.length - 1]}} </label> <br> <pagination [totalItems]=\"paginatableItems.size\" [ngModel]=\"currentPage\" [maxSize]=\"navigator.maxVisiblePageCount\" [itemsPerPage]=\"navigator.itemsPerPage\" class=\"pagination-sm pagination-top\" [boundaryLinks]=\"true\" [rotate]=\"false\" [firstText]=\"'❮❮'\" [previousText]=\"'❮'\" [nextText]=\"'❯'\" [lastText]=\"'❯❯'\" (pageChanged)=\"onPageChange($event.page)\"></pagination> </div> </div> <div [ngClass]=\"redLeftBorderClass\"> <!-- Elements --> <div *ngFor=\"let item of paginatedItems; trackBy:trackByElement\"> <div class=\"complex-list-field-wrapper\"> <span *ngIf=\"shouldDisplayViewTemplate && values.get(item.index).keySeq().size != 0\"> <ng-template [ngTemplateOutlet]=\"customTemplate\" [ngTemplateOutletContext]=\"{item: values.get(item.index)}\"></ng-template> <a href=\"javascript:void(0)\" (click)=\"item.isEditFormVisible = !item.isEditFormVisible\"> {{item.isEditFormVisible ? 'Hide Fields' : 'Show Fields'}} </a> </span> <span *ngIf=\"item.isEditFormVisible || hasProblemOrPatch(item.index)\"> <object-field [value]=\"values.get(item.index)\" [schema]=\"schema.items\" [path]=\"getPathForChild(item.index)\" [isComplexListFieldItem]=\"true\"> </object-field> <div class=\"row element-button-container\"> <div class=\"col-md-12 text-right\"> <list-action-group (onMove)=\"moveElement(item.index, $event)\" (onDelete)=\"deleteElement(item.index)\" [canMove]=\"sortable\" [isDisabled]=\"disabled || hasPatchOrChildrenHavePatch()\"> </list-action-group> </div> </div> </span> </div> </div> <div class=\"text-right\" *ngIf=\"removeJsonPatch\"> <patch-actions [patch]=\"removeJsonPatch\"></patch-actions> </div> </div> <div *ngFor=\"let patch of addJsonPatches\" class=\"complex-list-field-wrapper\"> <add-or-replace-patch [patch]=\"patch\"></add-or-replace-patch> </div> <div *ngIf=\"replaceJsonPatches && replaceJsonPatches[0]\"> <add-or-replace-patch [patch]=\"replaceJsonPatches[0]\"></add-or-replace-patch> </div> </div> ",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
@@ -2115,7 +2125,7 @@ JsonEditorComponent.propDecorators = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__bottom_console__ = __webpack_require__("../../../../../dist/src/bottom-console/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_38__text_diff__ = __webpack_require__("../../../../../dist/src/text-diff/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_39__patch_actions__ = __webpack_require__("../../../../../dist/src/patch-actions/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__add_patch_view__ = __webpack_require__("../../../../../dist/src/add-patch-view/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_40__add_or_replace_patch__ = __webpack_require__("../../../../../dist/src/add-or-replace-patch/index.js");
 /* unused harmony reexport AddFieldDropdownComponent */
 /* unused harmony reexport AddNestedFieldDropdownComponent */
 /* unused harmony reexport AddNewElementButtonComponent */
@@ -2146,7 +2156,7 @@ JsonEditorComponent.propDecorators = {
 /* unused harmony reexport PatchActionsComponent */
 /* unused harmony reexport PatchesConsoleTabComponent */
 /* unused harmony reexport ProblemsConsoleTabComponent */
-/* unused harmony reexport AddPatchViewComponent */
+/* unused harmony reexport AddOrReplacePatchComponent */
 /*
  * This file is part of ng2-json-editor.
  * Copyright (C) 2016 CERN.
@@ -2248,7 +2258,7 @@ JsonEditorModule.decorators = [
                     __WEBPACK_IMPORTED_MODULE_39__patch_actions__["a" /* PatchActionsComponent */],
                     __WEBPACK_IMPORTED_MODULE_37__bottom_console__["b" /* PatchesConsoleTabComponent */],
                     __WEBPACK_IMPORTED_MODULE_37__bottom_console__["c" /* ProblemsConsoleTabComponent */],
-                    __WEBPACK_IMPORTED_MODULE_40__add_patch_view__["a" /* AddPatchViewComponent */]
+                    __WEBPACK_IMPORTED_MODULE_40__add_or_replace_patch__["a" /* AddOrReplacePatchComponent */]
                 ]),
                 exports: [__WEBPACK_IMPORTED_MODULE_23__json_editor_component__["a" /* JsonEditorComponent */]],
                 imports: [
@@ -2511,6 +2521,7 @@ var ObjectFieldComponent = (function (_super) {
         _this.pathUtilService = pathUtilService;
         _this.changeDetectorRef = changeDetectorRef;
         _this.keysStoreService = keysStoreService;
+        _this.isComplexListFieldItem = false;
         return _this;
     }
     Object.defineProperty(ObjectFieldComponent.prototype, "keys$", {
@@ -2537,7 +2548,7 @@ ObjectFieldComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */], args: [{
                 selector: 'object-field',
                 styles: ["table.table { background-color: #f9f9f9; } "],
-                template: "<table [id]=\"pathString\" class=\"table\" [ngClass]=\"redLeftBorderClass\"> <tr *ngFor=\"let key of keys$ | async; trackBy:trackByElement\"> <!-- SUB FIELD TITLE MENU --> <td class=\"label-holder\"> <div> <title-dropdown [title]=\"key | underscoreToSpace\" [isDisabled]=\"isPropertyDisabled(key)\"> <li *ngIf=\"schema.properties[key].type === 'array'\" class=\"title-dropdown-item\"> <add-new-element-button [path]=\"getPathForChild(key)\" [schema]=\"schema.properties[key]\"></add-new-element-button> </li> <li class=\"title-dropdown-item\"> <button type=\"button\" class=\"editor-btn-delete editor-btn-delete-text\" (click)=\"deleteField(key)\">Delete</button> </li> <ng-container *ngIf=\"getTitleDropdownItemTemplateNamesForChild(key)\"> <li *ngFor=\"let templateName of getTitleDropdownItemTemplateNamesForChild(key)\" class=\"title-dropdown-item custom-title-dropdown-item\"> <ng-template [ngTemplateOutlet]=\"appGlobalsService.templates[templateName]\"></ng-template> </li> </ng-container> </title-dropdown> </div> </td> <!-- SUB FIELD COMPONENT --> <td> <any-type-field [value]=\"value.get(key) | selfOrEmpty:schema.properties[key]\" [schema]=schema.properties[key] [path]=\"getPathForChild(key)\"></any-type-field> </td> </tr> <!-- ADD PATCHES FOR CHILDREN --> <tr *ngFor=\"let patch of addJsonPatches\"> <td class=\"label-holder\"> <title-dropdown [title]=\"patch.path | lastPathElement | underscoreToSpace\" [isDisabled]=\"true\"></title-dropdown> </td> <td> <add-patch-view [patch]=\"patch\"></add-patch-view> </td> </tr> <!-- REMOVE PATCH FOR ITSELF --> <tr *ngIf=\"removeJsonPatch\"> <patch-actions [patch]=\"removeJsonPatch\"></patch-actions> </tr> <!-- ADD SUB FIELD FROM SCHEMA DROPDOWN --> <tr> <td class=\"button-holder\"> <add-field-dropdown [fields]=\"keys$ | async\" [pathString]=\"pathString\" [schema]=\"schema\" [isDisabled]=\"disabled\"> <i class=\"fa fa-plus\"></i> <i class=\"fa fa-caret-down\"></i> </add-field-dropdown> </td> </tr> </table>",
+                template: "<div [id]=\"pathString\"> <div *ngIf=\"isComplexListFieldItem\" class=\"pull-right\"> <add-nested-field-dropdown [pathString]=\"pathString\" [schema]=\"schema\" [isDisabled]=\"disabled\"></add-nested-field-dropdown> </div> <table class=\"table\" [ngClass]=\"redLeftBorderClass\"> <tr *ngFor=\"let key of keys$ | async; trackBy:trackByElement\"> <!-- SUB FIELD TITLE MENU --> <td class=\"label-holder\"> <div> <title-dropdown [title]=\"key | underscoreToSpace\" [isDisabled]=\"isPropertyDisabled(key)\"> <li *ngIf=\"schema.properties[key].type === 'array'\" class=\"title-dropdown-item\"> <add-new-element-button [path]=\"getPathForChild(key)\" [schema]=\"schema.properties[key]\"></add-new-element-button> </li> <li class=\"title-dropdown-item\"> <button type=\"button\" class=\"editor-btn-delete editor-btn-delete-text\" (click)=\"deleteField(key)\">Delete</button> </li> <ng-container *ngIf=\"getTitleDropdownItemTemplateNamesForChild(key)\"> <li *ngFor=\"let templateName of getTitleDropdownItemTemplateNamesForChild(key)\" class=\"title-dropdown-item custom-title-dropdown-item\"> <ng-template [ngTemplateOutlet]=\"appGlobalsService.templates[templateName]\"></ng-template> </li> </ng-container> </title-dropdown> </div> </td> <!-- SUB FIELD COMPONENT --> <td> <any-type-field [value]=\"value.get(key) | selfOrEmpty:schema.properties[key]\" [schema]=schema.properties[key] [path]=\"getPathForChild(key)\"></any-type-field> </td> </tr> <!-- ADD PATCHES FOR CHILDREN --> <tr *ngFor=\"let patch of addJsonPatches\"> <td class=\"label-holder\"> <title-dropdown [title]=\"patch.path | lastPathElement | underscoreToSpace\" [isDisabled]=\"true\"></title-dropdown> </td> <td> <add-or-replace-patch [patch]=\"patch\"></add-or-replace-patch> </td> </tr> <!-- REMOVE PATCH FOR ITSELF --> <tr *ngIf=\"removeJsonPatch\"> <patch-actions [patch]=\"removeJsonPatch\"></patch-actions> </tr> <!-- ADD SUB FIELD FROM SCHEMA DROPDOWN --> <tr> <td class=\"button-holder\"> <add-field-dropdown [fields]=\"keys$ | async\" [pathString]=\"pathString\" [schema]=\"schema\" [isDisabled]=\"disabled\"> <i class=\"fa fa-plus\"></i> <i class=\"fa fa-caret-down\"></i> </add-field-dropdown> </td> </tr> </table> <!-- REPLACE PATCH FOR ITSELF --> <div *ngIf=\"replaceJsonPatches && replaceJsonPatches[0]\"> <add-or-replace-patch [patch]=\"replaceJsonPatches[0]\"></add-or-replace-patch> </div> </div> ",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
@@ -2554,6 +2565,7 @@ ObjectFieldComponent.propDecorators = {
     'value': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
     'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
     'path': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
+    'isComplexListFieldItem': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
 };
 
 
@@ -2621,7 +2633,7 @@ PatchActionsComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */], args: [{
                 selector: 'patch-actions',
                 styles: [".patch-actions-container { display: inline-block; padding-left: 2px; } .patch-actions-container > button { border: none; background-color: transparent; padding: 1px 3px 1.5px; } .patch-actions-container > button .fa { font-size: 18px; } .patch-actions-container > button .fa-check-circle { color: #27ae60; } .patch-actions-container > button .fa-times-circle { color: #e74c3c; } .patch-actions-container > button .fa-plus-circle { color: #f1c40f; } "],
-                template: "<div class=\"patch-actions-container\" tabindex=\"-1\"> <button><i class=\"fa fa-check-circle\" (click)=\"onAcceptClick()\"></i></button> <button><i class=\"fa fa-times-circle\" (click)=\"onRejectClick()\"></i></button> <button  *ngIf=\"addActionEnabled\"><i class=\"fa fa-plus-circle\" (click)=\"onAddNewClick()\"></i></button> </div>",
+                template: "<div class=\"patch-actions-container\" [ngClass]=\"patch.op\" tabindex=\"-1\"> <button><i class=\"fa fa-check-circle\" (click)=\"onAcceptClick()\"></i></button> <button><i class=\"fa fa-times-circle\" (click)=\"onRejectClick()\"></i></button> <button  *ngIf=\"addActionEnabled\"><i class=\"fa fa-plus-circle\" (click)=\"onAddNewClick()\"></i></button> </div>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
@@ -2909,7 +2921,7 @@ PrimitiveListFieldComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */], args: [{
                 selector: 'primitive-list-field',
                 styles: ["td { padding: 0px !important; } "],
-                template: "<div [id]=\"pathString\" [ngClass]=\"redLeftBorderClass\"> <div class=\"wide\"> <table class=\"table\"> <tr *ngFor=\"let value of values | selfOrEmpty:schema; let i = index; trackBy:trackByIndex\"> <td> <any-type-field [value]=\"value\" [schema]=\"schema.items\" [path]=\"getPathForChild(i)\"></any-type-field> </td> <td *ngIf=\"values.size > 0\" class=\"button-holder\" [class.sortable]=\"schema.sortable\"> <list-action-group (onMove)=\"moveElement(i, $event)\" (onDelete)=\"deleteElement(i)\" [canMove]=\"schema.sortable\" [isDisabled]=\"disabled\"></list-action-group> </td> </tr> <tr *ngIf=\"removeJsonPatch\"> <patch-actions [patch]=\"removeJsonPatch\"></patch-actions> </tr> </table> <table class=\"table\"> <tr *ngFor=\"let patch of addJsonPatches\"> <add-patch-view [patch]=\"patch\"></add-patch-view> </tr> </table> </div> </div>",
+                template: "<div [id]=\"pathString\" [ngClass]=\"redLeftBorderClass\"> <div class=\"wide\"> <table class=\"table\"> <tr *ngFor=\"let value of values | selfOrEmpty:schema; let i = index; trackBy:trackByIndex\"> <td> <any-type-field [value]=\"value\" [schema]=\"schema.items\" [path]=\"getPathForChild(i)\"></any-type-field> </td> <td *ngIf=\"values.size > 0\" class=\"button-holder\" [class.sortable]=\"schema.sortable\"> <list-action-group (onMove)=\"moveElement(i, $event)\" (onDelete)=\"deleteElement(i)\" [canMove]=\"schema.sortable\" [isDisabled]=\"disabled\"></list-action-group> </td> </tr> <tr *ngIf=\"removeJsonPatch\"> <patch-actions [patch]=\"removeJsonPatch\"></patch-actions> </tr> </table> <table class=\"table\"> <tr *ngFor=\"let patch of addJsonPatches\"> <add-or-replace-patch [patch]=\"patch\"></add-or-replace-patch> </tr> <tr *ngIf=\"replaceJsonPatches && replaceJsonPatches[0]\"> <add-or-replace-patch [patch]=\"replaceJsonPatches[0]\"></add-or-replace-patch> </tr> </table> </div> </div>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
@@ -4577,18 +4589,18 @@ var DomUtilService = (function () {
             this.highlightedElement = undefined;
         }
     };
-    DomUtilService.prototype.focusPatchElementById = function (id) {
-        this.tabsUtilService.selectTabIfNeeded(id);
-        this.listPageChangerService.changePage(id);
+    DomUtilService.prototype.focusPatch = function (patch) {
+        this.tabsUtilService.selectTabIfNeeded(patch.path);
+        this.listPageChangerService.changePage(patch.path);
         setTimeout(function () {
-            var el = document.getElementById(id);
+            var el = document.getElementById(patch.path);
             var mergeButton = el.querySelector('.btn-merge');
             if (mergeButton) {
                 mergeButton.focus();
                 mergeButton.click();
             }
             else {
-                var patchActionsContainer = el.querySelector('.patch-actions-container');
+                var patchActionsContainer = el.querySelector("." + patch.op + ".patch-actions-container");
                 if (patchActionsContainer) {
                     patchActionsContainer.focus();
                 }
@@ -5166,6 +5178,14 @@ var JsonStoreService = (function () {
     };
     JsonStoreService.prototype.hasPatch = function (path) {
         return this.patchesByPath[path] && this.patchesByPath[path].length > 0;
+    };
+    JsonStoreService.prototype.hasPatchOrChildrenHavePatch = function (path) {
+        if (this.hasPatch(path)) {
+            return true;
+        }
+        var childPathPrefix = "" + path + this.pathUtilService.separator;
+        return this.jsonPatches
+            .some(function (patch) { return patch.path.startsWith(childPathPrefix); });
     };
     JsonStoreService.prototype.removeJsonPatch = function (patch) {
         var path = this.getComponentPathForPatch(patch);
@@ -7451,7 +7471,7 @@ TableItemFieldComponent.decorators = [
                 // tslint:disable-next-line
                 selector: '[table-item-field]',
                 styles: [""],
-                template: "<td *ngFor=\"let key of keys; trackBy:trackByElement; first as isFirst\" [style.width]=\"schema.properties[key].columnWidth + '%'\" [ngClass]=\"isFirst ? redLeftBorderClass : ''\"> <patch-actions *ngIf=\"removeJsonPatch && isFirst\" [patch]=\"removeJsonPatch\"></patch-actions> <any-type-field [value]=\"value.get(key) | selfOrEmpty:schema.properties[key]\" [schema]=\"schema.properties[key]\" [path]=\"getPathForChild(key)\"> </any-type-field> <add-new-element-button *ngIf=\"schema.properties[key].type === 'array'\" [path]=\"getPathForChild(key)\" [schema]=\"schema.properties[key]\"> </add-new-element-button> </td> <!-- td element with list-action-group (up/down and delete buttons) --> <ng-content></ng-content>",
+                template: "<td *ngFor=\"let key of keys; trackBy:trackByElement; first as isFirst\" [style.width]=\"schema.properties[key].columnWidth + '%'\" [ngClass]=\"isFirst ? redLeftBorderClass : ''\"> <any-type-field [value]=\"value.get(key) | selfOrEmpty:schema.properties[key]\" [schema]=\"schema.properties[key]\" [path]=\"getPathForChild(key)\"> </any-type-field> <add-new-element-button *ngIf=\"schema.properties[key].type === 'array'\" [path]=\"getPathForChild(key)\" [schema]=\"schema.properties[key]\"> </add-new-element-button> <patch-actions *ngIf=\"removeJsonPatch && isFirst\" [patch]=\"removeJsonPatch\"></patch-actions> </td> <!-- td element with list-action-group (up/down and delete buttons) --> <ng-content></ng-content> ",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
@@ -7552,7 +7572,7 @@ TableListFieldComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */], args: [{
                 selector: 'table-list-field',
                 styles: ["table.editable-inner-table { border: none; } table.editable-inner-table thead > tr > th { vertical-align: middle; border: none; color: #c1c1c1; } "],
-                template: "<div [id]=\"pathString\" [ngClass]=\"redLeftBorderClass\"> <table class=\"table editable-inner-table\"> <thead class=\"thead-inverse\"> <tr> <th *ngFor=\"let key of keys$ | async; trackBy:trackByElement\" [style.width]=\"schema.items.properties[key].columnWidth + '%'\"> {{key | underscoreToSpace}} </th> <th class=\"button-holder\" [class.sortable]=\"schema.sortable\"> <add-field-dropdown *ngIf=\"values.size > 0\" [fields]=\"keys$ | async\" [pathString]=\"pathString\" [schema]=\"schema.items\" [isDisabled]=\"disabled\"> <i class=\"fa fa-plus\"></i> <i class=\"fa fa-caret-down\"></i> </add-field-dropdown> </th> </tr> </thead> <tr *ngFor=\"let value of values; let i = index; trackBy:trackByIndex\" table-item-field [id]=\"getPathStringForChild(i)\" [value]=\"value\" [schema]=\"schema.items\" [path]=\"getPathForChild(i)\" [keys]=\"keys$ | async\"> <td *ngIf=\"values.size > 0\" class=\"button-holder\" [class.sortable]=\"schema.sortable\"> <list-action-group (onMove)=\"moveElement(i, $event)\" (onDelete)=\"deleteElement(i)\" [canMove]=\"schema.sortable\" [isDisabled]=\"disabled\"></list-action-group> </td> </tr> <tr *ngIf=\"removeJsonPatch\"> <patch-actions [patch]=\"removeJsonPatch\"></patch-actions> </tr> </table> <div *ngFor=\"let patch of addJsonPatches\"> <add-patch-view [patch]=\"patch\"></add-patch-view> </div> </div>",
+                template: "<div [id]=\"pathString\" [ngClass]=\"redLeftBorderClass\"> <table class=\"table editable-inner-table\"> <thead class=\"thead-inverse\"> <tr> <th *ngFor=\"let key of keys$ | async; trackBy:trackByElement\" [style.width]=\"schema.items.properties[key].columnWidth + '%'\"> {{key | underscoreToSpace}} </th> <th class=\"button-holder\" [class.sortable]=\"schema.sortable\"> <add-field-dropdown *ngIf=\"values.size > 0\" [fields]=\"keys$ | async\" [pathString]=\"pathString\" [schema]=\"schema.items\" [isDisabled]=\"disabled\"> <i class=\"fa fa-plus\"></i> <i class=\"fa fa-caret-down\"></i> </add-field-dropdown> </th> </tr> </thead> <tr *ngFor=\"let value of values; let i = index; trackBy:trackByIndex\" table-item-field [id]=\"getPathStringForChild(i)\" [value]=\"value\" [schema]=\"schema.items\" [path]=\"getPathForChild(i)\" [keys]=\"keys$ | async\"> <td *ngIf=\"values.size > 0\" class=\"button-holder\" [class.sortable]=\"schema.sortable\"> <list-action-group (onMove)=\"moveElement(i, $event)\" (onDelete)=\"deleteElement(i)\" [canMove]=\"schema.sortable\" [isDisabled]=\"disabled\"></list-action-group> </td> </tr> <tr *ngIf=\"removeJsonPatch\"> <patch-actions [patch]=\"removeJsonPatch\"></patch-actions> </tr> </table> <div *ngFor=\"let patch of addJsonPatches\"> <add-or-replace-patch [patch]=\"patch\"></add-or-replace-patch> </div> <div *ngIf=\"replaceJsonPatches && replaceJsonPatches[0]\"> <add-or-replace-patch [patch]=\"replaceJsonPatches[0]\"></add-or-replace-patch> </div> </div> ",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
