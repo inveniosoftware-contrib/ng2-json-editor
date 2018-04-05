@@ -1,4 +1,4 @@
-<div class="patch-actions-container" tabindex="-1">
+<div class="patch-actions-container" [ngClass]="patch.op" tabindex="-1">
   <button><i class="fa fa-check-circle" (click)="onAcceptClick()"></i></button>
   <button><i class="fa fa-times-circle" (click)="onRejectClick()"></i></button>
   <button  *ngIf="addActionEnabled"><i class="fa fa-plus-circle" (click)="onAddNewClick()"></i></button>

@@ -7,7 +7,7 @@
   <button class="btn btn-danger" (click)="rejectAll()">Reject All<i class="fa fa-times icon-padding-left"></i></button>
 </div>
 <ul class="list-group">
-  <li *ngFor="let patch of patches" class="list-group-item" (click)="focusPatchForPath(patch.path)">
+  <li *ngFor="let patch of patches" class="list-group-item" (click)="focusPatch(patch)">
     <i class="fa fa-bolt"></i> {{patch.path}} - {{patch.op}}
   </li>
 </ul>

@@ -25,6 +25,8 @@ import { Injectable } from '@angular/core';
 import { TabsUtilService } from './tabs-util.service';
 import { ListPageChangerService } from './list-page-changer.service';
 
+import { JsonPatch } from '../interfaces';
+
 @Injectable()
 export class DomUtilService {
 
@@ -112,17 +114,17 @@ export class DomUtilService {
     }
   }
 
-  focusPatchElementById(id: string) {
-    this.tabsUtilService.selectTabIfNeeded(id);
-    this.listPageChangerService.changePage(id);
+  focusPatch(patch: JsonPatch) {
+    this.tabsUtilService.selectTabIfNeeded(patch.path);
+    this.listPageChangerService.changePage(patch.path);
     setTimeout(() => {
-      const el = document.getElementById(id);
+      const el = document.getElementById(patch.path);
       const mergeButton = el.querySelector('.btn-merge') as HTMLButtonElement;
       if (mergeButton) {
         mergeButton.focus();
         mergeButton.click();
       } else {
-        const patchActionsContainer = el.querySelector('.patch-actions-container') as HTMLElement;
+        const patchActionsContainer = el.querySelector(`.${patch.op}.patch-actions-container`) as HTMLElement;
         if (patchActionsContainer) {
           patchActionsContainer.focus();
         }
