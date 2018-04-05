@@ -57,7 +57,7 @@
           <object-field [value]="values.get(item.index)" [schema]="schema.items" [path]="getPathForChild(item.index)" [isComplexListFieldItem]="true">
           </object-field>
           <div class="row element-button-container">
-            <div class="col-md-12 right">
+            <div class="col-md-12 text-right">
               <list-action-group (onMove)="moveElement(item.index, $event)" (onDelete)="deleteElement(item.index)" [canMove]="sortable"
                 [isDisabled]="disabled || hasPatchOrChildrenHavePatch()">
               </list-action-group>
@@ -66,7 +66,7 @@
         </span>
       </div>
     </div>
-    <div class="right" *ngIf="removeJsonPatch">
+    <div class="text-right" *ngIf="removeJsonPatch">
       <patch-actions [patch]="removeJsonPatch"></patch-actions>
     </div>
   </div>
