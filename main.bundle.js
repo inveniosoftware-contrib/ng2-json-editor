@@ -5183,9 +5183,12 @@ var JsonStoreService = (function () {
         if (this.hasPatch(path)) {
             return true;
         }
-        var childPathPrefix = "" + path + this.pathUtilService.separator;
-        return this.jsonPatches
-            .some(function (patch) { return patch.path.startsWith(childPathPrefix); });
+        if (this.jsonPatches) {
+            var childPathPrefix_1 = "" + path + this.pathUtilService.separator;
+            return this.jsonPatches
+                .some(function (patch) { return patch.path.startsWith(childPathPrefix_1); });
+        }
+        return false;
     };
     JsonStoreService.prototype.removeJsonPatch = function (patch) {
         var path = this.getComponentPathForPatch(patch);
