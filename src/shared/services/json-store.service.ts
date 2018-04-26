@@ -212,9 +212,12 @@ export class JsonStoreService {
       return true;
     }
 
-    const childPathPrefix = `${path}${this.pathUtilService.separator}`;
-    return this.jsonPatches
-      .some(patch => patch.path.startsWith(childPathPrefix));
+    if (this.jsonPatches) {
+      const childPathPrefix = `${path}${this.pathUtilService.separator}`;
+      return this.jsonPatches
+        .some(patch => patch.path.startsWith(childPathPrefix));
+    }
+    return false;
   }
 
   private removeJsonPatch(patch: JsonPatch) {
