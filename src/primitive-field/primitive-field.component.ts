@@ -136,8 +136,16 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   }
 
   onSearchableDropdownSelect(value: string) {
-    this.value = value;
+    this.onValueChange(value);
     this.commitValueChange();
+  }
+
+  onCompletionSelect(selection: string | object) {
+    this.commitValueChange();
+    const onCompletionSelect = this.schema.autocompletionConfig.onCompletionSelect;
+    if (onCompletionSelect) {
+      onCompletionSelect(this.path, selection, this.jsonStoreService, this.keysStoreService);
+    }
   }
 
   get tabIndex(): number {

@@ -24,9 +24,9 @@
             (onBlur)="onBlur()"></searchable-dropdown>
         </div>
         <div *ngSwitchCase="'autocomplete'">
-          <autocomplete-input [pathString]="pathString" [value]="value" [path]="path" [autocompletionConfig]="schema.autocompletionConfig"
-            (onBlur)="onBlur()" (onKeypress)="onKeypress($event)" (onValueChange)="onValueChange($event)" [placeholder]="schema.title"
-            [tabIndex]="tabIndex"></autocomplete-input>
+          <autocomplete-input [pathString]="pathString" [value]="value" [autocompletionConfig]="schema.autocompletionConfig"
+            (onBlur)="onBlur()" (onKeypress)="onKeypress($event)" (onValueChange)="onValueChange($event)" (onCompletionSelect) = "onCompletionSelect($event)" 
+            [placeholder]="schema.title" [tabIndex]="tabIndex"></autocomplete-input>
         </div>
         <div *ngSwitchCase="'integer'">
           <input type="number" [(ngModel)]="value" [tabindex]="tabIndex" [attr.data-path]="pathString" (blur)="onBlur()" (keypress)="onKeypress($event)"
