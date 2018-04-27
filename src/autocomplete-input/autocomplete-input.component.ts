@@ -22,8 +22,9 @@
 
 import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { TypeaheadMatch } from 'ngx-bootstrap';
 
-import { JsonStoreService, RemoteAutocompletionService, AppGlobalsService, KeysStoreService } from '../shared/services';
+import { RemoteAutocompletionService, AppGlobalsService } from '../shared/services';
 import { AutocompletionConfig } from '../shared/interfaces';
 
 @Component({
@@ -37,22 +38,20 @@ import { AutocompletionConfig } from '../shared/interfaces';
 export class AutocompleteInputComponent implements OnInit {
 
   @Input() autocompletionConfig: AutocompletionConfig;
-  @Input() path: Array<any>;
   @Input() value: string;
   @Input() pathString: string;
   @Input() tabIndex: number;
   @Input() placeholder: string;
 
-  @Output() onValueChange: EventEmitter<string> = new EventEmitter<any>();
-  @Output() onKeypress: EventEmitter<KeyboardEvent> = new EventEmitter<any>();
-  @Output() onBlur: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onValueChange = new EventEmitter<string>();
+  @Output() onCompletionSelect = new EventEmitter<string>();
+  @Output() onKeypress = new EventEmitter<KeyboardEvent>();
+  @Output() onBlur = new EventEmitter<void>();
 
   dataSource: Observable<Array<string | object>> | Array<string | object>;
   typeaheadOptionField: string;
 
   constructor(public remoteAutocompletionService: RemoteAutocompletionService,
-    public jsonStoreService: JsonStoreService,
-    public keysStoreService: KeysStoreService,
     public appGlobalsService: AppGlobalsService) { }
 
   ngOnInit() {
@@ -81,11 +80,7 @@ export class AutocompleteInputComponent implements OnInit {
     this.onValueChange.emit(value);
   }
 
-  onCompletionSelect(selection: object | string) {
-    const onCompletionSelect = this.autocompletionConfig.onCompletionSelect;
-    if (onCompletionSelect) {
-      // .slice() is used to pass by value instead of reference
-      onCompletionSelect(this.path.slice(), selection, this.jsonStoreService, this.keysStoreService);
-    }
+  onMatchSelect(match: TypeaheadMatch) {
+    this.onCompletionSelect.emit(match.item);
   }
 }

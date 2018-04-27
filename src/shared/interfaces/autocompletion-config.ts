@@ -24,7 +24,7 @@ export interface AutocompletionConfig {
   /**
    * Function to be called when a completion results is selected.
    */
-  onCompletionSelect?: (path: Array<any>, selection: object | string, jsonStore: JsonStoreService, keysStore: KeysStoreService) => void;
+  onCompletionSelect?: (path: Array<any>, selection: string | object, jsonStore: JsonStoreService, keysStore: KeysStoreService) => void;
 
   /**
    * Maximum number of items to be displayed as autocompletion result in dropdown.
