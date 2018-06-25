@@ -26,9 +26,10 @@ import { KeysStoreService } from './keys-store.service';
 import { PathUtilService } from './path-util.service';
 import { AppGlobalsService } from './app-globals.service';
 import { JsonSchemaService } from './json-schema.service';
-import { ProblemsService } from './errors.service';
+import { ProblemsService } from './problems.service';
 
 import { JSONSchema } from '../interfaces';
+import { CompareKeysBySchemaService } from '.';
 
 class MockJsonSchemaService extends JsonSchemaService {
   static schemaToReturn: JSONSchema;
@@ -57,7 +58,8 @@ describe('KeysStoreService', () => {
     service = new KeysStoreService(
       new AppGlobalsService(),
       new PathUtilService(),
-      new MockJsonSchemaService(null)
+      new MockJsonSchemaService(null),
+      new CompareKeysBySchemaService(),
     );
   });
 
@@ -184,6 +186,7 @@ describe('KeysStoreService', () => {
     assertKeys$Map(expectedKeysMap);
   });
 
+  // FIXME: perhaps remove it because this is tested in CompareKeysBySchemaService
   it('built keys should be ordered by schema.priority (ositive larger first, then alphabetically, then negative)', () => {
     const schema = {
       type: 'object',

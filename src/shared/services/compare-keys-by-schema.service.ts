@@ -1,6 +1,6 @@
 /*
  * This file is part of ng2-json-editor.
- * Copyright (C) 2017 CERN.
+ * Copyright (C) 2018 CERN.
  *
  * ng2-json-editor is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -20,35 +20,29 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import { JsonPatch, JSONSchema } from '../shared/interfaces';
-import { JsonSchemaService } from '../shared/services';
+import { JSONSchema } from '../interfaces';
 
-@Component({
-  selector: 'add-or-replace-patch',
-  styleUrls: [
-    './add-or-replace-patch.component.scss'
-  ],
-  templateUrl: './add-or-replace-patch.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
-})
-export class AddOrReplacePatchComponent implements OnChanges {
+@Injectable()
+export class CompareKeysBySchemaService {
 
-  @Input() patch: JsonPatch;
+  /**
+   * @param key1 the first key
+   * @param key2 the second key
+   * @param schema schema of the parent object
+   */
+  compare(key1: string, key2: string, schema: JSONSchema): number {
+    // Sort by priority, larger is the first.
+    const priorty1 = schema.properties[key1].priority || 0;
+    const priority2 = schema.properties[key2].priority || 0;
 
-  schema: JSONSchema;
+    if (priorty1 > priority2) { return -1; }
+    if (priorty1 < priority2) { return 1; }
 
-  constructor(private jsonSchemaService: JsonSchemaService) { }
-
-  ngOnChanges(changes: SimpleChanges) {
-    const patchChanges = changes['patch'];
-    if (patchChanges) {
-      this.schema = this.jsonSchemaService.forPathString(this.patch.path);
-    }
-  }
-
-  get leftBorderClass(): string {
-    return this.patch.op === 'add' ? 'green-left-border' : 'orange-left-border';
+    // Sort alphabetically.
+    if (key1 < key2) { return -1; }
+    if (key1 > key2) { return 1; }
+    return 0;
   }
 }

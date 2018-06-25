@@ -1,6 +1,6 @@
 /*
  * This file is part of ng2-json-editor.
- * Copyright (C) 2017 CERN.
+ * Copyright (C) 2018 CERN.
  *
  * ng2-json-editor is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -20,35 +20,27 @@
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
 */
 
-import { Component, Input, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 
-import { JsonPatch, JSONSchema } from '../shared/interfaces';
-import { JsonSchemaService } from '../shared/services';
+import { JSONSchema } from '../interfaces';
+import { CompareKeysBySchemaService } from '../services';
 
-@Component({
-  selector: 'add-or-replace-patch',
-  styleUrls: [
-    './add-or-replace-patch.component.scss'
-  ],
-  templateUrl: './add-or-replace-patch.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+@Pipe({
+  name: 'sortKeysBySchema',
+  pure: false,
 })
-export class AddOrReplacePatchComponent implements OnChanges {
+export class SortKeysBySchemaPipe implements PipeTransform {
 
-  @Input() patch: JsonPatch;
+  constructor(private compareKeysBySchemaService: CompareKeysBySchemaService) { }
 
-  schema: JSONSchema;
-
-  constructor(private jsonSchemaService: JsonSchemaService) { }
-
-  ngOnChanges(changes: SimpleChanges) {
-    const patchChanges = changes['patch'];
-    if (patchChanges) {
-      this.schema = this.jsonSchemaService.forPathString(this.patch.path);
-    }
-  }
-
-  get leftBorderClass(): string {
-    return this.patch.op === 'add' ? 'green-left-border' : 'orange-left-border';
+  /**
+   * WARN: uses Array.sort hence mutates the first param
+   *
+   * @param keys keys in the object
+   * @param schema schema of the parent object
+   */
+  transform(keys: Array<string>, schema: JSONSchema): Array<string> {
+    return keys
+      .sort((a, b) => this.compareKeysBySchemaService.compare(a, b, schema));
   }
 }

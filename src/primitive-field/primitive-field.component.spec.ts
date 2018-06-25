@@ -51,7 +51,8 @@ import {
   ProblemsService,
   JsonSchemaService,
   TextDiffService,
-  ListPageChangerService
+  ListPageChangerService,
+  CompareKeysBySchemaService
 } from '../shared/services';
 
 import { ContentModelDirective } from '../shared/directives';
@@ -114,6 +115,7 @@ describe('PrimitiveFieldComponent', () => {
         JsonSchemaService,
         TextDiffService,
         ListPageChangerService,
+        CompareKeysBySchemaService,
         { provide: JsonStoreService, useClass: MockJsonStoreService }
       ]
     }).compileComponents();
