@@ -14,7 +14,6 @@
   "homepage": "https://github.com/inspirehep/ng2-json-editor",
   "license": "GPL-2.0",
   "angular-cli": {},
-  "main": "ng2-json-editor.js",
   "scripts": {
     "build": "gulp build",
     "start": "npm run build && npm run serve",
