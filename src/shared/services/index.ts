@@ -20,6 +20,7 @@ import { ProblemsService } from './problems.service';
 import { KatexService } from './katex.service';
 import { TextDiffService } from './text-diff.service';
 import { ListPageChangerService } from './list-page-changer.service';
+import { CompareKeysBySchemaService } from './compare-keys-by-schema.service';
 
 export {
   AppGlobalsService,
@@ -43,7 +44,8 @@ export {
   ProblemsService,
   KatexService,
   TextDiffService,
-  ListPageChangerService
+  ListPageChangerService,
+  CompareKeysBySchemaService
 };
 
 export const SHARED_SERVICES = [
@@ -68,5 +70,6 @@ export const SHARED_SERVICES = [
   ProblemsService,
   KatexService,
   TextDiffService,
-  ListPageChangerService
+  ListPageChangerService,
+  CompareKeysBySchemaService
 ];

@@ -29,6 +29,8 @@ import { JSONSchema } from '../interfaces';
 import { PathUtilService } from './path-util.service';
 import { JsonSchemaService } from './json-schema.service';
 import { AppGlobalsService } from './app-globals.service';
+import { CompareKeysBySchemaService } from './compare-keys-by-schema.service';
+
 
 @Injectable()
 export class KeysStoreService {
@@ -38,7 +40,8 @@ export class KeysStoreService {
 
   constructor(private appGlobalsService: AppGlobalsService,
     private pathUtilService: PathUtilService,
-    private jsonSchemaService: JsonSchemaService) { }
+    private jsonSchemaService: JsonSchemaService,
+    private compareKeysBySchemaService: CompareKeysBySchemaService) { }
 
   forPath(path: string): ReplaySubject<OrderedSet<string>> {
     return this.keys$Map[path];
@@ -56,7 +59,7 @@ export class KeysStoreService {
     // FIXME: could do O(logn) insert instead of O(nlogn) since the set is already sorted.
     this.keysMap[path] = this.keysMap[path]
       .add(key)
-      .sort((a, b) => this.compareByPriority(a, b, schema)) as OrderedSet<string>;
+      .sort((a, b) => this.compareKeysBySchemaService.compare(a, b, schema)) as OrderedSet<string>;
     this.keys$Map[path].next(this.keysMap[path]);
     this.onKeysChange.next({ path, keys: this.keysMap[path] });
     const newKeyPath = `${path}${this.pathUtilService.separator}${key}`;
@@ -242,22 +245,8 @@ export class KeysStoreService {
       .filter(key => this.isNotHidden(key, schema) || this.appGlobalsService.adminMode)
       .concat(schema.required || [])
       .concat(schema.alwaysShow || [])
-      .sort((a, b) => this.compareByPriority(a, b, schema))
+      .sort((a, b) => this.compareKeysBySchemaService.compare(a, b, schema))
       .toOrderedSet();
-  }
-
-  private compareByPriority(a: string, b: string, schema: JSONSchema): number {
-    // Sort by priority, larger is the first.
-    const pa = schema.properties[a].priority || 0;
-    const pb = schema.properties[b].priority || 0;
-
-    if (pa > pb) { return -1; }
-    if (pa < pb) { return 1; }
-
-    // Sort alphabetically.
-    if (a < b) { return -1; }
-    if (a > b) { return 1; }
-    return 0;
   }
 
   private isNotHidden(key: string, schema: JSONSchema): boolean {

@@ -1,17 +1,17 @@
 <div class="patch-container" [ngClass]="leftBorderClass" [id]="patch.path" tabindex="-1">
   <div class="grow">
-    <ng-template [ngTemplateOutlet]="anyTypeTemplate" [ngTemplateOutletContext]="{value: patch.value}"></ng-template>
+    <ng-template [ngTemplateOutlet]="anyTypeTemplate" [ngTemplateOutletContext]="{value: patch.value, schema: schema}"></ng-template>
   </div>
   <patch-actions class="align-self-end" [patch]="patch"></patch-actions>
 </div>
 
-<ng-template #anyTypeTemplate let-value="value">
+<ng-template #anyTypeTemplate let-value="value" let-schema="schema">
   <ng-container [ngSwitch]="value | typeOf">
     <ng-container *ngSwitchCase="'object'">
-      <ng-template [ngTemplateOutlet]="objectTemplate" [ngTemplateOutletContext]="{object: value}"></ng-template>
+      <ng-template [ngTemplateOutlet]="objectTemplate" [ngTemplateOutletContext]="{object: value, schema: schema}"></ng-template>
     </ng-container>
     <ng-container *ngSwitchCase="'array'">
-      <ng-template [ngTemplateOutlet]="arrayTemplate" [ngTemplateOutletContext]="{array: value}"></ng-template>
+      <ng-template [ngTemplateOutlet]="arrayTemplate" [ngTemplateOutletContext]="{array: value, schema: schema}"></ng-template>
     </ng-container>
     <ng-container *ngSwitchDefault>
       <ng-template [ngTemplateOutlet]="primitiveTemplate" [ngTemplateOutletContext]="{primitive: value}"></ng-template>
@@ -19,24 +19,24 @@
   </ng-container>
 </ng-template>
 
-<ng-template #objectTemplate let-object="object">
+<ng-template #objectTemplate let-object="object" let-schema="schema">
   <table>
-    <tr *ngFor="let key of object | keys">
+    <tr *ngFor="let key of object | keys | sortKeysBySchema:schema">
       <td>
         <label>{{key}}</label>
       </td>
       <td>
-        <ng-template [ngTemplateOutlet]="anyTypeTemplate" [ngTemplateOutletContext]="{value: object[key]}"></ng-template>
+        <ng-template [ngTemplateOutlet]="anyTypeTemplate" [ngTemplateOutletContext]="{value: object[key], schema: schema.properties[key]}"></ng-template>
       </td>
     </tr>
   </table>
 </ng-template>
 
-<ng-template #arrayTemplate let-array="array">
+<ng-template #arrayTemplate let-array="array" let-schema="schema">
   <table>
     <tr *ngFor="let item of array" class="array-item">
       <td>
-        <ng-template [ngTemplateOutlet]="anyTypeTemplate" [ngTemplateOutletContext]="{value: item}"></ng-template>
+        <ng-template [ngTemplateOutlet]="anyTypeTemplate" [ngTemplateOutletContext]="{value: item, schema: schema.items}"></ng-template>
       </td>
     </tr>
   </table>

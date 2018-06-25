@@ -10,6 +10,7 @@ import { SortAlphabeticallyPipe } from './sort-alphabetically.pipe';
 import { KeysPipe } from './keys-pipe';
 import { LastPathElementPipe } from './last-path-element.pipe';
 import { TypeOfPipe } from './type-of.pipe';
+import { SortKeysBySchemaPipe } from './sort-keys-by-schema.pipe';
 
 export {
   AddAlwaysShowFieldsPipe,
@@ -23,7 +24,8 @@ export {
   SortAlphabeticallyPipe,
   KeysPipe,
   LastPathElementPipe,
-  TypeOfPipe
+  TypeOfPipe,
+  SortKeysBySchemaPipe
 };
 
 export const SHARED_PIPES = [
@@ -38,5 +40,6 @@ export const SHARED_PIPES = [
   SortAlphabeticallyPipe,
   KeysPipe,
   LastPathElementPipe,
-  TypeOfPipe
+  TypeOfPipe,
+  SortKeysBySchemaPipe
 ];
