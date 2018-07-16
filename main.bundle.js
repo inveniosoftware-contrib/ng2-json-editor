@@ -2637,7 +2637,7 @@ PatchActionsComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */], args: [{
                 selector: 'patch-actions',
                 styles: [".patch-actions-container { display: inline-block; padding-left: 2px; } .patch-actions-container > button { border: none; background-color: transparent; padding: 1px 3px 1.5px; } .patch-actions-container > button .fa { font-size: 18px; } .patch-actions-container > button .fa-check-circle { color: #27ae60; } .patch-actions-container > button .fa-times-circle { color: #e74c3c; } .patch-actions-container > button .fa-plus-circle { color: #f1c40f; } "],
-                template: "<div class=\"patch-actions-container\" [ngClass]=\"patch.op\" tabindex=\"-1\"> <button><i class=\"fa fa-check-circle\" (click)=\"onAcceptClick()\"></i></button> <button><i class=\"fa fa-times-circle\" (click)=\"onRejectClick()\"></i></button> <button  *ngIf=\"addActionEnabled\"><i class=\"fa fa-plus-circle\" (click)=\"onAddNewClick()\"></i></button> </div>",
+                template: "<div class=\"patch-actions-container\" [ngClass]=\"patch.op\" tabindex=\"-1\"> <button (click)=\"onAcceptClick()\"><i class=\"fa fa-check-circle\"></i></button> <button (click)=\"onRejectClick()\"><i class=\"fa fa-times-circle\"></i></button> <button  *ngIf=\"addActionEnabled\" (click)=\"onAddNewClick()\"><i class=\"fa fa-plus-circle\" ></i></button> </div>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
@@ -5939,6 +5939,9 @@ var ListPageChangerService = (function () {
     ListPageChangerService.prototype.changePage = function (itemPath) {
         var itemPathArray = this.pathUtilService.toPathArray(itemPath);
         var itemIndex = itemPathArray[itemPathArray.length - 1];
+        if (isNaN(itemIndex)) {
+            return;
+        }
         var listPath = this.pathUtilService.toPathString(itemPathArray.slice(0, -1));
         if (this.pageChange$Map[listPath]) {
             var itemsPerPage = this.itemsPerPageMap[listPath];
