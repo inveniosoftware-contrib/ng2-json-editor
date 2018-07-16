@@ -41,7 +41,11 @@ export class ListPageChangerService {
    */
   changePage(itemPath: string) {
     const itemPathArray = this.pathUtilService.toPathArray(itemPath);
-    const itemIndex = itemPathArray[itemPathArray.length - 1] as number;
+    const itemIndex = itemPathArray[itemPathArray.length - 1];
+    if (isNaN(itemIndex)) {
+      return;
+    }
+
     const listPath = this.pathUtilService.toPathString(itemPathArray.slice(0, -1));
     if (this.pageChange$Map[listPath]) {
       const itemsPerPage = this.itemsPerPageMap[listPath];
