@@ -89,7 +89,7 @@ export class JsonStoreService {
 
     this.json = this.json.removeIn(path);
     this.json$.next(this.json);
-    this.keysStoreService.deletePath(path);
+    this.keysStoreService.syncKeysForPath(path.slice(0, -1), this.json);
   }
 
   private pushRevertPatchToHistory(path: Array<any>, revertOp: string) {
