@@ -7,7 +7,7 @@
       <input [(ngModel)]="expression" placeholder="filter" (click)="$event.stopPropagation()">
     </li>
     <li class="divider dropdown-divider"></li>
-    <li *ngFor="let key of schema.properties | differentKeys:fields | filterByExpression:expression">
+    <li *ngFor="let key of schema.properties | differentKeys:fields | filterByExpression:expression | sortAlphabetically">
       <a class="dropdown-item" href="javascript:void(0)" (click)="onFieldSelect(key)">{{key}}</a>
     </li>
   </ul>
