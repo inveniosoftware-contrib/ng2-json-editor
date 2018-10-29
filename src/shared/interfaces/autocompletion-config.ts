@@ -32,10 +32,10 @@ export interface AutocompletionConfig {
   size: number;
 
   /**
-   * Name of the field in autocompletion result objects, used to be displayed and outputted
+   * Json pointer of the field in autocompletion result objects, used to be displayed and outputted
    *
    * - default: `''` if `source` is set (means that autocompletion results is array of string)
-   * - default: `'text'` if `url` is set (means that autcompletions results is array of objects with `text` property)
+   * - default: `'text'` if `url` is set (means that autcompletion results is array of objects with `text` property)
    */
   optionField?: string;
 

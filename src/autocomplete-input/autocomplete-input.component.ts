@@ -36,6 +36,7 @@ import { AutocompletionConfig } from '../shared/interfaces';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AutocompleteInputComponent implements OnInit {
+  static readonly slashesRegExp = new RegExp('/', 'g');
 
   @Input() autocompletionConfig: AutocompletionConfig;
   @Input() value: string;
@@ -57,7 +58,7 @@ export class AutocompleteInputComponent implements OnInit {
   ngOnInit() {
     if (this.autocompletionConfig.url) {
       // remote
-      this.typeaheadOptionField = this.autocompletionConfig.optionField || 'text';
+      this.typeaheadOptionField = this.getDotSeparatedOptionField() || 'text';
       this.dataSource = Observable.create((observer: any) => {
         if (this.value && this.value.length > 0) {
           observer.next(this.value);
@@ -66,13 +67,18 @@ export class AutocompleteInputComponent implements OnInit {
         this.remoteAutocompletionService.getAutocompletionResults(this.autocompletionConfig, token));
     } else {
       // local
-      this.typeaheadOptionField = this.autocompletionConfig.optionField || '';
+      this.typeaheadOptionField = this.getDotSeparatedOptionField() || '';
       this.dataSource = this.autocompletionConfig.source;
     }
   }
 
   get customItemTemplate(): TemplateRef<any> {
     return this.appGlobalsService.templates[this.autocompletionConfig.itemTemplateName];
+  }
+
+  getDotSeparatedOptionField() {
+    const { optionField } = this.autocompletionConfig;
+    return optionField && optionField.replace(AutocompleteInputComponent.slashesRegExp, '.');
   }
 
   onModelChange(value: string) {
