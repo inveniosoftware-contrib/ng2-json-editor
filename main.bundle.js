@@ -791,7 +791,7 @@ var AutocompleteInputComponent = (function () {
         var _this = this;
         if (this.autocompletionConfig.url) {
             // remote
-            this.typeaheadOptionField = this.autocompletionConfig.optionField || 'text';
+            this.typeaheadOptionField = this.getDotSeparatedOptionField() || 'text';
             this.dataSource = __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"].create(function (observer) {
                 if (_this.value && _this.value.length > 0) {
                     observer.next(_this.value);
@@ -802,7 +802,7 @@ var AutocompleteInputComponent = (function () {
         }
         else {
             // local
-            this.typeaheadOptionField = this.autocompletionConfig.optionField || '';
+            this.typeaheadOptionField = this.getDotSeparatedOptionField() || '';
             this.dataSource = this.autocompletionConfig.source;
         }
     };
@@ -813,6 +813,10 @@ var AutocompleteInputComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    AutocompleteInputComponent.prototype.getDotSeparatedOptionField = function () {
+        var optionField = this.autocompletionConfig.optionField;
+        return optionField && optionField.replace(AutocompleteInputComponent.slashesRegExp, '.');
+    };
     AutocompleteInputComponent.prototype.onModelChange = function (value) {
         this.value = value;
         this.onValueChange.emit(value);
@@ -823,6 +827,7 @@ var AutocompleteInputComponent = (function () {
     return AutocompleteInputComponent;
 }());
 
+AutocompleteInputComponent.slashesRegExp = new RegExp('/', 'g');
 AutocompleteInputComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */], args: [{
                 selector: 'autocomplete-input',
