@@ -1942,6 +1942,7 @@ var JsonEditorComponent = (function (_super) {
         }
         if (schemaChanged || recordChanged) {
             this.record = this.recordFixerService.fixRecord(this.record, this.fixedSchema);
+            this.lastEmittedRecord = this.record;
             this._record = Object(__WEBPACK_IMPORTED_MODULE_1_immutable__["fromJS"])(this.record);
             this.jsonStoreService.setJson(this._record);
             this.keysStoreService.buildKeysMap(this._record, this.fixedSchema);
