@@ -170,6 +170,7 @@ export class JsonEditorComponent extends AbstractSubscriberComponent implements 
 
     if (schemaChanged || recordChanged) {
       this.record = this.recordFixerService.fixRecord(this.record, this.fixedSchema);
+      this.lastEmittedRecord = this.record;
       this._record = fromJS(this.record);
       this.jsonStoreService.setJson(this._record);
       this.keysStoreService.buildKeysMap(this._record, this.fixedSchema);
