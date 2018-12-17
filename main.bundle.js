@@ -1853,7 +1853,7 @@ HtmlViewComponent.propDecorators = {
  * In applying this license, CERN does not
  * waive the privileges and immunities granted to it by virtue of its status
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
-*/
+ */
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -1887,12 +1887,14 @@ var JsonEditorComponent = (function (_super) {
         _this.validationProblems = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* EventEmitter */]();
         _this.pathString = '';
         _this.isBottomConsoleOpen = false;
+        _this.isPreviewerHidden = false;
         _this.isSidebarCollapsed = true;
         _this.bottomConsoleActiveTab = '';
         return _this;
     }
     JsonEditorComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.isPreviewerHidden = this.config.isPreviewerHiddenOnStart;
         this.appGlobalsService.adminMode$
             .takeUntil(this.isDestroyed)
             .subscribe(function (adminMode) {
@@ -2021,7 +2023,7 @@ var JsonEditorComponent = (function (_super) {
     });
     Object.defineProperty(JsonEditorComponent.prototype, "isPreviewerDisabled", {
         get: function () {
-            return this.config.previews === undefined || this.config.previews.length === 0;
+            return (this.config.previews === undefined || this.config.previews.length === 0);
         },
         enumerable: true,
         configurable: true
