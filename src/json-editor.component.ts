@@ -18,7 +18,7 @@
  * In applying this license, CERN does not
  * waive the privileges and immunities granted to it by virtue of its status
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
-*/
+ */
 
 import {
   Component,
@@ -89,8 +89,8 @@ export class JsonEditorComponent extends AbstractSubscriberComponent implements 
   _record: Map<string, any>;
   tabNames: Array<string>;
   previews: Array<Preview>;
-  isPreviewerHidden: boolean;
   isBottomConsoleOpen = false;
+  isPreviewerHidden = false;
   isSidebarCollapsed = true;
   bottomConsoleActiveTab = '';
   customShortcutKeys: CustomShortcutKeys;
@@ -100,7 +100,8 @@ export class JsonEditorComponent extends AbstractSubscriberComponent implements 
   // used to decide if the [record] is change caused by recordChange.emit or parent component
   private lastEmittedRecord: object;
 
-  constructor(public appGlobalsService: AppGlobalsService,
+  constructor(
+    public appGlobalsService: AppGlobalsService,
     public problemsService: ProblemsService,
     public jsonStoreService: JsonStoreService,
     public jsonUtilService: JsonUtilService,
@@ -109,11 +110,13 @@ export class JsonEditorComponent extends AbstractSubscriberComponent implements 
     public recordFixerService: RecordFixerService,
     public schemaFixerService: SchemaFixerService,
     public tabsUtilService: TabsUtilService,
-    public pathUtilService: PathUtilService) {
+    public pathUtilService: PathUtilService
+  ) {
     super();
   }
 
   ngOnInit() {
+    this.isPreviewerHidden = this.config.isPreviewerHiddenOnStart;
     this.appGlobalsService.adminMode$
       .takeUntil(this.isDestroyed)
       .subscribe(adminMode => {
@@ -254,7 +257,9 @@ export class JsonEditorComponent extends AbstractSubscriberComponent implements 
   }
 
   get isPreviewerDisabled(): boolean {
-    return this.config.previews === undefined || this.config.previews.length === 0;
+    return (
+      this.config.previews === undefined || this.config.previews.length === 0
+    );
   }
 
   set activeTabName(tabName: string) {
@@ -277,5 +282,4 @@ export class JsonEditorComponent extends AbstractSubscriberComponent implements 
   trackByElement(index: number, element: any): any {
     return element;
   }
-
 }
