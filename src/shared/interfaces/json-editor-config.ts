@@ -47,6 +47,13 @@ export interface JsonEditorConfig {
   schemaOptions?: SchemaOptions;
 
   /**
+   * If set, it hides the preview section of the editor.
+   *
+   * - It is `false` by default.
+   */
+  isPreviewerHiddenOnStart?: boolean;
+
+  /**
    * Configuration for previews to be displayed in previewer (on the right side).
    */
   previews?: Array<PreviewConfig>;
