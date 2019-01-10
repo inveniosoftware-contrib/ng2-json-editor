@@ -46,7 +46,7 @@ export class ShortcutActionPage extends Ng2JsonEditorPage {
 
   getNumberOfContentEditableElementsById(id: string): WDPromise<number> {
     const elem = element(by.id(id));
-    return elem.all(by.css('div[contenteditable=true]')).count();
+    return elem.all(by.css('span[contenteditable=true]')).count();
   }
 
   getNumberOfInputElementsById(id: string): WDPromise<number> {
@@ -55,7 +55,7 @@ export class ShortcutActionPage extends Ng2JsonEditorPage {
   }
 
   getValuesOfChildrenById(id: string): WDPromise<Array<string>> {
-    const elems = this.getChildrenOfElementByCss(this.getElementById(id), 'div[contenteditable=true], input');
+    const elems = this.getChildrenOfElementByCss(this.getElementById(id), 'span[contenteditable=true], input');
     return elems
       .map(elem => {
         return elem.getTagName()

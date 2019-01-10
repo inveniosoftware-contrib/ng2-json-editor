@@ -30,7 +30,7 @@ import { JsonPatch } from '../interfaces';
 @Injectable()
 export class DomUtilService {
 
-  private readonly editableSelector = '.value-container input, div[contenteditable=true], .switch-input, searchable-dropdown span.value';
+  private readonly editableSelector = '.value-container input, span[contenteditable=true], .switch-input, searchable-dropdown span.value';
   // highlight class is defined in json-editor.component.scss
   private readonly highlightClass = 'highlight';
   private highlightedElement: HTMLElement;
@@ -88,7 +88,7 @@ export class DomUtilService {
       }
       let nextSibling = direction > 0 ? elementParentCell.nextElementSibling : elementParentCell.previousElementSibling;
       while (nextSibling && nextSibling.nodeName === 'TD') {
-        const inputElement = nextSibling.querySelector(`input[tabindex='1'], div[contenteditable=true][tabindex='1']`) as HTMLElement;
+        const inputElement = nextSibling.querySelector(`input[tabindex='1'], span[contenteditable=true][tabindex='1']`) as HTMLElement;
         if (inputElement) {
           inputElement.focus();
           this.selectAllContent(inputElement);
