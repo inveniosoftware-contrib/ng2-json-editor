@@ -2843,7 +2843,7 @@ PrimitiveFieldComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */], args: [{
                 selector: 'primitive-field',
                 encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_16" /* ViewEncapsulation */].None,
-                styles: ["td.value-container div[contenteditable=true], td.value-container input { vertical-align: middle; transition: all 0.5s ease; border: none; background-color: transparent; display: inline-block; width: 100%; } table.primitive-field-container { width: 100%; } td.link-button-container { width: 22px; } td.value-container { width: 100%; padding: 3px 3px 3px 6px !important; } td.value-container:hover { background-color: #ffa !important; } a.no-decoration { text-decoration: none; } [contenteditable=true] { min-height: 18px; word-break: break-word; } [contenteditable=true]:empty:before { content: attr(placeholder); color: darkgray; display: block; /* For Firefox */ } .tooltip-left-align { margin-left: 12px; padding: 0px; } .btn-merge { border: none; background: transparent; width: 100%; text-align: left; white-space: normal; } .orange-left-border { border-left: 9px solid #e67e22; border-radius: 0; } .fa-bolt { color: #e67e22; } "],
+                styles: ["td.value-container span[contenteditable=true], td.value-container input { vertical-align: middle; transition: all 0.5s ease; border: none; background-color: transparent; display: inline-block; width: 100%; } table.primitive-field-container { width: 100%; } td.link-button-container { width: 22px; } td.value-container { width: 100%; padding: 3px 3px 3px 6px !important; } td.value-container:hover { background-color: #ffa !important; } a.no-decoration { text-decoration: none; } [contenteditable=true] { min-height: 18px; word-break: break-word; } [contenteditable=true]:empty:before { content: attr(placeholder); color: darkgray; display: block; /* For Firefox */ } .tooltip-left-align { margin-left: 12px; padding: 0px; } .btn-merge { border: none; background: transparent; width: 100%; text-align: left; white-space: normal; } .orange-left-border { border-left: 9px solid #e67e22; border-radius: 0; } .fa-bolt { color: #e67e22; } "],
                 template: "<div [id]=\"pathString\" [ngClass]=\"redLeftBorderClass\"> <table class=\"primitive-field-container\" [ngSwitch]=\"schema.componentType\"> <tr [ngClass]=\"errorClass\"> <ng-template #errorsTooltipTemplate> <ul class=\"tooltip-left-align\"> <li *ngFor=\"let error of internalErrors\"> {{error.message}} </li> <li *ngFor=\"let error of externalErrors\"> {{error.message}} </li> </ul> </ng-template> <td *ngIf=\"!replaceJsonPatches[0]; else patchTemplate\" class=\"value-container\" [class.disabled]=\"disabled\" [tooltip]=\"errorsTooltipTemplate\" [isDisabled]=\"!hasErrors()\" placement=\"{{tooltipPosition}}\" container=\"body\"> <div *ngSwitchCase=\"'string'\"> <string-input [pathString]=\"pathString\" [value]=\"value\" (valueChange)=\"onValueChange($event)\" [disabled]=\"disabled\" [tabIndex]=\"tabIndex\" [latexPreviewEnabled]=\"schema.latexPreviewEnabled\" [placeholder]=\"schema.title\" (blur)=\"onBlur()\" (onKeypress)=\"onKeypress($event)\"> </string-input> </div> <div *ngSwitchCase=\"'enum'\"> <searchable-dropdown [pathString]=\"pathString\" [value]=\"value\" [placeholder]=\"schema.title\" [items]=\"schema.enum\" [shortcutMap]=\"schema.enumShorcutMap\" (onSelect)=\"onSearchableDropdownSelect($event)\" [displayValueMap]=\"schema.enumDisplayValueMap\" [tabIndex]=\"tabIndex\" (onBlur)=\"onBlur()\"></searchable-dropdown> </div> <div *ngSwitchCase=\"'autocomplete'\"> <autocomplete-input [pathString]=\"pathString\" [value]=\"value\" [autocompletionConfig]=\"schema.autocompletionConfig\" (onBlur)=\"onBlur()\" (onKeypress)=\"onKeypress($event)\" (onValueChange)=\"onValueChange($event)\" (onCompletionSelect) = \"onCompletionSelect($event)\"  [placeholder]=\"schema.title\" [tabIndex]=\"tabIndex\"></autocomplete-input> </div> <div *ngSwitchCase=\"'integer'\"> <input type=\"number\" [(ngModel)]=\"value\" [tabindex]=\"tabIndex\" [attr.data-path]=\"pathString\" (blur)=\"onBlur()\" (keypress)=\"onKeypress($event)\" [placeholder]=\"schema.title\"> </div> <div *ngSwitchCase=\"'boolean'\"> <input type=\"checkbox\" [(ngModel)]=\"value\" (ngModelChange)=\"onBlur()\" [placeholder]=\"schema.title\"> </div> <div *ngSwitchDefault> ## Not recognized type: {{valueType}} </div> </td> <td class=\"link-button-container\"> <a *ngIf=\"schema.linkBuilder\" class=\"no-decoration\" target=\"_blank\" [href]=\"schema.linkBuilder(value)\"> <i class=\"fa fa-link\" aria-hidden=\"true\"></i> </a> <a *ngIf=\"!schema.linkBuilder && schema.format === 'url'\" class=\"no-decoration\" target=\"_blank\" [href]=\"value\"> <i class=\"fa fa-link\" aria-hidden=\"true\"></i> </a> </td> </tr> <tr *ngIf=\"removeJsonPatch\"> <patch-actions [patch]=\"removeJsonPatch\"></patch-actions> </tr> </table> </div> <ng-template #patchTemplate> <button class=\"btn btn-default btn-merge orange-left-border\" type=\"button\" [popover]=\"mergePopover\" [popoverContext]=\"{currentValue: value, patchValue: replaceJsonPatches[0].value}\" popoverTitle=\"Merge\" container=\"body\"> {{value}} <i class=\"fa fa-bolt\"></i> </button> </ng-template> <ng-template let-currentValue=\"currentValue\" let-patchValue=\"patchValue\" #mergePopover> <text-diff [currentText]=\"currentValue.toString()\" [newText]=\"patchValue ? patchValue.toString() : ''\"></text-diff> <patch-actions [patch]=\"replaceJsonPatches[0]\" [addActionEnabled]=\"isPathToAnIndex\"></patch-actions> </ng-template>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectionStrategy */].OnPush
             },] },
@@ -4663,7 +4663,7 @@ var DomUtilService = (function () {
     function DomUtilService(tabsUtilService, listPageChangerService) {
         this.tabsUtilService = tabsUtilService;
         this.listPageChangerService = listPageChangerService;
-        this.editableSelector = '.value-container input, div[contenteditable=true], .switch-input, searchable-dropdown span.value';
+        this.editableSelector = '.value-container input, span[contenteditable=true], .switch-input, searchable-dropdown span.value';
         // highlight class is defined in json-editor.component.scss
         this.highlightClass = 'highlight';
     }
@@ -4718,7 +4718,7 @@ var DomUtilService = (function () {
             }
             var nextSibling = direction > 0 ? elementParentCell.nextElementSibling : elementParentCell.previousElementSibling;
             while (nextSibling && nextSibling.nodeName === 'TD') {
-                var inputElement = nextSibling.querySelector("input[tabindex='1'], div[contenteditable=true][tabindex='1']");
+                var inputElement = nextSibling.querySelector("input[tabindex='1'], span[contenteditable=true][tabindex='1']");
                 if (inputElement) {
                     inputElement.focus();
                     this.selectAllContent(inputElement);
@@ -7378,9 +7378,9 @@ var StringInputComponent = (function () {
     StringInputComponent.prototype.renderLatex = function () {
         this.katexService.renderMathInText(this.value, this.latexPreviewEl.nativeElement);
     };
-    StringInputComponent.prototype.hideLatexPreview = function (contentEditableDiv) {
+    StringInputComponent.prototype.hideLatexPreview = function (contentEditableEl) {
         this.latexPreviewShown = false;
-        setTimeout(function () { return contentEditableDiv.focus(); });
+        setTimeout(function () { return contentEditableEl.focus(); });
     };
     StringInputComponent.prototype.contentModelChange = function (value) {
         this.contentModel = value;
@@ -7400,7 +7400,7 @@ StringInputComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */], args: [{
                 selector: 'string-input',
                 styles: [""],
-                template: "<div [class.hidden]=\"latexPreviewShown\" [attr.contenteditable]=\"!disabled\" [attr.data-path]=\"pathString\" [tabindex]=\"tabIndex\" [contentModel]=\"contentModel\" (contentModelChange)=\"contentModelChange($event)\" (blur)=\"onBlur()\" (keypress)=\"onKeypress.emit($event)\" attr.placeholder=\"{{placeholder || '⁣\u2063'}}\" #contentEditable></div> <div [class.hidden]=\"!latexPreviewEnabled || !latexPreviewShown\" (click)=\"hideLatexPreview(contentEditable)\" (blur)=\"hideLatexPreview(contentEditable)\" #latexPreview></div>",
+                template: "<span [class.hidden]=\"latexPreviewShown\" [attr.contenteditable]=\"!disabled\" [attr.data-path]=\"pathString\" [tabindex]=\"tabIndex\" [contentModel]=\"contentModel\" (contentModelChange)=\"contentModelChange($event)\" (blur)=\"onBlur()\" (keypress)=\"onKeypress.emit($event)\" attr.placeholder=\"{{placeholder || '⁣\u2063'}}\" #contentEditable></span> <div [class.hidden]=\"!latexPreviewEnabled || !latexPreviewShown\" (click)=\"hideLatexPreview(contentEditable)\" (blur)=\"hideLatexPreview(contentEditable)\" #latexPreview></div>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
