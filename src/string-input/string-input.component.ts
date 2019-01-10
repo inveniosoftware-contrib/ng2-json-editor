@@ -60,7 +60,7 @@ export class StringInputComponent implements AfterViewInit, OnInit, OnChanges {
   @Output() valueChange = new EventEmitter<string>();
 
   latexPreviewShown: boolean;
-  // updated as typed in contenteditable div, doesn't trigger latex re-rendering.
+  // updated as typed in contenteditable el, doesn't trigger latex re-rendering.
   contentModel: string;
 
   constructor(public domUtilService: DomUtilService, public katexService: KatexService) { }
@@ -100,9 +100,9 @@ export class StringInputComponent implements AfterViewInit, OnInit, OnChanges {
     this.katexService.renderMathInText(this.value, this.latexPreviewEl.nativeElement);
   }
 
-  hideLatexPreview(contentEditableDiv: HTMLElement) {
+  hideLatexPreview(contentEditableEl: HTMLElement) {
     this.latexPreviewShown = false;
-    setTimeout(() => contentEditableDiv.focus());
+    setTimeout(() => contentEditableEl.focus());
   }
 
   contentModelChange(value: string) {

@@ -65,7 +65,7 @@ import { ContentModelDirective } from '../shared/directives';
  *
  * TODO: create a test helper class for this kind of functions!
  *
- * @param {HTMLElement} el - <div contenteditable=true> or <input> html element
+ * @param {HTMLElement} el - <span contenteditable=true> or <input> html element
  * @param {string} value - new value to be set to el.value
  */
 function changeInputElementValue(el: HTMLInputElement, value: string) {
