@@ -1390,9 +1390,9 @@ var ComplexListFieldComponent = (function (_super) {
                         this.currentPage = lastPage;
                     }
                 }
-                this.paginatableItems = this.getPaginatableItems();
-                this.paginatedItems = this.getPaginatableItemsForPage(this.currentPage);
             }
+            this.paginatableItems = this.getPaginatableItems();
+            this.paginatedItems = this.getPaginatableItemsForPage(this.currentPage);
         }
     };
     ComplexListFieldComponent.prototype.hasProblemOrPatch = function (index) {
@@ -1470,9 +1470,9 @@ var ComplexListFieldComponent = (function (_super) {
     };
     ComplexListFieldComponent.prototype.getPaginatableItems = function () {
         var _this = this;
+        var viewTemplateConfig = this.schema.viewTemplateConfig;
         return this.values
             .map(function (value, index) {
-            var viewTemplateConfig = _this.schema.viewTemplateConfig;
             var isEditFormVisible = viewTemplateConfig ? viewTemplateConfig.showEditForm(value) : true;
             return { index: index, isEditFormVisible: isEditFormVisible };
         }).filter(function (item) {
@@ -5226,7 +5226,7 @@ var JsonStoreService = (function () {
         this.pushRevertPatchToHistory(path, 'add');
         this.json = this.json.removeIn(path);
         this.json$.next(this.json);
-        this.keysStoreService.syncKeysForPath(path.slice(0, -1), this.json);
+        this.keysStoreService.deletePath(path);
     };
     JsonStoreService.prototype.pushRevertPatchToHistory = function (path, revertOp) {
         this.history.push({
