@@ -111,9 +111,9 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
             this.currentPage = lastPage;
           }
         }
-        this.paginatableItems = this.getPaginatableItems();
-        this.paginatedItems = this.getPaginatableItemsForPage(this.currentPage);
       }
+      this.paginatableItems = this.getPaginatableItems();
+      this.paginatedItems = this.getPaginatableItemsForPage(this.currentPage);
     }
   }
 
@@ -191,9 +191,9 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
   }
 
   getPaginatableItems(): Iterable<number, PaginatedItem> {
+    const { viewTemplateConfig } = this.schema;
     return this.values
       .map((value, index) => {
-        const viewTemplateConfig = this.schema.viewTemplateConfig;
         const isEditFormVisible = viewTemplateConfig ? viewTemplateConfig.showEditForm(value) : true;
         return { index, isEditFormVisible };
       }).filter(item => {
