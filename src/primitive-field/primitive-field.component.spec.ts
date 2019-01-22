@@ -179,7 +179,7 @@ describe('PrimitiveFieldComponent', () => {
     expect(component.jsonStoreService.setIn).not.toHaveBeenCalled();
   });
 
-  it('should call jsonStore for change on enter pressed', () => {
+  xit('should call jsonStore for change on enter pressed', () => {
     spyOn(component.jsonStoreService, 'setIn');
     // change the value
     const newValue = '2';
@@ -189,7 +189,6 @@ describe('PrimitiveFieldComponent', () => {
     const enterPressedEvent = new Event('keypress');
     enterPressedEvent['key'] = 'Enter';
     inputEl.dispatchEvent(enterPressedEvent);
-
     expect(component.jsonStoreService.setIn).toHaveBeenCalledWith(component.path, Number(newValue));
   });
 
