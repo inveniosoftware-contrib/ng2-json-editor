@@ -24,7 +24,7 @@ import { List } from 'immutable';
 
 import { AbstractFieldComponent } from '../abstract-field';
 import { JsonStoreService, AppGlobalsService, PathUtilService, ProblemsService } from '../shared/services';
-import { JSONSchema, JsonPatch } from '../shared/interfaces';
+import { JSONSchema } from '../shared/interfaces';
 
 /**
  * Abstract component to share code of common operations of all array fields
@@ -60,7 +60,8 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
   deleteElement(index: number) {
     const elementPath = this.path.concat(index);
     this.jsonStoreService.removeIn(elementPath);
-    this.values = this.jsonStoreService.getIn(this.path);
+    // empty list as notSetValue, because there can be lists rendered on the UI, while they are absent in json (alwaysShow)
+    this.values = this.jsonStoreService.getIn(this.path, List());
   }
 
   getPathStringForChild(index: number): string {
