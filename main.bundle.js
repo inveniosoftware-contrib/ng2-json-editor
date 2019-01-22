@@ -174,7 +174,9 @@ var AbstractFieldComponent = (function (_super) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AbstractListFieldComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__abstract_field__ = __webpack_require__("../../../../../dist/src/abstract-field/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_immutable__ = __webpack_require__("../../../../immutable/dist/immutable.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_immutable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__abstract_field__ = __webpack_require__("../../../../../dist/src/abstract-field/index.js");
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -185,6 +187,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+
 
 /**
  * Abstract component to share code of common operations of all array fields
@@ -216,7 +219,8 @@ var AbstractListFieldComponent = (function (_super) {
     AbstractListFieldComponent.prototype.deleteElement = function (index) {
         var elementPath = this.path.concat(index);
         this.jsonStoreService.removeIn(elementPath);
-        this.values = this.jsonStoreService.getIn(this.path);
+        // empty list as notSetValue, because there can be lists rendered on the UI, while they are absent in json (alwaysShow)
+        this.values = this.jsonStoreService.getIn(this.path, Object(__WEBPACK_IMPORTED_MODULE_0_immutable__["List"])());
     };
     AbstractListFieldComponent.prototype.getPathStringForChild = function (index) {
         return "" + this.pathString + this.pathUtilService.separator + index;
@@ -225,7 +229,7 @@ var AbstractListFieldComponent = (function (_super) {
         return this.jsonStoreService.hasPatchOrChildrenHavePatch(this.pathString);
     };
     return AbstractListFieldComponent;
-}(__WEBPACK_IMPORTED_MODULE_0__abstract_field__["a" /* AbstractFieldComponent */]));
+}(__WEBPACK_IMPORTED_MODULE_1__abstract_field__["a" /* AbstractFieldComponent */]));
 
 
 
@@ -5219,8 +5223,8 @@ var JsonStoreService = (function () {
             }
         }
     };
-    JsonStoreService.prototype.getIn = function (path) {
-        return this.json.getIn(path);
+    JsonStoreService.prototype.getIn = function (path, notSetValue) {
+        return this.json.getIn(path, notSetValue);
     };
     JsonStoreService.prototype.removeIn = function (path) {
         this.pushRevertPatchToHistory(path, 'add');
