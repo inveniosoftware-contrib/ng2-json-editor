@@ -3,7 +3,6 @@ notifications:
 language: node_js
 node_js:
 - 6.9.1
-- node
 sudo: true
 dist: trusty
 addons:
