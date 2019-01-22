@@ -36,11 +36,19 @@ class MockKeysStoreService extends KeysStoreService {
 describe('JsonStoreService', () => {
 
   let service: JsonStoreService;
-  let historyLimit;
 
   beforeEach(() => {
-    service = new JsonStoreService(new PathUtilService(), new MockKeysStoreService(null, null, null));
-    historyLimit = service['historyLimit'];
+    service = new JsonStoreService(new PathUtilService(), new MockKeysStoreService(null, null, null, null));
+  });
+
+  it('should get notSetValue if path is not in json', () => {
+    const json = fromJS({
+      whatever: {}
+    });
+    service.setJson(json);
+
+    const result = service.getIn(['thing'], 'defaultValue');
+    expect(result).toEqual('defaultValue');
   });
 
   it('should set in path and notify when some lists parents is missing', () => {

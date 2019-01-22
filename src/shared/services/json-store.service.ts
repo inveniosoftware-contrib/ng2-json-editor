@@ -80,8 +80,8 @@ export class JsonStoreService {
     }
   }
 
-  getIn(path: Array<any>): any {
-    return this.json.getIn(path);
+  getIn(path: Array<any>, notSetValue?: any): any {
+    return this.json.getIn(path, notSetValue);
   }
 
   removeIn(path: Array<any>) {
