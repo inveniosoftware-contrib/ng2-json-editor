@@ -307,7 +307,9 @@ var AbstractSubscriberComponent = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddFieldDropdownComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_services__ = __webpack_require__("../../../../../dist/src/shared/services/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable__ = __webpack_require__("../../../../immutable/dist/immutable.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_immutable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_immutable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_services__ = __webpack_require__("../../../../../dist/src/shared/services/index.js");
 /*
  * This file is part of ng2-json-editor.
  * Copyright (C) 2016 CERN.
@@ -331,6 +333,7 @@ var AbstractSubscriberComponent = (function () {
 */
 
 
+
 var AddFieldDropdownComponent = (function () {
     function AddFieldDropdownComponent(elementRef, domUtilService, keysStoreService) {
         this.elementRef = elementRef;
@@ -340,8 +343,12 @@ var AddFieldDropdownComponent = (function () {
         this.hidden = false;
     }
     AddFieldDropdownComponent.prototype.ngOnChanges = function (changes) {
+        var _this = this;
         if (changes['schema'] || changes['fields']) {
             this.hidden = Object.keys(this.schema.properties).length === this.fields.size;
+            this.addableKeys = __WEBPACK_IMPORTED_MODULE_1_immutable__["Set"].fromKeys(this.schema.properties)
+                .subtract(this.fields)
+                .filter(function (field) { return !_this.schema.properties[field].hidden; });
         }
     };
     AddFieldDropdownComponent.prototype.onDropdownShown = function () {
@@ -362,15 +369,15 @@ AddFieldDropdownComponent.decorators = [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */], args: [{
                 selector: 'add-field-dropdown',
                 styles: [".btn-add-field-dropdown { padding: 0 3px; font-size: 11px; opacity: 0.4; border: 0; background: transparent; font-weight: bold; line-height: 1; text-shadow: 0 1px 0 #fff; color: darkslategray; margin-bottom: 2px; float: left; } .btn-add-field-dropdown:hover { color: blue; opacity: 0.6; } .dropdown-filter-container { padding: 0 3px; } .dropdown-filter-container input { width: 100%; } "],
-                template: "<div *ngIf=\"!hidden\" class=\"btn-group add-field-dropdown-container\" dropdown keyboardNav=\"true\" [isDisabled]=\"isDisabled\" (onShown)=\"onDropdownShown()\"> <button type=\"button\" class=\"btn btn-add-field-dropdown\" dropdownToggle> <ng-content></ng-content>  </button> <ul class=\"dropdown-menu\" *dropdownMenu> <li class=\"dropdown-filter-container\"> <input [(ngModel)]=\"expression\" placeholder=\"filter\" (click)=\"$event.stopPropagation()\"> </li> <li class=\"divider dropdown-divider\"></li> <li *ngFor=\"let key of schema.properties | differentKeys:fields | filterByExpression:expression | sortAlphabetically\"> <a class=\"dropdown-item\" href=\"javascript:void(0)\" (click)=\"onFieldSelect(key)\">{{key}}</a> </li> </ul> </div>",
+                template: "<div *ngIf=\"!hidden\" class=\"btn-group add-field-dropdown-container\" dropdown keyboardNav=\"true\" [isDisabled]=\"isDisabled\" (onShown)=\"onDropdownShown()\"> <button type=\"button\" class=\"btn btn-add-field-dropdown\" dropdownToggle> <ng-content></ng-content> </button> <ul class=\"dropdown-menu\" *dropdownMenu> <li class=\"dropdown-filter-container\"> <input [(ngModel)]=\"expression\" placeholder=\"filter\" (click)=\"$event.stopPropagation()\"> </li> <li class=\"divider dropdown-divider\"></li> <li *ngFor=\"let key of addableKeys | filterByExpression:expression | sortAlphabetically\"> <a class=\"dropdown-item\" href=\"javascript:void(0)\" (click)=\"onFieldSelect(key)\">{{key}}</a> </li> </ul> </div>",
                 changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["j" /* ChangeDetectionStrategy */].OnPush
             },] },
 ];
 /** @nocollapse */
 AddFieldDropdownComponent.ctorParameters = function () { return [
     { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */], },
-    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["d" /* DomUtilService */], },
-    { type: __WEBPACK_IMPORTED_MODULE_1__shared_services__["k" /* KeysStoreService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["d" /* DomUtilService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_2__shared_services__["k" /* KeysStoreService */], },
 ]; };
 AddFieldDropdownComponent.propDecorators = {
     'schema': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */] },],
@@ -5864,8 +5871,8 @@ var KeysStoreService = (function () {
     KeysStoreService.prototype.schemafy = function (keys, schema) {
         var _this = this;
         return keys
-            .filter(function (key) { return _this.isNotHidden(key, schema) || _this.appGlobalsService.adminMode; })
             .concat(schema.required || [])
+            .filter(function (key) { return _this.isNotHidden(key, schema) || _this.appGlobalsService.adminMode; })
             .concat(schema.alwaysShow || [])
             .sort(function (a, b) { return _this.compareKeysBySchemaService.compare(a, b, schema); })
             .toOrderedSet();
