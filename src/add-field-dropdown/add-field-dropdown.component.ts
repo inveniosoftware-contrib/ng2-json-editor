@@ -52,10 +52,10 @@ export class AddFieldDropdownComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['schema'] || changes['fields']) {
-      this.hidden = Object.keys(this.schema.properties).length === this.fields.size;
       this.addableKeys = Set.fromKeys(this.schema.properties)
         .subtract(this.fields)
         .filter(field => !this.schema.properties[field].hidden);
+      this.hidden = this.addableKeys.size === 0;
     }
   }
 
