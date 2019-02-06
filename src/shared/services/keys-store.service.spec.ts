@@ -678,4 +678,46 @@ describe('KeysStoreService', () => {
     expect(service.keysMap).toEqual(expectedKeysMap);
   });
 
+  it('should hide required schema fields if are explicitely set to hidden', () => {
+    const schema = {
+      type: 'object',
+      required: ['childA'],
+      properties: {
+        childA: {
+          type: 'object',
+          hidden: true,
+          properties: {
+            grandChild1: {
+              type: 'string'
+            }
+          }
+        },
+        childB: {
+          type: 'object',
+          properties: {
+            grandChild2: {
+              type: 'string'
+            }
+          }
+        }
+      }
+    };
+    MockJsonSchemaService.schemaToReturn = schema;
+    // build initial keys map
+    const json = fromJS({});
+    service.buildKeysMap(json, schema);
+    const expectedKeysMap = {
+      '': OrderedSet(['childB']),
+      '/childB': OrderedSet(['grandChild2'])
+    };
+    // new json after set
+    const newJson = fromJS({
+      childB: {
+        grandChild2: 'value',
+      }
+    });
+    service.syncKeysForPath(['childB'], newJson);
+    expect(service.keysMap).toEqual(expectedKeysMap);
+  });
+
 });
