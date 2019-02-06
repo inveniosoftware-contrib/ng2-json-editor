@@ -21,10 +21,11 @@
 */
 
 import { Component, Input, Output, EventEmitter, ElementRef, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
-import { Set } from 'immutable';
+import { Set, Iterable } from 'immutable';
 
 import { DomUtilService, KeysStoreService } from '../shared/services';
 import { JSONSchema } from '../shared/interfaces';
+import { stringify } from '@angular/core/src/util';
 
 @Component({
   selector: 'add-field-dropdown',
@@ -41,6 +42,7 @@ export class AddFieldDropdownComponent implements OnChanges {
   @Input() pathString: string;
   @Input() isDisabled: boolean;
 
+  addableKeys: Iterable<string, string>;
   expression = '';
   hidden = false;
 
@@ -51,6 +53,9 @@ export class AddFieldDropdownComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['schema'] || changes['fields']) {
       this.hidden = Object.keys(this.schema.properties).length === this.fields.size;
+      this.addableKeys = Set.fromKeys(this.schema.properties)
+        .subtract(this.fields)
+        .filter(field => !this.schema.properties[field].hidden);
     }
   }
 
