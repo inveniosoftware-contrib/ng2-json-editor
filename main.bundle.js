@@ -345,10 +345,10 @@ var AddFieldDropdownComponent = (function () {
     AddFieldDropdownComponent.prototype.ngOnChanges = function (changes) {
         var _this = this;
         if (changes['schema'] || changes['fields']) {
-            this.hidden = Object.keys(this.schema.properties).length === this.fields.size;
             this.addableKeys = __WEBPACK_IMPORTED_MODULE_1_immutable__["Set"].fromKeys(this.schema.properties)
                 .subtract(this.fields)
                 .filter(function (field) { return !_this.schema.properties[field].hidden; });
+            this.hidden = this.addableKeys.size === 0;
         }
     };
     AddFieldDropdownComponent.prototype.onDropdownShown = function () {
