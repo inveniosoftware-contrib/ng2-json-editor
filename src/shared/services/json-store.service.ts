@@ -41,8 +41,8 @@ export class JsonStoreService {
   private json: Map<string, any>;
   private jsonPatches: Array<JsonPatch>;
 
-  // list of reverse patches for important changes
-  private history = new SizedStack<JsonPatch>(5);
+  // list of reverse patches for changes
+  private history = new SizedStack<JsonPatch>(10);
 
   constructor(private pathUtilService: PathUtilService,
     private keysStoreService: KeysStoreService) { }
@@ -59,7 +59,7 @@ export class JsonStoreService {
     // therefore List() should be set manually for some of those keys.
     this.setEmptyListBeforeEachIndexInPath(path);
 
-    if (allowUndo && path.length <= 1) {
+    if (allowUndo) {
       this.pushRevertPatchToHistory(path, 'replace');
     }
 
