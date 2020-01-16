@@ -119,7 +119,7 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
 
   hasProblemOrPatch(index: number) {
     const itemPath = this.getPathStringForChild(index);
-    return this.problemsService.hasProblem(itemPath) || this.jsonStoreService.hasPatch(itemPath);
+    return this.problemsService.hasProblem(itemPath) || this.jsonStoreService.hasPatchOrChildrenHavePatch(itemPath);
   }
 
   get headerItemTemplate(): TemplateRef<any> {
@@ -169,9 +169,16 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
   }
 
   navigateToItem(index: number) {
-    this.currentPage = this.getPageForIndex(index);
+    const item = this.paginatableItems.get(index);
+
+    if (!item.editFormDisplayedByUser) {
+      item.editFormDisplayedByUser = true;
+      this.changeDetectorRef.markForCheck();
+    }
+
     const itemPath = this.path.concat(index);
     const itemId = this.pathUtilService.toPathString(itemPath);
+
     setTimeout(() => this.domUtilService.focusAndSelectFirstEditableChildById(itemId));
   }
 
@@ -194,11 +201,12 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
     const { viewTemplateConfig } = this.schema;
     return this.values
       .map((value, index) => {
-        const isEditFormVisible = viewTemplateConfig ? viewTemplateConfig.showEditForm(value) : true;
-        return { index, isEditFormVisible };
+        const editFormDisplayedByUser = this.paginatableItems ? this.paginatableItems.get(index).editFormDisplayedByUser : null;
+        const shouldDisplayEditForm = viewTemplateConfig ? viewTemplateConfig.showEditForm(value) : true;
+        return { index, shouldDisplayEditForm, editFormDisplayedByUser};
       }).filter(item => {
         if (this.shouldDisplayOnlyEditFormItems) {
-          return item.isEditFormVisible;
+          return item.shouldDisplayEditForm;
         } else {
           return true;
         }
@@ -221,12 +229,19 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
     return this.schema.sortable && !this.shouldDisplayOnlyEditFormItems;
   }
 
+  shouldDisplayEditableFieldsForItem(item: PaginatedItem): boolean {
+    // override default display state that is based on viewTemplateConfig.showEditForm(item) with user action
+    const shouldDisplayEditForm = item.editFormDisplayedByUser != null ? item.editFormDisplayedByUser : item.shouldDisplayEditForm;
+    return shouldDisplayEditForm || this.hasProblemOrPatch(item.index);
+  }
+
   set shouldDisplayOnlyEditFormItems(value: boolean) {
     this.currentPage = 1;
     this._shouldDisplayOnlyEditFormItems = value;
     this.paginatableItems = this.getPaginatableItems();
     this.paginatedItems = this.getPaginatableItemsForPage(this.currentPage);
   }
+
 
   get shouldDisplayOnlyEditFormItems(): boolean {
     return this._shouldDisplayOnlyEditFormItems;
