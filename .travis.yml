@@ -6,11 +6,7 @@ node_js:
 sudo: true
 dist: trusty
 addons:
-  apt:
-    sources:
-    - google-chrome
-    packages:
-    - google-chrome-stable
+  chrome: stable
 env:
   global:
   - GH_REF: github.com/inveniosoftware-contrib/ng2-json-editor.git
