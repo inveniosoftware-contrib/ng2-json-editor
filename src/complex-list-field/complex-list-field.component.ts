@@ -201,9 +201,11 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
     const { viewTemplateConfig } = this.schema;
     return this.values
       .map((value, index) => {
-        const editFormDisplayedByUser = this.paginatableItems ? this.paginatableItems.get(index).editFormDisplayedByUser : null;
+        const paginatableItem = this.paginatableItems ? this.paginatableItems.get(index) : null;
+        const isNewItem = paginatableItem == null;
+        const editFormDisplayedByUser = isNewItem ? null : paginatableItem.editFormDisplayedByUser;
         const shouldDisplayEditForm = viewTemplateConfig ? viewTemplateConfig.showEditForm(value) : true;
-        return { index, shouldDisplayEditForm, editFormDisplayedByUser};
+        return { index, shouldDisplayEditForm, editFormDisplayedByUser };
       }).filter(item => {
         if (this.shouldDisplayOnlyEditFormItems) {
           return item.shouldDisplayEditForm;
