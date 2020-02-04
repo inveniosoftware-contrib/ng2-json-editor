@@ -27,6 +27,7 @@ deploy:
   provider: npm
   skip_cleanup: true
   email: admin@inspirehep.net
+  edge: true
   api_key:
     secure: AGQ03Eg8NAhVE2mBNFihLmOPgDAkLJ2rkv9L0ogKUhsNSF0x6orI+01o5L0M+wfr6ZvUrHjuPo3/h5K83SPmrH0GIMdmd9KDOO92hLeMP/BNZqzBeAN7ewgJlRrwu/3ZsNVT/VwFjYHX4/JrFAJQ03MCj+vF5FJGU6kaG3fcesQuBZ2PPwzIir3x6A6J+ccAOBmHKIRA//sslO1+2qFKSUzAWL1mcAfTOZF1fNE9JuzuHYV//3c+7z9bk21oOPMnnXjfibYX5omLZXuoO25e2yIhUqbx+xNsBL/fJb6/IwTMO0E6AawarH0lE1NSEsWX4uZSkGER6YYdpg8FrqCUd0NbFhemukEe12tDPQJMPSJFT/IeYAquYd/FVW2R0dyw+W+0kwxuC7Vv2MNhZB05uuZCl60lpCD8b15muTbhh1sgoa8Y7zZlByswNIRJbogSyMRx5PTDhTbS0c2RIyHOOsvexlfiHosrN22UGMPgfYwlnAj968qx7FnnOFrn628opXL6kdsblSMupo7i4tQirn0eD7BJ0VAT+Vy7Dt8JBCWxGyiSI3Frra9saOn5a4CLuvJpQ0/NXImQvshdC9pNL+tYUM1Grh2DV3S+oWO2HKdqY08xvbY2RvYjFDY7hTB0Cq6UXYmMtCWVcbMUMKLUFasZUgnHCEgg689AssIREN4=
   on:
