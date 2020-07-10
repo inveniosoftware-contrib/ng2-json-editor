@@ -48,6 +48,18 @@ describe('ListPageChangerService', () => {
     service.changePage(itemPath);
   });
 
+  it('should change page for nested field', () => {
+    const listPath = '/list';
+    const nestedFieldPath = '/list/3/item/5/field/sub';
+    const itemsPerPage = 3;
+    const expectedPage = 2;
+    service.registerPaginatedList(listPath, itemsPerPage)
+    .subscribe(page => {
+      expect(page).toEqual(expectedPage);
+    });
+    service.changePage(nestedFieldPath);
+  });
+
   it('should not change page if path is not to an index', () => {
     const listPath = '/list';
     const itemPath = '/list/-';
