@@ -39,15 +39,13 @@ export class ListPageChangerService {
    *
    * @param itemPath path to a list item
    */
-  changePage(itemPath: string) {
-    const itemPathArray = this.pathUtilService.toPathArray(itemPath);
-    const itemIndex = itemPathArray[itemPathArray.length - 1];
-    if (isNaN(itemIndex)) {
-      return;
-    }
+  changePage(fieldPath: string) {
+    const fieldPathArray = this.pathUtilService.toPathArray(fieldPath);
+    const listPathArray = this.pathUtilService.getNearestOrRootArrayParentInPath(fieldPathArray, true);
 
-    const listPath = this.pathUtilService.toPathString(itemPathArray.slice(0, -1));
+    const listPath = this.pathUtilService.toPathString(listPathArray);
     if (this.pageChange$Map[listPath]) {
+      const itemIndex = fieldPathArray[listPathArray.length];
       const itemsPerPage = this.itemsPerPageMap[listPath];
       const page = Math.floor((itemIndex / itemsPerPage) + 1);
       this.pageChange$Map[listPath].next(page);
