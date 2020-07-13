@@ -21,7 +21,7 @@
     "serve": "ng serve",
     "lint": "tslint --project ./src/tsconfig.json \"src/**/*.ts\"",
     "test:unit": "ng test --code-coverage --sourcemaps=false --watch=false",
-    "test": "npm-run-all build test:unit e2e",
+    "test": "npm-run-all build test:unit",
     "pree2e": "webdriver-manager update",
     "e2e": "ng e2e --env=e2e",
     "preversion": "npm test",
