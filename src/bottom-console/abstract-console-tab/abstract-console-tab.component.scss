@@ -1,8 +1,17 @@
 .list-group-item {
   &:hover {
     background-color: #faebcc;
-    text-decoration: underline;
+    & > .title {
+      text-decoration: underline;
+    }
+
+    &.nested {
+      background-color: #e2dcd1;
+    }
   }
-  cursor: pointer;
-  color: #0074D9;
+
+  .title {
+    cursor: pointer;
+    color: #0074D9;
+  }
 }

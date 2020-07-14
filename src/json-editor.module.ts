@@ -29,6 +29,7 @@ import { HttpModule } from '@angular/http';
 
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { PopoverModule } from 'ngx-bootstrap/popover';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -111,6 +112,7 @@ import { AddOrReplacePatchComponent } from './add-or-replace-patch';
   exports: [JsonEditorComponent],
   imports: [
     TooltipModule.forRoot(),
+    CollapseModule.forRoot(),
     PopoverModule.forRoot(),
     BsDropdownModule.forRoot(),
     PaginationModule.forRoot(),

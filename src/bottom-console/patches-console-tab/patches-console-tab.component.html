@@ -7,7 +7,21 @@
   <button class="btn btn-danger" (click)="rejectAll()">Reject All<i class="fa fa-times icon-padding-left"></i></button>
 </div>
 <ul class="list-group">
-  <li *ngFor="let patch of patches" class="list-group-item" (click)="focusPatch(patch)">
-    <i class="fa fa-bolt"></i> {{patch.path}} - {{patch.op}}
+  <li *ngFor="let path of patchesByPath | keys" class="list-group-item">
+    <span *ngIf="patchesByPath[path].length === 1" (click)="focusPatch(patchesByPath[path][0])" role="button" class="title">
+      <i class="fa fa-bolt"></i> {{patchesByPath[path][0].path}} - {{patchesByPath[path][0].op}}
+    </span>
+    <ng-container *ngIf="patchesByPath[path].length > 1">
+      <span class="title" role="button" [attr.aria-controls]="path + '-collapse'" (click)="collapse.toggle()">
+        <i class="fa fa-expand"></i> {{path}} ({{patchesByPath[path].length}})
+      </span>
+      <ul class="list-group" #collapse="bs-collapse" [collapse]="true" [attr.id]="path + '-collapse'">
+        <li *ngFor="let patch of patchesByPath[path]" class="list-group-item nested">
+          <span class="title" (click)="focusPatch(patch)" role="button">
+            <i class="fa fa-bolt"></i> {{patch.path}} - {{patch.op}}
+          </span>
+        </li>
+      </ul>
+    </ng-container>
   </li>
 </ul>

@@ -29,7 +29,7 @@ import {
 
 import { AbstractSubscriberComponent } from '../../abstract-subscriber';
 import { DomUtilService, PathUtilService, JsonStoreService } from '../../shared/services';
-import { JsonPatch } from '../../shared/interfaces';
+import { JsonPatch, JsonPatchesByPath } from '../../shared/interfaces';
 
 @Component({
   selector: 'patches-console-tab',
@@ -42,7 +42,7 @@ import { JsonPatch } from '../../shared/interfaces';
 })
 export class PatchesConsoleTabComponent extends AbstractSubscriberComponent implements OnInit {
 
-  patches: Array<JsonPatch> = [];
+  patchesByPath: JsonPatchesByPath = {};
 
   constructor(private domUtilService: DomUtilService,
     private pathUtilService: PathUtilService,
@@ -53,20 +53,21 @@ export class PatchesConsoleTabComponent extends AbstractSubscriberComponent impl
 
   ngOnInit() {
     this.jsonStoreService.patchesByPath$
-      .map(patchesByPath => {
-        return Object.keys(patchesByPath)
-          .map(path => patchesByPath[path])
-          .reduce((pre, cur) => pre.concat(cur), []);
-      })
       .takeUntil(this.isDestroyed)
-      .subscribe(patches => {
-        this.patches = patches;
+      .subscribe(patchesByPath => {
+        this.patchesByPath = patchesByPath;
         this.changeDetectorRef.markForCheck();
       });
   }
 
   focusPatch(patch: JsonPatch) {
     this.domUtilService.focusPatch(patch);
+  }
+
+  get patches(): Array<JsonPatch> {
+    return Object
+      .keys(this.patchesByPath)
+      .reduce((patches, path) => patches.concat(this.patchesByPath[path]), []);
   }
 
   acceptAll() {
