@@ -2,7 +2,8 @@
   <i class="fa fa-bolt"></i> Conflicts <span class="badge">{{patches.length}}</span>
 </ng-template>
 
-<div *ngIf="patches && patches.length > 0" class="all-actions-container">
+<div *ngIf="patches && patches.length > 0" class="header-container">
+  <ng-template [ngTemplateOutlet]="customHeaderTemplate"></ng-template>
   <button class="btn btn-success" (click)="acceptAll()">Accept All<i class="fa fa-check icon-padding-left"></i></button>
   <button class="btn btn-danger" (click)="rejectAll()">Reject All<i class="fa fa-times icon-padding-left"></i></button>
 </div>
