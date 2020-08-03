@@ -10,11 +10,19 @@
     </span>
   </div>
 </ng-template>
+
+<ng-template #patchesHeaderTemplate>
+  <span>Patches (Conflicts) actions:</span>
+</ng-template>
+
 <json-editor *ngIf="record && schema"
   [config]="config"
   [(record)]="record"
   [(jsonPatches)]="patches"
   [problemMap]="problemMap"
   [schema]="schema"
-  [templates]="{referenceTemplate: referenceTemplate}">
+  [templates]="{
+    referenceTemplate: referenceTemplate,
+    patchesHeaderTemplate: patchesHeaderTemplate
+  }">
 </json-editor>

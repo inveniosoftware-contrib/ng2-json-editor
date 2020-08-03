@@ -24,11 +24,12 @@ import {
   Component,
   ChangeDetectionStrategy,
   OnInit,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  TemplateRef
 } from '@angular/core';
 
 import { AbstractSubscriberComponent } from '../../abstract-subscriber';
-import { DomUtilService, PathUtilService, JsonStoreService } from '../../shared/services';
+import { DomUtilService, PathUtilService, JsonStoreService, AppGlobalsService } from '../../shared/services';
 import { JsonPatch, JsonPatchesByPath } from '../../shared/interfaces';
 
 @Component({
@@ -45,6 +46,7 @@ export class PatchesConsoleTabComponent extends AbstractSubscriberComponent impl
   patchesByPath: JsonPatchesByPath = {};
 
   constructor(private domUtilService: DomUtilService,
+    private appGlobalsService: AppGlobalsService,
     private pathUtilService: PathUtilService,
     private jsonStoreService: JsonStoreService,
     private changeDetectorRef: ChangeDetectorRef) {
@@ -68,6 +70,10 @@ export class PatchesConsoleTabComponent extends AbstractSubscriberComponent impl
     return Object
       .keys(this.patchesByPath)
       .reduce((patches, path) => patches.concat(this.patchesByPath[path]), []);
+  }
+
+  get customHeaderTemplate(): TemplateRef<any> {
+    return this.appGlobalsService.templates.patchesHeaderTemplate;
   }
 
   acceptAll() {
