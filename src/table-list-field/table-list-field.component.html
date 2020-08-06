@@ -23,7 +23,7 @@
       <patch-actions [patch]="removeJsonPatch"></patch-actions>
     </tr>
   </table>
-  <div *ngFor="let patch of addJsonPatches">
+  <div class="add-patch" *ngFor="let patch of addJsonPatches">
     <add-or-replace-patch [patch]="patch"></add-or-replace-patch>
   </div>
   <div *ngIf="replaceJsonPatches && replaceJsonPatches[0]">
