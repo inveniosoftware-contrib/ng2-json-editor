@@ -565,3 +565,11 @@ complex-list-field {
     display: none;
   }
 }
+
+// Make nav tabs sticky
+.nav-tabs {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 1;
+}
