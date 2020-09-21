@@ -17,6 +17,8 @@ Here is a live example of ng2-json-editor: [https://inveniosoftware-contrib.gith
 
 ```bash
 npm install --save ng2-json-editor
+
+yarn add ng2-json-editor
 ```
 
 #### Style Requirements
@@ -78,15 +80,15 @@ git clone https://github.com/inveniosoftware-contrib/ng2-json-editor.git
 # change directory to our repo
 cd ng2-json-editor
 
-# install the repo with npm
-npm install
+# install the repo
+yarn install
 
 # build for the first time and start example app to see changes
-npm start
+yarn start
 
 # in another terminal session
 # watch changes on src, so that all will be available on example app immediately
-gulp watch
+yarn gulp watch
 ```
 
 ### Working with npm link
@@ -95,10 +97,10 @@ gulp watch
 # in ng2-json-editor
 
 # do initial build into dist
-npm run build
+yarn build
 
 # copy package.json to dist
-npm run copy
+yarn copy
 
 # go to dist folder and link it
 cd dist
@@ -109,7 +111,7 @@ rm -rf node_modules/
 
 # in another terminal session
 # watch changes on src, so that all will be available on the linked module
-gulp watch
+yarn gulp watch
 ```
 
 ```bash
@@ -120,7 +122,7 @@ npm link ng2-json-editor
 
 ### Debug e2e tests with vscode
 
-- `npm start`
+- `yarn start`
 - Put breakpoints
 - Go to debug view (`shift+mod+d`)
 - Run debugger with `e2e` configuration (`f5`)
@@ -129,19 +131,19 @@ npm link ng2-json-editor
 
 ```bash
 # build the editor and start the server with example app
-npm start
+yarn start
 
 # run unit tests
-npm run test:unit
+yarn test:unit
 
 # run e2e tests (an instance should be running)
-npm run test:e2e
+yarn test:e2e
 
 # test and watch (for usually debugging tests)
-ng test
+yarn test:watch
 
 # build
-gulp build 
+yarn build 
 ```
 
 ## Contributing

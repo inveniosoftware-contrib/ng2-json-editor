@@ -16,16 +16,17 @@
   "angular-cli": {},
   "scripts": {
     "build": "gulp build",
-    "start": "npm run build && npm run serve",
+    "start": "yarn build && yarn serve",
     "gulp": "gulp",
     "serve": "ng serve",
+    "test:watch": "ng test",
     "lint": "tslint --project ./src/tsconfig.json \"src/**/*.ts\"",
     "test:unit": "ng test --code-coverage --sourcemaps=false --watch=false",
     "test": "npm-run-all build test:unit",
     "pree2e": "webdriver-manager update",
     "e2e": "ng e2e --env=e2e",
-    "preversion": "npm test",
-    "version": "npm run build",
+    "preversion": "yarn test",
+    "version": "yarn build",
     "copy": "copyfiles LICENSE README.md package.json dist",
     "postversion": "git push upstream && git push upstream --tags",
     "coveralls": "cat coverage/coverage.lcov | coveralls",
@@ -111,7 +112,6 @@
     "url": "https://github.com/inspirehep/ng2-json-editor/issues"
   },
   "engines": {
-    "node": ">= 6.9.0",
-    "npm": ">= 3"
+    "node": "10.14.0"
   }
 }
