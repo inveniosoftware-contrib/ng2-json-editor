@@ -8,7 +8,7 @@
   <button class="btn btn-danger" (click)="rejectAll()">Reject All<i class="fa fa-times icon-padding-left"></i></button>
 </div>
 <ul class="list-group">
-  <li *ngFor="let path of patchesByPath | keys" class="list-group-item">
+  <li *ngFor="let path of patchesByPath | keys | sortAlphabetically" class="list-group-item">
     <span *ngIf="patchesByPath[path].length === 1" (click)="focusPatch(patchesByPath[path][0])" role="button" class="title">
       <i class="fa fa-bolt"></i> {{patchesByPath[path][0].path}} - {{patchesByPath[path][0].op}}
     </span>
