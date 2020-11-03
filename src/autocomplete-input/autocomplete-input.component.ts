@@ -89,4 +89,9 @@ export class AutocompleteInputComponent implements OnInit {
   onMatchSelect(match: TypeaheadMatch) {
     this.onCompletionSelect.emit(match.item);
   }
+
+  onMatchWrapperMouseDown(match: TypeaheadMatch) {
+    this.onModelChange(match.value);
+    this.onMatchSelect(match);
+  }
 }

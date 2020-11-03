@@ -1,6 +1,18 @@
+<ng-template let-match="match" #matchWrapper>
+  <div style="width: 100%; height: 100%; padding: 3px 20px;" (mousedown)="onMatchWrapperMouseDown(match)">
+    <ng-template [ngTemplateOutlet]="customItemTemplate || defaultItemTemplate"
+      [ngTemplateOutletContext]="{item:match.item, index:i, match:match, query:query}"></ng-template>
+  </div>
+</ng-template>
+
+<ng-template #defaultItemTemplate let-match="match">
+  {{match.value}}
+</ng-template>
+
 <div class="autocomplete-container">
-  <input attr.data-path="{{pathString}}" [ngModel]="value" (ngModelChange)="onModelChange($event)" (keypress)="onKeypress.emit($event)"
-    (blur)="onBlur.emit()" [typeahead]="dataSource" [typeaheadOptionsLimit]="autocompletionConfig.size" [typeaheadOptionField]="typeaheadOptionField"
-    [typeaheadItemTemplate]="customItemTemplate" (typeaheadOnSelect)="onMatchSelect($event)" [typeaheadWaitMs]="200" [tabindex]="tabIndex"
-    placeholder="{{placeholder}}">
+  <input attr.data-path="{{pathString}}" [ngModel]="value" (ngModelChange)="onModelChange($event)"
+    (keypress)="onKeypress.emit($event)" (blur)="onBlur.emit()" [typeahead]="dataSource"
+    [typeaheadOptionsLimit]="autocompletionConfig.size" [typeaheadOptionField]="typeaheadOptionField"
+    [typeaheadItemTemplate]="matchWrapper" (typeaheadOnSelect)="onMatchSelect($event)" [typeaheadWaitMs]="200"
+    [tabindex]="tabIndex" placeholder="{{placeholder}}">
 </div>

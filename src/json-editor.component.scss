@@ -573,3 +573,7 @@ complex-list-field {
     background: white;
     z-index: 1;
 }
+
+typeahead-container a[href='#'] {
+  padding: 0 !important;
+}
