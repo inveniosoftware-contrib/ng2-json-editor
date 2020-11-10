@@ -63,3 +63,6 @@ npm-debug.log
 # IDE #
 .idea/
 *.swp
+
+# pyenv
+.python-version

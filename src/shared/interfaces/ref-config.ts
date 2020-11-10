@@ -21,6 +21,11 @@ export interface RefConfig {
   headers?: Array<HttpHeader>;
 
   /**
+   * Flag to indicate if the template should display the input field.
+   */
+  displayInputField?: boolean;
+
+  /**
    * Function to be called to set display and href of the anchor element that opens the $ref link on the new tab
    * instead of the full link display text and the link itself. It is used if template is not configured for $ref field.
    */
