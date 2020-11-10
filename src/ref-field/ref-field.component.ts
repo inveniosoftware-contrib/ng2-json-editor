@@ -100,6 +100,10 @@ export class RefFieldComponent implements OnChanges {
     return this.appGlobalsService.templates[this.refConfig.templateName];
   }
 
+  get pathStringWithRef(): string {
+    return this.pathString + this.pathUtilService.separator + '$ref';
+  }
+
   get refConfig(): RefConfig {
     return this.schema.refFieldConfig;
   }
@@ -122,6 +126,10 @@ export class RefFieldComponent implements OnChanges {
 
   get shouldDisplayTemplate(): boolean {
     return this.isPreviewButtonHidden || !this.refConfig.lazy;
+  }
+
+  get shouldDisplayInputField(): boolean {
+    return this.refConfig !== undefined && this.refConfig.displayInputField;
   }
 
   private fetchRef() {
