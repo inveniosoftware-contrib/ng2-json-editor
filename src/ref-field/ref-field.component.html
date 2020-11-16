@@ -1,8 +1,8 @@
 <div [id]="pathString">
+  <div *ngIf="shouldDisplayInputField">
+    <primitive-field [value]="ref" [schema]="schema['properties']['$ref']" [path]="refPath"></primitive-field>
+  </div>
   <div *ngIf="ref">
-    <div *ngIf="shouldDisplayInputField" >
-      <string-input [pathString]="pathStringWithRef" [value]="ref" [tabIndex]="tabIndex" [placeholder]="schema.properties.$ref.title"></string-input>
-    </div>
     <div *ngIf="isTemplateEnabled">
       <button class="btn-preview-template" *ngIf="!shouldDisplayTemplate" (click)="onPreviewClick($event)"><i class="fa fa-eye"></i></button>
       <div *ngIf="shouldDisplayTemplate">
