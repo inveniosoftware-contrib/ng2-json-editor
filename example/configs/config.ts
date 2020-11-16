@@ -29,6 +29,18 @@ export const defaultConfig: JsonEditorConfig = {
           }
         }
       },
+      collaborations: {
+        items: {
+          order: ['value'],
+          properties: {
+            record: {
+              refFieldConfig: {
+                displayInputField: true,
+              },
+            },
+          },
+        },
+      },
       references: {
         sortable: true,
         longListNavigatorConfig: {

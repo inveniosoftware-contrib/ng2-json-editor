@@ -53,6 +53,7 @@ export class RefFieldComponent implements OnChanges {
   pathString: string;
   refData: object;
   requestOptions: RequestOptions;
+  refPath: Array<any>;
 
   isPreviewButtonHidden = false;
 
@@ -88,6 +89,7 @@ export class RefFieldComponent implements OnChanges {
 
     if (changes['path']) {
       this.pathString = this.pathUtilService.toPathString(this.path);
+      this.refPath = this.path.concat('$ref');
     }
   }
 
@@ -98,10 +100,6 @@ export class RefFieldComponent implements OnChanges {
 
   get customTemplate(): TemplateRef<any> {
     return this.appGlobalsService.templates[this.refConfig.templateName];
-  }
-
-  get pathStringWithRef(): string {
-    return this.pathString + this.pathUtilService.separator + '$ref';
   }
 
   get refConfig(): RefConfig {
