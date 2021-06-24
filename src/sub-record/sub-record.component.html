@@ -16,7 +16,7 @@
               <li *ngIf="schema.properties[key].type === 'array'" class="title-dropdown-item">
                 <add-new-element-button [path]="getPathForChild(key)" [schema]="schema.properties[key]"></add-new-element-button>
               </li>
-              <li class="title-dropdown-item">
+              <li class="title-dropdown-item" *ngIf="isDeleteDisabled(key)">
                 <button type="button" class="editor-btn-delete editor-btn-delete-text" (click)="deleteField(key)">Delete</button>
               </li>
               <ng-container *ngIf="getTitleDropdownItemTemplateNamesForChild(key)">

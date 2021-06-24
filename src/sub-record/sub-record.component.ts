@@ -98,6 +98,10 @@ export class SubRecordComponent implements OnChanges {
     return this.schema.properties[key].disabled && !this.appGlobalsService.adminMode ;
   }
 
+  isDeleteDisabled(key): boolean {
+    return !this.schema.properties[key].isDeleteDisabled;
+  }
+
   trackByElement(index: number, element: any): any {
     return element;
   }
