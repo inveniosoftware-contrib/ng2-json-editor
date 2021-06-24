@@ -95,6 +95,9 @@ export class SchemaFixerService {
     if (schema.disabled) {
       schema = this.fixDisabled(schema);
     }
+    if (schema.isDeleteDisabled) {
+      schema = this.fixIsDeleteDisabled(schema);
+    }
     if (schema.alwaysShow) {
       schema = this.fixAlwaysShow(schema);
     }
@@ -129,6 +132,22 @@ export class SchemaFixerService {
       Object.keys(schema.properties)
         .forEach(prop => {
           schema.properties[prop].disabled = true;
+        });
+    }
+    return schema;
+  }
+
+  /**
+   * Fixes isDeleteDisabled config to assign the isDeleteDisabled attribute
+   * to array items or object properties
+   */
+  private fixIsDeleteDisabled(schema: JSONSchema): JSONSchema {
+    if (schema.items) {
+      schema.items.isDeleteDisabled = false;
+    } else if (schema.properties) {
+      Object.keys(schema.properties)
+        .forEach(prop => {
+          schema.properties[prop].isDeleteDisabled = false;
         });
     }
     return schema;

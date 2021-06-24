@@ -19,6 +19,11 @@ export interface SchemaOption {
   disabled?: boolean;
 
   /**
+   * Flag to disable delete button that should be displayed in the UI.
+   */
+  isDeleteDisabled?: boolean;
+
+  /**
    * Flag to hide fields in the json from the editor's UI.
    *
    * - When this is set to `true` then the field is hidden even if it is required.
