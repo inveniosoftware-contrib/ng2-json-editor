@@ -438,6 +438,11 @@ html, body {
       top: 0px !important;
       left: 0px !important;
     }
+
+    .dropdown-menu {
+      width: min-content;
+      min-width: 100% !important;
+    }
   }
 
   div.admin-mode {
