@@ -16,7 +16,7 @@ jobs:
       - run: yarn build
       - run: yarn copy
       - run: >
-            cd dist
+            cd dist;
             npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
