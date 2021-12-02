@@ -26,7 +26,6 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 @Pipe({
   name: 'sanitizeUrl',
 })
-
 export class SanitizeUrlPipe implements PipeTransform {
 
   constructor(public domSanitizer: DomSanitizer) { }
