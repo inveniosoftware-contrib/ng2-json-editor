@@ -110,10 +110,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
 
     if (this.schema.onValueChange) {
       // setTimeout to workaround the case when the value is changed back to previous value inside onValuChange callback
-      setTimeout( () => {
-        this.schema.onValueChange(this.path, this.value, this.jsonStoreService, this.keysStoreService);
-        this.validate();
-        }
+      setTimeout( () => this.schema.onValueChange(this.path, this.value, this.jsonStoreService, this.keysStoreService)
       );
     }
   }
@@ -134,7 +131,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   }
 
   onValueChange(value: string) {
-    this.value = value;
+    this.value = this.schema.stripWhitespace ? value.trim() : value;
   }
 
   onSearchableDropdownSelect(value: string) {

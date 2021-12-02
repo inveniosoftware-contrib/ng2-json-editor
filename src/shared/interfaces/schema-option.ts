@@ -134,4 +134,9 @@ export interface SchemaOption {
    * Names of templates to be put as extra custom items to title dropdown.
    */
   titleDropdownItemTemplateNames?: Array<string>;
+
+  /**
+   * Configuration for striping whitespaces from field value
+   */
+  stripWhitespace?: boolean;
 }
