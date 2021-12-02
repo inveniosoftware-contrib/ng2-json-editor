@@ -1,5 +1,11 @@
 name: Node.js Package
 on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
   release:
     types: [created]
 jobs:
@@ -14,8 +20,10 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: yarn install
       - run: yarn build
-      - run: yarn copy
-      - run: >
+      - if: ${{ github.event_name == 'release' }}
+        run: yarn copy
+      - if: ${{ github.event_name == 'release' }}
+        run: >
             cd dist;
             npm publish --access public
         env:
