@@ -138,5 +138,5 @@ export interface SchemaOption {
   /**
    * Configuration for striping whitespaces from field value
    */
-  stripWhitespace?: boolean;
+  omitStripWhitespace?: boolean;
 }
