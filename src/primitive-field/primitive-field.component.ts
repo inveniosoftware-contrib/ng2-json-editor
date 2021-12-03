@@ -131,7 +131,7 @@ export class PrimitiveFieldComponent extends AbstractFieldComponent implements O
   }
 
   onValueChange(value: string) {
-    this.value = this.schema.stripWhitespace ? value.trim() : value;
+    this.value = this.schema.omitStripWhitespace ? value : value.trim();
   }
 
   onSearchableDropdownSelect(value: string) {
