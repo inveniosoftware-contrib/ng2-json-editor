@@ -45,8 +45,16 @@
   </div>
   <div [ngClass]="redLeftBorderClass">
     <!-- Elements -->
-    <div *ngFor="let item of paginatedItems; trackBy:trackByElement">
+    <div *ngFor="let item of paginatedItems; index as i; trackBy:trackByElement">
+
       <div class="complex-list-field-wrapper">
+
+        <div class="add-new-element">
+          <a href="javascript:void(0)" (click)="onAddNewElementAtPosition(i)">
+            Add new element here
+          </a>
+        </div>
+
         <span *ngIf="shouldDisplayViewTemplate && values.get(item.index).keySeq().size != 0">
           <ng-template [ngTemplateOutlet]="customTemplate" [ngTemplateOutletContext]="{item: values.get(item.index)}"></ng-template>
           <a href="javascript:void(0)" (click)="item.editFormDisplayedByUser = !shouldDisplayEditableFieldsForItem(item)">

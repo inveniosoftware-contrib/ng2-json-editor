@@ -33,15 +33,19 @@ import {
 import { List, Map, Set, Iterable } from 'immutable';
 
 import { AbstractListFieldComponent } from '../abstract-list-field';
+
 import {
   AppGlobalsService,
   JsonStoreService,
   DomUtilService,
   PathUtilService,
   ListPageChangerService,
-  ProblemsService
+  ProblemsService,
+  EmptyValueService,
 } from '../shared/services';
 import { LongListNavigatorConfig, JSONSchema, PaginatedItem } from '../shared/interfaces';
+
+
 
 @Component({
   selector: 'complex-list-field',
@@ -74,6 +78,7 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
     public domUtilService: DomUtilService,
     public pathUtilService: PathUtilService,
     public changeDetectorRef: ChangeDetectorRef,
+    public emptyValueService: EmptyValueService,
     public listPageChangerService: ListPageChangerService) {
     super(appGlobalsService, problemsService, jsonStoreService, pathUtilService, changeDetectorRef);
   }
@@ -154,6 +159,26 @@ export class ComplexListFieldComponent extends AbstractListFieldComponent implem
     } else {
       this.shouldDisplayFoundNavigation = false;
     }
+  }
+
+  onAddNewElementAtPosition(index: number) {
+    const itemSchema = this.schema.items;
+    const emptyValue = this.emptyValueService.generateEmptyValue(itemSchema);
+    const values: List<any> = this.jsonStoreService.getIn(this.path);
+
+    let insertIndex;
+    if (this.navigator) {
+      insertIndex = index + (this.navigator.itemsPerPage * (this.currentPage - 1));
+    } else {
+      insertIndex = index;
+    }
+    const insertPath = this.path.concat(insertIndex);
+    this.jsonStoreService.addIn(insertPath, emptyValue);
+    // focus on the new added element
+    const insertPathString = this.pathUtilService.toPathString(insertPath);
+    setTimeout(() => {
+      this.domUtilService.focusAndSelectFirstEditableChildById(insertPathString);
+    });
   }
 
   onFindInputKeypress(key: string) {
