@@ -8,7 +8,8 @@
     "emitDecoratorMetadata": true,
     "lib": [
       "es6",
-      "dom"
+      "dom",
+      "es2017.object"
     ],
     "rootDir": "../",
     "module": "es6",

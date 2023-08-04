@@ -7,7 +7,8 @@
     "emitDecoratorMetadata": true,
     "lib": [
       "es6",
-      "dom"
+      "dom",
+      "es2017.object"
     ],
     "paths": {
       "@angular/core": [
