@@ -58,6 +58,7 @@ import { LongListNavigatorConfig, JSONSchema, PaginatedItem } from '../shared/in
 export class ComplexListFieldComponent extends AbstractListFieldComponent implements OnChanges, OnInit {
 
   @Input() values: List<Map<string, any>>;
+  @Input() supportValues: List<Map<string, any>>;
   @Input() schema: JSONSchema;
   @Input() path: Array<any>;
 
