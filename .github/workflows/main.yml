@@ -11,14 +11,29 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix: 
+        include:
+          - python: python2
+            pip: pip
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout      
+        - uses: actions/checkout@v2
+
+      - name: Install python dependencies
+        run: |
+            ${{ matrix.pip }} install --user --upgrade pip
+            ${{ matrix.pip }} --no-cache-dir install --user setuptools wheel "urllib3==1.25.11"
+            ${{ matrix.pip }} --no-cache-dir install --user -e .[tests,docs]
+            
       # Setup .npmrc file to publish to npm
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '10.14.0'
-          registry-url: 'https://registry.npmjs.org'
+      - name: Install node       
+        - uses: actions/setup-node@v2
+          with:
+            node-version: '10.14.0'
+            registry-url: 'https://registry.npmjs.org'
       - run: yarn install
       - run: yarn build
       - if: ${{ github.event_name == 'release' }}
