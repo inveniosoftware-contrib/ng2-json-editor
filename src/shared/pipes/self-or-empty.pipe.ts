@@ -29,6 +29,7 @@ import { JSONSchema } from '../interfaces';
 @Pipe({
   name: 'selfOrEmpty',
 })
+
 export class SelfOrEmptyPipe implements PipeTransform {
 
   constructor(public emptyValueService: EmptyValueService) {}

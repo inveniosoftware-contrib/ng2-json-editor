@@ -37,9 +37,9 @@ export class JsonStoreService {
   readonly json$ = new Subject<Map<string, any>>();
   readonly jsonPatches$ = new Subject<Array<JsonPatch>>();
 
+  private patchesByPath: JsonPatchesByPath = {};
   private json: Map<string, any>;
   private jsonPatches: Array<JsonPatch>;
-  patchesByPath: JsonPatchesByPath = {};
 
   // list of reverse patches for changes
   private history = new SizedStack<JsonPatch>(10);
@@ -212,10 +212,6 @@ export class JsonStoreService {
       return true;
     }
 
-    if (Object.keys(this.patchesByPath).some(patch => patch.includes(path))) {
-      return true;
-    }
-
     if (this.jsonPatches) {
       const childPathPrefix = `${path}${this.pathUtilService.separator}`;
       return this.jsonPatches
@@ -224,23 +220,17 @@ export class JsonStoreService {
     return false;
   }
 
-  removeJsonPatch(patch: JsonPatch) {
+  private removeJsonPatch(patch: JsonPatch) {
     const path = this.getComponentPathForPatch(patch);
     // don't do anything if it's UNDO json-patch.
     if (this.patchesByPath[path]) {
       const patchIndex = this.patchesByPath[path].indexOf(patch);
       if (patchIndex > -1) {
-        // if there is more than one patch in the same path remove all of them when 'remove'
-        if (patch.op === 'remove' && this.patchesByPath[path].length > 1) {
-          this.patchesByPath[path] = [];
-          this.jsonPatches = this.jsonPatches.filter(p => p.path !== path);
-        } else {
-          this.patchesByPath[path].splice(patchIndex, 1);
-          const globalPatchIndex = this.jsonPatches.indexOf(patch);
-          this.jsonPatches.splice(globalPatchIndex, 1);
-        }
-
+        this.patchesByPath[path].splice(patchIndex, 1);
         this.patchesByPath$.next(this.patchesByPath);
+
+        const globalPatchIndex = this.jsonPatches.indexOf(patch);
+        this.jsonPatches.splice(globalPatchIndex, 1);
         this.jsonPatches$.next(this.jsonPatches);
       }
     }
@@ -258,17 +248,5 @@ export class JsonStoreService {
     const pathArray = this.pathUtilService.toPathArray(path);
     const parentPathArray = pathArray.slice(0, -1);
     return this.pathUtilService.toPathString(parentPathArray);
-  }
-
-  getPatchesIncludingPath(path: string): JsonPatch[] {
-    const pathsWithPatches = Object.keys(this.patchesByPath).filter(patch => patch.includes(path));
-    const patches = pathsWithPatches.map(p => this.patchesByPath[p]);
-    return [].concat(...patches);
-  }
-
-  deletePatchForElement(path: any) {
-    if (this.getPatchesIncludingPath(path)) {
-      this.getPatchesIncludingPath(path).forEach(patch => this.removeJsonPatch(patch));
-    }
   }
 }
