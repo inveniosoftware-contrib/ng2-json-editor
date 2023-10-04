@@ -1,5 +1,4 @@
 name: Node.js Package
-
 on:
   push:
     branches:
@@ -14,30 +13,34 @@ jobs:
   build:
     runs-on: ubuntu-20.04
     strategy:
-      matrix:
+      matrix: 
         include:
           - python: python2
             pip: pip
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: Checkout      
+        - uses: actions/checkout@v2
 
       - name: Install python dependencies
         run: |
-          ${{ matrix.pip }} install --user --upgrade pip
-
-      - name: Install node
-        uses: actions/setup-node@v2
-        with:
-          node-version: '10.14.0'
-          registry-url: 'https://registry.npmjs.org'
+            ${{ matrix.pip }} install --user --upgrade pip
+            ${{ matrix.pip }} --no-cache-dir install --user setuptools wheel "urllib3==1.25.11"
+            ${{ matrix.pip }} --no-cache-dir install --user -e .[tests,docs]
+            
+      # Setup .npmrc file to publish to npm
+      - name: Install node       
+        - uses: actions/setup-node@v2
+          with:
+            node-version: '10.14.0'
+            registry-url: 'https://registry.npmjs.org'
       - run: yarn install
       - run: yarn build
       - if: ${{ github.event_name == 'release' }}
         run: yarn copy
       - if: ${{ github.event_name == 'release' }}
         run: >
-          cd dist;
-          npm publish --access public
+            cd dist;
+            npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
