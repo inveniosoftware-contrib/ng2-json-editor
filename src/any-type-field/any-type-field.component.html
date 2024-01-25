@@ -1,12 +1,12 @@
 <div [ngSwitch]="schema.componentType">
   <div *ngSwitchCase="'table-list'">
-    <table-list-field [values]="value" [supportValues]="value" [schema]="schema" [path]="path"></table-list-field>
+    <table-list-field [values]="value" [schema]="schema" [path]="path"></table-list-field>
   </div>
   <div *ngSwitchCase="'complex-list'">
-    <complex-list-field [values]="value" [supportValues]="value" [schema]="schema" [path]="path"></complex-list-field>
+    <complex-list-field [values]="value" [schema]="schema" [path]="path"></complex-list-field>
   </div>
   <div *ngSwitchCase="'primitive-list'">
-    <primitive-list-field [values]="value" [supportValues]="value" [schema]="schema" [path]="path"></primitive-list-field>
+    <primitive-list-field [values]="value" [schema]="schema" [path]="path"></primitive-list-field>
   </div>
   <div *ngSwitchCase="'object'">
     <object-field [value]="value" [schema]="schema" [path]="path"></object-field>

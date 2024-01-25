@@ -37,7 +37,6 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
   values: List<any>;
   schema: JSONSchema;
   path: Array<any>;
-  supportValues: List<any>;
 
   constructor(public appGlobalsService: AppGlobalsService,
     public problemsService: ProblemsService,
@@ -58,23 +57,11 @@ export abstract class AbstractListFieldComponent extends AbstractFieldComponent 
   /**
    * @param index - Index of the element to be deleted
    */
-  deleteElement(index: number, value: any) {
+  deleteElement(index: number) {
     const elementPath = this.path.concat(index);
-    const patchIndex = this.supportValues.indexOf(value);
-
     this.jsonStoreService.removeIn(elementPath);
     // empty list as notSetValue, because there can be lists rendered on the UI, while they are absent in json (alwaysShow)
     this.values = this.jsonStoreService.getIn(this.path, List());
-
-    // remove patches for this element
-    if (this.jsonStoreService.hasPatch(this.pathString)) {
-      this.jsonStoreService.deletePatchForElement(this.pathString);
-    }
-
-    // if patch is in child path that will be removed
-    if (this.jsonStoreService.hasPatchOrChildrenHavePatch(this.getPathStringForChild(patchIndex))) {
-      this.jsonStoreService.deletePatchForElement(this.getPathStringForChild(patchIndex));
-    }
   }
 
   getPathStringForChild(index: number): string {

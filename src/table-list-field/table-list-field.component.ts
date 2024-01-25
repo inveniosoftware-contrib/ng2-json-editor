@@ -40,7 +40,6 @@ import { JSONSchema } from '../shared/interfaces';
 export class TableListFieldComponent extends AbstractListFieldComponent {
 
   @Input() values: List<Map<string, any>>;
-  @Input() supportValues: List<Map<string, any>>;
   @Input() schema: JSONSchema;
   @Input() path: Array<any>;
 

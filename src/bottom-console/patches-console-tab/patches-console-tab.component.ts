@@ -29,7 +29,7 @@ import {
 } from '@angular/core';
 
 import { AbstractSubscriberComponent } from '../../abstract-subscriber';
-import { DomUtilService, JsonStoreService, AppGlobalsService } from '../../shared/services';
+import { DomUtilService, PathUtilService, JsonStoreService, AppGlobalsService } from '../../shared/services';
 import { JsonPatch, JsonPatchesByPath } from '../../shared/interfaces';
 
 @Component({
@@ -47,6 +47,7 @@ export class PatchesConsoleTabComponent extends AbstractSubscriberComponent impl
 
   constructor(private domUtilService: DomUtilService,
     private appGlobalsService: AppGlobalsService,
+    private pathUtilService: PathUtilService,
     private jsonStoreService: JsonStoreService,
     private changeDetectorRef: ChangeDetectorRef) {
     super();
@@ -56,9 +57,7 @@ export class PatchesConsoleTabComponent extends AbstractSubscriberComponent impl
     this.jsonStoreService.patchesByPath$
       .takeUntil(this.isDestroyed)
       .subscribe(patchesByPath => {
-        // filter paths with empty patch arrays to prevent from rendering empty <li> elements
-        const filtered = Object.entries(patchesByPath).filter(([key, value]) => value.length > 0);
-        this.patchesByPath = filtered.reduce((o, key) => Object.assign(o, {[key[0]]: key[1]}), {});
+        this.patchesByPath = patchesByPath;
         this.changeDetectorRef.markForCheck();
       });
   }

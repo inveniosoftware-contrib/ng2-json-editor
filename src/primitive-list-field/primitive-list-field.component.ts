@@ -37,7 +37,6 @@ import { JSONSchema } from '../shared/interfaces';
 })
 export class PrimitiveListFieldComponent extends AbstractListFieldComponent {
   @Input() values: List<any>;
-  @Input() supportValues: List<any>;
   @Input() schema: JSONSchema;
   @Input() path: Array<any>;
 
