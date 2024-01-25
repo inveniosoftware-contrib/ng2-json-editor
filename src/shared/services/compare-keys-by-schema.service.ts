@@ -34,21 +34,11 @@ export class CompareKeysBySchemaService {
    */
   compare(key1: string, key2: string, schema: JSONSchema): number {
     // Sort by priority, larger is the first.
-    const priority1 =
-      (schema &&
-        schema.properties &&
-        schema.properties[key1] &&
-        schema.properties[key1].priority) ||
-      0;
-    const priority2 =
-      (schema &&
-        schema.properties &&
-        schema.properties[key2] &&
-        schema.properties[key2].priority) ||
-      0;
+    const priorty1 = schema.properties[key1].priority || 0;
+    const priority2 = schema.properties[key2].priority || 0;
 
-    if (priority1 > priority2) { return -1; }
-    if (priority1 < priority2) { return 1; }
+    if (priorty1 > priority2) { return -1; }
+    if (priorty1 < priority2) { return 1; }
 
     // Sort alphabetically.
     if (key1 < key2) { return -1; }
