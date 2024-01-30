@@ -26,7 +26,6 @@ import { JSONSchema } from '../interfaces';
 
 @Injectable()
 export class CompareKeysBySchemaService {
-
   /**
    * @param key1 the first key
    * @param key2 the second key
